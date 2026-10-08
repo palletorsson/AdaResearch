@@ -1,0 +1,17 @@
+{
+  "artifacts": {
+    "force_capability_lab": {
+      "lookup_name": "force_capability_lab",
+      "name": "Forces — a capability court",
+      "scene": "res://commons/artifacts/force_capability_lab/force_capability_lab.tscn",
+      "category": "vectors_forces",
+      "complexity": "intermediate",
+      "map_ready": true,
+      "include_in_map_data": true,
+      "footprint": [14, 6, 24],
+      "parameters": {"footprint": [14, 6, 24], "size_group": "large"},
+      "description": "Two carried points apply thrust; a cake mortar launches hollow physical rings; a launch pad meets a moving platform; a hinged pole falls; spring points collide; loose cubes cross a drag lane. Ordinary aftermath persists until an explicit reset.",
+      "qfep_connection": "A known object gains a capacity. Release lets the environment participate; the next attempt inherits the aftermath. Pulling, resistance and drag can be read together without equating their meanings."
+    }
+  }
+}

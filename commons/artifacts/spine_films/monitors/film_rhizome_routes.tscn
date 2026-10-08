@@ -1,0 +1,7 @@
+[gd_scene load_steps=3 format=3]
+[ext_resource type="Script" path="res://commons/artifacts/concept_monitor/concept_monitor.gd" id="1"]
+[ext_resource type="PackedScene" path="res://commons/artifacts/spine_films/late/rhizome_routes.tscn" id="2"]
+[node name="film_rhizome_routes" type="Node3D"]
+script = ExtResource("1")
+concept_scene = ExtResource("2")
+next_caption = "TURN VIEW"

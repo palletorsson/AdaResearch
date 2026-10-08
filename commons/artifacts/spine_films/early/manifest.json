@@ -1,0 +1,117 @@
+[
+  {
+    "id": "transformation_order",
+    "sequence": "transformation",
+    "map": "Trans_Rotation",
+    "title": "The same operations, another order",
+    "scene": "res://commons/artifacts/spine_films/early/transformation_order.tscn",
+    "source_paths": [
+      "res://commons/artifacts/transform_composition_workbench/transform_composition_workbench.gd"
+    ],
+    "description": "Rotation and translation unfold in both orders, then the results share one origin.",
+    "limitation": "Actual workbench transformations and tetrahedron; interpolation is explanatory staging."
+  },
+  {
+    "id": "array_address",
+    "sequence": "array_tutorial",
+    "map": "Array",
+    "title": "An address keeps a place",
+    "scene": "res://commons/artifacts/spine_films/early/array_address.tscn",
+    "source_paths": [
+      "res://commons/artifacts/molnar_cube_study/molnar_cube_study.gd"
+    ],
+    "description": "Rows become a volume of fixed addresses; their nested frames rotate, move and scale.",
+    "limitation": "Replays existing seeded Molnar poses, not live hand interaction."
+  },
+  {
+    "id": "tiling_rule",
+    "sequence": "array_tutorial",
+    "map": "Tutorial_Tiling_Floor",
+    "title": "A turn crosses the floor",
+    "scene": "res://commons/artifacts/spine_films/early/tiling_rule.tscn",
+    "source_paths": [
+      "res://commons/artifacts/regularity/tiling_pattern.gd",
+      "res://commons/artifacts/regularity/tiling_rule_study.gd"
+    ],
+    "description": "A physical four-by-four sample changes one tile at a time, followed by the full field and an eye chart.",
+    "limitation": "Actual rule images on explanatory 3D tile slabs; no new tiling algorithm."
+  },
+  {
+    "id": "colour_edge",
+    "sequence": "color",
+    "map": "Color_Pillar",
+    "title": "Where does the column end?",
+    "scene": "res://commons/artifacts/spine_films/early/colour_edge.tscn",
+    "source_paths": [
+      "res://algorithms/color/pillarcolorcollection/pillarcolorcollection.gd",
+      "res://algorithms/color/pillarcolorcollection/hsv_field.gdshader"
+    ],
+    "description": "A column rises from dark to light; its matching ceiling arrives and its edge becomes difficult to see.",
+    "limitation": "Shared source HSV function and shader on simplified cylinders; apparent fog is colour matching."
+  },
+  {
+    "id": "pattern_symmetry",
+    "sequence": "tiling",
+    "map": "Pattern_Foundry",
+    "title": "A fragment becomes a pattern",
+    "scene": "res://commons/artifacts/spine_films/early/pattern_symmetry.tscn",
+    "source_paths": [
+      "res://commons/artifacts/pattern_mill/pattern_mill.gd",
+      "res://commons/pattern_grammar/pattern_sim.gd",
+      "res://commons/primitives/arrays/wallpaper_groups.gd"
+    ],
+    "description": "A source motif unfolds through p4m symmetry; editing one cell changes its distant occurrences.",
+    "limitation": "Actual source colour lookup raised into a 3D relief; the original mill generates a texture."
+  },
+  {
+    "id": "directional_slope",
+    "sequence": "change",
+    "map": "Change_Intro",
+    "title": "One hill, different slopes",
+    "scene": "res://commons/artifacts/spine_films/early/directional_slope.tscn",
+    "source_paths": [
+      "res://algorithms/change/partial_derivative_terrain.gd"
+    ],
+    "description": "Two perpendicular sections pass through one point of the terrain, revealing opposite signed partial slopes.",
+    "limitation": "Samples the existing analytic height and derivative functions; explanatory marker and section overlays."
+  },
+  {
+    "id": "force_motion",
+    "sequence": "forces",
+    "map": "VFM_03_Motion",
+    "title": "A force changes a journey",
+    "scene": "res://commons/artifacts/spine_films/early/force_motion.tscn",
+    "source_paths": [
+      "res://algorithms/vectors/02_vector_addition/CombinedForcesDemo.gd",
+      "res://algorithms/vectors/shared/force_containment_base.gd"
+    ],
+    "description": "Two source force vectors meet head to tail; their sum bends a journey, then equal opposing forces leave prior motion intact.",
+    "limitation": "Actual source vectors. The motion interval is ideal unit mass without source contacts or damping."
+  },
+  {
+    "id": "form_relaxation",
+    "sequence": "formfinding",
+    "map": "FormFinding_Relaxation",
+    "title": "A network settles into a body",
+    "scene": "res://commons/artifacts/spine_films/early/form_relaxation.tscn",
+    "source_paths": [
+      "res://commons/artifacts/mass_spring_bench/mass_spring_bench.gd",
+      "res://commons/soft_body/soft_body_shapes.gd",
+      "res://commons/soft_body/soft_body_sim.gd"
+    ],
+    "description": "A 4-by-3-by-4 lattice gains springs and settles through the bench solver, retaining a ghost of the starting shape.",
+    "limitation": "Fixed-seed replay of source initialization; the museum bench normally displays only its settled snapshot."
+  },
+  {
+    "id": "wave_neighbours",
+    "sequence": "wavefunctions",
+    "map": "WaveFunctions_3D_Wave_Propagation",
+    "title": "A movement reaches its neighbours",
+    "scene": "res://commons/artifacts/spine_films/early/wave_neighbours.tscn",
+    "source_paths": [
+      "res://algorithms/wavefunctions/coupled_oscillator_lattice/coupled_oscillator_lattice.gd"
+    ],
+    "description": "A centre pulse reaches neighbouring oscillators; a second lattice with zero coupling receives the same pulse.",
+    "limitation": "Existing fixed-step oscillator solver; private start-state copies, slowed for inspection."
+  }
+]

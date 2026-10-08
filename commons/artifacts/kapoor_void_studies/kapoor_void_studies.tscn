@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://commons/artifacts/kapoor_void_studies/kapoor_void_studies.gd" id="1_studies"]
+
+[node name="KapoorVoidStudies" type="Node3D"]
+script = ExtResource("1_studies")

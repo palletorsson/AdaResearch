@@ -1,0 +1,38 @@
+{
+  "artifacts": {
+    "form_grammar_canopy": {
+      "lookup_name": "form_grammar_canopy",
+      "name": "A Surface Above You",
+      "scene": "res://commons/artifacts/form_grammar_canopy/form_grammar_canopy.tscn",
+      "category": "lsystems",
+      "description": "One triangle from the cube, six curved strips added by the production PetalSplayOp, and the same generated data at four times the scale. Walk around the small studies and beneath the enlarged surface; sky remains visible through its open edges.",
+      "include_in_map_data": true,
+      "map_ready": true,
+      "auto_ground": false,
+      "footprint": [
+        13,
+        7.5,
+        18
+      ],
+      "size_group": "environment",
+      "map_sequences": [
+        "lsystems"
+      ],
+      "tags": [
+        "mesh_grammar",
+        "petals",
+        "scale",
+        "surface",
+        "canopy",
+        "dna"
+      ],
+      "interactions": [
+        "Compare the retained seed face with the six generated strips.",
+        "Walk beneath the same surface at four times scale.",
+        "Find the open edges and the independently supplied support."
+      ],
+      "qfep_connection": "A new operation expands the form vocabulary; scaling changes its relation to a visitor. Petal is a geometric label, not evidence of biology. An open surface offers partial visual cover while leaving gaps.",
+      "validation": "Native isolated geometry, scaling, collision and walking checks; full museum-loader, Quest and tracked-headset acceptance pending."
+    }
+  }
+}

@@ -1,0 +1,103 @@
+[
+  {
+    "id": "chance_passage",
+    "sequence": "randomness",
+    "map": "Randomness_10_PRINT_Algorithm",
+    "title": "A choice becomes a passage",
+    "scene": "res://commons/artifacts/spine_films/middle/chance_passage.tscn",
+    "source_paths": [
+      "res://commons/artifacts/ten_print_structure/ten_print_structure.gd"
+    ],
+    "description": "One seeded diagonal decision per cell becomes a four-by-four arrangement of walls.",
+    "limitation": "One fixed seed and 16 cells; not every gap is connected."
+  },
+  {
+    "id": "noise_layers",
+    "sequence": "noise",
+    "map": "Noise_One",
+    "title": "Three fields, one height",
+    "scene": "res://commons/artifacts/spine_films/middle/noise_layers.tscn",
+    "source_paths": [
+      "res://algorithms/randomness/noiselayers/noiselayers.tscn",
+      "res://algorithms/randomness/noiselayers/noiselayers.gd"
+    ],
+    "description": "Separate authored noise layers meet at the same addresses, then sum and undergo the source's slope pass.",
+    "limitation": "A 25-by-25 display sampling over the 200 m source span; display scales are explicit, not a full terrain simulation."
+  },
+  {
+    "id": "shader_view",
+    "sequence": "shaders",
+    "map": "Shader_11_QueerRubber",
+    "title": "A surface answers a view",
+    "scene": "res://commons/artifacts/spine_films/middle/shader_view.tscn",
+    "source_paths": [
+      "res://algorithms/shaders/queer_collection_2/oil_slick_latex.gdshader",
+      "res://algorithms/shaders/book_of_shaders/shader_11_queerrubber.gd"
+    ],
+    "description": "Orbit a fixed torus while the source oil-slick shader answers the changing normal/view angle.",
+    "limitation": "Source optical approximation, not physical thin-film simulation; only TIME is replaced by the film clock."
+  },
+  {
+    "id": "cellular_history",
+    "sequence": "cellularautomata",
+    "map": "CA_GameOfLife",
+    "title": "A generation becomes a storey",
+    "scene": "res://commons/artifacts/spine_films/middle/cellular_history.tscn",
+    "source_paths": [
+      "res://algorithms/cellularautomata/ca_columns/ca_columns.gd"
+    ],
+    "description": "A three-neighbour birth is revealed, then actual Life states stack vertically as retained time.",
+    "limitation": "A declared eight-by-eight wrapped glider fixture; later walker erosion is excluded."
+  },
+  {
+    "id": "menger_twenty",
+    "sequence": "fractals",
+    "map": "Fractal_MengerSponge",
+    "title": "Twenty of twenty-seven",
+    "scene": "res://commons/artifacts/spine_films/middle/menger_twenty.tscn",
+    "source_paths": [
+      "res://algorithms/fractals/mengersponge/menger_sponge.gd"
+    ],
+    "description": "Separate 27 cells, remove the source's seven omitted positions, and repeat the retained-index rule.",
+    "limitation": "Two finite subdivision depths, not an infinite sponge."
+  },
+  {
+    "id": "grammar_forward",
+    "sequence": "lsystems",
+    "map": "LSystems_Grammars_And_Curves",
+    "title": "Forward is a local direction",
+    "scene": "res://commons/artifacts/spine_films/middle/grammar_forward.tscn",
+    "source_paths": [
+      "res://algorithms/lsystems/Hilbert3D.gd",
+      "res://utils/lsystem.gd"
+    ],
+    "description": "Follow the actual 3D Hilbert turtle segments through two rewrites and around a spatial orbit.",
+    "limitation": "Finite generations; marker points along the current segment, rather than claiming to expose an unrecorded full turtle frame."
+  },
+  {
+    "id": "branch_decision",
+    "sequence": "proceduralgeneration",
+    "map": "PG_Space_Colonization",
+    "title": "Which requests make the next branch?",
+    "scene": "res://commons/artifacts/spine_films/middle/branch_decision.tscn",
+    "source_paths": [
+      "res://algorithms/proceduralgeneration/growth_systems/space_colonization_algorithm/SpaceColonizationAlgorithm.gd",
+      "res://algorithms/proceduralgeneration/growth_systems/space_colonization_algorithm/colonization_lesson.gd"
+    ],
+    "description": "Show real target assignments, unit directions, their normalized sum, and the resulting network growth.",
+    "limitation": "One authored asymmetric field with NETWORK policy and a finite node/iteration budget."
+  },
+  {
+    "id": "cloth_relations",
+    "sequence": "softbodies",
+    "map": "SoftBodies_Cloth_Physics",
+    "title": "A sheet is held by relations",
+    "scene": "res://commons/artifacts/spine_films/middle/cloth_relations.tscn",
+    "source_paths": [
+      "res://commons/artifacts/spine_studies/tension_score.gd",
+      "res://commons/artifacts/spine_studies/tension_membrane.gd"
+    ],
+    "description": "Reveal the actual membrane's pins and distance constraints while replaying a computed grip and release.",
+    "limitation": "Educational membrane, not measured fabric; six seconds of actual fixed-step solver output slowed for inspection."
+  }
+]

@@ -1,0 +1,1 @@
+Restore local field editing after the periodic gyroid. Compare equal deposits at three separations, add and subtract at one repeatable point, preserve a held surface, and inspect the cost of finite sampling and edit history.

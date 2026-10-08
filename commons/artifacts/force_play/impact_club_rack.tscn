@@ -1,0 +1,7 @@
+[gd_scene load_steps=2 format=3]
+[ext_resource type="Script" path="res://commons/artifacts/force_play/push_stick_rack.gd" id="1"]
+[node name="ImpactClubRack" type="Node3D"]
+script = ExtResource("1")
+tool_script = "res://commons/artifacts/force_play/impact_club.gd"
+invitation = "TAKE THE CLUB\nSwing / hit / send it"
+return_label = "RETURN CLUB"

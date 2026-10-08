@@ -1,0 +1,22 @@
+[
+  {
+    "id": "foundation_point",
+    "sequence": "primitives",
+    "map": "Point_Coordinates",
+    "title": "A value places a body",
+    "scene": "res://commons/artifacts/spine_films/foundation_a/foundation_point.tscn",
+    "source_paths": ["res://commons/artifacts/spine_films/foundation_source.js"],
+    "description": "A native sphere responds to the browser study's height value; an optional mistaken one-metre offset separates its displayed and expected positions. Four physical controls lower, raise, toggle the offset and reset.",
+    "limitation": "A faithful port of drawPoint, with height 0–3 m in 0.1 m steps and default1.2 m. A visible representation of a point, not a controller for the existing museum coordinate artifact. The +1 m is an incorrect value sent to a local receiver."
+  },
+  {
+    "id": "foundation_trace",
+    "sequence": "primitives",
+    "map": "Point_Trace",
+    "title": "Read a candidate. Keep a position. Join a pair.",
+    "scene": "res://commons/artifacts/spine_films/foundation_a/foundation_trace.tscn",
+    "source_paths": ["res://commons/artifacts/spine_films/foundation_source.js"],
+    "description": "Eight given positions become a retained list by the exact distance >=0.8 m test. The learner reads candidates and separately joins retained neighbours, with both route and stored list visible in 3D.",
+    "limitation": "Fixed candidates from the browser study, not live hand tracking or a replay of a museum drawing. Two-dimensional source positions are embedded on a 3D table with equal units; joining does not alter those positions."
+  }
+]

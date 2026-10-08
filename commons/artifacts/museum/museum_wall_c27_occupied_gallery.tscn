@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://commons/artifacts/museum/museum_wall_c27_occupied_gallery.gd" id="1_context"]
+
+[node name="MuseumWallC27OccupiedGallery" type="Node3D"]
+script = ExtResource("1_context")

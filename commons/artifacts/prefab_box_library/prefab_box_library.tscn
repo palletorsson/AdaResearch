@@ -1,0 +1,4 @@
+[gd_scene load_steps=2 format=3]
+[ext_resource type="Script" path="res://commons/artifacts/prefab_box_library/prefab_box_library.gd" id="1"]
+[node name="PrefabBoxLibrary" type="Node3D"]
+script = ExtResource("1")

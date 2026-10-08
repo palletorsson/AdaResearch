@@ -1,0 +1,19 @@
+{
+  "artifacts": {
+    "biome_inheritance": {
+      "lookup_name": "biome_inheritance",
+      "name": "Inherited forms: doors become banners",
+      "scene": "res://commons/artifacts/biome_inheritance/biome_inheritance.tscn",
+      "category": "biome",
+      "artifact_type": "installation",
+      "complexity": "intermediate",
+      "map_ready": false,
+      "include_in_map_data": false,
+      "description": "Map-driven biome prototype. The hall's cumulative capabilities introduce faces, raise them at translation, turn them at rotation, narrow them at scale, colour them at colour and pattern them at tiling. The same panel bodies remain when later biome inhabitants arrive. Each hall's state holds; the old twenty-second loop is a separate recording preview. Full size, no in-world interface. Geometric occupancy, not growth or cloth physics.",
+      "qfep_connection": "A continuous change in one form crosses discrete occupancy thresholds for other bodies. The clearance rule and excluded candidate identities are recorded, making the chosen norm inspectable.",
+      "interactions": ["Follow the same specimen across authored map stages; notice which capability changes its form and role.", "The map supplies a stage through apply_grid_config; waiting does not advance evolution."],
+      "tags": ["biome", "inheritance", "sculpture", "clearance", "pattern", "banner", "translation", "prototype"],
+      "spatial_needs": {"footprint_cells": 12, "height_m": 6, "approach": "walk in"}
+    }
+  }
+}

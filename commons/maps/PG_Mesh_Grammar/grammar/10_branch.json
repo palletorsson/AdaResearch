@@ -1,0 +1,19 @@
+{
+  "id": "10_branch",
+  "notes": "A tube grows from each upward face along its normal. curve_amount draws from an unseeded generator, so the bend differs at every build.",
+  "seed": "icosahedron",
+  "seed_scale": 0.4,
+  "generations": 1,
+  "rules": [
+    {
+      "op": "tube_branch",
+      "selector": "up",
+      "params": {
+        "length": 0.3,
+        "curve_amount": 0.05,
+        "segments": 5,
+        "rings": 3
+      }
+    }
+  ]
+}

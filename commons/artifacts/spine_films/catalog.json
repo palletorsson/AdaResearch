@@ -1,0 +1,773 @@
+[
+  {
+    "id": "cube_corner",
+    "sequence": "primitives",
+    "map": "Point_Animatedcube",
+    "title": "The diagonal was already there",
+    "scene": "res://commons/artifacts/spine_films/more_early/cube_corner.tscn",
+    "source_paths": [
+      "res://commons/primitives/animatedcubebuilder/animatedcubebuilder.gd"
+    ],
+    "description": "Eight source vertices become the cube; moving corner 6 reveals the unchanged front diagonal.",
+    "limitation": "Actual builder vertices, triangle indices and mesh update function. Construction timing and materials are staged.",
+    "collection": "more",
+    "lookup": "film_cube_corner",
+    "monitor_scene": "res://commons/artifacts/spine_films/monitors/film_cube_corner.tscn"
+  },
+  {
+    "id": "foundation_function",
+    "sequence": "primitives",
+    "map": "Primitives_Columns",
+    "title": "One rule makes a family",
+    "scene": "res://commons/artifacts/spine_films/foundation_b/foundation_function.tscn",
+    "source_paths": [
+      "res://commons/artifacts/spine_films/foundation_source.js"
+    ],
+    "description": "One angular rule makes two straight columns. A fixed four-sided, two-metre reference stands beside editable height and radial count; the two-ring position list stays visible in the geometry.",
+    "limitation": "Port of the Function browser study, not the museum's richer profile generator. Height 1–3 m in 0.1 m steps; radial counts 4, 6, 8, 12, 16. A declared 0.70 m display radius replaces browser pixels. Side faces and top cap only. Rendering duplicates corners for flat normals; the input list contains exactly 2*n positions.",
+    "collection": "foundation",
+    "lookup": "film_foundation_function",
+    "monitor_scene": "res://commons/artifacts/spine_films/monitors/film_foundation_function.tscn"
+  },
+  {
+    "id": "foundation_point",
+    "sequence": "primitives",
+    "map": "Point_Coordinates",
+    "title": "A value places a body",
+    "scene": "res://commons/artifacts/spine_films/foundation_a/foundation_point.tscn",
+    "source_paths": [
+      "res://commons/artifacts/spine_films/foundation_source.js"
+    ],
+    "description": "A native sphere responds to the browser study's height value; an optional mistaken one-metre offset separates its displayed and expected positions. Four physical controls lower, raise, toggle the offset and reset.",
+    "limitation": "A faithful port of drawPoint, with height 0–3 m in 0.1 m steps and default1.2 m. A visible representation of a point, not a controller for the existing museum coordinate artifact. The +1 m is an incorrect value sent to a local receiver.",
+    "collection": "foundation",
+    "lookup": "film_foundation_point",
+    "monitor_scene": "res://commons/artifacts/spine_films/monitors/film_foundation_point.tscn"
+  },
+  {
+    "id": "foundation_trace",
+    "sequence": "primitives",
+    "map": "Point_Trace",
+    "title": "Read a candidate. Keep a position. Join a pair.",
+    "scene": "res://commons/artifacts/spine_films/foundation_a/foundation_trace.tscn",
+    "source_paths": [
+      "res://commons/artifacts/spine_films/foundation_source.js"
+    ],
+    "description": "Eight given positions become a retained list by the exact distance >=0.8 m test. The learner reads candidates and separately joins retained neighbours, with both route and stored list visible in 3D.",
+    "limitation": "Fixed candidates from the browser study, not live hand tracking or a replay of a museum drawing. Two-dimensional source positions are embedded on a 3D table with equal units; joining does not alter those positions.",
+    "collection": "foundation",
+    "lookup": "film_foundation_trace",
+    "monitor_scene": "res://commons/artifacts/spine_films/monitors/film_foundation_trace.tscn"
+  },
+  {
+    "id": "profile_travels",
+    "sequence": "primitives",
+    "map": "Primitives_Profiles",
+    "title": "A profile travels",
+    "scene": "res://commons/artifacts/spine_films/profile_travels.tscn",
+    "source_paths": [
+      "res://commons/artifacts/glyph_profile_gallery/glyph_profile_gallery.gd",
+      "res://commons/artifacts/glyph_profile_gallery/profile_sweep.gd"
+    ],
+    "description": "Two O profiles and one I become a passage, an open vessel and a closed sweep. Sections expose the operation before their boundary edges become surfaces.",
+    "limitation": "Construction timing is staged. Final vertices come from the unchanged gallery recipes. The O keeps its sill and the vessel remains open at both ends.",
+    "lookup": "film_profile_travels",
+    "monitor_scene": "res://commons/artifacts/spine_films/monitors/film_profile_travels.tscn"
+  },
+  {
+    "id": "body_aperture",
+    "sequence": "transformation",
+    "map": "Trans_Body",
+    "title": "A passage follows a body",
+    "scene": "res://commons/artifacts/spine_films/more_early/body_aperture.tscn",
+    "source_paths": [
+      "res://commons/artifacts/approach_wall/approach_wall.gd"
+    ],
+    "description": "The wall opens near an approaching body and moves its gap as the body walks along it.",
+    "limitation": "Actual per-slat targets, clearance rule and hinge transforms on a private copy. Shows target poses rather than live easing and visitor detection.",
+    "collection": "more",
+    "lookup": "film_body_aperture",
+    "monitor_scene": "res://commons/artifacts/spine_films/monitors/film_body_aperture.tscn"
+  },
+  {
+    "id": "door_routes",
+    "sequence": "transformation",
+    "map": "Trans_Translation",
+    "title": "A lift, then a slide",
+    "scene": "res://commons/artifacts/spine_films/more_early/door_routes.tscn",
+    "source_paths": [
+      "res://commons/primitives/translation/translation_cube_demo.gd"
+    ],
+    "description": "A panel follows the source's lift-then-slide route; another takes one diagonal to the same corner.",
+    "limitation": "Paths and dimensions come from the original door. This is a chosen diagonal in the free mode, not a claim that free motion has only one route.",
+    "collection": "more",
+    "lookup": "film_door_routes",
+    "monitor_scene": "res://commons/artifacts/spine_films/monitors/film_door_routes.tscn"
+  },
+  {
+    "id": "foundation_state",
+    "sequence": "transformation",
+    "map": "Trans_Body",
+    "title": "A response can remember",
+    "scene": "res://commons/artifacts/spine_films/foundation_b/foundation_state.tscn",
+    "source_paths": [
+      "res://commons/artifacts/spine_films/foundation_source.js"
+    ],
+    "description": "A teaching clock moves a cube while two physical gate models compare present proximity with a retained visit. FRAME, APPROACH / AWAY and RESET let the visitor separate the events.",
+    "limitation": "Exact State browser-study transitions presented in 3D. Each FRAME adds a synthetic 0.5 seconds; it is not a measured engine frame. APPROACH is an explicit input, not player tracking. No museum gate is controlled.",
+    "collection": "foundation",
+    "lookup": "film_foundation_state",
+    "monitor_scene": "res://commons/artifacts/spine_films/monitors/film_foundation_state.tscn"
+  },
+  {
+    "id": "scale_children",
+    "sequence": "transformation",
+    "map": "Trans_Scale",
+    "title": "Only the children grow",
+    "scene": "res://commons/artifacts/spine_films/more_early/scale_children.tscn",
+    "source_paths": [
+      "res://algorithms/primitives/scaleme/drink_me_room.gd"
+    ],
+    "description": "The small exit grows with its parent room; the separate reference doorway keeps its size.",
+    "limitation": "Uses actual door-wall construction, witness placement and factor four; omits furniture, player relocation and collision demonstration. Whole exhibit reduced to 26% scale.",
+    "collection": "more",
+    "lookup": "film_scale_children",
+    "monitor_scene": "res://commons/artifacts/spine_films/monitors/film_scale_children.tscn"
+  },
+  {
+    "id": "transformation_order",
+    "sequence": "transformation",
+    "map": "Trans_Rotation",
+    "title": "The same operations, another order",
+    "scene": "res://commons/artifacts/spine_films/early/transformation_order.tscn",
+    "source_paths": [
+      "res://commons/artifacts/transform_composition_workbench/transform_composition_workbench.gd"
+    ],
+    "description": "Rotation and translation unfold in both orders, then the results share one origin.",
+    "limitation": "Actual workbench transformations and tetrahedron; interpolation is explanatory staging.",
+    "lookup": "film_transformation_order",
+    "monitor_scene": "res://commons/artifacts/spine_films/monitors/film_transformation_order.tscn"
+  },
+  {
+    "id": "array_address",
+    "sequence": "array_tutorial",
+    "map": "Array",
+    "title": "An address keeps a place",
+    "scene": "res://commons/artifacts/spine_films/early/array_address.tscn",
+    "source_paths": [
+      "res://commons/artifacts/molnar_cube_study/molnar_cube_study.gd"
+    ],
+    "description": "Rows become a volume of fixed addresses; their nested frames rotate, move and scale.",
+    "limitation": "Replays existing seeded Molnar poses, not live hand interaction.",
+    "lookup": "film_array_address",
+    "monitor_scene": "res://commons/artifacts/spine_films/monitors/film_array_address.tscn"
+  },
+  {
+    "id": "disco_phase",
+    "sequence": "array_tutorial",
+    "map": "Tutorial_Disco",
+    "title": "One phase travels through sixty-four addresses",
+    "scene": "res://commons/artifacts/spine_films/more_early/disco_phase.tscn",
+    "source_paths": [
+      "res://commons/artifacts/regularity/disco_controls.gd"
+    ],
+    "description": "A snake advances along addressed cells, wraps through zero and changes palette without changing its rule.",
+    "limitation": "Original 8 by 8 snake value function and palettes. Raised active cells are a reading aid; the live disco floor changes colour.",
+    "collection": "more",
+    "lookup": "film_disco_phase",
+    "monitor_scene": "res://commons/artifacts/spine_films/monitors/film_disco_phase.tscn"
+  },
+  {
+    "id": "foundation_array",
+    "sequence": "array_tutorial",
+    "map": "Array",
+    "title": "An empty address still exists",
+    "scene": "res://commons/artifacts/spine_films/foundation_c/foundation_array.tscn",
+    "source_paths": [
+      "res://commons/artifacts/spine_films/foundation_source.js"
+    ],
+    "description": "Sixteen persistent sockets distinguish selecting an address, toggling its Boolean and overwriting the grid with a checker rule.",
+    "limitation": "A native port of the browser teaching study; its private cells do not control the museum floor. Height displays occupancy, not a third array index.",
+    "collection": "foundation",
+    "lookup": "film_foundation_array",
+    "monitor_scene": "res://commons/artifacts/spine_films/monitors/film_foundation_array.tscn"
+  },
+  {
+    "id": "tiling_rule",
+    "sequence": "array_tutorial",
+    "map": "Tutorial_Tiling_Floor",
+    "title": "A turn crosses the floor",
+    "scene": "res://commons/artifacts/spine_films/early/tiling_rule.tscn",
+    "source_paths": [
+      "res://commons/artifacts/regularity/tiling_pattern.gd",
+      "res://commons/artifacts/regularity/tiling_rule_study.gd"
+    ],
+    "description": "A physical four-by-four sample changes one tile at a time, followed by the full field and an eye chart.",
+    "limitation": "Actual rule images on explanatory 3D tile slabs; no new tiling algorithm.",
+    "lookup": "film_tiling_rule",
+    "monitor_scene": "res://commons/artifacts/spine_films/monitors/film_tiling_rule.tscn"
+  },
+  {
+    "id": "colour_edge",
+    "sequence": "color",
+    "map": "Color_Pillar",
+    "title": "Where does the column end?",
+    "scene": "res://commons/artifacts/spine_films/early/colour_edge.tscn",
+    "source_paths": [
+      "res://algorithms/color/pillarcolorcollection/pillarcolorcollection.gd",
+      "res://algorithms/color/pillarcolorcollection/hsv_field.gdshader"
+    ],
+    "description": "A column rises from dark to light; its matching ceiling arrives and its edge becomes difficult to see.",
+    "limitation": "Shared source HSV function and shader on simplified cylinders; apparent fog is colour matching.",
+    "lookup": "film_colour_edge",
+    "monitor_scene": "res://commons/artifacts/spine_films/monitors/film_colour_edge.tscn"
+  },
+  {
+    "id": "foundation_class",
+    "sequence": "color",
+    "map": "Color_Grid_Pallet",
+    "title": "One class; whose state changes?",
+    "scene": "res://commons/artifacts/spine_films/foundation_c/foundation_class.tscn",
+    "source_paths": [
+      "res://commons/artifacts/spine_films/foundation_source.js"
+    ],
+    "description": "Two colour receivers read actual RefCounted Palette objects. Separate reference paths converge when both receivers share one instance.",
+    "limitation": "Proposed Palette teaching class, with the browser's three inks and reset semantics; no claim that existing museum floor cells already use this class. Receivers refresh explicitly.",
+    "collection": "foundation",
+    "lookup": "film_foundation_class",
+    "monitor_scene": "res://commons/artifacts/spine_films/monitors/film_foundation_class.tscn"
+  },
+  {
+    "id": "gradient_paths",
+    "sequence": "color",
+    "map": "Color_Walls",
+    "title": "The space changes the colours between",
+    "scene": "res://commons/artifacts/spine_films/more_early/gradient_paths.tscn",
+    "source_paths": [
+      "res://algorithms/color/gradient_interpolator/gradient_interpolator.gd"
+    ],
+    "description": "Source RGB and HSV interpolation take different routes between red and cyan, plotted inside one three-dimensional RGB cube.",
+    "limitation": "Uses all 16 original samples. Plot positions are an explanatory RGB embedding; both routes use the same colour-space axes.",
+    "collection": "more",
+    "lookup": "film_gradient_paths",
+    "monitor_scene": "res://commons/artifacts/spine_films/monitors/film_gradient_paths.tscn"
+  },
+  {
+    "id": "rainbow_partitions",
+    "sequence": "color",
+    "map": "Color_Rainbow",
+    "title": "How many colours fit the same arch?",
+    "scene": "res://commons/artifacts/spine_films/more_early/rainbow_partitions.tscn",
+    "source_paths": [
+      "res://algorithms/primitives/rainbow/rainbow.gd"
+    ],
+    "description": "Two, six, seven and forty-eight authored bands divide the same width; separated layers join into each arc.",
+    "limitation": "Original planar band meshes and authored palettes, reduced to 15% scale. Depth separation stages the construction; no optical rainbow simulation.",
+    "collection": "more",
+    "lookup": "film_rainbow_partitions",
+    "monitor_scene": "res://commons/artifacts/spine_films/monitors/film_rainbow_partitions.tscn"
+  },
+  {
+    "id": "pattern_symmetry",
+    "sequence": "tiling",
+    "map": "Pattern_Foundry",
+    "title": "A fragment becomes a pattern",
+    "scene": "res://commons/artifacts/spine_films/early/pattern_symmetry.tscn",
+    "source_paths": [
+      "res://commons/artifacts/pattern_mill/pattern_mill.gd",
+      "res://commons/pattern_grammar/pattern_sim.gd",
+      "res://commons/primitives/arrays/wallpaper_groups.gd"
+    ],
+    "description": "A source motif unfolds through p4m symmetry; editing one cell changes its distant occurrences.",
+    "limitation": "Actual source colour lookup raised into a 3D relief; the original mill generates a texture.",
+    "lookup": "film_pattern_symmetry",
+    "monitor_scene": "res://commons/artifacts/spine_films/monitors/film_pattern_symmetry.tscn"
+  },
+  {
+    "id": "directional_slope",
+    "sequence": "change",
+    "map": "Change_Intro",
+    "title": "One hill, different slopes",
+    "scene": "res://commons/artifacts/spine_films/early/directional_slope.tscn",
+    "source_paths": [
+      "res://algorithms/change/partial_derivative_terrain.gd"
+    ],
+    "description": "Two perpendicular sections pass through one point of the terrain, revealing opposite signed partial slopes.",
+    "limitation": "Samples the existing analytic height and derivative functions; explanatory marker and section overlays.",
+    "lookup": "film_directional_slope",
+    "monitor_scene": "res://commons/artifacts/spine_films/monitors/film_directional_slope.tscn"
+  },
+  {
+    "id": "flow_lookup",
+    "sequence": "change",
+    "map": "Flow_Field",
+    "title": "The next position is another lookup",
+    "scene": "res://commons/artifacts/spine_films/more_motion/flow_lookup.tscn",
+    "source_paths": [
+      "res://commons/artifacts/flow_field_painter/flow_field_painter.gd"
+    ],
+    "description": "Three source particles repeatedly sample one held direction field and retain their different trajectories.",
+    "limitation": "A fixed seed and three declared starts; 160 source steps of 0.05 seconds. Directions, not forces. The chosen trajectories do not wrap.",
+    "collection": "more",
+    "lookup": "film_flow_lookup",
+    "monitor_scene": "res://commons/artifacts/spine_films/monitors/film_flow_lookup.tscn"
+  },
+  {
+    "id": "force_motion",
+    "sequence": "forces",
+    "map": "VFM_03_Motion",
+    "title": "A force changes a journey",
+    "scene": "res://commons/artifacts/spine_films/early/force_motion.tscn",
+    "source_paths": [
+      "res://algorithms/vectors/02_vector_addition/CombinedForcesDemo.gd",
+      "res://algorithms/vectors/shared/force_containment_base.gd"
+    ],
+    "description": "Two source force vectors meet head to tail; their sum bends a journey, then equal opposing forces leave prior motion intact.",
+    "limitation": "Actual source vectors. The motion interval is ideal unit mass without source contacts or damping.",
+    "lookup": "film_force_motion",
+    "monitor_scene": "res://commons/artifacts/spine_films/monitors/film_force_motion.tscn"
+  },
+  {
+    "id": "torque_purchase",
+    "sequence": "forces",
+    "map": "Vectors_Act2_VectorArithmetic",
+    "title": "A longer arm, a smaller push",
+    "scene": "res://commons/artifacts/spine_films/more_motion/torque_purchase.tscn",
+    "source_paths": [
+      "res://commons/artifacts/torque_crank/torque_crank.gd",
+      "res://commons/artifacts/_toy_console/toy_console.gd"
+    ],
+    "description": "Actual crank geometry exposes parallel and perpendicular push components, then compares three arm/push purchases.",
+    "limitation": "Static source poses, not angular dynamics. Rigs are enlarged for inspection; the three purchase alternatives keep a common display scale.",
+    "collection": "more",
+    "lookup": "film_torque_purchase",
+    "monitor_scene": "res://commons/artifacts/spine_films/monitors/film_torque_purchase.tscn"
+  },
+  {
+    "id": "catenoid_sections",
+    "sequence": "formfinding",
+    "map": "FormFinding_Catenary",
+    "title": "A waist and sixteen intervals",
+    "scene": "res://commons/artifacts/spine_films/more_motion/catenoid_sections.tscn",
+    "source_paths": [
+      "res://commons/primitives/parametric/catenoid.gd"
+    ],
+    "description": "Boundary rings, the narrow waist and sampled sections reveal how the actual catenoid surface is assembled.",
+    "limitation": "Analytic catenoid with c=0.82, height range -1 to 1, 16 by 48 intervals. No settling, stability test or universal area-minimum claim.",
+    "collection": "more",
+    "lookup": "film_catenoid_sections",
+    "monitor_scene": "res://commons/artifacts/spine_films/monitors/film_catenoid_sections.tscn"
+  },
+  {
+    "id": "form_relaxation",
+    "sequence": "formfinding",
+    "map": "FormFinding_Relaxation",
+    "title": "A network settles into a body",
+    "scene": "res://commons/artifacts/spine_films/early/form_relaxation.tscn",
+    "source_paths": [
+      "res://commons/artifacts/mass_spring_bench/mass_spring_bench.gd",
+      "res://commons/soft_body/soft_body_shapes.gd",
+      "res://commons/soft_body/soft_body_sim.gd"
+    ],
+    "description": "A 4-by-3-by-4 lattice gains springs and settles through the bench solver, retaining a ghost of the starting shape.",
+    "limitation": "Fixed-seed replay of source initialization; the museum bench normally displays only its settled snapshot.",
+    "lookup": "film_form_relaxation",
+    "monitor_scene": "res://commons/artifacts/spine_films/monitors/film_form_relaxation.tscn"
+  },
+  {
+    "id": "circle_projection",
+    "sequence": "wavefunctions",
+    "map": "WaveFunctions_Unit_Circle",
+    "title": "A turn leaves its coordinates",
+    "scene": "res://commons/artifacts/spine_films/more_motion/circle_projection.tscn",
+    "source_paths": [
+      "res://algorithms/wavefunctions/unit_circle/UnitCircle.gd"
+    ],
+    "description": "Original rotating-point and bridge functions show sine projection, then retain cosine in depth with the source helix option.",
+    "limitation": "One 81-sample cycle. Small non-colliding bridge specimens; interpolating between sine and helix is explanatory staging.",
+    "collection": "more",
+    "lookup": "film_circle_projection",
+    "monitor_scene": "res://commons/artifacts/spine_films/monitors/film_circle_projection.tscn"
+  },
+  {
+    "id": "wave_neighbours",
+    "sequence": "wavefunctions",
+    "map": "WaveFunctions_3D_Wave_Propagation",
+    "title": "A movement reaches its neighbours",
+    "scene": "res://commons/artifacts/spine_films/early/wave_neighbours.tscn",
+    "source_paths": [
+      "res://algorithms/wavefunctions/coupled_oscillator_lattice/coupled_oscillator_lattice.gd"
+    ],
+    "description": "A centre pulse reaches neighbouring oscillators; a second lattice with zero coupling receives the same pulse.",
+    "limitation": "Existing fixed-step oscillator solver; private start-state copies, slowed for inspection.",
+    "lookup": "film_wave_neighbours",
+    "monitor_scene": "res://commons/artifacts/spine_films/monitors/film_wave_neighbours.tscn"
+  },
+  {
+    "id": "chance_passage",
+    "sequence": "randomness",
+    "map": "Randomness_10_PRINT_Algorithm",
+    "title": "A choice becomes a passage",
+    "scene": "res://commons/artifacts/spine_films/middle/chance_passage.tscn",
+    "source_paths": [
+      "res://commons/artifacts/ten_print_structure/ten_print_structure.gd"
+    ],
+    "description": "One seeded diagonal decision per cell becomes a four-by-four arrangement of walls.",
+    "limitation": "One fixed seed and 16 cells; not every gap is connected.",
+    "lookup": "film_chance_passage",
+    "monitor_scene": "res://commons/artifacts/spine_films/monitors/film_chance_passage.tscn"
+  },
+  {
+    "id": "prng_register",
+    "sequence": "randomness",
+    "map": "Random_Definition",
+    "title": "A number has a previous state",
+    "scene": "res://commons/artifacts/spine_films/more_motion/prng_register.tscn",
+    "source_paths": [
+      "res://algorithms/randomness/prng_crank_machine/prng_crank_machine.gd"
+    ],
+    "description": "The original crank arithmetic fills a 64-bit block register, masks to 32 bits and replays sixteen outputs from the same seed.",
+    "limitation": "Blocks represent integer bit places, not circuitry. Sixteen matching outputs establish this replay, not distribution quality or cryptographic security.",
+    "collection": "more",
+    "lookup": "film_prng_register",
+    "monitor_scene": "res://commons/artifacts/spine_films/monitors/film_prng_register.tscn"
+  },
+  {
+    "id": "noise_layers",
+    "sequence": "noise",
+    "map": "Noise_One",
+    "title": "Three fields, one height",
+    "scene": "res://commons/artifacts/spine_films/middle/noise_layers.tscn",
+    "source_paths": [
+      "res://algorithms/randomness/noiselayers/noiselayers.tscn",
+      "res://algorithms/randomness/noiselayers/noiselayers.gd"
+    ],
+    "description": "Separate authored noise layers meet at the same addresses, then sum and undergo the source's slope pass.",
+    "limitation": "A 25-by-25 display sampling over the 200 m source span; display scales are explicit, not a full terrain simulation.",
+    "lookup": "film_noise_layers",
+    "monitor_scene": "res://commons/artifacts/spine_films/monitors/film_noise_layers.tscn"
+  },
+  {
+    "id": "noise_relief",
+    "sequence": "noise",
+    "map": "Noise_Inside_Noise",
+    "title": "One sample becomes colour and distance",
+    "scene": "res://commons/artifacts/spine_films/more_motion/noise_relief.tscn",
+    "source_paths": [
+      "res://algorithms/randomness/noisesphere/warp_study.gd",
+      "res://algorithms/randomness/noisesphere/noisesphere.gd"
+    ],
+    "description": "The actual study sampler and radius function turn one field into skin and relief, then compare direct and warped addresses.",
+    "limitation": "A 48-segment, 24-ring display sphere uses the existing CPU study, not the older animated dome shader. Skin-to-relief interpolation is staged; source endpoint values and seeds are retained.",
+    "collection": "more",
+    "lookup": "film_noise_relief",
+    "monitor_scene": "res://commons/artifacts/spine_films/monitors/film_noise_relief.tscn"
+  },
+  {
+    "id": "shader_repeat",
+    "sequence": "shaders",
+    "map": "Shader_05_Patterns",
+    "title": "One function, many addresses",
+    "scene": "res://commons/artifacts/spine_films/more_motion/shader_repeat.tscn",
+    "source_paths": [
+      "res://algorithms/shaders/book_of_shaders/patterns_tile.gdshader",
+      "res://algorithms/shaders/book_of_shaders/shader_05_patterns.gd"
+    ],
+    "description": "An unchanged sphere mesh receives the original UV tile shader; grid frequency changes while its faces stay fixed.",
+    "limitation": "The original flat-display shader is transferred to spheres, exposing their UV distortion. TIME is replaced by a private film clock; animate stays zero.",
+    "collection": "more",
+    "lookup": "film_shader_repeat",
+    "monitor_scene": "res://commons/artifacts/spine_films/monitors/film_shader_repeat.tscn"
+  },
+  {
+    "id": "shader_view",
+    "sequence": "shaders",
+    "map": "Shader_11_QueerRubber",
+    "title": "A surface answers a view",
+    "scene": "res://commons/artifacts/spine_films/middle/shader_view.tscn",
+    "source_paths": [
+      "res://algorithms/shaders/queer_collection_2/oil_slick_latex.gdshader",
+      "res://algorithms/shaders/book_of_shaders/shader_11_queerrubber.gd"
+    ],
+    "description": "Orbit a fixed torus while the source oil-slick shader answers the changing normal/view angle.",
+    "limitation": "Source optical approximation, not physical thin-film simulation; only TIME is replaced by the film clock.",
+    "lookup": "film_shader_view",
+    "monitor_scene": "res://commons/artifacts/spine_films/monitors/film_shader_view.tscn"
+  },
+  {
+    "id": "ca_triplet",
+    "sequence": "cellularautomata",
+    "map": "CA_AgentsCircuits",
+    "title": "Three neighbours choose one next cell",
+    "scene": "res://commons/artifacts/spine_films/more_structure/ca_triplet.tscn",
+    "source_paths": [
+      "res://commons/artifacts/ca_rule_explorer/ca_rule_explorer.gd"
+    ],
+    "description": "The actual elementary rule selects an output from three input bits, then repeats around wrapped rows.",
+    "limitation": "Height separates recorded generations; no added spatial cellular-automaton dimension.",
+    "collection": "more",
+    "lookup": "film_ca_triplet",
+    "monitor_scene": "res://commons/artifacts/spine_films/monitors/film_ca_triplet.tscn"
+  },
+  {
+    "id": "cellular_history",
+    "sequence": "cellularautomata",
+    "map": "CA_GameOfLife",
+    "title": "A generation becomes a storey",
+    "scene": "res://commons/artifacts/spine_films/middle/cellular_history.tscn",
+    "source_paths": [
+      "res://algorithms/cellularautomata/ca_columns/ca_columns.gd"
+    ],
+    "description": "A three-neighbour birth is revealed, then actual Life states stack vertically as retained time.",
+    "limitation": "A declared eight-by-eight wrapped glider fixture; later walker erosion is excluded.",
+    "lookup": "film_cellular_history",
+    "monitor_scene": "res://commons/artifacts/spine_films/monitors/film_cellular_history.tscn"
+  },
+  {
+    "id": "cantor_thirds",
+    "sequence": "fractals",
+    "map": "Fractal_CantorSet",
+    "title": "Keep two thirds; repeat the cut",
+    "scene": "res://commons/artifacts/spine_films/more_structure/cantor_thirds.tscn",
+    "source_paths": [
+      "res://algorithms/fractals/example_8_4_cantor_set_vr.gd"
+    ],
+    "description": "The actual Cantor recursion supplies retained bars while removed thirds move aside.",
+    "limitation": "Five finite removals; staging of cut material does not establish an infinite-set claim.",
+    "collection": "more",
+    "lookup": "film_cantor_thirds",
+    "monitor_scene": "res://commons/artifacts/spine_films/monitors/film_cantor_thirds.tscn"
+  },
+  {
+    "id": "menger_twenty",
+    "sequence": "fractals",
+    "map": "Fractal_MengerSponge",
+    "title": "Twenty of twenty-seven",
+    "scene": "res://commons/artifacts/spine_films/middle/menger_twenty.tscn",
+    "source_paths": [
+      "res://algorithms/fractals/mengersponge/menger_sponge.gd"
+    ],
+    "description": "Separate 27 cells, remove the source's seven omitted positions, and repeat the retained-index rule.",
+    "limitation": "Two finite subdivision depths, not an infinite sponge.",
+    "lookup": "film_menger_twenty",
+    "monitor_scene": "res://commons/artifacts/spine_films/monitors/film_menger_twenty.tscn"
+  },
+  {
+    "id": "grammar_forward",
+    "sequence": "lsystems",
+    "map": "LSystems_Grammars_And_Curves",
+    "title": "Forward is a local direction",
+    "scene": "res://commons/artifacts/spine_films/middle/grammar_forward.tscn",
+    "source_paths": [
+      "res://algorithms/lsystems/Hilbert3D.gd",
+      "res://utils/lsystem.gd"
+    ],
+    "description": "Follow the actual 3D Hilbert turtle segments through two rewrites and around a spatial orbit.",
+    "limitation": "Finite generations; marker points along the current segment, rather than claiming to expose an unrecorded full turtle frame.",
+    "lookup": "film_grammar_forward",
+    "monitor_scene": "res://commons/artifacts/spine_films/monitors/film_grammar_forward.tscn"
+  },
+  {
+    "id": "branch_decision",
+    "sequence": "proceduralgeneration",
+    "map": "PG_Space_Colonization",
+    "title": "Which requests make the next branch?",
+    "scene": "res://commons/artifacts/spine_films/middle/branch_decision.tscn",
+    "source_paths": [
+      "res://algorithms/proceduralgeneration/growth_systems/space_colonization_algorithm/SpaceColonizationAlgorithm.gd",
+      "res://algorithms/proceduralgeneration/growth_systems/space_colonization_algorithm/colonization_lesson.gd"
+    ],
+    "description": "Show real target assignments, unit directions, their normalized sum, and the resulting network growth.",
+    "limitation": "One authored asymmetric field with NETWORK policy and a finite node/iteration budget.",
+    "lookup": "film_branch_decision",
+    "monitor_scene": "res://commons/artifacts/spine_films/monitors/film_branch_decision.tscn"
+  },
+  {
+    "id": "cloth_relations",
+    "sequence": "softbodies",
+    "map": "SoftBodies_Cloth_Physics",
+    "title": "A sheet is held by relations",
+    "scene": "res://commons/artifacts/spine_films/middle/cloth_relations.tscn",
+    "source_paths": [
+      "res://commons/artifacts/spine_studies/tension_score.gd",
+      "res://commons/artifacts/spine_studies/tension_membrane.gd"
+    ],
+    "description": "Reveal the actual membrane's pins and distance constraints while replaying a computed grip and release.",
+    "limitation": "Educational membrane, not measured fabric; six seconds of actual fixed-step solver output slowed for inspection.",
+    "lookup": "film_cloth_relations",
+    "monitor_scene": "res://commons/artifacts/spine_films/monitors/film_cloth_relations.tscn"
+  },
+  {
+    "id": "jelly_skin",
+    "sequence": "softbodies",
+    "map": "SoftBodies_Soft_Body_Deformation",
+    "title": "A yielding body begins with a skin",
+    "scene": "res://commons/artifacts/spine_films/more_structure/jelly_skin.tscn",
+    "source_paths": [
+      "res://commons/artifacts/jelly_cube/jelly_cube.gd"
+    ],
+    "description": "The actual BoxMesh separates into face data, indexed triangles and its source-selected crown pin.",
+    "limitation": "Shows rest geometry and attachment, not a substitute simulation of inflation or deformation.",
+    "collection": "more",
+    "lookup": "film_jelly_skin",
+    "monitor_scene": "res://commons/artifacts/spine_films/monitors/film_jelly_skin.tscn"
+  },
+  {
+    "id": "iso_cell",
+    "sequence": "isosurfaces",
+    "map": "ISO_LookupTable",
+    "title": "A surface between eight samples",
+    "scene": "res://commons/artifacts/spine_films/late/iso_cell.tscn",
+    "source_paths": [
+      "res://algorithms/spacetopology/marchingcubes/core/MarchingCubesGenerator.gd",
+      "res://algorithms/spacetopology/marchingcubes/scenes/FifteenCasesController.gd"
+    ],
+    "description": "Eight corner samples become crossings and lookup triangles; margin moves the sheet while classification stays fixed.",
+    "limitation": "One cell, using the source extractor; no claim that this one demonstration resolves ambiguous marching-cubes cases.",
+    "lookup": "film_iso_cell",
+    "monitor_scene": "res://commons/artifacts/spine_films/monitors/film_iso_cell.tscn"
+  },
+  {
+    "id": "metaball_sum",
+    "sequence": "isosurfaces",
+    "map": "ISO_Metaballs",
+    "title": "Two contributions become one boundary",
+    "scene": "res://commons/artifacts/spine_films/more_structure/metaball_sum.tscn",
+    "source_paths": [
+      "res://algorithms/proceduralgeneration/hybrid_complex/metaballgenerator/metaballgenerator.gd"
+    ],
+    "description": "The original field generator adds two inverse-square sources and extracts a shared threshold as their centres approach.",
+    "limitation": "Reduced fixed sampling lattice and 21 cached surfaces; no changes to the live museum generator.",
+    "collection": "more",
+    "lookup": "film_metaball_sum",
+    "monitor_scene": "res://commons/artifacts/spine_films/monitors/film_metaball_sum.tscn"
+  },
+  {
+    "id": "boolean_overlap",
+    "sequence": "boolean_surfaces",
+    "map": "Boolean_Gallery",
+    "title": "Only what both solids contain",
+    "scene": "res://commons/artifacts/spine_films/more_structure/boolean_overlap.tscn",
+    "source_paths": [
+      "res://algorithms/boolean_surfaces/csg_intersection_demo.gd"
+    ],
+    "description": "Native CSG computes the source box-sphere intersections at all four named offsets.",
+    "limitation": "Geometric intersection does not prove the source comments’ social analogies.",
+    "collection": "more",
+    "lookup": "film_boolean_overlap",
+    "monitor_scene": "res://commons/artifacts/spine_films/monitors/film_boolean_overlap.tscn"
+  },
+  {
+    "id": "boolean_room",
+    "sequence": "boolean_surfaces",
+    "map": "Boolean_Works",
+    "title": "A walk taken out of a block",
+    "scene": "res://commons/artifacts/spine_films/late/boolean_room.tscn",
+    "source_paths": [
+      "res://commons/artifacts/boolean_burrow/boolean_burrow.gd"
+    ],
+    "description": "Follow the eleven original seeded cutter centres, their union, and the subtraction from a sectioned block.",
+    "limitation": "A cutter union is not clipped to the stock; cutter connectivity does not establish body clearance.",
+    "lookup": "film_boolean_room",
+    "monitor_scene": "res://commons/artifacts/spine_films/monitors/film_boolean_room.tscn"
+  },
+  {
+    "id": "boid_neighbour",
+    "sequence": "swarmintelligence",
+    "map": "SwarmIntelligence_Boids_Algorithm",
+    "title": "One body, several neighbours",
+    "scene": "res://commons/artifacts/spine_films/late/boid_neighbour.tscn",
+    "source_paths": [
+      "res://commons/artifacts/boids_aquarium/boids_aquarium.gd"
+    ],
+    "description": "Freeze one body, inspect its neighbourhood and three steering contributions, then run the original updater on a private flock.",
+    "limitation": "A bounded eight-body teaching fixture; original sequential update order retained. No biological or political inference.",
+    "lookup": "film_boid_neighbour",
+    "monitor_scene": "res://commons/artifacts/spine_films/monitors/film_boid_neighbour.tscn"
+  },
+  {
+    "id": "learning_step",
+    "sequence": "machinelearning",
+    "map": "ML_Gradient_Landscape",
+    "title": "One learning step",
+    "scene": "res://commons/artifacts/spine_films/late/learning_step.tscn",
+    "source_paths": [
+      "res://algorithms/numericalmethods/gradientdescent/gradient_descent_visualization.gd"
+    ],
+    "description": "Sample the original loss function, expose its finite-difference gradient and learning rate, then follow source-computed steps.",
+    "limitation": "A toy optimization surface, not a demonstration of neural-network learning or consciousness.",
+    "lookup": "film_learning_step",
+    "monitor_scene": "res://commons/artifacts/spine_films/monitors/film_learning_step.tscn"
+  },
+  {
+    "id": "graph_layout",
+    "sequence": "graphtheory",
+    "map": "GT_Layout",
+    "title": "The graph keeps its connections",
+    "scene": "res://commons/artifacts/spine_films/late/graph_layout.tscn",
+    "source_paths": [
+      "res://algorithms/graphtheory/forcedirected3d/forcedirected3d.gd"
+    ],
+    "description": "A source-generated tree spreads under repulsion and spring forces while its adjacency stays fixed.",
+    "limitation": "A layout algorithm changes coordinates, not the meaning or validity of the graph.",
+    "lookup": "film_graph_layout",
+    "monitor_scene": "res://commons/artifacts/spine_films/monitors/film_graph_layout.tscn"
+  },
+  {
+    "id": "spanning_choice",
+    "sequence": "graphtheory",
+    "map": "GT_Spanning_Trees",
+    "title": "Keep a connection; refuse a cycle",
+    "scene": "res://commons/artifacts/spine_films/more_structure/spanning_choice.tscn",
+    "source_paths": [
+      "res://algorithms/graphtheory/minimumspanningtree/mst_visualization.gd"
+    ],
+    "description": "The seeded source graph is sorted by cost and original union-find joins components while rejecting cycles.",
+    "limitation": "Arch height displays cost; a minimum spanning tree is not a shortest path.",
+    "collection": "more",
+    "lookup": "film_spanning_choice",
+    "monitor_scene": "res://commons/artifacts/spine_films/monitors/film_spanning_choice.tscn"
+  },
+  {
+    "id": "curvature_triangle",
+    "sequence": "foundationscrisis",
+    "map": "NonEuclidean_Spaces",
+    "title": "A triangle depends on its surface",
+    "scene": "res://commons/artifacts/spine_films/late/curvature_triangle.tscn",
+    "source_paths": [
+      "res://commons/artifacts/triangle_curvature_workbench/triangle_curvature_workbench.gd"
+    ],
+    "description": "Source-generated straight and great-circle edges reveal different tangent angles on plane and sphere.",
+    "limitation": "Separate geometric models; no continuous curvature interpolation, independent area theorem test, or Godel proof.",
+    "lookup": "film_curvature_triangle",
+    "monitor_scene": "res://commons/artifacts/spine_films/monitors/film_curvature_triangle.tscn"
+  },
+  {
+    "id": "shannon_threshold",
+    "sequence": "qfeplaboratory",
+    "map": "QFEP_F_Term",
+    "title": "Same draws, a moving threshold",
+    "scene": "res://commons/artifacts/spine_films/late/shannon_threshold.tscn",
+    "source_paths": [
+      "res://commons/artifacts/shannon_workbench/shannon_workbench.gd"
+    ],
+    "description": "Lift fixed source-generated random draws into height, sweep the threshold, and distinguish sample count from binary source entropy.",
+    "limitation": "Private 64-draw sample; H(p) is source entropy, not thermodynamic entropy or proof of QFEP.",
+    "lookup": "film_shannon_threshold",
+    "monitor_scene": "res://commons/artifacts/spine_films/monitors/film_shannon_threshold.tscn"
+  },
+  {
+    "id": "rhizome_routes",
+    "sequence": "postfoundationscrisis",
+    "map": "SpeculativeComputation_Rhizome_Network",
+    "title": "No named root, unequal connections",
+    "scene": "res://commons/artifacts/spine_films/late/rhizome_routes.tscn",
+    "source_paths": [
+      "res://commons/artifacts/rhizome_grower/rhizome_grower.gd"
+    ],
+    "description": "Replay source growth with one or three earlier neighbours, then remove a high-degree node and its edges.",
+    "limitation": "A source graph comparison, not evidence of social equality or an automatic interpretation of A Thousand Plateaus.",
+    "lookup": "film_rhizome_routes",
+    "monitor_scene": "res://commons/artifacts/spine_films/monitors/film_rhizome_routes.tscn"
+  }
+]

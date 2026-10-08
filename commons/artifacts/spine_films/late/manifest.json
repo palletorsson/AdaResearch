@@ -1,0 +1,99 @@
+[
+  {
+    "id": "iso_cell",
+    "sequence": "isosurfaces",
+    "map": "ISO_LookupTable",
+    "title": "A surface between eight samples",
+    "scene": "res://commons/artifacts/spine_films/late/iso_cell.tscn",
+    "source_paths": [
+      "res://algorithms/spacetopology/marchingcubes/core/MarchingCubesGenerator.gd",
+      "res://algorithms/spacetopology/marchingcubes/scenes/FifteenCasesController.gd"
+    ],
+    "description": "Eight corner samples become crossings and lookup triangles; margin moves the sheet while classification stays fixed.",
+    "limitation": "One cell, using the source extractor; no claim that this one demonstration resolves ambiguous marching-cubes cases."
+  },
+  {
+    "id": "boolean_room",
+    "sequence": "boolean_surfaces",
+    "map": "Boolean_Works",
+    "title": "A walk taken out of a block",
+    "scene": "res://commons/artifacts/spine_films/late/boolean_room.tscn",
+    "source_paths": [
+      "res://commons/artifacts/boolean_burrow/boolean_burrow.gd"
+    ],
+    "description": "Follow the eleven original seeded cutter centres, their union, and the subtraction from a sectioned block.",
+    "limitation": "A cutter union is not clipped to the stock; cutter connectivity does not establish body clearance."
+  },
+  {
+    "id": "boid_neighbour",
+    "sequence": "swarmintelligence",
+    "map": "SwarmIntelligence_Boids_Algorithm",
+    "title": "One body, several neighbours",
+    "scene": "res://commons/artifacts/spine_films/late/boid_neighbour.tscn",
+    "source_paths": [
+      "res://commons/artifacts/boids_aquarium/boids_aquarium.gd"
+    ],
+    "description": "Freeze one body, inspect its neighbourhood and three steering contributions, then run the original updater on a private flock.",
+    "limitation": "A bounded eight-body teaching fixture; original sequential update order retained. No biological or political inference."
+  },
+  {
+    "id": "learning_step",
+    "sequence": "machinelearning",
+    "map": "ML_Gradient_Landscape",
+    "title": "One learning step",
+    "scene": "res://commons/artifacts/spine_films/late/learning_step.tscn",
+    "source_paths": [
+      "res://algorithms/numericalmethods/gradientdescent/gradient_descent_visualization.gd"
+    ],
+    "description": "Sample the original loss function, expose its finite-difference gradient and learning rate, then follow source-computed steps.",
+    "limitation": "A toy optimization surface, not a demonstration of neural-network learning or consciousness."
+  },
+  {
+    "id": "graph_layout",
+    "sequence": "graphtheory",
+    "map": "GT_Layout",
+    "title": "The graph keeps its connections",
+    "scene": "res://commons/artifacts/spine_films/late/graph_layout.tscn",
+    "source_paths": [
+      "res://algorithms/graphtheory/forcedirected3d/forcedirected3d.gd"
+    ],
+    "description": "A source-generated tree spreads under repulsion and spring forces while its adjacency stays fixed.",
+    "limitation": "A layout algorithm changes coordinates, not the meaning or validity of the graph."
+  },
+  {
+    "id": "curvature_triangle",
+    "sequence": "foundationscrisis",
+    "map": "NonEuclidean_Spaces",
+    "title": "A triangle depends on its surface",
+    "scene": "res://commons/artifacts/spine_films/late/curvature_triangle.tscn",
+    "source_paths": [
+      "res://commons/artifacts/triangle_curvature_workbench/triangle_curvature_workbench.gd"
+    ],
+    "description": "Source-generated straight and great-circle edges reveal different tangent angles on plane and sphere.",
+    "limitation": "Separate geometric models; no continuous curvature interpolation, independent area theorem test, or Godel proof."
+  },
+  {
+    "id": "shannon_threshold",
+    "sequence": "qfeplaboratory",
+    "map": "QFEP_F_Term",
+    "title": "Same draws, a moving threshold",
+    "scene": "res://commons/artifacts/spine_films/late/shannon_threshold.tscn",
+    "source_paths": [
+      "res://commons/artifacts/shannon_workbench/shannon_workbench.gd"
+    ],
+    "description": "Lift fixed source-generated random draws into height, sweep the threshold, and distinguish sample count from binary source entropy.",
+    "limitation": "Private 64-draw sample; H(p) is source entropy, not thermodynamic entropy or proof of QFEP."
+  },
+  {
+    "id": "rhizome_routes",
+    "sequence": "postfoundationscrisis",
+    "map": "SpeculativeComputation_Rhizome_Network",
+    "title": "No named root, unequal connections",
+    "scene": "res://commons/artifacts/spine_films/late/rhizome_routes.tscn",
+    "source_paths": [
+      "res://commons/artifacts/rhizome_grower/rhizome_grower.gd"
+    ],
+    "description": "Replay source growth with one or three earlier neighbours, then remove a high-degree node and its edges.",
+    "limitation": "A source graph comparison, not evidence of social equality or an automatic interpretation of A Thousand Plateaus."
+  }
+]

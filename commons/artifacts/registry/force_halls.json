@@ -1,0 +1,215 @@
+{
+  "artifacts": {
+    "force_point_direction": {
+      "lookup_name": "force_point_direction",
+      "name": "The point / direction",
+      "scene": "res://commons/artifacts/force_halls/direction.tscn",
+      "map_ready": true,
+      "include_in_map_data": true,
+      "category": "vectors_forces",
+      "footprint": [
+        5,
+        3,
+        5
+      ],
+      "description": "Move the known PointBody by hand. Live local XYZ values and solid slender arrows show direction."
+    },
+    "force_point_addition": {
+      "lookup_name": "force_point_addition",
+      "name": "The point / addition",
+      "scene": "res://commons/artifacts/force_halls/addition.tscn",
+      "map_ready": true,
+      "include_in_map_data": true,
+      "category": "vectors_forces",
+      "footprint": [
+        5,
+        3,
+        5
+      ],
+      "description": "Move the known PointBody by hand. Live local XYZ values and solid slender arrows show addition."
+    },
+    "force_point_projection": {
+      "lookup_name": "force_point_projection",
+      "name": "The point / projection",
+      "scene": "res://commons/artifacts/force_halls/projection.tscn",
+      "map_ready": true,
+      "include_in_map_data": true,
+      "category": "vectors_forces",
+      "footprint": [
+        5,
+        3,
+        5
+      ],
+      "description": "Move the known PointBody by hand. Live local XYZ values and solid slender arrows show projection."
+    },
+    "force_hall_01": {
+      "lookup_name": "force_hall_01",
+      "name": "Forces hall 1 / wayfinding",
+      "scene": "res://commons/artifacts/force_halls/force_hall_01.tscn",
+      "category": "museum_architecture",
+      "map_ready": true,
+      "include_in_map_data": true,
+      "footprint": [
+        1,
+        1,
+        1
+      ]
+    },
+    "force_hall_02": {
+      "lookup_name": "force_hall_02",
+      "name": "Forces hall 2 / wayfinding",
+      "scene": "res://commons/artifacts/force_halls/force_hall_02.tscn",
+      "category": "museum_architecture",
+      "map_ready": true,
+      "include_in_map_data": true,
+      "footprint": [
+        1,
+        1,
+        1
+      ]
+    },
+    "force_hall_03": {
+      "lookup_name": "force_hall_03",
+      "name": "Forces hall 3 / wayfinding",
+      "scene": "res://commons/artifacts/force_halls/force_hall_03.tscn",
+      "category": "museum_architecture",
+      "map_ready": true,
+      "include_in_map_data": true,
+      "footprint": [
+        1,
+        1,
+        1
+      ]
+    },
+    "force_hall_04": {
+      "lookup_name": "force_hall_04",
+      "name": "Forces hall 4 / wayfinding",
+      "scene": "res://commons/artifacts/force_halls/force_hall_04.tscn",
+      "category": "museum_architecture",
+      "map_ready": true,
+      "include_in_map_data": true,
+      "footprint": [
+        1,
+        1,
+        1
+      ]
+    },
+    "force_hall_05": {
+      "lookup_name": "force_hall_05",
+      "name": "Forces hall 5 / wayfinding",
+      "scene": "res://commons/artifacts/force_halls/force_hall_05.tscn",
+      "category": "museum_architecture",
+      "map_ready": true,
+      "include_in_map_data": true,
+      "footprint": [
+        1,
+        1,
+        1
+      ]
+    },
+    "force_hall_06": {
+      "lookup_name": "force_hall_06",
+      "name": "Forces hall 6 / wayfinding",
+      "scene": "res://commons/artifacts/force_halls/force_hall_06.tscn",
+      "category": "museum_architecture",
+      "map_ready": true,
+      "include_in_map_data": true,
+      "footprint": [
+        1,
+        1,
+        1
+      ]
+    },
+    "force_hall_07": {
+      "lookup_name": "force_hall_07",
+      "name": "Forces hall 7 / wayfinding",
+      "scene": "res://commons/artifacts/force_halls/force_hall_07.tscn",
+      "category": "museum_architecture",
+      "map_ready": true,
+      "include_in_map_data": true,
+      "footprint": [
+        1,
+        1,
+        1
+      ]
+    },
+    "force_hall_08": {
+      "lookup_name": "force_hall_08",
+      "name": "Forces hall 8 / wayfinding",
+      "scene": "res://commons/artifacts/force_halls/force_hall_08.tscn",
+      "category": "museum_architecture",
+      "map_ready": true,
+      "include_in_map_data": true,
+      "footprint": [
+        1,
+        1,
+        1
+      ]
+    },
+    "force_hall_09": {
+      "lookup_name": "force_hall_09",
+      "name": "Forces hall 9 / wayfinding",
+      "scene": "res://commons/artifacts/force_halls/force_hall_09.tscn",
+      "category": "museum_architecture",
+      "map_ready": true,
+      "include_in_map_data": true,
+      "footprint": [
+        1,
+        1,
+        1
+      ]
+    },
+    "force_hall_10": {
+      "lookup_name": "force_hall_10",
+      "name": "Forces hall 10 / wayfinding",
+      "scene": "res://commons/artifacts/force_halls/force_hall_10.tscn",
+      "category": "museum_architecture",
+      "map_ready": true,
+      "include_in_map_data": true,
+      "footprint": [
+        1,
+        1,
+        1
+      ]
+    },
+    "force_hall_11": {
+      "lookup_name": "force_hall_11",
+      "name": "Forces hall 11 / wayfinding",
+      "scene": "res://commons/artifacts/force_halls/force_hall_11.tscn",
+      "category": "museum_architecture",
+      "map_ready": true,
+      "include_in_map_data": true,
+      "footprint": [
+        1,
+        1,
+        1
+      ]
+    },
+    "force_hall_12": {
+      "lookup_name": "force_hall_12",
+      "name": "Forces hall 12 / wayfinding",
+      "scene": "res://commons/artifacts/force_halls/force_hall_12.tscn",
+      "category": "museum_architecture",
+      "map_ready": true,
+      "include_in_map_data": true,
+      "footprint": [
+        1,
+        1,
+        1
+      ]
+    },
+    "force_hall_13": {
+      "lookup_name": "force_hall_13",
+      "name": "Forces hall 13 / wayfinding",
+      "scene": "res://commons/artifacts/force_halls/force_hall_13.tscn",
+      "category": "museum_architecture",
+      "map_ready": true,
+      "include_in_map_data": true,
+      "footprint": [
+        1,
+        1,
+        1
+      ]
+    }
+  }
+}

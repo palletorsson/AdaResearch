@@ -1,0 +1,33 @@
+{
+  "id": "fabric_shader_studio",
+  "name": "From Source to Skirt",
+  "category": "patterns",
+  "artifacts": {
+    "fabric_shader_studio": {
+      "lookup_name": "fabric_shader_studio",
+      "name": "From Source to Skirt — Shader and Fabric Studio",
+      "scene": "res://commons/artifacts/fabric_shader_studio/fabric_shader_studio.tscn",
+      "description": "An editable four-by-four source feeds a wall and skirt preview. Inspect UVs, repetition, cut-outs, matte/metal finish and bounded vertex displacement; save/load a recipe, deliberately dress the player or runway performers, and undo application.",
+      "include_in_map_data": true,
+      "map_ready": true,
+      "map_sequences": [
+        "tiling"
+      ],
+      "footprint": [
+        9,
+        4,
+        5
+      ],
+      "size_group": "large",
+      "interactions": [
+        "Paint a source cell",
+        "Inspect shader stages with mounted controls",
+        "Save and load the recipe",
+        "Wear the saved recipe on the skirt",
+        "Apply to runway skirts",
+        "Undo appearance or recipe changes"
+      ],
+      "qfep_connection": "A recipe acquires different bodies through their coordinates and material responses; visible cut-outs and displaced vertices do not change collision."
+    }
+  }
+}

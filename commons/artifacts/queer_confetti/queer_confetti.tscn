@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://commons/artifacts/queer_confetti/queer_confetti.gd" id="1_conf"]
+
+[node name="QueerConfetti" type="Node3D"]
+script = ExtResource("1_conf")

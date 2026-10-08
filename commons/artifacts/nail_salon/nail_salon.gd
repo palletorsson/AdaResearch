@@ -1,0 +1,138 @@
+extends Node3D
+## One source hand, two scales. Existing RGB controllers address both through
+## GameManager's nail/hand colour signals; no polling or private colour state.
+var hands: Array[MeshInstance3D] = []
+var nail_materials: Array[StandardMaterial3D] = []
+var skin_materials: Array[StandardMaterial3D] = []
+var giant: MeshInstance3D
+var petite: MeshInstance3D
+var nail_index := -1
+var skin_index := -1
+
+func _ready() -> void:
+	_build_salon()
+	GameManager.nail_color_changed.connect(_nail_colour)
+	GameManager.hand_color_changed.connect(_skin_colour)
+	_nail_colour(GameManager.get_nail_color())
+	_skin_colour(GameManager.get_hand_color())
+
+func _mat(colour: Color, metal: float = 0.0, rough: float = 0.4) -> StandardMaterial3D:
+	var m := StandardMaterial3D.new()
+	m.albedo_color = colour
+	m.metallic = metal
+	m.roughness = rough
+	return m
+
+func _shape(label: String, mesh: Mesh, at: Vector3, material: Material, solid: bool = false) -> MeshInstance3D:
+	var n := MeshInstance3D.new()
+	n.name = label
+	n.mesh = mesh
+	n.material_override = material
+	n.position = at
+	add_child(n)
+	if solid:
+		n.create_convex_collision()
+	return n
+
+func _box(label: String, size: Vector3, at: Vector3, material: Material, solid: bool = false) -> MeshInstance3D:
+	var mesh := BoxMesh.new()
+	mesh.size = size
+	return _shape(label, mesh, at, material, solid)
+
+func _cylinder(label: String, radius: float, height: float, at: Vector3, material: Material) -> MeshInstance3D:
+	var mesh := CylinderMesh.new()
+	mesh.top_radius = radius
+	mesh.bottom_radius = radius
+	mesh.height = height
+	mesh.radial_segments = 32
+	return _shape(label, mesh, at, material)
+
+func _label(text: String, at: Vector3, size: int = 42) -> void:
+	var label := Label3D.new()
+	label.text = text
+	label.font_size = size
+	label.pixel_size = 0.002
+	label.position = at
+	label.modulate = Color("f5e5d8")
+	label.outline_size = 5
+	add_child(label)
+
+func _hand(label: String, source: Mesh, height: float, bottom: Vector3, roll: float) -> MeshInstance3D:
+	var h := MeshInstance3D.new()
+	h.name = label
+	h.mesh = source
+	# Use the existing mesh's rest geometry as a display, not an untracked XR rig.
+	h.rotation_degrees = Vector3(90, -110, roll)
+	var turned: AABB = h.transform * h.get_aabb()
+	var factor: float = height / turned.size.y
+	h.scale = Vector3.ONE * factor
+	turned = h.transform * h.get_aabb()
+	h.position = bottom - Vector3(turned.get_center().x, turned.position.y, turned.get_center().z)
+	add_child(h)
+	hands.append(h)
+	for i in range(source.get_surface_count()):
+		var is_nail: bool = source.surface_get_name(i).to_lower().contains("nail")
+		var material := _mat(Color("c9a5da"), 0.65 if is_nail else 0.12, 0.16 if is_nail else 0.48)
+		h.set_surface_override_material(i, material)
+		if is_nail:
+			nail_index = i
+			nail_materials.append(material)
+		else:
+			skin_index = i
+			skin_materials.append(material)
+	return h
+
+func _build_salon() -> void:
+	var plum := _mat(Color("391a3e"), 0.0, 0.68)
+	var pink := _mat(Color("dfa8b9"), 0.15, 0.3)
+	var ivory := _mat(Color("f3ded0"), 0.1, 0.24)
+	var gold := _mat(Color("bda069"), 0.8, 0.22)
+	var source_scene: Node = load("res://commons/body/hands/right_hand.tscn").instantiate()
+	var original: MeshInstance3D = source_scene.get_node("Hand_R_Nails/Armature/Skeleton3D/mesh_Hand_Nails_R")
+	var source: Mesh = original.mesh
+	giant = _hand("GiantHand", source, 4.3, Vector3(0, 0.72, -0.2), -12)
+	petite = _hand("PetiteHand", source, 0.32, Vector3(0, 0.89, 2.95), -12)
+	source_scene.free()
+	# Velvet oval island and a restrained cuff under the impossible client.
+	var island := _cylinder("VelvetIsland", 2.3, 0.12, Vector3(0, 0.07, -0.2), plum)
+	island.scale.z = 0.72
+	_cylinder("GoldCuffBase", 0.67, 0.09, Vector3(0, 0.18, -0.2), gold)
+	_cylinder("VelvetCuff", 0.59, 0.48, Vector3(0, 0.45, -0.2), plum)
+	_cylinder("GoldCuffLip", 0.67, 0.065, Vector3(0, 0.71, -0.2), gold)
+	# Fine furniture stays at human scale; controls occupy the left/right ends.
+	_box("ManicureTop", Vector3(3.4, 0.09, 1.1), Vector3(0, 0.82, 3), ivory, true)
+	_box("RoseApron", Vector3(3.25, 0.16, 0.92), Vector3(0, 0.71, 3), pink)
+	for x in [-1.42, 1.42]:
+		for z in [2.65, 3.35]:
+			_cylinder("BrassLeg", 0.025, 0.72, Vector3(x, 0.36, z), gold)
+	_box("HandRest", Vector3(0.46, 0.055, 0.32), Vector3(0, 0.878, 3.0), pink)
+	for x in [-0.83, 0.83]:
+		var stool := _cylinder("VelvetStool", 0.27, 0.12, Vector3(x, 0.48, 4.3), plum)
+		stool.create_convex_collision()
+		_cylinder("StoolStem", 0.03, 0.39, Vector3(x, 0.23, 4.3), gold)
+		_cylinder("StoolFoot", 0.21, 0.045, Vector3(x, 0.045, 4.3), gold)
+	# Tiny polish bottles and a file distinguish the table from a generic console.
+	for i in range(5):
+		var x: float = -0.34 + i * 0.17
+		var polish := _mat(Color.from_hsv(float(i) / 5.0, 0.6, 0.85), 0.15, 0.14)
+		_cylinder("PolishBottle", 0.038, 0.08, Vector3(x, 0.905, 2.6), polish)
+		_cylinder("PolishCap", 0.022, 0.055, Vector3(x, 0.972, 2.6), gold)
+	var file := _box("NailFile", Vector3(0.22, 0.012, 0.035), Vector3(0.4, 0.875, 3.15), plum)
+	file.rotation_degrees.y = -22
+	_box("SalonSign", Vector3(3.6, 0.56, 0.08), Vector3(0, 5.55, -0.6), plum)
+	_label("GRAND / PETIT", Vector3(0, 5.58, -0.55), 105)
+	# Dedicated control plinths: open above and in front so hands can enter the
+	# whole RGB volume without reaching across the manicure table or stools.
+	for x in [-2.0, 2.0]:
+		_box("ControlPlinthLeft" if x < 0 else "ControlPlinthRight", Vector3(0.82, 0.75, 0.78), Vector3(x + 0.15, 0.375, 5.15), ivory, true)
+		_box("PlinthFoot", Vector3(0.91, 0.055, 0.87), Vector3(x + 0.15, 0.028, 5.15), gold)
+		_box("PlinthTop", Vector3(0.9, 0.055, 0.86), Vector3(x + 0.15, 0.778, 5.15), pink, true)
+		_label("NAILS" if x < 0 else "SKIN", Vector3(x + 0.15, 0.62, 5.55), 40)
+
+func _nail_colour(colour: Color) -> void:
+	for material in nail_materials:
+		material.albedo_color = colour
+
+func _skin_colour(colour: Color) -> void:
+	for material in skin_materials:
+		material.albedo_color = colour

@@ -1,0 +1,9 @@
+[gd_scene load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://commons/artifacts/radial_inside/rhizome_inside.gd" id="1_rhz"]
+
+[node name="RhizomeWorld" type="Node3D"]
+script = ExtResource("1_rhz")
+seed = 3
+surface = "wetflesh"
+world_scale = 4.0

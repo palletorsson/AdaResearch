@@ -1,0 +1,40 @@
+{
+  "artifacts": {
+    "facade_room_cast": {
+      "lookup_name": "facade_room_cast",
+      "name": "The Room and Its Volume",
+      "scene": "res://commons/artifacts/facade_room_cast/facade_room_cast.tscn",
+      "category": "boolean_surfaces",
+      "description": "A doorway and window drawn from the existing facade vocabulary lead into a room. Beside it, the shared void is intersected with the same stock to make a positive counterpart, retaining the opening profiles and wall-rail impression.",
+      "include_in_map_data": true,
+      "map_ready": true,
+      "auto_ground": false,
+      "footprint": [
+        26,
+        5,
+        16
+      ],
+      "size_group": "environment",
+      "map_sequences": [
+        "boolean_surfaces",
+        "facade_assembly"
+      ],
+      "tags": [
+        "boolean",
+        "facade",
+        "interior",
+        "positive",
+        "negative",
+        "whiteread",
+        "walkable"
+      ],
+      "interactions": [
+        "Enter the room, follow its curved alcove, and return through the door.",
+        "Look through the window, then find its corresponding projection on the positive.",
+        "Walk around the positive; its apparent doorway is solid."
+      ],
+      "qfep_connection": "A shared boundary receives a body in one construction and excludes it in the corresponding positive. Architectural details make the change recognisable; Whiteread offers a reference for negative space, traces and loss, without treating a digital operation as physical casting.",
+      "validation": "Isolated desktop mesh-partition and capsule checks; tracked-headset and full museum-loader verification remain separate."
+    }
+  }
+}

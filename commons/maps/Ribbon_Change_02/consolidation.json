@@ -1,0 +1,23 @@
+{
+  "active": false,
+  "date": "2026-09-11",
+  "destinations": {
+    "riemann_pi": {
+      "map": "Change_Intro",
+      "cell": [
+        2,
+        29
+      ],
+      "placement": "riemann_pi:0:0:0.18#pin:1#plinth:0"
+    },
+    "noc_5_04_flow_field": {
+      "map": "Flow_Field",
+      "cell": [
+        5,
+        17
+      ],
+      "placement": "noc_5_04_flow_field:0:0.8:1#pin:1#plinth:0"
+    }
+  },
+  "note": "Original room retained for historical comparison; no longer in the active Change sequence."
+}

@@ -1,0 +1,16 @@
+{
+  "id": "02_split",
+  "notes": "Every triangle becomes four through its edge midpoints: 80 faces on the same 20 planes. The count changes, the shape does not.",
+  "seed": "icosahedron",
+  "seed_scale": 0.4,
+  "generations": 1,
+  "rules": [
+    {
+      "op": "split",
+      "selector": "all",
+      "params": {
+        "pattern": "midpoint"
+      }
+    }
+  ]
+}

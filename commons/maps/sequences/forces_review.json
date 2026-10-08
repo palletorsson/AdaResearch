@@ -1,0 +1,27 @@
+{
+  "sequences": {
+    "forces_review": {
+      "name": "Forces — ten more trials",
+      "description": "Optional curation route: compare ten playable experiments before selecting the final spine.",
+      "maps": [
+        "Force_Review_01_Mass",
+        "Force_Review_02_Vortex",
+        "Force_Review_03_Roll",
+        "Force_Review_04_Pipe",
+        "Force_Review_05_Conveyor",
+        "Force_Review_06_Attractor",
+        "Force_Review_07_Threebody",
+        "Force_Review_08_Support",
+        "Force_Review_09_Bowling",
+        "Force_Review_10_Catapult"
+      ],
+      "difficulty": "intermediate",
+      "prerequisites": [
+        "forces"
+      ],
+      "artifact_groups": []
+    }
+  },
+  "world_phase": "grid",
+  "artifact_groups": []
+}

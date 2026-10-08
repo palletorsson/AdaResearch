@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://intractable_ev1"]
+
+[ext_resource type="Script" path="res://commons/artifacts/intractable_evidence/intractable_evidence.gd" id="1_script"]
+
+[node name="IntractableEvidence" type="Node3D"]
+script = ExtResource("1_script")

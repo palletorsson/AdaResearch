@@ -1,0 +1,25 @@
+{
+  "artifacts": {
+    "cube_sorting_line": {
+      "lookup_name": "cube_sorting_line",
+      "name": "Fold, print, sort",
+      "scene": "res://commons/artifacts/cube_sorting_line/cube_sorting_line.tscn",
+      "description": "A cube net folds above a conveyor and drops a grabbable cube. The printer randomly gives it the AGAIN or YET carton edition. Match each cube to its labelled basket, where it shrinks. Missed cubes fall from the belt and accumulate in the room until the sorting round ends.",
+      "category": "primitives",
+      "complexity": "beginner",
+      "map_ready": true,
+      "include_in_map_data": true,
+      "size_group": "large",
+      "footprint": [7.4, 3.0, 3.3],
+      "map_sequences": ["primitives"],
+      "tags": ["cube", "net", "prefab", "sorting", "conveyor", "minigame", "grabbable"],
+      "interactions": [
+        "Grab a printed cube and release it into the basket with the same word and stripe",
+        "Watch accepted cubes shrink inside the baskets",
+        "Pause production or reset the sorting round at the control stand",
+        "Recover missed cubes from the floor before the room fills"
+      ],
+      "qfep_connection": "Two supplied editions define the sorting rule. Identical cube geometry acquires a category through its printed surface; the visitor's repeated decisions counter the accumulating physical backlog."
+    }
+  }
+}

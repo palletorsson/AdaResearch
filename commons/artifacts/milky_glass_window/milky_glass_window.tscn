@@ -1,0 +1,11 @@
+[gd_scene load_steps=2 format=3 uid="uid://dq7v2mhx8nk4p"]
+
+[ext_resource type="Script" path="res://commons/artifacts/milky_glass_window/milky_glass_window.gd" id="1_win"]
+
+; Frame, mullions, milky pane and the drifting lamps behind it are all built in
+; _ready(). The script goes on the ROOT: GridInteractablesComponent sets config_*
+; metadata and calls apply_grid_config on the root, so logic on a child makes
+; every map token silently unreachable.
+
+[node name="MilkyGlassWindow" type="Node3D"]
+script = ExtResource("1_win")

@@ -1,0 +1,607 @@
+{
+  "artifacts": {
+    "reference_suspension": {
+      "lookup_name": "reference_suspension",
+      "name": "A place still held",
+      "scene": "res://commons/artifacts/spine_studies/suspension.tscn",
+      "description": "A place still held: an original response after Mona Hatoum. Installed application bay in Tutorial_3D; controls belong to the main museum pointer.",
+      "sequence": "array_tutorial",
+      "category": "reference_studies",
+      "map_ready": true,
+      "include_in_map_data": true,
+      "complexity": "intermediate",
+      "tags": [
+        "reference-study",
+        "array_tutorial"
+      ],
+      "signals": [],
+      "parameters": {
+        "study": "Adapter selected by the installed scene; use its labelled pointer controls."
+      },
+      "interactions": [
+        "Use the labelled 3D controls; geometry changes require the display area to be clear.",
+        "RESET restores this study, without resetting the hall."
+      ],
+      "qfep_connection": "What can a grid preserve when its contents are no longer whole?",
+      "proposed_maps": [
+        "Array",
+        "Tutorial_3D"
+      ],
+      "minimum_display_bounds_m": [
+        5.4,
+        5.0,
+        5.4
+      ],
+      "reference_artist": "Mona Hatoum",
+      "status": "Installed in the authored museum route; native integration verification recorded with the spine review.",
+      "installed_maps": [
+        "Tutorial_3D"
+      ],
+      "study_adapter": "suspension"
+    },
+    "reference_passage": {
+      "lookup_name": "reference_passage",
+      "name": "Who fits through?",
+      "scene": "res://commons/artifacts/spine_studies/passage.tscn",
+      "description": "Who fits through?: an original response after Mirosław Bałka. Installed application bay in Trans_Scale; controls belong to the main museum pointer.",
+      "sequence": "transformation",
+      "category": "reference_studies",
+      "map_ready": true,
+      "include_in_map_data": true,
+      "complexity": "intermediate",
+      "tags": [
+        "reference-study",
+        "transformation"
+      ],
+      "signals": [],
+      "parameters": {
+        "study": "Adapter selected by the installed scene; use its labelled pointer controls."
+      },
+      "interactions": [
+        "Use the labelled 3D controls; geometry changes require the display area to be clear.",
+        "RESET restores this study, without resetting the hall."
+      ],
+      "qfep_connection": "When does a measurement become permission?",
+      "proposed_maps": [
+        "Trans_Scale",
+        "Trans_Body"
+      ],
+      "minimum_display_bounds_m": [
+        5.4,
+        3.6,
+        7.0
+      ],
+      "reference_artist": "Mirosław Bałka",
+      "status": "Installed in the authored museum route; native integration verification recorded with the spine review.",
+      "installed_maps": [
+        "Trans_Scale"
+      ],
+      "study_adapter": "passage"
+    },
+    "reference_landscape": {
+      "lookup_name": "reference_landscape",
+      "name": "A world from a cone",
+      "scene": "res://commons/artifacts/spine_studies/landscape.tscn",
+      "description": "A world from a cone: an original response after Alex McLeod. Installed application bay in Color_Context_Placed; controls belong to the main museum pointer.",
+      "sequence": "color",
+      "category": "reference_studies",
+      "map_ready": true,
+      "include_in_map_data": true,
+      "complexity": "intermediate",
+      "tags": [
+        "reference-study",
+        "color"
+      ],
+      "signals": [],
+      "parameters": {
+        "study": "Adapter selected by the installed scene; use its labelled pointer controls."
+      },
+      "interactions": [
+        "Use the labelled 3D controls; geometry changes require the display area to be clear.",
+        "RESET restores this study, without resetting the hall."
+      ],
+      "qfep_connection": "How little geometry does a world need before we believe in its scale?",
+      "proposed_maps": [
+        "Color_Context_Placed"
+      ],
+      "minimum_display_bounds_m": [
+        12,
+        4.5,
+        10
+      ],
+      "reference_artist": "Alex McLeod",
+      "status": "Installed in the authored museum route; native integration verification recorded with the spine review.",
+      "installed_maps": [
+        "Color_Context_Placed"
+      ],
+      "study_adapter": "landscape"
+    },
+    "reference_pattern_garden": {
+      "lookup_name": "reference_pattern_garden",
+      "name": "The pattern crosses over",
+      "scene": "res://commons/artifacts/spine_studies/garden.tscn",
+      "description": "The pattern crosses over: an original response after Claudia Hart. Installed application bay in Shader_05_Patterns; controls belong to the main museum pointer.",
+      "sequence": "shaders",
+      "category": "reference_studies",
+      "map_ready": true,
+      "include_in_map_data": true,
+      "complexity": "intermediate",
+      "tags": [
+        "reference-study",
+        "shaders"
+      ],
+      "signals": [],
+      "parameters": {
+        "study": "Adapter selected by the installed scene; use its labelled pointer controls."
+      },
+      "interactions": [
+        "Use the labelled 3D controls; geometry changes require the display area to be clear.",
+        "RESET restores this study, without resetting the hall."
+      ],
+      "qfep_connection": "Does the pattern help you see the object, or make its boundary harder to follow?",
+      "proposed_maps": [
+        "Shader_05_Patterns"
+      ],
+      "minimum_display_bounds_m": [
+        12,
+        5.5,
+        10
+      ],
+      "reference_artist": "Claudia Hart",
+      "status": "Installed in the authored museum route; native integration verification recorded with the spine review.",
+      "installed_maps": [
+        "Shader_05_Patterns"
+      ],
+      "study_adapter": "garden"
+    },
+    "reference_plural_body": {
+      "lookup_name": "reference_plural_body",
+      "name": "A body in the plural",
+      "scene": "res://commons/artifacts/spine_studies/body.tscn",
+      "description": "A body in the plural: an original response after Peaches & Pussykrew. Installed application bay in Shader_12_PinkExtravaganza; controls belong to the main museum pointer.",
+      "sequence": "shaders",
+      "category": "reference_studies",
+      "map_ready": true,
+      "include_in_map_data": true,
+      "complexity": "intermediate",
+      "tags": [
+        "reference-study",
+        "shaders"
+      ],
+      "signals": [],
+      "parameters": {
+        "study": "Adapter selected by the installed scene; use its labelled pointer controls."
+      },
+      "interactions": [
+        "Use the labelled 3D controls; geometry changes require the display area to be clear.",
+        "RESET restores this study, without resetting the hall."
+      ],
+      "qfep_connection": "Which attachments can change while we continue to recognise a body?",
+      "proposed_maps": [
+        "Shader_11_QueerRubber",
+        "Shader_12_PinkExtravaganza"
+      ],
+      "minimum_display_bounds_m": [
+        6,
+        4.5,
+        5
+      ],
+      "reference_artist": "Peaches & Pussykrew",
+      "status": "Installed in the authored museum route; native integration verification recorded with the spine review.",
+      "installed_maps": [
+        "Shader_12_PinkExtravaganza"
+      ],
+      "study_adapter": "body"
+    },
+    "kapoor_void_studies": {
+      "map_ready": true,
+      "include_in_map_data": true,
+      "category": "reference_studies",
+      "sequence": "boolean_surfaces",
+      "reference_artist": "Anish Kapoor",
+      "scene": "res://commons/artifacts/spine_studies/void.tscn",
+      "related_study_scene": "res://commons/artifacts/kapoor_void_studies/boolean_eggs.tscn",
+      "bounds": [
+        25,
+        6,
+        10
+      ],
+      "status": "Installed in the authored museum route; native integration verification recorded with the spine review.",
+      "lookup_name": "kapoor_void_studies",
+      "name": "The surface that says depth",
+      "description": "The surface that says depth: an original response after Anish Kapoor. Installed application bay in Boolean_Works; controls belong to the main museum pointer.",
+      "installed_maps": [
+        "Boolean_Works"
+      ],
+      "interactions": [
+        "Use the labelled 3D controls; geometry changes require the display area to be clear.",
+        "RESET restores this study, without resetting the hall."
+      ],
+      "study_adapter": "void",
+      "parameters": {
+        "study": "Adapter selected by the installed scene; use its labelled pointer controls."
+      },
+      "signals": []
+    },
+    "boolean_eggs": {
+      "lookup_name": "boolean_eggs",
+      "name": "Boolean Eggs — a darkness held",
+      "scene": "res://commons/artifacts/kapoor_void_studies/boolean_eggs_museum.tscn",
+      "description": "Three deep-colour CSG ovoids on a colliding low plinth: union, intersection and a genuinely concave subtraction whose interior material removes lighting cues.",
+      "category": "reference_studies",
+      "sequence": "boolean_surfaces",
+      "map_ready": true,
+      "include_in_map_data": true,
+      "complexity": "intermediate",
+      "tags": [
+        "boolean",
+        "colour",
+        "void",
+        "reference-study"
+      ],
+      "minimum_display_bounds_m": [
+        7.84,
+        4.8,
+        3.24
+      ],
+      "reference_artist": "Anish Kapoor (original response, not a reconstruction)",
+      "interactions": [
+        "Walk around the three forms; compare the lit rim with the unlit cavity."
+      ],
+      "parameters": {},
+      "signals": [],
+      "qfep_connection": "The deterministic cut makes a boundary; its material decides which depth cues remain visible.",
+      "status": "Installed in Boolean_Works; desktop capture verified separately from headset acceptance."
+    },
+    "conical_sightline": {
+      "lookup_name": "conical_sightline",
+      "name": "One cut, three rooms",
+      "scene": "res://commons/artifacts/spine_studies/cut.tscn",
+      "description": "One cut, three rooms: an original response after Gordon Matta-Clark. Installed application bay in Boolean_Works; controls belong to the main museum pointer.",
+      "category": "reference_studies",
+      "sequence": "boolean_surfaces",
+      "map_ready": true,
+      "include_in_map_data": true,
+      "reference_artist": "Gordon Matta-Clark",
+      "proposed_maps": [
+        "Boolean_Works"
+      ],
+      "complexity": "intermediate",
+      "minimum_display_bounds_m": [
+        18.6,
+        5.4,
+        11
+      ],
+      "parameters": {
+        "study": "Adapter selected by the installed scene; use its labelled pointer controls."
+      },
+      "interactions": [
+        "Use the labelled 3D controls; geometry changes require the display area to be clear.",
+        "RESET restores this study, without resetting the hall."
+      ],
+      "signals": [],
+      "tags": [
+        "boolean",
+        "architecture",
+        "sightline",
+        "reference-study"
+      ],
+      "qfep_connection": "One deterministic cut changes relations between several spaces; permission and historical loss are not computed by it.",
+      "status": "Installed in the authored museum route; native integration verification recorded with the spine review.",
+      "installed_maps": [
+        "Boolean_Works"
+      ],
+      "study_adapter": "cut"
+    },
+    "colour_assembly": {
+      "lookup_name": "colour_assembly",
+      "name": "Room to gather",
+      "scene": "res://commons/artifacts/spine_studies/assembly.tscn",
+      "study_scene": "res://commons/artifacts/colour_assembly/study.tscn",
+      "description": "Room to gather: an original response after Liam Gillick. Installed application bay in Color_Walls; controls belong to the main museum pointer.",
+      "category": "reference_studies",
+      "sequence": "color",
+      "map_ready": true,
+      "include_in_map_data": true,
+      "reference_artist": "Liam Gillick",
+      "proposed_maps": [
+        "Color_Walls"
+      ],
+      "complexity": "intermediate",
+      "minimum_display_bounds_m": [
+        10.6,
+        6.3,
+        10
+      ],
+      "parameters": {
+        "study": "Adapter selected by the installed scene; use its labelled pointer controls."
+      },
+      "interactions": [
+        "Use the labelled 3D controls; geometry changes require the display area to be clear.",
+        "RESET restores this study, without resetting the hall."
+      ],
+      "signals": [],
+      "tags": [
+        "array",
+        "colour",
+        "assembly",
+        "architecture",
+        "reference-study"
+      ],
+      "qfep_connection": "A deterministic arrangement distributes positions and passages; naming its open centre Gathering cannot establish who gets to occupy or change it.",
+      "status": "Installed in the authored museum route; native integration verification recorded with the spine review.",
+      "installed_maps": [
+        "Color_Walls"
+      ],
+      "study_adapter": "assembly"
+    },
+    "colour_wall_studies": {
+      "lookup_name": "colour_wall_studies",
+      "name": "Wall relations",
+      "scene": "res://commons/artifacts/spine_studies/wall.tscn",
+      "study_scene": "res://commons/artifacts/colour_wall_studies/study.tscn",
+      "description": "Wall relations: an original response after Liam Gillick. Installed application bay in Color_Walls; controls belong to the main museum pointer.",
+      "category": "reference_studies",
+      "sequence": "color",
+      "map_ready": true,
+      "include_in_map_data": true,
+      "proposed_maps": [
+        "Color_Walls"
+      ],
+      "reference_artist": "Liam Gillick",
+      "complexity": "intermediate",
+      "minimum_display_bounds_m": [
+        17.2,
+        3.4,
+        1.1
+      ],
+      "parameters": {
+        "study": "Adapter selected by the installed scene; use its labelled pointer controls."
+      },
+      "interactions": [
+        "Use the labelled 3D controls; geometry changes require the display area to be clear.",
+        "RESET restores this study, without resetting the hall."
+      ],
+      "signals": [],
+      "tags": [
+        "colour",
+        "array",
+        "wall",
+        "composition",
+        "shadow",
+        "reference-study"
+      ],
+      "qfep_connection": "A legible geometric assembly can suggest an organised process without revealing the labour, authority or production it seems to diagram.",
+      "status": "Installed in the authored museum route; native integration verification recorded with the spine review.",
+      "installed_maps": [
+        "Color_Walls"
+      ],
+      "study_adapter": "wall"
+    },
+    "hinge_release": {
+      "lookup_name": "hinge_release",
+      "name": "A pose left",
+      "scene": "res://commons/artifacts/spine_studies/hinge.tscn",
+      "category": "reference_studies",
+      "sequence": "transformation",
+      "map_ready": true,
+      "include_in_map_data": true,
+      "description": "A pose left: an original response after Lygia Clark. Installed application bay in Trans_Rotation; controls belong to the main museum pointer.",
+      "reference_artist": "Lygia Clark",
+      "installed_maps": [
+        "Trans_Rotation"
+      ],
+      "status": "Installed in the authored museum route; native integration verification recorded with the spine review.",
+      "interactions": [
+        "Use the labelled 3D controls; geometry changes require the display area to be clear.",
+        "RESET restores this study, without resetting the hall."
+      ],
+      "study_adapter": "hinge",
+      "parameters": {
+        "study": "Adapter selected by the installed scene; use its labelled pointer controls."
+      },
+      "signals": []
+    },
+    "open_structures": {
+      "lookup_name": "open_structures",
+      "name": "A rule takes up space",
+      "scene": "res://commons/artifacts/spine_studies/open.tscn",
+      "category": "reference_studies",
+      "sequence": "array_tutorial",
+      "map_ready": true,
+      "include_in_map_data": true,
+      "description": "A rule takes up space: an original response after Sol LeWitt. Installed application bay in Tutorial_3D; controls belong to the main museum pointer.",
+      "reference_artist": "Sol LeWitt",
+      "installed_maps": [
+        "Tutorial_3D"
+      ],
+      "status": "Installed in the authored museum route; native integration verification recorded with the spine review.",
+      "interactions": [
+        "Use the labelled 3D controls; geometry changes require the display area to be clear.",
+        "RESET restores this study, without resetting the hall."
+      ],
+      "study_adapter": "open",
+      "parameters": {
+        "study": "Adapter selected by the installed scene; use its labelled pointer controls."
+      },
+      "signals": []
+    },
+    "sphere_in_pink": {
+      "lookup_name": "sphere_in_pink",
+      "name": "A sphere in pink",
+      "scene": "res://commons/artifacts/spine_studies/pink.tscn",
+      "category": "reference_studies",
+      "sequence": "color",
+      "map_ready": true,
+      "include_in_map_data": true,
+      "description": "A sphere in pink: an original response after Sol LeWitt. Installed application bay in Color_Flashlight; controls belong to the main museum pointer.",
+      "reference_artist": "Sol LeWitt",
+      "installed_maps": [
+        "Color_Flashlight"
+      ],
+      "status": "Installed in the authored museum route; native integration verification recorded with the spine review.",
+      "interactions": [
+        "Use the labelled 3D controls; geometry changes require the display area to be clear.",
+        "RESET restores this study, without resetting the hall."
+      ],
+      "study_adapter": "pink",
+      "parameters": {
+        "study": "Adapter selected by the installed scene; use its labelled pointer controls."
+      },
+      "signals": []
+    },
+    "evidence_network": {
+      "lookup_name": "evidence_network",
+      "name": "A relation needs a record",
+      "scene": "res://commons/artifacts/spine_studies/network.tscn",
+      "category": "reference_studies",
+      "sequence": "graphtheory",
+      "map_ready": true,
+      "include_in_map_data": true,
+      "description": "A relation needs a record: an original response after Mark Lombardi. Installed application bay in GT_Network_Analysis; controls belong to the main museum pointer.",
+      "reference_artist": "Mark Lombardi",
+      "installed_maps": [
+        "GT_Network_Analysis"
+      ],
+      "status": "Installed in the authored museum route; native integration verification recorded with the spine review.",
+      "parameters": {
+        "study": "Adapter selected by the installed scene; use its labelled pointer controls."
+      },
+      "signals": [],
+      "interactions": [
+        "Use the labelled museum pointer controls to change records, sentences or image state.",
+        "RESET restores this study without resetting the hall."
+      ],
+      "study_adapter": "network"
+    },
+    "sentence_authority": {
+      "lookup_name": "sentence_authority",
+      "name": "Permission at three scales",
+      "scene": "res://commons/artifacts/spine_studies/sentence.tscn",
+      "category": "reference_studies",
+      "sequence": "foundationscrisis",
+      "map_ready": true,
+      "include_in_map_data": true,
+      "description": "Permission at three scales: an original response after Jenny Holzer. Installed application bay in Crisis_Synthesis; controls belong to the main museum pointer.",
+      "reference_artist": "Jenny Holzer",
+      "installed_maps": [
+        "Crisis_Synthesis"
+      ],
+      "status": "Installed in the authored museum route; native integration verification recorded with the spine review.",
+      "parameters": {
+        "study": "Adapter selected by the installed scene; use its labelled pointer controls."
+      },
+      "signals": [],
+      "interactions": [
+        "Use the labelled museum pointer controls to change records, sentences or image state.",
+        "RESET restores this study without resetting the hall."
+      ],
+      "study_adapter": "sentence"
+    },
+    "museum_witnesses": {
+      "lookup_name": "museum_witnesses",
+      "name": "The room arrives late",
+      "scene": "res://commons/artifacts/spine_studies/witness.tscn",
+      "category": "reference_studies",
+      "sequence": "postfoundationscrisis",
+      "map_ready": true,
+      "include_in_map_data": true,
+      "description": "The room arrives late: an original response after Melanie Gilligan. Installed application bay in SpeculativeComputation_Situated_Computation; controls belong to the main museum pointer.",
+      "reference_artist": "Melanie Gilligan",
+      "installed_maps": [
+        "SpeculativeComputation_Situated_Computation"
+      ],
+      "status": "Installed in the authored museum route; native integration verification recorded with the spine review.",
+      "parameters": {
+        "study": "Adapter selected by the installed scene; use its labelled pointer controls."
+      },
+      "signals": [],
+      "interactions": [
+        "Use the labelled museum pointer controls to change records, sentences or image state.",
+        "RESET restores this study without resetting the hall.",
+        "Grab pink cameras A and B beside the readouts; aim them and release to leave them in place. C stays fixed.",
+        "RETURN CAMERAS restores starting poses; release held cameras first. Delayed and held exposures retain their recorded viewpoints."
+      ],
+      "study_adapter": "witness"
+    },
+    "tension_membrane": {
+      "lookup_name": "tension_membrane",
+      "name": "A little give",
+      "scene": "res://commons/artifacts/spine_studies/tension.tscn",
+      "category": "reference_studies",
+      "sequence": "softbodies",
+      "map_ready": true,
+      "include_in_map_data": true,
+      "description": "A little give: an original response after Senga Nengudi. Installed application bay in SoftBodies_Cloth_Physics; controls belong to the main museum pointer.",
+      "reference_artist": "Senga Nengudi",
+      "installed_maps": [
+        "SoftBodies_Cloth_Physics"
+      ],
+      "status": "Installed in the authored museum route; native integration verification recorded with the spine review.",
+      "parameters": {
+        "study": "Adapter selected by the installed scene; use its labelled pointer controls."
+      },
+      "signals": [],
+      "interactions": [
+        "Grab and pull the pink handle; release to let the membrane respond.",
+        "HOLD A PULL and RELEASE provide a repeatable comparison. LOAD cycles 0/1/3 kg; MORE / LESS GIVE changes compliance.",
+        "RESET restores the settled unloaded surface; release a held handle first."
+      ],
+      "study_adapter": "tension",
+      "qfep_connection": "Compare imposed load, fixed attachments and material response separately; the rule for returning encodes a remembered rest shape."
+    },
+    "paired_time": {
+      "lookup_name": "paired_time",
+      "name": "A second together",
+      "scene": "res://commons/artifacts/spine_studies/paired_time.tscn",
+      "category": "reference_studies",
+      "sequence": "forces",
+      "map_ready": true,
+      "include_in_map_data": true,
+      "description": "A second together: an original response after Felix Gonzalez-Torres. Installed application bay in Change_Choreography; controls belong to the main museum pointer.",
+      "reference_artist": "Felix Gonzalez-Torres",
+      "installed_maps": [
+        "Change_Choreography"
+      ],
+      "status": "Installed in the authored museum route; native integration verification recorded with the spine review.",
+      "parameters": {
+        "study": "Adapter selected by the installed scene; use its labelled pointer controls."
+      },
+      "signals": [],
+      "interactions": [
+        "DRIFT RIGHT changes the right rate without moving either hand immediately.",
+        "SAME RATE retains the gap; OFFSET adds 45 degrees; ALIGN retains the rates.",
+        "HOLD / RUN pauses this pair only. READING reveals the rates and gap. RESET restores local starting state."
+      ],
+      "study_adapter": "paired_time",
+      "qfep_connection": "Equal rates preserve a difference inherited from prior updates. Agreement is an imposed relation; both apparent clocks share one engine delta."
+    },
+    "tube_painting": {
+      "lookup_name": "tube_painting",
+      "name": "A line takes up room",
+      "scene": "res://commons/artifacts/spine_studies/tube.tscn",
+      "category": "reference_studies",
+      "sequence": "lsystems",
+      "map_ready": true,
+      "include_in_map_data": true,
+      "description": "Ada pipe, cable and tube workbench: continue suspended paths or twenty-one supplied forms, branch from a run, join at named ports, or attach to the wall.",
+      "reference_artist": "Ada / drawing in space",
+      "installed_maps": [
+        "LSystems_Grammars_And_Curves"
+      ],
+      "status": "Installed in the authored museum route; native integration verification recorded with the spine review.",
+      "parameters": {
+        "study": "Adapter selected by the installed scene; use its labelled pointer controls."
+      },
+      "signals": [],
+      "interactions": [
+        "Grab a free end and extend; release at the amber marker to join another run, or at the wall to attach.",
+        "Hold the pen trigger to draw; start beside an existing run to branch. VIEW cycles path, rings and skin for drawn runs.",
+        "FORM chooses tube, hollow pipe or drafted cable for the last run and next stroke. SAG changes the last cable; NETWORK loads the combined example.",
+        "PARTS cycles sixteen pipe/glass forms in four groups. CABLES shows five cable arrangements. Grab any free part port to draw a new run; the supplied part stays fixed.",
+        "UNDO restores pieces, geometry and sockets together. Release held ends before editing. Eight pieces and runs share the workbench."
+      ],
+      "study_adapter": "tube"
+    }
+  }
+}

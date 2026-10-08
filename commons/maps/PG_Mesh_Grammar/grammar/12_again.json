@@ -1,0 +1,24 @@
+{
+  "id": "12_again",
+  "notes": "The two rules of 05, applied for two generations. In the second generation up is asked again of the body the first one left.",
+  "seed": "icosahedron",
+  "seed_scale": 0.4,
+  "generations": 2,
+  "rules": [
+    {
+      "op": "inset",
+      "selector": "up",
+      "params": {
+        "amount": 0.25
+      }
+    },
+    {
+      "op": "extrude",
+      "selector": "tag:inset",
+      "params": {
+        "distance": 0.3,
+        "scale": 0.85
+      }
+    }
+  ]
+}

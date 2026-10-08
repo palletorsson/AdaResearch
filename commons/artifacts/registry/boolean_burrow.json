@@ -1,0 +1,83 @@
+{
+  "artifacts": {
+    "boolean_burrow": {
+      "lookup_name": "boolean_burrow",
+      "name": "Boolean Burrow",
+      "class_name": "BooleanBurrow",
+      "scene": "res://commons/artifacts/boolean_burrow/boolean_burrow.tscn",
+      "category": "boolean_surfaces",
+      "artifact_type": "synthesis",
+      "complexity": "intermediate",
+      "description": "A seeded walk places eleven overlapping cutters in a rock block. The rock is a CSG difference with collision. The sphere profile makes scalloped hollows; the level profile uses upright cylinders with the same centres and radius. A section cut exposes the interior, and roof variants change overhead enclosure. The cast displays the cutter union without the stock or its collision. Reported components and cycles describe the overlap graph, not traversable routes or topological holes.",
+      "include_in_map_data": true,
+      "map_ready": true,
+      "size_group": "environment",
+      "footprint": [
+        11,
+        5,
+        9
+      ],
+      "map_sequences": [
+        "boolean_surfaces"
+      ],
+      "tags": [
+        "boolean",
+        "csg",
+        "procedural",
+        "cave",
+        "walkable",
+        "seeded"
+      ],
+      "parameters": {
+        "footprint": [
+          11,
+          5,
+          9
+        ],
+        "size_group": "environment",
+        "carver_profile": "sphere keeps the original scalloped hollow; level uses upright cylinders with the same seeded centres and radius to provide a level floor. Graph connectivity alone does not prove body clearance."
+      },
+      "dna": {
+        "axes": {
+          "spoil": [
+            "rock",
+            "cast"
+          ],
+          "overburden": [
+            "roofed",
+            "broached",
+            "skylit",
+            "ruined"
+          ]
+        },
+        "predicted_degeneracy": {
+          "pair": "overburden: roofed <-> broached, at spoil=rock",
+          "predicted_bite_pct": 0.16,
+          "basis": "frame-share, and it is a LOWER BOUND — every prediction measured in this corpus under-predicted by 1.5x to 6.7x, because a flat-shaded estimate has one light, no shadow, no AO and no antialiasing. Arithmetic: from the canonical standpoint (yaw 0.62, pitch -0.26) the 11x5x9 block projects roughly 56 m2 — the 11x9 top foreshortened to ~26 m2 plus two sides at ~30 m2. `broached` differs from `roofed` by ONE vertical shaft of radius 0.52 m through the top: aperture pi*r^2 = 0.85 m2, foreshortened to ~0.22 m2, i.e. 0.39% of the subject. The delta across those pixels is light stone (0.52) to dark cavity (~0.10) = 0.42. FRAME = 0.0039 * 0.42 = 0.0016.",
+          "what_to_do_if_it_measures_lower": "STOP AND TEST THE HARNESS BEFORE THE DESIGN. Below ~0.16% the likely causes in order are (a) the shaft falling outside the crop because the seeded walk started its first carver near a far edge — read the printed seed and the carver count, (b) the top face being foreshortened past the antialiaser at this framing, (c) the roof cut failing to reach the surface because block_size.y grew. Open the PNGs and read <out>/_rejects.json before writing anything down.",
+          "note": "This is the SMALLEST pair by design, not by accident: `overburden` was chosen precisely because how much stone stands over a hollow is the one interior property a camera OUTSIDE the object can see at all. The chapter has already measured the alternative and it fails — csg_architecture_cavity's step from one wall to a four-walled room, the rung its own source calls the first on which the player is INSIDE, registers 4.372%. If roofed<->broached returns under ~3% it is CONDITIONAL, not INERT, and must be cleared with `python tools/probe_anamorphic.py --token=boolean_burrow --axis=overburden` across all five standpoints before any verdict is recorded: five of seven historical dead verdicts in this corpus were false.",
+          "measured_2026_09_07": "SWEPT AND RESOLVED. overburden measured 0.00% from the canonical standpoint — BELOW the 0.16% prediction, which this entry's own instruction says means test the harness before the design. probe_anamorphic did that and the axis is ANAMORPHIC, not inert: canonical 0.00%, opposite 20.28%, square-on 21.24%, from-above 36.07% (best pair skylit/ruined 63.74%), from-below 2.15%. A camera at eye level cannot see a roof. Cleared in doc/reports/anamorphic_boolean_burrow.json, which is what the critic gates on. Separately, a third spoil value `returned` was declared, swept, measured byte-identical to `rock` (0 of 577,600 px — a body drawn back inside opaque stone is invisible from every standpoint) and DROPPED. The axis is rock | cast.",
+          "conditional_2026_09_07": "THE TWO AXES ARE CROSSED, AND THE DEGENERACY IS BY CONSTRUCTION. At spoil=cast the stock is hidden and only the removed volume is drawn, so the roof cut has nothing to act on and all four overburden frames are byte-identical. That is 6 of the sweep's 7 twin pairs and it is CONDITIONAL, not inert: overburden is only meaningful where there is stone to stand over the hollow. Read the per-pair rows grouped by VALUE PAIR, never the axis mean — a mean over 8 frames of which 4 are one picture reports an axis that half exists. The remaining twin is roofed vs broached at spoil=rock, which is the anamorphic pair cleared above (0.00% canonical, 63.74% from above). Measured at spoil=rock, the kept axis is unambiguous: rock vs cast is 100.00% of frame at every one of the four overburden values."
+        },
+        "fixture": {
+          "generation_seed": 20260907
+        },
+        "framing": 0.85
+      },
+      "spatial_needs": {
+        "platform": "none",
+        "footprint_cells": 11,
+        "clearance": {
+          "front": 3,
+          "back": 1,
+          "left": 1,
+          "right": 1
+        },
+        "player_position": "front",
+        "wall_backing": false,
+        "orientation": "face_approach",
+        "isolation": "none"
+      }
+    }
+  }
+}

@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://commons/artifacts/spine_films/middle/chance_passage.gd" id="1"]
+
+[node name="chance_passage" type="Node3D"]
+script = ExtResource("1")

@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://commons/artifacts/force_capability_lab/force_capability_lab.gd" id="1"]
+
+[node name="ForceCapabilityCourt" type="Node3D"]
+script = ExtResource("1")

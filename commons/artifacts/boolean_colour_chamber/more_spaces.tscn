@@ -1,0 +1,9 @@
+[gd_scene load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://commons/artifacts/boolean_colour_chamber/study.gd" id="1"]
+
+[node name="MoreBooleanSpaces" type="Node3D"]
+script = ExtResource("1")
+study_modes = PackedStringArray("ring", "cross", "fold")
+study_finishes = PackedInt32Array(1, 0, 2)
+surrounding_floor = true

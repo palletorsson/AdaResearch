@@ -1,0 +1,21 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" path="res://commons/artifacts/chroma_life/chroma_life.gd" id="1_chroma_life"]
+
+; Everything is built in _ready(): B3/S23 is run from the fixed R-pentomino for
+; as many generations as `run` names, one column stands on every live cell as
+; tall as the crowd around it, painted by what `paint` records, plus the board,
+; the unseen anchor, the text plate and the body. Nothing is authored here, so
+; there is nothing here to drift out of step with the script.
+;
+; THE SCRIPT IS ON THE ROOT. GridInteractablesComponent sets config_* metadata and
+; calls apply_grid_config on the ROOT node; a scriptless root with the logic on a
+; child makes every map token silently unreachable.
+;
+; The root is a plain Node3D with its origin at the board's centre on the floor:
+; the board's underside is y = 0. The collider is a StaticBody3D child built at
+; run time with one box per column, one for the board, one for the post and one
+; for the plate, all sized from the same numbers as the meshes.
+
+[node name="ChromaLife" type="Node3D"]
+script = ExtResource("1_chroma_life")

@@ -1,0 +1,47 @@
+{
+  "artifacts": {
+    "signal_room": {
+      "lookup_name": "signal_room",
+      "name": "Different neighbours",
+      "scene": "res://commons/artifacts/spine_studies/signal.tscn",
+      "description": "Different neighbours: an original response after Ryoji Ikeda. Installed application bay in Random_Entropy; controls belong to the main museum pointer.",
+      "sequence": "randomness",
+      "category": "reference_studies",
+      "map_ready": true,
+      "include_in_map_data": true,
+      "status": "Installed in the authored museum route; native integration verification recorded with the spine review.",
+      "complexity": "intermediate",
+      "tags": [
+        "array",
+        "randomness",
+        "permutation",
+        "entropy",
+        "reference-study"
+      ],
+      "reference_artist": "Ryoji Ikeda",
+      "reference_source": "https://www.ryojiikeda.com/project/testpattern/",
+      "proposed_maps": [
+        "Random_Entropy"
+      ],
+      "minimum_display_bounds_m": [
+        14,
+        7.2,
+        24
+      ],
+      "signals": [],
+      "interactions": [
+        "Use the labelled 3D controls; geometry changes require the display area to be clear.",
+        "RESET restores this study, without resetting the hall."
+      ],
+      "parameters": {
+        "study": "Adapter selected by the installed scene; use its labelled pointer controls."
+      },
+      "qfep_connection": "Keep the population fixed and make changed adjacency perceptible at room scale; name what the marginal entropy gauge omits.",
+      "tutorial": "res://doc/book/studies/signal-room/MAKING.md",
+      "installed_maps": [
+        "Random_Entropy"
+      ],
+      "study_adapter": "signal"
+    }
+  }
+}

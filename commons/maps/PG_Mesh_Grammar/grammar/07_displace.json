@@ -1,0 +1,20 @@
+{
+  "id": "07_displace",
+  "notes": "Simplex noise pushes each vertex along its normal. The seed has 12 vertices, so 12 points move.",
+  "seed": "icosahedron",
+  "seed_scale": 0.4,
+  "generations": 1,
+  "rules": [
+    {
+      "op": "noise",
+      "selector": "all",
+      "params": {
+        "amplitude": 0.22,
+        "frequency": 3.0,
+        "direction": "normal",
+        "noise_type": "simplex",
+        "noise_seed": 7
+      }
+    }
+  ]
+}

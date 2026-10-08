@@ -1,0 +1,96 @@
+{
+	"artifacts": {
+		"chroma_life": {
+			"dna": {
+				"axes": {
+					"run": [
+						"seed",
+						"crowd",
+						"field"
+					],
+					"paint": [
+						"one",
+						"age",
+						"birth"
+					]
+				},
+				"predicted_degeneracy": {
+					"pair": "paint=one vs paint=age (any run)",
+					"predicted_focus_pct": 20.0,
+					"arithmetic": "The family ramp is not monotonic in luminance (0.39 at t=0 to 0.73 at t=7/8, back to 0.58) against ochre 0.62, so the pair rests on newborns (blue, -0.23 = 59 grey levels). At field 8 of 16 columns are newborn: ~8 x 2.2 x 0.4 m x two faces = ~14 m2 of world surface, far above the hottest 5% (~1.3 m2) of a ~26 m2 crop; written as 20% for shading. one vs birth 27%; age vs birth 30%+; run pairs move columns on and off the board, 40%+. Below 20%: age is not tracked (an all-blue age tile) or the board is occluded."
+				}
+			},
+			"lookup_name": "chroma_life",
+			"name": "Chroma Life",
+			"class_name": "ChromaLife",
+			"scene": "res://commons/artifacts/chroma_life/chroma_life.tscn",
+			"category": "color",
+			"artifact_type": "synthesis",
+			"complexity": "intermediate",
+			"sequence": "color",
+			"description": "Conway's Game of Life as a field of columns nobody arranged, with colour as the rule's own record. Five cells - the R-pentomino at rows 3..5, columns 4..6 of an 8 x 8 board - are set down and B3/S23 is run for as many generations as one word names; every live cell of the shown generation becomes a 0.40 m column whose height is the crowd around it, h = min(4.35, 0.45 + 0.65 n) for n live Moore neighbours, so no neighbour is a knee, one a hip, two the eye, three over the head, up to 4.35 m at six. Two axes, both word-valued on the map token. run (default seed) is TIME: seed is generation 0, the five cells stood as columns (n = 2, 2, 3, 3, 4); crowd is generation 8, eighteen columns in a 6 x 6 cluster with nine newborn and nine survivors, one of them an original cell alive since the seed, the densest moment before the crash; field is generation 13, sixteen columns spread over 7 x 7 cells, nine at eye height and eight newborn, with the streets the rule emptied between them (0.70 m across one dead cell, 1.25 m across two). paint (default one) is what the colour records, which the height cannot: one is a single ochre on every column, a coat that knows nothing of the run; age samples the family's blue-to-orange hue ramp at (age - 1) / 8, newborn blue and nine generations orange, the same direction as chroma_stack's by_height; birth is two colours 0.40 apart in luminance, newborn yellow and survivor blue. Age is tracked during the run, 1 at birth and +1 per survived generation, never read off the last frame. There is deliberately no count paint: colour by neighbour count is ca_conway_city's default and the height already says that number. Geometry: 8 x 8 cells at 0.55 m pitch on a 4.40 x 0.02 x 4.40 m dark board, row 0 north (-Z) and column 0 west (-X), columns standing on the board's top; an unseen anchor box (layers 0) 4.40 x 4.37 x 4.40 m - the board's 0.02 plus the tallest column's 4.35 - pins the capture AABB to the same extent for every value; a 0.90 m text plate at 1.20 m on a dark post over the always-dead cell (7, 2) at the south edge names the two words in force and states the run and the paint in one sentence each, facing +Z, rebuilt on every rebuild. The board is bounded with dead cells outside, and with this start it is identical to unbounded Life through generation 13, so no tile is a picture of the border. Built-in meshes only (BoxMesh), one StandardMaterial3D per column at roughness 0.55, no randomness, no hash, no emission, no lights, no timers; the origin is the board's centre at floor level so min y is 0; one box collider per column, one for the board, the post and the plate. NOT COMPILED OR CAPTURED in the session that wrote it; every number here is arithmetic and a Python simulation of the rule, not a render.",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"size_group": "large",
+			"footprint": [
+				5,
+				5,
+				5
+			],
+			"map_sequences": [
+				"color"
+			],
+			"tags": [
+				"color",
+				"colour",
+				"primitives",
+				"cellular_automata",
+				"conway",
+				"life",
+				"r_pentomino",
+				"age",
+				"birth",
+				"neighbour",
+				"dna"
+			],
+			"parameters": {
+				"footprint": [
+					5,
+					5,
+					5
+				],
+				"size_group": "large"
+			},
+			"spatial_needs": {
+				"platform": "none",
+				"footprint_cells": 9,
+				"clearance": {
+					"front": 2,
+					"back": 1,
+					"left": 0,
+					"right": 1
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": "none"
+			},
+			"measurements": {
+				"aabb_size": [
+					4.4,
+					4.37,
+					4.4
+				],
+				"source": "procedural, arithmetic not a render: the board is 8 cells at 0.55 m pitch, 4.40 m across X and Z, and every column stands inside it (a 0.40 m column centred on a rim cell reaches 2.125 from the centre, under the board's 2.20). The plate's post stands at z 1.85 and the text_screen at z 1.905 with its baked text at +0.004, so the plate's far face is near 1.91, inside the board's 2.20. Y is 0.02 of board plus a column of min(4.35, 0.45 + 0.65 n): under crowd the cell (2, 5) has six neighbours and stands 4.35 tall, from 0.02 to 4.37, so the union over all values is 4.40 x 4.37 x 4.40. The unseen anchor box is sized exactly to that union, 4.40 x 4.37 x 4.40 from y 0, and is counted by the capture's AABB in every value, so seed and field (tallest column 3.05, top 3.07) measure the same box as crowd. The build spec wrote the anchor and this extent as 4.35, two centimetres short of its own column arithmetic; the Python mirror of the geometry found the 2 cm and the anchor was sized to the true union so the extent is constant across the three run values."
+			},
+			"interactions": [],
+			"dev_themes": [
+				"colour as a record rather than a property: what the height cannot say",
+				"the neighbour as everyone around, the relation as a count read with the body",
+				"time as an axis: the same five cells at generation 0, 8 and 13"
+			],
+			"qfep_connection": "Color_Context_Placed's truth is that a colour value enters an encounter - a light, a surface, a position, a neighbour and a viewer. chroma_stack made the neighbour one shape below and the relation a complement; here the neighbour is everyone around, the relation is a count, and the colour is the rule's bookkeeping rather than a repaint of the height: under age an orange column among blue newborns has stood since the seed, and under crowd the tallest column is newborn while the seed's survivor, one neighbour short of it at 3.70 m, is the oldest thing on the board, so neither reading can be taken off the other. Nothing here was arranged; five cells and one rule stood the field, and what a context is, is the company a cell has had and for how long.",
+			"note": "NEW 2026-09-17. Config keys: #run:<seed|crowd|field> and #paint:<one|age|birth>. Both are word-valued, so neither key needs to sit in GridInteractablesComponent.CONFIG_PARAM_NAMES - only a #key:<number> on an unlisted key is eaten as the tutorial's rotation shorthand; run is seed/crowd/field and never 0/8/13, which the sweep would numericise and the typed property refuse in silence. An unknown word warns and falls back to the default. The museum stamps config_* metadata before _ready and the grid calls apply_grid_config after: the script reads the metadata in _ready, runs the rule and builds once behind a _built guard, and apply_grid_config rebuilds only when one of the two words actually changes, so curation_station's blanket apply_grid_config({\"emissive\": false}) touches nothing and the rule never runs twice. THE START IS THE WHOLE WORK: R = (3,5), (3,6), (4,4), (4,5), (5,5) as (row, column) on the 8 x 8 board, row 0 north, column 0 west, exactly these cells in exactly this orientation (the R-pentomino has eight; a one-cell or one-orientation slip silently changes every tile - shifting the start one cell east gives a different generation-8 set, because there the border bites). Bounded board with dead cells outside, simulated in the session that wrote this to be identical to unbounded Life through generation 13 with this start, so no tile is a picture of the border; the simulation also confirmed the plate's counts (5 / 18 / 16 columns, 9 and 8 newborn, age 9 at (5,5)) and that cells (0,6), (0,7), (7,6), (7,7), (1,7), (6,7) under the hall's light fixtures and the post cell (7,2) are dead in every run value. Lineage: ca_conway_city (cellular_automata.json) already holds the walk-scale Life city - B3/S23 for 10 steps, height by neighbour count, one MultiMesh, colour a lerp of the count - and this work re-does it deterministically with what it lacks: no RNG (the start is R), colour as the rule's bookkeeping (age, birth) rather than a repaint of the height, one MeshInstance3D with a collider per column, and TIME as the second axis instead of the rule. Its reading is dna_primitive_stack_ps_ca01_conway_city (crown_jewel, evaluated_by claude, 2026-04-22). NO dna block written by hand - derive it with tools/apply_dna_block.py --token=chroma_life --axes=run,paint. Predicted degeneracy, arithmetic and a lower bound: the closest pair is paint=one vs paint=age at any run, predicted 20%. The family ramp is not monotonic in luminance - across its eighths it reads 0.39, 0.54, 0.65, 0.62, 0.59, 0.65, 0.72, 0.73, 0.58 against ochre's 0.62 - so only newborns (blue, -0.23, 59 grey levels) and two-generation columns (-0.08) move, and the pair rests on the newborns: at field 8 of 16 columns are newborn, about 8 x 2.2 m x 0.4 m x two visible faces = 14 m^2 of world surface, far over the hottest 5% (about 1.3 m^2) of a ~26 m^2 crop, so the hottest 5% averages about 0.23, written as 20% for shading; seed (5 of 5 newborn) and crowd (9 of 18) give the same. one vs birth moves every column by at least 0.13 (ochre to yellow, 34 levels) and survivors 0.27 (ochre to blue): about 27%. age vs birth is at least 0.36 on newborns: 30%+. Run pairs move columns on and off the board (column about 0.6 against board 0.22) over most of the crop: 40%+. A sweep BELOW 20% on the named row means age is not being tracked (an all-blue age tile means the tracker resets every step) or the board is occluded - check the harness before the axis. footprint_cells 9 is the schema's cap; the board really covers 25 cells (5 x 5 from the token cell, the origin at the board's centre). Walkability: 0.70 m single lanes are below the eye_shot law's 1.2 m and the pathfinder cannot see inside a 5 x 5 body, so field's streets are a headset claim until walked and crowd is honestly a circled cluster; any collider seals the footprint in the museum walk graph while the body can still enter. The plate's title uses a middle dot (U+00B7) written as a \\u00b7 escape so the source stays ASCII; the baked typeface is Roboto, which carries the glyph. NOT COMPILED OR CAPTURED in the session that wrote it."
+		}
+	}
+}

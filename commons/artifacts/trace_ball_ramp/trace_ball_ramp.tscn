@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://commons/artifacts/trace_ball_ramp/trace_ball_ramp.gd" id="1"]
+
+[node name="TraceBallRamp" type="Node3D"]
+script = ExtResource("1")

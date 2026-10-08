@@ -1,0 +1,31 @@
+{
+  "id": "11_branch_the_tips",
+  "notes": "A second tube rule selects the faces the first tagged branch_tip. A tip is a fan of five triangles, so each tube carries five thinner ones. Parameters are the Branching Coral of mesh_grammar_demo.gd, run for one generation with the selector up in place of up_random.",
+  "seed": "icosahedron",
+  "seed_scale": 0.4,
+  "generations": 1,
+  "rules": [
+    {
+      "op": "tube_branch",
+      "selector": "up",
+      "params": {
+        "length": 0.2,
+        "curve_amount": 0.08,
+        "segments": 5,
+        "rings": 3,
+        "tip_tag": "branch_tip"
+      }
+    },
+    {
+      "op": "tube_branch",
+      "selector": "tag:branch_tip",
+      "params": {
+        "length": 0.15,
+        "curve_amount": 0.1,
+        "segments": 4,
+        "rings": 2,
+        "tip_tag": "branch_tip"
+      }
+    }
+  ]
+}

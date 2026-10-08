@@ -1,0 +1,1 @@
+One outline can stand at several heights and appear with four sides or sixteen. Keep one choice still while another changes. Then walk among a family of different columns and ask which difference belongs to the rule, which to its sampling, and which you want to keep.

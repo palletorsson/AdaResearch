@@ -1,0 +1,64 @@
+{
+  "artifacts": {
+    "tiling_principles": {
+      "lookup_name": "tiling_principles",
+      "name": "One motif, six relations",
+      "scene": "res://commons/artifacts/regularity/tiling_principles.tscn",
+      "category": "arrays",
+      "complexity": "beginner",
+      "map_ready": true,
+      "include_in_map_data": true,
+      "footprint": [
+        19,
+        28,
+        7
+      ],
+      "parameters": {
+        "footprint": [
+          19,
+          28,
+          7
+        ],
+        "size_group": "large"
+      },
+      "description": "Six deterministic black and white comparison fields, plus a reversible 4x4 before/after rule study. One shared generator connects the small sample to a 16x16 floor field or a wall eye chart of 25 identical samples at five sizes.",
+      "qfep_connection": "A repeated rule makes an address, a field or an environment; the receiver and body determine what can be encountered.",
+      "interactions": [
+        "NEXT RULE selects an instruction; APPLY / UNDO compares it with unchanged repetition.",
+        "NEXT TILE moves the marked address through the 4x4 and shows its evaluated instruction.",
+        "The floor study marks the matching 4x4 window in its 16x16 field.",
+        "The wall chart cycles applied rules and shares the desk state; only the size of its 25 repeated marks differs.",
+        "TURN MOTIF and EXCEPTION retain the six comparison fields and hinged wall behaviour."
+      ]
+    },
+    "wall_exception": {
+      "lookup_name": "wall_exception",
+      "name": "The wall turns",
+      "scene": "res://commons/artifacts/regularity/wall_exception.tscn",
+      "category": "arrays",
+      "complexity": "beginner",
+      "map_ready": true,
+      "include_in_map_data": true,
+      "footprint": [
+        6,
+        5,
+        5
+      ],
+      "parameters": {
+        "footprint": [
+          6,
+          5,
+          5
+        ],
+        "size_group": "large"
+      },
+      "description": "A thin hinged section of Tutorial_Tiling_Walls and a guarded landing beyond the museum skin. Its inner image shares ONE EXCEPTION; TURN WALL changes passage without changing the pattern. Requires the museum.turning_wall declaration and two floor cells on the east boundary.",
+      "interactions": [
+        "TURN WALL opens or closes the moving panel.",
+        "Return inside and step clear before turning; the occupied landing holds the wall.",
+        "TURN MOTIF and EXCEPTION on the existing tiling desk also update the hinged surface."
+      ],
+      "qfep_connection": "A local exception in a repeated image differs from an exception in the enclosure: the receiver and its collision decide whether the body can pass."
+    }
+  }
+}

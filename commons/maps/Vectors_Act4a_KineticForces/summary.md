@@ -1,0 +1,1 @@
+Kinetic Forces distinguishes a force applied to rigid bodies, a locomotion adaptation, signed nominal work and acceleration required by a prescribed circle. Three primaries ground the comparisons; five supporting artifacts remain. Discover the responses before reading their rules, then carry restoring influences and retained motion into Oscillation.

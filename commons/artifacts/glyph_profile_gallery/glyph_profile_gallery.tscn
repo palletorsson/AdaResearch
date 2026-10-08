@@ -1,0 +1,7 @@
+[gd_scene load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://commons/artifacts/glyph_profile_gallery/glyph_profile_gallery.gd" id="1_gallery"]
+
+[node name="GlyphProfileGallery" type="Node3D"]
+script = ExtResource("1_gallery")
+metadata/_artifact_lookup = "glyph_profile_gallery"

@@ -1,0 +1,29 @@
+{
+  "artifacts": {
+    "suspension_passage": {
+      "lookup_name": "suspension_passage",
+      "name": "Seven places for a passage",
+      "scene": "res://commons/artifacts/suspension_passage/suspension_passage.tscn",
+      "description": "49 retained fragments, seven raised. Compare a continuous passage with separate pockets, then exchange two height assignments. Original desktop study after Mona Hatoum's Remains to be Seen.",
+      "sequence": "array_tutorial",
+      "category": "reference_studies",
+      "map_ready": false,
+      "include_in_map_data": false,
+      "complexity": "intermediate",
+      "tags": ["array", "passage", "suspension", "body", "reference-study"],
+      "signals": ["state_changed"],
+      "interactions": ["Use the supplied desktop viewer to select an arrangement", "Exchange two grid heights", "Walk through or around the field", "Compare the supplied body widths"],
+      "parameters": {"arrangement": "apply_rule(0) = passage; apply_rule(1) = separate pockets", "exchange": "swap_cells(first, second) exchanges unlike heights while retaining the count"},
+      "qfep_connection": "Identical value counts and fixed horizontal addresses can offer different routes. Access also depends on the declared body, exposing a hidden assumption behind calling a space open.",
+      "proposed_maps": ["Array", "Tutorial_3D"],
+      "minimum_display_bounds_m": [5.88, 5.2, 5.88],
+      "placement_note": "Needs a clear walking perimeter beyond the display bounds; never occupy the only exit route.",
+      "reference_artist": "Mona Hatoum",
+      "reference_work": "Remains to be Seen (2019)",
+      "reference_url": "https://www.whitecube.com/gallery-exhibitions/remains-to-be-seen",
+      "status": "standalone chapter companion; not installed in the spine",
+      "evidence": "doc/book/iterations/2026-10-01-hatoum-seven-places/results.json",
+      "limits": "Static kinematic placement, convex collision approximation, visual cables. No weight, damage, tension or original-debris history. Native desktop checks do not establish headset or learner acceptance."
+    }
+  }
+}

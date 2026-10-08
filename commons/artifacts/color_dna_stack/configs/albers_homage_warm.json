@@ -1,0 +1,32 @@
+{
+  "id": "albers_homage_warm",
+  "artist": "Josef Albers",
+  "year": 1959,
+  "movement": "Bauhaus / color theory",
+  "notes": "Homage to the Square \u2014 nested squares, warm value steps. Albers' demonstration that color is relational: no two adjacent squares look the way they would alone.",
+  "layout": "vertical_stack",
+  "palette": "color_pedagogy",
+  "base_scale": 0.28,
+  "sequence": [
+    {
+      "shape": "cube",
+      "color": "#3a1808",
+      "scale": 1.6
+    },
+    {
+      "shape": "cube",
+      "color": "#7a3a18",
+      "scale": 1.3
+    },
+    {
+      "shape": "cube",
+      "color": "#c06840",
+      "scale": 1.0
+    },
+    {
+      "shape": "cube",
+      "color": "#e8a878",
+      "scale": 0.7
+    }
+  ]
+}

@@ -1,0 +1,16 @@
+{
+  "id": "04_inset",
+  "notes": "Every face is replaced by a smaller inner face and a border. Nothing leaves the original planes. Parameters are the Inset Pattern of mesh_grammar_demo.gd.",
+  "seed": "icosahedron",
+  "seed_scale": 0.4,
+  "generations": 1,
+  "rules": [
+    {
+      "op": "inset",
+      "selector": "all",
+      "params": {
+        "amount": 0.35
+      }
+    }
+  ]
+}

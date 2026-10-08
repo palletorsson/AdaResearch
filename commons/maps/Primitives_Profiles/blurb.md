@@ -1,0 +1,1 @@
+A letter carries an outline before we give it another task. O can surround an opening; its lower stroke can also obstruct the way through. Follow a borrowed boundary into a body and keep the source beside it. Recognition is a beginning, not a promise that the form can do what its new name suggests.

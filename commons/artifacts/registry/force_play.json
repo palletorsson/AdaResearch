@@ -1,0 +1,557 @@
+{
+  "artifacts": {
+    "force_play_tower": {
+      "lookup_name": "force_play_tower",
+      "name": "One brick holds the question",
+      "scene": "res://commons/artifacts/force_play/tower.tscn",
+      "category": "vectors_forces",
+      "map_ready": true,
+      "include_in_map_data": true,
+      "map_sequences": [
+        "forces"
+      ],
+      "footprint": [
+        10,
+        7,
+        12
+      ],
+      "parameters": {
+        "footprint": [
+          10,
+          7,
+          12
+        ],
+        "size_group": "large"
+      },
+      "description": "Pull the bottom rose brick; forty-two upper bricks lose their support. A small companion table carries nine loose shapes: pick up, turn and reorder the stack by hand; its reset is independent."
+    },
+    "force_play_gravity": {
+      "lookup_name": "force_play_gravity",
+      "name": "The room lets go",
+      "scene": "res://commons/artifacts/force_play/gravity.tscn",
+      "category": "vectors_forces",
+      "map_ready": true,
+      "include_in_map_data": true,
+      "map_sequences": [
+        "forces"
+      ],
+      "footprint": [
+        22,
+        5,
+        10
+      ],
+      "parameters": {
+        "footprint": [
+          22,
+          5,
+          10
+        ],
+        "size_group": "large"
+      },
+      "description": "An entry threshold releases a hinged trapdoor, suspended cargo and a leaning pole."
+    },
+    "force_play_mass": {
+      "lookup_name": "force_play_mass",
+      "name": "Same force, different mass",
+      "scene": "res://commons/artifacts/force_play/mass.tscn",
+      "category": "vectors_forces",
+      "map_ready": true,
+      "include_in_map_data": true,
+      "map_sequences": [
+        "forces"
+      ],
+      "footprint": [
+        12,
+        4,
+        10
+      ],
+      "parameters": {
+        "footprint": [
+          12,
+          4,
+          10
+        ],
+        "size_group": "large"
+      },
+      "description": "Equal-size PointBody spheres: 1, 2 and 4 kg; a matched one-newton pulse."
+    },
+    "force_play_trolley": {
+      "lookup_name": "force_play_trolley",
+      "name": "Load changes the push",
+      "scene": "res://commons/artifacts/force_play/trolley.tscn",
+      "category": "vectors_forces",
+      "map_ready": true,
+      "include_in_map_data": true,
+      "map_sequences": [
+        "forces"
+      ],
+      "footprint": [
+        10,
+        4,
+        10
+      ],
+      "parameters": {
+        "footprint": [
+          10,
+          4,
+          10
+        ],
+        "size_group": "large"
+      },
+      "description": "Load the cart and pull its hand grip. A low-friction sliding carrier with decorative wheels."
+    },
+    "force_play_puzzle": {
+      "lookup_name": "force_play_puzzle",
+      "name": "Make room for a body",
+      "scene": "res://commons/artifacts/force_play/puzzle.tscn",
+      "category": "vectors_forces",
+      "map_ready": true,
+      "include_in_map_data": true,
+      "map_sequences": [
+        "forces"
+      ],
+      "footprint": [
+        10,
+        4,
+        10
+      ],
+      "parameters": {
+        "footprint": [
+          10,
+          4,
+          10
+        ],
+        "size_group": "large"
+      },
+      "description": "Three weighted cubes, staggered walls and destination marks; push and rearrange."
+    },
+    "force_play_bowling": {
+      "lookup_name": "force_play_bowling",
+      "name": "Ten pins, one commitment",
+      "scene": "res://commons/artifacts/force_play/bowling.tscn",
+      "category": "vectors_forces",
+      "map_ready": true,
+      "include_in_map_data": true,
+      "map_sequences": [
+        "forces"
+      ],
+      "footprint": [
+        10,
+        5,
+        25
+      ],
+      "parameters": {
+        "footprint": [
+          10,
+          5,
+          25
+        ],
+        "size_group": "large"
+      },
+      "description": "Ten compound rigid pins, a black sphere, long lane, bumpers and banked sides."
+    },
+    "force_play_recoil": {
+      "lookup_name": "force_play_recoil",
+      "name": "The launcher also moves",
+      "scene": "res://commons/artifacts/force_play/recoil.tscn",
+      "category": "vectors_forces",
+      "map_ready": true,
+      "include_in_map_data": true,
+      "map_sequences": [
+        "forces"
+      ],
+      "footprint": [
+        12,
+        4,
+        10
+      ],
+      "parameters": {
+        "footprint": [
+          12,
+          4,
+          10
+        ],
+        "size_group": "large"
+      },
+      "description": "Compare equal opposite impulses on free and braced carts."
+    },
+    "force_play_friction": {
+      "lookup_name": "force_play_friction",
+      "name": "The slope does not choose the ending",
+      "scene": "res://commons/artifacts/force_play/friction.tscn",
+      "category": "vectors_forces",
+      "map_ready": true,
+      "include_in_map_data": true,
+      "map_sequences": [
+        "forces"
+      ],
+      "footprint": [
+        24,
+        5,
+        16
+      ],
+      "parameters": {
+        "footprint": [
+          24,
+          5,
+          16
+        ],
+        "size_group": "large"
+      },
+      "description": "Four slopes compare cube/ball and smooth/rough contact; trajectories leave trails."
+    },
+    "force_play_liquids": {
+      "lookup_name": "force_play_liquids",
+      "name": "Walk into resistance",
+      "scene": "res://commons/artifacts/force_play/liquids.tscn",
+      "category": "vectors_forces",
+      "map_ready": true,
+      "include_in_map_data": true,
+      "map_sequences": [
+        "forces"
+      ],
+      "footprint": [
+        24,
+        5,
+        16
+      ],
+      "parameters": {
+        "footprint": [
+          24,
+          5,
+          16
+        ],
+        "size_group": "large"
+      },
+      "description": "Three large transparent drag regions slow falling points and the visitor. Approximate drag and buoyancy, not fluid simulation."
+    },
+    "force_play_springs": {
+      "lookup_name": "force_play_springs",
+      "name": "Pull one, disturb the row",
+      "scene": "res://commons/artifacts/force_play/springs.tscn",
+      "category": "vectors_forces",
+      "map_ready": true,
+      "include_in_map_data": true,
+      "map_sequences": [
+        "forces"
+      ],
+      "footprint": [
+        18,
+        5,
+        12
+      ],
+      "parameters": {
+        "footprint": [
+          18,
+          5,
+          12
+        ],
+        "size_group": "large"
+      },
+      "description": "Seven hanging familiar points share restoring springs; pull one and disturb its neighbours."
+    },
+    "force_play_swings": {
+      "lookup_name": "force_play_swings",
+      "name": "How long should a disturbance last",
+      "scene": "res://commons/artifacts/force_play/swings.tscn",
+      "category": "vectors_forces",
+      "map_ready": true,
+      "include_in_map_data": true,
+      "map_sequences": [
+        "forces"
+      ],
+      "footprint": [
+        24,
+        5,
+        11
+      ],
+      "parameters": {
+        "footprint": [
+          24,
+          5,
+          11
+        ],
+        "size_group": "large"
+      },
+      "description": "Three connected swing pairs compare weak, medium and strong damping."
+    },
+    "force_play_torque": {
+      "lookup_name": "force_play_torque",
+      "name": "Where you push matters",
+      "scene": "res://commons/artifacts/force_play/torque.tscn",
+      "category": "vectors_forces",
+      "map_ready": true,
+      "include_in_map_data": true,
+      "map_sequences": [
+        "forces"
+      ],
+      "footprint": [
+        22,
+        5,
+        10
+      ],
+      "parameters": {
+        "footprint": [
+          22,
+          5,
+          10
+        ],
+        "size_group": "large"
+      },
+      "description": "A gate, seesaw and crank retain actual hinges while rose hand grips transmit forces."
+    },
+    "force_play_constraints": {
+      "lookup_name": "force_play_constraints",
+      "name": "Attachment changes the possible",
+      "scene": "res://commons/artifacts/force_play/constraints.tscn",
+      "category": "vectors_forces",
+      "map_ready": true,
+      "include_in_map_data": true,
+      "map_sequences": [
+        "forces"
+      ],
+      "footprint": [
+        24,
+        5,
+        11
+      ],
+      "parameters": {
+        "footprint": [
+          24,
+          5,
+          11
+        ],
+        "size_group": "large"
+      },
+      "description": "Basket, three-link chain, suspended plank and articulated arm use physical joints."
+    },
+    "force_play_magnet": {
+      "lookup_name": "force_play_magnet",
+      "name": "The catch must end",
+      "scene": "res://commons/artifacts/force_play/magnet.tscn",
+      "category": "vectors_forces",
+      "map_ready": true,
+      "include_in_map_data": true,
+      "map_sequences": [
+        "forces"
+      ],
+      "footprint": [
+        14,
+        5,
+        14
+      ],
+      "parameters": {
+        "footprint": [
+          14,
+          5,
+          14
+        ],
+        "size_group": "large"
+      },
+      "description": "A large timed magnet attracts twelve prefabs for three seconds. A held point also becomes a trigger-driven gravity gun."
+    },
+    "force_play_vortex": {
+      "lookup_name": "force_play_vortex",
+      "name": "The field takes a turn",
+      "scene": "res://commons/artifacts/force_play/vortex.tscn",
+      "category": "vectors_forces",
+      "map_ready": true,
+      "include_in_map_data": true,
+      "map_sequences": [
+        "forces"
+      ],
+      "footprint": [
+        20,
+        5,
+        18
+      ],
+      "parameters": {
+        "footprint": [
+          20,
+          5,
+          18
+        ],
+        "size_group": "large"
+      },
+      "description": "Eighteen prefabs move through a visible swirl; the visitor meets the same acceleration field."
+    },
+    "force_play_mutual": {
+      "lookup_name": "force_play_mutual",
+      "name": "You become another source",
+      "scene": "res://commons/artifacts/force_play/mutual.tscn",
+      "category": "vectors_forces",
+      "map_ready": true,
+      "include_in_map_data": true,
+      "map_sequences": [
+        "forces"
+      ],
+      "footprint": [
+        20,
+        5,
+        20
+      ],
+      "parameters": {
+        "footprint": [
+          20,
+          5,
+          20
+        ],
+        "size_group": "large"
+      },
+      "description": "Five larger orbiting points; the visitor becomes the sixth source. Softened attraction with contact disabled."
+    },
+    "force_play_support": {
+      "lookup_name": "force_play_support",
+      "name": "Move a leg, inherit the load",
+      "scene": "res://commons/artifacts/force_play/support.tscn",
+      "category": "vectors_forces",
+      "map_ready": true,
+      "include_in_map_data": true,
+      "map_sequences": [
+        "forces"
+      ],
+      "footprint": [
+        18,
+        6,
+        16
+      ],
+      "parameters": {
+        "footprint": [
+          18,
+          6,
+          16
+        ],
+        "size_group": "large"
+      },
+      "description": "Move an actual table leg beneath a tall uneven load; contacts decide the collapse."
+    },
+    "force_play_flight": {
+      "lookup_name": "force_play_flight",
+      "name": "A mat, two points, a way through",
+      "scene": "res://commons/artifacts/force_play/flight.tscn",
+      "category": "vectors_forces",
+      "map_ready": true,
+      "include_in_map_data": true,
+      "map_sequences": [
+        "forces"
+      ],
+      "footprint": [
+        14,
+        7,
+        26
+      ],
+      "parameters": {
+        "footprint": [
+          14,
+          7,
+          26
+        ],
+        "size_group": "large"
+      },
+      "description": "Two inherited trigger-thrust points carry the visitor and a visual flying mat through four elevated gates."
+    },
+    "gravity_oval": {
+      "lookup_name": "gravity_oval",
+      "name": "Gravity oval",
+      "scene": "res://commons/artifacts/gravity_oval/gravity_oval.tscn",
+      "category": "vectors_forces",
+      "map_ready": true,
+      "include_in_map_data": true,
+      "map_sequences": [
+        "forces"
+      ],
+      "footprint": [
+        14,
+        13,
+        16
+      ],
+      "parameters": {
+        "footprint": [
+          14,
+          13,
+          16
+        ],
+        "size_group": "large"
+      },
+      "description": "A walk-in artificial field carries 24 familiar prefab bodies up the left column, over the top and down the right in a repeating vertical oval. Step into the stream to travel with them; walk sideways to leave. Real contacts, hand pickup, finite bodies and local reset. The field supplies energy; the tracked head stays upright."
+    },
+    "force_impact_club": {
+      "lookup_name": "force_impact_club",
+      "name": "Oversized impact club",
+      "scene": "res://commons/artifacts/force_play/impact_club_rack.tscn",
+      "category": "vectors_forces",
+      "map_ready": true,
+      "include_in_map_data": true,
+      "map_sequences": [
+        "forces"
+      ],
+      "footprint": [
+        2,
+        3,
+        2
+      ],
+      "parameters": {
+        "footprint": [
+          2,
+          3,
+          2
+        ],
+        "size_group": "large"
+      },
+      "description": "Take the rose grip and swing a long metal shaft with an oversized driver head. Actual held-tool collision sends the existing PointBody ball onward. RETURN CLUB restores the unheld tool.",
+      "qfep_connection": "Contact redistributes motion; the joint permits a return while preventing free translation. The encounter does not measure muscular force or entropy."
+    },
+    "force_punching_bag": {
+      "lookup_name": "force_punching_bag",
+      "name": "A push comes back",
+      "scene": "res://commons/artifacts/force_play/punching_bag.tscn",
+      "category": "vectors_forces",
+      "map_ready": true,
+      "include_in_map_data": true,
+      "map_sequences": [
+        "forces"
+      ],
+      "footprint": [
+        6,
+        4,
+        7
+      ],
+      "parameters": {
+        "footprint": [
+          6,
+          4,
+          7
+        ],
+        "size_group": "large"
+      },
+      "description": "A seven-kilogram padded bag swings on a real pin joint. Nearby tracked hands wear local collision mitts; held clubs and loose balls also strike it. Pull the rose force grip without detaching the bag. Local reset.",
+      "qfep_connection": "Contact redistributes motion; the joint permits a return while preventing free translation. The encounter does not measure muscular force or entropy."
+    },
+    "endless_racer": {
+      "lookup_name": "endless_racer",
+      "name": "Endless Drive",
+      "scene": "res://commons/artifacts/endless_racer/endless_racer.tscn",
+      "category": "vectors_forces",
+      "map_ready": true,
+      "include_in_map_data": true,
+      "map_sequences": [
+        "forces"
+      ],
+      "footprint": [
+        6,
+        3,
+        6
+      ],
+      "parameters": {
+        "footprint": [
+          6,
+          3,
+          6
+        ],
+        "size_group": "large"
+      },
+      "description": "Board an arcade car inside the museum. Grip the steering wheel, right trigger accelerates, left trigger brakes. A bounded road pool supplies endless bends, collectible cubes and barriers. Reachable restart and museum return.",
+      "qfep_connection": "Steering selects a path while speed, inertia and resistance constrain corrections. Arcade rules are explicit; this is not a physical tyre model or an entropy measurement."
+    }
+  }
+}

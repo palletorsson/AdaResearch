@@ -1,0 +1,25 @@
+{
+  "id": "03_extrude",
+  "notes": "Upward faces are pushed out and scaled down; a second rule selects what the first tagged extruded_top and pushes it again. Parameters are the Extruded Spire of mesh_grammar_demo.gd.",
+  "seed": "icosahedron",
+  "seed_scale": 0.4,
+  "generations": 1,
+  "rules": [
+    {
+      "op": "extrude",
+      "selector": "up",
+      "params": {
+        "distance": 0.3,
+        "scale": 0.7
+      }
+    },
+    {
+      "op": "extrude",
+      "selector": "tag:extruded_top",
+      "params": {
+        "distance": 0.25,
+        "scale": 0.6
+      }
+    }
+  ]
+}

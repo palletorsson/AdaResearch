@@ -1,0 +1,89 @@
+[
+  {
+    "id": "flow_lookup",
+    "sequence": "change",
+    "map": "Flow_Field",
+    "title": "The next position is another lookup",
+    "scene": "res://commons/artifacts/spine_films/more_motion/flow_lookup.tscn",
+    "source_paths": [
+      "res://commons/artifacts/flow_field_painter/flow_field_painter.gd"
+    ],
+    "description": "Three source particles repeatedly sample one held direction field and retain their different trajectories.",
+    "limitation": "A fixed seed and three declared starts; 160 source steps of 0.05 seconds. Directions, not forces. The chosen trajectories do not wrap."
+  },
+  {
+    "id": "torque_purchase",
+    "sequence": "forces",
+    "map": "Vectors_Act2_VectorArithmetic",
+    "title": "A longer arm, a smaller push",
+    "scene": "res://commons/artifacts/spine_films/more_motion/torque_purchase.tscn",
+    "source_paths": [
+      "res://commons/artifacts/torque_crank/torque_crank.gd",
+      "res://commons/artifacts/_toy_console/toy_console.gd"
+    ],
+    "description": "Actual crank geometry exposes parallel and perpendicular push components, then compares three arm/push purchases.",
+    "limitation": "Static source poses, not angular dynamics. Rigs are enlarged for inspection; the three purchase alternatives keep a common display scale."
+  },
+  {
+    "id": "catenoid_sections",
+    "sequence": "formfinding",
+    "map": "FormFinding_Catenary",
+    "title": "A waist and sixteen intervals",
+    "scene": "res://commons/artifacts/spine_films/more_motion/catenoid_sections.tscn",
+    "source_paths": [
+      "res://commons/primitives/parametric/catenoid.gd"
+    ],
+    "description": "Boundary rings, the narrow waist and sampled sections reveal how the actual catenoid surface is assembled.",
+    "limitation": "Analytic catenoid with c=0.82, height range -1 to 1, 16 by 48 intervals. No settling, stability test or universal area-minimum claim."
+  },
+  {
+    "id": "circle_projection",
+    "sequence": "wavefunctions",
+    "map": "WaveFunctions_Unit_Circle",
+    "title": "A turn leaves its coordinates",
+    "scene": "res://commons/artifacts/spine_films/more_motion/circle_projection.tscn",
+    "source_paths": [
+      "res://algorithms/wavefunctions/unit_circle/UnitCircle.gd"
+    ],
+    "description": "Original rotating-point and bridge functions show sine projection, then retain cosine in depth with the source helix option.",
+    "limitation": "One 81-sample cycle. Small non-colliding bridge specimens; interpolating between sine and helix is explanatory staging."
+  },
+  {
+    "id": "prng_register",
+    "sequence": "randomness",
+    "map": "Random_Definition",
+    "title": "A number has a previous state",
+    "scene": "res://commons/artifacts/spine_films/more_motion/prng_register.tscn",
+    "source_paths": [
+      "res://algorithms/randomness/prng_crank_machine/prng_crank_machine.gd"
+    ],
+    "description": "The original crank arithmetic fills a 64-bit block register, masks to 32 bits and replays sixteen outputs from the same seed.",
+    "limitation": "Blocks represent integer bit places, not circuitry. Sixteen matching outputs establish this replay, not distribution quality or cryptographic security."
+  },
+  {
+    "id": "noise_relief",
+    "sequence": "noise",
+    "map": "Noise_Inside_Noise",
+    "title": "One sample becomes colour and distance",
+    "scene": "res://commons/artifacts/spine_films/more_motion/noise_relief.tscn",
+    "source_paths": [
+      "res://algorithms/randomness/noisesphere/warp_study.gd",
+      "res://algorithms/randomness/noisesphere/noisesphere.gd"
+    ],
+    "description": "The actual study sampler and radius function turn one field into skin and relief, then compare direct and warped addresses.",
+    "limitation": "A 48-segment, 24-ring display sphere uses the existing CPU study, not the older animated dome shader. Skin-to-relief interpolation is staged; source endpoint values and seeds are retained."
+  },
+  {
+    "id": "shader_repeat",
+    "sequence": "shaders",
+    "map": "Shader_05_Patterns",
+    "title": "One function, many addresses",
+    "scene": "res://commons/artifacts/spine_films/more_motion/shader_repeat.tscn",
+    "source_paths": [
+      "res://algorithms/shaders/book_of_shaders/patterns_tile.gdshader",
+      "res://algorithms/shaders/book_of_shaders/shader_05_patterns.gd"
+    ],
+    "description": "An unchanged sphere mesh receives the original UV tile shader; grid frequency changes while its faces stay fixed.",
+    "limitation": "The original flat-display shader is transferred to spheres, exposing their UV distortion. TIME is replaced by a private film clock; animate stays zero."
+  }
+]

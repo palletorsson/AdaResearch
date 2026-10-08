@@ -1,0 +1,22 @@
+[
+  {
+    "id": "foundation_state",
+    "sequence": "transformation",
+    "map": "Trans_Body",
+    "title": "A response can remember",
+    "scene": "res://commons/artifacts/spine_films/foundation_b/foundation_state.tscn",
+    "source_paths": ["res://commons/artifacts/spine_films/foundation_source.js"],
+    "description": "A teaching clock moves a cube while two physical gate models compare present proximity with a retained visit. FRAME, APPROACH / AWAY and RESET let the visitor separate the events.",
+    "limitation": "Exact State browser-study transitions presented in 3D. Each FRAME adds a synthetic 0.5 seconds; it is not a measured engine frame. APPROACH is an explicit input, not player tracking. No museum gate is controlled."
+  },
+  {
+    "id": "foundation_function",
+    "sequence": "primitives",
+    "map": "Primitives_Columns",
+    "title": "One rule makes a family",
+    "scene": "res://commons/artifacts/spine_films/foundation_b/foundation_function.tscn",
+    "source_paths": ["res://commons/artifacts/spine_films/foundation_source.js"],
+    "description": "One angular rule makes two straight columns. A fixed four-sided, two-metre reference stands beside editable height and radial count; the two-ring position list stays visible in the geometry.",
+    "limitation": "Port of the Function browser study, not the museum's richer profile generator. Height 1–3 m in 0.1 m steps; radial counts 4, 6, 8, 12, 16. A declared 0.70 m display radius replaces browser pixels. Side faces and top cap only. Rendering duplicates corners for flat normals; the input list contains exactly 2*n positions."
+  }
+]

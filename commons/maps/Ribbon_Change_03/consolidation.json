@@ -1,0 +1,23 @@
+{
+  "active": false,
+  "date": "2026-09-11",
+  "destinations": {
+    "vector_field_visualizer": {
+      "map": "Flow_Field",
+      "cell": [
+        13,
+        5
+      ],
+      "placement": "vector_field_visualizer:0:0.8:1#pin:1#plinth:0"
+    },
+    "flow_field_painter": {
+      "map": "Flow_Field",
+      "cell": [
+        5,
+        5
+      ],
+      "placement": "flow_field_painter:0:1.05:2.5#pin:1#plinth:0#lesson:shared_field"
+    }
+  },
+  "note": "Original room retained for historical comparison; no longer in the active Change sequence."
+}

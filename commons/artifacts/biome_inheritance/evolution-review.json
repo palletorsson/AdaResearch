@@ -1,0 +1,15 @@
+{
+  "schema": "ada.biome-evolution-review.v1",
+  "purpose": "Selected checkpoints, in spine order. Runtime capability gates read the existing BiomeGrammar, not this presentation list.",
+  "stages": [
+    {"map":"Point_One","title":"A point on a ground","text":"A position. No future panels, foliage or trees are visible."},
+    {"map":"Point_Triangle_Context","title":"The face arrives","text":"The quads stand at ground level. Their two triangles make a surface; collision gives it a boundary for a body."},
+    {"map":"Trans_Translation","title":"The face rises","text":"Translation lifts the same panels 2.35 metres. They remain grey and unpatterned, and stay raised."},
+    {"map":"Trans_Rotation","title":"A different orientation","text":"The raised faces turn 45 degrees. The form is retained while its relation to the space changes."},
+    {"map":"Trans_Scale","title":"A narrower face","text":"Width changes from 1.1 to 0.66 metres. The taller proportion suggests a banner."},
+    {"map":"Color_Context_Placed","title":"Colour arrives","text":"Each face receives its own plain palette. Pattern has not arrived yet."},
+    {"map":"Pattern_Foundry","title":"A rule on the surface","text":"The patterns chapter gives the faces repeated geometric markings. The earlier translation and colour remain."},
+    {"map":"Random_Mushrooms","title":"The world gains inhabitants","text":"The current biome rules now provide fungi and wandering bodies. The banners remain recognisable among them."},
+    {"map":"LSystems_Growth","title":"Branching joins the scene","text":"Trees arrive through the existing growth vocabulary. The earlier sculpture stays within this more populated world."}
+  ]
+}

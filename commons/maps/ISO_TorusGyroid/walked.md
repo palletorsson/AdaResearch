@@ -1,0 +1,1 @@
+Approach the compact desk, compare the two fields side by side, then move toward the held gyroid behind the live specimen. The inherited floor and voxel noise work remain at the rear. Independent right aisle leads onward. Probe is a marked straight-path test, not proof of walkable generated interiors.

@@ -1,0 +1,39 @@
+{
+  "id": "ps01_bauhaus_totem_red",
+  "notes": "Second Bauspiel totem \u00e2\u20ac\u201d yellow cube, black hemisphere, big red sphere, small red sphere on top.",
+  "layout": "vertical_stack",
+  "palette": "bauhaus",
+  "base_scale": 0.2,
+  "sequence": [
+    {
+      "shape": "cylinder",
+      "color": "#4a6b5e",
+      "scale": 0.9
+    },
+    {
+      "shape": "disc",
+      "color": "#1f2327",
+      "scale": 1.3
+    },
+    {
+      "shape": "cube",
+      "color": "#e8a846",
+      "scale": 1.0
+    },
+    {
+      "shape": "sphere",
+      "color": "#c0392b",
+      "scale": 1.4
+    },
+    {
+      "shape": "hemisphere",
+      "color": "#1f2327",
+      "scale": 1.0
+    },
+    {
+      "shape": "sphere",
+      "color": "#c0392b",
+      "scale": 0.7
+    }
+  ]
+}

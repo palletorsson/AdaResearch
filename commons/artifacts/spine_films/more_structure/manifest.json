@@ -1,0 +1,74 @@
+[
+  {
+    "id": "ca_triplet",
+    "sequence": "cellularautomata",
+    "map": "CA_AgentsCircuits",
+    "title": "Three neighbours choose one next cell",
+    "scene": "res://commons/artifacts/spine_films/more_structure/ca_triplet.tscn",
+    "source_paths": [
+      "res://commons/artifacts/ca_rule_explorer/ca_rule_explorer.gd"
+    ],
+    "description": "The actual elementary rule selects an output from three input bits, then repeats around wrapped rows.",
+    "limitation": "Height separates recorded generations; no added spatial cellular-automaton dimension."
+  },
+  {
+    "id": "cantor_thirds",
+    "sequence": "fractals",
+    "map": "Fractal_CantorSet",
+    "title": "Keep two thirds; repeat the cut",
+    "scene": "res://commons/artifacts/spine_films/more_structure/cantor_thirds.tscn",
+    "source_paths": [
+      "res://algorithms/fractals/example_8_4_cantor_set_vr.gd"
+    ],
+    "description": "The actual Cantor recursion supplies retained bars while removed thirds move aside.",
+    "limitation": "Five finite removals; staging of cut material does not establish an infinite-set claim."
+  },
+  {
+    "id": "jelly_skin",
+    "sequence": "softbodies",
+    "map": "SoftBodies_Soft_Body_Deformation",
+    "title": "A yielding body begins with a skin",
+    "scene": "res://commons/artifacts/spine_films/more_structure/jelly_skin.tscn",
+    "source_paths": [
+      "res://commons/artifacts/jelly_cube/jelly_cube.gd"
+    ],
+    "description": "The actual BoxMesh separates into face data, indexed triangles and its source-selected crown pin.",
+    "limitation": "Shows rest geometry and attachment, not a substitute simulation of inflation or deformation."
+  },
+  {
+    "id": "metaball_sum",
+    "sequence": "isosurfaces",
+    "map": "ISO_Metaballs",
+    "title": "Two contributions become one boundary",
+    "scene": "res://commons/artifacts/spine_films/more_structure/metaball_sum.tscn",
+    "source_paths": [
+      "res://algorithms/proceduralgeneration/hybrid_complex/metaballgenerator/metaballgenerator.gd"
+    ],
+    "description": "The original field generator adds two inverse-square sources and extracts a shared threshold as their centres approach.",
+    "limitation": "Reduced fixed sampling lattice and 21 cached surfaces; no changes to the live museum generator."
+  },
+  {
+    "id": "boolean_overlap",
+    "sequence": "boolean_surfaces",
+    "map": "Boolean_Gallery",
+    "title": "Only what both solids contain",
+    "scene": "res://commons/artifacts/spine_films/more_structure/boolean_overlap.tscn",
+    "source_paths": [
+      "res://algorithms/boolean_surfaces/csg_intersection_demo.gd"
+    ],
+    "description": "Native CSG computes the source box-sphere intersections at all four named offsets.",
+    "limitation": "Geometric intersection does not prove the source comments\u2019 social analogies."
+  },
+  {
+    "id": "spanning_choice",
+    "sequence": "graphtheory",
+    "map": "GT_Spanning_Trees",
+    "title": "Keep a connection; refuse a cycle",
+    "scene": "res://commons/artifacts/spine_films/more_structure/spanning_choice.tscn",
+    "source_paths": [
+      "res://algorithms/graphtheory/minimumspanningtree/mst_visualization.gd"
+    ],
+    "description": "The seeded source graph is sorted by cost and original union-find joins components while rejecting cycles.",
+    "limitation": "Arch height displays cost; a minimum spanning tree is not a shortest path."
+  }
+]

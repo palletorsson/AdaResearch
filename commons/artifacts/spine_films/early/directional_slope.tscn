@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://commons/artifacts/spine_films/early/directional_slope.gd" id="1"]
+
+[node name="directional_slope" type="Node3D"]
+script = ExtResource("1")

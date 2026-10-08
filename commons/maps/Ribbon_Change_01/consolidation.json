@@ -1,0 +1,31 @@
+{
+  "active": false,
+  "date": "2026-09-11",
+  "destinations": {
+    "tangent_slope_workbench": {
+      "map": "Change_Intro",
+      "cell": [
+        6,
+        5
+      ],
+      "placement": "tangent_slope_workbench:90:0:1#comparison:true#pin:1#plinth:0"
+    },
+    "descent_marble_toy": {
+      "map": "Change_Intro",
+      "cell": [
+        20,
+        27
+      ],
+      "placement": "descent_marble_toy:0:0:1#pin:1#plinth:0"
+    },
+    "riemann_sum_workbench": {
+      "map": "Change_Intro",
+      "cell": [
+        20,
+        5
+      ],
+      "placement": "riemann_sum_workbench:270:0:1#comparison:true#pin:1#plinth:0"
+    }
+  },
+  "note": "Original room retained for historical comparison; no longer in the active Change sequence."
+}

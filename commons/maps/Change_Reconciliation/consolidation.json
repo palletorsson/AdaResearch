@@ -1,0 +1,47 @@
+{
+  "active": false,
+  "date": "2026-09-11",
+  "destinations": {
+    "derivative_pair": {
+      "map": "Change_Intro",
+      "cell": [
+        20,
+        12
+      ],
+      "placement": "derivative_pair:0:0:1#pin:1#plinth:0"
+    },
+    "ftc_bridge": {
+      "map": "Change_Intro",
+      "cell": [
+        6,
+        12
+      ],
+      "placement": "ftc_bridge:0:0:1#pin:1#plinth:0#evidence:longhand"
+    },
+    "science_screen": {
+      "map": "Change_Intro",
+      "cell": [
+        18,
+        30
+      ],
+      "placement": "science_screen:0:0:1#pin:1#plinth:0"
+    },
+    "code_display": {
+      "map": "Change_Intro",
+      "cell": [
+        9,
+        20
+      ],
+      "placement": "code_display:0:0:1#pin:1#plinth:0"
+    },
+    "integral_area": {
+      "map": "Change_Intro",
+      "cell": [
+        18,
+        17
+      ],
+      "placement": "integral_area:0:0:1#pin:1#plinth:0"
+    }
+  },
+  "note": "Original room retained for historical comparison; no longer in the active Change sequence."
+}

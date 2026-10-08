@@ -1,0 +1,24 @@
+{
+  "id": "06_extrude_then_inset",
+  "notes": "The same two rules as 05, in the other order. When the extrude runs nothing is tagged inset yet, so it selects nothing; the inset then runs alone.",
+  "seed": "icosahedron",
+  "seed_scale": 0.4,
+  "generations": 1,
+  "rules": [
+    {
+      "op": "extrude",
+      "selector": "tag:inset",
+      "params": {
+        "distance": 0.3,
+        "scale": 0.85
+      }
+    },
+    {
+      "op": "inset",
+      "selector": "up",
+      "params": {
+        "amount": 0.25
+      }
+    }
+  ]
+}

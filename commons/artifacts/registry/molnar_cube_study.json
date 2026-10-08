@@ -1,0 +1,53 @@
+{
+  "artifacts": {
+    "molnar_cube_study": {
+      "lookup_name": "molnar_cube_study",
+      "name": "At each address, a decision - after Molnar",
+      "scene": "res://commons/artifacts/molnar_cube_study/molnar_cube_study.tscn",
+      "category": "arrays",
+      "complexity": "beginner",
+      "map_ready": true,
+      "include_in_map_data": true,
+      "footprint": [
+        6,
+        3.3,
+        6
+      ],
+      "parameters": {
+        "footprint": [
+          6,
+          3.3,
+          6
+        ],
+        "size_group": "large"
+      },
+      "description": "Transparent nested cube frames at 4 x 4 x 4 fixed sites. Three reachable sliders independently vary translation, rotation and uniform scale using stable per-site decisions. Depth reveals one to four layers; reset restores the ordered geometry. A spatial interpretation after Vera Molnar’s (Des)Ordres, not a reconstruction of her algorithm.",
+      "interactions": [
+        "Walk around to distinguish the front projection from depth.",
+        "Drag TRANSLATE, ROTATE and SCALE, separately or together.",
+        "Press DEPTH to reveal one through four indexed layers.",
+        "Press RESET to restore all three operation amounts to zero."
+      ],
+      "qfep_connection": "An index retains an identity while visible placement, orientation and size vary. The variation is bounded by authored ranges; local difference need not erase the shared arrangement.",
+      "references": [
+        {
+          "title": "Vera Molnar, (Des)Ordres, 1974 - Digital Art Museum",
+          "url": "https://dam.org/museum/artists_ui/artists/molnar-vera/des-ordres/"
+        }
+      ],
+      "tags": [
+        "array",
+        "molnar",
+        "transformation",
+        "transparent",
+        "nested cubes",
+        "regularity"
+      ],
+      "dev_themes": [
+        "arrays",
+        "transformation",
+        "art"
+      ]
+    }
+  }
+}

@@ -1,0 +1,47 @@
+{
+  "active": false,
+  "date": "2026-09-11",
+  "destinations": {
+    "science_screen": {
+      "map": "Change_Intro",
+      "cell": [
+        18,
+        30
+      ],
+      "placement": "science_screen:0:0:1#pin:1#plinth:0"
+    },
+    "grand_zoetrope": {
+      "map": "Flow_Field",
+      "cell": [
+        13,
+        17
+      ],
+      "placement": "grand_zoetrope:0:0:1#pin:1#plinth:0"
+    },
+    "code_display": {
+      "map": "Change_Intro",
+      "cell": [
+        9,
+        20
+      ],
+      "placement": "code_display:0:0:1#pin:1#plinth:0"
+    },
+    "noc_5_04_flow_field": {
+      "map": "Flow_Field",
+      "cell": [
+        5,
+        17
+      ],
+      "placement": "noc_5_04_flow_field:0:0.8:1#pin:1#plinth:0"
+    },
+    "flow_field_painter": {
+      "map": "Flow_Field",
+      "cell": [
+        5,
+        5
+      ],
+      "placement": "flow_field_painter:0:1.05:2.5#pin:1#plinth:0#lesson:shared_field"
+    }
+  },
+  "note": "Original room retained for historical comparison; no longer in the active Change sequence."
+}

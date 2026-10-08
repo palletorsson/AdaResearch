@@ -1,0 +1,22 @@
+{
+  "id": "09_extrude_then_delete",
+  "notes": "Extrude the upward faces, then delete what the extrude tagged extruded_top: open chimneys. The Budding Sphere of mesh_grammar_demo.gd uses a random selector on a sphere; here the selector is up, so the same faces act at every build.",
+  "seed": "icosahedron",
+  "seed_scale": 0.4,
+  "generations": 1,
+  "rules": [
+    {
+      "op": "extrude",
+      "selector": "up",
+      "params": {
+        "distance": 0.2,
+        "scale": 0.8
+      }
+    },
+    {
+      "op": "delete",
+      "selector": "tag:extruded_top",
+      "params": {}
+    }
+  ]
+}

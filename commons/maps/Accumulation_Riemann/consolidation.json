@@ -1,0 +1,39 @@
+{
+  "active": false,
+  "date": "2026-09-11",
+  "destinations": {
+    "riemann_sum_workbench": {
+      "map": "Change_Intro",
+      "cell": [
+        20,
+        5
+      ],
+      "placement": "riemann_sum_workbench:270:0:1#comparison:true#pin:1#plinth:0"
+    },
+    "riemann_pi": {
+      "map": "Change_Intro",
+      "cell": [
+        2,
+        29
+      ],
+      "placement": "riemann_pi:0:0:0.18#pin:1#plinth:0"
+    },
+    "integral_area": {
+      "map": "Change_Intro",
+      "cell": [
+        18,
+        17
+      ],
+      "placement": "integral_area:0:0:1#pin:1#plinth:0"
+    },
+    "riemann_pump": {
+      "map": "Change_Intro",
+      "cell": [
+        23,
+        17
+      ],
+      "placement": "riemann_pump:0:0:1#pin:1#plinth:0"
+    }
+  },
+  "note": "Original room retained for historical comparison; no longer in the active Change sequence."
+}

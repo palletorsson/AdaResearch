@@ -1,0 +1,11 @@
+[gd_scene load_steps=2 format=3 uid="uid://c8lmrk3wqn7dy"]
+
+[ext_resource type="Script" path="res://commons/artifacts/laser_measure_rack/laser_measure_rack.gd" id="1_rack"]
+
+; The rack is built entirely in _ready(): rail, end posts, ten collars and ten
+; laser_measure bodies. The script goes on the ROOT, because
+; GridInteractablesComponent sets config_* metadata and calls apply_grid_config
+; on the root — logic on a child makes every map token silently unreachable.
+
+[node name="LaserMeasureRack" type="Node3D"]
+script = ExtResource("1_rack")

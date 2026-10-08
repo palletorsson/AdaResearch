@@ -1,0 +1,84 @@
+{
+  "id": "glyph_profile_gallery",
+  "name": "Borrowed Outlines",
+  "category": "primitives",
+  "artifacts": {
+    "glyph_profile_gallery": {
+      "lookup_name": "glyph_profile_gallery",
+      "name": "Borrowed Outlines — Glyph Profile Gallery",
+      "scene": "res://commons/artifacts/glyph_profile_gallery/glyph_profile_gallery.tscn",
+      "description": "Six existing font-profile sculptures and their source sections: O passage, O vessel, B wells, C channel, closed I sweep and two colon bodies. Built for the existing Endless Museum host, with static collision and a clear central aisle. The O retains its sill; it is not a level doorway.",
+      "category": "primitives",
+      "complexity": "intermediate",
+      "include_in_map_data": true,
+      "map_ready": true,
+      "map_sequences": [
+        "primitives"
+      ],
+      "tags": [
+        "glyph",
+        "profile",
+        "sweep",
+        "extrusion",
+        "typography",
+        "architecture",
+        "museum",
+        "holes",
+        "components"
+      ],
+      "qfep_connection": "A type designer supplies the inherited boundary and Godot supplies its sampled triangulation. The six routes change how that boundary is used while keeping visible which holes, separations and constraints were inherited and which arise from the sweep.",
+      "interactions": [
+        "Walk around each sculpture using the museum's player",
+        "Compare its flat source profile with its depth, turn, flare or closed path",
+        "Inspect the O's sill without treating it as an accessible level doorway"
+      ],
+      "parameters": {
+        "collision_layer": "Static world collision layer, default 1",
+        "collision_mask": "Static world collision mask, default 1"
+      },
+      "spatial_needs": {
+        "platform": "floor",
+        "orientation": "central aisle runs along local Z",
+        "preferred_zone": "gallery",
+        "footprint_source": "authored; see native verification in the paired review folder",
+        "placement_y": 0.0,
+        "minimum_interior_size_m": [
+          28.0,
+          7.0,
+          36.0
+        ],
+        "central_aisle_width_m": 5.2,
+        "cross_aisle_width_m": 2.4,
+        "entrance_exit": "Centre entry and exit on local x=0 at opposite Z ends; keep the 5.2 m central aisle free."
+      },
+      "provenance": {
+        "source": "doc/book/studies/glyph-form-atlas",
+        "profile_sweep": "Copied unchanged",
+        "frame_recipes": "Copied unchanged from atlas.gd",
+        "font": "JetBrains Mono Medium",
+        "license": "SIL Open Font License 1.1; included JetBrainsMono-OFL.txt"
+      },
+      "measurements": {
+        "aabb_position": [
+          -11.4,
+          0,
+          -15.3
+        ],
+        "aabb_size": [
+          22.8,
+          5.64,
+          30.6
+        ],
+        "aabb_center": [
+          0,
+          2.82,
+          0
+        ],
+        "sculpture_triangles": 71132,
+        "measured_at": "2026-10-04",
+        "method": "Godot 4.6 native instantiation; mesh AABB including plinths and boards, labels excluded",
+        "proof": "doc/book/iterations/2026-10-04-primitives-expanded/glyph-gallery-verification.json"
+      }
+    }
+  }
+}

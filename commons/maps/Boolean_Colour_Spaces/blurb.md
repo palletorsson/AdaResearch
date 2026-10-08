@@ -1,0 +1,1 @@
+A line passes through a block and takes room with it. Further on, two hollows meet; their shared region becomes an inside. Pearl, amber and chrome offer different skins to the same cuts. Enter before deciding what kind of body the room resembles.

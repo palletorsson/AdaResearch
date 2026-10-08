@@ -1,0 +1,98 @@
+{
+  "artifacts": {
+    "ambient_patch": {
+      "name": "Slow Circuits — Ambient Patch",
+      "lookup_name": "ambient_patch",
+      "scene": "res://commons/artifacts/ambient_patch/ambient_patch.tscn",
+      "category": "waves",
+      "artifact_type": "interactive",
+      "complexity": "intermediate",
+      "include_in_map_data": true,
+      "map_ready": true,
+      "size_group": "medium",
+      "description": "A playable generative ambient console: three clocks, seeded chance, pentatonic pitch, Ada's Discreet pad and FM piano, a 29-second LFO, filter, stereo echoes and reverb. Six physical sliders and four pushbuttons. Fixed signal path; the LFO can be routed to filter or stereo pan. Silent until PLAY. Flat printed text and a real output waveform. Eight voices and two shared baked notes; native effects, asynchronous synthesis, no per-sample work on the rendering thread. ENTER ROOM opens Room Memory, a recursive voice experiment after Alvin Lucier; the earlier generative ambient room is available inside. Return restores this hall.",
+      "tags": [
+        "wavefunctions",
+        "audio",
+        "generative",
+        "ambient",
+        "physical_interface"
+      ],
+      "interactions": [
+        "PLAY / STOP",
+        "NEW SEED",
+        "LFO ROUTE",
+        "density",
+        "rate",
+        "warmth",
+        "space",
+        "drift",
+        "level",
+        "ENTER ROOM"
+      ],
+      "footprint": {
+        "width": 1.4,
+        "depth": 0.5,
+        "height": 2.0
+      }
+    },
+    "ambient_listening_room": {
+      "name": "Slow Circuits — Walk-in Instrument",
+      "lookup_name": "ambient_listening_room",
+      "scene": "res://commons/artifacts/ambient_patch/ambient_listening_room.tscn",
+      "category": "waves",
+      "artifact_type": "immersive",
+      "map_ready": false,
+      "include_in_map_data": false,
+      "size_group": "room",
+      "description": "A 6.4-metre round instrument room with an open floor, physical Rhythm/Tone/Space stations, flat wall text, actual PCM waveform and three spatial sound sources. Enter using AMBIENT ROOM inside Room Memory; the staged scene supplies the existing VR rig and a return to WaveFunctions_Synthesis_Lab.",
+      "tags": [
+        "audio",
+        "ambient",
+        "spatial_audio",
+        "wavefunctions",
+        "walk_in"
+      ],
+      "interactions": [
+        "Walk between Rhythm, Tone and Space stations",
+        "PLAY / STOP",
+        "NEW SEED",
+        "LFO ROUTE",
+        "BACK TO HALL"
+      ]
+    },
+    "room_memory": {
+      "name": "Room Memory - after Alvin Lucier",
+      "lookup_name": "room_memory",
+      "scene": "res://commons/artifacts/ambient_patch/room_memory.tscn",
+      "category": "waves",
+      "artifact_type": "immersive",
+      "include_in_map_data": false,
+      "map_ready": false,
+      "size_group": "room",
+      "description": "A walkable 6 x 5 x 3 metre room. Record a short local phrase or use a labelled synthetic demo. Each pass filters the previous PCM through a bounded three-axis resonance model. Compare the original, run up to 24 passes, or change absorption and restart from the same voice. Native physical controls and flat text. Simplified algorithmic acoustics, not a measured room response.",
+      "qfep_connection": "A repeated spatial filter selects what can remain audible. The visitor can compare the surviving resonances with the original voice and change that selection. The model is explicit: the CGI walls obtain acoustic effects only through authored rules.",
+      "tags": [
+        "wavefunctions",
+        "audio",
+        "resonance",
+        "recursion",
+        "Alvin Lucier",
+        "room acoustics"
+      ],
+      "interactions": [
+        "RECORD / END",
+        "DEMO VOICE",
+        "HEAR ORIGINAL",
+        "NEXT PASS",
+        "AUTO / STOP",
+        "REPLAY",
+        "RESET",
+        "ABSORB",
+        "LEVEL",
+        "BACK TO HALL",
+        "AMBIENT ROOM"
+      ]
+    }
+  }
+}

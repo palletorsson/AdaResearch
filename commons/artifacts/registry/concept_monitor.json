@@ -1,0 +1,173 @@
+{
+  "artifacts": {
+    "trace_sampling_monitor": {
+      "lookup_name": "trace_sampling_monitor",
+      "name": "One Hand / Three Records",
+      "map_ready": true,
+      "scene": "res://commons/artifacts/concept_monitor/trace_sampling_monitor.tscn",
+      "description": "Films three 3D records of the same Draw Dot pen gesture. Compare distance-based sampling separately from grid snapping. Reads the held pen without changing its trace or saved data; gaze controls the filmed replay.",
+      "category": "primitives",
+      "include_in_map_data": true,
+      "auto_ground": false,
+      "footprint": [
+        2.7,
+        2.6,
+        0.55
+      ],
+      "size_group": "standard",
+      "map_sequences": [
+        "primitives"
+      ],
+      "tags": [
+        "monitor",
+        "trace",
+        "sampling",
+        "resolution",
+        "hand",
+        "draw_dot"
+      ],
+      "interactions": [
+        "Draw with a nearby Draw Dot pen.",
+        "Look at the monitor to watch or replay your gesture.",
+        "Compare 5, 20 and 80 mm sample spacing.",
+        "Switch to 10, 40 and 80 mm grid snapping."
+      ],
+      "qfep_connection": "The same gesture leaves different records according to what the system keeps and where it permits a point to stand. More retained points do not make an unsampled motion recoverable."
+    },
+    "line_trace_monitor": {
+      "lookup_name": "line_trace_monitor",
+      "name": "Line and Trace / Live Illustration",
+      "scene": "res://commons/artifacts/concept_monitor/concept_monitor.tscn",
+      "description": "A camera films a private Godot scene. Two fixed endpoints retain the same straight segment while a moving point leaves three different sampled routes. Pause, replay or advance one sample.",
+      "category": "primitives",
+      "include_in_map_data": true,
+      "auto_ground": false,
+      "footprint": [
+        2.7,
+        2.6,
+        0.55
+      ],
+      "size_group": "standard",
+      "map_sequences": [
+        "primitives"
+      ],
+      "tags": [
+        "monitor",
+        "illustration",
+        "line",
+        "trace",
+        "camera",
+        "subviewport"
+      ],
+      "interactions": [
+        "Pause or resume the illustration.",
+        "Replay the current route.",
+        "Step to the next retained position.",
+        "Compare another route with the same endpoints."
+      ],
+      "qfep_connection": "A shared start and end do not determine the journey. The trace retains ordered samples; the segment disregards the intervening movement.",
+      "validation": "Prototype; see doc/book/iterations/2026-10-04-line-trace-monitor. Headset acceptance remains open."
+    },
+    "triangle_reveal_monitor": {
+      "lookup_name": "triangle_reveal_monitor",
+      "name": "A Drawing / Revealed",
+      "map_ready": true,
+      "scene": "res://commons/artifacts/concept_monitor/triangle_reveal_monitor.tscn",
+      "description": "A private camera films copies of the Triangle drawing tool's actual corners and emitted faces. Watch a boundary become a fan, separate its faces and return them. Open drawings remain open. The source is never edited by the monitor.",
+      "category": "primitives",
+      "include_in_map_data": true,
+      "auto_ground": false,
+      "footprint": [
+        2.7,
+        2.6,
+        0.55
+      ],
+      "size_group": "standard",
+      "map_sequences": [
+        "primitives"
+      ],
+      "tags": [
+        "monitor",
+        "triangle",
+        "mesh",
+        "fan",
+        "boundary",
+        "camera"
+      ],
+      "interactions": [
+        "Look at the screen to play; look away to pause.",
+        "Draw or edit with the existing triangle tool.",
+        "Pause, replay, step or turn the filmed view."
+      ],
+      "qfep_connection": "The same boundary admits different internal connections. The source chooses its first stored corner as a fan anchor; a surface is the result of that decision."
+    },
+    "polyhedra_reveal_monitor": {
+      "lookup_name": "polyhedra_reveal_monitor",
+      "name": "Four Faces / An Enclosure",
+      "map_ready": true,
+      "scene": "res://commons/artifacts/concept_monitor/polyhedra_reveal_monitor.tscn",
+      "description": "Films the existing tetrahedron's four positions, six edges and four faces, then unfolds its surface into a rigid net and folds it closed. Copies actual mesh data without changing the original body. Plays while viewed.",
+      "category": "primitives",
+      "include_in_map_data": true,
+      "auto_ground": false,
+      "footprint": [
+        2.7,
+        2.6,
+        0.55
+      ],
+      "size_group": "standard",
+      "map_sequences": [
+        "primitives"
+      ],
+      "tags": [
+        "monitor",
+        "polyhedra",
+        "tetrahedron",
+        "net",
+        "faces",
+        "enclosure"
+      ],
+      "interactions": [
+        "Look at the monitor to play.",
+        "Pause, replay or step through construction.",
+        "Turn the filmed camera to inspect the net and enclosure."
+      ],
+      "qfep_connection": "The same triangular elements enclose a volume through their connections and relative angles. Visible enclosure and a physics boundary remain separate constructions."
+    },
+    "resolution_reveal_monitor": {
+      "lookup_name": "resolution_reveal_monitor",
+      "name": "Around / Along: Three Resolutions",
+      "map_ready": true,
+      "scene": "res://commons/artifacts/concept_monitor/resolution_reveal_monitor.tscn",
+      "description": "A live camera films native cylinder, capsule and sphere meshes. Compare segments and rings independently, inspect actual triangle edges and explore every integer combination within S4-64 and R0-32 (sphere R1-32).",
+      "category": "primitives",
+      "include_in_map_data": true,
+      "auto_ground": false,
+      "footprint": [
+        2.7,
+        2.6,
+        0.55
+      ],
+      "size_group": "standard",
+      "map_sequences": [
+        "primitives"
+      ],
+      "tags": [
+        "monitor",
+        "resolution",
+        "cylinder",
+        "capsule",
+        "sphere",
+        "rings",
+        "segments"
+      ],
+      "interactions": [
+        "Look at the monitor to play; look away to freeze.",
+        "Pause, replay or step through the film.",
+        "Use S-/S+ and R-/R+ for each integer setting.",
+        "Toggle triangle edges with SURFACE."
+      ],
+      "qfep_connection": "Sampling around and along a body are independent choices. More geometry changes some silhouettes and leaves others intact; smooth shading is a separate decision."
+    }
+  }
+}

@@ -1,0 +1,86 @@
+[
+  {
+    "id": "cube_corner",
+    "sequence": "primitives",
+    "map": "Point_Animatedcube",
+    "title": "The diagonal was already there",
+    "scene": "res://commons/artifacts/spine_films/more_early/cube_corner.tscn",
+    "source_paths": [
+      "res://commons/primitives/animatedcubebuilder/animatedcubebuilder.gd"
+    ],
+    "description": "Eight source vertices become the cube; moving corner 6 reveals the unchanged front diagonal.",
+    "limitation": "Actual builder vertices, triangle indices and mesh update function. Construction timing and materials are staged."
+  },
+  {
+    "id": "door_routes",
+    "sequence": "transformation",
+    "map": "Trans_Translation",
+    "title": "A lift, then a slide",
+    "scene": "res://commons/artifacts/spine_films/more_early/door_routes.tscn",
+    "source_paths": [
+      "res://commons/primitives/translation/translation_cube_demo.gd"
+    ],
+    "description": "A panel follows the source's lift-then-slide route; another takes one diagonal to the same corner.",
+    "limitation": "Paths and dimensions come from the original door. This is a chosen diagonal in the free mode, not a claim that free motion has only one route."
+  },
+  {
+    "id": "scale_children",
+    "sequence": "transformation",
+    "map": "Trans_Scale",
+    "title": "Only the children grow",
+    "scene": "res://commons/artifacts/spine_films/more_early/scale_children.tscn",
+    "source_paths": [
+      "res://algorithms/primitives/scaleme/drink_me_room.gd"
+    ],
+    "description": "The small exit grows with its parent room; the separate reference doorway keeps its size.",
+    "limitation": "Uses actual door-wall construction, witness placement and factor four; omits furniture, player relocation and collision demonstration. Whole exhibit reduced to 26% scale."
+  },
+  {
+    "id": "body_aperture",
+    "sequence": "transformation",
+    "map": "Trans_Body",
+    "title": "A passage follows a body",
+    "scene": "res://commons/artifacts/spine_films/more_early/body_aperture.tscn",
+    "source_paths": [
+      "res://commons/artifacts/approach_wall/approach_wall.gd"
+    ],
+    "description": "The wall opens near an approaching body and moves its gap as the body walks along it.",
+    "limitation": "Actual per-slat targets, clearance rule and hinge transforms on a private copy. Shows target poses rather than live easing and visitor detection."
+  },
+  {
+    "id": "gradient_paths",
+    "sequence": "color",
+    "map": "Color_Walls",
+    "title": "The space changes the colours between",
+    "scene": "res://commons/artifacts/spine_films/more_early/gradient_paths.tscn",
+    "source_paths": [
+      "res://algorithms/color/gradient_interpolator/gradient_interpolator.gd"
+    ],
+    "description": "Source RGB and HSV interpolation take different routes between red and cyan, plotted inside one three-dimensional RGB cube.",
+    "limitation": "Uses all 16 original samples. Plot positions are an explanatory RGB embedding; both routes use the same colour-space axes."
+  },
+  {
+    "id": "rainbow_partitions",
+    "sequence": "color",
+    "map": "Color_Rainbow",
+    "title": "How many colours fit the same arch?",
+    "scene": "res://commons/artifacts/spine_films/more_early/rainbow_partitions.tscn",
+    "source_paths": [
+      "res://algorithms/primitives/rainbow/rainbow.gd"
+    ],
+    "description": "Two, six, seven and forty-eight authored bands divide the same width; separated layers join into each arc.",
+    "limitation": "Original planar band meshes and authored palettes, reduced to 15% scale. Depth separation stages the construction; no optical rainbow simulation."
+  },
+  {
+    "id": "disco_phase",
+    "sequence": "array_tutorial",
+    "map": "Tutorial_Disco",
+    "title": "One phase travels through sixty-four addresses",
+    "scene": "res://commons/artifacts/spine_films/more_early/disco_phase.tscn",
+    "source_paths": [
+      "res://commons/artifacts/regularity/disco_controls.gd"
+    ],
+    "description": "A snake advances along addressed cells, wraps through zero and changes palette without changing its rule.",
+    "limitation": "Original 8 by 8 snake value function and palettes. Raised active cells are a reading aid; the live disco floor changes colour."
+  }
+]

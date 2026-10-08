@@ -1,0 +1,1530 @@
+{
+  "artifacts": {
+    "film_cube_corner": {
+      "lookup_name": "film_cube_corner",
+      "name": "The diagonal was already there",
+      "scene": "res://commons/artifacts/spine_films/monitors/film_cube_corner.tscn",
+      "description": "Eight source vertices become the cube; moving corner 6 reveals the unchanged front diagonal.",
+      "map_ready": true,
+      "include_in_map_data": true,
+      "auto_ground": false,
+      "footprint": [
+        2.7,
+        2.6,
+        0.55
+      ],
+      "category": "education",
+      "map_sequences": [
+        "primitives"
+      ],
+      "tags": [
+        "monitor",
+        "process",
+        "film",
+        "primitives"
+      ],
+      "interactions": [
+        "Look at the screen to play.",
+        "Pause, replay, step or turn the view."
+      ],
+      "qfep_connection": "Actual builder vertices, triangle indices and mesh update function. Construction timing and materials are staged."
+    },
+    "film_foundation_function": {
+      "lookup_name": "film_foundation_function",
+      "name": "One rule makes a family",
+      "scene": "res://commons/artifacts/spine_films/monitors/film_foundation_function.tscn",
+      "description": "One angular rule makes two straight columns. A fixed four-sided, two-metre reference stands beside editable height and radial count; the two-ring position list stays visible in the geometry.",
+      "map_ready": true,
+      "include_in_map_data": true,
+      "auto_ground": false,
+      "footprint": [
+        2.7,
+        2.6,
+        0.55
+      ],
+      "category": "education",
+      "map_sequences": [
+        "primitives"
+      ],
+      "tags": [
+        "monitor",
+        "process",
+        "film",
+        "primitives",
+        "interactive-study"
+      ],
+      "interactions": [
+        "Look at the screen to play.",
+        "Pause, replay, step or turn the view.",
+        "Use the lower row to try the model; the demonstration pauses.",
+        "Your choices remain when you look away. DEMO returns to the demonstration."
+      ],
+      "qfep_connection": "Port of the Function browser study, not the museum's richer profile generator. Height 1–3 m in 0.1 m steps; radial counts 4, 6, 8, 12, 16. A declared 0.70 m display radius replaces browser pixels. Side faces and top cap only. Rendering duplicates corners for flat normals; the input list contains exactly 2*n positions."
+    },
+    "film_foundation_point": {
+      "lookup_name": "film_foundation_point",
+      "name": "A value places a body",
+      "scene": "res://commons/artifacts/spine_films/monitors/film_foundation_point.tscn",
+      "description": "A native sphere responds to the browser study's height value; an optional mistaken one-metre offset separates its displayed and expected positions. Four physical controls lower, raise, toggle the offset and reset.",
+      "map_ready": true,
+      "include_in_map_data": true,
+      "auto_ground": false,
+      "footprint": [
+        2.7,
+        2.6,
+        0.55
+      ],
+      "category": "education",
+      "map_sequences": [
+        "primitives"
+      ],
+      "tags": [
+        "monitor",
+        "process",
+        "film",
+        "primitives",
+        "interactive-study"
+      ],
+      "interactions": [
+        "Look at the screen to play.",
+        "Pause, replay, step or turn the view.",
+        "Use the lower row to try the model; the demonstration pauses.",
+        "Your choices remain when you look away. DEMO returns to the demonstration."
+      ],
+      "qfep_connection": "A faithful port of drawPoint, with height 0–3 m in 0.1 m steps and default1.2 m. A visible representation of a point, not a controller for the existing museum coordinate artifact. The +1 m is an incorrect value sent to a local receiver."
+    },
+    "film_foundation_trace": {
+      "lookup_name": "film_foundation_trace",
+      "name": "Read a candidate. Keep a position. Join a pair.",
+      "scene": "res://commons/artifacts/spine_films/monitors/film_foundation_trace.tscn",
+      "description": "Eight given positions become a retained list by the exact distance >=0.8 m test. The learner reads candidates and separately joins retained neighbours, with both route and stored list visible in 3D.",
+      "map_ready": true,
+      "include_in_map_data": true,
+      "auto_ground": false,
+      "footprint": [
+        2.7,
+        2.6,
+        0.55
+      ],
+      "category": "education",
+      "map_sequences": [
+        "primitives"
+      ],
+      "tags": [
+        "monitor",
+        "process",
+        "film",
+        "primitives",
+        "interactive-study"
+      ],
+      "interactions": [
+        "Look at the screen to play.",
+        "Pause, replay, step or turn the view.",
+        "Use the lower row to try the model; the demonstration pauses.",
+        "Your choices remain when you look away. DEMO returns to the demonstration."
+      ],
+      "qfep_connection": "Fixed candidates from the browser study, not live hand tracking or a replay of a museum drawing. Two-dimensional source positions are embedded on a 3D table with equal units; joining does not alter those positions."
+    },
+    "film_profile_travels": {
+      "lookup_name": "film_profile_travels",
+      "name": "A profile travels",
+      "scene": "res://commons/artifacts/spine_films/monitors/film_profile_travels.tscn",
+      "description": "Two O profiles and one I become a passage, an open vessel and a closed sweep. Sections expose the operation before their boundary edges become surfaces.",
+      "map_ready": true,
+      "include_in_map_data": true,
+      "auto_ground": false,
+      "footprint": [
+        2.7,
+        2.6,
+        0.55
+      ],
+      "category": "education",
+      "map_sequences": [
+        "primitives"
+      ],
+      "tags": [
+        "monitor",
+        "process",
+        "film",
+        "primitives"
+      ],
+      "interactions": [
+        "Look at the screen to play.",
+        "Pause, replay, step or turn the view."
+      ],
+      "qfep_connection": "Construction timing is staged. Final vertices come from the unchanged gallery recipes. The O keeps its sill and the vessel remains open at both ends."
+    },
+    "film_body_aperture": {
+      "lookup_name": "film_body_aperture",
+      "name": "A passage follows a body",
+      "scene": "res://commons/artifacts/spine_films/monitors/film_body_aperture.tscn",
+      "description": "The wall opens near an approaching body and moves its gap as the body walks along it.",
+      "map_ready": true,
+      "include_in_map_data": true,
+      "auto_ground": false,
+      "footprint": [
+        2.7,
+        2.6,
+        0.55
+      ],
+      "category": "education",
+      "map_sequences": [
+        "transformation"
+      ],
+      "tags": [
+        "monitor",
+        "process",
+        "film",
+        "transformation"
+      ],
+      "interactions": [
+        "Look at the screen to play.",
+        "Pause, replay, step or turn the view."
+      ],
+      "qfep_connection": "Actual per-slat targets, clearance rule and hinge transforms on a private copy. Shows target poses rather than live easing and visitor detection."
+    },
+    "film_door_routes": {
+      "lookup_name": "film_door_routes",
+      "name": "A lift, then a slide",
+      "scene": "res://commons/artifacts/spine_films/monitors/film_door_routes.tscn",
+      "description": "A panel follows the source's lift-then-slide route; another takes one diagonal to the same corner.",
+      "map_ready": true,
+      "include_in_map_data": true,
+      "auto_ground": false,
+      "footprint": [
+        2.7,
+        2.6,
+        0.55
+      ],
+      "category": "education",
+      "map_sequences": [
+        "transformation"
+      ],
+      "tags": [
+        "monitor",
+        "process",
+        "film",
+        "transformation"
+      ],
+      "interactions": [
+        "Look at the screen to play.",
+        "Pause, replay, step or turn the view."
+      ],
+      "qfep_connection": "Paths and dimensions come from the original door. This is a chosen diagonal in the free mode, not a claim that free motion has only one route."
+    },
+    "film_foundation_state": {
+      "lookup_name": "film_foundation_state",
+      "name": "A response can remember",
+      "scene": "res://commons/artifacts/spine_films/monitors/film_foundation_state.tscn",
+      "description": "A teaching clock moves a cube while two physical gate models compare present proximity with a retained visit. FRAME, APPROACH / AWAY and RESET let the visitor separate the events.",
+      "map_ready": true,
+      "include_in_map_data": true,
+      "auto_ground": false,
+      "footprint": [
+        2.7,
+        2.6,
+        0.55
+      ],
+      "category": "education",
+      "map_sequences": [
+        "transformation"
+      ],
+      "tags": [
+        "monitor",
+        "process",
+        "film",
+        "transformation",
+        "interactive-study"
+      ],
+      "interactions": [
+        "Look at the screen to play.",
+        "Pause, replay, step or turn the view.",
+        "Use the lower row to try the model; the demonstration pauses.",
+        "Your choices remain when you look away. DEMO returns to the demonstration."
+      ],
+      "qfep_connection": "Exact State browser-study transitions presented in 3D. Each FRAME adds a synthetic 0.5 seconds; it is not a measured engine frame. APPROACH is an explicit input, not player tracking. No museum gate is controlled."
+    },
+    "film_scale_children": {
+      "lookup_name": "film_scale_children",
+      "name": "Only the children grow",
+      "scene": "res://commons/artifacts/spine_films/monitors/film_scale_children.tscn",
+      "description": "The small exit grows with its parent room; the separate reference doorway keeps its size.",
+      "map_ready": true,
+      "include_in_map_data": true,
+      "auto_ground": false,
+      "footprint": [
+        2.7,
+        2.6,
+        0.55
+      ],
+      "category": "education",
+      "map_sequences": [
+        "transformation"
+      ],
+      "tags": [
+        "monitor",
+        "process",
+        "film",
+        "transformation"
+      ],
+      "interactions": [
+        "Look at the screen to play.",
+        "Pause, replay, step or turn the view."
+      ],
+      "qfep_connection": "Uses actual door-wall construction, witness placement and factor four; omits furniture, player relocation and collision demonstration. Whole exhibit reduced to 26% scale."
+    },
+    "film_transformation_order": {
+      "lookup_name": "film_transformation_order",
+      "name": "The same operations, another order",
+      "scene": "res://commons/artifacts/spine_films/monitors/film_transformation_order.tscn",
+      "description": "Rotation and translation unfold in both orders, then the results share one origin.",
+      "map_ready": true,
+      "include_in_map_data": true,
+      "auto_ground": false,
+      "footprint": [
+        2.7,
+        2.6,
+        0.55
+      ],
+      "category": "education",
+      "map_sequences": [
+        "transformation"
+      ],
+      "tags": [
+        "monitor",
+        "process",
+        "film",
+        "transformation"
+      ],
+      "interactions": [
+        "Look at the screen to play.",
+        "Pause, replay, step or turn the view."
+      ],
+      "qfep_connection": "Actual workbench transformations and tetrahedron; interpolation is explanatory staging."
+    },
+    "film_array_address": {
+      "lookup_name": "film_array_address",
+      "name": "An address keeps a place",
+      "scene": "res://commons/artifacts/spine_films/monitors/film_array_address.tscn",
+      "description": "Rows become a volume of fixed addresses; their nested frames rotate, move and scale.",
+      "map_ready": true,
+      "include_in_map_data": true,
+      "auto_ground": false,
+      "footprint": [
+        2.7,
+        2.6,
+        0.55
+      ],
+      "category": "education",
+      "map_sequences": [
+        "array_tutorial"
+      ],
+      "tags": [
+        "monitor",
+        "process",
+        "film",
+        "array_tutorial"
+      ],
+      "interactions": [
+        "Look at the screen to play.",
+        "Pause, replay, step or turn the view."
+      ],
+      "qfep_connection": "Replays existing seeded Molnar poses, not live hand interaction."
+    },
+    "film_disco_phase": {
+      "lookup_name": "film_disco_phase",
+      "name": "One phase travels through sixty-four addresses",
+      "scene": "res://commons/artifacts/spine_films/monitors/film_disco_phase.tscn",
+      "description": "A snake advances along addressed cells, wraps through zero and changes palette without changing its rule.",
+      "map_ready": true,
+      "include_in_map_data": true,
+      "auto_ground": false,
+      "footprint": [
+        2.7,
+        2.6,
+        0.55
+      ],
+      "category": "education",
+      "map_sequences": [
+        "array_tutorial"
+      ],
+      "tags": [
+        "monitor",
+        "process",
+        "film",
+        "array_tutorial"
+      ],
+      "interactions": [
+        "Look at the screen to play.",
+        "Pause, replay, step or turn the view."
+      ],
+      "qfep_connection": "Original 8 by 8 snake value function and palettes. Raised active cells are a reading aid; the live disco floor changes colour."
+    },
+    "film_foundation_array": {
+      "lookup_name": "film_foundation_array",
+      "name": "An empty address still exists",
+      "scene": "res://commons/artifacts/spine_films/monitors/film_foundation_array.tscn",
+      "description": "Sixteen persistent sockets distinguish selecting an address, toggling its Boolean and overwriting the grid with a checker rule.",
+      "map_ready": true,
+      "include_in_map_data": true,
+      "auto_ground": false,
+      "footprint": [
+        2.7,
+        2.6,
+        0.55
+      ],
+      "category": "education",
+      "map_sequences": [
+        "array_tutorial"
+      ],
+      "tags": [
+        "monitor",
+        "process",
+        "film",
+        "array_tutorial",
+        "interactive-study"
+      ],
+      "interactions": [
+        "Look at the screen to play.",
+        "Pause, replay, step or turn the view.",
+        "Use the lower row to try the model; the demonstration pauses.",
+        "Your choices remain when you look away. DEMO returns to the demonstration."
+      ],
+      "qfep_connection": "A native port of the browser teaching study; its private cells do not control the museum floor. Height displays occupancy, not a third array index."
+    },
+    "film_tiling_rule": {
+      "lookup_name": "film_tiling_rule",
+      "name": "A turn crosses the floor",
+      "scene": "res://commons/artifacts/spine_films/monitors/film_tiling_rule.tscn",
+      "description": "A physical four-by-four sample changes one tile at a time, followed by the full field and an eye chart.",
+      "map_ready": true,
+      "include_in_map_data": true,
+      "auto_ground": false,
+      "footprint": [
+        2.7,
+        2.6,
+        0.55
+      ],
+      "category": "education",
+      "map_sequences": [
+        "array_tutorial"
+      ],
+      "tags": [
+        "monitor",
+        "process",
+        "film",
+        "array_tutorial"
+      ],
+      "interactions": [
+        "Look at the screen to play.",
+        "Pause, replay, step or turn the view."
+      ],
+      "qfep_connection": "Actual rule images on explanatory 3D tile slabs; no new tiling algorithm."
+    },
+    "film_colour_edge": {
+      "lookup_name": "film_colour_edge",
+      "name": "Where does the column end?",
+      "scene": "res://commons/artifacts/spine_films/monitors/film_colour_edge.tscn",
+      "description": "A column rises from dark to light; its matching ceiling arrives and its edge becomes difficult to see.",
+      "map_ready": true,
+      "include_in_map_data": true,
+      "auto_ground": false,
+      "footprint": [
+        2.7,
+        2.6,
+        0.55
+      ],
+      "category": "education",
+      "map_sequences": [
+        "color"
+      ],
+      "tags": [
+        "monitor",
+        "process",
+        "film",
+        "color"
+      ],
+      "interactions": [
+        "Look at the screen to play.",
+        "Pause, replay, step or turn the view."
+      ],
+      "qfep_connection": "Shared source HSV function and shader on simplified cylinders; apparent fog is colour matching."
+    },
+    "film_foundation_class": {
+      "lookup_name": "film_foundation_class",
+      "name": "One class; whose state changes?",
+      "scene": "res://commons/artifacts/spine_films/monitors/film_foundation_class.tscn",
+      "description": "Two colour receivers read actual RefCounted Palette objects. Separate reference paths converge when both receivers share one instance.",
+      "map_ready": true,
+      "include_in_map_data": true,
+      "auto_ground": false,
+      "footprint": [
+        2.7,
+        2.6,
+        0.55
+      ],
+      "category": "education",
+      "map_sequences": [
+        "color"
+      ],
+      "tags": [
+        "monitor",
+        "process",
+        "film",
+        "color",
+        "interactive-study"
+      ],
+      "interactions": [
+        "Look at the screen to play.",
+        "Pause, replay, step or turn the view.",
+        "Use the lower row to try the model; the demonstration pauses.",
+        "Your choices remain when you look away. DEMO returns to the demonstration."
+      ],
+      "qfep_connection": "Proposed Palette teaching class, with the browser's three inks and reset semantics; no claim that existing museum floor cells already use this class. Receivers refresh explicitly."
+    },
+    "film_gradient_paths": {
+      "lookup_name": "film_gradient_paths",
+      "name": "The space changes the colours between",
+      "scene": "res://commons/artifacts/spine_films/monitors/film_gradient_paths.tscn",
+      "description": "Source RGB and HSV interpolation take different routes between red and cyan, plotted inside one three-dimensional RGB cube.",
+      "map_ready": true,
+      "include_in_map_data": true,
+      "auto_ground": false,
+      "footprint": [
+        2.7,
+        2.6,
+        0.55
+      ],
+      "category": "education",
+      "map_sequences": [
+        "color"
+      ],
+      "tags": [
+        "monitor",
+        "process",
+        "film",
+        "color"
+      ],
+      "interactions": [
+        "Look at the screen to play.",
+        "Pause, replay, step or turn the view."
+      ],
+      "qfep_connection": "Uses all 16 original samples. Plot positions are an explanatory RGB embedding; both routes use the same colour-space axes."
+    },
+    "film_rainbow_partitions": {
+      "lookup_name": "film_rainbow_partitions",
+      "name": "How many colours fit the same arch?",
+      "scene": "res://commons/artifacts/spine_films/monitors/film_rainbow_partitions.tscn",
+      "description": "Two, six, seven and forty-eight authored bands divide the same width; separated layers join into each arc.",
+      "map_ready": true,
+      "include_in_map_data": true,
+      "auto_ground": false,
+      "footprint": [
+        2.7,
+        2.6,
+        0.55
+      ],
+      "category": "education",
+      "map_sequences": [
+        "color"
+      ],
+      "tags": [
+        "monitor",
+        "process",
+        "film",
+        "color"
+      ],
+      "interactions": [
+        "Look at the screen to play.",
+        "Pause, replay, step or turn the view."
+      ],
+      "qfep_connection": "Original planar band meshes and authored palettes, reduced to 15% scale. Depth separation stages the construction; no optical rainbow simulation."
+    },
+    "film_pattern_symmetry": {
+      "lookup_name": "film_pattern_symmetry",
+      "name": "A fragment becomes a pattern",
+      "scene": "res://commons/artifacts/spine_films/monitors/film_pattern_symmetry.tscn",
+      "description": "A source motif unfolds through p4m symmetry; editing one cell changes its distant occurrences.",
+      "map_ready": true,
+      "include_in_map_data": true,
+      "auto_ground": false,
+      "footprint": [
+        2.7,
+        2.6,
+        0.55
+      ],
+      "category": "education",
+      "map_sequences": [
+        "tiling"
+      ],
+      "tags": [
+        "monitor",
+        "process",
+        "film",
+        "tiling"
+      ],
+      "interactions": [
+        "Look at the screen to play.",
+        "Pause, replay, step or turn the view."
+      ],
+      "qfep_connection": "Actual source colour lookup raised into a 3D relief; the original mill generates a texture."
+    },
+    "film_directional_slope": {
+      "lookup_name": "film_directional_slope",
+      "name": "One hill, different slopes",
+      "scene": "res://commons/artifacts/spine_films/monitors/film_directional_slope.tscn",
+      "description": "Two perpendicular sections pass through one point of the terrain, revealing opposite signed partial slopes.",
+      "map_ready": true,
+      "include_in_map_data": true,
+      "auto_ground": false,
+      "footprint": [
+        2.7,
+        2.6,
+        0.55
+      ],
+      "category": "education",
+      "map_sequences": [
+        "change"
+      ],
+      "tags": [
+        "monitor",
+        "process",
+        "film",
+        "change"
+      ],
+      "interactions": [
+        "Look at the screen to play.",
+        "Pause, replay, step or turn the view."
+      ],
+      "qfep_connection": "Samples the existing analytic height and derivative functions; explanatory marker and section overlays."
+    },
+    "film_flow_lookup": {
+      "lookup_name": "film_flow_lookup",
+      "name": "The next position is another lookup",
+      "scene": "res://commons/artifacts/spine_films/monitors/film_flow_lookup.tscn",
+      "description": "Three source particles repeatedly sample one held direction field and retain their different trajectories.",
+      "map_ready": true,
+      "include_in_map_data": true,
+      "auto_ground": false,
+      "footprint": [
+        2.7,
+        2.6,
+        0.55
+      ],
+      "category": "education",
+      "map_sequences": [
+        "change"
+      ],
+      "tags": [
+        "monitor",
+        "process",
+        "film",
+        "change"
+      ],
+      "interactions": [
+        "Look at the screen to play.",
+        "Pause, replay, step or turn the view."
+      ],
+      "qfep_connection": "A fixed seed and three declared starts; 160 source steps of 0.05 seconds. Directions, not forces. The chosen trajectories do not wrap."
+    },
+    "film_force_motion": {
+      "lookup_name": "film_force_motion",
+      "name": "A force changes a journey",
+      "scene": "res://commons/artifacts/spine_films/monitors/film_force_motion.tscn",
+      "description": "Two source force vectors meet head to tail; their sum bends a journey, then equal opposing forces leave prior motion intact.",
+      "map_ready": true,
+      "include_in_map_data": true,
+      "auto_ground": false,
+      "footprint": [
+        2.7,
+        2.6,
+        0.55
+      ],
+      "category": "education",
+      "map_sequences": [
+        "forces"
+      ],
+      "tags": [
+        "monitor",
+        "process",
+        "film",
+        "forces"
+      ],
+      "interactions": [
+        "Look at the screen to play.",
+        "Pause, replay, step or turn the view."
+      ],
+      "qfep_connection": "Actual source vectors. The motion interval is ideal unit mass without source contacts or damping."
+    },
+    "film_torque_purchase": {
+      "lookup_name": "film_torque_purchase",
+      "name": "A longer arm, a smaller push",
+      "scene": "res://commons/artifacts/spine_films/monitors/film_torque_purchase.tscn",
+      "description": "Actual crank geometry exposes parallel and perpendicular push components, then compares three arm/push purchases.",
+      "map_ready": true,
+      "include_in_map_data": true,
+      "auto_ground": false,
+      "footprint": [
+        2.7,
+        2.6,
+        0.55
+      ],
+      "category": "education",
+      "map_sequences": [
+        "forces"
+      ],
+      "tags": [
+        "monitor",
+        "process",
+        "film",
+        "forces"
+      ],
+      "interactions": [
+        "Look at the screen to play.",
+        "Pause, replay, step or turn the view."
+      ],
+      "qfep_connection": "Static source poses, not angular dynamics. Rigs are enlarged for inspection; the three purchase alternatives keep a common display scale."
+    },
+    "film_catenoid_sections": {
+      "lookup_name": "film_catenoid_sections",
+      "name": "A waist and sixteen intervals",
+      "scene": "res://commons/artifacts/spine_films/monitors/film_catenoid_sections.tscn",
+      "description": "Boundary rings, the narrow waist and sampled sections reveal how the actual catenoid surface is assembled.",
+      "map_ready": true,
+      "include_in_map_data": true,
+      "auto_ground": false,
+      "footprint": [
+        2.7,
+        2.6,
+        0.55
+      ],
+      "category": "education",
+      "map_sequences": [
+        "formfinding"
+      ],
+      "tags": [
+        "monitor",
+        "process",
+        "film",
+        "formfinding"
+      ],
+      "interactions": [
+        "Look at the screen to play.",
+        "Pause, replay, step or turn the view."
+      ],
+      "qfep_connection": "Analytic catenoid with c=0.82, height range -1 to 1, 16 by 48 intervals. No settling, stability test or universal area-minimum claim."
+    },
+    "film_form_relaxation": {
+      "lookup_name": "film_form_relaxation",
+      "name": "A network settles into a body",
+      "scene": "res://commons/artifacts/spine_films/monitors/film_form_relaxation.tscn",
+      "description": "A 4-by-3-by-4 lattice gains springs and settles through the bench solver, retaining a ghost of the starting shape.",
+      "map_ready": true,
+      "include_in_map_data": true,
+      "auto_ground": false,
+      "footprint": [
+        2.7,
+        2.6,
+        0.55
+      ],
+      "category": "education",
+      "map_sequences": [
+        "formfinding"
+      ],
+      "tags": [
+        "monitor",
+        "process",
+        "film",
+        "formfinding"
+      ],
+      "interactions": [
+        "Look at the screen to play.",
+        "Pause, replay, step or turn the view."
+      ],
+      "qfep_connection": "Fixed-seed replay of source initialization; the museum bench normally displays only its settled snapshot."
+    },
+    "film_circle_projection": {
+      "lookup_name": "film_circle_projection",
+      "name": "A turn leaves its coordinates",
+      "scene": "res://commons/artifacts/spine_films/monitors/film_circle_projection.tscn",
+      "description": "Original rotating-point and bridge functions show sine projection, then retain cosine in depth with the source helix option.",
+      "map_ready": true,
+      "include_in_map_data": true,
+      "auto_ground": false,
+      "footprint": [
+        2.7,
+        2.6,
+        0.55
+      ],
+      "category": "education",
+      "map_sequences": [
+        "wavefunctions"
+      ],
+      "tags": [
+        "monitor",
+        "process",
+        "film",
+        "wavefunctions"
+      ],
+      "interactions": [
+        "Look at the screen to play.",
+        "Pause, replay, step or turn the view."
+      ],
+      "qfep_connection": "One 81-sample cycle. Small non-colliding bridge specimens; interpolating between sine and helix is explanatory staging."
+    },
+    "film_wave_neighbours": {
+      "lookup_name": "film_wave_neighbours",
+      "name": "A movement reaches its neighbours",
+      "scene": "res://commons/artifacts/spine_films/monitors/film_wave_neighbours.tscn",
+      "description": "A centre pulse reaches neighbouring oscillators; a second lattice with zero coupling receives the same pulse.",
+      "map_ready": true,
+      "include_in_map_data": true,
+      "auto_ground": false,
+      "footprint": [
+        2.7,
+        2.6,
+        0.55
+      ],
+      "category": "education",
+      "map_sequences": [
+        "wavefunctions"
+      ],
+      "tags": [
+        "monitor",
+        "process",
+        "film",
+        "wavefunctions"
+      ],
+      "interactions": [
+        "Look at the screen to play.",
+        "Pause, replay, step or turn the view."
+      ],
+      "qfep_connection": "Existing fixed-step oscillator solver; private start-state copies, slowed for inspection."
+    },
+    "film_chance_passage": {
+      "lookup_name": "film_chance_passage",
+      "name": "A choice becomes a passage",
+      "scene": "res://commons/artifacts/spine_films/monitors/film_chance_passage.tscn",
+      "description": "One seeded diagonal decision per cell becomes a four-by-four arrangement of walls.",
+      "map_ready": true,
+      "include_in_map_data": true,
+      "auto_ground": false,
+      "footprint": [
+        2.7,
+        2.6,
+        0.55
+      ],
+      "category": "education",
+      "map_sequences": [
+        "randomness"
+      ],
+      "tags": [
+        "monitor",
+        "process",
+        "film",
+        "randomness"
+      ],
+      "interactions": [
+        "Look at the screen to play.",
+        "Pause, replay, step or turn the view."
+      ],
+      "qfep_connection": "One fixed seed and 16 cells; not every gap is connected."
+    },
+    "film_prng_register": {
+      "lookup_name": "film_prng_register",
+      "name": "A number has a previous state",
+      "scene": "res://commons/artifacts/spine_films/monitors/film_prng_register.tscn",
+      "description": "The original crank arithmetic fills a 64-bit block register, masks to 32 bits and replays sixteen outputs from the same seed.",
+      "map_ready": true,
+      "include_in_map_data": true,
+      "auto_ground": false,
+      "footprint": [
+        2.7,
+        2.6,
+        0.55
+      ],
+      "category": "education",
+      "map_sequences": [
+        "randomness"
+      ],
+      "tags": [
+        "monitor",
+        "process",
+        "film",
+        "randomness"
+      ],
+      "interactions": [
+        "Look at the screen to play.",
+        "Pause, replay, step or turn the view."
+      ],
+      "qfep_connection": "Blocks represent integer bit places, not circuitry. Sixteen matching outputs establish this replay, not distribution quality or cryptographic security."
+    },
+    "film_noise_layers": {
+      "lookup_name": "film_noise_layers",
+      "name": "Three fields, one height",
+      "scene": "res://commons/artifacts/spine_films/monitors/film_noise_layers.tscn",
+      "description": "Separate authored noise layers meet at the same addresses, then sum and undergo the source's slope pass.",
+      "map_ready": true,
+      "include_in_map_data": true,
+      "auto_ground": false,
+      "footprint": [
+        2.7,
+        2.6,
+        0.55
+      ],
+      "category": "education",
+      "map_sequences": [
+        "noise"
+      ],
+      "tags": [
+        "monitor",
+        "process",
+        "film",
+        "noise"
+      ],
+      "interactions": [
+        "Look at the screen to play.",
+        "Pause, replay, step or turn the view."
+      ],
+      "qfep_connection": "A 25-by-25 display sampling over the 200 m source span; display scales are explicit, not a full terrain simulation."
+    },
+    "film_noise_relief": {
+      "lookup_name": "film_noise_relief",
+      "name": "One sample becomes colour and distance",
+      "scene": "res://commons/artifacts/spine_films/monitors/film_noise_relief.tscn",
+      "description": "The actual study sampler and radius function turn one field into skin and relief, then compare direct and warped addresses.",
+      "map_ready": true,
+      "include_in_map_data": true,
+      "auto_ground": false,
+      "footprint": [
+        2.7,
+        2.6,
+        0.55
+      ],
+      "category": "education",
+      "map_sequences": [
+        "noise"
+      ],
+      "tags": [
+        "monitor",
+        "process",
+        "film",
+        "noise"
+      ],
+      "interactions": [
+        "Look at the screen to play.",
+        "Pause, replay, step or turn the view."
+      ],
+      "qfep_connection": "A 48-segment, 24-ring display sphere uses the existing CPU study, not the older animated dome shader. Skin-to-relief interpolation is staged; source endpoint values and seeds are retained."
+    },
+    "film_shader_repeat": {
+      "lookup_name": "film_shader_repeat",
+      "name": "One function, many addresses",
+      "scene": "res://commons/artifacts/spine_films/monitors/film_shader_repeat.tscn",
+      "description": "An unchanged sphere mesh receives the original UV tile shader; grid frequency changes while its faces stay fixed.",
+      "map_ready": true,
+      "include_in_map_data": true,
+      "auto_ground": false,
+      "footprint": [
+        2.7,
+        2.6,
+        0.55
+      ],
+      "category": "education",
+      "map_sequences": [
+        "shaders"
+      ],
+      "tags": [
+        "monitor",
+        "process",
+        "film",
+        "shaders"
+      ],
+      "interactions": [
+        "Look at the screen to play.",
+        "Pause, replay, step or turn the view."
+      ],
+      "qfep_connection": "The original flat-display shader is transferred to spheres, exposing their UV distortion. TIME is replaced by a private film clock; animate stays zero."
+    },
+    "film_shader_view": {
+      "lookup_name": "film_shader_view",
+      "name": "A surface answers a view",
+      "scene": "res://commons/artifacts/spine_films/monitors/film_shader_view.tscn",
+      "description": "Orbit a fixed torus while the source oil-slick shader answers the changing normal/view angle.",
+      "map_ready": true,
+      "include_in_map_data": true,
+      "auto_ground": false,
+      "footprint": [
+        2.7,
+        2.6,
+        0.55
+      ],
+      "category": "education",
+      "map_sequences": [
+        "shaders"
+      ],
+      "tags": [
+        "monitor",
+        "process",
+        "film",
+        "shaders"
+      ],
+      "interactions": [
+        "Look at the screen to play.",
+        "Pause, replay, step or turn the view."
+      ],
+      "qfep_connection": "Source optical approximation, not physical thin-film simulation; only TIME is replaced by the film clock."
+    },
+    "film_ca_triplet": {
+      "lookup_name": "film_ca_triplet",
+      "name": "Three neighbours choose one next cell",
+      "scene": "res://commons/artifacts/spine_films/monitors/film_ca_triplet.tscn",
+      "description": "The actual elementary rule selects an output from three input bits, then repeats around wrapped rows.",
+      "map_ready": true,
+      "include_in_map_data": true,
+      "auto_ground": false,
+      "footprint": [
+        2.7,
+        2.6,
+        0.55
+      ],
+      "category": "education",
+      "map_sequences": [
+        "cellularautomata"
+      ],
+      "tags": [
+        "monitor",
+        "process",
+        "film",
+        "cellularautomata"
+      ],
+      "interactions": [
+        "Look at the screen to play.",
+        "Pause, replay, step or turn the view."
+      ],
+      "qfep_connection": "Height separates recorded generations; no added spatial cellular-automaton dimension."
+    },
+    "film_cellular_history": {
+      "lookup_name": "film_cellular_history",
+      "name": "A generation becomes a storey",
+      "scene": "res://commons/artifacts/spine_films/monitors/film_cellular_history.tscn",
+      "description": "A three-neighbour birth is revealed, then actual Life states stack vertically as retained time.",
+      "map_ready": true,
+      "include_in_map_data": true,
+      "auto_ground": false,
+      "footprint": [
+        2.7,
+        2.6,
+        0.55
+      ],
+      "category": "education",
+      "map_sequences": [
+        "cellularautomata"
+      ],
+      "tags": [
+        "monitor",
+        "process",
+        "film",
+        "cellularautomata"
+      ],
+      "interactions": [
+        "Look at the screen to play.",
+        "Pause, replay, step or turn the view."
+      ],
+      "qfep_connection": "A declared eight-by-eight wrapped glider fixture; later walker erosion is excluded."
+    },
+    "film_cantor_thirds": {
+      "lookup_name": "film_cantor_thirds",
+      "name": "Keep two thirds; repeat the cut",
+      "scene": "res://commons/artifacts/spine_films/monitors/film_cantor_thirds.tscn",
+      "description": "The actual Cantor recursion supplies retained bars while removed thirds move aside.",
+      "map_ready": true,
+      "include_in_map_data": true,
+      "auto_ground": false,
+      "footprint": [
+        2.7,
+        2.6,
+        0.55
+      ],
+      "category": "education",
+      "map_sequences": [
+        "fractals"
+      ],
+      "tags": [
+        "monitor",
+        "process",
+        "film",
+        "fractals"
+      ],
+      "interactions": [
+        "Look at the screen to play.",
+        "Pause, replay, step or turn the view."
+      ],
+      "qfep_connection": "Five finite removals; staging of cut material does not establish an infinite-set claim."
+    },
+    "film_menger_twenty": {
+      "lookup_name": "film_menger_twenty",
+      "name": "Twenty of twenty-seven",
+      "scene": "res://commons/artifacts/spine_films/monitors/film_menger_twenty.tscn",
+      "description": "Separate 27 cells, remove the source's seven omitted positions, and repeat the retained-index rule.",
+      "map_ready": true,
+      "include_in_map_data": true,
+      "auto_ground": false,
+      "footprint": [
+        2.7,
+        2.6,
+        0.55
+      ],
+      "category": "education",
+      "map_sequences": [
+        "fractals"
+      ],
+      "tags": [
+        "monitor",
+        "process",
+        "film",
+        "fractals"
+      ],
+      "interactions": [
+        "Look at the screen to play.",
+        "Pause, replay, step or turn the view."
+      ],
+      "qfep_connection": "Two finite subdivision depths, not an infinite sponge."
+    },
+    "film_grammar_forward": {
+      "lookup_name": "film_grammar_forward",
+      "name": "Forward is a local direction",
+      "scene": "res://commons/artifacts/spine_films/monitors/film_grammar_forward.tscn",
+      "description": "Follow the actual 3D Hilbert turtle segments through two rewrites and around a spatial orbit.",
+      "map_ready": true,
+      "include_in_map_data": true,
+      "auto_ground": false,
+      "footprint": [
+        2.7,
+        2.6,
+        0.55
+      ],
+      "category": "education",
+      "map_sequences": [
+        "lsystems"
+      ],
+      "tags": [
+        "monitor",
+        "process",
+        "film",
+        "lsystems"
+      ],
+      "interactions": [
+        "Look at the screen to play.",
+        "Pause, replay, step or turn the view."
+      ],
+      "qfep_connection": "Finite generations; marker points along the current segment, rather than claiming to expose an unrecorded full turtle frame."
+    },
+    "film_branch_decision": {
+      "lookup_name": "film_branch_decision",
+      "name": "Which requests make the next branch?",
+      "scene": "res://commons/artifacts/spine_films/monitors/film_branch_decision.tscn",
+      "description": "Show real target assignments, unit directions, their normalized sum, and the resulting network growth.",
+      "map_ready": true,
+      "include_in_map_data": true,
+      "auto_ground": false,
+      "footprint": [
+        2.7,
+        2.6,
+        0.55
+      ],
+      "category": "education",
+      "map_sequences": [
+        "proceduralgeneration"
+      ],
+      "tags": [
+        "monitor",
+        "process",
+        "film",
+        "proceduralgeneration"
+      ],
+      "interactions": [
+        "Look at the screen to play.",
+        "Pause, replay, step or turn the view."
+      ],
+      "qfep_connection": "One authored asymmetric field with NETWORK policy and a finite node/iteration budget."
+    },
+    "film_cloth_relations": {
+      "lookup_name": "film_cloth_relations",
+      "name": "A sheet is held by relations",
+      "scene": "res://commons/artifacts/spine_films/monitors/film_cloth_relations.tscn",
+      "description": "Reveal the actual membrane's pins and distance constraints while replaying a computed grip and release.",
+      "map_ready": true,
+      "include_in_map_data": true,
+      "auto_ground": false,
+      "footprint": [
+        2.7,
+        2.6,
+        0.55
+      ],
+      "category": "education",
+      "map_sequences": [
+        "softbodies"
+      ],
+      "tags": [
+        "monitor",
+        "process",
+        "film",
+        "softbodies"
+      ],
+      "interactions": [
+        "Look at the screen to play.",
+        "Pause, replay, step or turn the view."
+      ],
+      "qfep_connection": "Educational membrane, not measured fabric; six seconds of actual fixed-step solver output slowed for inspection."
+    },
+    "film_jelly_skin": {
+      "lookup_name": "film_jelly_skin",
+      "name": "A yielding body begins with a skin",
+      "scene": "res://commons/artifacts/spine_films/monitors/film_jelly_skin.tscn",
+      "description": "The actual BoxMesh separates into face data, indexed triangles and its source-selected crown pin.",
+      "map_ready": true,
+      "include_in_map_data": true,
+      "auto_ground": false,
+      "footprint": [
+        2.7,
+        2.6,
+        0.55
+      ],
+      "category": "education",
+      "map_sequences": [
+        "softbodies"
+      ],
+      "tags": [
+        "monitor",
+        "process",
+        "film",
+        "softbodies"
+      ],
+      "interactions": [
+        "Look at the screen to play.",
+        "Pause, replay, step or turn the view."
+      ],
+      "qfep_connection": "Shows rest geometry and attachment, not a substitute simulation of inflation or deformation."
+    },
+    "film_iso_cell": {
+      "lookup_name": "film_iso_cell",
+      "name": "A surface between eight samples",
+      "scene": "res://commons/artifacts/spine_films/monitors/film_iso_cell.tscn",
+      "description": "Eight corner samples become crossings and lookup triangles; margin moves the sheet while classification stays fixed.",
+      "map_ready": true,
+      "include_in_map_data": true,
+      "auto_ground": false,
+      "footprint": [
+        2.7,
+        2.6,
+        0.55
+      ],
+      "category": "education",
+      "map_sequences": [
+        "isosurfaces"
+      ],
+      "tags": [
+        "monitor",
+        "process",
+        "film",
+        "isosurfaces"
+      ],
+      "interactions": [
+        "Look at the screen to play.",
+        "Pause, replay, step or turn the view."
+      ],
+      "qfep_connection": "One cell, using the source extractor; no claim that this one demonstration resolves ambiguous marching-cubes cases."
+    },
+    "film_metaball_sum": {
+      "lookup_name": "film_metaball_sum",
+      "name": "Two contributions become one boundary",
+      "scene": "res://commons/artifacts/spine_films/monitors/film_metaball_sum.tscn",
+      "description": "The original field generator adds two inverse-square sources and extracts a shared threshold as their centres approach.",
+      "map_ready": true,
+      "include_in_map_data": true,
+      "auto_ground": false,
+      "footprint": [
+        2.7,
+        2.6,
+        0.55
+      ],
+      "category": "education",
+      "map_sequences": [
+        "isosurfaces"
+      ],
+      "tags": [
+        "monitor",
+        "process",
+        "film",
+        "isosurfaces"
+      ],
+      "interactions": [
+        "Look at the screen to play.",
+        "Pause, replay, step or turn the view."
+      ],
+      "qfep_connection": "Reduced fixed sampling lattice and 21 cached surfaces; no changes to the live museum generator."
+    },
+    "film_boolean_overlap": {
+      "lookup_name": "film_boolean_overlap",
+      "name": "Only what both solids contain",
+      "scene": "res://commons/artifacts/spine_films/monitors/film_boolean_overlap.tscn",
+      "description": "Native CSG computes the source box-sphere intersections at all four named offsets.",
+      "map_ready": true,
+      "include_in_map_data": true,
+      "auto_ground": false,
+      "footprint": [
+        2.7,
+        2.6,
+        0.55
+      ],
+      "category": "education",
+      "map_sequences": [
+        "boolean_surfaces"
+      ],
+      "tags": [
+        "monitor",
+        "process",
+        "film",
+        "boolean_surfaces"
+      ],
+      "interactions": [
+        "Look at the screen to play.",
+        "Pause, replay, step or turn the view."
+      ],
+      "qfep_connection": "Geometric intersection does not prove the source comments’ social analogies."
+    },
+    "film_boolean_room": {
+      "lookup_name": "film_boolean_room",
+      "name": "A walk taken out of a block",
+      "scene": "res://commons/artifacts/spine_films/monitors/film_boolean_room.tscn",
+      "description": "Follow the eleven original seeded cutter centres, their union, and the subtraction from a sectioned block.",
+      "map_ready": true,
+      "include_in_map_data": true,
+      "auto_ground": false,
+      "footprint": [
+        2.7,
+        2.6,
+        0.55
+      ],
+      "category": "education",
+      "map_sequences": [
+        "boolean_surfaces"
+      ],
+      "tags": [
+        "monitor",
+        "process",
+        "film",
+        "boolean_surfaces"
+      ],
+      "interactions": [
+        "Look at the screen to play.",
+        "Pause, replay, step or turn the view."
+      ],
+      "qfep_connection": "A cutter union is not clipped to the stock; cutter connectivity does not establish body clearance."
+    },
+    "film_boid_neighbour": {
+      "lookup_name": "film_boid_neighbour",
+      "name": "One body, several neighbours",
+      "scene": "res://commons/artifacts/spine_films/monitors/film_boid_neighbour.tscn",
+      "description": "Freeze one body, inspect its neighbourhood and three steering contributions, then run the original updater on a private flock.",
+      "map_ready": true,
+      "include_in_map_data": true,
+      "auto_ground": false,
+      "footprint": [
+        2.7,
+        2.6,
+        0.55
+      ],
+      "category": "education",
+      "map_sequences": [
+        "swarmintelligence"
+      ],
+      "tags": [
+        "monitor",
+        "process",
+        "film",
+        "swarmintelligence"
+      ],
+      "interactions": [
+        "Look at the screen to play.",
+        "Pause, replay, step or turn the view."
+      ],
+      "qfep_connection": "A bounded eight-body teaching fixture; original sequential update order retained. No biological or political inference."
+    },
+    "film_learning_step": {
+      "lookup_name": "film_learning_step",
+      "name": "One learning step",
+      "scene": "res://commons/artifacts/spine_films/monitors/film_learning_step.tscn",
+      "description": "Sample the original loss function, expose its finite-difference gradient and learning rate, then follow source-computed steps.",
+      "map_ready": true,
+      "include_in_map_data": true,
+      "auto_ground": false,
+      "footprint": [
+        2.7,
+        2.6,
+        0.55
+      ],
+      "category": "education",
+      "map_sequences": [
+        "machinelearning"
+      ],
+      "tags": [
+        "monitor",
+        "process",
+        "film",
+        "machinelearning"
+      ],
+      "interactions": [
+        "Look at the screen to play.",
+        "Pause, replay, step or turn the view."
+      ],
+      "qfep_connection": "A toy optimization surface, not a demonstration of neural-network learning or consciousness."
+    },
+    "film_graph_layout": {
+      "lookup_name": "film_graph_layout",
+      "name": "The graph keeps its connections",
+      "scene": "res://commons/artifacts/spine_films/monitors/film_graph_layout.tscn",
+      "description": "A source-generated tree spreads under repulsion and spring forces while its adjacency stays fixed.",
+      "map_ready": true,
+      "include_in_map_data": true,
+      "auto_ground": false,
+      "footprint": [
+        2.7,
+        2.6,
+        0.55
+      ],
+      "category": "education",
+      "map_sequences": [
+        "graphtheory"
+      ],
+      "tags": [
+        "monitor",
+        "process",
+        "film",
+        "graphtheory"
+      ],
+      "interactions": [
+        "Look at the screen to play.",
+        "Pause, replay, step or turn the view."
+      ],
+      "qfep_connection": "A layout algorithm changes coordinates, not the meaning or validity of the graph."
+    },
+    "film_spanning_choice": {
+      "lookup_name": "film_spanning_choice",
+      "name": "Keep a connection; refuse a cycle",
+      "scene": "res://commons/artifacts/spine_films/monitors/film_spanning_choice.tscn",
+      "description": "The seeded source graph is sorted by cost and original union-find joins components while rejecting cycles.",
+      "map_ready": true,
+      "include_in_map_data": true,
+      "auto_ground": false,
+      "footprint": [
+        2.7,
+        2.6,
+        0.55
+      ],
+      "category": "education",
+      "map_sequences": [
+        "graphtheory"
+      ],
+      "tags": [
+        "monitor",
+        "process",
+        "film",
+        "graphtheory"
+      ],
+      "interactions": [
+        "Look at the screen to play.",
+        "Pause, replay, step or turn the view."
+      ],
+      "qfep_connection": "Arch height displays cost; a minimum spanning tree is not a shortest path."
+    },
+    "film_curvature_triangle": {
+      "lookup_name": "film_curvature_triangle",
+      "name": "A triangle depends on its surface",
+      "scene": "res://commons/artifacts/spine_films/monitors/film_curvature_triangle.tscn",
+      "description": "Source-generated straight and great-circle edges reveal different tangent angles on plane and sphere.",
+      "map_ready": true,
+      "include_in_map_data": true,
+      "auto_ground": false,
+      "footprint": [
+        2.7,
+        2.6,
+        0.55
+      ],
+      "category": "education",
+      "map_sequences": [
+        "foundationscrisis"
+      ],
+      "tags": [
+        "monitor",
+        "process",
+        "film",
+        "foundationscrisis"
+      ],
+      "interactions": [
+        "Look at the screen to play.",
+        "Pause, replay, step or turn the view."
+      ],
+      "qfep_connection": "Separate geometric models; no continuous curvature interpolation, independent area theorem test, or Godel proof."
+    },
+    "film_shannon_threshold": {
+      "lookup_name": "film_shannon_threshold",
+      "name": "Same draws, a moving threshold",
+      "scene": "res://commons/artifacts/spine_films/monitors/film_shannon_threshold.tscn",
+      "description": "Lift fixed source-generated random draws into height, sweep the threshold, and distinguish sample count from binary source entropy.",
+      "map_ready": true,
+      "include_in_map_data": true,
+      "auto_ground": false,
+      "footprint": [
+        2.7,
+        2.6,
+        0.55
+      ],
+      "category": "education",
+      "map_sequences": [
+        "qfeplaboratory"
+      ],
+      "tags": [
+        "monitor",
+        "process",
+        "film",
+        "qfeplaboratory"
+      ],
+      "interactions": [
+        "Look at the screen to play.",
+        "Pause, replay, step or turn the view."
+      ],
+      "qfep_connection": "Private 64-draw sample; H(p) is source entropy, not thermodynamic entropy or proof of QFEP."
+    },
+    "film_rhizome_routes": {
+      "lookup_name": "film_rhizome_routes",
+      "name": "No named root, unequal connections",
+      "scene": "res://commons/artifacts/spine_films/monitors/film_rhizome_routes.tscn",
+      "description": "Replay source growth with one or three earlier neighbours, then remove a high-degree node and its edges.",
+      "map_ready": true,
+      "include_in_map_data": true,
+      "auto_ground": false,
+      "footprint": [
+        2.7,
+        2.6,
+        0.55
+      ],
+      "category": "education",
+      "map_sequences": [
+        "postfoundationscrisis"
+      ],
+      "tags": [
+        "monitor",
+        "process",
+        "film",
+        "postfoundationscrisis"
+      ],
+      "interactions": [
+        "Look at the screen to play.",
+        "Pause, replay, step or turn the view."
+      ],
+      "qfep_connection": "A source graph comparison, not evidence of social equality or an automatic interpretation of A Thousand Plateaus."
+    }
+  }
+}

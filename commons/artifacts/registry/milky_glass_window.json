@@ -1,0 +1,54 @@
+{
+	"artifacts": {
+		"milky_glass_window": {
+			"lookup_name": "milky_glass_window",
+			"name": "Milky Glass Window",
+			"class_name": "MilkyGlassWindow",
+			"scene": "res://commons/artifacts/milky_glass_window/milky_glass_window.tscn",
+			"category": "color",
+			"artifact_type": "demonstration",
+			"complexity": "beginner",
+			"description": "A divided-light window glazed in milky glass, with coloured lamps drifting and cycling hue behind it. The glass never shows you what is back there, only what colour it is: four hard lights become four soft fields, and where two fields overlap a third colour appears that neither lamp is emitting. Frosted glass is a device for destroying information, and that is exactly why the colour reads — a clear pane would show you the lamps. The frosting is a shader: the pane averages twelve jittered samples of the screen behind it, so a point of light arrives as a patch. `frost` is that scatter radius, `glass_alpha` is how much milk is in the glass, and the lamps themselves are plain opaque spheres because the softening is done by the glass and not by them.",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"size_group": "wide",
+			"footprint": [
+				2,
+				2,
+				1
+			],
+			"map_sequences": [
+				"color"
+			],
+			"tags": [
+				"visualization",
+				"color",
+				"light",
+				"additive",
+				"glass"
+			],
+			"parameters": {
+				"footprint": [
+					2,
+					2,
+					1
+				],
+				"size_group": "wide"
+			},
+			"spatial_needs": {
+				"platform": "none",
+				"footprint_cells": 2,
+				"clearance": {
+					"front": 2,
+					"back": 1,
+					"left": 1,
+					"right": 1
+				},
+				"player_position": "front",
+				"wall_backing": true,
+				"orientation": "face_approach",
+				"isolation": "none"
+			}
+		}
+	}
+}

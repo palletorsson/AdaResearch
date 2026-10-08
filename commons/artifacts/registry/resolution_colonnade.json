@@ -1,0 +1,82 @@
+{
+  "id": "resolution_colonnade",
+  "name": "Resolution Colonnade",
+  "category": "primitives",
+  "artifacts": {
+    "resolution_totem": {
+      "lookup_name": "resolution_totem",
+      "name": "Rings of Ash — Resolution Totem",
+      "scene": "res://commons/artifacts/resolution_colonnade/resolution_totem.tscn",
+      "description": "Five stacked column profiles with independent height, width, radial segments and curved-profile subdivisions. Default Vessel is 4.67 m high at 8 by 8; gallery uses 4, 6, 8, 12 and 16 sampling counts.",
+      "category": "primitives",
+      "complexity": "intermediate",
+      "include_in_map_data": true,
+      "map_ready": true,
+      "footprint": [
+        2,
+        2,
+        5
+      ],
+      "tags": [
+        "resolution",
+        "lathe",
+        "column",
+        "totem",
+        "finite-geometry"
+      ],
+      "parameters": {
+        "radial_segments": "Number of sides around every section, default 8",
+        "profile_rings": "Height subdivisions per curved section, default 8",
+        "collisions": "Static mesh collision, default true",
+        "profile_kind": "Vessel, Reed, Bell, Spindle or Cairn; default Vessel",
+        "column_height": "Mesh height in metres, excluding plinth; default 4.67",
+        "width_factor": "Radial multiplier, default 1.0"
+      },
+      "qfep_connection": "One profile rule yields visibly different finite bodies under two sampling budgets. More triangles preserve some distinctions and soften others.",
+      "placement_notes": "Declared footprint covers the default 4.67 m body; reserve more vertical space for taller settings."
+    },
+    "resolution_colonnade_museum": {
+      "lookup_name": "resolution_colonnade_museum",
+      "name": "Rings of Ash — Museum Colonnade",
+      "scene": "res://commons/artifacts/resolution_colonnade/resolution_colonnade_museum.tscn",
+      "description": "Twenty-five full-size columns: an entry row keeps the Vessel profile, 4.67 m height, width and eight profile subdivisions fixed while varying sides over 4, 6, 8, 12 and 16. Behind it, twenty varied bodies keep the authored profiles, heights and widths from the standalone gallery's remaining four rows. Plaques distinguish the controlled comparison from the varied grove. Solid columns and plinths flank a continuous 2.14 m aisle at local x=0. The host supplies architecture, lighting, camera and floor.",
+      "category": "primitives",
+      "complexity": "intermediate",
+      "include_in_map_data": true,
+      "map_ready": true,
+      "footprint": [23, 33, 7],
+      "tags": ["resolution", "lathe", "column", "finite-geometry", "museum", "environment"],
+      "parameters": {},
+      "interactions": ["Walk between the columns and compare silhouettes", "Compare the controlled entry row with its fixed parameters", "Explore the twenty varied bodies beyond the controlled row"],
+      "qfep_connection": "A controlled comparison isolates a sampling decision; the varied grove shows that shared construction rules and budgets can support different forms. Geometry counts describe a construction without deciding its value.",
+      "placement_notes": "Place at floor level with unit scale and zero rotation, entrance toward local -Z and continuation +Z. Local x=0 is a 2.14 m clear aisle. Physical geometry spans x=-10.93 to 8.10, z=-13.05 to 10.93, y=0 to 6.17 m. Use a hall at least 27 by 35 m with the artifact at cell (13,17); supply open sky or a ceiling above 6.7 m. No floor, walls, environment, camera or lights are instantiated by this artifact."
+    },
+    "resolution_colonnade": {
+      "lookup_name": "resolution_colonnade",
+      "name": "Rings of Ash — Gallery",
+      "scene": "res://commons/artifacts/resolution_colonnade/resolution_colonnade.tscn",
+      "description": "A 20 by 28 metre courtyard of twenty-five totems with five silhouettes and 2.87–6.17 m overall heights. Rows vary profile subdivisions, columns vary radial segments. Pompeii-inspired red, pale stone, open roof, charcoal floor and rose light.",
+      "category": "primitives",
+      "complexity": "intermediate",
+      "include_in_map_data": false,
+      "map_ready": false,
+      "footprint": [
+        21,
+        29,
+        8
+      ],
+      "tags": [
+        "gallery",
+        "standalone-room",
+        "resolution",
+        "totem",
+        "pompeii-inspired"
+      ],
+      "parameters": {
+        "own_environment": "Use true standalone; false when hosted in another museum environment",
+        "varied_forms": "Default true: five silhouettes and staggered heights. False: original Vessel profile at equal height for controlled resolution comparison."
+      },
+      "qfep_connection": "Shared construction rules support differences in outline, proportion and sampling. An equal-form option isolates the effect of finite resolution."
+    }
+  }
+}

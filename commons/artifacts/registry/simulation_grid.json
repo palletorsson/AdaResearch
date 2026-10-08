@@ -1,0 +1,37 @@
+{
+  "artifacts": {
+    "simulation_grid": {
+      "lookup_name": "simulation_grid",
+      "name": "Five by five simulation plan",
+      "scene": "res://commons/artifacts/simulation_grid/simulation_grid.tscn",
+      "category": "primitives",
+      "description": "Walkable 5 by 5 plan with one-metre cells and numbered rows and columns. Twenty-five areas give later ramps, platforms and moving objects a common placement grid.",
+      "size": "large",
+      "tags": [
+        "grid",
+        "plan",
+        "simulation",
+        "walkable"
+      ],
+      "include_in_map_data": true,
+      "map_ready": true,
+      "footprint": [
+        5,
+        0.06,
+        5
+      ],
+      "size_group": "large",
+      "map_sequences": [
+        "primitives"
+      ],
+      "parameters": {
+        "footprint": [
+          5,
+          0.06,
+          5
+        ],
+        "size_group": "large"
+      }
+    }
+  }
+}
