@@ -40,6 +40,18 @@ extends RefCounted
 ## other shoulders), the garden behind them, the true polygon-by-polygon shard cuts
 ## of real smalti (the lattice is Voronoi, not hand-nipped), and the mirror-glass
 ## specular of the silver figure, which stands in as metallic plus painted speckle.
+##
+## AXES
+##   tessera   — what the tiles do to the body: bedded, flush in the skin (today's
+##               statue) · proud, thick smalti standing off it in an armoured crust ·
+##               spalling, the tesserae flown off along their own normals into a
+##               hovering shell · unset, the flesh shrunk to a pale mortar armature
+##               inside the crust that used to sheath it.
+##   companion — who the reach lands on: none, the arm over an absent shoulder
+##               (today's statue) · mirror, a second identical figure turned out of
+##               this one at the reaching shoulder so each hand finds the other ·
+##               huddle, three hooded busts risen legless out of the pavement around
+##               it · pour, the pavement itself risen to drown the legs to the hip.
 
 const TEX_SIZE: int = 192
 const GROUND: float = 0.055
@@ -82,7 +94,53 @@ static func describe() -> String:
 	return "A half-kneeling faceless figure sheathed in code-painted mosaic tesserae with pale grout, one hand braced on its raised knee and the other reaching over an absent companion's shoulder."
 
 
-static func build(root: Node3D, seed: int) -> void:
+static func axes() -> Dictionary:
+	return {
+		"tessera": ["bedded", "proud", "spalling", "unset"],
+		"companion": ["none", "mirror", "huddle", "pour"],
+	}
+
+
+static func build(root: Node3D, seed: int, opts: Dictionary = {}) -> void:
+	var tessera: String = str(opts.get("tessera", "bedded"))
+	var companion: String = str(opts.get("companion", "none"))
+
+	# --- what the axes do to the build --------------------------------------
+	var flesh: float = 1.0
+	var plate_k: float = 1.0
+	var plate_th: float = 0.0075
+	var plate_size: float = 1.0
+	var lift_lo: float = 0.0
+	var lift_hi: float = 0.0
+	var wob: float = 0.0
+	var bone_skin: bool = false
+	match tessera:
+		"proud":
+			plate_k = 1.50
+			plate_th = 0.024
+			plate_size = 1.24
+			lift_lo = 0.004
+			lift_hi = 0.018
+			wob = 0.10
+		"spalling":
+			plate_k = 1.60
+			plate_th = 0.009
+			plate_size = 1.06
+			lift_lo = 0.022
+			lift_hi = 0.150
+			wob = 0.55
+		"unset":
+			flesh = 0.44
+			plate_k = 1.75
+			plate_th = 0.012
+			plate_size = 1.18
+			lift_lo = 0.0
+			lift_hi = 0.014
+			wob = 0.10
+			bone_skin = true
+	if companion == "mirror":
+		plate_k = plate_k * 0.55
+
 	var rng := RandomNumberGenerator.new()
 	rng.seed = seed
 
@@ -118,6 +176,10 @@ static func build(root: Node3D, seed: int) -> void:
 	var mat_skin: StandardMaterial3D = _skin_mat(tex_skin, tex_scale, rough, metal)
 	var mat_field: StandardMaterial3D = _skin_mat(tex_patch, tex_scale * 0.86, rough, metal)
 	var mat_slab: StandardMaterial3D = _skin_mat(tex_patch, tex_scale * 1.35, 0.62, 0.0)
+	if bone_skin:
+		var bone := Color(grout.r * 0.93, grout.g * 0.90, grout.b * 0.86)
+		mat_skin = _flat_mat(bone, 0.90, 0.0)
+		mat_field = _flat_mat(Color(bone.r * 0.88, bone.g * 0.88, bone.b * 0.90), 0.94, 0.0)
 
 	var tile_mats: Array = []
 	for i in range(tiles.size()):
@@ -149,8 +211,8 @@ static func build(root: Node3D, seed: int) -> void:
 		var sxv: float = SX[i]
 		var szv: float = SZ[i]
 		var sph := SphereMesh.new()
-		sph.radius = r
-		sph.height = r * 2.0
+		sph.radius = r * flesh
+		sph.height = r * flesh * 2.0
 		sph.radial_segments = 22
 		sph.rings = 12
 		var use_field: bool = i >= patch_lo and i <= patch_hi
@@ -162,9 +224,9 @@ static func build(root: Node3D, seed: int) -> void:
 	var fb0: Basis = frames[0]
 	var hip_r := Vector3(0.115, 0.513 + GROUND, 0.038)
 	var hip_l := Vector3(-0.115, 0.513 + GROUND, 0.038)
-	_ball(root, pelvis + Vector3(0.0, -0.06, 0.05), 0.125, Vector3(1.18, 0.92, 0.92), fb0, mat_skin)
-	_ball(root, hip_r + Vector3(0.02, -0.03, 0.02), 0.100, Vector3(1.0, 0.94, 0.94), fb0, mat_skin)
-	_ball(root, hip_l + Vector3(-0.02, -0.03, 0.02), 0.100, Vector3(1.0, 0.94, 0.94), fb0, mat_skin)
+	_ball(root, pelvis + Vector3(0.0, -0.06, 0.05), 0.125 * flesh, Vector3(1.18, 0.92, 0.92), fb0, mat_skin)
+	_ball(root, hip_r + Vector3(0.02, -0.03, 0.02), 0.100 * flesh, Vector3(1.0, 0.94, 0.94), fb0, mat_skin)
+	_ball(root, hip_l + Vector3(-0.02, -0.03, 0.02), 0.100 * flesh, Vector3(1.0, 0.94, 0.94), fb0, mat_skin)
 
 	# --- legs ----------------------------------------------------------------
 	var knee_r := Vector3(0.152, 0.082 + GROUND, -0.012)
@@ -178,18 +240,18 @@ static func build(root: Node3D, seed: int) -> void:
 	var mat_thigh_r: StandardMaterial3D = mat_skin
 	var mat_thigh_l: StandardMaterial3D = mat_field if rng.randf() < 0.55 else mat_skin
 
-	_limb(root, hip_r, knee_r, 0.096, mat_thigh_r)
-	_ball(root, knee_r, 0.080, Vector3(1.0, 1.0, 1.0), Basis(), mat_skin)
-	_limb(root, knee_r, ankle_r, 0.066, mat_skin)
-	_ball(root, ankle_r, 0.060, Vector3(1.0, 1.0, 1.0), Basis(), mat_skin)
-	_limb(root, ankle_r, toe_r, 0.056, mat_skin)
+	_limb(root, hip_r, knee_r, 0.096 * flesh, mat_thigh_r)
+	_ball(root, knee_r, 0.080 * flesh, Vector3(1.0, 1.0, 1.0), Basis(), mat_skin)
+	_limb(root, knee_r, ankle_r, 0.066 * flesh, mat_skin)
+	_ball(root, ankle_r, 0.060 * flesh, Vector3(1.0, 1.0, 1.0), Basis(), mat_skin)
+	_limb(root, ankle_r, toe_r, 0.056 * flesh, mat_skin)
 
-	_limb(root, hip_l, knee_l, 0.096, mat_thigh_l)
-	_ball(root, knee_l, 0.086, Vector3(1.0, 1.0, 1.0), Basis(), mat_skin)
-	_limb(root, knee_l, ankle_l, 0.066, mat_skin)
-	_ball(root, ankle_l, 0.058, Vector3(1.0, 1.0, 1.0), Basis(), mat_skin)
-	_limb(root, heel_l, toe_l, 0.052, mat_skin)
-	_ball(root, heel_l, 0.050, Vector3(1.0, 1.0, 1.0), Basis(), mat_skin)
+	_limb(root, hip_l, knee_l, 0.096 * flesh, mat_thigh_l)
+	_ball(root, knee_l, 0.086 * flesh, Vector3(1.0, 1.0, 1.0), Basis(), mat_skin)
+	_limb(root, knee_l, ankle_l, 0.066 * flesh, mat_skin)
+	_ball(root, ankle_l, 0.058 * flesh, Vector3(1.0, 1.0, 1.0), Basis(), mat_skin)
+	_limb(root, heel_l, toe_l, 0.052 * flesh, mat_skin)
+	_ball(root, heel_l, 0.050 * flesh, Vector3(1.0, 1.0, 1.0), Basis(), mat_skin)
 
 	# --- shoulders and arms --------------------------------------------------
 	var i_sh: int = 8
@@ -200,9 +262,9 @@ static func build(root: Node3D, seed: int) -> void:
 	var sh_r: Vector3 = p_sh + fb_sh * Vector3(half_w, 0.030, 0.0)
 	var sh_l: Vector3 = p_sh + fb_sh * Vector3(-half_w, 0.030, 0.0)
 	var mat_yoke: StandardMaterial3D = mat_field if patch_lo <= i_sh and i_sh <= patch_hi else mat_skin
-	_limb(root, sh_l, sh_r, 0.062, mat_yoke)
-	_ball(root, sh_r, 0.086, Vector3(1.0, 1.0, 1.0), Basis(), mat_skin)
-	_ball(root, sh_l, 0.086, Vector3(1.0, 1.0, 1.0), Basis(), mat_skin)
+	_limb(root, sh_l, sh_r, 0.062 * flesh, mat_yoke)
+	_ball(root, sh_r, 0.086 * flesh, Vector3(1.0, 1.0, 1.0), Basis(), mat_skin)
+	_ball(root, sh_l, 0.086 * flesh, Vector3(1.0, 1.0, 1.0), Basis(), mat_skin)
 
 	var upper_len: float = 0.300
 	var fore_len: float = 0.278
@@ -214,11 +276,11 @@ static func build(root: Node3D, seed: int) -> void:
 	var elbow_r: Vector3 = chain_r[0]
 	var wrist_r: Vector3 = chain_r[1]
 	var mat_arm_r: StandardMaterial3D = mat_field if rng.randf() < 0.45 else mat_skin
-	_limb(root, sh_r, elbow_r, 0.062, mat_arm_r)
-	_ball(root, elbow_r, 0.055, Vector3(1.0, 1.0, 1.0), Basis(), mat_skin)
-	_limb(root, elbow_r, wrist_r, 0.049, mat_skin)
+	_limb(root, sh_r, elbow_r, 0.062 * flesh, mat_arm_r)
+	_ball(root, elbow_r, 0.055 * flesh, Vector3(1.0, 1.0, 1.0), Basis(), mat_skin)
+	_limb(root, elbow_r, wrist_r, 0.049 * flesh, mat_skin)
 	var fwd_r: Vector3 = (wrist_r - elbow_r).normalized()
-	_hand(root, wrist_r, fwd_r, (fb_sh * Vector3(0.15, 1.0, 0.1)).normalized(), mat_skin, rng)
+	_hand(root, wrist_r, fwd_r, (fb_sh * Vector3(0.15, 1.0, 0.1)).normalized(), mat_skin, rng, flesh)
 
 	# left arm: hand braced flat on the raised knee
 	var target_l: Vector3 = knee_l + Vector3(0.005, 0.128, 0.066)
@@ -226,25 +288,25 @@ static func build(root: Node3D, seed: int) -> void:
 	var chain_l: Array = _arm_chain(sh_l, target_l, upper_len, fore_len, pole_l)
 	var elbow_l: Vector3 = chain_l[0]
 	var wrist_l: Vector3 = chain_l[1]
-	_limb(root, sh_l, elbow_l, 0.062, mat_skin)
-	_ball(root, elbow_l, 0.055, Vector3(1.0, 1.0, 1.0), Basis(), mat_skin)
-	_limb(root, elbow_l, wrist_l, 0.049, mat_skin)
+	_limb(root, sh_l, elbow_l, 0.062 * flesh, mat_skin)
+	_ball(root, elbow_l, 0.055 * flesh, Vector3(1.0, 1.0, 1.0), Basis(), mat_skin)
+	_limb(root, elbow_l, wrist_l, 0.049 * flesh, mat_skin)
 	var brace_target: Vector3 = knee_l + Vector3(0.0, 0.075, -0.055)
 	var fwd_l: Vector3 = (brace_target - wrist_l).normalized()
-	_hand(root, wrist_l, fwd_l, Vector3(-0.12, 0.98, 0.15).normalized(), mat_skin, rng)
+	_hand(root, wrist_l, fwd_l, Vector3(-0.12, 0.98, 0.15).normalized(), mat_skin, rng, flesh)
 
 	# --- hooded head, no face ------------------------------------------------
 	var neck_base: Vector3 = pts[N_SPINE - 1]
 	var fb_n: Basis = frames[N_SPINE - 1]
 	var hb: Basis = fb_n * Basis(Vector3.UP, head_yaw) * Basis(Vector3.RIGHT, -head_pitch)
 	var h_c: Vector3 = neck_base + fb_n.y * 0.185
-	_limb(root, neck_base + fb_n.y * 0.01, h_c - hb.y * 0.085, 0.062, mat_skin)
-	_ball(root, h_c, 0.108, Vector3(0.90, 1.18, 1.00), hb, mat_skin)
-	_ball(root, h_c + hb * Vector3(0.0, 0.020, 0.052), 0.084, Vector3(1.02, 0.96, 0.92), hb, mat_skin)
-	_ball(root, h_c + hb * Vector3(0.0, -0.020, -0.050), 0.080, Vector3(0.96, 1.00, 0.74), hb, mat_skin)
-	_ball(root, h_c + hb * Vector3(0.0, -0.078, -0.028), 0.062, Vector3(0.98, 0.82, 1.06), hb, mat_skin)
-	_ball(root, h_c + hb * Vector3(0.0, 0.012, -0.080), 0.056, Vector3(1.32, 0.44, 0.50), hb, mat_skin)
-	_ball(root, h_c + hb * Vector3(0.0, -0.022, -0.096), 0.030, Vector3(0.62, 1.35, 0.72), hb, mat_skin)
+	_limb(root, neck_base + fb_n.y * 0.01, h_c - hb.y * 0.085, 0.062 * flesh, mat_skin)
+	_ball(root, h_c, 0.108 * flesh, Vector3(0.90, 1.18, 1.00), hb, mat_skin)
+	_ball(root, h_c + hb * Vector3(0.0, 0.020, 0.052), 0.084 * flesh, Vector3(1.02, 0.96, 0.92), hb, mat_skin)
+	_ball(root, h_c + hb * Vector3(0.0, -0.020, -0.050), 0.080 * flesh, Vector3(0.96, 1.00, 0.74), hb, mat_skin)
+	_ball(root, h_c + hb * Vector3(0.0, -0.078, -0.028), 0.062 * flesh, Vector3(0.98, 0.82, 1.06), hb, mat_skin)
+	_ball(root, h_c + hb * Vector3(0.0, 0.012, -0.080), 0.056 * flesh, Vector3(1.32, 0.44, 0.50), hb, mat_skin)
+	_ball(root, h_c + hb * Vector3(0.0, -0.022, -0.096), 0.030 * flesh, Vector3(0.62, 1.35, 0.72), hb, mat_skin)
 	var collar := TorusMesh.new()
 	collar.inner_radius = 0.064
 	collar.outer_radius = 0.094
@@ -254,7 +316,7 @@ static func build(root: Node3D, seed: int) -> void:
 	cm.transform = Transform3D(fb_n, neck_base + fb_n.y * 0.045)
 
 	# --- raised tesserae -----------------------------------------------------
-	var n_torso: int = rng.randi_range(16, 24)
+	var n_torso: int = maxi(4, int(round(float(rng.randi_range(16, 24)) * plate_k)))
 	for k in range(n_torso):
 		var i: int = rng.randi_range(1, N_SPINE - 2)
 		var ang: float = rng.randf_range(-PI, PI)
@@ -268,35 +330,98 @@ static func build(root: Node3D, seed: int) -> void:
 		var pos: Vector3 = pts[i] + fb * Vector3(lx, ly, lz)
 		var nrm: Vector3 = (fb * Vector3(cos(ang) / sxv, 0.18, sin(ang) / szv)).normalized()
 		var mt: StandardMaterial3D = tile_mats[int(deck_idx[rng.randi_range(0, deck_idx.size() - 1)])]
-		_plate(root, pos, nrm, fb.y, rng.randf_range(0.036, 0.058), rng.randf_range(0.032, 0.052), rng.randf_range(-PI, PI), mt)
+		var pw: float = rng.randf_range(0.036, 0.058) * plate_size
+		var ph: float = rng.randf_range(0.032, 0.052) * plate_size
+		var pyaw: float = rng.randf_range(-PI, PI)
+		if wob > 0.0:
+			nrm = (nrm + Vector3(rng.randf_range(-wob, wob), rng.randf_range(-wob, wob), rng.randf_range(-wob, wob))).normalized()
+		var off_n: float = 0.0
+		if lift_hi > 0.0:
+			off_n = rng.randf_range(lift_lo, lift_hi)
+		_plate(root, pos, nrm, fb.y, pw, ph, pyaw, mt, plate_th, off_n)
 
-	_limb_plates(root, hip_r, knee_r, 0.098, rng.randi_range(4, 7), rng, tile_mats, deck_idx)
-	_limb_plates(root, hip_l, knee_l, 0.098, rng.randi_range(4, 7), rng, tile_mats, deck_idx)
-	_limb_plates(root, sh_r, elbow_r, 0.062, rng.randi_range(2, 4), rng, tile_mats, deck_idx)
-	_limb_plates(root, sh_l, elbow_l, 0.062, rng.randi_range(2, 4), rng, tile_mats, deck_idx)
-	_limb_plates(root, knee_l, ankle_l, 0.068, rng.randi_range(2, 4), rng, tile_mats, deck_idx)
+	var lp_a: int = maxi(1, int(round(float(rng.randi_range(4, 7)) * plate_k)))
+	_limb_plates(root, hip_r, knee_r, 0.098, lp_a, rng, tile_mats, deck_idx, plate_th, plate_size, lift_lo, lift_hi, wob)
+	var lp_b: int = maxi(1, int(round(float(rng.randi_range(4, 7)) * plate_k)))
+	_limb_plates(root, hip_l, knee_l, 0.098, lp_b, rng, tile_mats, deck_idx, plate_th, plate_size, lift_lo, lift_hi, wob)
+	var lp_c: int = maxi(1, int(round(float(rng.randi_range(2, 4)) * plate_k)))
+	_limb_plates(root, sh_r, elbow_r, 0.062, lp_c, rng, tile_mats, deck_idx, plate_th, plate_size, lift_lo, lift_hi, wob)
+	var lp_d: int = maxi(1, int(round(float(rng.randi_range(2, 4)) * plate_k)))
+	_limb_plates(root, sh_l, elbow_l, 0.062, lp_d, rng, tile_mats, deck_idx, plate_th, plate_size, lift_lo, lift_hi, wob)
+	var lp_e: int = maxi(1, int(round(float(rng.randi_range(2, 4)) * plate_k)))
+	_limb_plates(root, knee_l, ankle_l, 0.068, lp_e, rng, tile_mats, deck_idx, plate_th, plate_size, lift_lo, lift_hi, wob)
 
-	var n_head: int = rng.randi_range(3, 6)
+	var n_head: int = maxi(2, int(round(float(rng.randi_range(3, 6)) * plate_k)))
 	for k in range(n_head):
 		var ang: float = rng.randf_range(-PI, PI)
-		var lift: float = rng.randf_range(-0.02, 0.075)
-		var rr: float = 0.106 * sqrt(maxf(1.0 - (lift / 0.128) * (lift / 0.128), 0.05))
-		var loc := Vector3(cos(ang) * rr * 0.90, lift, sin(ang) * rr)
+		var band: float = rng.randf_range(-0.02, 0.075)
+		var rr: float = 0.106 * sqrt(maxf(1.0 - (band / 0.128) * (band / 0.128), 0.05))
+		var loc := Vector3(cos(ang) * rr * 0.90, band, sin(ang) * rr)
 		var pos: Vector3 = h_c + hb * loc
-		var nrm: Vector3 = (hb * Vector3(cos(ang) / 0.90, lift * 3.0, sin(ang))).normalized()
+		var nrm: Vector3 = (hb * Vector3(cos(ang) / 0.90, band * 3.0, sin(ang))).normalized()
 		var mt: StandardMaterial3D = tile_mats[int(deck_idx[rng.randi_range(0, deck_idx.size() - 1)])]
-		_plate(root, pos, nrm, hb.y, rng.randf_range(0.030, 0.044), rng.randf_range(0.028, 0.040), rng.randf_range(-PI, PI), mt)
+		var pw: float = rng.randf_range(0.030, 0.044) * plate_size
+		var ph: float = rng.randf_range(0.028, 0.040) * plate_size
+		var pyaw: float = rng.randf_range(-PI, PI)
+		if wob > 0.0:
+			nrm = (nrm + Vector3(rng.randf_range(-wob, wob), rng.randf_range(-wob, wob), rng.randf_range(-wob, wob))).normalized()
+		var off_n: float = 0.0
+		if lift_hi > 0.0:
+			off_n = rng.randf_range(lift_lo, lift_hi)
+		_plate(root, pos, nrm, hb.y, pw, ph, pyaw, mt, plate_th, off_n)
 
-	# --- individual size, then the floor slab --------------------------------
+	# --- the companion the reach was always for ------------------------------
+	if companion == "mirror":
+		var pv: Vector3 = (sh_r + target_r) * 0.5
+		var tw := Basis(Vector3.UP, PI + deg_to_rad(rng.randf_range(-16.0, 16.0)))
+		var kids: Array = []
+		for ch in root.get_children():
+			if ch is MeshInstance3D:
+				kids.append(ch)
+		for entry in kids:
+			var src: MeshInstance3D = entry
+			if src.mesh == null:
+				continue
+			var twin := MeshInstance3D.new()
+			twin.mesh = src.mesh
+			twin.material_override = src.material_override
+			root.add_child(twin)
+			var src_tf: Transform3D = src.transform
+			twin.transform = Transform3D(tw * src_tf.basis, pv + tw * (src_tf.origin - pv))
+	elif companion == "huddle":
+		var yaw0: float = rng.randf_range(0.0, TAU)
+		for k in range(3):
+			var yaw: float = yaw0 + TAU * float(k) / 3.0 + rng.randf_range(-0.20, 0.20)
+			var rad: float = rng.randf_range(0.46, 0.60)
+			var seat := Vector3(sin(yaw) * rad, GROUND * 0.4, cos(yaw) * rad)
+			_bust(root, seat, yaw, rng.randf_range(0.72, 0.94), mat_skin, mat_field, rng)
+
+	# --- individual size, then the pavement ----------------------------------
 	_scale_children(root, body_k, Vector3(0.0, GROUND, 0.0))
 
 	var box: AABB = _union_aabb(root)
 	var mid: Vector3 = box.position + box.size * 0.5
-	var slab_rx: float = clampf(box.size.x * 0.5 + 0.12, 0.26, 0.52)
-	var slab_rz: float = clampf(box.size.z * 0.5 + 0.08, 0.26, 0.56)
-	var slab: ArrayMesh = _slab_mesh(rng, slab_rx, slab_rz, GROUND, rng.randi_range(11, 16))
+	var cap_x: float = 0.52
+	var cap_z: float = 0.56
+	if companion == "mirror" or companion == "huddle":
+		cap_x = 0.68
+		cap_z = 0.72
+	var slab_h: float = GROUND
+	if companion == "pour":
+		slab_h = rng.randf_range(0.30, 0.46)
+	var slab_rx: float = clampf(box.size.x * 0.5 + 0.12, 0.26, cap_x)
+	var slab_rz: float = clampf(box.size.z * 0.5 + 0.08, 0.26, cap_z)
+	var slab: ArrayMesh = _slab_mesh(rng, slab_rx, slab_rz, slab_h, rng.randi_range(11, 16))
 	var sm: MeshInstance3D = _add(root, slab, mat_slab)
 	sm.transform = Transform3D(Basis(), Vector3(mid.x, 0.0, mid.z))
+
+	if companion == "pour":
+		var n_pool: int = rng.randi_range(2, 4)
+		for k in range(n_pool):
+			var ang: float = rng.randf_range(0.0, TAU)
+			var rr: float = rng.randf_range(0.14, maxf(slab_rx * 0.84, 0.18))
+			var lp := Vector3(mid.x + cos(ang) * rr, slab_h - 0.020, mid.z + sin(ang) * rr)
+			_ball(root, lp, rng.randf_range(0.10, 0.20), Vector3(1.0, 0.30, 1.0), Basis(), mat_slab)
 
 	_settle(root)
 
@@ -330,7 +455,7 @@ static func _arm_chain(a: Vector3, target: Vector3, l1: float, l2: float, pole: 
 	return [elbow, b]
 
 
-static func _hand(root: Node3D, wrist: Vector3, fwd: Vector3, palm_n: Vector3, mat: StandardMaterial3D, rng: RandomNumberGenerator) -> void:
+static func _hand(root: Node3D, wrist: Vector3, fwd: Vector3, palm_n: Vector3, mat: StandardMaterial3D, rng: RandomNumberGenerator, flesh: float = 1.0) -> void:
 	var f: Vector3 = fwd.normalized()
 	var n: Vector3 = palm_n - f * palm_n.dot(f)
 	if n.length() < 0.0001:
@@ -338,8 +463,9 @@ static func _hand(root: Node3D, wrist: Vector3, fwd: Vector3, palm_n: Vector3, m
 	n = n.normalized()
 	var s: Vector3 = f.cross(n).normalized()
 	var hb := Basis(s, n, -f)
+	var fk: float = 0.55 + 0.45 * flesh
 	var palm := BoxMesh.new()
-	palm.size = Vector3(0.086, 0.030, 0.098)
+	palm.size = Vector3(0.086 * fk, 0.030 * flesh, 0.098 * fk)
 	var pm: MeshInstance3D = _add(root, palm, mat)
 	pm.transform = Transform3D(hb, wrist + f * 0.052)
 	for k in range(4):
@@ -347,13 +473,13 @@ static func _hand(root: Node3D, wrist: Vector3, fwd: Vector3, palm_n: Vector3, m
 		var root_p: Vector3 = wrist + f * 0.096 + s * ((float(k) - 1.5) * 0.024)
 		var dirf: Vector3 = (f * cos(fan) + s * sin(fan) - n * 0.16).normalized()
 		var ln: float = 0.074 - absf(float(k) - 1.4) * 0.008 + rng.randf_range(-0.006, 0.006)
-		_limb(root, root_p, root_p + dirf * ln, 0.0135, mat)
+		_limb(root, root_p, root_p + dirf * ln, 0.0135 * flesh, mat)
 	var thumb_p: Vector3 = wrist + f * 0.040 + s * 0.042
 	var thumb_d: Vector3 = (f * 0.55 + s * rng.randf_range(0.70, 0.92) - n * 0.20).normalized()
-	_limb(root, thumb_p, thumb_p + thumb_d * 0.058, 0.0155, mat)
+	_limb(root, thumb_p, thumb_p + thumb_d * 0.058, 0.0155 * flesh, mat)
 
 
-static func _limb_plates(root: Node3D, a: Vector3, b: Vector3, r: float, count: int, rng: RandomNumberGenerator, tile_mats: Array, deck_idx: Array) -> void:
+static func _limb_plates(root: Node3D, a: Vector3, b: Vector3, r: float, count: int, rng: RandomNumberGenerator, tile_mats: Array, deck_idx: Array, th: float = 0.0075, size_k: float = 1.0, lift_lo: float = 0.0, lift_hi: float = 0.0, wob: float = 0.0) -> void:
 	var d: Vector3 = b - a
 	if d.length() < 0.001:
 		return
@@ -366,21 +492,61 @@ static func _limb_plates(root: Node3D, a: Vector3, b: Vector3, r: float, count: 
 		var pos: Vector3 = base + fb * loc
 		var nrm: Vector3 = (fb * Vector3(cos(ang), 0.12, sin(ang))).normalized()
 		var mt: StandardMaterial3D = tile_mats[int(deck_idx[rng.randi_range(0, deck_idx.size() - 1)])]
-		_plate(root, pos, nrm, fb.y, rng.randf_range(0.032, 0.050), rng.randf_range(0.028, 0.046), rng.randf_range(-PI, PI), mt)
+		var pw: float = rng.randf_range(0.032, 0.050) * size_k
+		var ph: float = rng.randf_range(0.028, 0.046) * size_k
+		var pyaw: float = rng.randf_range(-PI, PI)
+		if wob > 0.0:
+			nrm = (nrm + Vector3(rng.randf_range(-wob, wob), rng.randf_range(-wob, wob), rng.randf_range(-wob, wob))).normalized()
+		var off_n: float = 0.0
+		if lift_hi > 0.0:
+			off_n = rng.randf_range(lift_lo, lift_hi)
+		_plate(root, pos, nrm, fb.y, pw, ph, pyaw, mt, th, off_n)
 
 
-static func _plate(root: Node3D, pos: Vector3, nrm: Vector3, up_hint: Vector3, w: float, h: float, yaw: float, mat: StandardMaterial3D) -> MeshInstance3D:
+## One hooded bust for the huddle: a legless column risen out of the pavement,
+## leaning toward the kneeling figure, face (brow ridge) on its own -Z.
+static func _bust(root: Node3D, seat: Vector3, yaw: float, k: float, mat_a: StandardMaterial3D, mat_b: StandardMaterial3D, rng: RandomNumberGenerator) -> void:
+	var lean: float = deg_to_rad(rng.randf_range(6.0, 16.0))
+	var bb: Basis = Basis(Vector3.UP, yaw) * Basis(Vector3.RIGHT, -lean)
+	_ball(root, seat + bb * Vector3(0.0, 0.15 * k, 0.0), 0.150 * k, Vector3(1.10, 0.96, 0.90), bb, mat_a)
+	_ball(root, seat + bb * Vector3(0.0, 0.31 * k, 0.0), 0.158 * k, Vector3(1.14, 0.98, 0.88), bb, mat_b)
+	_ball(root, seat + bb * Vector3(0.0, 0.47 * k, 0.005 * k), 0.150 * k, Vector3(1.22, 0.96, 0.86), bb, mat_a)
+	var sh: Vector3 = seat + bb * Vector3(0.0, 0.60 * k, 0.0)
+	var half: float = 0.150 * k
+	_limb(root, sh - bb.x * half, sh + bb.x * half, 0.055 * k, mat_a)
+	_ball(root, sh - bb.x * half, 0.078 * k, Vector3(1.0, 1.0, 1.0), bb, mat_a)
+	_ball(root, sh + bb.x * half, 0.078 * k, Vector3(1.0, 1.0, 1.0), bb, mat_a)
+	var hc: Vector3 = seat + bb * Vector3(0.0, 0.80 * k, -0.010 * k)
+	_limb(root, sh, hc - bb.y * (0.090 * k), 0.052 * k, mat_a)
+	_ball(root, hc, 0.104 * k, Vector3(0.90, 1.18, 1.00), bb, mat_a)
+	_ball(root, hc + bb * Vector3(0.0, 0.018 * k, 0.050 * k), 0.080 * k, Vector3(1.02, 0.96, 0.92), bb, mat_a)
+	_ball(root, hc + bb * Vector3(0.0, -0.072 * k, -0.026 * k), 0.058 * k, Vector3(0.98, 0.82, 1.06), bb, mat_a)
+	_ball(root, hc + bb * Vector3(0.0, 0.010 * k, -0.076 * k), 0.052 * k, Vector3(1.30, 0.44, 0.50), bb, mat_a)
+	var collar := TorusMesh.new()
+	collar.inner_radius = 0.062 * k
+	collar.outer_radius = 0.092 * k
+	collar.rings = 24
+	collar.ring_segments = 10
+	var cm: MeshInstance3D = _add(root, collar, mat_b)
+	cm.transform = Transform3D(bb, sh + bb * Vector3(0.0, 0.045 * k, 0.0))
+
+
+static func _plate(root: Node3D, pos: Vector3, nrm: Vector3, up_hint: Vector3, w: float, h: float, yaw: float, mat: StandardMaterial3D, th: float = 0.0075, lift: float = 0.0) -> MeshInstance3D:
 	var ny: Vector3 = nrm.normalized()
 	var t_ref: Vector3 = up_hint - ny * up_hint.dot(ny)
 	if t_ref.length() < 0.0001:
 		t_ref = Vector3.FORWARD - ny * Vector3.FORWARD.dot(ny)
 	var nz: Vector3 = t_ref.normalized()
 	var nx: Vector3 = ny.cross(nz).normalized()
-	var th: float = 0.0075
 	var box := BoxMesh.new()
-	box.size = Vector3(w, th, h)
+	box.size = Vector3(w, maxf(th, 0.002), h)
 	var mi: MeshInstance3D = _add(root, box, mat)
-	mi.transform = Transform3D(Basis(nx, ny, nz) * Basis(Vector3.UP, yaw), pos + ny * (th * 0.30))
+	# a tessera flung off a downward face must not sink under the pavement, or the
+	# settle pass lifts the whole statue off its slab to make room for one tile
+	var fin: Vector3 = pos + ny * (th * 0.30 + lift)
+	if fin.y < 0.012:
+		fin.y = 0.012
+	mi.transform = Transform3D(Basis(nx, ny, nz) * Basis(Vector3.UP, yaw), fin)
 	return mi
 
 

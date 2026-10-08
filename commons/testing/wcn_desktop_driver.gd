@@ -130,6 +130,22 @@ func walk(action: String, frames: int) -> Vector3:
 func hover_target() -> Node:
 	await get_tree().process_frame
 	await get_tree().process_frame
+	# A probe can aim immediately after a physics tick. RayCast3D normally
+	# refreshes on the next physics step, so force the same ray the pointer will
+	# use for this hover sample instead of reading its previous direction.
+	var ray: RayCast3D = pointer.get("_raycast") if pointer != null else null
+	if ray != null:
+		ray.force_raycast_update()
+	if pointer != null and pointer.has_method("_process"):
+		pointer.call("_process", 0.0)
+	# Keep the pointer's target cache in lockstep with the forced ray. The normal
+	# cache is filled in _process, but a synthetic desktop click can arrive in
+	# the same frame as an aim and otherwise read the previous (empty) target.
+	if ray != null and ray.is_colliding() and pointer != null:
+		var resolved = pointer.call("_resolve_pointer_target", ray.get_collider())
+		if resolved != null:
+			pointer.set("_last_target", resolved)
+			pointer.set("_last_position", ray.get_collision_point())
 	if pointer != null and pointer.has_method("has_hover_target") and bool(pointer.call("has_hover_target")):
 		return pointer.get("_last_target")
 	return null
@@ -156,9 +172,14 @@ func press(control: Node3D, stand_at: Vector3) -> Dictionary:
 	aim_at(control.global_position)
 	var seen: Node = await hover_target()
 	var ray_rec: Dictionary = ray_report()
+	# Keep the control's live collider facts beside the pointer report. This is
+	# especially useful for rotated museum desks where the camera can aim at a
+	# cap while the physics shape has been rebuilt or moved.
+	var control_inspect: Dictionary = inspect_control(control)
 	await click(MOUSE_BUTTON_LEFT)
 	var rec := {"control": str(control.get_path()).right(60), "hover": (str(seen.get_path()).right(60) if seen != null else "nothing"),
 		"stand": [snappedf(stand_at.x, 0.01), snappedf(stand_at.y, 0.01), snappedf(stand_at.z, 0.01)], "ray": ray_rec}
+	rec["control_inspect"] = control_inspect
 	log.append({"event": "press", "record": rec})
 	return rec
 
@@ -169,6 +190,11 @@ func ray_report() -> Dictionary:
 	var out := {}
 	var rc: RayCast3D = pointer.get("_raycast") if pointer != null else null
 	if rc != null:
+		out["pointer_from"] = [snappedf(rc.global_position.x, 0.01), snappedf(rc.global_position.y, 0.01), snappedf(rc.global_position.z, 0.01)]
+		var pointer_dir := -rc.global_transform.basis.z
+		out["pointer_dir"] = [snappedf(pointer_dir.x, 0.01), snappedf(pointer_dir.y, 0.01), snappedf(pointer_dir.z, 0.01)]
+		out["pointer_process_mode"] = pointer.process_mode if pointer != null else -1
+		out["pointer_enabled"] = rc.enabled
 		out["raycast_colliding"] = rc.is_colliding()
 		out["raycast_collider"] = str(rc.get_collider().get_path()).right(70) if rc.is_colliding() and rc.get_collider() != null else "none"
 		var pt: Vector3 = rc.get_collision_point() if rc.is_colliding() else Vector3.ZERO

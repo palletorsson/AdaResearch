@@ -52,11 +52,35 @@ var balls_dropped: int = 0
 # Visual elements
 var dropper_mesh: MeshInstance3D
 var indicator_light: OmniLight3D
+var _pool_built := false
+
+func apply_grid_config(config: Dictionary) -> void:
+	var before := [total_balls, ball_radius, ball_mass, ball_bounce]
+	if config.has("total_balls"): total_balls = clampi(int(config.total_balls), 1, 128)
+	for key in ["drop_interval_min", "drop_interval_max", "spawn_spread", "drop_height", "ball_radius", "ball_mass", "ball_bounce", "ball_health"]:
+		if config.has(key): set(key, float(config[key]))
+	drop_interval_min=maxf(0.1,drop_interval_min)
+	drop_interval_max=maxf(drop_interval_min,drop_interval_max)
+	spawn_spread=maxf(0.0,spawn_spread)
+	ball_radius=maxf(0.01,ball_radius); ball_mass=maxf(0.01,ball_mass); ball_health=maxf(1.0,ball_health)
+	if config.has("auto_drop"): auto_drop=str(config.auto_drop).to_lower() in ["true","1","yes","on"]
+	if _pool_built and before != [total_balls, ball_radius, ball_mass, ball_bounce]:
+		clear_all()
+		for ball in ball_pool:
+			if is_instance_valid(ball): ball.queue_free()
+		ball_pool.clear(); available_balls.clear()
+		_create_ball_pool()
+	_set_next_interval()
 
 func _ready() -> void:
+	var config := {}
+	for key in ["total_balls", "drop_interval_min", "drop_interval_max", "spawn_spread", "drop_height", "ball_radius", "ball_mass", "ball_bounce", "ball_health", "auto_drop"]:
+		if has_meta("config_"+key): config[key]=get_meta("config_"+key)
+	apply_grid_config(config)
 	add_to_group("ball_dropper")
 	_build_dropper_visual()
 	_create_ball_pool()
+	_pool_built=true
 	_set_next_interval()
 	
 	# Start with first drop soon
@@ -125,7 +149,8 @@ func _create_ball_pool() -> void:
 
 func _create_ball(index: int) -> Node3D:
 	"""Create a ball with physics"""
-	var root = Node3D.new()
+	var root = preload("res://commons/artifacts/turret_targeting/target_ball.gd").new()
+	root.dropper = self
 	root.name = "PoolBall_%d" % index
 	
 	# RigidBody for physics
@@ -183,12 +208,16 @@ func _hide_ball(ball: Node3D) -> void:
 		rb.freeze = true
 		rb.linear_velocity = Vector3.ZERO
 		rb.angular_velocity = Vector3.ZERO
+		rb.collision_layer = 0
+		rb.collision_mask = 0
 
 func _show_ball(ball: Node3D) -> void:
 	"""Show and enable a ball"""
 	ball.visible = true
 	var rb = ball.get_node_or_null("RigidBody3D")
 	if rb:
+		rb.collision_layer = 1
+		rb.collision_mask = 1
 		# Unfreeze deferred so position change takes effect first
 		rb.set_deferred("freeze", false)
 
@@ -291,8 +320,8 @@ func _set_ball_color(ball: Node3D, color: Color) -> void:
 func remove_ball(ball: Node3D) -> void:
 	"""Return a ball to the pool"""
 	var idx = active_balls.find(ball)
-	if idx >= 0:
-		active_balls.remove_at(idx)
+	if idx < 0: return # Another dropper or a second hit must not recycle it twice.
+	active_balls.remove_at(idx)
 	
 	_hide_ball(ball)
 	
@@ -300,6 +329,19 @@ func remove_ball(ball: Node3D) -> void:
 		available_balls.append(ball)
 	
 	emit_signal("ball_destroyed", ball)
+
+func destroy_ball(ball: Node3D) -> bool:
+	if not is_instance_valid(ball) or not active_balls.has(ball): return false
+	var at: Vector3 = ball.get_node("RigidBody3D").global_position
+	# Parent to the dropper, not the hidden pooled ball; one bounded burst per death.
+	preload("res://commons/artifacts/queer_confetti/queer_confetti.gd").burst(self, at, 72, 1.25)
+	remove_ball(ball)
+	return true
+
+func _exit_tree() -> void:
+	# Pooled bodies live under the world root so parent scale cannot distort physics.
+	for ball in ball_pool:
+		if is_instance_valid(ball): ball.queue_free()
 
 func clear_all() -> void:
 	"""Return all balls to pool"""

@@ -1,142 +1,25 @@
-# situated_readout.gd
-# Procedural artifact for postfoundationscrisis/SpeculativeComputation_Situated_Computation.
-#
-# A flat display panel that shows a "classification result" for an identical
-# subject ID. The verdict is determined by the panel's OWN world position,
-# not by any query or input. Place four of these in the four quadrants of
-# a room and the player sees four different "objective" answers to the same
-# question — which is the point. Haraway's situated knowledge, enacted
-# spatially: the view always comes from somewhere.
-#
-# Registry: commons/artifacts/registry/algorithms_misc.json (category=critical)
-
+# Situated Readout: authored claims and the disclosure of their address.
+# A configured verdict key selects a table entry; otherwise a position hash does.
+# The percentages are supplied examples, not evidence or calibrated probabilities.
+# The visitor's location never classifies the visitor.
 # @identity
-# essence: four flat display panels in a room each show a different "objective" verdict about identical subject ID #4729 — ORDERLY, CREATIVE, DANGEROUS, IRRELEVANT — all equally confident, all from the same input
-# desire: to make Haraway's situated knowledge tangible — the player literally walks across the room and watches the system's certainty flip, without any input changing
-# critical_parameter: global_position determines the verdict — there is no query; the coordinate IS the classification; the view always comes from somewhere
-# triggers: _ready builds panel + labels; _populate_from_position() hashes cell coordinates to NW/NE/SW/SE quadrant and picks verdict; apply_grid_config accepts explicit #verdict override for authorial placement
-# emerges: four panels placed 2×2 create a debate the player stands inside — from the center, all four verdicts are visible simultaneously, not sequentially
-# needs: apply_grid_config [has]; VR walk-through so the verdict-flip is felt as you cross from one quadrant to another [missing — currently static display]
-# relationships: pairs with wiki_fragment (both postfoundationscrisis "knowledge with a body" series); four instances fill one map; echoes bias_visualizer which shows the same effect at the dataset level
-# truth: objectivity is not a view from nowhere — it is always from somewhere; four panels, one subject, four incompatible verdicts, zero input changes
+# essence: one subject identifier, four authored descriptions, several ways of showing a source
+# desire: compare the authority of a claim with and without its visible address
+# truth: an address makes a claim traceable; it does not make the claim true
 
 extends Node3D
 class_name SituatedReadout
 
-# ─────────────────────────────────────────────────────────────────────────────
-# STAGE-2 DNA PROMOTION (2026-07-31) — ONE AXIS.
-#
-#   address   WHAT THE READOUT DOES WITH THE POSITION IT SPEAKS FROM
-#             erasure · footnote · witness · parallax · survey
-#
-# WHY THIS, AND NOT A REGISTER OR AN EXPOSURE AXIS. A register axis asks what
-# kind of room a thing belongs in; an exposure axis asks how much of a machine's
-# works you are allowed to see. This is neither a piece of furniture nor a
-# mechanism you operate. It is a CLAIM — a verdict, stated flat, about a named
-# subject — and the whole argument of the map it lives in is that the claim's
-# authority depends entirely on a fact the claim does not state: where it is
-# standing. `global_position` picks the verdict. Nothing else does. So the axis
-# that matters is not how the claim is housed or how much of its mechanism shows;
-# it is what the claim DOES with its own address.
-#
-# The word is the map's own. Its walked.md says situatedness teaches a system to
-# carry an address, and that objectivity is not the absence of a perspective but
-# the careful accounting of the one you are in. `address` is also what the
-# curriculum's grid axioms call a cell's coordinate — which is literally what
-# picks the verdict here. One word, both senses, and they are the same word on
-# purpose.
-#
-# WHAT EACH VALUE DOES WITH THE PART IT CANNOT REPRESENT — the sieve's third
-# question, and what decides whether this is a family or a menu. The part this
-# panel cannot represent is the position that determined its answer: it is off
-# the panel, it is not the subject, and the readout is complete-looking without
-# it.
-#   erasure   HIDES it.      The address line is still printed and a slab of
-#                            overpaint is applied on top of it, slightly askew,
-#                            overhanging the panel edge. Not a blank panel — a
-#                            painted-out one. "Objective" is a position someone
-#                            covered, and the cover is the evidence.
-#   footnote  BOUNDS it.     The legacy lineage. The address is there, in the
-#                            smallest type on the panel, dimmest colour, last
-#                            line, under the confidence. Admitted, and sized so
-#                            the admission disturbs nothing.
-#   witness   EXHIBITS it.   The reading grows a body: a column to the floor, a
-#                            marked station plate under it, an eye on a mast
-#                            above, and on the face a datum rule with an eye at
-#                            its centre and height ticks up the edge. The
-#                            position stops being a string and becomes mass,
-#                            standing somewhere, at a height, facing a way.
-#   parallax  LEAVES A HOLE. The panel fails to close. It is built as two half
-#                            panels with the room showing between them, each
-#                            holding the reading from its own station in its own
-#                            colour, tie bars reaching across the gap and not
-#                            meeting. The one thing both agree on — SUBJECT
-#                            #4729 — hangs in the hole with nothing behind it.
-#   survey    BUILDS THERE.  The face becomes the drawing the single panel could
-#                            not contain: the field of positions, drawn FROM this
-#                            one. The projection has an origin and the origin is
-#                            this instrument, sitting on the near edge half out
-#                            of its own picture. The other three recede by their
-#                            distance along this station's axis, foreshortened,
-#                            and tinted toward this station's verdict colour —
-#                            along with the ground they stand on. The subject
-#                            falls where it falls from here. The verdict climbs
-#                            into the head of the panel and the address line says
-#                            the drawing was surveyed from somewhere.
-#
-# address=footnote is the legacy lineage, statement for statement: the panel,
-# the four labels at their old positions in their old sizes, the same tint, and
-# nothing staged at all. All five shipped placements are untouched.
-#
-# WHAT IT COST. Two real foreclosures, both worth naming.
-#   - parallax and survey put the disagreement on ONE panel. The map's teaching
-#     is that you WALK to the contradiction — you cross the room and the system's
-#     certainty flips under your feet. Both of these hand it to you standing
-#     still. They make the argument legible to a still frame at the cost of the
-#     thing the room was built to do. They are honest variants and they are not
-#     free.
-#   - witness gives the artifact a base. Its AABB now reaches the floor, so under
-#     the grid's auto-ground a witness panel sits ~0.4 m higher than a footnote
-#     one. Both shipped map tokens carry an explicit y (`:0:0.3`), which switches
-#     auto-ground off, so nothing placed today moves — but a future bare
-#     placement of witness will not sit where a bare footnote does.
-#
-# NOT ROUTED THROUGH address: SUBJECT_ID, the four verdict words, their
-# confidences, their colours, the position→quadrant hash, and the #verdict:
-# override. Every word and number any variant shows is READ OUT of
-# QUADRANT_VERDICTS — the counter-reading parallax prints and the four stations
-# survey draws are this artifact's own table, quoted, never invented. This pass
-# stages the curriculum's last claims; it does not edit them.
-#
-# ── THE 2026-07-31 REPAIR OF `survey` ─────────────────────────────────────────
-#
-# survey USED TO HAND OVER THE GOD-TRICK. It drew an orthographic plan: all four
-# stations laid out square on the panel, four sight lines converging on a subject mark
-# at the geometric centre, this station merely highlighted and haloed. That is a view
-# of the whole field from no station inside it — which is precisely the thing Haraway's
-# "situated knowledges" names as the enemy, and the thing this artifact's own truth line
-# denies in one sentence: objectivity is not a view from nowhere. A plan with a
-# you-are-here dot on it is still a plan from nowhere; the dot marks a position without
-# the drawing being made from it, and the highlight was doing the work a projection
-# refused to do.
-#
-# So the drawing acquired an origin, and the origin is this instrument. It stands on the
-# near edge of the field, half outside its own picture, because it is not in the picture
-# — it is where the picture is taken from. The other three are placed by their DEPTH
-# along this station's own axis and foreshortened accordingly, so the diagonal partner
-# (the reading that disagrees most, the one parallax quotes) lands small and far and
-# directly behind the subject, which is a true fact about standing here and is invisible
-# in a plan. Every one of them, and the ground they stand on, is tinted toward this
-# station's verdict colour: what a situated readout has of another station is not that
-# station, it is this station's version of it. The four positions, verdicts and colours
-# are still QUADRANT_VERDICTS, quoted; only the projection is new.
-# ─────────────────────────────────────────────────────────────────────────────
+# Address variants retain their existing geometry:
+# erasure covers the footer; footnote prints it; witness gives the display a body;
+# parallax quotes another entry; survey projects a schematic station layout.
+# Interactive placements expose the first three as a controlled second reading.
 
 # Shared subject ID — every instance shows the SAME input, different output.
 const SUBJECT_ID := "#4729"
 
-# Quadrant → (label, confidence, color). Tuned so that no quadrant agrees
-# with any other: same subject, four incompatible "objective" verdicts.
+# Authored station key → (label, confidence, color). The predicates need not
+# contradict each other; no evidence or criteria are supplied by this table.
 const QUADRANT_VERDICTS := {
 	"NW": { "label": "ORDERLY",     "confidence": 0.87, "color": Color(0.35, 0.75, 0.95) },
 	"NE": { "label": "CREATIVE",    "confidence": 0.64, "color": Color(0.95, 0.75, 0.35) },
@@ -156,6 +39,12 @@ const PANEL_HEIGHT := 0.9
 ## instead of rendering a value the registry never declared. This list is also
 ## what tools/apply_dna_block.py derives the registry declaration from — the
 ## @export_enum above is read first, and the two must stay identical.
+@export var interactive: bool = false
+const BakedText := preload("res://commons/utils/baked_text_albedo.gd")
+var _console: Node3D
+var _controls: Node3D
+var _reading: Node3D
+
 const ADDRESSES: PackedStringArray = ["erasure", "footnote", "witness", "parallax", "survey"]
 
 ## Which station parallax quotes against this one. The diagonal partner, because
@@ -207,7 +96,7 @@ func _build_panel() -> void:
 	mat.roughness = 0.85
 	mat.metallic = 0.15
 	_panel_mesh.material_override = mat
-	_panel_mesh.position = Vector3(0, PANEL_HEIGHT * 0.5 + 0.4, 0)
+	_panel_mesh.position = Vector3(0, PANEL_HEIGHT * 0.5 + (0.8 if interactive else 0.4), 0)
 	add_child(_panel_mesh)
 
 	var base_y := _panel_mesh.position.y
@@ -247,8 +136,8 @@ func _make_label(text: String, font_size: float, color: Color) -> Label3D:
 # Determine which quadrant THIS instance represents. Resolution order:
 #   1. Explicit override from grid config (e.g. #verdict:NW) — authorial.
 #   2. Cell-position hash — deterministic, for default placement.
-# In both cases the verdict is a function of LOCATION, never of input.
-# That's the point: identical subject, different answer per location.
+# An explicit key takes priority over location. Both select authored text;
+# neither performs an assessment of the subject or the visitor.
 func _populate_from_position() -> void:
 	var pos := global_position
 	var key := _resolve_quadrant_key(pos)
@@ -266,6 +155,8 @@ func _populate_from_position() -> void:
 
 	# Staging runs last, because every variant reads the verdict it just resolved.
 	_apply_address(key, verdict)
+	_sync_reading()
+	_sync_console()
 
 
 func _resolve_quadrant_key(pos: Vector3) -> String:
@@ -287,6 +178,10 @@ func _resolve_quadrant_key(pos: Vector3) -> String:
 #   verdict: one of NW, NE, SW, SE — explicit quadrant override.
 #   address: one of ADDRESSES — what the readout does with its own position.
 func apply_grid_config(config_data: Dictionary) -> void:
+	if config_data.has("interactive"):
+		interactive = str(config_data["interactive"]).to_lower() in ["true", "1"]
+		if is_instance_valid(_panel_mesh):
+			_panel_mesh.position.y = PANEL_HEIGHT * .5 + (.8 if interactive else .4)
 	# GUARDED on presence. The old form read config_data.get("verdict", "") and
 	# assigned unconditionally, so any config WITHOUT a verdict key silently
 	# cleared an override that was already set. Harmless while `verdict` was the
@@ -615,3 +510,73 @@ func _build_survey(key: String, verdict: Dictionary) -> void:
 	for lx in [-1.0, 1.0]:
 		_stage_box(Vector3(lx * 0.052, y0 - 0.058, 0.028),
 			Vector3(0.014, 0.040, 0.010), body)
+
+
+func _sync_reading() -> void:
+	if is_instance_valid(_reading):
+		remove_child(_reading)
+		_reading.queue_free()
+		_reading = null
+	var labels: Array[Label3D] = [_subject_label,_verdict_label,_confidence_label,_footer_label]
+	var use_plates: bool = interactive and address in ["footnote","erasure","witness"]
+	for label in labels:
+		label.visible = not use_plates
+	if not use_plates:
+		return
+	_reading = Node3D.new()
+	_reading.name = "Reading"
+	add_child(_reading)
+	var heights: Array[float] = [.08,.13,.075,.05]
+	for i in range(labels.size()):
+		var label: Label3D = labels[i]
+		var colour: Color = label.modulate if i==1 else Color(.82,.84,.87)
+		var plate := BakedText.make_label_mesh(label.text,colour,Vector2(1.02,heights[i]),1200,true)
+		plate.position = label.position
+		plate.set_meta("readout_field",i)
+		plate.set_meta("readout_text",label.text)
+		_reading.add_child(plate)
+
+
+func _sync_console() -> void:
+	if not interactive:
+		if is_instance_valid(_console):
+			remove_child(_console)
+			_console.queue_free()
+		_console = null
+		_controls = null
+		return
+	if not is_instance_valid(_console):
+		_console = Node3D.new()
+		_console.name = "AddressConsole"
+		add_child(_console)
+		var rack: GDScript = load("res://commons/audio/rack_templates/RackTemplates.gd")
+		_controls = rack.create_panel("ADDRESS",[
+			[{"type":"button","label":"FOOTNOTE"}],
+			[{"type":"button","label":"COVER"}],
+			[{"type":"button","label":"WITNESS"}]
+		])
+		_controls.position = Vector3(.85,1.02,.4)
+		_controls.rotation_degrees.x = -20
+		_controls.scale = Vector3.ONE * 1.5
+		_console.add_child(_controls)
+		var choices: Array[String] = ["footnote","erasure","witness"]
+		for i in range(choices.size()):
+			_controls.find_child("Btn_%d" % i,true,false).get_node("InteractableAreaButton").button_pressed.connect(_choose_address.bind(choices[i]))
+		for x in [0.0,.85]:
+			var stand := MeshInstance3D.new()
+			stand.name = "PanelStand" if x==0 else "ControlStand"
+			var mesh := CylinderMesh.new()
+			mesh.height = .95
+			mesh.top_radius = .055
+			mesh.bottom_radius = .1
+			stand.mesh = mesh
+			stand.position = Vector3(x,.475,-.075 if x==0 else .31)
+			var mat := StandardMaterial3D.new()
+			mat.albedo_color = Color(.25,.27,.3)
+			stand.material_override = mat
+			_console.add_child(stand)
+	_console.get_node("PanelStand").visible = address!="witness"
+
+
+func _choose_address(_body: Variant, value: String) -> void:
+	apply_grid_config({"address":value})

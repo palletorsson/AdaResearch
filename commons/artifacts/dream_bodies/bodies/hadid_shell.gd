@@ -41,6 +41,19 @@ extends RefCounted
 ## a shell inside a shell), the neighbouring bodies leaning on each other, the
 ## city and its floodlights, and the sharp faceted creases where the reference's
 ## panels meet — here every fold is smooth.
+##
+## AXES (dna):
+##   bore   — what the perforation DOES to the skin: "holes" the moulded lattice
+##            as built; "cage" the skin eaten back to one-cell struts around
+##            every hole, a thickened bone frame with the flesh gone; "swarm"
+##            every lattice cell detached into its own hovering scale, the body
+##            dissolving into a thousand small copies of itself; "bloom" a
+##            violet-throated trumpet erupting out of each hole, shell and blade.
+##   figure — what the WHOLE body does: "standing" one shell; "twinned" a second
+##            smaller shell budding out of its flank at a tilt; "poured" the
+##            lower third drowned in a solid lobed casting with a violet
+##            meniscus at the flood line; "crowned" a ring of curved tapering
+##            horns springing from the shoulder over a torus band.
 
 const TEX_SIZE: int = 192
 const PLINTH_TOP: float = 0.05
@@ -58,11 +71,21 @@ const SCHEMES: Array = [
 ]
 
 
+static func axes() -> Dictionary:
+	return {
+		"bore": ["holes", "cage", "swarm", "bloom"],
+		"figure": ["standing", "twinned", "poured", "crowned"],
+	}
+
+
 static func describe() -> String:
 	return "A tall white parametric shell twisting around its own hollow, its bone lattice bored through with rounded organic holes that bleed violet light, one window filled with fine dark mesh."
 
 
-static func build(root: Node3D, seed: int) -> void:
+static func build(root: Node3D, seed: int, opts: Dictionary = {}) -> void:
+	var bore: String = str(opts.get("bore", "holes"))
+	var figure: String = str(opts.get("figure", "standing"))
+
 	var rng := RandomNumberGenerator.new()
 	rng.seed = seed
 
@@ -209,8 +232,14 @@ static func build(root: Node3D, seed: int) -> void:
 			if u >= wu0 and u <= wu1:
 				keep[i * cu + j] = 0
 
+	# ---- bore: eat the skin back to struts ---------------------------------
+	var thick_use: float = thick
+	if bore == "cage":
+		keep = _strut_grid(keep, nv, nu)
+		thick_use = thick * 1.72
+
 	# ---- emit the shell ----------------------------------------------------
-	_emit_shell(root, pts, nrm, keep, nv, nu, thick, 12, mat_out, mat_in, mat_rim)
+	_emit_shell(root, pts, nrm, keep, nv, nu, thick_use, 12, mat_out, mat_in, mat_rim, bore)
 
 	# ---- the woven panel ---------------------------------------------------
 	var fi0: float = wv0 * float(nv - 1) - 0.5
@@ -261,7 +290,19 @@ static func build(root: Node3D, seed: int) -> void:
 	var b_nrm: PackedVector3Array = _grid_normals(b_pts, nvb, nub, b_cen)
 	var b_blobs: Array = _make_blobs(rng, 11, 0.045, 0.105)
 	var b_keep: PackedByteArray = _keep_grid(b_blobs, nvb, nub, 1, 4)
-	_emit_shell(root, b_pts, b_nrm, b_keep, nvb, nub, thick * 0.78, 6, mat_out, mat_in, mat_rim)
+	if bore == "cage":
+		b_keep = _strut_grid(b_keep, nvb, nub)
+	_emit_shell(root, b_pts, b_nrm, b_keep, nvb, nub, thick_use * 0.78, 6, mat_out, mat_in, mat_rim, bore)
+
+	# ---- bore == bloom: a trumpet out of every hole -------------------------
+	if bore == "bloom":
+		var mat_thr: StandardMaterial3D = mat_in.duplicate() as StandardMaterial3D
+		mat_thr.emission_energy_multiplier = 2.15
+		mat_thr.cull_mode = BaseMaterial3D.CULL_DISABLED
+		var frng := RandomNumberGenerator.new()
+		frng.seed = seed * 7919 + 13
+		_emit_bloom(root, pts, nrm, nv, nu, blobs, frng, 1.0, mat_out, mat_thr)
+		_emit_bloom(root, b_pts, b_nrm, nvb, nub, b_blobs, frng, 0.60, mat_out, mat_thr)
 
 	# ---- violet cores in the hollow ---------------------------------------
 	var n_cores: int = rng.randi_range(10, 14)
@@ -320,6 +361,25 @@ static func build(root: Node3D, seed: int) -> void:
 		var bs: Basis = Basis().scaled(Vector3(1.35, 0.42, 1.35))
 		pm.transform = Transform3D(bs, Vector3(p.x, rp * 0.30, p.z))
 
+	# ---- figure: what the whole body does ----------------------------------
+	var grng := RandomNumberGenerator.new()
+	grng.seed = seed * 104729 + 71
+	if figure == "twinned":
+		_grow_twin(root, grng, body_h, girth)
+	elif figure == "poured":
+		var mat_pour: StandardMaterial3D = mat_out.duplicate() as StandardMaterial3D
+		mat_pour.albedo_color = col_out.lerp(col_plinth, 0.42).darkened(0.05)
+		mat_pour.roughness = 0.93
+		mat_pour.clearcoat_enabled = false
+		mat_pour.uv1_scale = Vector3(1.05, 1.05, 1.05)
+		var mat_men: StandardMaterial3D = mat_rim.duplicate() as StandardMaterial3D
+		mat_men.emission_energy_multiplier = 1.85
+		_emit_pour(root, grng, axis, body_h, girth, mat_pour, mat_men)
+	elif figure == "crowned":
+		var mat_tip: StandardMaterial3D = mat_rim.duplicate() as StandardMaterial3D
+		mat_tip.emission_energy_multiplier = 1.55
+		_emit_crown(root, grng, pts, nrm, nv, nu, girth, mat_out, mat_tip)
+
 	# ---- settle: fit, ground, centre, plinth -------------------------------
 	var box: AABB = _union_aabb(root)
 	var wmax: float = maxf(box.size.x, box.size.z)
@@ -354,10 +414,11 @@ static func build(root: Node3D, seed: int) -> void:
 # ---------------------------------------------------------------------------
 # lattice construction
 
-static func _emit_shell(root: Node3D, pts: PackedVector3Array, nrm: PackedVector3Array, keep: PackedByteArray, nv: int, nu: int, thick: float, bands: int, mat_out: StandardMaterial3D, mat_in: StandardMaterial3D, mat_rim: StandardMaterial3D) -> void:
+static func _emit_shell(root: Node3D, pts: PackedVector3Array, nrm: PackedVector3Array, keep: PackedByteArray, nv: int, nu: int, thick: float, bands: int, mat_out: StandardMaterial3D, mat_in: StandardMaterial3D, mat_rim: StandardMaterial3D, bore: String = "holes") -> void:
 	var cv: int = nv - 1
 	var cu: int = nu - 1
 	var hh: float = thick * 0.5
+	var swarm: bool = bore == "swarm"
 	for b in range(bands):
 		var i0: int = int(floor(float(b) * float(cv) / float(bands)))
 		var i1: int = int(floor(float(b + 1) * float(cv) / float(bands)))
@@ -387,19 +448,33 @@ static func _emit_shell(root: Node3D, pts: PackedVector3Array, nrm: PackedVector
 				var n10: Vector3 = nrm[(i + 1) * nu + j]
 				var n11: Vector3 = nrm[(i + 1) * nu + j + 1]
 				var nc: Vector3 = (n00 + n01 + n11 + n10).normalized()
+				if swarm:
+					# every cell lets go of its neighbours and hovers off along
+					# its own normal — one shell becoming a thousand scales
+					var cc: Vector3 = (p00 + p01 + p10 + p11) * 0.25
+					var hsh: float = fposmod(sin(float(i) * 12.9898 + float(j) * 78.233) * 43758.5453, 1.0)
+					var hs2: float = fposmod(hsh * 7.13 + 0.371, 1.0)
+					var lift: float = lerpf(-0.012, 0.058, hsh)
+					var shr: float = lerpf(0.46, 0.74, hs2)
+					var slide: Vector3 = nc * lift
+					p00 = cc.lerp(p00, shr) + slide
+					p01 = cc.lerp(p01, shr) + slide
+					p10 = cc.lerp(p10, shr) + slide
+					p11 = cc.lerp(p11, shr) + slide
 				_quad_face(so, p00 + n00 * hh, p01 + n01 * hh, p11 + n11 * hh, p10 + n10 * hh, nc)
 				_quad_face(si, p00 - n00 * hh, p01 - n01 * hh, p11 - n11 * hh, p10 - n10 * hh, -nc)
-				# rim on any edge whose neighbour cell is gone
-				if j == 0 or keep[i * cu + j - 1] == 0:
+				# rim on any edge whose neighbour cell is gone — a loose scale
+				# is rimmed the whole way round
+				if swarm or j == 0 or keep[i * cu + j - 1] == 0:
 					_rim(sr, p00, n00, _ortho(p00 - p01, n00), p10, n10, _ortho(p10 - p11, n10), hh)
 					n_rim += 1
-				if j == cu - 1 or keep[i * cu + j + 1] == 0:
+				if swarm or j == cu - 1 or keep[i * cu + j + 1] == 0:
 					_rim(sr, p01, n01, _ortho(p01 - p00, n01), p11, n11, _ortho(p11 - p10, n11), hh)
 					n_rim += 1
-				if i == 0 or keep[(i - 1) * cu + j] == 0:
+				if swarm or i == 0 or keep[(i - 1) * cu + j] == 0:
 					_rim(sr, p00, n00, _ortho(p00 - p10, n00), p01, n01, _ortho(p01 - p11, n01), hh)
 					n_rim += 1
-				if i == cv - 1 or keep[(i + 1) * cu + j] == 0:
+				if swarm or i == cv - 1 or keep[(i + 1) * cu + j] == 0:
 					_rim(sr, p10, n10, _ortho(p10 - p00, n10), p11, n11, _ortho(p11 - p01, n11), hh)
 					n_rim += 1
 		if n_skin == 0:
@@ -543,6 +618,286 @@ static func _keep_grid(blobs: Array, nv: int, nu: int, floor_rows: int, min_row:
 			keep[i * cu + bestj] = 1
 			cnt += 1
 	return keep
+
+
+static func _strut_grid(keep: PackedByteArray, nv: int, nu: int) -> PackedByteArray:
+	# bore == cage: the flesh is gone. Only cells that touch a hole (or the
+	# open border) survive, so every remaining patch is a one-cell strut and
+	# the shell reads as the frame the lattice was hung on.
+	var cv: int = nv - 1
+	var cu: int = nu - 1
+	var out := PackedByteArray()
+	out.resize(cv * cu)
+	for i in range(cv):
+		for j in range(cu):
+			if keep[i * cu + j] == 0:
+				out[i * cu + j] = 0
+				continue
+			var edge: bool = false
+			if i == 0 or i == cv - 1 or j == 0 or j == cu - 1:
+				edge = true
+			elif keep[i * cu + j - 1] == 0 or keep[i * cu + j + 1] == 0:
+				edge = true
+			elif keep[(i - 1) * cu + j] == 0 or keep[(i + 1) * cu + j] == 0:
+				edge = true
+			if edge:
+				out[i * cu + j] = 1
+			else:
+				out[i * cu + j] = 0
+	return out
+
+
+static func _emit_bloom(root: Node3D, pts: PackedVector3Array, nrm: PackedVector3Array, nv: int, nu: int, blobs: Array, rng: RandomNumberGenerator, sz: float, mat_pet: StandardMaterial3D, mat_thr: StandardMaterial3D) -> void:
+	# bore == bloom: every hole in the lattice grows a lobed trumpet, its
+	# throat carrying the cavity's violet out into the air
+	var so := SurfaceTool.new()
+	so.begin(Mesh.PRIMITIVE_TRIANGLES)
+	var si := SurfaceTool.new()
+	si.begin(Mesh.PRIMITIVE_TRIANGLES)
+	var rings: int = 7
+	var sides: int = 14
+	var made: int = 0
+	for bl in blobs:
+		var bb: Array = bl
+		var vraw: float = bb[0]
+		var uraw: float = bb[1]
+		var vc: float = clampf(vraw, 0.05, 0.97)
+		var uc: float = clampf(uraw, 0.07, 0.93)
+		var fi: float = vc * float(nv - 1)
+		var fj: float = uc * float(nu - 1)
+		var base_p: Vector3 = _bilinear(pts, nv, nu, fi, fj)
+		var nn: Vector3 = _sample_n(nrm, nv, nu, fi, fj)
+		var fr: Array = _frame(nn)
+		var e1: Vector3 = fr[0]
+		var e2: Vector3 = fr[1]
+		var petals: float = float(rng.randi_range(5, 7))
+		var lph: float = rng.randf_range(0.0, TAU)
+		var r0: float = 0.013 * sz
+		var r1: float = rng.randf_range(0.052, 0.112) * sz
+		var hgt: float = rng.randf_range(0.070, 0.190) * sz
+		var lean: Vector3 = (e1 * rng.randf_range(-1.0, 1.0) + e2 * rng.randf_range(-1.0, 1.0) + Vector3.UP * 0.55).normalized() * (hgt * rng.randf_range(0.18, 0.55))
+		var flare: float = rng.randf_range(0.20, 0.44)
+		var rpt := PackedVector3Array()
+		rpt.resize(rings * sides)
+		var cens := PackedVector3Array()
+		cens.resize(rings)
+		for k in range(rings):
+			var t: float = float(k) / float(rings - 1)
+			var cen: Vector3 = base_p + nn * (hgt * t - 0.012 * sz) + lean * (t * t)
+			cens[k] = cen
+			var rr: float = lerpf(r0, r1, pow(t, 1.65))
+			for j in range(sides):
+				var a: float = TAU * float(j) / float(sides)
+				var pm: float = 1.0 + flare * sin(petals * a + lph) * t * t
+				rpt[k * sides + j] = cen + e1 * (cos(a) * rr * pm) + e2 * (sin(a) * rr * pm)
+		var ins: float = 0.006 * sz
+		for k in range(rings - 1):
+			for j in range(sides):
+				var j2: int = (j + 1) % sides
+				var q00: Vector3 = rpt[k * sides + j]
+				var q01: Vector3 = rpt[k * sides + j2]
+				var q11: Vector3 = rpt[(k + 1) * sides + j2]
+				var q10: Vector3 = rpt[(k + 1) * sides + j]
+				var mid: Vector3 = (q00 + q01 + q11 + q10) * 0.25
+				var cmid: Vector3 = (cens[k] + cens[k + 1]) * 0.5
+				var wout: Vector3 = mid - cmid
+				if wout.length() < 0.000001:
+					wout = nn
+				wout = wout.normalized()
+				_quad_face(so, q00, q01, q11, q10, wout)
+				_quad_face(si, q00 - wout * ins, q01 - wout * ins, q11 - wout * ins, q10 - wout * ins, -wout)
+		made += 1
+	if made == 0:
+		return
+	so.generate_normals()
+	_add(root, so.commit(), mat_pet)
+	si.generate_normals()
+	_add(root, si.commit(), mat_thr)
+
+
+static func _grow_twin(root: Node3D, rng: RandomNumberGenerator, body_h: float, girth: float) -> void:
+	# figure == twinned: a second, smaller shell buds out of the first's flank,
+	# every mesh of the body repeated through one tilted turn
+	var kids: Array = []
+	for ch in root.get_children():
+		if ch is MeshInstance3D:
+			kids.append(ch)
+	var yaw: float = rng.randf_range(1.9, 2.9)
+	var tilt: float = rng.randf_range(0.30, 0.54)
+	var k: float = rng.randf_range(0.68, 0.86)
+	var pivot := Vector3(0.0, body_h * rng.randf_range(0.30, 0.46), 0.0)
+	var tax := Vector3(cos(yaw), 0.0, sin(yaw))
+	var side := Vector3(-sin(yaw), 0.0, cos(yaw))
+	var push: float = girth * rng.randf_range(0.16, 0.30)
+	var bs: Basis = Basis(Vector3.UP, yaw) * Basis(tax, tilt)
+	bs = bs.scaled(Vector3(k, k, k))
+	var off: Vector3 = pivot - bs * pivot + side * push + Vector3(0.0, body_h * 0.07, 0.0)
+	var xf := Transform3D(bs, off)
+	for entry in kids:
+		var src: MeshInstance3D = entry
+		if src.mesh == null:
+			continue
+		var mi := MeshInstance3D.new()
+		mi.mesh = src.mesh
+		mi.material_override = src.material_override
+		mi.transform = xf * src.transform
+		root.add_child(mi)
+
+
+static func _emit_pour(root: Node3D, rng: RandomNumberGenerator, ax: PackedVector3Array, body_h: float, girth: float, mat_pour: StandardMaterial3D, mat_men: StandardMaterial3D) -> void:
+	# figure == poured: the lower body is drowned in a solid lobed casting that
+	# swallows the lattice, spreads a skirt on the floor and curls a lip inward
+	var nvp: int = 26
+	var cap: int = 5
+	var nup: int = 40
+	var flood: float = body_h * rng.randf_range(0.34, 0.47)
+	var lob: float = float(rng.randi_range(3, 5))
+	var lph: float = rng.randf_range(0.0, TAU)
+	var wob: float = rng.randf_range(0.05, 0.12)
+	var skirt: float = rng.randf_range(0.29, 0.41)
+	var rows: int = nvp + cap
+	var pp := PackedVector3Array()
+	pp.resize(rows * nup)
+	var cc := PackedVector3Array()
+	cc.resize(rows)
+	var n_ax: int = ax.size()
+	for i in range(rows):
+		var wall: bool = i < nvp
+		var t: float = 1.0
+		if wall:
+			t = float(i) / float(nvp - 1)
+		var y: float = flood * t
+		var vv: float = clampf(y / maxf(body_h, 0.001), 0.0, 1.0)
+		var body_r: float = _key(RAD_KEYS, vv) * girth
+		var fidx: float = vv * float(n_ax - 1)
+		var i_lo: int = clampi(int(floor(fidx)), 0, n_ax - 1)
+		var i_hi: int = mini(i_lo + 1, n_ax - 1)
+		var ft: float = fidx - float(i_lo)
+		var cen: Vector3 = ax[i_lo].lerp(ax[i_hi], ft)
+		cen.y = y
+		var prof: float = body_r
+		if wall:
+			if t < 0.80:
+				prof = lerpf(skirt, body_r * 1.26, pow(t / 0.80, 0.60))
+			else:
+				var s: float = (t - 0.80) / 0.20
+				prof = body_r * lerpf(1.26, 1.07, s) + 0.062 * sin(PI * s)
+		else:
+			var s2: float = float(i - nvp + 1) / float(cap)
+			prof = lerpf(body_r * 1.07, body_r * 0.70, s2)
+			cen.y = y - 0.020 * s2
+		cc[i] = cen
+		for j in range(nup):
+			var a: float = TAU * float(j) / float(nup)
+			var rr: float = prof * (1.0 + wob * sin(lob * a + lph + t * 2.2))
+			pp[i * nup + j] = cen + Vector3(cos(a) * rr, 0.0, sin(a) * rr)
+	var st := SurfaceTool.new()
+	st.begin(Mesh.PRIMITIVE_TRIANGLES)
+	for i in range(rows - 1):
+		for j in range(nup):
+			var j2: int = (j + 1) % nup
+			var q00: Vector3 = pp[i * nup + j]
+			var q01: Vector3 = pp[i * nup + j2]
+			var q11: Vector3 = pp[(i + 1) * nup + j2]
+			var q10: Vector3 = pp[(i + 1) * nup + j]
+			var mid: Vector3 = (q00 + q01 + q11 + q10) * 0.25
+			var cm: Vector3 = (cc[i] + cc[i + 1]) * 0.5
+			var w: Vector3 = mid - cm
+			if i >= nvp - 1:
+				w = w * 0.35 + Vector3.UP * (maxf(w.length(), 0.01) * 1.6)
+			if w.length() < 0.000001:
+				w = Vector3.UP
+			_quad_face(st, q00, q01, q11, q10, w.normalized())
+	st.generate_normals()
+	_add(root, st.commit(), mat_pour)
+
+	var vf: float = clampf(flood / maxf(body_h, 0.001), 0.0, 1.0)
+	var rmean: float = _key(RAD_KEYS, vf) * girth
+	var tor := TorusMesh.new()
+	tor.inner_radius = maxf(rmean * 0.96, 0.012)
+	tor.outer_radius = rmean * 1.20 + 0.022
+	tor.rings = 28
+	tor.ring_segments = 8
+	var idx: int = clampi(int(floor(vf * float(n_ax - 1))), 0, n_ax - 1)
+	var cf: Vector3 = ax[idx]
+	var tm: MeshInstance3D = _add(root, tor, mat_men)
+	tm.transform = Transform3D(Basis().scaled(Vector3(1.0, 0.55, 1.0)), Vector3(cf.x, flood - 0.008, cf.z))
+
+
+static func _emit_crown(root: Node3D, rng: RandomNumberGenerator, pts: PackedVector3Array, nrm: PackedVector3Array, nv: int, nu: int, girth: float, mat_horn: StandardMaterial3D, mat_tip: StandardMaterial3D) -> void:
+	# figure == crowned: the shoulder erupts into a ring of curving tapered
+	# horns over a torus band, and the settle pass shrinks the body to fit them
+	var n_horn: int = rng.randi_range(6, 9)
+	var segs: int = 10
+	var sides: int = 8
+	var so := SurfaceTool.new()
+	so.begin(Mesh.PRIMITIVE_TRIANGLES)
+	var stip := SurfaceTool.new()
+	stip.begin(Mesh.PRIMITIVE_TRIANGLES)
+	for h in range(n_horn):
+		var jf: float = lerpf(1.0, float(nu - 2), float(h) / float(maxi(n_horn - 1, 1)))
+		var fi: float = float(nv - 1) - rng.randf_range(0.4, 3.6)
+		var base_p: Vector3 = _bilinear(pts, nv, nu, fi, jf)
+		var nn: Vector3 = _sample_n(nrm, nv, nu, fi, jf)
+		var up0: Vector3 = (Vector3.UP + nn * 0.42).normalized()
+		var hlen: float = rng.randf_range(0.17, 0.34)
+		var bend: Vector3 = (nn * rng.randf_range(0.5, 1.2) + Vector3(rng.randf_range(-0.5, 0.5), 0.0, rng.randf_range(-0.5, 0.5))).normalized()
+		var bmag: float = hlen * rng.randf_range(0.22, 0.62)
+		var r_b: float = rng.randf_range(0.026, 0.047) * girth
+		var cens := PackedVector3Array()
+		cens.resize(segs)
+		for k in range(segs):
+			var t: float = float(k) / float(segs - 1)
+			cens[k] = base_p + up0 * (hlen * t) + bend * (bmag * t * t)
+		for k in range(segs - 1):
+			var t0: float = float(k) / float(segs - 1)
+			var t1: float = float(k + 1) / float(segs - 1)
+			var f0: Array = _frame(_spine_tangent(cens, k))
+			var f1: Array = _frame(_spine_tangent(cens, k + 1))
+			var a0: Vector3 = f0[0]
+			var b0: Vector3 = f0[1]
+			var a1: Vector3 = f1[0]
+			var b1: Vector3 = f1[1]
+			var r0: float = r_b * pow(maxf(1.0 - t0, 0.0), 0.85) + 0.0042
+			var r1: float = r_b * pow(maxf(1.0 - t1, 0.0), 0.85) + 0.0042
+			var tgt: SurfaceTool = so
+			if t0 > 0.70:
+				tgt = stip
+			for j in range(sides):
+				var ang0: float = TAU * float(j) / float(sides)
+				var ang1: float = TAU * float(j + 1) / float(sides)
+				var q00: Vector3 = cens[k] + a0 * (cos(ang0) * r0) + b0 * (sin(ang0) * r0)
+				var q01: Vector3 = cens[k] + a0 * (cos(ang1) * r0) + b0 * (sin(ang1) * r0)
+				var q11: Vector3 = cens[k + 1] + a1 * (cos(ang1) * r1) + b1 * (sin(ang1) * r1)
+				var q10: Vector3 = cens[k + 1] + a1 * (cos(ang0) * r1) + b1 * (sin(ang0) * r1)
+				var mid: Vector3 = (q00 + q01 + q11 + q10) * 0.25
+				var cm: Vector3 = (cens[k] + cens[k + 1]) * 0.5
+				var w: Vector3 = mid - cm
+				if w.length() < 0.000001:
+					w = up0
+				_quad_face(tgt, q00, q01, q11, q10, w.normalized())
+	so.generate_normals()
+	_add(root, so.commit(), mat_horn)
+	stip.generate_normals()
+	_add(root, stip.commit(), mat_tip)
+
+	var top_c := Vector3.ZERO
+	for j in range(nu):
+		top_c += pts[(nv - 1) * nu + j]
+	top_c = top_c / float(nu)
+	var rsum: float = 0.0
+	for j in range(nu):
+		var dv: Vector3 = pts[(nv - 1) * nu + j] - top_c
+		rsum += dv.length()
+	var rmean: float = maxf(rsum / float(nu), 0.02)
+	var tor := TorusMesh.new()
+	tor.inner_radius = rmean * 0.84
+	tor.outer_radius = rmean * 1.06 + 0.014
+	tor.rings = 26
+	tor.ring_segments = 8
+	var band: MeshInstance3D = _add(root, tor, mat_horn)
+	var tilt: Basis = Basis(Vector3(1.0, 0.0, 0.0), rng.randf_range(-0.16, 0.16)) * Basis(Vector3(0.0, 0.0, 1.0), rng.randf_range(-0.16, 0.16))
+	band.transform = Transform3D(tilt.scaled(Vector3(1.0, 0.7, 1.0)), top_c + Vector3(0.0, 0.012, 0.0))
 
 
 static func _tube_grid(cen: PackedVector3Array, refp: PackedVector3Array, nvb: int, nub: int, span: float, tw: float, rb_lo: float, rb_hi: float, flat: float) -> PackedVector3Array:

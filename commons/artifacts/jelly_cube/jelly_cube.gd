@@ -107,6 +107,11 @@ const ASSAYS: PackedStringArray = ["none", "gauge", "control", "chart", "vitrine
 ## Whether the jelly uses alpha transparency
 @export var use_transparency: bool = true
 
+## Placement-only attachment for the opening hall; ordinary placements stay free.
+@export_enum("free", "crown") var anchor: String = "free"
+var _anchor_index: int = -1
+var _anchor_marker: MeshInstance3D
+
 var _soft_body: SoftBody3D
 var _material: StandardMaterial3D
 var _info_label: Label3D
@@ -141,6 +146,7 @@ func _ready() -> void:
 	_read_dna_meta()
 	_create_soft_body()
 	_create_pedestal()
+	_configure_anchor()
 	_create_labels()
 	_create_vr_controls()
 	# ASSAY apparatus, appended LAST so every child index and position above is
@@ -153,6 +159,8 @@ func _ready() -> void:
 ## four existing placements. The DNA sweep sets the @export directly instead, also
 ## before add_child, and lands in the same place.
 func _read_dna_meta() -> void:
+	if str(get_meta("config_anchor", "")) == "crown":
+		anchor = "crown"
 	if has_meta("config_assay"):
 		var a: String = str(get_meta("config_assay")).strip_edges().to_lower()
 		assay = a if ASSAYS.has(a) else assay
@@ -222,6 +230,9 @@ func _create_soft_body() -> void:
 	_track_node(_soft_body)
 
 func _create_pedestal() -> void:
+	if anchor == "crown":
+		_create_hanging_support()
+		return
 	var pedestal = MeshInstance3D.new()
 	pedestal.name = "Pedestal"
 
@@ -253,13 +264,97 @@ func _create_pedestal() -> void:
 	add_child(static_body)
 	_track_node(static_body)
 
+## Expose the held point with an open stand. No plate passes through the body.
+func _create_hanging_support() -> void:
+	var stand := Node3D.new()
+	stand.name = "HangingSupport"
+	add_child(stand)
+	_track_node(stand)
+	var mat := StandardMaterial3D.new()
+	mat.albedo_color = Color(0.13, 0.16, 0.18)
+	mat.metallic = 0.4
+	mat.roughness = 0.4
+	var top: float = cube_size + 0.12
+	_stand_piece(stand, Vector3(0, -0.97, -0.4), Vector3(0.40, 0.06, 0.36), mat)
+	_stand_piece(stand, Vector3(0, (top - 1.0) * 0.5, -0.4), Vector3(0.045, top + 1.0, 0.045), mat)
+	_stand_piece(stand, Vector3(0, top, -0.18), Vector3(0.09, 0.04, 0.48), mat)
+
+func _stand_piece(parent: Node3D, center: Vector3, size: Vector3, material: Material) -> void:
+	var body := StaticBody3D.new()
+	body.position = center
+	var mesh := MeshInstance3D.new()
+	var box := BoxMesh.new()
+	box.size = size
+	mesh.mesh = box
+	mesh.material_override = material
+	body.add_child(mesh)
+	var collision := CollisionShape3D.new()
+	var shape := BoxShape3D.new()
+	shape.size = size
+	collision.shape = shape
+	body.add_child(collision)
+	parent.add_child(body)
+
+## Choose a single point on the top face, nearest its centre. Pinning constrains
+## that mesh point; it does not restore coefficients or replace the simulated body.
+func _configure_anchor() -> void:
+	if _anchor_index >= 0:
+		_soft_body.set_point_pinned(_anchor_index, false)
+		_anchor_index = -1
+	if is_instance_valid(_anchor_marker):
+		remove_child(_anchor_marker)
+		_anchor_marker.queue_free()
+		_anchor_marker = null
+	if anchor != "crown":
+		return
+	# Use the same undeformed BoxMesh as the body: a deformed mesh is not an index map.
+	var rest := BoxMesh.new()
+	rest.size = Vector3.ONE * cube_size
+	rest.subdivide_width = subdivisions
+	rest.subdivide_height = subdivisions
+	rest.subdivide_depth = subdivisions
+	var points: PackedVector3Array = rest.surface_get_arrays(0)[Mesh.ARRAY_VERTEX]
+	var best := INF
+	for i in points.size():
+		var v: Vector3 = points[i]
+		if absf(v.y - cube_size * 0.5) > 0.001:
+			continue
+		var distance: float = Vector2(v.x, v.z).length_squared()
+		if distance < best:
+			best = distance
+			_anchor_index = i
+	if _anchor_index < 0:
+		return
+	_soft_body.set_point_pinned(_anchor_index, true)
+	# A small brass stem exposes the attachment instead of pretending it is contact.
+	var stem := CylinderMesh.new()
+	stem.top_radius = 0.008
+	stem.bottom_radius = 0.012
+	stem.height = 0.05
+	_anchor_marker = MeshInstance3D.new()
+	_anchor_marker.name = "CrownAnchor"
+	_anchor_marker.mesh = stem
+	_anchor_marker.position = Vector3(points[_anchor_index].x, cube_size + 0.075, points[_anchor_index].z)
+	var material := StandardMaterial3D.new()
+	material.albedo_color = Color(0.85, 0.55, 0.15)
+	material.metallic = 0.5
+	material.roughness = 0.35
+	_anchor_marker.material_override = material
+	add_child(_anchor_marker)
+	_track_node(_anchor_marker)
+
 func _create_labels() -> void:
 	_info_label = Label3D.new()
 	_info_label.name = "InfoLabel"
 	_info_label.pixel_size = 0.002
 	_info_label.font_size = 20
 	_info_label.position = Vector3(0, cube_size + 0.15, 0)
-	_info_label.text = "JELLY CUBE\nTouch to deform"
+	if anchor == "crown":
+		_info_label.position.y = cube_size + 0.32
+		var legacy_label := get_node_or_null("Label3D")
+		if legacy_label != null:
+			legacy_label.hide()
+	_info_label.text = "JELLY CUBE\nOne upper point held" if anchor == "crown" else "JELLY CUBE\nTouch to deform"
 	add_child(_info_label)
 	_track_node(_info_label)
 
@@ -277,6 +372,8 @@ func _create_vr_controls() -> void:
 		],
 	])
 	_control_panel.position = Vector3(0, 0.04, cube_size * 0.7 + 0.15)
+	if anchor == "crown":
+		_control_panel.position = Vector3(0, -0.35, cube_size + 0.35)
 	_control_panel.rotation_degrees = Vector3(-30, 0, 0)
 	add_child(_control_panel)
 	_track_node(_control_panel)

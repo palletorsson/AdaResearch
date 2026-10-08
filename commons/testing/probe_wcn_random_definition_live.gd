@@ -48,7 +48,7 @@ func run() -> void:
 	var em: Node3D = load("res://commons/scenes/endless_museum.tscn").instantiate()
 	var ctl := "res://ada_run/waves_chance_noise/wcn-probe-control.json"
 	em.set("EM_CONTROL", ctl); em.set("_overrides_path", ctl + ".unused")
-	# _hand_path is left at its default: res://ada_run/necklace_hand.json, the live stamps
+	em.set("_hand_path", "res://ada_run/necklace_hand.json")  # isolated runners replace this path with a snapshot
 	em.set("start_chapter", "randomness"); em.set("start_map", MAP)
 	var layout: Dictionary = JSON.parse_string(FileAccess.get_file_as_string("res://commons/data/em_layout.json"))
 	layout.get_or_add("stream", {})["bodies"] = 1
@@ -131,6 +131,8 @@ func run() -> void:
 	var random_area: Node = _button_area(demo, "Btn_1")
 	check(random_area != null, "the RANDOM button exists on the panel")
 	seed(4242)
+	var picker: RandomNumberGenerator = demo.get("_pick")
+	var picker_before: int = picker.state
 	if random_area != null: random_area.emit_signal("button_pressed", random_area)
 	var g2: int = randi()
 	check(g1 == g2, "RANDOM did not advance the game's global RNG")
@@ -140,17 +142,20 @@ func run() -> void:
 	await get_tree().process_frame
 	var s2: int = int(demo.call("current_seed"))
 	measurements["seeds"] = [seed0, s1, s2]
-	check(s1 != seed0 or s2 != seed0, "RANDOM chose another seed (%d -> %d -> %d)" % [seed0, s1, s2])
+	check(picker.state != picker_before and s1 >= 0 and s1 < 1000 and s2 >= 0 and s2 < 1000, "RANDOM advances its local picker within 0–999; repeated seeds are allowed (%d -> %d -> %d)" % [seed0, s1, s2])
 	check(_same(demo.call("column_colors", 0), demo.call("column_colors", 1)), "after RANDOM the two grids still match each other")
 	var slider: Node = demo.find_child("Param_0", true, false)
 	check(slider != null and slider.has_method("get_normalized_value"), "the seed slider exists")
 	if slider != null:
 		check(absf(float(slider.get_normalized_value()) - float(s2) / 999.0) < 0.01, "the slider followed the RANDOM seed")
+	await _check_seed_slider(demo)
+	await _check_draw_assignment(demo)
+	_check_panel_refinement(demo)
 
 	# ── 2b. the visual pass of 12 September: the action line at the panel's foot ──────────
 	var aline: Label3D = demo.get_node_or_null("ActionLine")
 	# the demo draws a seed on arrival, so the line's first word is RANDOM before anyone presses
-	check(aline != null and (aline.text.begins_with("RANDOM · seed ") or aline.text.begins_with("ARRIVAL · seed ")) and aline.text.ends_with("grids equal"), "a cased action line at the panel's foot names the last action, the seed and the grids' agreement (%s)" % (aline.text if aline != null else "none"))
+	check(aline != null and aline.text.contains(" · seed ") and aline.text.ends_with("grids equal"), "a cased action line at the panel's foot names the last action, the seed and the grids' agreement (%s)" % (aline.text if aline != null else "none"))
 	var dpanel: Node3D = demo.get_node_or_null("Panel")
 	check(dpanel != null and dpanel.scale.x > 1.4, "the panel is enlarged for its labels (scale %.2f)" % (dpanel.scale.x if dpanel != null else 0.0))
 	# Astra's review of the visual pass: material and lettering contrast, not just size
@@ -224,7 +229,8 @@ func run() -> void:
 		measurements["desktop_input"] = {"press": rec, "seed_before": seed_before_click, "seed_after": seed_after_click,
 			"log": drv.get("log"), "camera": "desktop rig at " + str(seg.to_local(stand))}
 		check(str(rec.get("hover", "")).contains("Btn_1") or str(rec.get("hover", "")).contains("InteractableAreaButton"), "the desktop pointer had the RANDOM button under the crosshair (%s)" % str(rec.get("hover", "")))
-		check(seed_after_click != seed_before_click, "a left click through the input pipeline changed the seed (%d -> %d): actual desktop input, not an emitted signal" % [seed_before_click, seed_after_click])
+		check(str(demo.call("last_action")) == "RANDOM" and seed_after_click >= 0 and seed_after_click < 1000, "a left click invokes RANDOM through the input pipeline (%d -> %d); a repeated seed is valid" % [seed_before_click, seed_after_click])
+		await _check_desktop_controls(demo, drv, stand)
 		if "--capture" in OS.get_cmdline_user_args():
 			await get_tree().create_timer(0.3).timeout
 			await get_tree().create_timer(0.3, true, false, true).timeout
@@ -247,6 +253,7 @@ func run() -> void:
 		for i in range(30): cam.make_current(); await get_tree().process_frame
 		await get_tree().create_timer(0.3, true, false, true).timeout
 		get_viewport().get_texture().get_image().save_png(_evidence + "probe_random_definition_live.png")
+	await _check_rebuild(em, seg, demo)
 	_finish()
 
 func _button_area(demo: Node, btn: String) -> Node:
@@ -254,17 +261,170 @@ func _button_area(demo: Node, btn: String) -> Node:
 	return b.get_node_or_null("InteractableAreaButton") if b != null else null
 
 func _same(a: PackedColorArray, b: PackedColorArray) -> bool:
-	if a.size() != b.size(): return false
-	for i in range(a.size()):
-		if not a[i].is_equal_approx(b[i]): return false
-	return true
+	return var_to_bytes(a) == var_to_bytes(b)
 
 func _finish() -> void:
 	var report := {"map": MAP, "checks": checks, "failures": failures, "measurements": measurements,
 		"hand_file": "res://ada_run/necklace_hand.json (the live stamps, on purpose)",
-		"control_path": "InteractableAreaButton.button_pressed emitted programmatically; slider read, not driven; no tracked hand",
+		"control_path": "Signals and real slider move path; live lane additionally drives pointer drag and all three buttons; no tracked hand",
 		"headset_verified": false, "engine": Engine.get_version_info().string}
 	var f := FileAccess.open(OUT + "probe_random_definition_live.json", FileAccess.WRITE)
 	f.store_string(JSON.stringify(report, "  ")); f.close()
 	print("[wcn-random] ", checks, " checks; ", failures.size(), " failures")
 	get_tree().quit(0 if failures.is_empty() else 1)
+
+func _move_seed(demo: Node3D, value: int) -> void:
+	var slider: Node = demo.get_node("Panel/Param_0")
+	var xr: Node = slider.get_node("SliderOrigin/InteractableSlider")
+	xr.call("move_slider", lerpf(float(xr.get("slider_limit_min")), float(xr.get("slider_limit_max")), float(value) / 999.0))
+	await get_tree().process_frame
+	await get_tree().process_frame
+
+func _check_seed_slider(demo: Node3D) -> void:
+	var results: Array = []
+	for wanted in [0, 1, 42, 137, 999, 42]:
+		await _move_seed(demo, wanted)
+		var got: int = int(demo.call("current_seed"))
+		var label: Label3D = demo.get_node("Panel/Param_0/Frame/Label3DValue")
+		check(got == wanted and label.text == str(wanted), "slider movement reaches integer seed %d in state and its own label (got %d, %s)" % [wanted, got, label.text])
+		var independent := RandomNumberGenerator.new()
+		independent.seed = wanted
+		var expected := PackedColorArray()
+		for i in range(64): expected.append(Color(independent.randf(), independent.randf(), independent.randf()))
+		check(_same(expected, demo.call("column_colors", 0)) and _same(expected, demo.call("column_colors", 1)), "seed %d paints both grids from the independently reconstructed draws" % wanted)
+		results.append({"seed": got, "slider_label": label.text})
+	check(str(demo.call("last_action")) == "SLIDER", "the action line records a real slider gesture")
+	measurements["seed_slider"] = results
+
+func _check_draw_assignment(demo: Node3D) -> void:
+	var before: PackedColorArray = demo.call("column_colors", 0)
+	var positions: Array = []
+	for entry in demo.get("_columns"):
+		for cube in entry["cubes"]: positions.append(cube.position)
+	var extra: Node = _button_area(demo, "Btn_2")
+	extra.emit_signal("button_pressed", extra)
+	await get_tree().process_frame
+	var shifted: PackedColorArray = demo.call("column_colors", 1)
+	var generator := RandomNumberGenerator.new()
+	generator.seed = int(demo.call("current_seed"))
+	var draws: Array = []
+	for i in range(193): draws.append(generator.randf())
+	var expected := PackedColorArray()
+	for i in range(64): expected.append(Color(draws[3*i+1], draws[3*i+2], draws[3*i+3]))
+	check(_same(expected, shifted), "all 64 offset colors use draws [3i+1, 3i+2, 3i+3], including the new last draw")
+	var positions_after: Array = []
+	for entry in demo.get("_columns"):
+		for cube in entry["cubes"]: positions_after.append(cube.position)
+	check(positions == positions_after, "the extra draw changes no cube position")
+	var replay_area: Node = _button_area(demo, "Btn_0")
+	replay_area.emit_signal("button_pressed", replay_area)
+	await get_tree().process_frame
+	check(_same(demo.call("column_colors", 1), shifted) and bool(demo.call("extra_on")), "REPLAY preserves the chosen offset procedure exactly")
+	var raw_a: Array = []
+	var raw_b: Array = []
+	for c in before: raw_a.append([c.r, c.g, c.b])
+	for c in shifted: raw_b.append([c.r, c.g, c.b])
+	var sample_file := FileAccess.open(OUT + "samples.json", FileAccess.WRITE)
+	sample_file.store_string(JSON.stringify({"seed": demo.call("current_seed"), "rows": 8, "columns": 8, "draws": draws, "base": raw_a, "offset": raw_b, "carrier": "material albedo RGB before room lighting"}, "  "))
+	sample_file.close()
+	extra.emit_signal("button_pressed", extra)
+	await get_tree().process_frame
+	check(_same(demo.call("column_colors", 1), before), "offset off restores all material color bytes")
+
+func _check_desktop_controls(demo: Node3D, drv: Node, stand: Vector3) -> void:
+	# Hold a known sample for the matched operating-camera captures.
+	await _move_seed(demo, 137)
+	await _move_seed(demo, 42)
+	var slider: Node3D = demo.get_node("Panel/Param_0")
+	var handle: Node3D = slider.get_node("SliderOrigin/InteractableSlider/HandleOrigin/InteractableHandle")
+	drv.get("rig").global_position = stand
+	await get_tree().physics_frame
+	var from: Vector3 = handle.global_position
+	var to: Vector3 = from + slider.global_transform.basis.x.normalized() * 0.05
+	var drag: Dictionary = await drv.call("drag", from, to, 20)
+	await get_tree().process_frame
+	var changed_seed: int = int(demo.call("current_seed"))
+	check(bool(drag.get("dragging_midway")) and changed_seed != 42 and str(demo.call("last_action")) == "SLIDER", "desktop pointer drags the seed handle and changes the actual seed (%d)" % changed_seed)
+	check(_same(demo.call("column_colors", 0), demo.call("column_colors", 1)), "both grids follow the desktop slider")
+	measurements["desktop_slider"] = {"drag": drag, "seed": changed_seed}
+	await _move_seed(demo, 42)
+	var before: PackedColorArray = demo.call("column_colors", 0)
+	var replay: Dictionary = await drv.call("press", demo.find_child("Btn_0", true, false), stand)
+	await get_tree().process_frame
+	check(str(demo.call("last_action")) == "REPLAY" and _same(before, demo.call("column_colors", 0)), "desktop REPLAY retains every color and records the action")
+	if "--capture" in OS.get_cmdline_user_args():
+		drv.call("aim_at", demo.to_global(Vector3(0, 1.22, 0)))
+		for i in range(12): await get_tree().process_frame
+		await get_tree().create_timer(0.2, true, false, true).timeout
+		get_viewport().get_texture().get_image().save_png(_evidence + "probe_random_definition_equal_live.png")
+		measurements["equal_pose"] = drv.call("pose")
+	var extra: Dictionary = await drv.call("press", demo.find_child("Btn_2", true, false), stand)
+	await get_tree().process_frame
+	var shifted: PackedColorArray = demo.call("column_colors", 1)
+	check(bool(demo.call("extra_on")) and not _same(before, shifted), "desktop +1 DRAW changes the right grid")
+	check(_same(before, demo.call("column_colors", 0)) and int(demo.call("current_seed")) == 42, "desktop +1 DRAW retains the left grid and the seed")
+	if "--capture" in OS.get_cmdline_user_args():
+		drv.call("aim_at", demo.to_global(Vector3(0, 1.22, 0)))
+		for i in range(12): await get_tree().process_frame
+		await get_tree().create_timer(0.2, true, false, true).timeout
+		get_viewport().get_texture().get_image().save_png(_evidence + "probe_random_definition_offset_live.png")
+		measurements["offset_pose"] = drv.call("pose")
+	await drv.call("press", demo.find_child("Btn_0", true, false), stand)
+	await get_tree().process_frame
+	check(bool(demo.call("extra_on")) and _same(shifted, demo.call("column_colors", 1)), "desktop REPLAY repeats the offset grid without switching the offset off")
+	await drv.call("press", demo.find_child("Btn_2", true, false), stand)
+	await get_tree().process_frame
+	check(not bool(demo.call("extra_on")) and _same(before, demo.call("column_colors", 1)), "desktop second +1 DRAW restores the match")
+	measurements["desktop_replay"] = replay
+	measurements["desktop_extra"] = extra
+
+func _check_rebuild(em: Node3D, seg: Node3D, demo: Node3D) -> void:
+	var segs: Array = em.get("_segments")
+	var index: int = -1
+	for i in range(segs.size()):
+		if segs[i].get("node") == seg: index = i
+	check(index >= 0, "the hall can be located for the streaming check")
+	if index < 0: return
+	var z0: float = seg.global_position.z
+	var subject_ref: WeakRef = weakref(demo)
+	em.call("_stream_free", index, "south")
+	for i in range(5): await get_tree().process_frame
+	check(subject_ref.get_ref() == null, "streaming frees the seed instrument")
+	var snapshot: Dictionary = {}
+	for entry in em.get("_freed"):
+		if absf(float(entry.get("z0", -1e9)) - z0) < 0.01: snapshot = entry
+	check(snapshot.has("snap"), "the hall has a rebuildable museum snapshot")
+	if not snapshot.has("snap"): return
+	em.call("_stream_rebuild", snapshot)
+	await get_tree().create_timer(1.5).timeout
+	var rebuilt: Node3D
+	for entry in em.get("_segments"):
+		if entry.node.get_meta("em_map", "") == MAP:
+			for child in entry.node.find_children("*", "Node3D", true, false):
+				if child is SeedReplayDemo: rebuilt = child; break
+	check(rebuilt != null, "the seed instrument returns when the hall rebuilds")
+	if rebuilt == null: return
+	await _move_seed(rebuilt, 137)
+	check(int(rebuilt.call("current_seed")) == 137, "the slider remains wired after the hall rebuild")
+	var first: PackedColorArray = rebuilt.call("column_colors", 0)
+	var replay: Node = _button_area(rebuilt, "Btn_0")
+	replay.emit_signal("button_pressed", replay)
+	await get_tree().process_frame
+	check(_same(first, rebuilt.call("column_colors", 1)), "REPLAY still matches after rebuilding")
+
+func _check_panel_refinement(demo: Node3D) -> void:
+	var panel: Node3D = demo.get_node("Panel")
+	var fonts: Array = []
+	for label in panel.find_children("*", "Label3D", true, false): fonts.append(label.font_size)
+	demo.call("_contrast_panel", panel)
+	var after: Array = []
+	for label in panel.find_children("*", "Label3D", true, false): after.append(label.font_size)
+	check(fonts == after, "repeating the contrast pass does not keep enlarging the labels")
+	var stable_tags: int = 0
+	for mi in panel.find_children("*", "MeshInstance3D", true, false):
+		var mat: StandardMaterial3D = mi.material_override as StandardMaterial3D
+		if mat != null and mat.albedo_texture != null and mat.shading_mode == BaseMaterial3D.SHADING_MODE_UNSHADED: stable_tags += 1
+	check(stable_tags >= 4, "all four baked-text tags keep their contrast independently of room light")
+	var action: Label3D = demo.get_node("ActionLine")
+	var plate: MeshInstance3D = demo.get_node("ActionPlate")
+	check(action.font_size == 20 and (plate.mesh as BoxMesh).size.x >= 0.60, "the action readout has larger text within a wider casing")

@@ -66,10 +66,16 @@ const GRAVITY := 3.0
 
 
 func _ready() -> void:
+	if str(get_meta("config_lesson",""))=="launch_chamber":
+		_reset_console()
+		var room=preload("res://commons/artifacts/launch_arc/launch_chamber.gd").new()
+		room.name="LaunchChamber";add_child(room);return
 	_console_ready()
 
 
 func apply_grid_config(config_data: Dictionary) -> void:
+	if str(config_data.get("lesson",get_meta("config_lesson","")))=="launch_chamber":
+		set_meta("config_lesson","launch_chamber");return
 	if config_data.has("seed"): seed = int(config_data["seed"])
 	if config_data.has("angle"): angle = clampf(float(config_data["angle"]), 0.0, 1.0)
 	if config_data.has("power"): power = clampf(float(config_data["power"]), 0.0, 1.0)

@@ -14,8 +14,8 @@ const BakedText = preload("res://commons/utils/baked_text_albedo.gd")
 # critical_parameter: current_postulate — when it reaches 4 (the fifth), the entire color scheme shifts
 # triggers: click/interact cycles postulates; reaching the fifth fires parallel_highlighted signal
 # emerges: the dawning suspicion that the fifth postulate is not like the others — it can be denied
-# needs: VR click interaction [has via mouse], XR grab interaction [missing]
-# relationships: unlocks hyperbolic_surface and elliptic_surface (what happens when you deny the fifth); depends on angle_sum_triangle
+# needs: optional physical NEXT / GOLD buttons [present]; legacy desktop mouse cycling
+# relationships: precedes the triangle comparison in NonEuclidean_Spaces; no door or surface is unlocked by its signals
 # truth: the parallel postulate was assumed for two thousand years — its independence was the first crack in mathematical certainty
 
 signal postulate_selected(index: int)
@@ -27,7 +27,9 @@ signal parallel_highlighted
 		_update_display()
 
 @export var highlight_fifth: bool = true
+@export var lesson_controls: bool = false
 @export var plaque_size: Vector3 = Vector3(0.8, 1.0, 0.05)
+var _lesson_controls: Node3D
 
 var _xr_active: bool = false
 var _plaque_mesh: MeshInstance3D
@@ -61,6 +63,7 @@ func _ready():
 	_create_labels()
 	_create_highlight()
 	_update_display()
+	if lesson_controls: _build_lesson_controls()
 
 func _create_plaque():
 	_plaque_mesh = MeshInstance3D.new()
@@ -114,7 +117,7 @@ func _create_highlight():
 	add_child(_highlight_mesh)
 
 func _update_display():
-	if not is_inside_tree():
+	if not is_inside_tree() or not is_instance_valid(_highlight_mesh):
 		return
 
 	# Color the fifth postulate differently
@@ -206,7 +209,7 @@ func previous_postulate():
 	current_postulate = (current_postulate + 4) % 5
 
 func _input(event):
-	if _xr_active:
+	if _xr_active or lesson_controls:
 		return
 	if event is InputEventMouseButton and event.pressed:
 		if event.button_index == MOUSE_BUTTON_LEFT:
@@ -216,5 +219,32 @@ func _input(event):
 
 func apply_grid_config(config_data: Dictionary):
 	for key in config_data:
+		if key == "lesson_controls":
+			lesson_controls = str(config_data[key]).to_lower() in ["true", "on", "1"]
+			if is_node_ready() and lesson_controls: _build_lesson_controls()
+			continue
 		if key in self:
 			set(key, config_data[key])
+
+func _toggle_emphasis() -> void:
+	highlight_fifth = not highlight_fifth
+	_update_display()
+
+func _build_lesson_controls() -> void:
+	if is_instance_valid(_lesson_controls): return
+	_lesson_controls = Node3D.new()
+	_lesson_controls.name = "LessonControls"
+	add_child(_lesson_controls)
+	var actions: Array[Callable] = [next_postulate, _toggle_emphasis]
+	for i in 2:
+		var button := preload("res://commons/interactables/push_button.tscn").instantiate()
+		button.name = "NEXT" if i == 0 else "GOLD"
+		button.position = Vector3((i - 0.5) * 0.44, -0.65, 0.04)
+		_lesson_controls.add_child(button)
+		button.pressed.connect(actions[i])
+		var label := Label3D.new()
+		label.text = button.name
+		label.font_size = 24
+		label.pixel_size = 0.001
+		label.position = button.position + Vector3(0, 0.09, 0)
+		_lesson_controls.add_child(label)

@@ -43,6 +43,19 @@ extends RefCounted
 ## rank of them), the drilled screw holes and cable ports moulded into the shells,
 ## the fingers as anything more than three short nubs, and the way the reference's
 ## cloth hangs as a genuinely thin sheet with a visible cut edge.
+##
+## AXES — two, swept as a gallery:
+##   stringing — what the jointed chain is MADE of. strung = today's glazed capsule
+##     links on white ball joints; swarmed = every link dissolved into a cloud of
+##     small beads, the joints left standing in the fog; unstrung = the links shoved
+##     off their joints and hovering apart, the ball armature bare beneath them;
+##     wired = the glaze gone, a thin chrome rod threaded through fat collar rings;
+##     swollen = the links inflated into bulbs that swallow their own joints.
+##   vestment — what the maze cloth BECOMES. maze_cloth = today's stiff printed
+##     shell with its raised collar corner; flooded = a solid glaze pour risen in
+##     tongues up the legs and drowned the hem; unravelled = the shell come apart
+##     into a fringe of hanging printed threads; bloomed = the hem flared into
+##     scalloped petals, with petals opening from both hands as well.
 
 const TEX_SIZE: int = 240
 
@@ -56,9 +69,37 @@ static func describe() -> String:
 	return "A glossy ceramic ball-jointed puppet standing with both long segmented arms raised and curling, its torso wrapped in a stiff cloth printed with a black-and-white maze."
 
 
-static func build(root: Node3D, seed: int) -> void:
+static func axes() -> Dictionary:
+	return {
+		"stringing": ["strung", "swarmed", "unstrung", "wired", "swollen"],
+		"vestment": ["maze_cloth", "flooded", "unravelled", "bloomed"],
+	}
+
+
+static func build(root: Node3D, seed: int, opts: Dictionary = {}) -> void:
 	var rng := RandomNumberGenerator.new()
 	rng.seed = seed
+
+	# --- axes ---------------------------------------------------------------
+	var stringing: String = str(opts.get("stringing", "strung"))
+	var vestment: String = str(opts.get("vestment", "maze_cloth"))
+	# how the chain mode rescales the parts that hang off the chains
+	var head_k: float = 1.0
+	var foot_k: float = 1.0
+	var fin_k: float = 1.0
+	var joint_k: float = 1.0
+	if stringing == "swollen":
+		head_k = 1.32
+		foot_k = 1.34
+		fin_k = 1.70
+		joint_k = 0.64
+	elif stringing == "wired":
+		head_k = 0.80
+		foot_k = 0.78
+		fin_k = 0.55
+		joint_k = 0.58
+	elif stringing == "swarmed":
+		joint_k = 0.74
 
 	# --- palette ------------------------------------------------------------
 	var swatch: Array = [Color(COL_PINK), Color(COL_MINT), Color(COL_GOLD), Color(COL_WHITE)]
@@ -109,6 +150,8 @@ static func build(root: Node3D, seed: int) -> void:
 	var n_arm: int = rng.randi_range(6, 8)
 	var n_ring: int = rng.randi_range(6, 8)
 	var n_side: int = 14
+	if vestment == "bloomed":
+		n_side = 20
 	var yaw: float = deg_to_rad(rng.randf_range(-16.0, 16.0))
 	var head_tilt: float = deg_to_rad(rng.randf_range(-13.0, 13.0))
 	var head_yaw: float = deg_to_rad(rng.randf_range(-24.0, 24.0))
@@ -135,17 +178,17 @@ static func build(root: Node3D, seed: int) -> void:
 		for k in range(4):
 			var pick: Color = col_main if (k % 3) != 2 else col_alt
 			mats.append(_glaze(pick, line_tex))
-		_chain(root, pts, radii, mats, mat_ball, mat_chrome)
+		_chain(root, pts, radii, mats, mat_ball, mat_chrome, stringing)
 		# foot: a capsule lying along the toe direction, sole exactly on y = 0
 		var toe_dir := Vector3(sd * toe_out, 0.0, -1.0).normalized()
 		var foot := CapsuleMesh.new()
-		foot.radius = 0.046
-		foot.height = 0.205
+		foot.radius = 0.046 * foot_k
+		foot.height = 0.205 * foot_k
 		foot.radial_segments = 16
 		foot.rings = 4
 		var mat_foot: StandardMaterial3D = _glaze(col_main, line_tex)
 		var fm: MeshInstance3D = _add(root, foot, mat_foot)
-		fm.transform = Transform3D(_basis_y_to(toe_dir), Vector3(ax, 0.046, -fwd) + toe_dir * 0.048)
+		fm.transform = Transform3D(_basis_y_to(toe_dir), Vector3(ax, 0.046 * foot_k, -fwd) + toe_dir * (0.048 * foot_k))
 
 	# --- torso column (mostly under the cloth) ------------------------------
 	var tn0 := Vector3(lean_x * 0.2, y_hip + 0.020, lean_z * 0.2)
@@ -157,7 +200,7 @@ static func build(root: Node3D, seed: int) -> void:
 	var torso_mats: Array = []
 	for k in range(3):
 		torso_mats.append(_glaze(col_main, line_tex))
-	_chain(root, torso_pts, torso_radii, torso_mats, mat_ball, mat_chrome)
+	_chain(root, torso_pts, torso_radii, torso_mats, mat_ball, mat_chrome, stringing)
 
 	# --- shoulders ----------------------------------------------------------
 	var sh_half: float = rng.randf_range(0.175, 0.198)
@@ -167,8 +210,8 @@ static func build(root: Node3D, seed: int) -> void:
 		var sp: Vector3 = tn3 + Vector3(sd * sh_half, rng.randf_range(-0.012, 0.016), 0.004)
 		shoulder_pts.append(sp)
 		var ball := SphereMesh.new()
-		ball.radius = 0.062
-		ball.height = 0.124
+		ball.radius = 0.062 * joint_k
+		ball.height = 0.124 * joint_k
 		ball.radial_segments = 22
 		ball.rings = 11
 		var bm: MeshInstance3D = _add(root, ball, mat_ball)
@@ -218,7 +261,7 @@ static func build(root: Node3D, seed: int) -> void:
 			var alt: bool = (i % 3) == 2 or (two_tone and i == n_arm - 1)
 			var pick: Color = col_alt if alt else col_main
 			mats.append(_glaze(pick, line_tex))
-		_chain(root, pts, radii, mats, mat_ball, mat_chrome)
+		_chain(root, pts, radii, mats, mat_ball, mat_chrome, stringing)
 		# three short finger nubs at the end of the chain
 		var hand: Vector3 = pts[n_arm]
 		var up_ish: Vector3 = Vector3(0.0, 1.0, 0.0)
@@ -228,16 +271,26 @@ static func build(root: Node3D, seed: int) -> void:
 		side_v = side_v.normalized()
 		var norm_v: Vector3 = side_v.cross(last_dir).normalized()
 		var mat_finger: StandardMaterial3D = _glaze(col_main, line_tex)
-		for f in range(3):
-			var a_f: float = (float(f) - 1.0) * 0.62
+		var n_fin: int = 3
+		if vestment == "bloomed":
+			n_fin = 5
+		for f in range(n_fin):
+			var a_f: float = (float(f) - float(n_fin - 1) * 0.5) * 0.62
 			var fd: Vector3 = (last_dir * 0.72 + side_v * sin(a_f) * 0.55 - norm_v * 0.42).normalized()
+			if vestment == "bloomed":
+				# the hand opens: a flat printed petal instead of a nub
+				var petal := QuadMesh.new()
+				petal.size = Vector2(0.082, 0.148)
+				var pmi: MeshInstance3D = _add(root, petal, mat_cloth)
+				pmi.transform = Transform3D(_basis_y_to(fd), hand + fd * 0.082)
+				continue
 			var fin := CapsuleMesh.new()
-			fin.radius = 0.0155
-			fin.height = 0.068
+			fin.radius = 0.0155 * fin_k
+			fin.height = 0.068 * fin_k
 			fin.radial_segments = 10
 			fin.rings = 3
 			var fim: MeshInstance3D = _add(root, fin, mat_finger)
-			fim.transform = Transform3D(_basis_y_to(fd), hand + fd * 0.036)
+			fim.transform = Transform3D(_basis_y_to(fd), hand + fd * (0.036 * fin_k))
 
 	# --- neck and egg head --------------------------------------------------
 	var n0: Vector3 = tn3 + Vector3(0.0, 0.010, 0.0)
@@ -246,16 +299,18 @@ static func build(root: Node3D, seed: int) -> void:
 	var neck_pts: Array = [n0, n1, n2]
 	var neck_radii: Array = [0.048, 0.042, 0.040]
 	var neck_mats: Array = [_glaze(col_alt, null), _glaze(col_main, null)]
-	_chain(root, neck_pts, neck_radii, neck_mats, mat_ball, mat_chrome)
+	_chain(root, neck_pts, neck_radii, neck_mats, mat_ball, mat_chrome, stringing)
 
 	var hb: Basis = Basis(Vector3.UP, head_yaw) * Basis(Vector3.RIGHT, head_tilt)
-	var head_org: Vector3 = n2 + hb * Vector3(0.0, 0.098, 0.0)
+	var head_org: Vector3 = n2 + hb * Vector3(0.0, 0.098 * head_k, 0.0)
 	var egg := SphereMesh.new()
-	egg.radius = 0.083
-	egg.height = 0.216
+	egg.radius = 0.083 * head_k
+	egg.height = 0.216 * head_k
 	egg.radial_segments = 26
 	egg.rings = 14
 	var mat_head: StandardMaterial3D = _glaze(col_main, null)
+	if stringing == "wired":
+		mat_head = mat_chrome
 	var hm: MeshInstance3D = _add(root, egg, mat_head)
 	hm.transform = Transform3D(hb, head_org)
 	# one dark glaze dot, on one side only — the only feature on the face
@@ -266,34 +321,68 @@ static func build(root: Node3D, seed: int) -> void:
 	dot.radial_segments = 12
 	dot.rings = 6
 	var dm: MeshInstance3D = _add(root, dot, mat_dark)
-	dm.transform = Transform3D(Basis(), head_org + hb * Vector3(dot_side * 0.060, 0.024, -0.052))
+	dm.transform = Transform3D(Basis(), head_org + hb * (Vector3(dot_side * 0.060, 0.024, -0.052) * head_k))
 	var nub := CylinderMesh.new()
 	nub.bottom_radius = 0.020
 	nub.top_radius = 0.016
 	nub.height = 0.018
 	nub.radial_segments = 14
 	var nm: MeshInstance3D = _add(root, nub, mat_chrome)
-	nm.transform = Transform3D(hb * _basis_y_to(Vector3(0.0, 0.25, 1.0).normalized()), head_org + hb * Vector3(0.0, 0.010, 0.078))
+	nm.transform = Transform3D(hb * _basis_y_to(Vector3(0.0, 0.25, 1.0).normalized()), head_org + hb * (Vector3(0.0, 0.010, 0.078) * head_k))
 
-	# --- the stiff maze cloth ------------------------------------------------
+	# --- the vestment: stiff maze cloth, or what it has become ---------------
+	# every branch draws the same numbers in the same order, so the axis is the
+	# only thing that differs between two frames of this seed
 	var y_top: float = y_shoulder + 0.020
 	var y_hem: float = lerpf(y_hip, 0.0, rng.randf_range(0.24, 0.32))
+	var rx_top: float = rng.randf_range(0.215, 0.240)
+	var rx_hem: float = rng.randf_range(0.165, 0.190)
+	var rz_top: float = rng.randf_range(0.128, 0.148)
+	var rz_hem: float = rng.randf_range(0.108, 0.126)
+	var u_tiles: float = rng.randf_range(1.5, 2.1)
+	var v_tiles: float = rng.randf_range(1.7, 2.4)
+	var petals: int = 0
+	var petal_amp: float = 0.0
+	var flare: float = 0.0
+	var curl: float = 0.0
+	if vestment == "bloomed":
+		petals = 5
+		petal_amp = 0.72
+		flare = 0.58
+		curl = 0.15
 	var cloth_mesh: ArrayMesh = _cloth(
 		rng, y_top, y_hem,
-		rng.randf_range(0.215, 0.240), rng.randf_range(0.165, 0.190),
-		rng.randf_range(0.128, 0.148), rng.randf_range(0.108, 0.126),
+		rx_top, rx_hem, rz_top, rz_hem,
 		lean_x, lean_z, n_ring, n_side,
-		rng.randf_range(1.5, 2.1), rng.randf_range(1.7, 2.4)
+		u_tiles, v_tiles,
+		petals, petal_amp, flare, curl
 	)
-	var cm_node: MeshInstance3D = _add(root, cloth_mesh, mat_cloth)
-	cm_node.transform = Transform3D(Basis(), Vector3.ZERO)
+	if vestment != "unravelled":
+		var cm_node: MeshInstance3D = _add(root, cloth_mesh, mat_cloth)
+		cm_node.transform = Transform3D(Basis(), Vector3.ZERO)
 	# the raised collar corner, folded stiffly up over one shoulder
 	var flap_side: float = 1.0 if rng.randf() < 0.5 else -1.0
 	var flap := QuadMesh.new()
 	flap.size = Vector2(rng.randf_range(0.19, 0.26), rng.randf_range(0.17, 0.24))
 	var flap_b: Basis = Basis(Vector3.UP, flap_side * rng.randf_range(0.5, 1.0)) * Basis(Vector3.RIGHT, rng.randf_range(0.5, 1.0))
-	var fpm: MeshInstance3D = _add(root, flap, mat_cloth)
-	fpm.transform = Transform3D(flap_b, Vector3(flap_side * 0.140 + lean_x, y_top + 0.052, 0.088 + lean_z))
+	if vestment != "unravelled":
+		var fpm: MeshInstance3D = _add(root, flap, mat_cloth)
+		fpm.transform = Transform3D(flap_b, Vector3(flap_side * 0.140 + lean_x, y_top + 0.052, 0.088 + lean_z))
+
+	if vestment == "unravelled":
+		# the shell has come apart: the print now hangs as loose threads
+		var n_thread: int = rng.randi_range(20, 28)
+		var thread_mesh: ArrayMesh = _threads(rng, y_top, y_hem, rx_top, rx_hem, rz_top, rz_hem, lean_x, lean_z, n_thread)
+		var th_node: MeshInstance3D = _add(root, thread_mesh, mat_cloth)
+		th_node.transform = Transform3D(Basis(), Vector3.ZERO)
+	elif vestment == "flooded":
+		# the glaze ran off the kiln shelf and set: the lower body is drowned
+		var y_pour: float = y_hip * rng.randf_range(0.74, 0.98)
+		var pour_r: float = rng.randf_range(0.34, 0.44)
+		var pour_mesh: ArrayMesh = _pour(rng, y_pour, pour_r, lean_x, lean_z)
+		var mat_pour: StandardMaterial3D = _glaze(col_alt.lerp(Color(1.0, 1.0, 1.0), 0.22), null)
+		var pr_node: MeshInstance3D = _add(root, pour_mesh, mat_pour)
+		pr_node.transform = Transform3D(Basis(), Vector3.ZERO)
 
 	# --- a seeded quarter-turn in the stance --------------------------------
 	var spin := Basis(Vector3.UP, yaw)
@@ -330,8 +419,14 @@ static func build(root: Node3D, seed: int) -> void:
 # ---------------------------------------------------------------------------
 # the jointed chain — the whole grammar of this puppet
 
-static func _chain(root: Node3D, pts: Array, radii: Array, seg_mats: Array, mat_ball: StandardMaterial3D, mat_chrome: StandardMaterial3D) -> void:
+static func _chain(root: Node3D, pts: Array, radii: Array, seg_mats: Array, mat_ball: StandardMaterial3D, mat_chrome: StandardMaterial3D, mode: String = "strung") -> void:
 	var n: int = pts.size()
+	# the chain's own centre, so "unstrung" can shove each link off it
+	var cen := Vector3.ZERO
+	for i in range(n):
+		var pv: Vector3 = pts[i]
+		cen += pv
+	cen = cen / float(n)
 	for i in range(n - 1):
 		var a: Vector3 = pts[i]
 		var b: Vector3 = pts[i + 1]
@@ -344,18 +439,54 @@ static func _chain(root: Node3D, pts: Array, radii: Array, seg_mats: Array, mat_
 		var ca: Vector3 = a + dir * inset
 		var cb: Vector3 = b - dir * (float(radii[i + 1]) * 1.16 * 0.70)
 		var seg_len: float = maxf((cb - ca).length(), 0.02)
+		var mat_i: StandardMaterial3D = seg_mats[mini(i, seg_mats.size() - 1)]
+		if mode == "swarmed":
+			# the link is gone; a cloud of its own beads stands where it was
+			_swarm(root, ca, cb, dir, r, i, mat_i, mat_ball)
+			continue
+		var pa: Vector3 = ca
+		var pb: Vector3 = cb
+		var rr: float = r
+		var collar_r: float = r * 1.07
+		var seg_mat: StandardMaterial3D = mat_i
+		if mode == "wired":
+			# the glaze fired away: a bare rod through fat chrome rings
+			rr = maxf(r * 0.20, 0.005)
+			collar_r = r * 1.14
+			seg_mat = mat_chrome
+		elif mode == "swollen":
+			# the link inflates until it swallows its own joints
+			rr = r * 1.85
+			var mid_s: Vector3 = (ca + cb) * 0.5
+			pa = mid_s - dir * (seg_len * 0.27)
+			pb = mid_s + dir * (seg_len * 0.27)
+			collar_r = r * 0.50
+		elif mode == "unstrung":
+			# the link hovers off the armature, along its own outward normal
+			var away: Vector3 = (ca + cb) * 0.5 - cen
+			if away.length() < 0.004:
+				away = dir.cross(Vector3.UP)
+			if away.length() < 0.004:
+				away = Vector3.RIGHT
+			var mid_u: Vector3 = (ca + cb) * 0.5 + away.normalized() * (r * 2.3) + Vector3(0.0, r * 0.85, 0.0)
+			pa = mid_u - dir * (seg_len * 0.29)
+			pb = mid_u + dir * (seg_len * 0.29)
+		var body_len: float = maxf((pb - pa).length(), 0.02)
 		var cap := CapsuleMesh.new()
-		cap.radius = r
-		cap.height = seg_len + r * 2.0
+		cap.radius = rr
+		cap.height = body_len + rr * 2.0
 		cap.radial_segments = 18
 		cap.rings = 5
-		var mat_i: StandardMaterial3D = seg_mats[mini(i, seg_mats.size() - 1)]
-		var mi: MeshInstance3D = _add(root, cap, mat_i)
-		mi.transform = Transform3D(_basis_y_to(dir), (ca + cb) * 0.5)
-		_collar(root, ca + dir * (r * 0.30), dir, r * 1.07, mat_chrome)
-		_collar(root, cb - dir * (r * 0.30), dir, r * 1.07, mat_chrome)
+		var mi: MeshInstance3D = _add(root, cap, seg_mat)
+		mi.transform = Transform3D(_basis_y_to(dir), (pa + pb) * 0.5)
+		_collar(root, pa + dir * (r * 0.30), dir, collar_r, mat_chrome)
+		_collar(root, pb - dir * (r * 0.30), dir, collar_r, mat_chrome)
 	for i in range(n):
 		var rb: float = float(radii[mini(i, radii.size() - 1)]) * 1.16
+		if mode == "wired" or mode == "swollen":
+			rb *= 0.58
+		elif mode == "swarmed":
+			rb *= 0.70
 		var ball := SphereMesh.new()
 		ball.radius = rb
 		ball.height = rb * 2.0
@@ -363,6 +494,30 @@ static func _chain(root: Node3D, pts: Array, radii: Array, seg_mats: Array, mat_
 		ball.rings = 11
 		var bm: MeshInstance3D = _add(root, ball, mat_ball)
 		bm.transform = Transform3D(Basis(), pts[i])
+
+
+# a link dissolved into a handful of small glazed beads — the swarm is made of
+# copies of the puppet's own ball joints, scattered off the link's axis
+static func _swarm(root: Node3D, a: Vector3, b: Vector3, dir: Vector3, r: float, salt: int, mat_seg: StandardMaterial3D, mat_ball: StandardMaterial3D) -> void:
+	var side: Vector3 = dir.cross(Vector3.UP)
+	if side.length() < 0.01:
+		side = Vector3.RIGHT
+	side = side.normalized()
+	var nrm: Vector3 = side.cross(dir).normalized()
+	for q in range(5):
+		var t: float = (float(q) + 0.5) / 5.0
+		var ang: float = float(q) * 2.39996 + float(salt) * 1.37
+		var swing: float = r * (1.05 + 0.80 * sin(float(salt) * 0.71 + float(q) * 1.93))
+		var p: Vector3 = a.lerp(b, t) + side * (cos(ang) * swing) + nrm * (sin(ang) * swing)
+		var br: float = r * (0.30 + 0.24 * absf(sin(float(q) * 2.11 + float(salt) * 0.83)))
+		var bead := SphereMesh.new()
+		bead.radius = br
+		bead.height = br * 2.0
+		bead.radial_segments = 12
+		bead.rings = 6
+		var mat_q: StandardMaterial3D = mat_seg if (q % 2) == 0 else mat_ball
+		var bm: MeshInstance3D = _add(root, bead, mat_q)
+		bm.transform = Transform3D(Basis(), p)
 
 
 static func _collar(root: Node3D, at: Vector3, dir: Vector3, r: float, mat: StandardMaterial3D) -> MeshInstance3D:
@@ -380,7 +535,7 @@ static func _collar(root: Node3D, at: Vector3, dir: Vector3, r: float, mat: Stan
 # ---------------------------------------------------------------------------
 # the cloth shell
 
-static func _cloth(rng: RandomNumberGenerator, y_top: float, y_hem: float, rx_top: float, rx_hem: float, rz_top: float, rz_hem: float, lean_x: float, lean_z: float, n_ring: int, n_side: int, u_tiles: float, v_tiles: float) -> ArrayMesh:
+static func _cloth(rng: RandomNumberGenerator, y_top: float, y_hem: float, rx_top: float, rx_hem: float, rz_top: float, rz_hem: float, lean_x: float, lean_z: float, n_ring: int, n_side: int, u_tiles: float, v_tiles: float, petals: int = 0, petal_amp: float = 0.0, flare: float = 0.0, curl: float = 0.0) -> ArrayMesh:
 	var folds: Array = []
 	var lifts: Array = []
 	for j in range(n_side):
@@ -404,15 +559,23 @@ static func _cloth(rng: RandomNumberGenerator, y_top: float, y_hem: float, rx_to
 		if k == n_ring - 1:
 			rx += 0.012
 			rz += 0.010
+		# the bloom: the whole skirt swells outward toward the hem
+		var open_k: float = 1.0 + flare * s * s
+		rx = rx * open_k
+		rz = rz * open_k
 		var ring: Array = []
 		for j in range(n_side):
 			var th: float = TAU * float(j) / float(n_side)
-			var fold: float = 1.0 + float(folds[j]) * (0.35 + 0.65 * t)
+			# the petal lobe — zero unless this vestment blooms
+			var lobe: float = 0.0
+			if petals > 0:
+				lobe = pow(0.5 + 0.5 * cos(float(petals) * th), 1.7)
+			var fold: float = 1.0 + float(folds[j]) * (0.35 + 0.65 * t) + petal_amp * lobe * s
 			var py: float = cy
 			if k == 0:
 				py += float(lifts[j])
 			if k == n_ring - 1:
-				py += 0.026 * sin(th * 3.0 + float(folds[j]) * 8.0)
+				py += 0.026 * sin(th * 3.0 + float(folds[j]) * 8.0) + curl * lobe
 			ring.append(Vector3(cx + rx * fold * cos(th), py, cz + rz * fold * sin(th)))
 		grid.append(ring)
 		axis.append(Vector3(cx, cy, cz))
@@ -463,6 +626,116 @@ static func _quad_uv(st: SurfaceTool, a: Vector3, ua: Vector2, b: Vector3, ub: V
 static func _v(st: SurfaceTool, p: Vector3, uv: Vector2) -> void:
 	st.set_uv(uv)
 	st.add_vertex(p)
+
+
+# the unravelled vestment — the shell come apart into hanging printed threads,
+# each a narrow ribbon that spirals off the shoulder line and swings free of the
+# body. One mesh, so a hundred threads cost one MeshInstance3D.
+static func _threads(rng: RandomNumberGenerator, y_top: float, y_hem: float, rx_top: float, rx_hem: float, rz_top: float, rz_hem: float, lean_x: float, lean_z: float, count: int) -> ArrayMesh:
+	var st := SurfaceTool.new()
+	st.begin(Mesh.PRIMITIVE_TRIANGLES)
+	st.set_smooth_group(-1)
+	var steps: int = 9
+	for s in range(count):
+		var th0: float = TAU * float(s) / float(count) + rng.randf_range(-0.12, 0.12)
+		var sway: float = rng.randf_range(-0.70, 0.70)
+		var drop: float = rng.randf_range(0.0, 1.0)
+		var y_end: float = lerpf(y_hem, 0.015, clampf(0.18 + 0.78 * drop, 0.0, 1.0))
+		var halfw: float = rng.randf_range(0.005, 0.015)
+		var bow: float = rng.randf_range(0.01, 0.11)
+		var kink: float = rng.randf_range(0.0, 0.045)
+		var prev_a := Vector3.ZERO
+		var prev_b := Vector3.ZERO
+		var prev_t: float = 0.0
+		for k in range(steps + 1):
+			var t: float = float(k) / float(steps)
+			var th: float = th0 + sway * t * t
+			var yy: float = lerpf(y_top, y_end, _ease(t)) + kink * sin(t * 11.0 + float(s))
+			var rx: float = lerpf(rx_top, rx_hem, t) + bow * t * t
+			var rz: float = lerpf(rz_top, rz_hem, t) + bow * t * t
+			var cx: float = lean_x * (1.0 - t)
+			var cz: float = lean_z * (1.0 - t) - 0.045 * t
+			var p := Vector3(cx + rx * cos(th), yy, cz + rz * sin(th))
+			var tang: Vector3 = Vector3(-sin(th), 0.0, cos(th)) * halfw
+			var pa: Vector3 = p - tang
+			var pb: Vector3 = p + tang
+			if k > 0:
+				_v(st, prev_a, Vector2(0.0, prev_t * 2.6))
+				_v(st, prev_b, Vector2(1.0, prev_t * 2.6))
+				_v(st, pb, Vector2(1.0, t * 2.6))
+				_v(st, prev_a, Vector2(0.0, prev_t * 2.6))
+				_v(st, pb, Vector2(1.0, t * 2.6))
+				_v(st, pa, Vector2(0.0, t * 2.6))
+			prev_a = pa
+			prev_b = pb
+			prev_t = t
+	st.generate_normals()
+	return st.commit()
+
+
+# the flooded vestment — a solid pour of set glaze standing on the floor, risen
+# in uneven tongues up the legs until it drowns the hem of the cloth
+static func _pour(rng: RandomNumberGenerator, y_pour: float, base_r: float, lean_x: float, lean_z: float) -> ArrayMesh:
+	var sides: int = 22
+	var rings: int = 7
+	var tongues: Array = []
+	var wobs: Array = []
+	for j in range(sides):
+		tongues.append(rng.randf_range(0.34, 0.92))
+		wobs.append(rng.randf_range(-0.12, 0.16))
+	for i in range(3):
+		tongues[rng.randi_range(0, sides - 1)] = rng.randf_range(1.02, 1.34)
+
+	var grid: Array = []
+	var axis: Array = []
+	for k in range(rings):
+		var t: float = float(k) / float(rings - 1)
+		var s: float = _ease(t)
+		var cx: float = lean_x * t * 0.4
+		var cz: float = lean_z * t * 0.4
+		var ring: Array = []
+		var y_sum: float = 0.0
+		for j in range(sides):
+			var th: float = TAU * float(j) / float(sides)
+			var top_j: float = y_pour * clampf(float(tongues[j]), 0.2, 1.4)
+			var yy: float = lerpf(0.0, top_j, t)
+			var rr: float = lerpf(base_r * (1.0 + float(wobs[j])), 0.118, s)
+			ring.append(Vector3(cx + rr * cos(th), yy, cz + rr * 0.86 * sin(th)))
+			y_sum += yy
+		grid.append(ring)
+		axis.append(Vector3(cx, y_sum / float(sides), cz))
+
+	var st := SurfaceTool.new()
+	st.begin(Mesh.PRIMITIVE_TRIANGLES)
+	st.set_smooth_group(-1)
+	for k in range(rings - 1):
+		var row0: Array = grid[k]
+		var row1: Array = grid[k + 1]
+		var ax0: Vector3 = axis[k]
+		var ax1: Vector3 = axis[k + 1]
+		var v0: float = float(k) / float(rings - 1) * 1.3
+		var v1: float = float(k + 1) / float(rings - 1) * 1.3
+		for j in range(sides):
+			var j2: int = posmod(j + 1, sides)
+			var u0: float = float(j) / float(sides) * 2.0
+			var u1: float = float(j + 1) / float(sides) * 2.0
+			var pa: Vector3 = row0[j]
+			var pb: Vector3 = row0[j2]
+			var pc: Vector3 = row1[j2]
+			var pd: Vector3 = row1[j]
+			_quad_uv(st, pa, Vector2(u0, v0), pb, Vector2(u1, v0), pc, Vector2(u1, v1), pd, Vector2(u0, v1), (ax0 + ax1) * 0.5)
+	# close the top, so the pour reads as a solid and not a shell
+	var top_row: Array = grid[rings - 1]
+	var cap_c: Vector3 = axis[rings - 1]
+	for j in range(sides):
+		var j2: int = posmod(j + 1, sides)
+		var ta: Vector3 = top_row[j]
+		var tb: Vector3 = top_row[j2]
+		_v(st, cap_c, Vector2(0.5, 0.5))
+		_v(st, tb, Vector2(0.5, 0.5))
+		_v(st, ta, Vector2(0.5, 0.5))
+	st.generate_normals()
+	return st.commit()
 
 
 # ---------------------------------------------------------------------------

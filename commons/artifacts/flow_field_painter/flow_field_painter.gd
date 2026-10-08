@@ -1,11 +1,13 @@
 # flow_field_painter.gd
-## Implements Perlin noise flow-field advection to visualize particle dynamics.
-## Particles follow the gradient of a 2D+time noise field, leaving colored trails
-## that create organic, paint-like patterns. The noise field evolves continuously,
-## producing ever-changing flow structures.
-## Key parameters: noise_scale controls field frequency, particle_speed sets advection rate.
+## Particles sample a Perlin-derived direction field at their current positions.
+## A 2D+time noise value becomes an angle, then a unit direction; each update
+## moves by direction * particle_speed * delta and retains a finite trail.
+## The field clock can advance or be held independently of particle movement.
+## Key parameters: noise_scale controls spatial variation; particle_speed sets speed.
 ##
-## QFEP: Noise as structured randomness — not chaos, not order, but λ-edge
+## Research association: structured noise can invite questions about order and
+## variation. This direction sampler does not calculate a QFEP λ-edge, a noise
+## gradient, forces, or fluid dynamics.
 
 # @identity
 # essence: a small canvas across which hundreds of particles drift, each one
@@ -13,28 +15,28 @@
 #   colored trail behind it. No particle is told where to go; it only reads the
 #   field beneath its feet and steps. The image is the AGGREGATE of those steps
 #   — paint laid down by a crowd that never agreed on a destination.
-# desire: to make an invisible vector field visible by letting things FALL
-#   through it. The field has no color, no shape, no edge; only when bodies
+# desire: to make an invisible direction field visible by letting particles STEP
+#   through it. The field has no color; only when bodies
 #   advect along it do its grain and swirls appear. It wants to show that
 #   structure can be felt before it can be seen.
 # critical_parameter: noise_scale — the spatial frequency of the field. Low and
-#   the particles sweep in broad laminar rivers; high and the field shatters
-#   into tight turbulent eddies. It is the dial between calm and chaos without
-#   ever touching the particles themselves. (noise_speed evolves the field in
-#   time so no frame's flow is the last word.)
+#   the directions vary over broader distances; high and they vary over shorter
+#   distances. River and eddy are visual associations, not simulated fluid
+#   regimes. (noise_speed advances the field's time coordinate when enabled.)
 # triggers: _ready() builds the canvas and seeds particles; _process(dt)
-#   advances _time, samples the noise gradient at each particle, advects it by
+#   advances _time if enabled, samples the noise value at each particle, moves it by
 #   particle_speed, and redraws fading trails into an ImmediateMesh
-# emerges: large scale reads CURRENT / RIVER; small scale reads TURBULENCE /
-#   STORM. Same particles, the field's frequency IS the difference between flow
-#   that reads as ordered and flow that reads as chaotic — the λ-edge made paint
+# emerges: the same local direction rule makes many different trajectories as
+#   each new position becomes the next lookup address. Their aggregate can read
+#   as a current or a storm; those readings belong to the picture.
 # relationships: sibling to other noise artifacts (all turn structured
 #   randomness into form); cousin to forces/flocking artifacts (both move bodies
-#   by a field rather than by command); peer to barnsley_fern (both fill a plane
+#   through local rules, though this painter stores no velocity or force);
+#   peer to barnsley_fern (both fill a plane
 #   from many cheap iterations, but the fern's points CONVERGE while these flow)
-# truth: noise is not the absence of order but order at a length scale you have
-#   not yet named. The painter is that thesis enacted — randomness given a
-#   frequency becomes a current, and a current given bodies becomes a picture.
+# truth: a simple local rule can leave a complicated history. The picture records
+#   finite positions and also connects samples across a wrap; a visible stroke
+#   need not be a route that a particle actually travelled.
 
 extends Node3D
 
@@ -74,6 +76,8 @@ class_name FlowFieldPainter
 var _noise: FastNoiseLite
 var _particles: Array[Dictionary] = []
 var _time: float = 0.0
+var field_evolving: bool = true
+var field_lesson: Node3D
 
 # Visuals
 var _canvas_mesh: MeshInstance3D
@@ -118,6 +122,10 @@ func _ready():
 	_trail_mat.transparency = BaseMaterial3D.TRANSPARENCY_ALPHA
 	_trail_mesh.mesh = _im
 	_trail_mesh.material_override = _trail_mat
+	if str(get_meta("config_lesson", "")) == "shared_field":
+		field_lesson = preload("res://commons/artifacts/flow_field_painter/shared_field_lesson.gd").new()
+		field_lesson.name = "SharedFieldLesson"
+		add_child(field_lesson)
 
 ## Configure the Perlin noise generator.
 func _setup_noise():
@@ -289,22 +297,15 @@ func _new_seed(_button = null):  # Accept optional button arg
 
 ## Advect particles through the noise field and update trails each frame.
 func _process(delta):
-	_time = wrapf(_time + delta * noise_speed, 0.0, 1000.0)
+	if field_evolving: _time = wrapf(_time + delta * noise_speed, 0.0, 1000.0)
 
 	var half_cx := canvas_size.x / 2.0
 	var half_cy := canvas_size.y / 2.0
-	var inv_cx := 1.0 / maxf(canvas_size.x, 0.0001)
-	var inv_cy := 1.0 / maxf(canvas_size.y, 0.0001)
-
 	for p in _particles:
-		# Get flow angle from noise
-		var nx = (p.x + half_cx) * inv_cx * NOISE_SAMPLE_SCALE
-		var ny = (p.y + half_cy) * inv_cy * NOISE_SAMPLE_SCALE
-		var angle = _noise.get_noise_3d(nx * noise_scale, ny * noise_scale, _time * NOISE_TIME_SCALE) * TAU * 2.0
-
+		var direction = field_direction(Vector2(p.x, p.y))
 		# Move particle
-		p.x += cos(angle) * particle_speed * delta
-		p.y += sin(angle) * particle_speed * delta
+		p.x += direction.x * particle_speed * delta
+		p.y += direction.y * particle_speed * delta
 
 		# Wrap around
 		if p.x < -half_cx: p.x += canvas_size.x
@@ -318,6 +319,14 @@ func _process(delta):
 			p.trail.remove_at(0)
 
 	_update_trail_mesh()
+
+## Shared by the live particle update and the lesson's arrow display.
+func field_direction(point: Vector2) -> Vector2:
+	var nx = (point.x + canvas_size.x / 2.0) / maxf(canvas_size.x, 0.0001) * NOISE_SAMPLE_SCALE
+	var ny = (point.y + canvas_size.y / 2.0) / maxf(canvas_size.y, 0.0001) * NOISE_SAMPLE_SCALE
+	var coordinate_scale = 1.0 if field_lesson != null else noise_scale
+	var angle = _noise.get_noise_3d(nx * coordinate_scale, ny * coordinate_scale, _time * NOISE_TIME_SCALE) * TAU * 2.0
+	return Vector2(cos(angle), sin(angle))
 
 ## Rebuild trail line geometry from particle trails using the cached ImmediateMesh.
 func _update_trail_mesh():

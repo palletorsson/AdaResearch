@@ -4,6 +4,8 @@ var work: Node3D
 var reading: Label3D
 var markers: Array[MeshInstance3D] = []
 var elapsed: float = 0.0
+var room_ring: Node3D
+var floor_history: Node3D
 
 func _ready() -> void:
 	work = get_parent()
@@ -51,12 +53,23 @@ func _ready() -> void:
 		marker.material_override = mat
 		add_child(marker)
 		markers.append(marker)
+	if str(work.get_meta("config_room", "")) == "ring":
+		room_ring = load("res://commons/artifacts/ca_rule_explorer/neighbour_ring.gd").new()
+		add_child(room_ring)
+		room_ring.build(work)
+		add_child(load("res://commons/artifacts/ca_rule_explorer/hand_point.gd").new())
+	if str(work.get_meta("config_room", "")) == "comparison":
+		floor_history = load("res://commons/artifacts/ca_rule_explorer/comparison_floor.gd").new()
+		add_child(floor_history)
+		floor_history.build(work)
 	refresh()
 
 func next_cell() -> void:
 	work.sample_cell = (work.sample_cell + 1) % work.cells_x
 
 func refresh() -> void:
+	if is_instance_valid(floor_history): floor_history.refresh()
+	if is_instance_valid(room_ring): room_ring.refresh()
 	var d: Dictionary = work.neighbourhood_readback()
 	reading.text = "THREE CELLS\n\nGEN %d / %s\nCELL %d OF %d\n\nLEFT  SELF  RIGHT\n%d       %d       %d\n\nNEXT: %d\nRULE %d\n\nSEED: %s\nEDGES WRAP" % [d.generation, "RUN" if d.running else "HELD", d.cell, d.width, d.inputs[0], d.inputs[1], d.inputs[2], d.next, d.rule, d.seed.to_upper()]
 	for j in range(3):

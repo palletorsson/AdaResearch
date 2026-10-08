@@ -2,30 +2,18 @@ extends Node3D
 class_name TriangleCurvatureWorkbench
 
 # @identity
-# essence: an interactive Gauss-Bonnet workbench — the player turns a slider for Gaussian curvature K and watches the triangle's host surface switch sign with it. At K=0 the triangle sits on a flat cyan grid and its angles sum to exactly π. Push the slider negative and the surface morphs into a Poincaré disk; the same triangle's edges become arcs bowing inward, its angles deflate, and the readout shows a defect. Push positive and the surface inflates into a sphere; the edges balloon into great-circle arcs, the angles fatten, and the readout shows an excess. The defect/excess is the integral of K over the triangle.
-# desire: the learner viscerally relocates Euclid's parallel postulate from "truth" to "a setting" — the slider IS Gauss-Bonnet, the surface is the parameter the postulate lives in
-# critical_parameter: K — discrete in {-2, -1, -0.5, 0, +0.5, +1, +2}. Drives surface choice, edge geodesic type, angle measurement, and the excess/defect readout
-# triggers: _ready() builds slider + surface root + triangle root + readout; _on_slider_changed swaps the surface and re-emits the triangle on it
-# emerges: the Theorema Egregium of triangles — angle sum is intrinsic, not extrinsic. The triangle doesn't know it's "in 3D"; it only knows its host's K. The number it reads back is geometry's secret pulse.
-# needs: slider_horizontal [present]; ImmediateMesh for triangle edges + angle arcs [present]; SphereMesh / QuadMesh / disk procgen for surfaces [present]; Label3D for readouts [present]; riemann_sum_workbench + shannon_workbench as siblings [present]
-# relationships: paired with /triangle-table-gallery's 9 cells (3 surfaces × 3 sizes); sits beside riemann_sphere, hyperbolic_surface, elliptic_surface as their unifying instrument; embodies the foundationscrisis truth "Euclid was one consistent choice among many"
-# truth: the parallel postulate is not a fact about lines, it is a setting on the surface they live in. Triangles on a sphere sum to more than 180°; on a disk they sum to less. The slider walks the postulate from "always", to "sometimes", to "never".
+# essence: select a plane, a Poincare disk model, or a sphere; compare the interior angles between their geodesic tangents
+# desire: change the host and ask what a straight path means there
+# critical_parameter: model selection — three examples, not a continuous control of Gaussian curvature magnitude
+# triggers: the physical slider selects disk, plane or sphere and rebuilds edges and measured-angle readout
+# needs: slider_horizontal [present]; console readout [present]
+# relationships: follows the printed angle claim in Euclid_Parallel; keeps the independent surface illustrations available for comparison
+# truth: the angle sum depends on the host geometry and the chosen triangle; the readout measures angles, not an independent curvature integral
 
-## A horizontal workbench for Gauss-Bonnet on a triangle.
-##
-## One slider drives Gaussian curvature K through seven detents
-## {-2, -1, -0.5, 0, +0.5, +1, +2}. As K changes:
-##   • the host surface morphs (Poincaré disk for K<0, flat grid for K=0, sphere for K>0)
-##   • the triangle's three vertices stay at canonical 30° geodesic separation
-##   • the edges become geodesics ON that surface (arcs, lines, or great-circle arcs)
-##   • the interior angles are measured and the angle sum (α + β + γ) is shown
-##   • the Gauss-Bonnet excess/defect (K · Area_T) appears as the gap from π
-##
-## The math: Gauss-Bonnet for a geodesic triangle says
-##   ∫∫_T K dA  =  (α + β + γ) − π
-## i.e. the angle sum exceeds π by exactly the integrated curvature over the
-## triangle. For our constant-K surfaces this reduces to
-##   K · Area_T  =  (α + β + γ) − π .
+## Three model examples. The Poincare disk is a flat drawing equipped with a
+## hyperbolic metric; the sphere uses great-circle edges; the plane uses segments.
+## The triangle is rebuilt for each model, not transported by an isometry.
+## Legacy initial_k inputs select by sign. Their magnitude never drove geometry.
 
 # ── Configuration ─────────────────────────────────────────────────────
 
@@ -37,7 +25,9 @@ class_name TriangleCurvatureWorkbench
 
 @export_group("Surface display")
 ## Where the surface sits relative to the artifact origin.
-@export var surface_offset: Vector3 = Vector3(0.0, 1.55, -0.20)
+@export var surface_offset: Vector3 = Vector3(0.0, 1.35, -0.95)
+## Tilt the whole model toward the visitor, leaving its intrinsic angles intact.
+@export var surface_tilt_deg: float = 35.0
 ## World-space radius the surface fills. The disk and sphere both fit inside this.
 @export var surface_radius: float = 0.42
 ## Colors keyed to the three regimes — match /triangle-table-gallery palette.
@@ -46,10 +36,8 @@ class_name TriangleCurvatureWorkbench
 @export var disk_color: Color = Color(0.35, 0.55, 1.0)        # blue
 
 @export_group("Triangle")
-## Geodesic half-angle each vertex sits at from the surface "north pole" /
-## disk center / plane origin. 30° is small enough that all three regimes
-## render cleanly inside surface_radius, and large enough that
-## excess/defect is visible (~10° at K=±1).
+## Angular distance from the sphere's north pole; also scales the disk and
+## plane vertex radii. These are three examples, not an isometric transport.
 @export var triangle_radius_deg: float = 30.0
 ## Number of segments per edge — 24 reads as smooth arcs without being heavy.
 @export var edge_segments: int = 24
@@ -66,12 +54,10 @@ const SLIDER_SCENE_PATH: String = "res://commons/interactables/slider_horizontal
 const ControlPanelScript = preload("res://commons/ui/control_panel.gd")
 const InterfacePresets = preload("res://commons/ui/interface_presets.gd")
 
-# Seven discrete K stops. Order matters — the slider's [0, 1] maps onto these
-# left-to-right, so negative K is on the left and positive on the right, which
-# matches the disk → flat → sphere visual reading.
-const K_STOPS: Array[float] = [-2.0, -1.0, -0.5, 0.0, 0.5, 1.0, 2.0]
+# Internal signs choose one of three normalized model examples.
+const K_STOPS: Array[float] = [-1.0, 0.0, 1.0]
 
-var _k_index: int = 3            # default to K=0 (flat) — neutral starting point
+var _k_index: int = 1
 var _k: float = 0.0
 
 var _plate_root: Node3D
@@ -94,22 +80,18 @@ var _plate_readout: Label       # 2D-in-3D readout integrated on the console boa
 
 # ── Lifecycle ─────────────────────────────────────────────────────────
 
-## Starting K — the critical parameter, settable as DNA (snapped to K_STOPS).
+## Legacy configuration: only the sign selects the model.
 @export var initial_k: float = 0.0
 
 func _ready() -> void:
-	var best_i := 0
-	var best_d := 1.0e9
-	for i in K_STOPS.size():
-		var d: float = absf(K_STOPS[i] - initial_k)
-		if d < best_d:
-			best_d = d
-			best_i = i
-	_k_index = best_i
+	_k_index = _index_from_sign(initial_k)
 	_k = K_STOPS[_k_index]
 	_build_plate_and_slider()
 	_build_surface_and_triangle_roots()
 	_refresh_all()
+
+func _index_from_sign(value: float) -> int:
+	return 0 if value < 0.0 else (2 if value > 0.0 else 1)
 
 
 # ── Slider detents ────────────────────────────────────────────────────
@@ -136,7 +118,7 @@ func _build_plate_and_slider() -> void:
 
 	_plate_readout = _plate_root.add_readout("")
 
-	_slider = _plate_root.add_slider("K  Gaussian curvature", "K  Gaussian curvature")
+	_slider = _plate_root.add_slider("HOST", "Disk / Plane / Sphere")
 	if _slider and _slider.has_method("set_normalized_value"):
 		_slider.call("set_normalized_value", _k_index_to_normalized(_k_index))
 	if _slider and _slider.has_signal("slider_moved"):
@@ -175,11 +157,13 @@ func _build_surface_and_triangle_roots() -> void:
 	_surface_root = Node3D.new()
 	_surface_root.name = "Surface"
 	_surface_root.position = surface_offset
+	_surface_root.rotation_degrees.x = surface_tilt_deg
 	add_child(_surface_root)
 
 	_triangle_root = Node3D.new()
 	_triangle_root.name = "Triangle"
 	_triangle_root.position = surface_offset
+	_triangle_root.rotation_degrees.x = surface_tilt_deg
 	add_child(_triangle_root)
 
 
@@ -381,8 +365,8 @@ func _build_disk_surface() -> void:
 # ── Triangle (geodesic edges on the active surface) ───────────────────
 
 # Returns the three triangle vertex positions in surface-local space.
-# Vertices sit at 30° geodesic separation from a center "north pole" (sphere)
-# / disk center / origin (plane), equispaced at 120° around it.
+# Three vertices at equal azimuth intervals. Radius is defined separately for
+# the sphere, flat plane and disk drawing.
 func _triangle_vertices() -> Array:
 	var verts: Array = []
 	var theta: float = deg_to_rad(triangle_radius_deg)
@@ -399,12 +383,8 @@ func _triangle_vertices() -> Array:
 				R * sin(theta) * sin(phi)
 			)
 		elif _k < 0.0:
-			# Poincaré disk: vertices on the flat (xz) plane. Place at
-			# euclidean radius tanh(theta_h / 2) where theta_h is hyperbolic
-			# half-angle from origin. We use Euclidean radius proportional
-			# to triangle_radius_deg so visible size matches the sphere case.
-			# Specifically: r_euc = triangle_radius_deg / 90 * 0.6 · R.
-			# That keeps the triangle inside the disk for our K range.
+			# A Euclidean drawing radius inside the Poincare disk. This is not
+			# an angle or a hyperbolic distance from its centre.
 			var r_euc: float = surface_radius * 0.55 * (triangle_radius_deg / 30.0)
 			r_euc = clampf(r_euc, 0.0, surface_radius * 0.9)
 			p = Vector3(r_euc * cos(phi), 0.002, r_euc * sin(phi))
@@ -498,24 +478,29 @@ func _edge_samples(a: Vector3, b: Vector3, n: int) -> PackedVector3Array:
 # Compute the interior angle at a vertex v, between the edges leading to
 # u (previous vertex) and w (next vertex). The angle is the angle between
 # the geodesic tangents at v.
-func _interior_angle(v: Vector3, u: Vector3, w: Vector3) -> float:
-	# Tangent vectors at v along each edge — approximated by the first segment
-	# of the geodesic toward u and toward w.
-	var u_samples: PackedVector3Array = _edge_samples(v, u, 2)
-	var w_samples: PackedVector3Array = _edge_samples(v, w, 2)
-	if u_samples.size() < 2 or w_samples.size() < 2:
-		return 0.0
-	var t_to_u: Vector3 = (u_samples[1] - v)
-	var t_to_w: Vector3 = (w_samples[1] - v)
+func _edge_tangent(v: Vector3, u: Vector3) -> Vector3:
 	if _k > 0.0:
-		# On the sphere, project tangents into the tangent plane at v.
-		var n_v: Vector3 = v.normalized()
-		t_to_u = t_to_u - n_v * t_to_u.dot(n_v)
-		t_to_w = t_to_w - n_v * t_to_w.dot(n_v)
-	t_to_u = t_to_u.normalized()
-	t_to_w = t_to_w.normalized()
-	var dot: float = clampf(t_to_u.dot(t_to_w), -1.0, 1.0)
-	return acos(dot)
+		var normal: Vector3 = v.normalized()
+		return (u - normal * u.dot(normal)).normalized()
+	if _k < 0.0:
+		var a := Vector2(v.x, v.z) / surface_radius
+		var b := Vector2(u.x, u.z) / surface_radius
+		var det: float = 2.0 * a.cross(b)
+		if absf(det) < 1e-5:
+			return Vector3(b.x - a.x, 0, b.y - a.y).normalized()
+		# The geodesic circle is orthogonal to the disk rim. Its tangent is
+		# perpendicular to the radius at the vertex, not a half-edge chord.
+		var centre := Vector2(
+			((a.length_squared() + 1.0) * b.y - (b.length_squared() + 1.0) * a.y) / det,
+			((b.length_squared() + 1.0) * a.x - (a.length_squared() + 1.0) * b.x) / det)
+		var radial := a - centre
+		var tangent := Vector2(-radial.y, radial.x).normalized()
+		if tangent.dot(b - a) < 0.0: tangent = -tangent
+		return Vector3(tangent.x, 0, tangent.y)
+	return (u - v).normalized()
+
+func _interior_angle(v: Vector3, u: Vector3, w: Vector3) -> float:
+	return acos(clampf(_edge_tangent(v, u).dot(_edge_tangent(v, w)), -1.0, 1.0))
 
 
 # Compute the geometric area of the triangle T on the active surface, in
@@ -607,20 +592,8 @@ func _build_triangle() -> void:
 		var v: Vector3 = verts[k]
 		var u: Vector3 = verts[(k + 2) % 3]
 		var w: Vector3 = verts[(k + 1) % 3]
-		var u_samples2: PackedVector3Array = _edge_samples(v, u, 2)
-		var w_samples2: PackedVector3Array = _edge_samples(v, w, 2)
-		if u_samples2.size() < 2 or w_samples2.size() < 2:
-			continue
-		var t_u: Vector3 = (u_samples2[1] - v)
-		var t_w: Vector3 = (w_samples2[1] - v)
-		var normal: Vector3 = Vector3.UP
-		if _k > 0.0:
-			normal = v.normalized()
-			# Project tangents into tangent plane.
-			t_u = t_u - normal * t_u.dot(normal)
-			t_w = t_w - normal * t_w.dot(normal)
-		t_u = t_u.normalized()
-		t_w = t_w.normalized()
+		var t_u: Vector3 = _edge_tangent(v, u)
+		var t_w: Vector3 = _edge_tangent(v, w)
 		# Build an orthonormal basis (e1, e2) in the tangent plane, with
 		# e1 = t_u, e2 perpendicular to it in the tangent plane on the side
 		# of t_w.
@@ -733,12 +706,12 @@ func _refresh_readout(verts: Array) -> void:
 	var excess: float = sum_deg - 180.0
 	var regime: String
 	if _k > 0.0:
-		regime = "elliptic · excess +%.1f°" % excess
+		regime = "SPHERE · excess +%.1f°" % excess
 	elif _k < 0.0:
-		regime = "hyperbolic · defect %.1f°" % excess
+		regime = "DISK · deficit %.1f°" % -excess
 	else:
-		regime = "flat · Euclidean"
-	_plate_readout.text = "α+β+γ = %.1f°\nK=%+0.1f · %s" % [sum_deg, _k, regime]
+		regime = "PLANE · straight segments"
+	_plate_readout.text = "α+β+γ = %.1f°\n%s" % [sum_deg, regime]
 
 
 # ── Refresh ───────────────────────────────────────────────────────────
@@ -766,24 +739,20 @@ func _refresh_all() -> void:
 
 func apply_grid_config(config_data: Dictionary) -> void:
 	if config_data.has("initial_k"):
-		var requested_k: float = float(config_data["initial_k"])
-		# Snap to nearest detent.
-		var best_idx: int = 0
-		var best_d: float = 99999.0
-		for i in range(K_STOPS.size()):
-			var d: float = abs(K_STOPS[i] - requested_k)
-			if d < best_d:
-				best_d = d
-				best_idx = i
-		_k_index = best_idx
-		_k = K_STOPS[_k_index]
-		if _slider and _slider.has_method("set_normalized_value"):
-			_slider.call("set_normalized_value", _k_index_to_normalized(_k_index))
-		_refresh_all()
+		initial_k = float(config_data["initial_k"])
+	if config_data.has("model"):
+		var requested: String = str(config_data["model"]).to_lower()
+		if requested in ["disk", "plane", "sphere"]:
+			initial_k = {"disk": -1.0, "plane": 0.0, "sphere": 1.0}[requested]
+	_k_index = _index_from_sign(initial_k)
+	_k = K_STOPS[_k_index]
 	if config_data.has("plate_scale"):
 		plate_scale = float(config_data["plate_scale"])
-		if _plate_root:
-			_plate_root.scale = Vector3.ONE * plate_scale
 	if config_data.has("triangle_radius_deg"):
-		triangle_radius_deg = float(config_data["triangle_radius_deg"])
-		_refresh_all()
+		triangle_radius_deg = clampf(float(config_data["triangle_radius_deg"]), 1.0, 60.0)
+	if not is_node_ready(): return
+	if _slider and _slider.has_method("set_normalized_value"):
+		_slider.call("set_normalized_value", _k_index_to_normalized(_k_index))
+	if config_data.has("plate_scale") and _plate_root:
+		_plate_root.scale = Vector3.ONE * plate_scale
+	_refresh_all()

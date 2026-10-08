@@ -5,6 +5,9 @@ const LIMIT := 48
 const SITES := [Vector2i(10,10),Vector2i(13,13),Vector2i(16,16)]
 const FLOOR_CELL := 0.2
 const FLOOR_Z := 3.6
+var floor_cell: float = FLOOR_CELL
+var floor_z: float = FLOOR_Z
+var walk_floor: bool = false
 var work: Node3D
 var running: bool = false
 var elapsed: float = 0.0
@@ -29,6 +32,10 @@ const DEATH_COLOUR := Color("b5555f")
 
 func _ready() -> void:
 	work = get_parent()
+	walk_floor = str(work.get_meta("config_floor", "")) == "walk"
+	if walk_floor:
+		floor_cell = 0.4
+		floor_z = 6.8
 	for name_ in ["Dish","Rim","CellMultiMesh"]:
 		work.get_node(name_).position += Vector3(0,1.02,-1.55)
 	_build_furniture()
@@ -99,6 +106,7 @@ func toggle_link() -> void:
 
 func toggle_trace() -> void:
 	trace = not trace
+	if not trace: work._update_display()
 	_refresh(false)
 
 func _process(delta: float) -> void:
@@ -108,7 +116,7 @@ func _process(delta: float) -> void:
 		elapsed = 0.0;_advance()
 
 func floor_position(site: Vector2i) -> Vector3:
-	return Vector3((site.x-11.5)*FLOOR_CELL,0.016,FLOOR_Z+(site.y-11.5)*FLOOR_CELL)
+	return Vector3((site.x-11.5)*floor_cell,0.016,floor_z+(site.y-11.5)*floor_cell)
 
 func _refresh(count_event: bool = true) -> void:
 	for y in range(SIZE):
@@ -143,17 +151,17 @@ func readback() -> Dictionary:
 
 func _build_floor() -> void:
 	# The coloured present is a finish on a continuous museum floor, not moving support.
-	_box("FloorInset",Vector3(4.94,0.012,4.94),Vector3(0,0.004,FLOOR_Z),Color("927653"))
+	_box("FloorInset",Vector3(SIZE*floor_cell+0.14,0.012,SIZE*floor_cell+0.14),Vector3(0,0.004,floor_z),Color("927653"))
 	floor_view = MultiMeshInstance3D.new()
 	floor_view.name = "PresentPlane"
 	var mm := MultiMesh.new();mm.transform_format=MultiMesh.TRANSFORM_3D;mm.use_colors=true
-	var mesh := BoxMesh.new();mesh.size=Vector3(0.185,0.012,0.185)
+	var mesh := BoxMesh.new();mesh.size=Vector3(floor_cell-0.015,0.012,floor_cell-0.015)
 	var mat := StandardMaterial3D.new();mat.vertex_color_use_as_albedo=true;mat.roughness=0.55
 	mesh.material=mat;mm.mesh=mesh;mm.instance_count=SIZE*SIZE;floor_view.multimesh=mm;add_child(floor_view)
 	for y in range(SIZE):
 		for x in range(SIZE):mm.set_instance_transform(y*SIZE+x,Transform3D(Basis.IDENTITY,floor_position(Vector2i(x,y))))
 	var axis := _label("FloorAxes","X: ACROSS / Y: ALONG / ONE PRESENT",30)
-	axis.position=Vector3(0,0.03,FLOOR_Z-2.65);axis.rotation_degrees=Vector3(-90,0,0);add_child(axis)
+	axis.position=Vector3(0,0.03,floor_z-SIZE*floor_cell/2-0.25);axis.rotation_degrees=Vector3(-90,0,0);add_child(axis)
 
 func _build_receivers() -> void:
 	for i in range(SITES.size()):
@@ -163,17 +171,20 @@ func _build_receivers() -> void:
 		receiver.letter = ["A","B","C"][i]
 		receiver.site = site
 		receiver.position=Vector3(3.35,0,2.5+i*1.45)
+		if walk_floor:
+			receiver.position=Vector3(SIZE*floor_cell/2+0.95,0,floor_position(site).z)
 		add_child(receiver);receivers.append(receiver)
 		var at: Vector3 = floor_position(site)
-		_marker("FloorAddress"+receiver.letter,at,0.205)
+		_marker("FloorAddress"+receiver.letter,at,floor_cell+0.005)
 		# The small dish and full-size floor retain the same x/y orientation.
 		var desk_at := Vector3((site.x-11.5)*work._cell_size,1.041,-1.55+(site.y-11.5)*work._cell_size)
 		_marker("DishAddress"+receiver.letter,desk_at,work._cell_size*1.02)
-		var span: float = 3.1-at.x
+		var wire_x: float = receiver.position.x if walk_floor else 3.1
+		var span: float = wire_x-at.x
 		_box("AddressWire"+receiver.letter,Vector3(span,0.009,0.012),Vector3(at.x+span/2,0.03,at.z),Color("d0a571"))
-		_box("WireElbow"+receiver.letter,Vector3(0.012,0.009,absf(receiver.position.z-at.z)+0.02),Vector3(3.1,0.03,(receiver.position.z+at.z)/2),Color("d0a571"))
+		_box("WireElbow"+receiver.letter,Vector3(0.012,0.009,absf(receiver.position.z-at.z)+0.02),Vector3(wire_x,0.03,(receiver.position.z+at.z)/2),Color("d0a571"))
 		var tag := _label("AddressLabel"+receiver.letter,"%s (%d,%d)"%[receiver.letter,site.x,site.y],30)
-		tag.position=at+Vector3(-0.38,0.023,0);tag.rotation_degrees=Vector3(-90,0,0);add_child(tag)
+		tag.position=at+Vector3(-floor_cell/2-0.28,0.023,0);tag.rotation_degrees=Vector3(-90,0,0);add_child(tag)
 
 func _marker(label: String,at: Vector3,size: float) -> void:
 	var line: float = 0.008 if size>0.1 else 0.003

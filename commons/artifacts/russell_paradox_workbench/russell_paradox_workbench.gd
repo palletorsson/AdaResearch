@@ -2,33 +2,20 @@ extends Node3D
 class_name RussellParadoxWorkbench
 
 # @identity
-# essence: an interactive Russell paradox workbench — the player turns a slider to walk through 6 set definitions, watching a translucent disc visualize each one. At cell 5 (R = {x : x ∉ x}) the disc turns red with a wavy perimeter and two arrows begin to orbit it labeled "R∈R ⇒ R∉R" and "R∉R ⇒ R∈R" — a closed contradiction loop you can see rotating in space. At cell 6 the disc vanishes; only the loop remains.
-# desire: learner viscerally feels that self-reference per se is not the problem (cell 4, S = {x : x ∈ x}, is consistent) — it is self-reference plus negation that creates the orbit. The eyes see the loop close.
-# critical_parameter: cell index ∈ {1..6} — drives the disc visual, the readout, the lamp color, and whether the contradiction loop animates
-# triggers: _ready() builds slider + disc + arrows + lamp + readout + ZFC card; _on_slider_changed snaps to nearest cell, rebuilds disc, retargets arrows, recolors lamp, swaps readout text, fades ZFC card in at cells 5-6
-# emerges: Russell's paradox as a physical orbit. Two arrows that, when traced, close on themselves into impossibility. The set-theoretic foundation crisis as a hand-cranked mechanism.
-# needs: slider_horizontal [present]; CylinderMesh + ArrayMesh-built ring for the wavy R disc [synthesized in-script]; Label3D readouts [present]
-# relationships: paired with /russell-paradox-gallery (web cells frozen at the same 6 definitions); sibling to cantor_diagonal_workbench, shannon_workbench, riemann_sum_workbench — together they make the limits-of-math substrate walkable; the consistency lamp inherits the green/amber/red vocabulary from QFEP verdict instruments
-# truth: self-reference is allowed (cell 4 is a well-formed set with one example) — but self-reference plus negation closes a loop that has no fixed point. ZFC's axiom of separation requires a pre-existing ambient set; R cannot be quantified over all x. The slider lets you walk to that exact spot.
-
-## A horizontal workbench for Russell's paradox.
-##
-## One slider drives the cell index ∈ {1, 2, 3, 4, 5, 6}. As you move it:
-##   • a translucent floating disc redraws to visualize the set definition
-##   • a live readout shows the set's symbolic definition and verdict
-##   • a consistency lamp turns green (well-formed), amber (degenerate),
-##     or red blinking (paradox)
-##   • at cells 5 and 6, two red arrows orbit the disc in opposite directions,
-##     each labeled with one half of the contradiction
-##   • a ZFC explanation card fades in at cells 5-6
-##
-## The argument: cells 1, 3 are well-formed predicates. Cell 2 (universal set)
-## is problematic but consistent if treated as a class. Cell 4 (S = {x : x ∈ x})
-## is well-formed; self-reference alone is fine. Cell 5 adds negation and
-## closes a loop: R ∈ R ⇒ R ∉ R, and R ∉ R ⇒ R ∈ R. Cell 6 abstracts: the
-## loop itself, without the disc.
+# essence: six set descriptions, with opt-in IN / OUT buttons to test self-membership.
+# desire: try both answers to unrestricted Russell comprehension, then restrict the domain.
+# critical_parameter: cell 5 is unrestricted; cell 6 filters the existing set U = {0,1,2,3} of von Neumann ordinals.
+# triggers: slider selects a definition; physical buttons supply an assumed answer; the readout checks it against the rule.
+# emerges: neither Boolean answer satisfies b = not b; restricting the domain changes the equation.
+# truth: this finite example computes separation. Its discs and orbit illustrate membership and contradiction; they are not models of a universal set or proof that all self-reference is inconsistent.
+# relationships: restored beside russell_set_box in Russell_Paradox; also available in Crisis_Synthesis.
 
 # ── Configuration ─────────────────────────────────────────────────────
+
+@export var membership_controls: bool = false
+var _membership_buttons: Node3D
+var _attempt: int = -1
+var _last_result: Dictionary = {}
 
 @export_group("Plate")
 @export var plate_tilt_deg: float = -25.0
@@ -72,64 +59,14 @@ const InterfacePresets = preload("res://commons/ui/interface_presets.gd")
 const DisplayMount = preload("res://commons/ui/display_mount.gd")
 const CELL_COUNT: int = 6
 
-# Cell definitions: name, formal, verdict label, lamp color id, disc style id.
-# disc_style: 0=clean, 1=universal (with self-ref label), 2=tiny+S-dot,
-# 3=red-wavy, 4=no-disc (loop only).
+# Dots are schematic except the four finite ordinals in cell 6.
 const CELL_DEFS: Array = [
-	{
-		"name": "E",
-		"formal": "E = {x : x is even}",
-		"verdict": "verdict: well-formed",
-		"lamp": "green",
-		"disc": 0,
-		"dot_count": 4,
-		"dot_label": "even"
-	},
-	{
-		"name": "A",
-		"formal": "A = {x : x is a set}",
-		"verdict": "verdict: problematic (no universal set in ZFC)",
-		"lamp": "amber",
-		"disc": 1,
-		"dot_count": 5,
-		"dot_label": "sets"
-	},
-	{
-		"name": "C",
-		"formal": "C = {x : x is non-empty}",
-		"verdict": "verdict: well-formed",
-		"lamp": "green",
-		"disc": 0,
-		"dot_count": 5,
-		"dot_label": "non-empty"
-	},
-	{
-		"name": "S",
-		"formal": "S = {x : x ∈ x}",
-		"verdict": "verdict: consistent (empty in ZFC)",
-		"lamp": "amber",
-		"disc": 2,
-		"dot_count": 1,
-		"dot_label": "S"
-	},
-	{
-		"name": "R",
-		"formal": "R = {x : x ∉ x}",
-		"verdict": "verdict: PARADOX",
-		"lamp": "red",
-		"disc": 3,
-		"dot_count": 0,
-		"dot_label": "?"
-	},
-	{
-		"name": "Frame",
-		"formal": "the loop itself",
-		"verdict": "verdict: undefined — closure has no fixed point",
-		"lamp": "red",
-		"disc": 4,
-		"dot_count": 0,
-		"dot_label": "?"
-	}
+	{"name":"E", "formal":"E = {x in N : x is even}", "verdict":"A subset of the natural numbers", "lamp":"green", "disc":0, "dot_count":4, "dot_label":"even"},
+	{"name":"V", "formal":"V = all sets", "verdict":"A proper class, not a set in ZFC", "lamp":"amber", "disc":1, "dot_count":5, "dot_label":"sets"},
+	{"name":"C", "formal":"C = {x in U : x is nonempty}", "verdict":"Filter an existing set U", "lamp":"green", "disc":0, "dot_count":3, "dot_label":"nonempty"},
+	{"name":"S", "formal":"S = {x in U : x in x}", "verdict":"Empty under Foundation", "lamp":"amber", "disc":2, "dot_count":0, "dot_label":""},
+	{"name":"R", "formal":"R = {x : x not in x}", "verdict":"Does R belong to itself?", "lamp":"amber", "disc":0, "dot_count":0, "dot_label":""},
+	{"name":"R_U", "formal":"R_U = {x in U : x not in x}", "verdict":"U = {0,1,2,3} (finite ordinals)", "lamp":"green", "disc":0, "dot_count":4, "dot_label":"ordinal"}
 ]
 
 var _cell: int = 0  # 0..5 (cell numbers 1..6)
@@ -180,6 +117,7 @@ func _ready() -> void:
 	_build_readout_panel()
 	_build_lamp()
 	_build_zfc_card()
+	if membership_controls: _build_membership_buttons()
 	_apply_cell(_cell)
 	_mount_display.call_deferred()
 
@@ -188,7 +126,7 @@ func _ready() -> void:
 func _mount_display() -> void:
 	var center := Vector3(0.0, disc_height, disc_depth)
 	_display_root = DisplayMount.make_anchor(self, "russell_paradox_workbench", center, 1.0, 0.0)
-	DisplayMount.mount_cluster(_display_root, [_disc_root, _arrow_orbit_root, _readout_root, _zfc_card_root, _lamp_inst], center)
+	DisplayMount.mount_cluster(_display_root, [_disc_root, _arrow_orbit_root, _readout_root, _zfc_card_root, _lamp_inst, get_node("LampLabel")], center)
 	DisplayMount.build_stand(self, _display_root)
 
 
@@ -294,7 +232,7 @@ func _build_disc_root() -> void:
 	_self_ref_label.pixel_size = 0.001
 	_self_ref_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
 	_self_ref_label.modulate = Color(1.0, 0.88, 0.5)
-	_self_ref_label.text = "...including A itself"
+	_self_ref_label.text = "class, not another member"
 	_self_ref_label.position = Vector3(0.0, -disc_radius * 0.55, 0.01)
 	_self_ref_label.visible = false
 	_disc_root.add_child(_self_ref_label)
@@ -378,7 +316,7 @@ func _rebuild_disc(style_id: int) -> void:
 
 	# Self-reference indicator for cell 2 (A = {x : x is a set}).
 	_self_ref_label.visible = (style_id == 1)
-	_self_ref_label.text = "...including A itself"
+	_self_ref_label.text = "class, not another member"
 
 	# Example element dots inside the disc.
 	var dot_count: int = int(cell_data["dot_count"])
@@ -391,7 +329,7 @@ func _rebuild_disc(style_id: int) -> void:
 			for i in range(dot_count):
 				var angle: float = float(i) * TAU / float(dot_count) + PI * 0.5
 				var pos := Vector3(cos(angle) * radius_inner, sin(angle) * radius_inner, 0.012)
-				_spawn_dot(pos, dot_label if i == 0 else "", Color(0.95, 0.97, 1.0))
+				_spawn_dot(pos, str(i) if _cell == 5 else (dot_label if i == 0 else ""), Color(0.95, 0.97, 1.0))
 
 
 func _spawn_dot(pos: Vector3, label_text: String, color: Color) -> void:
@@ -582,13 +520,13 @@ func _build_readout_panel() -> void:
 
 	var card := MeshInstance3D.new()
 	var card_mesh := QuadMesh.new()
-	card_mesh.size = Vector2(0.52, 0.42)
+	card_mesh.size = Vector2(0.66, 0.42)
 	card.mesh = card_mesh
 	var card_mat := StandardMaterial3D.new()
 	card_mat.albedo_color = Color(0.03, 0.05, 0.08)
 	card_mat.roughness = 0.7
 	card.material_override = card_mat
-	card.position = Vector3(0.26, 0.0, -0.005)
+	card.position = Vector3(0.33, 0.0, -0.005)
 	_readout_root.add_child(card)
 
 	_readout_formal = Label3D.new()
@@ -597,6 +535,8 @@ func _build_readout_panel() -> void:
 	_readout_formal.outline_size = 4
 	_readout_formal.pixel_size = 0.001
 	_readout_formal.horizontal_alignment = HORIZONTAL_ALIGNMENT_LEFT
+	_readout_formal.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
+	_readout_formal.width = 620
 	_readout_formal.modulate = Color(0.95, 0.97, 1.0)
 	_readout_formal.position = Vector3(0.02, 0.15, 0.0)
 	_readout_root.add_child(_readout_formal)
@@ -607,6 +547,8 @@ func _build_readout_panel() -> void:
 	_readout_verdict.outline_size = 3
 	_readout_verdict.pixel_size = 0.001
 	_readout_verdict.horizontal_alignment = HORIZONTAL_ALIGNMENT_LEFT
+	_readout_verdict.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
+	_readout_verdict.width = 620
 	_readout_verdict.modulate = Color(1.0, 0.78, 0.45)
 	_readout_verdict.position = Vector3(0.02, 0.05, 0.0)
 	_readout_root.add_child(_readout_verdict)
@@ -617,6 +559,8 @@ func _build_readout_panel() -> void:
 	_readout_proof.outline_size = 3
 	_readout_proof.pixel_size = 0.001
 	_readout_proof.horizontal_alignment = HORIZONTAL_ALIGNMENT_LEFT
+	_readout_proof.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
+	_readout_proof.width = 620
 	_readout_proof.modulate = Color(0.95, 0.95, 0.75)
 	_readout_proof.position = Vector3(0.02, -0.06, 0.0)
 	_readout_root.add_child(_readout_proof)
@@ -646,7 +590,7 @@ func _build_lamp() -> void:
 
 	var lab := Label3D.new()
 	lab.name = "LampLabel"
-	lab.text = "consistency"
+	lab.text = "rule check"
 	lab.font_size = 16
 	lab.outline_size = 2
 	lab.pixel_size = 0.001
@@ -712,7 +656,7 @@ func _build_zfc_card() -> void:
 
 	var lab_body := Label3D.new()
 	lab_body.name = "ZFCBody"
-	lab_body.text = "R cannot be built over all x — only over a pre-existing ambient set A.\nR_A = {x ∈ A : x ∉ x} is well-formed; R itself is not."
+	lab_body.text = "Filter within an existing set. The result need not be one of its members.\nHere U = {0,1,2,3}, R_U = U = 4, and 4 is not in U."
 	lab_body.font_size = 16
 	lab_body.outline_size = 2
 	lab_body.pixel_size = 0.001
@@ -726,6 +670,7 @@ func _apply_zfc_alpha(a: float) -> void:
 	if _zfc_card_root == null:
 		return
 	var clamped: float = clampf(a, 0.0, 1.0)
+	_zfc_card_root.visible = clamped > 0.01
 	for child in _zfc_card_root.get_children():
 		if child is MeshInstance3D:
 			var mat: StandardMaterial3D = (child as MeshInstance3D).material_override as StandardMaterial3D
@@ -743,41 +688,93 @@ func _apply_zfc_alpha(a: float) -> void:
 # ── Apply cell ────────────────────────────────────────────────────────
 
 func _apply_cell(cell_idx: int) -> void:
-	var data: Dictionary = CELL_DEFS[cell_idx]
-	var style_id: int = int(data["disc"])
-	_rebuild_disc(style_id)
-	_set_lamp(str(data["lamp"]))
-	_readout_formal.text = str(data["formal"])
-	_readout_verdict.text = str(data["verdict"])
-	if _plate_readout:
-		_plate_readout.text = "cell %d / %d\n%s" % [cell_idx + 1, CELL_COUNT, str(data["verdict"])]
-	if cell_idx == 4:
-		_readout_proof.text = "if R∈R then R∉R; if R∉R then R∈R; contradiction"
-	elif cell_idx == 5:
-		_readout_proof.text = "the loop closes on no fixed point"
-	else:
-		_readout_proof.text = ""
+	_cell = clampi(cell_idx, 0, CELL_COUNT - 1)
+	_attempt = -1
+	_last_result = {}
+	var data: Dictionary = CELL_DEFS[_cell]
+	_rebuild_disc(int(data.disc))
+	_set_lamp(str(data.lamp))
+	_readout_formal.text = str(data.formal)
+	_readout_verdict.text = str(data.verdict)
+	_readout_proof.text = ""
+	if _cell >= 4:
+		_readout_proof.text = "Choose IN or OUT: is the result a member of itself?" if membership_controls else "Cell 5: test both answers. Cell 6: restrict the domain."
+		_set_lamp("amber")
+	_plate_readout.text = "cell %d / %d\n%s" % [_cell + 1, CELL_COUNT, str(data.verdict)]
+	_arrows_visible = false
+	_arrow_orbit_root.visible = false
+	_zfc_card_alpha_t = 0.0
+	_zfc_card_current_alpha = 0.0
+	_apply_zfc_alpha(0.0)
+	if _membership_buttons: _membership_buttons.visible = _cell >= 4
+	# Legacy placements still present the argument without requiring new controls.
+	if not membership_controls and _cell >= 4: _test_membership(false)
 
-	# Arrows visible on cells 5 and 6.
-	_arrows_visible = (cell_idx == 4 or cell_idx == 5)
-	if _arrow_orbit_root:
-		_arrow_orbit_root.visible = _arrows_visible
 
-	# ZFC card fade target.
-	_zfc_card_alpha_t = (1.0 if _arrows_visible else 0.0)
+# A finite separation example: n denotes the set {0,...,n-1}.
+# Computing members makes the ambient-domain restriction inspectable.
+func restricted_members(ambient_size: int = 4) -> Array[int]:
+	var result: Array[int] = []
+	for x in ambient_size:
+		if not range(x).has(x): result.append(x)
+	return result
 
 
-# ── Grid system integration ───────────────────────────────────────────
+func evaluate_membership(assumed_in: bool, restricted: bool) -> Dictionary:
+	var required: bool = not assumed_in
+	var domain_contains_result := true
+	if restricted:
+		var result: Array[int] = restricted_members()
+		# Every ordinal < 4 survives, so the result is ordinal 4 = U.
+		domain_contains_result = range(4).has(result.size())
+		required = domain_contains_result and not assumed_in
+	return {"assumed":assumed_in, "required":required, "agrees":assumed_in == required,
+		"restricted":restricted, "domain_contains_result":domain_contains_result}
+
+
+func _build_membership_buttons() -> void:
+	if is_instance_valid(_membership_buttons): return
+	_membership_buttons = Node3D.new()
+	_membership_buttons.name = "MembershipControls"
+	add_child(_membership_buttons)
+	for i in 2:
+		var button := preload("res://commons/interactables/push_button.tscn").instantiate()
+		button.name = "IN" if i == 0 else "OUT"
+		button.position = Vector3((i - 0.5) * 0.36, 1.03, 0.30)
+		_membership_buttons.add_child(button)
+		button.pressed.connect(_test_membership.bind(i == 0))
+		var label := Label3D.new()
+		label.text = button.name
+		label.font_size = 24
+		label.pixel_size = 0.001
+		label.position = button.position + Vector3(0, 0.10, 0)
+		_membership_buttons.add_child(label)
+
+
+func _test_membership(assumed_in: bool) -> void:
+	if _cell < 4: return
+	_attempt = int(assumed_in)
+	_last_result = evaluate_membership(assumed_in, _cell == 5)
+	var choice := "IN" if assumed_in else "OUT"
+	var required := "IN" if _last_result.required else "OUT"
+	_readout_verdict.text = "You chose %s; the rule requires %s." % [choice, required]
+	_readout_proof.text = "The same assumption requires its opposite. Try the other answer." if _cell == 4 else "R_U = U = 4. But U contains only 0,1,2,3. R_U is OUT of U and OUT of itself."
+	_plate_readout.text = "cell %d / 6\n%s -> %s" % [_cell+1, choice, required]
+	_set_lamp("green" if _last_result.agrees else "red")
+	_rebuild_disc(3 if _cell == 4 else 0)
+	_arrows_visible = _cell == 4
+	_arrow_orbit_root.visible = _arrows_visible
+	_zfc_card_alpha_t = 1.0 if _cell == 5 else 0.0
+
 
 func apply_grid_config(config_data: Dictionary) -> void:
+	if config_data.has("membership_controls"):
+		membership_controls = str(config_data.membership_controls).to_lower() in ["true","on","1"]
+		if is_node_ready() and membership_controls: _build_membership_buttons()
 	if config_data.has("plate_scale"):
-		plate_scale = float(config_data["plate_scale"])
-		if _plate_root:
-			_plate_root.scale = Vector3.ONE * plate_scale
+		plate_scale = float(config_data.plate_scale)
+		if _plate_root: _plate_root.scale = Vector3.ONE * plate_scale
 	if config_data.has("initial_cell"):
-		var requested: int = int(config_data["initial_cell"]) - 1  # cell numbers 1..6
-		requested = clampi(requested, 0, CELL_COUNT - 1)
-		_cell = requested
-		if _slider and _slider.has_method("set_normalized_value"):
-			_slider.call("set_normalized_value", _normalized_for_cell(_cell))
-		_apply_cell(_cell)
+		_cell = clampi(int(config_data.initial_cell)-1, 0, CELL_COUNT-1)
+		if _slider: _slider.set_normalized_value(_normalized_for_cell(_cell))
+	if is_node_ready(): _apply_cell(_cell)

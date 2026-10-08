@@ -229,6 +229,9 @@ static func build(data: Dictionary, rotation_deg: int = 0,
 	var show_light: bool = bool(data.get("show_light", true))
 	var light_mode: String = str(data.get("light_mode", "glow"))
 	var show_info: bool = bool(data.get("show_info", true))
+	# Keep the support surface while allowing a deliberately solitary artifact
+	# to decline its posture DNA's auxiliary rails, cordons, and backdrops.
+	var show_dressing: bool = bool(data.get("show_dressing", true))
 	# The "floor" (terrain) type: the artifact IS the ground — no support prop AND
 	# no raised blockout pillar, and it seats flush at y=0 (a pedestal only appears
 	# for raised types). This is what makes y=0 mean the same "artifact base sits
@@ -336,7 +339,7 @@ static func build(data: Dictionary, rotation_deg: int = 0,
 		# These are base staging props (the well's fence, the apparition's
 		# backdrop) — suppressed with the base prop, so footprint-only is bare.
 		var dressing = tmpl.get("dressing", [])
-		if show_base and dressing is Array and not dressing.is_empty():
+		if show_base and show_dressing and dressing is Array and not dressing.is_empty():
 			var dress_root := Node3D.new()
 			dress_root.name = "Dressing"
 			root.add_child(dress_root)
@@ -463,8 +466,11 @@ static func build(data: Dictionary, rotation_deg: int = 0,
 	# on the PROP, not on the abstraction.
 	if staged_top_override >= 0.0:
 		anchor_height = staged_top_override
-	if staged and (not show_base or is_flat_ground):
-		anchor_height = 0.0   # footprint-only OR floor type: the artifact rests on the floor
+	if staged and (not show_base or is_flat_ground or posture == "wall"):
+		# A backing wall defines the rear plane; it does not raise the artifact.
+		# Wall artifacts rest on the studio floor by default and request an
+		# explicit positive artifact_offset.y only when they are actually hung.
+		anchor_height = 0.0
 	anchor_marker.position = Vector3(
 		origin_x + rotated_anchor[1] * CELL_SIZE,
 		anchor_height + 0.04,
@@ -528,9 +534,19 @@ static func build(data: Dictionary, rotation_deg: int = 0,
 		loaded_artifact = ph
 	else:
 		loaded_artifact.position = Vector3.ZERO
+		# Artifact-local configuration belongs to the dressing room contract.
+		# Apply it before the node enters the tree so procedural artifacts build
+		# their requested museum variant on the first _ready() pass.
+		var artifact_config = data.get("artifact_config", {})
+		if artifact_config is Dictionary and not artifact_config.is_empty() and loaded_artifact.has_method("apply_grid_config"):
+			loaded_artifact.apply_grid_config(artifact_config)
 		artifact_root.add_child(loaded_artifact)
-	# Apply rotation to the artifact (the tiles already rotated).
-	artifact_root.rotation_degrees = Vector3(0, -float(rotation_deg), 0)
+	# Apply the room rotation plus an optional artifact-local facing correction.
+	# Some one-sided props (boards, signs, monitors) are authored facing the
+	# opposite way from the museum's canonical south-facing wall bay. Keeping
+	# this in the dressing-room contract avoids rewriting the source scene.
+	var artifact_yaw_deg: float = float(data.get("artifact_yaw_deg", 0.0))
+	artifact_root.rotation_degrees = Vector3(0, artifact_yaw_deg - float(rotation_deg), 0)
 
 	# ── Extras (3t labels, tt placeholders, el lights) ────────────────
 	var extras_root := Node3D.new()

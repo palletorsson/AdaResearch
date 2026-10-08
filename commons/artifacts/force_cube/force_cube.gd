@@ -52,6 +52,9 @@ class_name ForceCube
 const DECOMPOSITIONS: Array[String] = ["both", "chain", "box", "none"]
 
 const CUBE := 0.40
+# At 0.5 m per m/s, this display threshold corresponds to 0.04 m/s.
+# Apply it before the redraw deadband so a small old arrow cannot survive rest.
+const LESSON_STILL_ARROW_M := 0.02
 
 var _last_pos: Vector3
 var _last_f: Vector3 = Vector3.INF
@@ -114,6 +117,7 @@ func apply_grid_config(config_data: Dictionary) -> void:
 
 # the resting/default vector (seeded) — shown when the cube isn't being moved
 func _resting_force() -> Vector3:
+	if str(get_meta("config_lesson", "")) == "force_as_place": return Vector3.ZERO
 	_rng.seed = hash(seed)
 	var mag: float = lerpf(0.55, 1.7, push)
 	return Vector3(_rng.randf_range(0.4, 1.0), _rng.randf_range(0.2, 0.9), _rng.randf_range(-0.7, 0.7)).normalized() * mag
@@ -150,13 +154,16 @@ func _process(delta: float) -> void:
 	var vel: Vector3 = (global_position - _last_pos) / maxf(delta, 0.0001)
 	_last_pos = global_position
 	var f_world: Vector3 = (vel * 0.5).limit_length(2.6)
-	if f_world.length() < 0.12:
+	if f_world.length() < 0.12 and str(get_meta("config_lesson", "")) != "force_as_place":
 		f_world = global_transform.basis * _resting_force()   # at rest → resting vector
 	# draw in body-local so the arrow keeps pointing the world way it's moving
 	_redraw(global_transform.basis.inverse() * f_world)
 
 
 func _redraw(f: Vector3) -> void:
+	var lesson := str(get_meta("config_lesson", "")) == "force_as_place"
+	if lesson and f.length() <= LESSON_STILL_ARROW_M:
+		f = Vector3.ZERO
 	if demo_root == null or f.distance_to(_last_f) < 0.02:
 		return
 	_last_f = f
@@ -165,7 +172,10 @@ func _redraw(f: Vector3) -> void:
 	var tip := f
 	# component decomposition box
 	var dim := _glow_mat(Color(0.6, 0.62, 0.68), 0.35)
-	match decomposition:
+	var display_style: String = "still" if lesson and f == Vector3.ZERO else decomposition
+	match display_style:
+		"still":
+			pass # Keep the readout without collapsed component cylinders at the origin.
 		"chain":
 			# the legs walked tip to tail: origin -> x -> xy -> tip, solid this time,
 			# so the last leg lands exactly on the resultant's point.
@@ -189,9 +199,12 @@ func _redraw(f: Vector3) -> void:
 			if absf(f.x) > 0.05: demo_root.add_child(_arrow(Vector3.ZERO, Vector3(f.x, 0, 0), 0.016, _glow_mat(x_color, 1.2)))
 			if absf(f.y) > 0.05: demo_root.add_child(_arrow(Vector3.ZERO, Vector3(0, f.y, 0), 0.016, _glow_mat(y_color, 1.2)))
 			if absf(f.z) > 0.05: demo_root.add_child(_arrow(Vector3.ZERO, Vector3(0, 0, f.z), 0.016, _glow_mat(z_color, 1.2)))
-	demo_root.add_child(_arrow(Vector3.ZERO, tip, 0.03, _glow_mat(force_color, 1.8)))
+	if tip.length() > 0.001 or str(get_meta("config_lesson", "")) != "force_as_place":
+		demo_root.add_child(_arrow(Vector3.ZERO, tip, 0.03, _glow_mat(force_color, 1.8)))
 	var lbl := _billboard_label("F = (%+.2f, %+.2f, %+.2f)\n|F| = %.2f" % [f.x, f.y, f.z, f.length()],
 		Vector3(0.0, f.length() * 0.6 + 0.55, 0.0), 26, force_color.lerp(Color.WHITE, 0.3))
+	if str(get_meta("config_lesson", "")) == "force_as_place":
+		lbl.text = "MOTION ARROW\n0.5 m per m/s / cap 2.6 m"
 	lbl.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
 	demo_root.add_child(lbl)
 

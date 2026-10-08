@@ -1,51 +1,43 @@
 {
   "lookup_name": "origin",
-  "footprint": [
-    2,
-    2,
-    1
-  ],
-  "rotations": [
-    "0",
-    "90",
-    "180",
-    "270"
-  ],
+  "footprint": [1.11, 1.11, 1.32],
+  "rotations": ["0", "90", "180", "270"],
   "approach": "south",
   "exit": "north",
   "footing": {
-    "anchor": [
-      1,
-      1
-    ],
+    "anchor": [2, 2],
     "tiles": [
-      [
-        1,
-        1,
-        1
-      ],
-      [
-        1,
-        3,
-        1
-      ],
-      [
-        1,
-        1,
-        1
-      ]
+      [1, 1, 1, 1, 1],
+      [1, 1, 1, 1, 1],
+      [1, 1, 3, 1, 1],
+      [1, 1, 1, 1, 1],
+      [1, 1, 1, 1, 1]
     ]
   },
+  "artifact_offset": [0.0, 0.0, 0.0],
+  "artifact_config": {
+    "beam_height": 0.6,
+    "octahedron_size": 0.08,
+    "rotation_speed": 0.18
+  },
   "extras": [],
-  "artifact_offset": [
-    0.0,
-    0.0,
-    0.0
-  ],
-  "clearance": [
-    3,
-    3,
-    3
-  ],
-  "posture": "pedestal"
+  "clearance": [5, 5, 3],
+  "posture": "pedestal",
+  "show_base": true,
+  "show_light": true,
+  "light_mode": "glow",
+  "show_info": true,
+  "placement_contract": {
+    "allowed_modes": ["freestanding"],
+    "preferred_mode": "freestanding",
+    "hard_zone_m": [3, 3, 3],
+    "preferred_zone_m": [5, 5, 3],
+    "required_support": "pedestal",
+    "interaction_faces": ["north", "east", "south", "west"],
+    "circulation": "full_orbit",
+    "minimum_route_width_m": 0.9,
+    "neighbor_policy": "outside_preferred_zone"
+  },
+  "production_grade": "featured_aaa",
+  "placement_intent": "An intimate island pedestal with a complete walking orbit; the beam makes the chosen zero legible at body scale."
 }

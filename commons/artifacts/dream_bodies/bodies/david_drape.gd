@@ -44,6 +44,20 @@ extends RefCounted
 ##      surface: the robe's radius grows downward, so a sheet that merely hangs
 ##      is swallowed by the flare below it.
 ##
+## AXES — two, declared in axes() and read from build()'s opts:
+##   drape  — what the cloth DOES. spiral: the swept folds of the reference.
+##            flood: the lower half drowned in a solid pour that puddles wide on the
+##            floor and flattens every fold as it sinks. unravel: the robe stops at
+##            the thigh with a torn hem and finishes the fall as hanging thread, so
+##            the legs come back into the silhouette. cage: the cloth reduced to its
+##            own armature — seven hoops and six vertical ribs standing around a
+##            body suddenly bare, with one rag left caught on the raised arm.
+##   chorus — how many bodies the frieze gives back. one: the single figure.
+##            twinned: a second neck, head and arm growing out of the covered
+##            shoulder, leaning the other way. hydra: three heads and six arms off
+##            the one torso. frieze: the crowd returns — three smaller draped
+##            companions pressed in around the principal, each with its own robe.
+##
 ## Given up: the crowd itself (this is one figure, not the frieze), David's faces,
 ## fingers that actually grip cloth instead of passing through it, the dotted
 ## blue-grey robe and the grey leggings, and any cloth simulation — every fold
@@ -77,9 +91,23 @@ static func describe() -> String:
 	return "A neoclassical figure caught mid-twist with one bare arm flung up, buried in a heavy matte-velvet robe whose swept folds spiral from the shoulder down to a hem pooling on the floor."
 
 
-static func build(root: Node3D, seed: int) -> void:
+static func axes() -> Dictionary:
+	return {
+		"drape": ["spiral", "flood", "unravel", "cage"],
+		"chorus": ["one", "twinned", "hydra", "frieze"],
+	}
+
+
+static func build(root: Node3D, seed: int, opts: Dictionary = {}) -> void:
+	var drape: String = str(opts.get("drape", "spiral"))
+	var chorus: String = str(opts.get("chorus", "one"))
+
 	var rng := RandomNumberGenerator.new()
 	rng.seed = seed
+	# a second stream for the variants, so the principal's draw order — and with it
+	# the default statue — is byte-identical whatever the axes say
+	var rng2 := RandomNumberGenerator.new()
+	rng2.seed = seed * 7919 + 31
 
 	# ---- palette -----------------------------------------------------------
 	var robe_i: int = rng.randi_range(0, ROBES.size() - 1)
@@ -151,8 +179,28 @@ static func build(root: Node3D, seed: int) -> void:
 		lin_base = Color(0.86, 0.90, 0.94)
 	var lin_ratio: Color = _ratio(col_line, lin_base)
 
-	_body(root, rng, mat_skin, mat_hair, mat_nail, col_hair, s_h, y_sh, y_hip, arm_side, twist, stance, ax)
-	_robe(root, rng, cloth_tex, cloth_albedo, col_robe, col_shade, col_line, col_sash, lin_ratio, striped, s_h, y_sh, y_hip, arm_side, twist, th_cov, th_key, th_leg, ax, fp, bg)
+	# every extra body costs curls, and the mesh budget is 260
+	var thin_hair: bool = chorus != "one" or drape == "unravel"
+
+	_body(root, rng, mat_skin, mat_hair, mat_nail, col_hair, s_h, y_sh, y_hip, arm_side, twist, stance, ax, thin_hair)
+	_robe(root, rng, rng2, cloth_tex, cloth_albedo, col_robe, col_shade, col_line, col_sash, lin_ratio, striped, s_h, y_sh, y_hip, arm_side, twist, th_cov, th_key, th_leg, ax, fp, bg, drape)
+
+	# ---- the chorus --------------------------------------------------------
+	if chorus == "twinned":
+		_twin(root, rng2, mat_skin, mat_nail, col_hair, s_h, y_sh, arm_side, twist, ax)
+	elif chorus == "hydra":
+		_hydra(root, rng2, mat_skin, mat_nail, col_hair, s_h, y_sh, y_hip, twist, ax)
+	elif chorus == "frieze":
+		var tri_c: float = 2.05 if striped else 3.4
+		var c_deep_c: Color = col_robe.lerp(col_shade, 0.26)
+		if striped:
+			c_deep_c = Color(0.87, 0.90, 0.93)
+		var cloths: Array = [
+			_cloth(cloth_albedo, cloth_tex, tri_c),
+			_cloth(c_deep_c, cloth_tex, tri_c),
+			_cloth(col_sash, cloth_tex, tri_c * 1.2),
+		]
+		_frieze(root, rng2, mat_skin, col_hair, cloths, s_h, fp, lin_ratio)
 
 	# ---- fit, centre, settle ----------------------------------------------
 	var box: AABB = _union_aabb(root)
@@ -186,7 +234,7 @@ static func build(root: Node3D, seed: int) -> void:
 # ---------------------------------------------------------------------------
 # the flesh
 
-static func _body(root: Node3D, rng: RandomNumberGenerator, mat_skin: StandardMaterial3D, mat_hair: StandardMaterial3D, mat_nail: StandardMaterial3D, col_hair: Color, s_h: float, y_sh: float, y_hip: float, arm_side: float, twist: float, stance: float, ax: Array) -> void:
+static func _body(root: Node3D, rng: RandomNumberGenerator, mat_skin: StandardMaterial3D, mat_hair: StandardMaterial3D, mat_nail: StandardMaterial3D, col_hair: Color, s_h: float, y_sh: float, y_hip: float, arm_side: float, twist: float, stance: float, ax: Array, thin_hair: bool) -> void:
 	var sb := Basis(Vector3.UP, twist)
 	var y_t0: float = y_hip - 0.075
 	var y_t1: float = y_sh + 0.015
@@ -256,6 +304,9 @@ static func _body(root: Node3D, rng: RandomNumberGenerator, mat_skin: StandardMa
 		var stretch := Vector3(dl.x * 0.95, dl.y * 1.06, dl.z)
 		var hp: Vector3 = head_c + hb * (stretch * (r_hh * 0.97) + stretch.normalized() * (cr * 0.42))
 		var mh: StandardMaterial3D = _matte(col_hair.lightened(rng.randf_range(0.0, 0.16)), 0.46)
+		# the draw above always happens, so thinning the curls cannot shift the stream
+		if thin_hair and (hi % 2) == 1:
+			continue
 		_ell(root, cr, Vector3(1.0, 0.86, 1.0), 0.0, hp, mh)
 	# four hanging locks at the nape
 	for lk in range(4):
@@ -266,7 +317,8 @@ static func _body(root: Node3D, rng: RandomNumberGenerator, mat_skin: StandardMa
 		for lb in range(3):
 			var lr: float = rng.randf_range(0.017, 0.026) * s_h
 			lp = lp + fall * (lr * 1.45) + hb * Vector3(0.0, 0.0, 0.004)
-			_ell(root, lr, Vector3(1.0, 0.92, 1.0), 0.0, lp, mat_hair)
+			if not (thin_hair and lk >= 2):
+				_ell(root, lr, Vector3(1.0, 0.92, 1.0), 0.0, lp, mat_hair)
 
 	# hips
 	_ell(root, 0.152 * s_h, Vector3(1.24, 0.86, 0.84), twist * 0.15, hip_c + Vector3(0.0, -0.030 * s_h, 0.0), mat_skin)
@@ -350,7 +402,7 @@ static func _hand(root: Node3D, wrist: Vector3, fwd: Vector3, side_in: Vector3, 
 # ---------------------------------------------------------------------------
 # the cloth
 
-static func _robe(root: Node3D, rng: RandomNumberGenerator, tex: ImageTexture, albedo: Color, col_robe: Color, col_shade: Color, col_line: Color, col_sash: Color, lin: Color, striped: bool, s_h: float, y_sh: float, y_hip: float, arm_side: float, twist: float, th_cov: float, th_key: float, th_leg: float, ax: Array, fp: Array, bg: Array) -> void:
+static func _robe(root: Node3D, rng: RandomNumberGenerator, rng2: RandomNumberGenerator, tex: ImageTexture, albedo: Color, col_robe: Color, col_shade: Color, col_line: Color, col_sash: Color, lin: Color, striped: bool, s_h: float, y_sh: float, y_hip: float, arm_side: float, twist: float, th_cov: float, th_key: float, th_leg: float, ax: Array, fp: Array, bg: Array, drape: String) -> void:
 	var tri: float = 2.05 if striped else 3.4
 	var c_under: Color = col_line
 	var c_deep: Color = col_robe.lerp(col_shade, 0.26)
@@ -364,70 +416,136 @@ static func _robe(root: Node3D, rng: RandomNumberGenerator, tex: ImageTexture, a
 
 	var hem_ph: float = rng.randf_range(0.0, TAU)
 	var lift_a: float = rng.randf_range(0.18, 0.30) * s_h
-
-	# 1 — chemise, nested exactly under the robe (same fold field, minus 55 mm)
-	var chem: Dictionary = _spec()
-	chem["nth"] = 48
-	chem["ny"] = 9
-	chem["yhi"] = 1.00 * s_h
-	chem["ylo"] = 0.90 * s_h
-	chem["thcov"] = th_cov
-	chem["hemw"] = 0.018 * s_h
-	chem["roff"] = -0.055 * s_h
-	chem["thick"] = 0.008
-	chem["phem"] = hem_ph
-	chem["keyth"] = th_key
-	chem["sh"] = s_h
-	_add(root, _sweep(chem, fp, ax, bg, lin), mat_under)
-
-	# 2 — the robe: closed, high over the covered shoulder, chest-low on the bare side
-	var main: Dictionary = _spec()
-	main["nth"] = 66
-	main["ny"] = 14
-	main["yhi"] = 1.300 * s_h
-	main["ylo"] = 1.000 * s_h
-	main["thcov"] = th_cov
-	main["hemw"] = 0.034 * s_h
-	main["lifta"] = lift_a
-	main["liftt"] = th_leg
-	main["phem"] = hem_ph
-	main["keyth"] = th_key
-	main["thick"] = 0.013
-	main["sh"] = s_h
-	_add(root, _sweep(main, fp, ax, bg, lin), mat_main)
-
-	# 3..5 — over-drape sectors: cowled, offset outward, hems at different heights
 	var n_over: int = rng.randi_range(2, 3)
-	var over_defs: Array = [
-		[th_cov, deg_to_rad(196.0), 0.028, 1.24, 0.030, 0.060, 1.285, 1.02, 40],
-		[th_cov + 1.10, deg_to_rad(132.0), 0.054, 1.34, 0.300, 0.110, 1.245, 1.05, 34],
-		[th_cov - 1.52, deg_to_rad(96.0), 0.064, 1.30, 0.520, 0.085, 1.190, 0.99, 28],
-	]
-	for oi in range(n_over):
-		var od: Array = over_defs[oi]
-		var ov: Dictionary = _spec()
-		ov["th0"] = float(od[0]) - float(od[1]) * 0.5
-		ov["span"] = float(od[1])
-		ov["nth"] = int(od[8])
-		ov["ny"] = 12
-		ov["ybot"] = float(od[4]) * s_h
-		ov["yhi"] = float(od[6]) * s_h
-		ov["ylo"] = float(od[7]) * s_h
-		ov["thcov"] = th_cov
-		ov["dip"] = float(od[5]) * s_h
-		ov["hemw"] = 0.030 * s_h
-		ov["roff"] = float(od[2]) * s_h
-		ov["foldk"] = float(od[3])
-		ov["thick"] = 0.014
-		ov["wrap"] = false
-		ov["phem"] = hem_ph + float(oi) * 1.7
-		ov["keyth"] = th_key
-		ov["sh"] = s_h
-		if oi == 0:
-			ov["lifta"] = lift_a * 0.75
-			ov["liftt"] = th_leg
-		var mo: StandardMaterial3D = mat_main if oi != 1 else mat_deep
-		_add(root, _sweep(ov, fp, ax, bg, lin), mo)
+
+	# ---- what the cloth does ----------------------------------------------
+	var flood: bool = drape == "flood"
+	var unravel: bool = drape == "unravel"
+	var cage: bool = drape == "cage"
+	# a solid pour swelling the radius toward the floor, and flattening the folds
+	# as it sinks — the hem stops being cloth and becomes a puddle
+	var pour: float = 0.235 * s_h if flood else 0.0
+	if flood:
+		lift_a = 0.0
+	# the height at which the woven cloth simply stops and thread takes over
+	var hem_y: float = 0.62 * s_h if unravel else 0.0
+	var hem_w_main: float = 0.034 * s_h
+	if unravel:
+		hem_w_main = 0.085 * s_h
+	elif flood:
+		hem_w_main = 0.012 * s_h
+
+	if not cage:
+		# 1 — chemise, nested exactly under the robe (same fold field, minus 55 mm)
+		var chem: Dictionary = _spec()
+		chem["nth"] = 48
+		chem["ny"] = 9
+		chem["yhi"] = 1.00 * s_h
+		chem["ylo"] = 0.90 * s_h
+		if unravel:
+			chem["ybot"] = hem_y + 0.06 * s_h
+		chem["thcov"] = th_cov
+		chem["hemw"] = 0.018 * s_h
+		chem["roff"] = -0.055 * s_h
+		chem["thick"] = 0.008
+		chem["pour"] = pour * 0.50
+		chem["phem"] = hem_ph
+		chem["keyth"] = th_key
+		chem["sh"] = s_h
+		_add(root, _sweep(chem, fp, ax, bg, lin), mat_under)
+
+		# 2 — the robe: closed, high over the covered shoulder, chest-low on the bare side
+		var main: Dictionary = _spec()
+		main["nth"] = 66
+		main["ny"] = 14
+		main["yhi"] = 1.300 * s_h
+		main["ylo"] = 1.000 * s_h
+		main["ybot"] = hem_y
+		main["thcov"] = th_cov
+		main["hemw"] = hem_w_main
+		main["lifta"] = lift_a
+		main["liftt"] = th_leg
+		main["pour"] = pour
+		main["phem"] = hem_ph
+		main["keyth"] = th_key
+		main["thick"] = 0.013
+		main["sh"] = s_h
+		_add(root, _sweep(main, fp, ax, bg, lin), mat_main)
+
+		# 3..5 — over-drape sectors: cowled, offset outward, hems at different heights
+		var over_defs: Array = [
+			[th_cov, deg_to_rad(196.0), 0.028, 1.24, 0.030, 0.060, 1.285, 1.02, 40],
+			[th_cov + 1.10, deg_to_rad(132.0), 0.054, 1.34, 0.300, 0.110, 1.245, 1.05, 34],
+			[th_cov - 1.52, deg_to_rad(96.0), 0.064, 1.30, 0.520, 0.085, 1.190, 0.99, 28],
+		]
+		for oi in range(n_over):
+			var od: Array = over_defs[oi]
+			var ov: Dictionary = _spec()
+			ov["th0"] = float(od[0]) - float(od[1]) * 0.5
+			ov["span"] = float(od[1])
+			ov["nth"] = int(od[8])
+			ov["ny"] = 12
+			ov["ybot"] = maxf(float(od[4]) * s_h, hem_y)
+			ov["yhi"] = float(od[6]) * s_h
+			ov["ylo"] = float(od[7]) * s_h
+			ov["thcov"] = th_cov
+			ov["dip"] = float(od[5]) * s_h
+			ov["hemw"] = 0.030 * s_h
+			ov["roff"] = float(od[2]) * s_h
+			ov["foldk"] = float(od[3])
+			ov["thick"] = 0.014
+			ov["pour"] = pour * 0.85
+			ov["wrap"] = false
+			ov["phem"] = hem_ph + float(oi) * 1.7
+			ov["keyth"] = th_key
+			ov["sh"] = s_h
+			if oi == 0:
+				ov["lifta"] = lift_a * 0.75
+				ov["liftt"] = th_leg
+			var mo: StandardMaterial3D = mat_main if oi != 1 else mat_deep
+			_add(root, _sweep(ov, fp, ax, bg, lin), mo)
+	else:
+		# the cloth fossilised into its own armature: seven hoops the robe once
+		# hung on, and six vertical ribs standing in for the deepest folds
+		var n_hoop: int = 7
+		for hi in range(n_hoop):
+			var hy: float = lerpf(0.16, 1.30, float(hi) / float(n_hoop - 1)) * s_h
+			var hoop: Dictionary = _spec()
+			hoop["nth"] = 60
+			hoop["ny"] = 3
+			hoop["yhi"] = hy
+			hoop["ylo"] = hy
+			hoop["thcov"] = th_cov
+			hoop["band"] = 0.054 * s_h
+			hoop["roff"] = 0.006 * s_h
+			hoop["foldk"] = 0.90
+			hoop["thick"] = 0.017
+			hoop["phem"] = hem_ph
+			hoop["keyth"] = th_key
+			hoop["sh"] = s_h
+			var mh2: StandardMaterial3D = mat_main if hi % 2 == 0 else mat_deep
+			_add(root, _sweep(hoop, fp, ax, bg, lin), mh2)
+		var n_rib: int = 6
+		for ri in range(n_rib):
+			var rth: float = th_cov + TAU * float(ri) / float(n_rib)
+			var rib: Dictionary = _spec()
+			rib["th0"] = rth - 0.086
+			rib["span"] = 0.172
+			rib["nth"] = 6
+			rib["ny"] = 16
+			rib["ybot"] = 0.02 * s_h
+			rib["yhi"] = 1.30 * s_h
+			rib["ylo"] = 1.30 * s_h
+			rib["thcov"] = th_cov
+			rib["hemw"] = 0.020 * s_h
+			rib["roff"] = 0.014 * s_h
+			rib["foldk"] = 1.38
+			rib["thick"] = 0.017
+			rib["wrap"] = false
+			rib["phem"] = hem_ph
+			rib["keyth"] = th_key
+			rib["sh"] = s_h
+			_add(root, _sweep(rib, fp, ax, bg, lin), mat_main)
 
 	# 6 — the sash, a spiral band from the covered shoulder to the far hip
 	var sash_dir: float = 1.0 if arm_side > 0.0 else -1.0
@@ -441,7 +559,8 @@ static func _robe(root: Node3D, rng: RandomNumberGenerator, tex: ImageTexture, a
 	sash["thcov"] = th_cov
 	sash["band"] = 0.105 * s_h
 	sash["spiral"] = true
-	sash["roff"] = 0.076 * s_h
+	# with the layers gone the band has nothing to clear, so it rides the ribs
+	sash["roff"] = 0.030 * s_h if cage else 0.076 * s_h
 	# foldk matches the over-drapes so the band rides their folds instead of
 	# hovering over them; roff then clears every layer by a constant 22 mm
 	sash["foldk"] = 1.30
@@ -508,9 +627,228 @@ static func _robe(root: Node3D, rng: RandomNumberGenerator, tex: ImageTexture, a
 		},
 	]
 	for fi2 in range(falls.size()):
+		# the cage keeps one rag, the swag caught on the raised arm
+		if cage and fi2 != 0:
+			continue
 		var fd: Dictionary = falls[fi2]
 		var mf: StandardMaterial3D = mat_main if fi2 != 1 else mat_deep
 		_add(root, _fall(fd), mf)
+
+	if flood:
+		var pool_r: float = _robe_base(0.02) * s_h + pour
+		_pool(root, rng2, ax, s_h, pool_r, mat_main, mat_deep)
+	if unravel:
+		_threads(root, rng2, ax, s_h, hem_y, [mat_main, mat_deep, mat_under])
+
+
+# ---------------------------------------------------------------------------
+# drape: what happens where the cloth stops being cloth
+
+## The puddle the pour makes when it reaches the floor: one flattened disc under
+## the hem and five lobes creeping out of it, so the outline is not a circle.
+static func _pool(root: Node3D, rng2: RandomNumberGenerator, ax: Array, s_h: float, r0: float, mat_a: StandardMaterial3D, mat_b: StandardMaterial3D) -> void:
+	var cen: Vector3 = _axis_y(0.0, ax)
+	_ell(root, r0, Vector3(1.0, 0.115, 0.94), 0.0, cen + Vector3(0.0, 0.078 * s_h, 0.0), mat_a)
+	for i in range(5):
+		var th: float = TAU * float(i) / 5.0 + rng2.randf_range(-0.40, 0.40)
+		var d: float = r0 * rng2.randf_range(0.45, 0.72)
+		var rr: float = r0 * rng2.randf_range(0.20, 0.32)
+		var p: Vector3 = cen + Vector3(sin(th) * d, 0.055 * s_h, cos(th) * d)
+		var mm: StandardMaterial3D = mat_a if i % 2 == 0 else mat_b
+		_ell(root, rr, Vector3(1.0, 0.17, 1.0), 0.0, p, mm)
+
+
+## Where the weave gives out, the robe finishes as thread: 26 two-jointed strands
+## dropped off the torn hem, each drifting round the axis as it falls.
+static func _threads(root: Node3D, rng2: RandomNumberGenerator, ax: Array, s_h: float, hem_y: float, mats: Array) -> void:
+	var n: int = 26
+	for i in range(n):
+		var th: float = TAU * float(i) / float(n) + rng2.randf_range(-0.06, 0.06)
+		var y0: float = hem_y + rng2.randf_range(-0.030, 0.055) * s_h
+		var r0: float = _robe_base(y0 / s_h) * s_h + 0.014 * s_h
+		var top: Vector3 = _axis_y(y0, ax) + Vector3(sin(th), 0.0, cos(th)) * r0
+		var sw: float = rng2.randf_range(-1.0, 1.0)
+		var y1: float = y0 * rng2.randf_range(0.42, 0.64)
+		var th1: float = th + sw * 0.30
+		var r1: float = r0 * rng2.randf_range(0.92, 1.20)
+		var mid: Vector3 = _axis_y(y1, ax) + Vector3(sin(th1), 0.0, cos(th1)) * r1
+		var y2: float = maxf(0.014 * s_h, y1 * rng2.randf_range(0.05, 0.45))
+		var th2: float = th1 + sw * 0.44
+		var r2: float = r0 * rng2.randf_range(0.86, 1.38)
+		var end: Vector3 = _axis_y(y2, ax) + Vector3(sin(th2), 0.0, cos(th2)) * r2
+		var mt: StandardMaterial3D = mats[i % mats.size()]
+		_cap(root, top, mid, rng2.randf_range(0.005, 0.010) * s_h, mt)
+		_cap(root, mid, end, rng2.randf_range(0.004, 0.008) * s_h, mt)
+
+
+# ---------------------------------------------------------------------------
+# chorus: the crowd the reference had and this figure gave up
+
+## A second body growing out of the covered shoulder — its own neck, skull, curls
+## and bare arm, three quarters the size, leaning the way the first one is not.
+static func _twin(root: Node3D, rng2: RandomNumberGenerator, mat_skin: StandardMaterial3D, mat_nail: StandardMaterial3D, col_hair: Color, s_h: float, y_sh: float, arm_side: float, twist: float, ax: Array) -> void:
+	var sb := Basis(Vector3.UP, twist)
+	var k: float = 0.76
+	var sh_c: Vector3 = _axis_y(y_sh, ax)
+	var base_p: Vector3 = sh_c + sb * Vector3(-arm_side * 0.148 * s_h, -0.010 * s_h, 0.030 * s_h)
+	var lean: Vector3 = (sb * Vector3(-arm_side * 0.66, 0.72, 0.24)).normalized()
+	var neck_b: Vector3 = base_p + lean * (0.235 * s_h)
+	_cap(root, base_p, _lerp_v(base_p, neck_b, 0.62), 0.050 * s_h * k, mat_skin)
+	_cap(root, _lerp_v(base_p, neck_b, 0.50), neck_b, 0.042 * s_h * k, mat_skin)
+
+	var hb := Basis(Vector3.UP, twist + deg_to_rad(-arm_side * 52.0))
+	var r_hh: float = 0.090 * s_h * k
+	var head_c: Vector3 = neck_b + lean * (0.082 * s_h)
+	_ell_b(root, r_hh, Vector3(0.95, 1.06, 1.00), hb, head_c, mat_skin)
+	_ell_b(root, r_hh * 0.72, Vector3(0.94, 0.80, 1.02), hb, head_c + hb * Vector3(0.0, -0.052 * s_h * k, -0.024 * s_h * k), mat_skin)
+	_ell_b(root, r_hh * 0.60, Vector3(1.30, 0.42, 0.72), hb, head_c + hb * Vector3(0.0, 0.030 * s_h * k, -0.074 * s_h * k), mat_skin)
+	_ell_b(root, r_hh * 0.24, Vector3(0.82, 1.15, 1.30), hb, head_c + hb * Vector3(0.0, -0.010 * s_h * k, -0.088 * s_h * k), mat_skin)
+	var ga: float = PI * (3.0 - sqrt(5.0))
+	for hi in range(14):
+		var fi: float = (float(hi) + 0.5) / 14.0
+		var cz: float = 1.0 - fi * 1.20
+		var sr: float = sqrt(maxf(0.0, 1.0 - cz * cz))
+		var an: float = ga * float(hi)
+		var dl := Vector3(sr * cos(an), cz, sr * sin(an))
+		if dl.z < -0.34 and dl.y < 0.30:
+			continue
+		var cr: float = rng2.randf_range(0.022, 0.034) * s_h * k
+		var hp: Vector3 = head_c + hb * (dl * (r_hh * 0.97) + dl.normalized() * (cr * 0.40))
+		_ell(root, cr, Vector3(1.0, 0.86, 1.0), 0.0, hp, _matte(col_hair.lightened(rng2.randf_range(0.0, 0.18)), 0.46))
+
+	var t_sh: Vector3 = base_p + sb * Vector3(-arm_side * 0.100 * s_h, 0.050 * s_h, -0.020 * s_h)
+	var t_elb: Vector3 = t_sh + sb * (Vector3(-arm_side * 0.180 * s_h, 0.020 * s_h, -0.110 * s_h) * k)
+	var t_wri: Vector3 = t_elb + sb * (Vector3(-arm_side * 0.030 * s_h, -0.150 * s_h, -0.130 * s_h) * k)
+	_ell(root, 0.064 * s_h * k, Vector3(1.05, 1.02, 0.94), twist, t_sh, mat_skin)
+	_cap(root, t_sh, t_elb, 0.050 * s_h * k, mat_skin)
+	_ell(root, 0.042 * s_h * k, Vector3(1.0, 1.0, 1.0), 0.0, t_elb, mat_skin)
+	_cap(root, t_elb, t_wri, 0.042 * s_h * k, mat_skin)
+	_hand(root, t_wri, (t_wri - t_elb).normalized(), sb * Vector3(-arm_side, 0.0, 0.0), s_h * k, 0.9, mat_skin, mat_nail)
+
+
+## Three heads and six arms off the one torso: two shorter necks pushing out of
+## the shoulders, and four more arms radiating at two heights, each ending in a
+## three-fingered claw rather than a full hand — the mesh budget is 260.
+static func _hydra(root: Node3D, rng2: RandomNumberGenerator, mat_skin: StandardMaterial3D, mat_nail: StandardMaterial3D, col_hair: Color, s_h: float, y_sh: float, y_hip: float, twist: float, ax: Array) -> void:
+	var sb := Basis(Vector3.UP, twist)
+	var sh_c: Vector3 = _axis_y(y_sh, ax)
+	for si in range(2):
+		var sd: float = -1.0 if si == 0 else 1.0
+		var k: float = 0.66
+		var neck_a: Vector3 = sh_c + sb * Vector3(sd * 0.125 * s_h, -0.012 * s_h, -0.020 * s_h)
+		var lean: Vector3 = (sb * Vector3(sd * 0.74, 0.64, -0.20)).normalized()
+		var neck_b: Vector3 = neck_a + lean * (0.185 * s_h)
+		_cap(root, neck_a, neck_b, 0.040 * s_h * k, mat_skin)
+		var hb := Basis(Vector3.UP, twist + deg_to_rad(sd * 60.0))
+		var r_hh: float = 0.090 * s_h * k
+		var head_c: Vector3 = neck_b + lean * (0.078 * s_h)
+		_ell_b(root, r_hh, Vector3(0.95, 1.06, 1.00), hb, head_c, mat_skin)
+		_ell_b(root, r_hh * 0.72, Vector3(0.94, 0.80, 1.02), hb, head_c + hb * Vector3(0.0, -0.052 * s_h * k, -0.024 * s_h * k), mat_skin)
+		_ell_b(root, r_hh * 0.60, Vector3(1.30, 0.42, 0.72), hb, head_c + hb * Vector3(0.0, 0.030 * s_h * k, -0.074 * s_h * k), mat_skin)
+		_ell_b(root, r_hh * 0.24, Vector3(0.82, 1.15, 1.30), hb, head_c + hb * Vector3(0.0, -0.010 * s_h * k, -0.088 * s_h * k), mat_skin)
+		for hi in range(6):
+			var an: float = TAU * float(hi) / 6.0
+			var dl := Vector3(cos(an) * 0.72, 0.62, sin(an) * 0.72).normalized()
+			var cr: float = rng2.randf_range(0.022, 0.032) * s_h * k
+			_ell(root, cr, Vector3(1.0, 0.86, 1.0), 0.0, head_c + hb * (dl * r_hh), _matte(col_hair.lightened(rng2.randf_range(0.0, 0.18)), 0.46))
+
+	var arm_ang: Array = [42.0, -42.0, 116.0, -116.0]
+	var arm_dy: Array = [0.055, -0.020, -0.300, -0.365]
+	var arm_pitch: Array = [0.58, 0.26, -0.22, -0.46]
+	for ai in range(4):
+		var th_a: float = twist + deg_to_rad(float(arm_ang[ai]))
+		var yy: float = maxf(y_sh + float(arm_dy[ai]) * s_h, y_hip + 0.08 * s_h)
+		var cen: Vector3 = _axis_y(yy, ax)
+		var out_d := Vector3(sin(th_a), 0.0, cos(th_a))
+		var up_d := Vector3(0.0, float(arm_pitch[ai]), 0.0)
+		var a_sh: Vector3 = cen + out_d * (0.150 * s_h)
+		var a_el: Vector3 = a_sh + (out_d * 0.62 + up_d).normalized() * (0.235 * s_h)
+		var a_wr: Vector3 = a_el + (out_d * 0.34 + up_d * 1.5 + Vector3(0.0, 0.10, 0.0)).normalized() * (0.215 * s_h)
+		_ell(root, 0.062 * s_h, Vector3(1.05, 1.02, 0.94), twist, a_sh, mat_skin)
+		_cap(root, a_sh, a_el, 0.048 * s_h, mat_skin)
+		_ell(root, 0.042 * s_h, Vector3(1.0, 1.0, 1.0), 0.0, a_el, mat_skin)
+		_cap(root, a_el, a_wr, 0.040 * s_h, mat_skin)
+		_claw(root, a_wr, (a_wr - a_el).normalized(), s_h, mat_skin, mat_nail)
+
+
+static func _claw(root: Node3D, wrist: Vector3, fwd: Vector3, s_h: float, mat: StandardMaterial3D, mat_nail: StandardMaterial3D) -> void:
+	var side: Vector3 = fwd.cross(Vector3.UP)
+	if side.length() < 0.02:
+		side = Vector3(1.0, 0.0, 0.0)
+	side = side.normalized()
+	var nrm: Vector3 = fwd.cross(side).normalized()
+	var palm: Vector3 = wrist + fwd * (0.044 * s_h)
+	# (side, nrm, fwd) is right-handed here too: side x nrm = fwd
+	_ell_b(root, 0.044 * s_h, Vector3(1.10, 0.52, 0.98), Basis(side, nrm, fwd), palm, mat)
+	for fi in range(3):
+		var ff: float = float(fi) - 1.0
+		var dirf: Vector3 = (fwd + side * (ff * 0.42) + nrm * 0.18).normalized()
+		var mfi: StandardMaterial3D = mat if fi != 1 else mat_nail
+		_cap(root, palm, palm + dirf * (0.070 * s_h), 0.013 * s_h, mfi)
+
+
+## The crowd comes back: three half-size companions pressed in around the
+## principal, each with a real swept robe of its own (its own lean, its own fold
+## phase, no bulge lobes — those are keyed to the principal's heights).
+static func _frieze(root: Node3D, rng2: RandomNumberGenerator, mat_skin: StandardMaterial3D, col_hair: Color, cloths: Array, s_h: float, fp: Array, lin: Color) -> void:
+	var slots: Array = [-1.0, 1.0, 0.0]
+	for ci in range(3):
+		var sd: float = float(slots[ci])
+		var s_c: float = s_h * rng2.randf_range(0.50, 0.60)
+		var turn: float = 0.0
+		var off_z: float = 0.56 * s_h
+		if sd != 0.0:
+			turn = -sd * 0.50
+			off_z = -0.10 * s_h
+		var yaw: float = rng2.randf_range(-0.55, 0.55) + turn
+		var dist: float = s_h * rng2.randf_range(0.40, 0.50)
+		var off := Vector3(sd * dist, 0.0, off_z + rng2.randf_range(-0.05, 0.05) * s_h)
+		_companion(root, rng2, mat_skin, col_hair, cloths[ci % cloths.size()], s_c, off, yaw, fp, lin)
+
+
+static func _companion(root: Node3D, rng2: RandomNumberGenerator, mat_skin: StandardMaterial3D, col_hair: Color, mat_cloth: StandardMaterial3D, s_c: float, off: Vector3, yaw: float, fp: Array, lin: Color) -> void:
+	var ax_c: Array = [1.335 * s_c, rng2.randf_range(-0.05, 0.05), rng2.randf_range(-0.22, -0.10), rng2.randf_range(-0.06, 0.06), rng2.randf_range(0.03, 0.08)]
+	var yb := Basis(Vector3.UP, yaw)
+	var th_c: float = rng2.randf_range(0.0, TAU)
+	var sp: Dictionary = _spec()
+	sp["nth"] = 44
+	sp["ny"] = 11
+	sp["yhi"] = 1.290 * s_c
+	sp["ylo"] = 1.010 * s_c
+	sp["thcov"] = th_c
+	sp["hemw"] = 0.030 * s_c
+	sp["lifta"] = rng2.randf_range(0.10, 0.24) * s_c
+	sp["liftt"] = th_c + PI
+	sp["phem"] = rng2.randf_range(0.0, TAU)
+	sp["keyth"] = th_c + PI * 0.72
+	sp["thick"] = 0.013
+	sp["sh"] = s_c
+	var mi: MeshInstance3D = _add(root, _sweep(sp, fp, ax_c, [], lin), mat_cloth)
+	mi.transform = Transform3D(yb, off)
+
+	var y_sh_c: float = 1.335 * s_c
+	var sh_c: Vector3 = off + yb * _axis_y(y_sh_c, ax_c)
+	var head_c: Vector3 = sh_c + yb * Vector3(0.0, 0.165 * s_c, -0.020 * s_c)
+	_cap(root, sh_c, head_c - Vector3(0.0, 0.075 * s_c, 0.0), 0.048 * s_c, mat_skin)
+	_ell(root, 0.088 * s_c, Vector3(0.95, 1.06, 1.00), yaw, head_c, mat_skin)
+	_ell(root, 0.062 * s_c, Vector3(0.94, 0.80, 1.02), yaw, head_c + yb * Vector3(0.0, -0.050 * s_c, -0.022 * s_c), mat_skin)
+	for hi in range(5):
+		var an: float = TAU * float(hi) / 5.0
+		var dl := Vector3(cos(an) * 0.66, 0.70, sin(an) * 0.66).normalized()
+		_ell(root, 0.030 * s_c, Vector3(1.0, 0.86, 1.0), 0.0, head_c + yb * (dl * (0.090 * s_c)), _matte(col_hair.lightened(rng2.randf_range(0.0, 0.20)), 0.46))
+
+	var a_side: float = 1.0 if rng2.randf() < 0.5 else -1.0
+	var a_sh: Vector3 = sh_c + yb * Vector3(a_side * 0.150 * s_c, 0.0, -0.010 * s_c)
+	var a_el: Vector3 = a_sh + yb * Vector3(a_side * 0.180 * s_c, rng2.randf_range(0.02, 0.10) * s_c, -0.060 * s_c)
+	var a_wr: Vector3 = a_el + yb * Vector3(a_side * 0.060 * s_c, rng2.randf_range(0.06, 0.16) * s_c, -0.110 * s_c)
+	_ell(root, 0.062 * s_c, Vector3(1.05, 1.02, 0.94), yaw, a_sh, mat_skin)
+	_cap(root, a_sh, a_el, 0.048 * s_c, mat_skin)
+	_cap(root, a_el, a_wr, 0.040 * s_c, mat_skin)
+	_ell(root, 0.046 * s_c, Vector3(1.10, 0.60, 0.98), yaw, a_wr + yb * Vector3(a_side * 0.010 * s_c, 0.030 * s_c, -0.020 * s_c), mat_skin)
+	for fi in range(2):
+		var fs: float = -1.0 if fi == 0 else 1.0
+		var fpo: Vector3 = off + yb * Vector3(fs * 0.070 * s_c, 0.030 * s_c, -0.045 * s_c)
+		_ell(root, 0.048 * s_c, Vector3(0.80, 0.62, 1.35), yaw, fpo, mat_skin)
 
 
 # ---------------------------------------------------------------------------
@@ -521,7 +859,7 @@ static func _spec() -> Dictionary:
 		"th0": 0.0, "span": TAU, "nth": 48, "ny": 10,
 		"ybot": 0.0, "yhi": 1.2, "ylo": 1.0, "thcov": 0.0,
 		"dip": 0.0, "hemw": 0.02, "lifta": 0.0, "liftt": 0.0,
-		"rs": 1.0, "roff": 0.0, "foldk": 1.0, "thick": 0.012,
+		"rs": 1.0, "roff": 0.0, "foldk": 1.0, "thick": 0.012, "pour": 0.0,
 		"band": 0.0, "spiral": false, "wrap": true, "phem": 0.0,
 		"keyth": 0.0, "sh": 1.0,
 	}
@@ -544,6 +882,7 @@ static func _sweep(spec: Dictionary, fp: Array, ax: Array, bg: Array, lin: Color
 	var r_off: float = float(spec["roff"])
 	var fold_k: float = float(spec["foldk"])
 	var thick: float = float(spec["thick"])
+	var pour: float = float(spec["pour"])
 	var band: float = float(spec["band"])
 	var spiral: bool = bool(spec["spiral"])
 	var wrap: bool = bool(spec["wrap"])
@@ -584,7 +923,12 @@ static func _sweep(spec: Dictionary, fp: Array, ax: Array, bg: Array, lin: Color
 			var w: float = _fold_w(yy, th, fp)
 			var fa: float = _fold_amp(yy / sh)
 			var rb: float = _robe_base(yy / sh) * sh * r_scale
-			var rr: float = rb * (1.0 + fold_k * fa * FOLD_D * w) + r_off + _bulge(yy, th, bg)
+			# the pour: a swell that grows toward the floor and drowns the folds it
+			# passes, so the hem reads as one solid mass and no longer as cloth
+			var pt: float = 0.0
+			if pour > 0.0:
+				pt = pow(clampf(1.0 - yy / maxf(0.95 * sh, 0.01), 0.0, 1.0), 1.7)
+			var rr: float = rb * (1.0 + fold_k * fa * FOLD_D * w * (1.0 - 0.82 * pt)) + r_off + _bulge(yy, th, bg) + pour * pt
 			var dir := Vector3(sin(th), 0.0, cos(th))
 			var po: Vector3 = cen + dir * rr
 			var pi2: Vector3 = cen + dir * maxf(rr - thick, 0.03)

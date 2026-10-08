@@ -28,6 +28,9 @@ const BakedText := preload("res://commons/utils/baked_text_albedo.gd")
 ## Spacing between the three trees (meters)
 @export var tree_spacing: float = 1.2
 
+## Physical controls are the museum default; retain the screen for comparison.
+@export var use_physical_controls: bool = true
+
 # ── Grammars ────────────────────────────────────────────────
 # Each grammar: { axiom, rules, angle_deg, length, label, subtitle }
 var _grammars: Array[Dictionary] = [
@@ -93,7 +96,7 @@ func _build_trees() -> void:
 		mat.shading_mode = BaseMaterial3D.SHADING_MODE_UNSHADED
 		mat.vertex_color_use_as_albedo = true
 		mi.material_override = mat
-		mi.position = Vector3((i - 1) * tree_spacing, 0, 0)
+		mi.position = Vector3((i - 1) * tree_spacing, 0.30, 0)
 		add_child(mi)
 		_tree_meshes.append(mi)
 
@@ -103,22 +106,32 @@ func _build_trees() -> void:
 		var cyl := CylinderMesh.new()
 		cyl.top_radius = 0.3
 		cyl.bottom_radius = 0.35
-		cyl.height = 0.02
+		cyl.height = 0.30
 		base.mesh = cyl
 		var bmat := StandardMaterial3D.new()
 		bmat.albedo_color = Color(0.12, 0.1, 0.08)
 		bmat.metallic = 0.3
 		bmat.roughness = 0.7
 		base.material_override = bmat
-		base.position = Vector3(0, -0.01, 0)
+		base.position = Vector3(0, -0.15, 0)
 		mi.add_child(base)
 
 		# Title + provenance consolidated on one framed dark panel (R-027)
 		var panel := Node3D.new()
 		panel.name = "Provenance_%d" % i
-		panel.position = Vector3(0, -0.2, 0.38)
+		# Tilt the evidence toward the visitor. The shallow sample bases keep
+		# even the flat grammar visible above these low foreground plaques.
+		panel.position = Vector3(0, 0.08, 0.70)
+		panel.rotation_degrees.x = -55
 		mi.add_child(panel)
 		panel.add_child(_plate(Vector3(0.9, 0.42, 0.03)))
+		var post := MeshInstance3D.new()
+		post.name = "ProvenanceSupport_%d" % i
+		post.mesh = BoxMesh.new()
+		post.mesh.size = Vector3(.045, .26, .045)
+		post.position = Vector3(0, -.17, .70)
+		post.material_override = bmat
+		mi.add_child(post)
 		var title_mesh: MeshInstance3D = BakedText.make_label_mesh(_grammars[i]["label"], Color(1, 1, 1), Vector2(0.8, 0.06), 1300, true)
 		if title_mesh:
 			title_mesh.position = Vector3(0, 0.14, 0.022)
@@ -136,13 +149,45 @@ func _build_trees() -> void:
 func _build_controls() -> void:
 	_controls = ArtifactControls.new()
 	_controls.name = "Controls"
-	_controls.position = Vector3(2.0, 1.2, 0.0)
+	# Local +Z is the viewing side: player -> controls -> three grammar forms.
+	# A low inclined face keeps the central form visible over the controls.
+	_controls.position = Vector3(0.0, .86, 1.7)
+	_controls.rotation_degrees.x = -55.0
+	_controls.scale = Vector3.ONE if use_physical_controls else Vector3.ONE * 1.5
+	_controls.set_spacing(.225 if use_physical_controls else .15)
 	add_child(_controls)
 
-	_controls.add_slider("DEPTH", float(generation_depth - 1) / 5.0, func(v: float):
+	var on_depth := func(v: float):
 		generation_depth = int(round(v * 5.0)) + 1
-	)
-	_controls.add_label("depth_display", "Depth: %d" % generation_depth)
+	if use_physical_controls:
+		_controls.add_physical_stepped_slider("DEPTH", float(generation_depth - 1) / 5.0, on_depth, 6)
+	else:
+		_controls.add_stepped_slider("DEPTH", float(generation_depth - 1) / 5.0, on_depth, 6)
+	var readout: Node3D = _controls.add_label("depth_display", "Depth: %d" % generation_depth)
+	if use_physical_controls:
+		readout.scale = Vector3.ONE * 1.5
+	# Support the selector and its nearby status screen as one small station.
+	var casing := _plate(Vector3(.23, .30, .03))
+	casing.position = Vector3(0, -.05, -.032)
+	if use_physical_controls:
+		casing.scale = Vector3.ONE * 1.5
+		casing.position *= 1.5
+	_controls.add_child(casing)
+	var stand := Node3D.new()
+	stand.name = "ConsoleStand"
+	stand.position.z = 1.7
+	add_child(stand)
+	var stem := _plate(Vector3(.08, .74, .08))
+	stem.position = Vector3(0, .37, .02)
+	stand.add_child(stem)
+	var foot := _plate(Vector3(.36, .025, .30))
+	foot.position = Vector3(0, .025, .02)
+	stand.add_child(foot)
+
+
+func exhibit_control_parts() -> Array[Node3D]:
+	if not use_physical_controls: return []
+	return [_controls, get_node("ConsoleStand")]
 
 
 func _build_header() -> void:
@@ -270,3 +315,6 @@ func _regenerate_all() -> void:
 	# Update depth label
 	if _controls and _controls.has_method("update_label"):
 		_controls.update_label("depth_display", "Depth: %d" % generation_depth)
+		var selector: Node = _controls._controls.get("DEPTH")
+		if selector and not is_equal_approx(selector.get_normalized_value(), float(generation_depth - 1) / 5.0):
+			selector.set_normalized_value(float(generation_depth - 1) / 5.0)

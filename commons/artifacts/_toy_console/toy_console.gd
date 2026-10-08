@@ -42,7 +42,12 @@ const DEMO_ONLY_SIZE := 1.9   # demo scale target when there's no console under 
 var _rng := RandomNumberGenerator.new()
 var _rack_built := false
 var demo_root: Node3D
-var monitor_label: Label3D
+var monitor_label: Variant
+var flat_console_text := false
+var _monitor_surface: Dictionary = {}
+var _title_plate: Node3D
+const ValueSurface = preload("res://commons/ui/control_value_surface.gd")
+const BakedText = preload("res://commons/utils/baked_text_albedo.gd")
 var _slider: Node
 var _controls_built: Array = []
 
@@ -94,6 +99,8 @@ func _reset_console() -> void:
 	_rack_built = false
 	demo_root = null
 	monitor_label = null
+	_monitor_surface.clear()
+	_title_plate=null
 	_slider = null
 	_controls_built = []
 
@@ -107,18 +114,21 @@ func _ensure_rack() -> void:
 
 	# demo_only: no rack — a free-standing demo with a billboard readout (gallery captures)
 	if demo_only:
-		monitor_label = Label3D.new()
-		monitor_label.name = "BillboardReadout"
-		monitor_label.font_size = 30
-		monitor_label.pixel_size = 0.0011
-		monitor_label.modulate = TEXT_DISPLAY
-		monitor_label.outline_size = 8
-		monitor_label.outline_modulate = Color(0.10, 0.10, 0.12, 0.85)
-		monitor_label.billboard = BaseMaterial3D.BILLBOARD_ENABLED
-		monitor_label.no_depth_test = true
-		monitor_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
-		monitor_label.position = Vector3(0.0, DEMO_ONLY_SIZE + 0.30, 0.0)
-		add_child(monitor_label)
+		if flat_console_text:
+			_make_monitor(Vector3(0,DEMO_ONLY_SIZE+.30,0),Vector2(1.2,.55))
+		else:
+			monitor_label = Label3D.new()
+			monitor_label.name = "BillboardReadout"
+			monitor_label.font_size = 30
+			monitor_label.pixel_size = 0.0011
+			monitor_label.modulate = TEXT_DISPLAY
+			monitor_label.outline_size = 8
+			monitor_label.outline_modulate = Color(0.10, 0.10, 0.12, 0.85)
+			monitor_label.billboard = BaseMaterial3D.BILLBOARD_ENABLED
+			monitor_label.no_depth_test = true
+			monitor_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+			monitor_label.position = Vector3(0.0, DEMO_ONLY_SIZE + 0.30, 0.0)
+			add_child(monitor_label)
 		demo_root = Node3D.new()
 		demo_root.name = "DemoMount"
 		add_child(demo_root)
@@ -134,17 +144,20 @@ func _ensure_rack() -> void:
 	var scr := Vector3(-0.48, 1.16, 0.10)
 	add_child(_box(scr + Vector3(0.0, 0.0, -0.02), Vector3(0.56, 0.48, 0.05), _panel_mat(PANEL_TRIM)))   # light bezel
 	add_child(_box(scr, Vector3(0.48, 0.40, 0.01), _screen_mat()))                                       # dark display
-	monitor_label = Label3D.new()
-	monitor_label.name = "MonitorReadout"
-	monitor_label.font_size = 36
-	monitor_label.pixel_size = 0.0011
-	monitor_label.modulate = TEXT_DISPLAY
-	monitor_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
-	monitor_label.vertical_alignment = VERTICAL_ALIGNMENT_CENTER
-	monitor_label.position = scr + Vector3(0.0, 0.0, 0.012)
-	monitor_label.text = "..."
-	add_child(monitor_label)
-	add_child(_label_plate(String(meta.get("title", "TOY")), Vector3(-0.48, 1.43, 0.10), 22, TEXT_DARK))
+	if flat_console_text:
+		_make_monitor(scr+Vector3(0,0,.012),Vector2(.48,.40))
+	else:
+		monitor_label = Label3D.new()
+		monitor_label.name = "MonitorReadout"
+		monitor_label.font_size = 36
+		monitor_label.pixel_size = 0.0011
+		monitor_label.modulate = TEXT_DISPLAY
+		monitor_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+		monitor_label.vertical_alignment = VERTICAL_ALIGNMENT_CENTER
+		monitor_label.position = scr + Vector3(0.0, 0.0, 0.012)
+		monitor_label.text = "..."
+		add_child(monitor_label)
+	refresh_console_title()
 
 	# the control(s): a multi-control bank if _controls() is overridden, else one slider
 	var specs: Array = _controls()
@@ -195,65 +208,36 @@ func _build_control_bank(specs: Array) -> void:
 		var kind: String = String(spec.get("kind", "slider"))
 		var t: float = 0.0 if n <= 1 else float(i) / float(n - 1)
 		if kind == "pad":
-			_build_pad(spec, lerpf(0.04, 0.56, t))
+			_build_pad(spec, lerpf(-0.02, 0.28, t))
 		else:
 			_build_scalar(spec, kind, lerpf(0.0, 0.58, t))
 
 
-## A control plate drawn directly (light bezel + recessed face + accent cross-hair),
-## with the knob sitting ON the plate at the vector's value — guaranteed aligned. The
-## plate tilts up toward the player on the front lip. (slider_plane's plate and handle
-## live on separate branches and can't be kept coplanar; the live VR grab is wired
-## separately as a constrained handle.)
+## Shared two-axis physical pad; face, handle and grab target stay coplanar.
+## Values remain signed normalized coordinates, with an explicit readout mapping.
 func _build_pad(spec: Dictionary, x: float) -> void:
-	var iv: Vector2 = spec["get"].call()
-	var pad := Node3D.new()
+	var pad: Node3D = load(PAD_SCENE).instantiate()
 	pad.name = "Pad_" + String(spec.get("label", ""))
 	add_child(pad)
-	pad.position = Vector3(x, 1.02, 0.34)                  # lifted onto the front lip, toward the player
-	pad.rotation = Vector3(deg_to_rad(-50.0), 0.0, 0.0)   # face tilts up toward the player
-	# interactable_demo principle: the grabbable control must sit at UNIT world scale — a scaled
-	# ancestor breaks XR handle-driven grab (the offset is read through global_transform.basis). So
-	# the pad stays unit scale; the Braun bezel is a scaled DECORATIVE sub-node (size/look unchanged),
-	# and slider_plane is a direct child of the unit pad so its ball actually moves.
-	var bezel := Node3D.new()
-	bezel.name = "Bezel"
-	bezel.scale = Vector3.ONE * 1.3                                                                  # decorative meshes only — scale here is harmless
-	pad.add_child(bezel)
-	bezel.add_child(_box(Vector3.ZERO, Vector3(0.24, 0.24, 0.02), _panel_mat(PANEL_TRIM)))           # bezel
-	bezel.add_child(_box(Vector3(0.0, 0.0, 0.013), Vector3(0.20, 0.20, 0.004), _screen_mat()))       # recessed face
-	bezel.add_child(_box(Vector3(0.0, 0.0, 0.016), Vector3(0.20, 0.004, 0.001), _glow_mat(BRAUN_ACCENT, 0.18)))  # cross-hair
-	bezel.add_child(_box(Vector3(0.0, 0.0, 0.016), Vector3(0.004, 0.20, 0.001), _glow_mat(BRAUN_ACCENT, 0.18)))
-
-	# the WORKING 2D control: slider_plane's grabbable handle at UNIT scale, a DIRECT child of the
-	# unit pad (correct grab math), resting on the scaled plate face. Its base/track are hidden so
-	# only the handle shows in the bezel; it emits slider_moved (Vector2 in ±PAD_LIMIT) → _make_pad_handler.
-	var wired := false
-	if ResourceLoader.exists(PAD_SCENE):
-		var ctl: Node = load(PAD_SCENE).instantiate()
-		ctl.name = "Ctl_" + String(spec.get("label", ""))
-		pad.add_child(ctl)                                               # direct child of the UNIT pad → unit world scale
-		(ctl as Node3D).rotation = Vector3(0.0, deg_to_rad(-90.0), 0.0)  # map the slider's Y-Z plane onto the plate's X-Y face
-		(ctl as Node3D).position = Vector3(0.0, 0.0, 0.016 * 1.3)        # rest on the scaled plate face
-		for p in ["Frame/BaseMesh", "Frame/TrackMesh", "Frame/Label3DValue"]:
-			var n: Node = ctl.get_node_or_null(p)
-			if n and n is Node3D: (n as Node3D).visible = false
-		if "limit_y_min" in ctl:
-			ctl.set("limit_y_min", -PAD_LIMIT); ctl.set("limit_y_max", PAD_LIMIT)
-			ctl.set("limit_z_min", -PAD_LIMIT); ctl.set("limit_z_max", PAD_LIMIT)
-		if "slider_position" in ctl:
-			ctl.set("slider_position", Vector2(clampf(iv.x, -1.0, 1.0) * PAD_LIMIT, clampf(iv.y, -1.0, 1.0) * PAD_LIMIT))
-		if ctl.has_signal("slider_moved"):
-			ctl.connect("slider_moved", _make_pad_handler(spec)); wired = true
-	if not wired:                                          # fallback: a static knob if the control is missing
-		var knob := Node3D.new(); knob.name = "Knob"
-		knob.position = Vector3(clampf(iv.x, -1.0, 1.0) * 0.09, clampf(iv.y, -1.0, 1.0) * 0.09, 0.0)
-		bezel.add_child(knob)
-		knob.add_child(_cylinder_between(Vector3(0, 0, 0.016), Vector3(0, 0, 0.05), 0.014, _accent_mat()))
-		knob.add_child(_sphere(Vector3(0, 0, 0.056), 0.028, _accent_mat()))
-
+	pad.position = Vector3(x,1.06,.40)
+	pad.rotation_degrees.x = -50
+	var support:=_box(Vector3(x,1.0,.30),Vector3(.09,.10,.09),_panel_mat(PANEL_TRIM))
+	support.name="PadSupport_"+String(spec.get("label",""))
+	add_child(support)
+	pad.set_travel_limits(Vector2.ONE * PAD_LIMIT)
+	pad.set_value_mapping(String(spec.get("label", "XY")),float(spec.get("display_span",1.0)))
+	pad.set_normalized_position(spec["get"].call())
+	pad.slider_moved.connect(_make_pad_handler(spec))
 	_controls_built.append(pad)
-	add_child(_label_plate(String(spec.get("label", "")), Vector3(x, 1.18, 0.30), 18, TEXT_DARK))
+
+func sync_pad_controls() -> void:
+	var specs: Array = _controls()
+	for i in mini(specs.size(),_controls_built.size()):
+		if specs[i].get("kind","")=="pad":
+			var pad: Node3D = _controls_built[i]
+			pad.set_block_signals(true)
+			pad.set_normalized_position(specs[i]["get"].call())
+			pad.set_block_signals(false)
 
 
 func _build_scalar(spec: Dictionary, kind: String, x: float) -> void:
@@ -296,7 +280,11 @@ func _make_scalar_handler(node: Node, spec: Dictionary) -> Callable:
 func set_readout(text: String, color: Color = Color(0.55, 0.92, 1.0)) -> void:
 	if monitor_label:
 		monitor_label.text = text
-		monitor_label.modulate = color.lerp(TEXT_DISPLAY, 0.55)   # calm the per-toy tint toward warm white
+		if flat_console_text:
+			monitor_label.add_theme_color_override("font_color",color.lerp(TEXT_DISPLAY,.55))
+			_monitor_surface.viewport.render_target_update_mode=SubViewport.UPDATE_ONCE
+		else:
+			monitor_label.modulate=color.lerp(TEXT_DISPLAY,.55)
 
 
 ## Fresh demo container — call at the top of _build_demo(), build into the returned rig.
@@ -354,16 +342,40 @@ func _accent_handles(root: Node) -> void:
 		_accent_handles(child)
 
 
-func _label_plate(text: String, pos: Vector3, font: int, col: Color) -> Label3D:
-	var l := Label3D.new()
-	l.text = text
-	l.font_size = font
-	l.pixel_size = 0.0011
-	l.modulate = col
-	l.outline_size = 4
-	l.outline_modulate = Color(0.86, 0.84, 0.80, 0.9)   # soft light halo so dark type reads on the housing
-	l.position = pos
-	return l
+func _label_plate(text: String, pos: Vector3, font: int, col: Color) -> Node3D:
+	if not flat_console_text:
+		var l := Label3D.new()
+		l.text = text
+		l.font_size = font
+		l.pixel_size = 0.0011
+		l.modulate = col
+		l.outline_size = 4
+		l.outline_modulate = Color(0.86, 0.84, 0.80, 0.9)   # soft light halo so dark type reads on the housing
+		l.position = pos
+		return l
+	var size:=Vector2(maxf(.18,text.length()*font*.0011*.55),font*.0011*1.6)
+	var plate:=BakedText.make_panel_mesh(text,PANEL_LIGHT,col,size,1600)
+	plate.position=pos
+	return plate
+
+func refresh_console_title() -> void:
+	if demo_only or not _rack_built: return
+	if is_instance_valid(_title_plate):
+		remove_child(_title_plate)
+		_title_plate.queue_free()
+	var title:=String(_console_meta().get("title","TOY"))
+	_title_plate=_label_plate(title,Vector3(-.48,1.43,.10),22,TEXT_DARK)
+	_title_plate.set_meta("printed_text",title)
+	add_child(_title_plate)
+
+func _make_monitor(at: Vector3, size: Vector2) -> void:
+	_monitor_surface=ValueSurface.build(self,size,at)
+	var vp: SubViewport=_monitor_surface.viewport
+	vp.size=Vector2i(720,600)
+	vp.get_child(0).size=Vector2(vp.size)
+	monitor_label=_monitor_surface.label
+	monitor_label.size=Vector2(vp.size)
+	monitor_label.add_theme_font_size_override("font_size",32)
 
 
 func _parse_color(value: Variant, fallback: Color) -> Color:

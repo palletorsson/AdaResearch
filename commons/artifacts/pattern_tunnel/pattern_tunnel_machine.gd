@@ -13,7 +13,7 @@ class_name PatternTunnelMachine
 const TunnelScene := preload("res://commons/artifacts/pattern_tunnel/pattern_tunnel.tscn")
 const SLIDER_SCENE := "res://commons/interactables/slider_horizontal.tscn"
 
-const GROUPS := ["P1","P2","PM","PG","PMM","PMG","PGG","CM","CMM","P4","P4M","P4G","P3","P3M1","P31M","P6","P6M"]
+const GROUPS := ["P1","P2","PM","PG","CM","PMM","PMG","PGG","CMM","P4","P4M","P4G","P3","P3M1","P31M","P6","P6M"]
 const MOTIF_NAMES := ["Checkerboard","Greek Key","Hex Rosette","Eight-Point Star"]
 const PERIOD_NAMES := ["Republican","Imperial","Cosmatesque","Renaissance","Baroque"]
 
@@ -29,6 +29,7 @@ var _tunnel: Node = null
 var _monitor: Label3D = null
 var _sliders: Dictionary = {}    # key -> slider node
 var _built := false
+var address_lesson:Node3D
 
 
 func _ready() -> void:
@@ -39,7 +40,9 @@ func _ready() -> void:
 func _build() -> void:
 	_built = true
 	for c in get_children():
+		remove_child(c)
 		c.queue_free()
+	address_lesson=null
 
 	if randomize_on_start:
 		group_index = randi() % GROUPS.size()
@@ -232,3 +235,7 @@ func apply_grid_config(config_data: Dictionary) -> void:
 	if config_data.has("randomize_on_start"): randomize_on_start = bool(config_data["randomize_on_start"])
 	_built = false
 	_build()
+	if config_data.get("lesson", "") == "addresses":
+		address_lesson=load("res://commons/artifacts/pattern_tunnel/tunnel_address_lesson.gd").new()
+		address_lesson.platform_route=str(config_data.get("platform_route", "false")).to_lower()=="true"
+		address_lesson.name="TunnelAddressLesson";add_child(address_lesson)

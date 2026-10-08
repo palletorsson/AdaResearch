@@ -35,6 +35,16 @@ extends RefCounted
 ## Given up: the black stage and its cast shadows, the neighbouring scaffolds that
 ## crowd the panorama, sheets that CURL rather than fold, and the faint white wall
 ## drawings behind the installation.
+##
+## AXES (dna)
+##   monument — what becomes of the tower itself: "tower" one leaning frame as built,
+##     "twinned" a second frame growing inverted out of its own top, "brigade" the one
+##     tower dissolved into a crowd of small towers on the floor, "collapse" the frame
+##     sagging into a wide wreck half drowned in a poured red pool, "exploded" every
+##     member hovering apart along its own outward normal.
+##   sheet — what the torn planes ARE: "torn" thin paper polygons as built, "thread"
+##     only their outlines left as sagging cord, "bloom" each plane opened into a paper
+##     flower on a red bud, "slab" the paper fossilised into thick stone monoliths.
 
 const TEX_SIZE: int = 128
 
@@ -53,11 +63,51 @@ const PAPER_SETS: Array = [
 ]
 
 
+static func axes() -> Dictionary:
+	return {
+		"monument": ["tower", "twinned", "brigade", "collapse", "exploded"],
+		"sheet": ["torn", "thread", "bloom", "slab"],
+	}
+
+
 static func describe() -> String:
 	return "A leaning constructivist tower of thin red steel bars triangulating in space, with torn white and cream paper planes skewered through the frame and leaning on the floor."
 
 
-static func build(root: Node3D, seed: int) -> void:
+static func build(root: Node3D, seed: int, opts: Dictionary = {}) -> void:
+	var monument: String = String(opts.get("monument", "tower"))
+	var sheet_mode: String = String(opts.get("sheet", "torn"))
+
+	# member budgets — a cloned monument must still fit inside the 260-mesh contract
+	var edge_cap: int = 84
+	var gusset_cap: int = 18
+	var spear_cap: int = 6
+	var spear_reach: float = 0.48
+	var sheet_reach: float = 0.33
+	var sheet_budget: int = 80
+	var clones: int = 0
+	if monument == "twinned":
+		edge_cap = 44
+		gusset_cap = 8
+		spear_cap = 4
+		sheet_budget = 40
+		clones = 1
+	elif monument == "brigade":
+		edge_cap = 18
+		gusset_cap = 4
+		spear_cap = 3
+		sheet_budget = 22
+		clones = 3
+	elif monument == "collapse":
+		spear_reach = 0.78
+		sheet_reach = 0.62
+	var per_sheet: int = 1
+	if sheet_mode == "thread":
+		per_sheet = 14
+	elif sheet_mode == "bloom":
+		per_sheet = 7
+	var sheet_cap: int = clampi(int(float(sheet_budget) / float(per_sheet)), 2, 12)
+
 	var rng := RandomNumberGenerator.new()
 	rng.seed = seed
 
@@ -82,6 +132,10 @@ static func build(root: Node3D, seed: int) -> void:
 		_paper_mat(Color(papers[3]), paper_tex),
 	]
 	var mat_red_sheet: StandardMaterial3D = _paper_mat(Color(reds[0]), paper_tex)
+	# fossil stone, for the slab sheets — dead weight where the paper was
+	var mat_stone: StandardMaterial3D = _paper_mat(Color(papers[2]).darkened(0.38), paper_tex)
+	mat_stone.roughness = 1.0
+	mat_stone.uv1_scale = Vector3(0.85, 0.85, 0.85)
 
 	# --- the individual --------------------------------------------------------
 	var levels: int = rng.randi_range(6, 8)
@@ -120,6 +174,21 @@ static func build(root: Node3D, seed: int) -> void:
 			var rr: float = lerpf(r_base, r_top, pow(t, 0.85)) * rng.randf_range(0.76, 1.22)
 			var yj: float = rng.randf_range(-0.04, 0.04)
 			nodes.append(Vector3(cx + cos(ang) * rr, cy + yj, cz + sin(ang) * rr))
+
+	# --- the tower gives way: the higher a node stood, the further it slumps --------
+	if monument == "collapse":
+		var flow_a: float = lean_dir + rng.randf_range(-0.7, 0.7)
+		var spread: float = rng.randf_range(1.65, 2.20)
+		for i in range(nodes.size()):
+			var ni: int = int(i)
+			var pn: Vector3 = nodes[ni]
+			var tn: float = clampf(pn.y / maxf(h_top, 0.02), 0.0, 1.0)
+			var sag: float = pow(tn, 1.25)
+			var kout: float = 1.0 + (spread - 1.0) * sag
+			var nx: float = pn.x * kout + cos(flow_a) * 0.34 * sag
+			var nz: float = pn.z * kout + sin(flow_a) * 0.34 * sag
+			var ny: float = pn.y * (1.0 - 0.74 * sag) + 0.015 * sag
+			nodes[ni] = Vector3(nx, maxf(ny, 0.012), nz)
 
 	var n_nodes: int = nodes.size()
 	var deg: Array = []
@@ -192,7 +261,7 @@ static func build(root: Node3D, seed: int) -> void:
 		var ib2: int = int(level_start[k + 2]) + rng.randi_range(0, int(level_count[k + 2]) - 1)
 		_push_edge(edges, seen, deg, ia2, ib2)
 
-	while edges.size() > 84:
+	while edges.size() > edge_cap:
 		edges.remove_at(edges.size() - 1)
 
 	# --- struts ----------------------------------------------------------------
@@ -238,6 +307,7 @@ static func build(root: Node3D, seed: int) -> void:
 
 	# --- free spears, leaving the frame ----------------------------------------
 	var n_spear: int = rng.randi_range(4, 6)
+	n_spear = mini(n_spear, spear_cap)
 	for i in range(n_spear):
 		var ii: int = int(i)
 		var src: int = rng.randi_range(0, n_nodes - 1)
@@ -253,8 +323,8 @@ static func build(root: Node3D, seed: int) -> void:
 		var d5: Vector3 = Vector3(cos(ang5) * 0.8, up_bias, sin(ang5) * 0.8).normalized()
 		var b5: Vector3 = a5 + d5 * ln5
 		var hb: float = sqrt(b5.x * b5.x + b5.z * b5.z)
-		if hb > 0.48:
-			var kh: float = 0.48 / hb
+		if hb > spear_reach:
+			var kh: float = spear_reach / hb
 			b5 = Vector3(b5.x * kh, b5.y, b5.z * kh)
 		b5 = Vector3(b5.x, clampf(b5.y, 0.02, 1.62), b5.z)
 		var mat_sp: StandardMaterial3D = reds_mat[rng.randi_range(0, 2)]
@@ -264,7 +334,7 @@ static func build(root: Node3D, seed: int) -> void:
 	var nubs: int = 0
 	for i in range(n_nodes):
 		var idx: int = int(i)
-		if nubs >= 18:
+		if nubs >= gusset_cap:
 			break
 		if int(deg[idx]) < 4:
 			continue
@@ -279,8 +349,37 @@ static func build(root: Node3D, seed: int) -> void:
 		var gbasis: Basis = Basis(Vector3.UP, rng.randf_range(0.0, TAU)) * Basis(Vector3.RIGHT, rng.randf_range(-0.7, 0.7))
 		gm.transform = Transform3D(gbasis, np)
 
+	# --- the pour: a solid red pool the wreck lies half inside --------------------
+	if monument == "collapse":
+		var pool_r: float = rng.randf_range(0.46, 0.62)
+		for i in range(4):
+			var ri: int = int(i)
+			var fr: float = float(ri) / 4.0
+			var rr2: float = pool_r * (1.0 - 0.19 * fr)
+			var cyl := CylinderMesh.new()
+			cyl.top_radius = rr2 * 0.93
+			cyl.bottom_radius = rr2
+			cyl.height = 0.030
+			cyl.radial_segments = 18
+			cyl.rings = 1
+			var mat_p: StandardMaterial3D = mat_red_d
+			if ri % 2 == 1:
+				mat_p = mat_red_b
+			var pmi: MeshInstance3D = _add(root, cyl, mat_p)
+			var poy: float = 0.015 + float(ri) * 0.026
+			pmi.transform = Transform3D(Basis(Vector3.UP, rng.randf_range(0.0, TAU)), Vector3(rng.randf_range(-0.03, 0.03), poy, rng.randf_range(-0.03, 0.03)))
+		var tongues: int = rng.randi_range(5, 8)
+		for i in range(tongues):
+			var ta: float = rng.randf_range(0.0, TAU)
+			var tb := BoxMesh.new()
+			tb.size = Vector3(rng.randf_range(0.07, 0.17), 0.022, rng.randf_range(0.16, 0.42))
+			var tmi: MeshInstance3D = _add(root, tb, mat_red_d)
+			var td: float = pool_r * rng.randf_range(0.55, 0.98)
+			tmi.transform = Transform3D(Basis(Vector3.UP, PI * 0.5 - ta), Vector3(cos(ta) * td, 0.011, sin(ta) * td))
+
 	# --- torn planes, skewered and leaning --------------------------------------
 	var n_sheets: int = rng.randi_range(7, 12)
+	n_sheets = mini(n_sheets, sheet_cap)
 	var red_sheet_at: int = rng.randi_range(0, n_sheets - 1)
 	for i in range(n_sheets):
 		var si: int = int(i)
@@ -291,11 +390,11 @@ static func build(root: Node3D, seed: int) -> void:
 		var px: float = anchor.x + cos(oang) * orad
 		var pz: float = anchor.z + sin(oang) * orad
 		var horiz: float = sqrt(px * px + pz * pz)
-		if horiz > 0.33:
-			var kc: float = 0.33 / horiz
+		if horiz > sheet_reach:
+			var kc: float = sheet_reach / horiz
 			px *= kc
 			pz *= kc
-			horiz = 0.33
+			horiz = sheet_reach
 		var rad: float = clampf(0.46 - 0.55 * horiz, 0.18, 0.40)
 		var sx: float = rng.randf_range(0.62, 0.92)
 		var sy: float = rng.randf_range(1.02, 1.42)
@@ -310,7 +409,13 @@ static func build(root: Node3D, seed: int) -> void:
 		var fold: float = 0.0
 		if rng.randf() < 0.55:
 			fold = rng.randf_range(0.10, 0.30)
-		var mesh: ArrayMesh = _sheet_mesh(rng, rad, n_v, thick, fold, sx, sy)
+		var mesh: ArrayMesh = null
+		if sheet_mode == "slab":
+			var nv_s: int = rng.randi_range(4, 6)
+			var th_s: float = rng.randf_range(0.085, 0.185)
+			mesh = _sheet_mesh(rng, rad * 1.16, nv_s, th_s, 0.0, sx * 1.10, sy * 0.86)
+		elif sheet_mode != "thread" and sheet_mode != "bloom":
+			mesh = _sheet_mesh(rng, rad, n_v, thick, fold, sx, sy)
 
 		var face_yaw: float = rng.randf_range(0.0, TAU)
 		var tilt_x: float = deg_to_rad(rng.randf_range(-32.0, 32.0))
@@ -323,12 +428,79 @@ static func build(root: Node3D, seed: int) -> void:
 		var mat_sheet: StandardMaterial3D = sheet_mats[rng.randi_range(0, sheet_mats.size() - 1)]
 		if si == red_sheet_at:
 			mat_sheet = mat_red_sheet
-		var sm: MeshInstance3D = _add(root, mesh, mat_sheet)
-		var tf: Transform3D = Transform3D(sb, Vector3(px, py, pz))
-		var wb: AABB = tf * mesh.get_aabb()
-		if wb.position.y < 0.004:
-			tf.origin.y += 0.004 - wb.position.y
-		sm.transform = tf
+		if mesh != null:
+			var mat_use: StandardMaterial3D = mat_sheet
+			if sheet_mode == "slab":
+				mat_use = mat_stone
+			var sm: MeshInstance3D = _add(root, mesh, mat_use)
+			var tf: Transform3D = Transform3D(sb, Vector3(px, py, pz))
+			var wb: AABB = tf * mesh.get_aabb()
+			if wb.position.y < 0.004:
+				tf.origin.y += 0.004 - wb.position.y
+			sm.transform = tf
+		elif sheet_mode == "thread":
+			_thread_sheet(root, rng, Vector3(px, py, pz), sb, rad, n_v, sx, sy, mat_sheet)
+		else:
+			_bloom_sheet(root, rng, Vector3(px, py, pz), sb, rad, sx, sy, mat_sheet, mat_red_c)
+
+	# --- every member drifts off along its own outward normal --------------------
+	if monument == "exploded":
+		var eb: AABB = _union_aabb(root)
+		var ec: Vector3 = eb.position + eb.size * 0.5
+		var blast: float = rng.randf_range(1.55, 2.05)
+		for ch3 in root.get_children():
+			if not (ch3 is MeshInstance3D):
+				continue
+			var em: MeshInstance3D = ch3
+			var etf: Transform3D = em.transform
+			var rel: Vector3 = etf.origin - ec
+			var flat := Vector3(rel.x, 0.0, rel.z)
+			var outv := Vector3(1.0, 0.0, 0.0)
+			if flat.length() > 0.004:
+				outv = flat.normalized()
+			else:
+				var ra: float = rng.randf_range(0.0, TAU)
+				outv = Vector3(cos(ra), 0.0, sin(ra))
+			var kick: float = rng.randf_range(0.05, 0.17)
+			var ax := Vector3(rng.randf_range(-1.0, 1.0), rng.randf_range(-1.0, 1.0), rng.randf_range(-1.0, 1.0))
+			if ax.length() < 0.02:
+				ax = Vector3.UP
+			var tumble: Basis = Basis(ax.normalized(), rng.randf_range(-0.42, 0.42))
+			em.transform = Transform3D(tumble * etf.basis, ec + rel * blast + outv * kick)
+
+	# --- the monument doubles, or breaks into a crowd of itself -------------------
+	if clones > 0:
+		var originals: Array = []
+		for ch4 in root.get_children():
+			if ch4 is MeshInstance3D:
+				originals.append(ch4)
+		var n_unit: int = originals.size()
+		var use_clones: int = mini(clones, maxi(0, int(252.0 / float(maxi(n_unit, 1))) - 1))
+		if use_clones > 0 and monument == "twinned":
+			var pv := Vector3(cos(lean_dir) * lean_amt, h_top * rng.randf_range(0.80, 0.94), sin(lean_dir) * lean_amt)
+			var flip: Basis = Basis(Vector3.UP, rng.randf_range(0.0, TAU)) * Basis(Vector3.RIGHT, PI)
+			_clone_all(root, originals, Transform3D(flip, pv - flip * pv))
+		elif use_clones > 0:
+			var slots: int = use_clones + 1
+			var base_a: float = rng.randf_range(0.0, TAU)
+			var xf0 := Transform3D()
+			for i in range(slots):
+				var isl: int = int(i)
+				var ang_s: float = base_a + float(isl) * TAU / float(slots) + rng.randf_range(-0.32, 0.32)
+				var rad_s: float = rng.randf_range(0.24, 0.48)
+				var k_s: float = rng.randf_range(0.34, 0.58)
+				if isl == 0:
+					rad_s = rng.randf_range(0.0, 0.12)
+					k_s = rng.randf_range(0.52, 0.72)
+				var bs: Basis = Basis(Vector3.UP, rng.randf_range(0.0, TAU)).scaled(Vector3(k_s, k_s, k_s))
+				var xfi := Transform3D(bs, Vector3(cos(ang_s) * rad_s, 0.0, sin(ang_s) * rad_s))
+				if isl == 0:
+					xf0 = xfi
+				else:
+					_clone_all(root, originals, xfi)
+			for o2 in originals:
+				var so: MeshInstance3D = o2
+				so.transform = xf0 * so.transform
 
 	# --- measured settle: floor it, centre it, fit it ---------------------------
 	var box: AABB = _union_aabb(root)
@@ -419,6 +591,79 @@ static func _basis_y_to(dir: Vector3) -> Basis:
 	var ax: Vector3 = Vector3.UP.cross(d).normalized()
 	var ang: float = acos(clampf(dot_up, -1.0, 1.0))
 	return Basis(ax, ang)
+
+
+# ---------------------------------------------------------------------------
+# the sheet, unravelled — its outline left behind as sagging cord
+
+static func _thread_sheet(root: Node3D, rng: RandomNumberGenerator, org: Vector3, sb: Basis, rad: float, n_v: int, sx: float, sy: float, mat: StandardMaterial3D) -> void:
+	var pts: Array = []
+	var a0: float = rng.randf_range(0.0, TAU)
+	for i in range(n_v):
+		var iv: int = int(i)
+		var f: float = float(iv) / float(n_v)
+		var ang: float = a0 + f * TAU + rng.randf_range(-0.24, 0.24)
+		var rr: float = rad * rng.randf_range(0.55, 1.02)
+		var loc := Vector3(cos(ang) * rr * sx, sin(ang) * rr * sy, rng.randf_range(-0.035, 0.035))
+		pts.append(org + sb * loc)
+	var thr: float = rng.randf_range(0.0035, 0.0065)
+	var m: int = pts.size()
+	for i in range(m):
+		var ia: int = int(i)
+		var pa: Vector3 = pts[ia]
+		var pb: Vector3 = pts[(ia + 1) % m]
+		_rod(root, pa, pb, thr, mat)
+	var chords: int = rng.randi_range(1, 2)
+	for i in range(chords):
+		var i1: int = rng.randi_range(0, m - 1)
+		var i2: int = (i1 + rng.randi_range(2, maxi(2, m - 2))) % m
+		var q1: Vector3 = pts[i1]
+		var q2: Vector3 = pts[i2]
+		var mid: Vector3 = (q1 + q2) * 0.5 + Vector3(0.0, -rng.randf_range(0.02, 0.09), 0.0)
+		_rod(root, q1, mid, thr * 0.8, mat)
+		_rod(root, mid, q2, thr * 0.8, mat)
+
+
+# ---------------------------------------------------------------------------
+# the sheet, opened — a paper flower on a red bud
+
+static func _bloom_sheet(root: Node3D, rng: RandomNumberGenerator, org: Vector3, sb: Basis, rad: float, sx: float, sy: float, mat: StandardMaterial3D, core_mat: StandardMaterial3D) -> void:
+	var petals: int = rng.randi_range(4, 6)
+	var plen: float = rad * rng.randf_range(0.66, 1.00)
+	var pitch: float = deg_to_rad(rng.randf_range(26.0, 64.0))
+	var yaw0: float = rng.randf_range(0.0, TAU)
+	var span: float = plen * 1.45 * maxf(sy, 0.4) * 0.62
+	for i in range(petals):
+		var ip: int = int(i)
+		var yaw: float = yaw0 + float(ip) * TAU / float(petals) + rng.randf_range(-0.16, 0.16)
+		var fold_p: float = rng.randf_range(0.10, 0.28)
+		var pm: ArrayMesh = _sheet_mesh(rng, plen, 4, 0.005, fold_p, 0.42 * sx, 1.45 * sy)
+		var tip: float = -pitch + rng.randf_range(-0.20, 0.20)
+		var pb: Basis = Basis(Vector3.UP, yaw) * Basis(Vector3.RIGHT, tip)
+		var loc: Vector3 = pb * Vector3(0.0, span, 0.0)
+		var mi: MeshInstance3D = _add(root, pm, mat)
+		mi.transform = Transform3D(sb * pb, org + sb * loc)
+	var core := SphereMesh.new()
+	var cr: float = rad * rng.randf_range(0.11, 0.17)
+	core.radius = cr
+	core.height = cr * 2.0
+	core.radial_segments = 10
+	core.rings = 6
+	var cmi: MeshInstance3D = _add(root, core, core_mat)
+	cmi.transform = Transform3D(Basis(), org)
+
+
+# ---------------------------------------------------------------------------
+# a second body, made of the first one's own parts
+
+static func _clone_all(root: Node3D, originals: Array, xf: Transform3D) -> void:
+	for o in originals:
+		var src: MeshInstance3D = o
+		var mi := MeshInstance3D.new()
+		mi.mesh = src.mesh
+		mi.material_override = src.material_override
+		root.add_child(mi)
+		mi.transform = xf * src.transform
 
 
 # ---------------------------------------------------------------------------

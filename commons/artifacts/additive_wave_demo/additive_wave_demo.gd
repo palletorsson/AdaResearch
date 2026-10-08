@@ -5,20 +5,20 @@ extends Node3D
 
 class_name AdditiveWaveDemo
 ## Demonstrates additive wave synthesis: building complex waveforms from sine harmonics.
-## Uses the Fourier principle: f(t) = Σ Aₙ·sin(n·ωt + φₙ), where each harmonic
-## contributes a sine wave at integer multiples of the fundamental frequency.
+## Draws f(t) = Σ Aₙ·sin(n·ωt): five nonnegative, phase-locked harmonics
+## at integer multiples of the fundamental frequency.
 ## Sliders control amplitudes of harmonics 1–5; preset detection identifies
-## square, sawtooth, and triangle waves by their harmonic signatures.
+## nearby finite square/sawtooth recipes and the legacy positive odd 1/n² mix.
 
 # @identity
 # essence: f(x) = sum(a_n * sin(n * omega * x)) — Fourier additive synthesis
 # desire: Stack harmonics with VR sliders and watch complex waveforms build from pure sines
 # critical_parameter: harmonic_amplitudes[] — each slider adds one frequency component
 # triggers: slider movement updates harmonic amplitudes; waveform redraws in real-time
-# emerges: square waves from odd harmonics, sawtooth from all — Fourier theorem made tactile
+# emerges: finite sums resemble familiar recipes; their names do not remove truncation or phase restrictions
 # needs: VR sliders for 5 harmonics [has], preset buttons [has]
 # relationships: depends on fundamental + harmonics; contrasts with timbre_sculptor (visual vs audible synthesis); unlocks Fourier intuition
-# truth: Any periodic function is a sum of sines; complexity is superposition of simplicity.
+# truth: Five nonnegative, phase-locked sine coefficients form a restricted family of sums.
 
 ## STAGE-2 DNA PROMOTION (2026-07-29). Before this the demo had five NodePath
 ## exports and nothing else turnable: every one of its 9 placements showed the
@@ -73,8 +73,12 @@ class_name AdditiveWaveDemo
 @export_enum("ladder", "overlay", "hidden") var components: String = "ladder"
 ## The staging: `none` (the shipped scene as it is) or `bench` (see THE BENCH above).
 @export_enum("none", "bench") var stand: String = "none"
+## On the bench, keep recipe recognition until H1 ALONE or BASELINE is used.
+## Coefficients, formula, rows and controls remain visible throughout.
+@export var name_after_compare: bool = false
+var _comparison_made: bool = false
 
-## Path to the fundamental frequency slider in the scene tree
+## Path to the fundamental amplitude slider in the scene tree
 @export var fundamental_slider_path: NodePath = "ControlPanel/FundamentalSlider"
 ## Path to the 2nd harmonic slider
 @export var harmonic2_slider_path: NodePath = "ControlPanel/Harmonic2Slider"
@@ -90,6 +94,8 @@ class_name AdditiveWaveDemo
 @onready var component_meshes: Node3D = $ComponentWaves
 @onready var formula_label: Label3D = $FormulaLabel
 @onready var preset_label: Label3D = $PresetLabel
+@onready var _explanation_label: Label3D = $ExplanationLabel
+@onready var _default_explanation: String = _explanation_label.text
 
 ## Sliders
 var fundamental_slider
@@ -371,29 +377,42 @@ func _update_labels() -> void:
 
 	if preset_label:
 		var preset = _detect_preset()
+		if stand == "bench" and name_after_compare and not _comparison_made:
+			preset = "ARRIVAL RECIPE" if harmonic_amplitudes == _baseline else "COMPARE THE SUM"
 		preset_label.text = preset
+	if _explanation_label:
+		_explanation_label.text = "Five phase-locked sine harmonics\nA finite sum with nonnegative coefficients" if stand == "bench" and name_after_compare else _default_explanation
 
-## Checks if current harmonic amplitudes match a known waveform type
+## Labels describe nearby recipes, not an exact identity of the drawn shape.
+## Compare every coefficient relative to H1: changing H4 or H5 must count too.
+const RECIPE_TOLERANCE: float = 0.025
+
+func _matches_recipe(recipe: Array) -> bool:
+	var first: float = harmonic_amplitudes[0]
+	if first < 0.01:
+		return false
+	for h in range(NUM_HARMONICS):
+		if absf(harmonic_amplitudes[h] / first - float(recipe[h])) > RECIPE_TOLERANCE:
+			return false
+	return true
+
+## All-zero and single-frequency states precede the multi-harmonic recipes.
 func _detect_preset() -> String:
-	# Check if current settings match known waveforms
 	var a = harmonic_amplitudes
-
-	# Square wave: odd harmonics with 1/n amplitude
-	if a[0] > 0.9 and a[1] < 0.1 and abs(a[2] - a[0]/3.0) < 0.1 and a[3] < 0.1:
-		return "≈ Square Wave (odd harmonics)"
-
-	# Sawtooth: all harmonics with 1/n amplitude
-	if a[0] > 0.9 and abs(a[1] - a[0]/2.0) < 0.15 and abs(a[2] - a[0]/3.0) < 0.15:
-		return "≈ Sawtooth Wave (all harmonics)"
-
-	# Triangle: odd harmonics with 1/n² amplitude
-	if a[0] > 0.9 and a[1] < 0.1 and abs(a[2] - a[0]/9.0) < 0.1:
-		return "≈ Triangle Wave"
-
-	# Pure sine
-	if a[0] > 0.5 and a[1] < 0.1 and a[2] < 0.1 and a[3] < 0.1 and a[4] < 0.1:
+	var nonzero: int = 0
+	for value in a:
+		if value != 0.0:
+			nonzero += 1
+	if nonzero == 0:
+		return "Zero waveform"
+	if nonzero == 1:
 		return "Pure Sine Wave"
-
+	if _matches_recipe([1.0, 0.0, 0.333, 0.0, 0.2]):
+		return "≈ Square Wave (odd harmonics)"
+	if _matches_recipe([1.0, 0.5, 0.333, 0.25, 0.2]):
+		return "≈ Sawtooth Wave (all harmonics)"
+	if _matches_recipe([1.0, 0.0, 0.111, 0.0, 0.04]):
+		return "Odd 1/n² mix (positive terms)"
 	return "Custom Waveform"
 
 ## Handles slider value changes for a specific harmonic index
@@ -424,7 +443,7 @@ func set_preset(preset_name: String) -> void:
 			# Sawtooth: all harmonics, amplitude 1/n
 			_set_amplitudes([1.0, 0.5, 0.333, 0.25, 0.2])
 		"triangle":
-			# Triangle: odd harmonics, amplitude 1/n²
+			# Legacy preset ID: positive odd 1/n². A triangle needs alternating signs.
 			_set_amplitudes([1.0, 0.0, 0.111, 0.0, 0.04])
 		"clear":
 			_set_amplitudes([0.0, 0.0, 0.0, 0.0, 0.0])
@@ -448,6 +467,12 @@ func toggle_components() -> void:
 ## promotion exists to leave alone.
 func apply_grid_config(config_data: Dictionary) -> void:
 	var changed: bool = false
+	if config_data.has("name_after_compare"):
+		var delayed: bool = str(config_data["name_after_compare"]).to_lower() in ["true", "1", "yes"]
+		if delayed != name_after_compare:
+			name_after_compare = delayed
+			_comparison_made = false
+			changed = true
 	if config_data.has("waveform"):
 		var w: String = str(config_data["waveform"])
 		if w != waveform:
@@ -748,11 +773,13 @@ func _update_readout() -> void:
 
 ## The arrival coefficients, back on every slider.
 func restore_baseline() -> void:
+	_comparison_made = true
 	_set_amplitudes(_baseline)
 	waveform_changed.emit(harmonic_amplitudes)
 
 ## The first harmonic by itself (as it is; 1.0 if it was down), the rest at zero.
 func first_alone() -> void:
+	_comparison_made = true
 	var a1: float = harmonic_amplitudes[0] if harmonic_amplitudes[0] >= 0.01 else 1.0
 	_set_amplitudes([a1, 0.0, 0.0, 0.0, 0.0])
 	waveform_changed.emit(harmonic_amplitudes)

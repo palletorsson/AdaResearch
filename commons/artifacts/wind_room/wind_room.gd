@@ -16,11 +16,16 @@ var _t: float = 0.0
 
 
 func _ready() -> void:
+	if str(get_meta("config_lesson", "")) == "hands_on_wind":
+		set_meta("em_keep_scale",true)
+		var room=preload("res://commons/artifacts/wind_room/hands_on_wind.gd").new()
+		room.name="HandsOnWind";add_child(room);set_process(false);return
 	_build()
 	set_process(not Engine.is_editor_hint())
 
 
 func apply_grid_config(config: Dictionary) -> void:
+	if str(get_meta("config_lesson", "")) == "hands_on_wind":return
 	if config.has("wind"): wind = clampf(float(config["wind"]), 0.0, 1.0)
 	if config.has("emissive"): emissive = bool(config["emissive"])
 	for c in get_children():

@@ -1,46 +1,33 @@
 # @identity
-# essence: six identical aluminium plates hinged into a tree on a museum plinth, opened by the seed to one arbitrary configuration and left there — an object whose transformation group is its own joints rather than something a matrix does to it from outside
-# desire: that a visitor take hold of a plate, turn it, let go, and find that there is nowhere for it to go back to
-# critical_parameter: swing — "tight" · "open" · "free" names the reachable set. It is not a comfort setting: at tight the joints cannot reach the plinth at all (0 of 4000 draws), at open 17.73% of draws put a plate through it, at free 68.75%. A bigger group buys more shapes AND more shapes that are not shapes, and that ratio is the lesson
-# triggers: _ready() searches a deterministic Kronecker sequence for a pose that is legibly bent, clears the floor and misses the plinth, and stands the object in it; grabbing a plate turns exactly one hinge; releasing leaves it turned
-# emerges: a body with no canonical view. Every still of it — including the four this project will shoot — is a photograph of one accident, which is what Clark said about photographs of Bichos
-# needs: floor at y=0 under the origin [the grid provides it]; ~2 m of clear approach so a body can get its hands to plate height, 0.80-1.30 m [spatial_needs.clearance.front]; commons/ui/text_screen.gd for the caption [present]; res://commons/render/pbr_kit.gd [present]; godot-xr-tools for the VR grab [present on this machine but GITIGNORED — loaded by path with a guard, never by class name, so its absence costs the grab and nothing else]
-# relationships: stands against Trans_Rotation and Trans_Scale, which do rotation and scale TO a rigid body from outside and leave the body with no say; borrows its defensive addon load from commons/audio/cables/synth_cable_plug.gd and its hinge+handle wiring from commons/audio/interfaces/VRAudioControlDial.tscn, which is the only other thing in this corpus that uses an XR Tools hinge
-# truth: a rigid body has one transformation group and it is the same group for every rigid body — the maps next door teach it as something done to a cube. This object carries its own, made of its own joints, and it is SMALLER than the set of poses you can picture for it. So the question stops being what can I do to this thing and becomes what can this thing do, and the answer is a fact about the thing rather than about the algebra.
+# essence: an original six-plate articulated study after Lygia Clark's Bichos.
+# desire: move one joint, release it, and inspect the pose that remains.
+# critical_parameter: each hinge's allowed angle; a release need not command a return.
+# limits: fixed root, kinematic plates, no gravity settling or collision rejection during editing.
+# reference: https://www.museoreinasofia.es/en/collections/artwork/bicho-desfolhado-husked-creature/
 
 extends Node3D
 class_name BichoHinge
 
-## BICHO — Lygia Clark, Rio de Janeiro, 1960. Hinged aluminium plates with no
-## fixed shape and no right way up. Clark held that the work does not exist as an
-## image: every photograph of a Bicho is a photograph of one accident, and the
-## piece is only itself while somebody is moving it. She called them Critters and
-## meant it — they have a "spine", they resist, they will not do everything.
+## An original rectangular-plate study after Clark, not a measured reconstruction
+## of a particular Bicho. Plate gauge, dimensions, support and joint tree are our
+## decisions. The root is fixed to a plinth; the whole sculpture cannot be lifted.
 ##
-## THE ARGUMENT, in a sequence whose maps teach rotation and scale on rigid
-## bodies. A cube in Trans_Rotation has one transformation group; so does every
-## other cube; the group lives in the matrix and the object is only the thing it
-## is applied to. Here the group is the object's OWN articulation. Three things
-## follow that a rigid body cannot show you:
+## Each child frame is its parent's frame * edge frame * local hinge rotation.
+## Matrix multiplication has a definite order. That does NOT mean independent
+## assignments of final joint angles are path-dependent: the same local-angle
+## vector produces the same pose, whichever joint the visitor adjusted first.
+## The intermediate movements can differ. A bounded set of joint angles is a
+## configuration space, not a transformation group closed under composition.
 ##
-##   1. THE GROUP IS THE OBJECT'S. Five hinges, each with its own limits, is a
-##      five-dimensional box — and it is this Bicho's box, not a Bicho's box.
-##   2. COMPOSITION IS ORDER-DEPENDENT AND YOU CAN FEEL IT. Every hinge angle is
-##      relative to its parent, so turning the root and then the leaf does not
-##      land where turning the leaf and then the root does. Nothing here is
-##      commutative and nothing here is written down as a matrix.
-##   3. THE REACHABLE SET IS A PROPER SUBSET OF THE IMAGINABLE ONE. The limits
-##      cut it, and so does the plinth. See `swing`.
+## _search rejects sampled initial poses near the floor/plinth. set_hinge only
+## clamps the angle; it does not reject plate/plate or plate/plinth intersections.
+## The static colliders support picking/contact with other bodies, not a physical
+## articulated solver. Retaining a pose is stored state, not simulated friction.
 ##
-## WHAT I COULD NOT TEST, AND WHAT I DID INSTEAD. This was written with the
-## editor open on another instance, so Godot could not be run. Every number in
-## this file that could be solved was solved first, in a Python replica of the
-## forward kinematics using the same arithmetic — the same Kronecker draw, the
-## same Transform3D composition order, the same eighteen sample points per plate.
-## The pose, the extents, the pass rates and the three clash percentages above are
-## outputs of that replica over 4000 draws per mode, not estimates. Where it
-## could not help (materials, the addon handoff, the desktop pointer) the code is
-## written to fail into something that still stands up and still photographs.
+## Earlier numerical comments below describe a Python kinematic study, not native
+## physics measurements. A focused native desktop probe and a keep/return
+## comparison live in doc/book/studies/hinge-and-return (2026-10-01).
+## Physical XR manipulation remains a separate check.
 
 const PBR := preload("res://commons/render/pbr_kit.gd")
 const TextScreenScript := preload("res://commons/ui/text_screen.gd")
@@ -57,8 +44,7 @@ const HANDLE_SCRIPT := "res://addons/godot-xr-tools/interactables/interactable_h
 
 # ── constants that are decisions, not settings ────────────────────────────────
 
-## Clark's gauge. 3 mm aluminium sheet, cut and hinged; thinner reads as paper
-## and thicker reads as armour plate.
+## Our 3 mm gauge for this study; not a sourced measurement of Clark's plates.
 const PLATE_T := 0.003
 ## Plate depth as a fraction of its width. 0.6923 is 0.18/0.26 — a plate a bit
 ## wider than it is deep, which is what makes the same plate on a `far` edge and
@@ -150,19 +136,9 @@ const WORLD_LAYER := 1
 ## regenerating a different object — the same Bicho with another plate on it.
 @export_range(4, 7) var plate_count: int = 6
 
-## "tight" · "open" · "free" — THE REACHABLE SET, and the artifact's argument.
-##
-## Not a comfort setting. Measured over 4000 draws each, 6 plates, on how often a
-## draw puts a plate through the plinth it is standing on:
-##
-##   tight   0.00%   the joints cannot reach the plinth. Every pose is a pose.
-##   open   17.73%   about one imagined shape in six is not available.
-##   free   68.75%   two in three of the shapes this thing can be asked for are
-##                   shapes it cannot be in, and the object has not changed.
-##
-## That is the whole lesson in one number: widening a transformation group does
-## not widen the set of things you can DO, because the group does not know about
-## the plinth. Reachability is a fact about the object AND its situation.
+## Three authored angular bands. Wider bands allow more mathematical poses,
+## including penetrations. The initial-pose search is a sample-based guard;
+## subsequent manual edits are NOT collision-constrained.
 @export var swing: String = "open"
 
 ## Which accident. The seed picks a starting point in the Kronecker sequence; the
@@ -393,9 +369,8 @@ func _build_hinge(parent: Node3D, i: int, kind: String, n: int, w: float,
 		hinge.set("hinge_limit_min", float(lim.x))
 		hinge.set("hinge_limit_max", float(lim.y))
 		hinge.set("hinge_steps", 0.0)
-		# NO RETURN. default_on_release false is the artifact: a released plate
-		# stays where it was let go. Clark's objection to sculpture was exactly
-		# that it has a pose to be restored to.
+		# Store the released angle. This is our kinematic interpretation of
+		# open-ended handling, not a claim to simulate metal friction or weight.
 		hinge.set("default_on_release", false)
 		hinge.set("hinge_position", float(_angles[i]))
 		if hinge.has_signal("hinge_moved"):
@@ -512,8 +487,7 @@ func _build_caption(root_x: Transform3D, n: int, w: float, d: float) -> void:
 
 
 ## What the plate says. Angles first because they are the configuration; the stop
-## count second because it is the claim about limits; "no home pose" third
-## because it is the claim about Clark.
+## count second; the last line reports the actual release policy.
 ##
 ## THE ANGLES ARE READ BACK FROM THE JOINTS, never from the search. If the addon
 ## clamped one differently, or a visitor moved it, the plate says what the object
@@ -534,7 +508,7 @@ func _caption_body() -> String:
 	if cur != "":
 		lines.append(cur)
 	lines.append("%d of %d at a stop" % [_stops(), _angles.size()])
-	lines.append("no home pose")
+	lines.append("no automatic return")
 	return "\n".join(lines)
 
 
@@ -648,8 +622,8 @@ func _draw(k: int, hinges: int) -> Array:
 
 
 ## Forward kinematics. Frame 0 is the root; every other frame is its parent's,
-## times the edge it hangs from, times its own hinge rotation. Composition order
-## is the artifact's second claim and it is written here in one line.
+## times the edge it hangs from, times its own hinge rotation. The product order
+## is structural; independent angle assignments may be made in either order.
 func _solve(root_x: Transform3D, a: Array, n: int, w: float, d: float) -> Array[Transform3D]:
 	var out: Array[Transform3D] = [root_x]
 	for i in range(1, n):
@@ -827,7 +801,9 @@ func _point_angle(i: int, at: Vector3) -> float:
 	if m == null or not is_instance_valid(m):
 		return 0.0
 	var p: Vector3 = m.global_transform.affine_inverse() * at
-	return rad_to_deg(atan2(p.y, p.z))
+	# A positive rotation about local X carries +Z toward -Y in Godot.
+	# Match that convention so the plate follows, rather than opposes, the hand.
+	return rad_to_deg(atan2(-p.y, p.z))
 
 
 # ══ CONFIG ═══════════════════════════════════════════════════════════════════

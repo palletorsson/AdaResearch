@@ -52,7 +52,15 @@ var a: Vector2 = Vector2(0.9, 0.3)
 var b: Vector2 = Vector2(0.3, 0.8)
 
 
+func _init() -> void:
+	flat_console_text=true
+
 func _ready() -> void:
+	if str(get_meta("config_lesson", "")) == "room_gap":
+		# Registry configuration may have built a rack before the map metadata arrived.
+		_reset_console()
+		var room=preload("res://commons/artifacts/vector_op_console/gap_projection_room.gd").new()
+		room.name="RoomGap";add_child(room);return
 	var rng := RandomNumberGenerator.new()
 	rng.seed = hash(seed)
 	a = Vector2(rng.randf_range(0.55, 1.0), rng.randf_range(0.0, 0.45))
@@ -61,6 +69,8 @@ func _ready() -> void:
 
 
 func apply_grid_config(config_data: Dictionary) -> void:
+	if str(config_data.get("lesson",get_meta("config_lesson","")))=="room_gap":
+		set_meta("config_lesson","room_gap");return
 	if config_data.has("seed"): seed = int(config_data["seed"])
 	if config_data.has("op"):
 		op = Op.SUB if String(config_data["op"]).to_lower().begins_with("sub") else Op.ADD
@@ -76,6 +86,8 @@ func apply_grid_config(config_data: Dictionary) -> void:
 	a = Vector2(rng.randf_range(0.55, 1.0), rng.randf_range(0.0, 0.45))
 	b = Vector2(rng.randf_range(-0.2, 0.45), rng.randf_range(0.5, 0.95))
 	_ensure_rack()
+	sync_pad_controls()
+	refresh_console_title()
 	_build_demo()
 
 
@@ -86,10 +98,10 @@ func _console_meta() -> Dictionary:
 # --- the two pads: each places one vector's tip ------------------------------
 func _controls() -> Array:
 	return [
-		{"label": "a-TIP", "kind": "pad",
+		{"label": "a-TIP", "kind": "pad", "display_span": SPAN,
 			"get": func() -> Vector2: return a / SPAN,
 			"set": func(v: Vector2) -> void: a = v * SPAN},
-		{"label": "b-TIP", "kind": "pad",
+		{"label": "b-TIP", "kind": "pad", "display_span": SPAN,
 			"get": func() -> Vector2: return b / SPAN,
 			"set": func(v: Vector2) -> void: b = v * SPAN},
 	]
@@ -133,7 +145,9 @@ func _build_demo() -> void:
 		rig.add_child(ghost)
 
 	rig.add_child(_sphere(O, 0.05, _glow_mat(Color(0.82, 0.86, 0.95), 0.5)))   # shared tail
-	rig.add_child(_sphere(pc, 0.055, _glow_mat(color_c, 1.6)))                 # resultant head
+	var result_tip:=_sphere(pc, 0.055, _glow_mat(color_c, 1.6))
+	result_tip.name="ResultTip"
+	rig.add_child(result_tip)                 # resultant head
 
 	# --- readout -> the monitor --------------------------------------------------
 	var sgn := "+" if not sub else "−"
@@ -221,16 +235,8 @@ func _workings_expression(rig: Node3D, va: Vector2, vb: Vector2, vc: Vector2, su
 	board.add_child(_box(Vector3.ZERO, Vector3(2.30, 0.62, 0.03), _panel_mat(PANEL_LIGHT)))
 	board.add_child(_box(Vector3(0.0, 0.31, 0.02), Vector3(2.30, 0.035, 0.02), _glow_mat(color_c, 1.8)))
 	board.add_child(_box(Vector3(0.0, -0.31, 0.02), Vector3(2.30, 0.035, 0.02), _glow_mat(color_c, 1.8)))
-	var l := Label3D.new()
-	l.name = "Algebra"
-	l.text = "(%+.2f, %+.2f)  %s  (%+.2f, %+.2f)\n=  (%+.2f, %+.2f)" % [
-		va.x, va.y, sgn, vb.x, vb.y, vc.x, vc.y]
-	l.font_size = 40
-	l.pixel_size = 0.0042
-	l.modulate = TEXT_DARK
-	l.outline_size = 6
-	l.outline_modulate = Color(0.90, 0.88, 0.84, 0.9)
-	l.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
-	l.vertical_alignment = VERTICAL_ALIGNMENT_CENTER
-	l.position = Vector3(0.0, 0.0, 0.03)
+	var text := "(%+.2f, %+.2f)  %s  (%+.2f, %+.2f)\n=  (%+.2f, %+.2f)" % [va.x,va.y,sgn,vb.x,vb.y,vc.x,vc.y]
+	var l:=BakedText.make_label_mesh(text,TEXT_DARK,Vector2(2.2,.54),1000,true)
+	l.name="Algebra"
+	l.position=Vector3(0,0,.03)
 	board.add_child(l)

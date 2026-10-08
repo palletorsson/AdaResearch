@@ -7,7 +7,7 @@
 # critical_parameter: mandate — switching it does not change the particles, only what counts as success, and the swarm obeys
 # triggers: pressing CONVERGE makes the swarm collapse to center; pressing SPREAD makes it explode outward; pressing NOVELTY makes it seek the unvisited; the ridge mandate funnels it onto one diagonal path
 # emerges: the transition animations between landscapes — particles hesitate, reorient, sometimes oscillate before committing to the new definition of success
-# needs: [has] landscape buttons via ArtifactControls; [has] inertia slider; [has] terrain recolor; [has] addressable mandate axis; [missing] no history trace; no fitness graph
+# needs: [has] physical landscape choices on a front console; [has] inertia slider; [has] terrain recolor; [has] addressable mandate axis; [missing] no history trace; no fitness graph
 # relationships: placed in SwarmIntelligence_Particle_Swarm_Optimization alongside self_organizing_patterns; responds to the critical.md question "whose fitness function?"
 # truth: the swarm always optimizes — the question is never whether to optimize but who wrote the objective function
 #
@@ -41,12 +41,11 @@ enum Landscape { CONVERGE, SPREAD, NOVELTY, RIDGE }
 ##   converge  a bright disc ~1.2 m across at dead centre, dark to the rim.
 ##             Corporate fitness: one right answer, and everyone toward it.
 ##   spread    the exact inverse — a dark disc in the middle, a bright annulus
-##             out to the 3 m edge. Ecological fitness: distance from everyone
-##             else is the value.
-##   novelty   uniformly bright across the whole plate, no gradient anywhere.
-##             With the archive empty every point scores identically (see
-##             _evaluate_fitness, which returns a flat 10.0), so this is what
-##             artistic fitness looks like before anyone has been anywhere.
+##             out to the 3 m edge. Distance from the centre is the value;
+##             the label Ecological is interpretive, not a diversity measure.
+##   novelty   distance from the nearest remembered position. The starting
+##             population seeds the archive; every addition changes the scoring
+##             surface and requires remembered positions to be scored again.
 ##   ridge     dark except for a bright band ~0.5 m wide running corner to
 ##             corner on the diagonal z = x. Meritocratic fitness: exactly one
 ##             narrow path counts, and it is the only value with a straight
@@ -69,6 +68,7 @@ const MANDATES: PackedStringArray = ["converge", "spread", "novelty", "ridge"]
 @export_range(0.0, 1.0, 0.05) var inertia: float = 0.6:
 	set(value):
 		inertia = clampf(value, 0.0, 1.0)
+		_sync_controls()
 
 ## Arena size in meters
 @export var arena_size: float = 3.0
@@ -84,10 +84,13 @@ var _terrain_mesh: MeshInstance3D
 var _terrain_im: ImmediateMesh
 var _controls: Node
 var _caption: Node3D
-var _landscape_label: Label3D
-var _subtitle_label: Label3D
+var _landscape_label: Label
+var _caption_viewport: SubViewport
 var _novelty_archive: Array[Vector3] = []  # for novelty search
 var _time: float = 0.0
+var _archive_elapsed: float = 0.0
+const ARCHIVE_INTERVAL: float = 0.5
+const ARCHIVE_CAPACITY: int = 200
 
 ## Nodes THIS script parented to itself. A rebuild frees exactly these — never
 ## get_children(), which would take the grid's own added plates with it.
@@ -113,25 +116,7 @@ var _rng: RandomNumberGenerator = RandomNumberGenerator.new()
 const RIDGE_FALLOFF: float = 0.625
 const SQRT_HALF: float = 0.7071067811865476
 
-# ── Caption geometry ─────────────────────────────────────────────
-#
-# LabelFramer turns every hanging Label3D into an opaque anthracite plate. Two
-# labels in one column with a small gap MERGE into a single plate, and that is
-# the outcome we want here — one nameplate, not two cards. So it is designed for
-# rather than fought: both labels sit at x = 0 under a shared Caption parent,
-# 0.03 m apart, and become one plate about 1.82 x 0.47 m (bezel 1.85 x 0.50).
-#
-# Every line is padded to a constant column count at all four mandate values, so
-# the plate is the same object in every tile and cannot itself carry the axis.
-# The block hangs at y 1.41..1.98: above the particles (y 0.15) by 1.26 m, above
-# the terrain (y -0.05), and above the top of the ArtifactControls chassis
-# (y 1.225) by 0.185 m — which is what keeps probe_label_placement at crossing=0,
-# since that probe measures a plate against the UNION box of the whole body.
-const CAPTION_COLS: int = 26
-const CAPTION_TITLE_Y: float = 1.75
-const CAPTION_SUB_Y: float = 1.50
-const CAPTION_TITLE_SIZE: int = 24
-const CAPTION_SUB_SIZE: int = 16
+# Flat caption behind the terrain; the low console stays in front of it.
 const CAPTION_SUB_TEXT: String = "Same swarm. Someone chose."
 
 
@@ -153,6 +138,8 @@ func _build_all() -> void:
 	_build_labels()
 	_init_swarm()
 	_color_terrain()
+	_update_landscape_label()
+	preload("res://commons/ui/exhibit_control_mount.gd").refresh(self)
 
 
 func apply_grid_config(config_data: Dictionary) -> void:
@@ -202,7 +189,7 @@ func _rebuild_now() -> void:
 	_controls = null
 	_caption = null
 	_landscape_label = null
-	_subtitle_label = null
+	_caption_viewport = null
 	_particles.clear()
 	_novelty_archive.clear()
 	_global_best_fitness = -INF
@@ -275,7 +262,8 @@ func _build_terrain() -> void:
 	mat.vertex_color_use_as_albedo = true
 	mat.transparency = BaseMaterial3D.TRANSPARENCY_ALPHA
 	_terrain_mesh.material_override = mat
-	_terrain_mesh.position = Vector3(0, -0.05, 0)
+	# Keep the value field above the museum floor, below the particles.
+	_terrain_mesh.position = Vector3(0, 0.03, 0)
 	add_child(_terrain_mesh)
 	_owned.append(_terrain_mesh)
 
@@ -329,22 +317,7 @@ func _terrain_fitness(pos: Vector3) -> float:
 			var d := Vector2(pos.x, pos.z).length()
 			return clampf(d / (arena_size * 0.5), 0.0, 1.0)
 		Landscape.NOVELTY:
-			# THE SHADING NOW AGREES WITH THE FITNESS FUNCTION. This branch used to
-			# shade by chebyshev distance to the edge — bright rim, dark middle —
-			# which is a picture of SPREAD, not of novelty, and _evaluate_fitness
-			# has never returned anything of the kind. On an empty archive it
-			# returns a flat 10.0: every point is equally novel because nobody has
-			# been anywhere. So the plate is uniform. Once the archive has entries
-			# (runtime, after the swarm has been somewhere) the field is distance
-			# to the nearest visited point, which is what the swarm is climbing.
-			if _novelty_archive.is_empty():
-				return 1.0
-			var near: float = INF
-			for archived in _novelty_archive:
-				var d2: float = Vector2(pos.x - archived.x, pos.z - archived.z).length()
-				if d2 < near:
-					near = d2
-			return clampf(near / (arena_size * 0.5), 0.0, 1.0)
+			return clampf(_evaluate_fitness(pos) / (arena_size * 0.5), 0.0, 1.0)
 		Landscape.RIDGE:
 			# Fitness falls off with perpendicular distance from the line z = x.
 			var dperp: float = absf(pos.x - pos.z) * SQRT_HALF
@@ -424,6 +397,8 @@ func _init_swarm() -> void:
 			_global_best_fitness = fit
 			_global_best_pos = pos
 
+	_reset_memories()
+
 
 func _evaluate_fitness(pos: Vector3) -> float:
 	match current_landscape:
@@ -436,10 +411,10 @@ func _evaluate_fitness(pos: Vector3) -> float:
 		Landscape.NOVELTY:
 			# Maximize distance from nearest archived point
 			if _novelty_archive.is_empty():
-				return 10.0
+				return 0.0
 			var min_dist := INF
 			for archived in _novelty_archive:
-				var d := pos.distance_to(archived)
+				var d := Vector2(pos.x - archived.x, pos.z - archived.z).length()
 				if d < min_dist:
 					min_dist = d
 			return min_dist
@@ -486,13 +461,44 @@ func _update_swarm(delta: float) -> void:
 			_global_best_fitness = fit
 			_global_best_pos = p["pos"]
 
-	# For novelty search, periodically archive positions
+	# The archive is simulation time, not rendered-frame count.
 	if current_landscape == Landscape.NOVELTY:
-		if Engine.get_frames_drawn() % 30 == 0 and _particles.size() > 0:
-			var rand_p: Dictionary = _particles[_rng.randi() % _particles.size()]
-			_novelty_archive.append(rand_p["pos"])
-			if _novelty_archive.size() > 200:
+		_archive_elapsed += delta
+		if _archive_elapsed >= ARCHIVE_INTERVAL and not _particles.is_empty():
+			_archive_elapsed = fmod(_archive_elapsed, ARCHIVE_INTERVAL)
+			var chosen: Dictionary = _particles[_rng.randi_range(0, _particles.size() - 1)]
+			_novelty_archive.append(chosen["pos"])
+			if _novelty_archive.size() > ARCHIVE_CAPACITY:
 				_novelty_archive.pop_front()
+			_rescore_memories()
+			_color_terrain()
+			_update_landscape_label()
+
+
+func _rescore_memories() -> void:
+	# Old scores were earned against another archive. Compare the saved position
+	# and the current position against ONE current record before choosing best.
+	_global_best_fitness = -INF
+	for p in _particles:
+		var remembered: float = _evaluate_fitness(p["best_pos"])
+		var present: float = _evaluate_fitness(p["pos"])
+		if present > remembered:
+			p["best_pos"] = p["pos"]
+			remembered = present
+		p["best_fitness"] = remembered
+		if remembered > _global_best_fitness:
+			_global_best_fitness = remembered
+			_global_best_pos = p["best_pos"]
+
+
+func _reset_memories() -> void:
+	_novelty_archive.clear()
+	_archive_elapsed = 0.0
+	for p in _particles:
+		p["best_pos"] = p["pos"]
+		if current_landscape == Landscape.NOVELTY:
+			_novelty_archive.append(p["pos"])
+	_rescore_memories()
 
 
 func _update_multimesh() -> void:
@@ -523,89 +529,96 @@ func _update_multimesh() -> void:
 # ── Controls ────────────────────────────────────────────────
 
 func _build_controls() -> void:
-	_controls = ArtifactControls.new()
+	_controls = preload("res://commons/ui/physical_choice_console.gd").new()
 	_controls.name = "Controls"
-	_controls.position = Vector3(2.2, 1.2, 0.0)
+	_controls.title = "WHAT COUNTS?"
+	_controls.choices = PackedStringArray(["CONVERGE", "SPREAD", "NOVELTY", "RIDGE"])
+	_controls.parameter = "INERTIA"
+	# +Z is the artifact front. The console follows the actual terrain extent.
+	_controls.position = Vector3(0, .76, arena_size * .5 + .34)
+	_controls.rotation_degrees.x = -60
+	_controls.set_selected(int(current_landscape))
+	_controls.set_value(inertia)
 	add_child(_controls)
 	_owned.append(_controls)
+	_controls.choice_pressed.connect(func(index: int): _switch_landscape(index as Landscape))
+	_controls.value_changed.connect(func(value: float): inertia = value)
+	_controls.reset_pressed.connect(func():
+		_init_swarm()
+		_color_terrain()
+		_update_landscape_label()
+	)
+	_sync_controls()
+	# A narrow floor stand leaves space for the player's feet and the sightline.
+	var stand := Node3D.new()
+	stand.name = "ConsoleStand"
+	stand.position.z = _controls.position.z
+	add_child(stand)
+	_owned.append(stand)
+	for piece in [
+		["Stem", Vector3(.10, .68, .10), Vector3(0, .36, -.05)],
+		["Foot", Vector3(.50, .045, .42), Vector3(0, .0225, -.05)],
+	]:
+		var mesh := MeshInstance3D.new()
+		mesh.name = piece[0]
+		mesh.mesh = BoxMesh.new()
+		mesh.mesh.size = piece[1]
+		mesh.position = piece[2]
+		var mat := StandardMaterial3D.new()
+		mat.albedo_color = Color(.16, .19, .21)
+		mat.roughness = .72
+		mesh.material_override = mat
+		stand.add_child(mesh)
 
-	_controls.add_button("CONVERGE", func():
-		_switch_landscape(Landscape.CONVERGE)
-	)
-	_controls.add_button("SPREAD", func():
-		_switch_landscape(Landscape.SPREAD)
-	)
-	_controls.add_button("NOVELTY", func():
-		_switch_landscape(Landscape.NOVELTY)
-	)
-	# The RIDGE button exists only where the ridge mandate was handed over. Two
-	# rules meet here: the shipped default look must stay pixel-exact (a fourth
-	# chassis in the control column would change it), and no value may be a
-	# one-way door in VR (leaving ridge with no way back would be exactly that).
-	# A return path is only needed to where you started, so it is built there.
-	if mandate == "ridge":
-		_controls.add_button("RIDGE", func():
-			_switch_landscape(Landscape.RIDGE)
-		)
-	_controls.add_slider("INERTIA", inertia, func(v: float):
-		inertia = v
-	)
+
+func exhibit_control_parts() -> Array[Node3D]:
+	return [_controls, get_node("ConsoleStand")]
+
+
+func _sync_controls() -> void:
+	if not is_instance_valid(_controls): return
+	_controls.set_selected(int(current_landscape))
+	_controls.set_value(inertia)
+	_controls.set_reading("%s  |  INERTIA %.2f" % [_mandate_for(current_landscape).to_upper(), inertia])
 
 
 func _build_labels() -> void:
-	# A shared parent so the framer's merged plate is parented to something this
-	# script owns — freeing Caption on rebuild takes the plate with it instead of
-	# stranding an orphan panel in mid-air.
 	_caption = Node3D.new()
 	_caption.name = "Caption"
+	_caption.position = Vector3(0, 1.5, -arena_size * .5 - .04)
 	add_child(_caption)
 	_owned.append(_caption)
-
-	_landscape_label = Label3D.new()
-	_landscape_label.name = "LandscapeLabel"
-	_landscape_label.font_size = CAPTION_TITLE_SIZE
-	_landscape_label.billboard = BaseMaterial3D.BILLBOARD_ENABLED
-	_landscape_label.position = Vector3(0, CAPTION_TITLE_Y, 0)
-	_landscape_label.modulate = Color(1, 1, 1, 0.9)
-	_caption.add_child(_landscape_label)
+	var surface := preload("res://commons/ui/control_value_surface.gd").build(
+		_caption, Vector2(1.35, .30), Vector3.ZERO)
+	_caption_viewport = surface.viewport
+	_caption_viewport.size = Vector2i(1080, 240)
+	_landscape_label = surface.label
+	_landscape_label.size = Vector2(1080, 240)
+	_caption_viewport.get_child(0).size = Vector2(1080, 240)
+	_landscape_label.add_theme_font_size_override("font_size", 48)
+	# The caption is an installed sign, not lettering suspended in the air.
+	for piece in [
+		["Bezel", Vector3(1.38, .33, .022), Vector3(0, 0, -.014)],
+		["LeftPost", Vector3(.024, 1.5, .024), Vector3(-.55, -.75, -.04)],
+		["RightPost", Vector3(.024, 1.5, .024), Vector3(.55, -.75, -.04)],
+	]:
+		var mesh := MeshInstance3D.new()
+		mesh.name = piece[0]
+		mesh.mesh = BoxMesh.new()
+		mesh.mesh.size = piece[1]
+		mesh.position = piece[2]
+		var mat := StandardMaterial3D.new()
+		mat.albedo_color = Color(.16, .19, .21)
+		mesh.material_override = mat
+		_caption.add_child(mesh)
 	_update_landscape_label()
-
-	_subtitle_label = Label3D.new()
-	_subtitle_label.name = "Subtitle"
-	_subtitle_label.text = _fit_cols(CAPTION_SUB_TEXT)
-	_subtitle_label.font_size = CAPTION_SUB_SIZE
-	_subtitle_label.billboard = BaseMaterial3D.BILLBOARD_ENABLED
-	_subtitle_label.position = Vector3(0, CAPTION_SUB_Y, 0)
-	_subtitle_label.modulate = Color(0.8, 0.8, 0.8, 0.7)
-	_caption.add_child(_subtitle_label)
-
-
-## Pad a caption line out to a constant column count, centred. Every line at
-## every mandate value is the same number of characters, so the merged plate is
-## the same nameplate in every tile and cannot be mistaken for the axis.
-func _fit_cols(s: String) -> String:
-	var t: String = s
-	if t.length() > CAPTION_COLS:
-		t = t.substr(0, CAPTION_COLS)
-	var pad: int = CAPTION_COLS - t.length()
-	var left: int = pad / 2
-	var right: int = pad - left
-	return " ".repeat(left) + t + " ".repeat(right)
 
 
 func _switch_landscape(mode: Landscape) -> void:
 	current_landscape = mode
 	mandate = _mandate_for(mode)
-	# Reset personal bests and global best for new landscape
-	_global_best_fitness = -INF
-	_novelty_archive.clear()
-	for p in _particles:
-		var fit := _evaluate_fitness(p["pos"])
-		p["best_fitness"] = fit
-		p["best_pos"] = p["pos"]
-		if fit > _global_best_fitness:
-			_global_best_fitness = fit
-			_global_best_pos = p["pos"]
+	_sync_controls()
+	_reset_memories()
 	_color_terrain()
 	_update_landscape_label()
 
@@ -623,15 +636,18 @@ func _update_landscape_label() -> void:
 			tint = Color(0.4, 0.6, 1.0, 0.9)
 		Landscape.SPREAD:
 			l1 = "SPREAD — Ecological"
-			l2 = "Distance from the rest."
+			l2 = "Distance from the centre."
 			tint = Color(0.3, 0.9, 0.4, 0.9)
 		Landscape.NOVELTY:
 			l1 = "NOVELTY — Artistic"
-			l2 = "Nowhere visited yet."
+			l2 = "Memory: %3d / 200 places." % _novelty_archive.size()
 			tint = Color(0.9, 0.5, 1.0, 0.9)
 		Landscape.RIDGE:
 			l1 = "RIDGE — Meritocratic"
 			l2 = "One narrow path counts."
 			tint = Color(1.0, 0.65, 0.25, 0.9)
-	_landscape_label.text = "%s\n%s" % [_fit_cols(l1), _fit_cols(l2)]
-	_landscape_label.modulate = tint
+	var text := "%s\n%s\n%s" % [l1, l2, CAPTION_SUB_TEXT]
+	if _landscape_label.text != text:
+		_landscape_label.text = text
+		_landscape_label.add_theme_color_override("font_color", tint)
+		_caption_viewport.render_target_update_mode = SubViewport.UPDATE_ONCE

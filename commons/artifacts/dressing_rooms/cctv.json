@@ -1,105 +1,24 @@
 {
-  "approach": "south",
-  "artifact_offset": [
-    0.0,
-    0.0,
-    0.0
-  ],
-  "clearance": [
-    3.0,
-    3.0,
-    3.0
-  ],
-  "exit": "north",
-  "extras": [],
-  "footing": {
-    "anchor": [
-      3,
-      3
-    ],
-    "tiles": [
-      [
-        1,
-        1,
-        1,
-        1,
-        1,
-        1,
-        1
-      ],
-      [
-        1,
-        2,
-        2,
-        2,
-        2,
-        2,
-        1
-      ],
-      [
-        1,
-        2,
-        2,
-        2,
-        2,
-        2,
-        1
-      ],
-      [
-        1,
-        2,
-        2,
-        2,
-        2,
-        2,
-        1
-      ],
-      [
-        1,
-        2,
-        2,
-        2,
-        2,
-        2,
-        1
-      ],
-      [
-        1,
-        2,
-        2,
-        2,
-        2,
-        2,
-        1
-      ],
-      [
-        1,
-        1,
-        1,
-        1,
-        1,
-        1,
-        1
-      ]
-    ]
-  },
-  "footprint": [
-    2,
-    2,
-    2
-  ],
   "lookup_name": "cctv",
-  "notes": {
-    "tags": [
-      "artifact-needs-fix"
-    ],
-    "text": "[auto] AABB.y min = -0.54 \u2014 body sinks into / floats above floor"
+  "footprint": [2.0, 4.992, 1.302],
+  "rotations": ["0"],
+  "approach": "south",
+  "exit": "south",
+  "footing": {"anchor": [1, 2], "tiles": [[4,4,4,4,4],[1,1,1,1,1],[1,1,1,1,1],[1,1,1,1,1],[1,1,1,1,1],[1,1,1,1,1],[1,1,1,1,1]]},
+  "extras": [],
+  "artifact_offset": [0.0, 1.6, -0.45],
+  "clearance": [5, 7, 3],
+  "posture": "wall",
+  "show_info": false,
+  "show_dressing": false,
+  "placement_contract": {
+    "allowed_modes": ["against_wall"], "preferred_mode": "against_wall", "wall_side": "north",
+    "hard_zone_m": [3, 6, 3], "preferred_zone_m": [5, 7, 3],
+    "required_support": "wall", "interaction_faces": ["south"],
+    "rear_clearance_m": 0.0, "front_clearance_m": 5.0,
+    "circulation": "sensor_corridor", "circulation_behind": false,
+    "minimum_route_width_m": 0.9, "neighbor_policy": "no_artifacts_in_preferred_zone"
   },
-  "rotations": [
-    "0",
-    "90",
-    "180",
-    "270"
-  ],
-  "posture": "platform"
+  "production_grade": "test_candidate",
+  "placement_intent": "A wall-mounted observation device whose five-metre sensing depth becomes reserved frontal territory rather than a generic platform."
 }

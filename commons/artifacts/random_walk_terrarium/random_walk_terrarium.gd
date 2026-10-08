@@ -2,22 +2,20 @@
 # Random walk visualization in a glass terrarium
 # Shows 2D and 3D random walks with trails
 #
-# Algorithm: Simulates random walks (uniform 2D, uniform 3D, and Lévy flight)
-# inside a bounded glass terrarium. Each walker takes discrete steps in uniformly
-# random directions; boundary reflection keeps walkers contained. Mean squared
-# displacement (MSD) is tracked to demonstrate diffusion scaling laws.
-#
-# QFEP: Random walk as pure E(S) — no memory, no direction, maximum entropy
+# Algorithm: Uniform headings in 2D or 3D, plus a bounded long-step mode.
+# Each walker retains its current position and RNG state. The displayed trail
+# is recorded but is not consulted by the next step; glass reflects endpoints.
+# MSD reports the five walkers' squared displacement inside this finite box.
 #
 # @identity
-# essence: E[|r|²] = n·d·σ² — mean squared displacement scales linearly with step count
-# desire: peer into a glass box and watch colored particles wander without purpose or memory
-# critical_parameter: walk_mode — switches between WALK_2D (planar), WALK_3D (volumetric), LEVY_FLIGHT (heavy-tailed jumps)
-# triggers: mode switch buttons change step generator; each step calls _generate_step() with boundary reflection
-# emerges: Levy flights produce dramatically different trail topology — rare giant leaps amid local clusters
+# essence: next_position = reflect(position + sampled_step)
+# desire: follow one walk, then compare its current position with its partial record
+# critical_parameter: walk_mode — planar, volumetric, or capped inverse-square-root step lengths
+# triggers: mode buttons change the generator; RESET replays a named seed with the same settings
+# emerges: changing a direction or length rule changes the retained tangle within the same glass
 # needs: VR mode buttons [has], reset button [has], trail rendering via ImmediateMesh [has]
 # relationships: contrasts with random_walk_leash (observed vs felt); feeds random_walk_collection and pixel_cloud
-# truth: A random walk has no destination — yet it explores space more honestly than any planned path.
+# truth: A visible history is not yet a history the next step can use.
 
 extends Node3D
 
@@ -456,7 +454,7 @@ func _create_vr_controls():
 		[
 			{"type": "button", "label": "2D"},
 			{"type": "button", "label": "3D"},
-			{"type": "button", "label": "LEVY"},
+			{"type": "button", "label": "LONG STEP"},
 		],
 		[{"type": "button", "label": "RESET"}],
 	], case_body)
@@ -483,7 +481,7 @@ func _create_vr_controls():
 		_control_panel.rotation_degrees = Vector3(-30, 0, 0)
 		add_child(_control_panel)
 
-	# Mode buttons: 2D (Btn_0), 3D (Btn_1), LEVY (Btn_2)
+	# Mode buttons: 2D (Btn_0), 3D (Btn_1), LONG STEP (Btn_2)
 	for i in range(3):
 		var btn: Node = _control_panel.find_child("Btn_%d" % i, true, false)
 		if btn:
@@ -581,7 +579,7 @@ func _generate_step() -> Vector3:
 			) * step_size
 
 		WalkMode.LEVY_FLIGHT:
-			# Lévy flight: occasional large jumps
+			# Bounded long-step sampler; the legacy enum name is retained for saved configurations.
 			var angle = _rand() * TAU
 			var phi = acos(2.0 * _rand() - 1.0)
 			var direction = Vector3(
@@ -654,7 +652,7 @@ func _update_stats():
 		sum_sq_disp += disp.length_squared()
 	var msd = sum_sq_disp / maxf(num_walkers, 1)
 
-	var mode_names = ["2D", "3D", "Lévy"]
+	var mode_names = ["2D", "3D", "Long step"]
 	_stats_label.text = "%s Walk\nSteps: %d\nMSD: %.4f" % [mode_names[walk_mode], _total_steps, msd]
 
 func _input(event):
@@ -879,8 +877,8 @@ func logbook_lines() -> Array[String]:
 			rule = "3D · fixed %.3f m steps in the volume" % step_size
 			glass = "glass folds a step back at every wall"
 		_:
-			rule = "LEVY · 3D · step %.3f m × (u+%.2f)^%.1f" % [step_size, LEVY_OFFSET, LEVY_EXPONENT]
-			glass = "glass folds a step back · LEVY cap %d×" % int(LEVY_STEP_CAP)
+			rule = "LONG STEP · 3D · step %.3f m × (u+%.2f)^%.1f" % [step_size, LEVY_OFFSET, LEVY_EXPONENT]
+			glass = "glass folds a step back · length cap %d×" % int(LEVY_STEP_CAP)
 	var kept: int = _walker_trails[0].size() if _walker_trails.size() > 0 else 0
 	var who: String = "one followed, %d dimmed" % (num_walkers - 1) if follow_one else "%d walkers" % num_walkers
 	var seed_line: String = "seed %d · RESET replays it" % walk_seed if walk_seed >= 0 \
@@ -940,7 +938,7 @@ func walker_positions() -> Array:
 
 
 func get_logbook_state() -> Dictionary:
-	return {"stand": stand, "mode": int(walk_mode), "mode_name": ["2D", "3D", "LEVY"][int(walk_mode)], "steps": _total_steps,
+	return {"stand": stand, "mode": int(walk_mode), "mode_name": ["2D", "3D", "LONG STEP"][int(walk_mode)], "steps": _total_steps,
 		"sim_time": float(_total_steps) / maxf(steps_per_second, 0.001), "steps_per_second": steps_per_second, "clock": _run_clock,
 		"frames": _run_frames, "catchup_cap": MAX_CATCHUP_STEPS, "trail_kept": _walker_trails[0].size() if _walker_trails.size() > 0 else 0,
 		"trail_length": trail_length, "seed": walk_seed, "replay": walk_seed >= 0, "follow_one": follow_one, "num_walkers": num_walkers,

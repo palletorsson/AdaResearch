@@ -39,6 +39,16 @@ extends RefCounted
 ## Given up: the wall-scale scene (this is one standing tangle, not the row), the
 ## black ground and spotlight, the folded and creased plates of the reference
 ## (mine are flat), and the plates that actually cut notches into each other.
+##
+## DNA axes:
+##   plate    — what the sheets ARE: torn (flat shards), swarm (each plate burst
+##              into a cloud of its own splinters), sag (melted into drooping
+##              horizontal puddles), cage (flesh gone, only the torn outline left
+##              as a lattice of rods).
+##   armature — what the tangle DOES: leaning (one trunk), mirrored (a twin thicket
+##              forks out of the waist), flooded (the lower body drowned in a solid
+##              torn pour, plates half-sunk at its surface), crowned (the apex
+##              erupts into a ring of orange spikes).
 
 const TEX_SIZE: int = 128
 
@@ -51,7 +61,17 @@ static func describe() -> String:
 	return "A leaning constructivist thicket of torn dusty-pink and white plates skewered together and triangulated by thin signal-orange tubes that run on past their joints."
 
 
-static func build(root: Node3D, seed: int) -> void:
+static func axes() -> Dictionary:
+	return {
+		"plate": ["torn", "swarm", "sag", "cage"],
+		"armature": ["leaning", "mirrored", "flooded", "crowned"],
+	}
+
+
+static func build(root: Node3D, seed: int, opts: Dictionary = {}) -> void:
+	var plate: String = str(opts.get("plate", "torn"))
+	var armature: String = str(opts.get("armature", "leaning"))
+
 	var rng := RandomNumberGenerator.new()
 	rng.seed = seed
 
@@ -103,6 +123,25 @@ static func build(root: Node3D, seed: int) -> void:
 		var oy: float = lerpf(0.05, 0.72, f) * rng.randf_range(0.85, 1.15)
 		nodes.append(Vector3(cos(oa) * orad, maxf(oy, 0.03), sin(oa) * orad))
 
+	# --- armature: a twin thicket forks out of the waist --------------------
+	var edge_cap: int = 58
+	var flood_h: float = 0.0
+	if armature == "mirrored":
+		var pivot: Vector3 = _axis_pt(0.42, height, lean)
+		var fork_ax := Vector3(-sin(lean_az), 0.0, cos(lean_az))
+		var fork_b := Basis(fork_ax.normalized(), deg_to_rad(rng.randf_range(52.0, 78.0)))
+		var twin: Array = []
+		for i in range(nodes.size()):
+			var tp: Vector3 = nodes[i]
+			var tq: Vector3 = pivot + fork_b * (tp - pivot)
+			twin.append(Vector3(tq.x, maxf(tq.y, 0.035), tq.z))
+		for i in range(twin.size()):
+			nodes.append(twin[i])
+		strut_target = int(float(strut_target) * 1.85)
+		edge_cap = 96
+	elif armature == "flooded":
+		flood_h = rng.randf_range(0.34, 0.52)
+
 	var n_nodes: int = nodes.size()
 
 	# --- strut graph: nearest neighbour spine, then triangles ---------------
@@ -153,8 +192,8 @@ static func build(root: Node3D, seed: int) -> void:
 			var fd: float = (fb - fa).length()
 			if fd >= 0.13 and fd <= 0.62:
 				_push_edge(seen, edge_list, i, j)
-	if edge_list.size() > 58:
-		edge_list.resize(58)
+	if edge_list.size() > edge_cap:
+		edge_list.resize(edge_cap)
 
 	# --- draw the struts ----------------------------------------------------
 	var degree: Array = []
@@ -184,6 +223,8 @@ static func build(root: Node3D, seed: int) -> void:
 		if int(degree[i]) < 3:
 			continue
 		var p: Vector3 = nodes[i]
+		if flood_h > 0.0 and p.y < flood_h + 0.03:
+			continue
 		var sph := SphereMesh.new()
 		var kr: float = rng.randf_range(0.011, 0.017)
 		sph.radius = kr
@@ -193,6 +234,29 @@ static func build(root: Node3D, seed: int) -> void:
 		var mi: MeshInstance3D = _add(root, sph, mat_knob)
 		mi.transform = Transform3D(Basis(), p)
 		knobs += 1
+
+	# --- crown: the apex erupts into a ring of spikes -----------------------
+	if armature == "crowned":
+		var apex: Vector3 = _axis_pt(1.0, height, lean)
+		var n_c: int = rng.randi_range(9, 13)
+		var c_rad: float = rng.randf_range(0.15, 0.25)
+		var c_up: float = rng.randf_range(0.20, 0.36)
+		var c_prev := Vector3.ZERO
+		var c_first := Vector3.ZERO
+		for i in range(n_c):
+			var ca: float = float(i) / float(n_c) * TAU + rng.randf_range(-0.10, 0.10)
+			var cp: Vector3 = apex + Vector3(cos(ca) * c_rad, rng.randf_range(-0.05, 0.05), sin(ca) * c_rad)
+			var flare: float = rng.randf_range(1.25, 1.85)
+			var tip: Vector3 = apex + Vector3(cos(ca) * c_rad * flare, c_up * rng.randf_range(0.62, 1.35), sin(ca) * c_rad * flare)
+			_strut(root, cp, tip, rng.randf_range(0.005, 0.009), mat_tube)
+			if i == 0:
+				c_first = cp
+			else:
+				_strut(root, c_prev, cp, rng.randf_range(0.005, 0.008), mat_tube)
+			c_prev = cp
+			nodes.append(cp)
+		_strut(root, c_prev, c_first, rng.randf_range(0.005, 0.008), mat_tube)
+		n_nodes = nodes.size()
 
 	# --- plates -------------------------------------------------------------
 	for i in range(n_plates):
@@ -224,13 +288,27 @@ static func build(root: Node3D, seed: int) -> void:
 			var az: float = rng.randf_range(0.0, TAU)
 			nrm = Vector3(cos(ele) * cos(az), sin(ele), cos(ele) * sin(az)).normalized()
 
+		if plate == "sag":
+			nrm = Vector3(nrm.x * 0.18, 1.0, nrm.z * 0.18).normalized()
+			pos = Vector3(pos.x, maxf(pos.y * 0.86, 0.03), pos.z)
+		if flood_h > 0.0 and pos.y < flood_h + 0.02:
+			pos = Vector3(pos.x, flood_h + rng.randf_range(-0.04, 0.12), pos.z)
+
 		var t_h: float = clampf(pos.y / maxf(height, 0.01), 0.0, 1.0)
 		var r0: float = rng.randf_range(0.115, 0.325) * lerpf(1.04, 0.60, t_h)
 		var thick: float = rng.randf_range(0.020, 0.038)
 		var hole_r: float = 0.0
 		if rng.randf() < 0.28:
 			hole_r = r0 * rng.randf_range(0.07, 0.13)
-		var mesh: ArrayMesh = _plate_mesh(rng, r0, thick, hole_r)
+		var mesh: ArrayMesh = null
+		if plate == "swarm":
+			mesh = _shards_mesh(rng, r0, thick, rng.randi_range(5, 8))
+		elif plate == "sag":
+			mesh = _plate_mesh(rng, r0 * 1.42, thick * 0.58, hole_r * 1.42, r0 * 0.66)
+		elif plate == "cage":
+			mesh = _cage_mesh(rng, r0, thick, hole_r)
+		else:
+			mesh = _plate_mesh(rng, r0, thick, hole_r)
 
 		var is_white: bool = rng.randf() < white_frac
 		var base: Color = col_white if is_white else col_pink.lerp(col_pink2, rng.randf())
@@ -240,6 +318,10 @@ static func build(root: Node3D, seed: int) -> void:
 		var mat: StandardMaterial3D = _enamel(tinted, tex_plate, rng.randf_range(1.1, 1.9), rough)
 		var mi: MeshInstance3D = _add(root, mesh, mat)
 		mi.transform = Transform3D(_basis_z_to(nrm, rng.randf_range(0.0, TAU)), pos)
+
+	# --- the pour: the lower body drowned in a solid slab -------------------
+	if flood_h > 0.0:
+		_pour(root, rng, flood_h, tex_plate, col_pink.lerp(col_pink2, 0.5).darkened(0.08))
 
 	_settle(root)
 
@@ -267,7 +349,7 @@ static func _push_edge(seen: Dictionary, edge_list: Array, a: int, b: int) -> vo
 # ---------------------------------------------------------------------------
 # geometry
 
-static func _plate_mesh(rng: RandomNumberGenerator, r0: float, thick: float, hole_r: float) -> ArrayMesh:
+static func _ring_points(rng: RandomNumberGenerator, r0: float, cap: float) -> Array:
 	var n_v: int = rng.randi_range(5, 9)
 	var span: float = TAU / float(n_v)
 	var angs: Array = []
@@ -307,43 +389,155 @@ static func _plate_mesh(rng: RandomNumberGenerator, r0: float, thick: float, hol
 				rr = lerpf(ra, rb, f)
 			else:
 				rr = (pa.x * pb.y - pa.y * pb.x) / den
-			rr = clampf(rr, r0 * 0.10, minf(r0 * 3.2, 0.34))
+			rr = clampf(rr, r0 * 0.10, minf(r0 * 3.2, cap))
 			ring.append(Vector2(d.x * rr, d.y * rr))
+	return ring
 
-	var count: int = ring.size()
-	var hz: float = thick * 0.5
-	var use_hole: bool = hole_r > 0.0
+
+## One torn plate. `sag` droops the rim by that much at r = r0 (melted sheets),
+## `cap` is the hard ceiling on the outline radius, `xf` places the shard when
+## several are packed into one mesh.
+static func _plate_mesh(rng: RandomNumberGenerator, r0: float, thick: float, hole_r: float, sag: float = 0.0, cap: float = 0.34) -> ArrayMesh:
 	var st := SurfaceTool.new()
 	st.begin(Mesh.PRIMITIVE_TRIANGLES)
 	st.set_smooth_group(-1)
-	var z_up := Vector3(0.0, 0.0, 1.0)
-	var z_dn := Vector3(0.0, 0.0, -1.0)
+	_plate_into(st, rng, r0, thick, hole_r, sag, Transform3D.IDENTITY, cap)
+	st.generate_normals()
+	return st.commit()
+
+
+static func _plate_into(st: SurfaceTool, rng: RandomNumberGenerator, r0: float, thick: float, hole_r: float, sag: float, xf: Transform3D, cap: float) -> void:
+	var ring: Array = _ring_points(rng, r0, cap)
+	var count: int = ring.size()
+	var hz: float = thick * 0.5
+	var use_hole: bool = hole_r > 0.0
+	var inv_r: float = 1.0 / maxf(r0, 0.0001)
+	var hole_z: float = -sag * pow(hole_r * inv_r, 2.0)
+	var z_up: Vector3 = xf.basis * Vector3(0.0, 0.0, 1.0)
+	var z_dn: Vector3 = xf.basis * Vector3(0.0, 0.0, -1.0)
 	for k in range(count):
 		var k2: int = (k + 1) % count
 		var o0: Vector2 = ring[k]
 		var o1: Vector2 = ring[k2]
-		var of0 := Vector3(o0.x, o0.y, hz)
-		var of1 := Vector3(o1.x, o1.y, hz)
-		var ob0 := Vector3(o0.x, o0.y, -hz)
-		var ob1 := Vector3(o1.x, o1.y, -hz)
+		var s0: float = -sag * pow(o0.length() * inv_r, 2.0)
+		var s1: float = -sag * pow(o1.length() * inv_r, 2.0)
+		var of0: Vector3 = xf * Vector3(o0.x, o0.y, hz + s0)
+		var of1: Vector3 = xf * Vector3(o1.x, o1.y, hz + s1)
+		var ob0: Vector3 = xf * Vector3(o0.x, o0.y, -hz + s0)
+		var ob1: Vector3 = xf * Vector3(o1.x, o1.y, -hz + s1)
 		if use_hole:
 			var d0: Vector2 = o0.normalized()
 			var d1: Vector2 = o1.normalized()
-			var if0 := Vector3(d0.x * hole_r, d0.y * hole_r, hz)
-			var if1 := Vector3(d1.x * hole_r, d1.y * hole_r, hz)
-			var ib0 := Vector3(d0.x * hole_r, d0.y * hole_r, -hz)
-			var ib1 := Vector3(d1.x * hole_r, d1.y * hole_r, -hz)
+			var if0: Vector3 = xf * Vector3(d0.x * hole_r, d0.y * hole_r, hz + hole_z)
+			var if1: Vector3 = xf * Vector3(d1.x * hole_r, d1.y * hole_r, hz + hole_z)
+			var ib0: Vector3 = xf * Vector3(d0.x * hole_r, d0.y * hole_r, -hz + hole_z)
+			var ib1: Vector3 = xf * Vector3(d1.x * hole_r, d1.y * hole_r, -hz + hole_z)
 			_quad_dir(st, if0, if1, of1, of0, z_up)
 			_quad_dir(st, ib0, ib1, ob1, ob0, z_dn)
-			var inward := Vector3(-(d0.x + d1.x), -(d0.y + d1.y), 0.0).normalized()
+			var inward: Vector3 = xf.basis * Vector3(-(d0.x + d1.x), -(d0.y + d1.y), 0.0).normalized()
 			_quad_dir(st, if0, if1, ib1, ib0, inward)
 		else:
-			_tri_dir(st, Vector3(0.0, 0.0, hz), of0, of1, z_up)
-			_tri_dir(st, Vector3(0.0, 0.0, -hz), ob0, ob1, z_dn)
-		var outward := Vector3(o0.x + o1.x, o0.y + o1.y, 0.0).normalized()
+			_tri_dir(st, xf * Vector3(0.0, 0.0, hz), of0, of1, z_up)
+			_tri_dir(st, xf * Vector3(0.0, 0.0, -hz), ob0, ob1, z_dn)
+		var outward: Vector3 = xf.basis * Vector3(o0.x + o1.x, o0.y + o1.y, 0.0).normalized()
 		_quad_dir(st, of0, of1, ob1, ob0, outward)
+
+
+## swarm — the plate has burst into a cloud of its own splinters, all in one mesh
+## so the instance count is unchanged.
+static func _shards_mesh(rng: RandomNumberGenerator, r0: float, thick: float, count: int) -> ArrayMesh:
+	var st := SurfaceTool.new()
+	st.begin(Mesh.PRIMITIVE_TRIANGLES)
+	st.set_smooth_group(-1)
+	for i in range(count):
+		var sa: float = rng.randf_range(0.0, TAU)
+		var sr: float = r0 * 1.30 * sqrt(rng.randf())
+		var off := Vector3(cos(sa) * sr, sin(sa) * sr, rng.randf_range(-r0 * 0.62, r0 * 0.62))
+		var tilt := Basis(Vector3(1.0, 0.0, 0.0), rng.randf_range(-0.95, 0.95))
+		tilt = tilt * Basis(Vector3(0.0, 1.0, 0.0), rng.randf_range(-0.95, 0.95))
+		tilt = tilt * Basis(Vector3(0.0, 0.0, 1.0), rng.randf_range(0.0, TAU))
+		var shard_r: float = r0 * rng.randf_range(0.16, 0.34)
+		_plate_into(st, rng, shard_r, thick * 0.85, 0.0, 0.0, Transform3D(tilt, off), 0.34)
 	st.generate_normals()
 	return st.commit()
+
+
+## cage — the sheet is gone, only its torn outline is left, drawn as square rods.
+static func _cage_mesh(rng: RandomNumberGenerator, r0: float, thick: float, hole_r: float) -> ArrayMesh:
+	var ring: Array = _ring_points(rng, r0, 0.34)
+	var count: int = ring.size()
+	var st := SurfaceTool.new()
+	st.begin(Mesh.PRIMITIVE_TRIANGLES)
+	st.set_smooth_group(-1)
+	var s: float = maxf(thick * 0.62, 0.007)
+	for k in range(count):
+		var k2: int = (k + 1) % count
+		var v0: Vector2 = ring[k]
+		var v1: Vector2 = ring[k2]
+		_rod_into(st, Vector3(v0.x, v0.y, 0.0), Vector3(v1.x, v1.y, 0.0), s)
+	var half: int = maxi(count / 2, 1)
+	var ribs: int = rng.randi_range(2, 4)
+	for i in range(ribs):
+		var ia: int = rng.randi_range(0, count - 1)
+		var ib: int = posmod(ia + half + rng.randi_range(-2, 2), count)
+		if ia == ib:
+			continue
+		var va: Vector2 = ring[ia]
+		var vb: Vector2 = ring[ib]
+		_rod_into(st, Vector3(va.x, va.y, 0.0), Vector3(vb.x, vb.y, 0.0), s * 0.72)
+	if hole_r > 0.0:
+		var hr: float = maxf(hole_r * 3.0, r0 * 0.26)
+		var hn: int = 9
+		for i in range(hn):
+			var a0: float = float(i) / float(hn) * TAU
+			var a1: float = float(i + 1) / float(hn) * TAU
+			_rod_into(st, Vector3(cos(a0) * hr, sin(a0) * hr, 0.0), Vector3(cos(a1) * hr, sin(a1) * hr, 0.0), s * 0.62)
+	st.generate_normals()
+	return st.commit()
+
+
+static func _rod_into(st: SurfaceTool, a: Vector3, b: Vector3, s: float) -> void:
+	var d: Vector3 = b - a
+	var ln: float = d.length()
+	if ln < 1.0e-5:
+		return
+	var dir: Vector3 = d / ln
+	var ref := Vector3(0.0, 0.0, 1.0)
+	if absf(dir.dot(ref)) > 0.95:
+		ref = Vector3(1.0, 0.0, 0.0)
+	var u: Vector3 = ref.cross(dir).normalized() * s
+	var v: Vector3 = dir.cross(u).normalized() * s
+	var a0: Vector3 = a - u - v
+	var a1: Vector3 = a + u - v
+	var a2: Vector3 = a + u + v
+	var a3: Vector3 = a - u + v
+	var b0: Vector3 = b - u - v
+	var b1: Vector3 = b + u - v
+	var b2: Vector3 = b + u + v
+	var b3: Vector3 = b - u + v
+	_quad_dir(st, a0, a1, b1, b0, -v)
+	_quad_dir(st, a1, a2, b2, b1, u)
+	_quad_dir(st, a2, a3, b3, b2, v)
+	_quad_dir(st, a3, a0, b0, b3, -u)
+	_quad_dir(st, a0, a3, a2, a1, -dir)
+	_quad_dir(st, b0, b1, b2, b3, dir)
+
+
+## flooded — a stack of wide torn slabs, the solid pour the lower body drowned in.
+static func _pour(root: Node3D, rng: RandomNumberGenerator, flood_h: float, tex: ImageTexture, base: Color) -> void:
+	var layers: int = rng.randi_range(3, 4)
+	var y: float = 0.0
+	for i in range(layers):
+		var f: float = float(i) / float(layers)
+		var rr: float = lerpf(0.52, 0.28, f) * rng.randf_range(0.92, 1.08)
+		var lh: float = flood_h / float(layers) * rng.randf_range(0.90, 1.20)
+		var mesh: ArrayMesh = _plate_mesh(rng, rr, lh, 0.0, 0.0, 0.92)
+		var col: Color = base.darkened(0.05 * float(i))
+		var mat: StandardMaterial3D = _enamel(col, tex, 0.9, rng.randf_range(0.48, 0.58))
+		var mi: MeshInstance3D = _add(root, mesh, mat)
+		var off := Vector3(rng.randf_range(-0.035, 0.035), y + lh * 0.5, rng.randf_range(-0.035, 0.035))
+		mi.transform = Transform3D(_basis_z_to(Vector3.UP, rng.randf_range(0.0, TAU)), off)
+		y += lh * 0.72
 
 
 static func _tri_dir(st: SurfaceTool, a: Vector3, b: Vector3, c: Vector3, outward: Vector3) -> void:

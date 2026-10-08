@@ -2,17 +2,16 @@ extends "res://commons/artifacts/_embodied/embodied_prop.gd"
 class_name MaxQBasinRoom
 
 ## @identity
-## name: "Settling: gradient descent toward max Q"
+## name: "Two staged responses: a Q interpretation"
 ## tier: large
-## lineage: two wells side by side — the deepest minimum is not the most alive one. A narrow
-##   pit traps a single frozen shape; a broad shallow basin holds a thing that keeps moving.
-## essence: A room with two basins you walk between. The DEAD well is deep and narrow: a rigid
-##   body falls in and locks to one shape, never to stir again — lowest energy, zero life. The
-##   ALIVE well is shallow and wide: a soft body lives there, jostled by every nudge, forever
-##   re-finding a slightly different rest. Max Q is not the bottom of the deepest pit; it is the
-##   liveliest minimum — the basin roomy enough to keep settling without ever being done.
-## truth: "MAX Q IS THE LIVELIEST MINIMUM, NOT THE DEEPEST" — width beats depth for life
-## applications: ecology, learning, design — robust, adaptive states over brittle optimal ones.
+## lineage: two wells side by side with deliberately different receivers. The narrow well
+##   contains a static mesh cube; the broad well displays a Verlet lattice driven by periodic
+##   random displacements and a separate floor constraint. Neither implements a shared Q objective.
+## essence: Compare the staged responses, then consider the proposition that the desired form
+##   need not have the lowest score. The optional reveal delays the alive/dead interpretation.
+## truth: "MAX Q IS THE LIVELIEST MINIMUM, NOT THE DEEPEST" is this work's proposal,
+##   not a measured Q value or a test separating living matter from dead matter.
+## applications: asking which responses a model values, and which conditions its author supplies.
 
 const SBShapes = preload("res://commons/soft_body/soft_body_shapes.gd")
 
@@ -33,12 +32,19 @@ const SBShapes = preload("res://commons/soft_body/soft_body_shapes.gd")
 @export var alive_col: Color = Color(0.50, 0.95, 0.65)
 @export var live_body_col: Color = Color(0.55, 0.95, 0.70)
 @export var label_col: Color = Color(0.86, 0.92, 0.98)
+## Opt-in comparison before the Q interpretation; other placements keep their original labels.
+@export var reveal_on_request: bool = false
 
 var _t: float = 0.0
 var _sim = null
 var _live_mm: MultiMesh = null
 var _live_holder: Node3D = null
 var _alive_center: Vector3 = Vector3.ZERO
+var _interpretation_visible := false
+var _interpretation_button: Node3D
+var _interpretation_title: Label3D
+var _deep_label: Label3D
+var _shallow_label: Label3D
 
 
 func _ready() -> void:
@@ -56,12 +62,17 @@ func apply_grid_config(config: Dictionary) -> void:
 		alive_col = _parse_color(config["alive_col"], alive_col)
 	if config.has("dead_col"):
 		dead_col = _parse_color(config["dead_col"], dead_col)
+	if config.has("reveal_on_request"):
+		reveal_on_request = str(config["reveal_on_request"]).to_lower() in ["true", "1"]
+	if not is_node_ready():
+		return
 	for c in get_children():
 		remove_child(c)
 		c.queue_free()
 	_sim = null
 	_live_mm = null
 	_live_holder = null
+	_interpretation_button = null
 	_build()
 
 
@@ -78,10 +89,18 @@ func _well_mesh(center: Vector3, rim_radius: float, depth: float, narrow: bool, 
 		# narrow well drops fast (f^0.5 steep walls); wide well is a soft parabola (f^2)
 		var depth_f: float = (sqrt(f) if narrow else (f * f))
 		var y: float = -depth * depth_f
+		# Sample adjacent rings so the normal follows the drawn hollow. This
+		# also avoids the square-root profile's singular derivative at the rim.
+		var before_f: float = maxf(0.0, f - 1.0 / bands)
+		var after_f: float = minf(1.0, f + 1.0 / bands)
+		var before_y: float = -depth * (sqrt(before_f) if narrow else before_f * before_f)
+		var after_y: float = -depth * (sqrt(after_f) if narrow else after_f * after_f)
+		var profile_slope: float = (before_y - after_y) / (rim_radius * (after_f - before_f))
 		for s in range(segs + 1):
 			var th: float = (float(s) / float(segs)) * TAU
 			verts.append(center + Vector3(rr * cos(th), y, rr * sin(th)))
-			normals.append(Vector3.UP)
+			# The shared pole has a rotationally symmetric, upward normal.
+			normals.append(Vector3.UP if b == bands else Vector3(-profile_slope * cos(th), 1.0, -profile_slope * sin(th)).normalized())
 	var stride: int = segs + 1
 	for b in range(bands):
 		for s in range(segs):
@@ -125,14 +144,16 @@ func _build() -> void:
 	# DEAD well — deep and narrow.
 	var dead_c := Vector3(dead_x, 0.0, 0.0)
 	stage.add_child(_well_mesh(dead_c, dead_rim, dead_depth, true, dead_col))
-	# A single rigid frozen shape locked at the bottom — one cube, never moving.
+	# A static mesh at the bottom — one cube, never moving.
 	stage.add_child(_box(dead_c + Vector3(0.0, -dead_depth * 0.82, 0.0), Vector3(0.28, 0.28, 0.28), _matte_mat(dead_col, 0.6, 0.4)))
-	stage.add_child(_billboard_label("DEAD WELL\ndeep · narrow · one frozen shape", dead_c + Vector3(0.0, 1.0, 0.0), 18, Color(0.78, 0.80, 0.86)))
+	_deep_label = _billboard_label("", dead_c + Vector3(0.0, 1.0, 0.0), 18, Color(0.78, 0.80, 0.86))
+	stage.add_child(_deep_label)
 
 	# ALIVE well — shallow and wide.
 	_alive_center = Vector3(alive_x, 0.0, 0.0)
 	stage.add_child(_well_mesh(_alive_center, alive_rim, alive_depth, false, alive_col))
-	stage.add_child(_billboard_label("ALIVE WELL\nshallow · wide · keeps re-finding", _alive_center + Vector3(0.0, 1.0, 0.0), 18, Color(0.70, 0.96, 0.78)))
+	_shallow_label = _billboard_label("", _alive_center + Vector3(0.0, 1.0, 0.0), 18, Color(0.70, 0.96, 0.78))
+	stage.add_child(_shallow_label)
 
 	# A soft body living in the alive well — live MultiMesh of particles.
 	var sim = SBShapes.make_jelly_grid(3, 3, 3, 0.22, 0.55)
@@ -169,7 +190,36 @@ func _build() -> void:
 	_live_holder.add_child(mmi)
 	_refresh_live()
 
-	add_child(_billboard_label("MAX Q IS THE LIVELIEST MINIMUM, NOT THE DEEPEST", Vector3(0.0, deck_h + 2.0, 0.0), 28, label_col))
+	var title_h: float = deck_h + (1.6 if reveal_on_request else 2.0)
+	_interpretation_title = _billboard_label("", Vector3(0.0, title_h, 0.0), 20 if reveal_on_request else 28, label_col)
+	add_child(_interpretation_title)
+	_interpretation_visible = not reveal_on_request
+	_update_interpretation()
+	if reveal_on_request:
+		var presets = load("res://commons/ui/interface_presets.gd")
+		var console: Node3D = presets.build("machine", "TWO WELLS")
+		console.name = "InterpretationConsole"
+		console.face_to_origin = false
+		console.body_height = 0.85
+		console.board_width = 0.9
+		console.position = Vector3(-1.6, 0, floor_size * 0.5 + 0.4)
+		add_child(console)
+		console.add_readout("Compare the responses first")
+		_interpretation_button = console.add_button("INTERPRET")
+		_interpretation_button.pressed.connect(_toggle_interpretation)
+
+
+func _toggle_interpretation() -> void:
+	_interpretation_visible = not _interpretation_visible
+	_update_interpretation()
+
+
+func _update_interpretation() -> void:
+	_deep_label.text = "DEAD WELL\ndeep · narrow · one frozen shape" if _interpretation_visible else "DEEP / NARROW"
+	_shallow_label.text = "ALIVE WELL\nshallow · wide · keeps re-finding" if _interpretation_visible else "SHALLOW / WIDE"
+	_interpretation_title.text = "MAX Q IS THE LIVELIEST MINIMUM, NOT THE DEEPEST" if _interpretation_visible else "Compare the two wells.\nWhat stays still; what keeps changing?"
+	if reveal_on_request and _interpretation_visible:
+		_interpretation_title.text += "\nA proposal about these staged responses, not a test of life.\nStatic mesh on one side; periodically driven lattice on the other."
 
 
 func _alive_floor_h(x: float, z: float) -> float:

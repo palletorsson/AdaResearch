@@ -2,6 +2,19 @@ extends RefCounted
 
 ## dream_bodies / hokusai_kimono — one ukiyo-e kimono figure, caught mid-turn.
 ##
+## AXES (opts):
+##   cloth  — what the robe's fabric HAS BECOME: wrapped (one lofted cloth to the
+##            floor) · drowned (the skirt pinched and sunk into a solid pour of its
+##            own pattern) · unspooling (the skirt cut at the obi and hanging as a
+##            curtain of thread over coils on the floor) · boned (the cloth gone,
+##            only its hoops and ribs left standing round the body) · shoal (the
+##            robe dissolved into a swarm of printed flakes drifting off the body).
+##   frieze — how many figures live in the one robe: single (as painted) · mirrored
+##            (a second face and a second pair of furisode growing out of the back)
+##            · triptych (three heads on three necks rising from one collar — the
+##            frieze's lost figures fused) · kannon (six sleeves fanning, six hands)
+##            · shed (the wearer gone: an empty kimono standing, the wig hovering).
+##
 ## Reference: scratchpad/refs/hokusai.png (2048x536 panorama) — a frieze of
 ## kabuki figures in flowing kimono, painted flat and graphic: robes covered in
 ## indigo-on-white patterns (Hokusai wave combs, seigaiha arcs, peony scatter,
@@ -39,9 +52,10 @@ extends RefCounted
 ##   8. A hem lining band — sixteen boxes riding the rippled hem ring, so the
 ##      contrasting under-cloth shows at the floor.
 ##
-## Given up: hands and fingers past a sphere and a knuckle box, the second and
-## third figures of the frieze, the pine and maple ground, the gold obi
-## brocade's own woven pattern, and the paper's visible tooth.
+## Given up: hands and fingers past a sphere and a knuckle box, the pine and
+## maple ground, the gold obi brocade's own woven pattern, and the paper's
+## visible tooth. (The second and third figures of the frieze came back, but
+## only as the `frieze` axis, and only fused into this one body.)
 
 const TEX: int = 128
 
@@ -50,7 +64,23 @@ static func describe() -> String:
 	return "An ukiyo-e kimono figure caught mid-turn, one wide furisode sleeve thrown out, the robe a single flaring cloth printed in code-painted indigo pattern, above a white mask face with red kumadori strokes."
 
 
-static func build(root: Node3D, seed: int) -> void:
+static func axes() -> Dictionary:
+	return {
+		"cloth": ["wrapped", "drowned", "unspooling", "boned", "shoal"],
+		"frieze": ["single", "mirrored", "triptych", "kannon", "shed"],
+	}
+
+
+static func build(root: Node3D, seed: int, opts: Dictionary = {}) -> void:
+	var cloth: String = String(opts.get("cloth", "wrapped"))
+	var frieze: String = String(opts.get("frieze", "single"))
+
+	var is_drowned: bool = cloth == "drowned"
+	var is_thread: bool = cloth == "unspooling"
+	var is_cage: bool = cloth == "boned"
+	var is_shoal: bool = cloth == "shoal"
+	var empty: bool = frieze == "shed"
+
 	var rng := RandomNumberGenerator.new()
 	rng.seed = seed
 
@@ -71,6 +101,10 @@ static func build(root: Node3D, seed: int) -> void:
 	var head_pitch: float = deg_to_rad(rng.randf_range(-9.0, 5.0))
 	var head_roll: float = deg_to_rad(rng.randf_range(-7.0, 7.0))
 	var crease_u: float = rng.randf_range(0.34, 0.58)
+
+	# a second stream, so every variant leaves the seeded body above untouched
+	var vrng := RandomNumberGenerator.new()
+	vrng.seed = seed * 7919 + 13
 
 	# --- palette --------------------------------------------------------------
 	var cloth_tex: ImageTexture = _pattern(kind, rng)
@@ -115,6 +149,17 @@ static func build(root: Node3D, seed: int) -> void:
 	var mat_bone: StandardMaterial3D = _flat(Color("#E8DEC6"), 0.42)
 	var mat_under: StandardMaterial3D = _flat(Color("#5A5764"), 0.80)
 
+	var mats := {
+		"cloth": mat_cloth,
+		"cloth_tri": mat_cloth_tri,
+		"lining": mat_lining,
+		"skin": mat_skin,
+		"ink": mat_ink,
+		"red": mat_red,
+		"hair": mat_hair,
+		"bone": mat_bone,
+	}
+
 	# --- body frame -----------------------------------------------------------
 	var up := Vector3.UP
 	var rgt := Vector3(cos(turn), 0.0, -sin(turn))
@@ -133,13 +178,18 @@ static func build(root: Node3D, seed: int) -> void:
 	var lev: Array = [0.0, 0.02, 0.045, 0.075, 0.11, 0.15, 0.20, 0.25, 0.31, 0.37, 0.43, 0.49, 0.55, 0.61, 0.67, 0.73, 0.79, 0.86, 0.93, 1.0]
 	var n_ang: int = 24
 	var hem_yaw: float = turn + swing
+	var y_bot_use: float = 0.300 if is_drowned else y_hem
 
 	var rings: Array = []
 	for k in range(lev.size()):
 		var t: float = float(lev[k])
-		var yy: float = lerpf(y_top, y_hem, t)
-		var rxx: float = _profile(t, kx) * bk
-		var rzz: float = _profile(t, kz) * bk
+		var yy: float = lerpf(y_top, y_bot_use, t)
+		var sink: float = 1.0
+		if is_drowned:
+			var s_t: float = clampf((t - 0.40) / 0.60, 0.0, 1.0)
+			sink = lerpf(1.0, 0.44, s_t * s_t)
+		var rxx: float = _profile(t, kx) * bk * sink
+		var rzz: float = _profile(t, kz) * bk * sink
 		var yw: float = lerpf(turn, hem_yaw, pow(t, 1.15))
 		var cs: float = cos(yw)
 		var sn: float = sin(yw)
@@ -158,98 +208,219 @@ static func build(root: Node3D, seed: int) -> void:
 			row.append(Vector3(px, py, pz))
 		rings.append(row)
 
-	var robe: ArrayMesh = _loft_mesh(rings, lev, 6.0, 6.5)
-	var robe_mi: MeshInstance3D = _add(root, robe, mat_cloth)
-	robe_mi.transform = Transform3D(Basis(), Vector3.ZERO)
+	# the cloth is cut at the obi when it unspools; gone entirely when boned or shoaled
+	var n_ring_mesh: int = rings.size()
+	if is_thread:
+		n_ring_mesh = 9
+
+	if not is_cage and not is_shoal:
+		var sub_rings: Array = rings
+		var sub_lev: Array = lev
+		if is_thread:
+			sub_rings = rings.slice(0, n_ring_mesh)
+			sub_lev = lev.slice(0, n_ring_mesh)
+		var robe: ArrayMesh = _loft_mesh(sub_rings, sub_lev, 6.0, 6.5)
+		var robe_mi: MeshInstance3D = _add(root, robe, mat_cloth)
+		robe_mi.transform = Transform3D(Basis(), Vector3.ZERO)
 
 	# hem lining band riding the rippled hem ring
-	var hem_row: Array = rings[rings.size() - 1]
-	var hem_c: Vector3 = _row_centre(hem_row)
-	var hem_per: float = 0.0
-	for j in range(n_ang):
-		var pa: Vector3 = hem_row[j]
-		var pb: Vector3 = hem_row[(j + 1) % n_ang]
-		hem_per += pa.distance_to(pb)
-	var band_w: float = hem_per / 16.0 * 1.30
-	for j in range(16):
-		var jf: float = float(j) / 16.0 * float(n_ang)
-		var ja: int = int(floor(jf)) % n_ang
-		var jb: int = (ja + 1) % n_ang
-		var fmix: float = jf - floor(jf)
-		var pa2: Vector3 = hem_row[ja]
-		var pb2: Vector3 = hem_row[jb]
-		var pm: Vector3 = pa2.lerp(pb2, fmix)
-		var radial := Vector3(pm.x - hem_c.x, 0.0, pm.z - hem_c.z)
-		if radial.length() < 0.001:
-			radial = Vector3.BACK
-		var zv: Vector3 = radial.normalized()
-		var xv: Vector3 = up.cross(zv).normalized()
-		var ring_p: Vector3 = hem_c + radial * 1.014
-		_box(root, Vector3(ring_p.x, 0.058, ring_p.z), xv, up, zv, Vector3(band_w, 0.100, 0.020), mat_lining)
+	if not is_thread and not is_shoal and not is_drowned:
+		var hem_row: Array = rings[rings.size() - 1]
+		var hem_c: Vector3 = _row_centre(hem_row)
+		var hem_per: float = 0.0
+		for j in range(n_ang):
+			var pa: Vector3 = hem_row[j]
+			var pb: Vector3 = hem_row[(j + 1) % n_ang]
+			hem_per += pa.distance_to(pb)
+		var band_w: float = hem_per / 16.0 * 1.30
+		for j in range(16):
+			var jf: float = float(j) / 16.0 * float(n_ang)
+			var ja: int = int(floor(jf)) % n_ang
+			var jb: int = (ja + 1) % n_ang
+			var fmix: float = jf - floor(jf)
+			var pa2: Vector3 = hem_row[ja]
+			var pb2: Vector3 = hem_row[jb]
+			var pm: Vector3 = pa2.lerp(pb2, fmix)
+			var radial := Vector3(pm.x - hem_c.x, 0.0, pm.z - hem_c.z)
+			if radial.length() < 0.001:
+				radial = Vector3.BACK
+			var zv: Vector3 = radial.normalized()
+			var xv: Vector3 = up.cross(zv).normalized()
+			var ring_p: Vector3 = hem_c + radial * 1.014
+			_box(root, Vector3(ring_p.x, 0.058, ring_p.z), xv, up, zv, Vector3(band_w, 0.100, 0.020), mat_lining)
+
+	# --- cloth axis: what the fabric has become -------------------------------
+	if is_drowned:
+		# a solid pour of the robe's own pattern, the skirt sunk in it
+		var pn: int = 9
+		var prings: Array = []
+		var plev: Array = []
+		for k in range(pn):
+			var pt: float = float(k) / float(pn - 1)
+			var py0: float = lerpf(0.615, 0.010, pt)
+			var prad: float = lerpf(0.215, 0.485, pow(pt, 0.62))
+			var prow: Array = []
+			for j in range(20):
+				var pth: float = TAU * float(j) / 20.0
+				var wob: float = 1.0 + 0.085 * sin(5.0 * pth + fold_ph) * (0.30 + pt)
+				var pxr: float = prad * 1.05 * wob
+				var pzr: float = prad * 0.88 * wob
+				var pyv: float = py0 + 0.028 * sin(3.0 * pth + fold_ph * 0.6) * (1.0 - pt)
+				prow.append(Vector3(sway_x * 0.4 + pxr * cos(pth), maxf(pyv, 0.004), sway_z * 0.4 + pzr * sin(pth)))
+			prings.append(prow)
+			plev.append(pt)
+		var pour: ArrayMesh = _loft_mesh(prings, plev, 5.0, 4.0)
+		var pmi: MeshInstance3D = _add(root, pour, mat_cloth)
+		pmi.transform = Transform3D(Basis(), Vector3.ZERO)
+		# beads of cloth spat up where the skirt goes under
+		for j in range(10):
+			var bth: float = TAU * float(j) / 10.0 + fold_ph * 0.2
+			var brad: float = vrng.randf_range(0.200, 0.330)
+			var by: float = vrng.randf_range(0.630, 0.810)
+			var br: float = vrng.randf_range(0.026, 0.052)
+			var drop_m := SphereMesh.new()
+			drop_m.radius = br
+			drop_m.height = br * 2.0
+			drop_m.radial_segments = 10
+			drop_m.rings = 6
+			var dmi: MeshInstance3D = _add(root, drop_m, mat_cloth_tri)
+			var dsq: float = vrng.randf_range(0.62, 1.15)
+			dmi.transform = Transform3D(Basis().scaled(Vector3(1.0, dsq, 1.0)), Vector3(brad * cos(bth), by, brad * 0.86 * sin(bth)))
+
+	if is_thread:
+		# the cut skirt hanging as thread, pooling in coils on the floor
+		var arow: Array = rings[n_ring_mesh - 1]
+		var ac: Vector3 = _row_centre(arow)
+		var n_thread: int = 48
+		for j in range(n_thread):
+			var jf2: float = float(j) / float(n_thread) * float(n_ang)
+			var ja2: int = int(floor(jf2)) % n_ang
+			var jb2: int = (ja2 + 1) % n_ang
+			var fm2: float = jf2 - floor(jf2)
+			var ta0: Vector3 = arow[ja2]
+			var tb0: Vector3 = arow[jb2]
+			var top_p: Vector3 = ta0.lerp(tb0, fm2)
+			var rad_t := Vector3(top_p.x - ac.x, 0.0, top_p.z - ac.z)
+			if rad_t.length() < 0.001:
+				rad_t = Vector3.BACK
+			var out_t: Vector3 = rad_t.normalized()
+			var tang_t: Vector3 = up.cross(out_t).normalized()
+			var flare: float = vrng.randf_range(0.055, 0.255)
+			var curl: float = vrng.randf_range(-0.09, 0.09)
+			var bot_y: float = vrng.randf_range(0.0, 0.075)
+			var bot_p: Vector3 = Vector3(top_p.x, bot_y, top_p.z) + out_t * flare + tang_t * curl
+			_taper(root, top_p, bot_p, 0.0085, 0.0045, mat_cloth_tri)
+		for j in range(6):
+			var cr: float = vrng.randf_range(0.115, 0.330)
+			var cang: float = vrng.randf_range(0.0, TAU)
+			var coil := TorusMesh.new()
+			coil.outer_radius = cr
+			coil.inner_radius = maxf(cr - 0.016, 0.004)
+			coil.rings = 22
+			coil.ring_segments = 6
+			var cmi3: MeshInstance3D = _add(root, coil, mat_cloth_tri)
+			var cd: float = vrng.randf_range(0.02, 0.13)
+			cmi3.transform = Transform3D(Basis(Vector3.UP, cang) * Basis().scaled(Vector3(1.0, 0.55, 0.80)), Vector3(ac.x + cd * cos(cang), vrng.randf_range(0.010, 0.032), ac.z + cd * sin(cang)))
+
+	if is_cage:
+		# the flesh of the cloth gone, only its hoops and ribs standing
+		var hidx: Array = [1, 5, 9, 13, 16, 19]
+		for hi in range(hidx.size()):
+			var hkk: int = hidx[hi]
+			var hrow: Array = rings[hkk]
+			var hcen: Vector3 = _row_centre(hrow)
+			var mx: float = 0.0
+			var mz: float = 0.0
+			for j in range(n_ang):
+				var hp: Vector3 = hrow[j]
+				mx = maxf(mx, absf(hp.x - hcen.x))
+				mz = maxf(mz, absf(hp.z - hcen.z))
+			var mzs: float = maxf(mz, 0.024)
+			var mxs: float = maxf(mx, 0.024)
+			var tor := TorusMesh.new()
+			tor.outer_radius = mzs
+			tor.inner_radius = maxf(mzs - 0.030, 0.006)
+			tor.rings = 24
+			tor.ring_segments = 6
+			var tmi: MeshInstance3D = _add(root, tor, mat_bone)
+			tmi.transform = Transform3D(Basis().scaled(Vector3(mxs / mzs, 1.0, 1.0)), hcen)
+		var ridx: Array = [0, 5, 10, 15, 19]
+		for a in range(9):
+			var jn: int = int(round(float(a) / 9.0 * float(n_ang))) % n_ang
+			for sgi in range(4):
+				var ka: int = ridx[sgi]
+				var kb2: int = ridx[sgi + 1]
+				var rowa: Array = rings[ka]
+				var rowb: Array = rings[kb2]
+				var pa3: Vector3 = rowa[jn]
+				var pb3: Vector3 = rowb[jn]
+				var r0: float = lerpf(0.017, 0.009, float(sgi) / 3.0)
+				var r1: float = lerpf(0.017, 0.009, float(sgi + 1) / 3.0)
+				_taper(root, pa3, pb3, r0, r1, mat_bone)
+
+	if is_shoal:
+		# the robe come apart into a swarm of its own printed flakes
+		for _s in range(60):
+			var kk: int = vrng.randi_range(0, rings.size() - 2)
+			var jj: int = vrng.randi_range(0, n_ang - 1)
+			var mu: float = vrng.randf()
+			var mv: float = vrng.randf()
+			var ra: Array = rings[kk]
+			var rb: Array = rings[kk + 1]
+			var j2s: int = (jj + 1) % n_ang
+			var a0: Vector3 = ra[jj]
+			var a1: Vector3 = ra[j2s]
+			var b0: Vector3 = rb[jj]
+			var b1: Vector3 = rb[j2s]
+			var pas: Vector3 = a0.lerp(a1, mu)
+			var pbs: Vector3 = b0.lerp(b1, mu)
+			var pmid: Vector3 = pas.lerp(pbs, mv)
+			var cen: Vector3 = _row_centre(ra)
+			var rad_s := Vector3(pmid.x - cen.x, 0.0, pmid.z - cen.z)
+			if rad_s.length() < 0.001:
+				rad_s = Vector3.BACK
+			var nvs: Vector3 = rad_s.normalized()
+			var tt: float = float(lev[kk])
+			var push: float = (0.018 + 0.095 * tt) * vrng.randf_range(0.35, 1.45)
+			var ctr: Vector3 = pmid + nvs * push + Vector3(0.0, vrng.randf_range(-0.030, 0.030), 0.0)
+			var yvs: Vector3 = (up + nvs * vrng.randf_range(-0.55, 0.55)).normalized()
+			var xvs: Vector3 = yvs.cross(nvs).normalized()
+			var zvs: Vector3 = xvs.cross(yvs).normalized()
+			var sw: float = lerpf(0.082, 0.044, tt) * vrng.randf_range(0.70, 1.30)
+			var sh2: float = sw * vrng.randf_range(0.70, 1.40)
+			_box(root, ctr, xvs, yvs, zvs, Vector3(sw, sh2, 0.010), mat_cloth_tri)
 
 	# --- body under the cloth -------------------------------------------------
-	_capsule(root, Vector3(0.0, y_hip - 0.02, 0.0), Vector3(0.0, y_top - 0.06, 0.0) + bck * 0.01, 0.125 * bk, mat_under)
-	_capsule(root, Vector3(0.0, y_hip - 0.10, 0.0), Vector3(0.0, y_waist, 0.0), 0.135 * bk, mat_under)
-	_capsule(root, rgt * (-0.06) + Vector3(0.0, y_hip, 0.0), rgt * (-0.05) + Vector3(0.0, 0.10, 0.0), 0.055, mat_under)
-	_capsule(root, rgt * 0.06 + Vector3(0.0, y_hip, 0.0), rgt * 0.05 + Vector3(0.0, 0.10, 0.0), 0.055, mat_under)
-	for si in range(2):
-		var sfoot: float = -1.0 if si == 0 else 1.0
-		var fp: Vector3 = rgt * (sfoot * 0.055) - bck * 0.235 + Vector3(0.0, 0.026, 0.0)
-		_box(root, fp, rgt, up, bck, Vector3(0.078, 0.052, 0.130), mat_collar)
+	if not empty:
+		_capsule(root, Vector3(0.0, y_hip - 0.02, 0.0), Vector3(0.0, y_top - 0.06, 0.0) + bck * 0.01, 0.125 * bk, mat_under)
+		_capsule(root, Vector3(0.0, y_hip - 0.10, 0.0), Vector3(0.0, y_waist, 0.0), 0.135 * bk, mat_under)
+		_capsule(root, rgt * (-0.06) + Vector3(0.0, y_hip, 0.0), rgt * (-0.05) + Vector3(0.0, 0.10, 0.0), 0.055, mat_under)
+		_capsule(root, rgt * 0.06 + Vector3(0.0, y_hip, 0.0), rgt * 0.05 + Vector3(0.0, 0.10, 0.0), 0.055, mat_under)
+		for si in range(2):
+			var sfoot: float = -1.0 if si == 0 else 1.0
+			var fp: Vector3 = rgt * (sfoot * 0.055) - bck * 0.235 + Vector3(0.0, 0.026, 0.0)
+			_box(root, fp, rgt, up, bck, Vector3(0.078, 0.052, 0.130), mat_collar)
 
-	# neck
-	_capsule(root, Vector3(0.0, y_neck - 0.02, 0.0) - bck * 0.012, Vector3(0.0, y_neck + 0.082, 0.0) - bck * 0.020, 0.042 * bk, mat_skin)
+		# neck
+		_capsule(root, Vector3(0.0, y_neck - 0.02, 0.0) - bck * 0.012, Vector3(0.0, y_neck + 0.082, 0.0) - bck * 0.020, 0.042 * bk, mat_skin)
 
 	# --- sleeves --------------------------------------------------------------
 	var sh_half: float = 0.205 * bk
 	var y_sh: float = y_top - 0.030
 	var dkeys: Array = [0.34, 0.66, 0.88, 0.98, 1.0, 1.0, 0.97, 0.86, 0.62]
-	for si in range(2):
-		var sd: float = -1.0 if si == 0 else 1.0
-		var is_out: bool = (sd == thrown)
-		var sh_pt: Vector3 = Vector3(0.0, y_sh, 0.0) + rgt * (sd * sh_half) - bck * 0.010
-		var along: Vector3
-		var drop: Vector3
-		var len_a: float
-		var len_d: float
-		if is_out:
-			along = (rgt * (sd * 0.90) + up * 0.34 - bck * 0.20).normalized()
-			drop = (rgt * (sd * 0.34) - up * 0.88 + bck * 0.30).normalized()
-			len_a = 0.250 * bk
-			len_d = 0.470 * hk
-		else:
-			along = (rgt * (sd * 0.80) - up * 0.36 + bck * 0.14).normalized()
-			drop = (rgt * (sd * 0.07) - up * 0.99 + bck * 0.06).normalized()
-			len_a = 0.230 * bk
-			len_d = 0.560 * hk
-		var nrm: Vector3 = along.cross(drop).normalized()
-		var bulge: float = 0.030 if is_out else 0.022
-		var sleeve: ArrayMesh = _sleeve_mesh(sh_pt, along, drop, nrm, len_a, len_d, dkeys, 0.026, bulge, crease_u, 1.4, 2.7)
-		var sm: MeshInstance3D = _add(root, sleeve, mat_cloth)
-		sm.transform = Transform3D(Basis(), Vector3.ZERO)
+	_sleeve_pair(root, rgt, bck, up, y_sh, sh_half, thrown, bk, hk, dkeys, crease_u, not empty, 1.0, mats)
 
-		# the arm inside the sleeve, a cuff and a hand at its mouth
-		var wrist: Vector3 = sh_pt + along * (len_a * 0.94)
-		_taper(root, sh_pt, wrist, 0.062 * bk, 0.040 * bk, mat_cloth_tri)
-		var cuff := TorusMesh.new()
-		cuff.inner_radius = 0.036
-		cuff.outer_radius = 0.050
-		cuff.rings = 10
-		cuff.ring_segments = 8
-		var cm: MeshInstance3D = _add(root, cuff, mat_lining)
-		cm.transform = Transform3D(_basis_y_to(along), wrist)
-		var hand := SphereMesh.new()
-		hand.radius = 0.036
-		hand.height = 0.072
-		hand.radial_segments = 12
-		hand.rings = 8
-		var hm: MeshInstance3D = _add(root, hand, mat_skin)
-		var hand_pt: Vector3 = sh_pt + along * (len_a * 1.03)
-		hm.transform = Transform3D(Basis().scaled(Vector3(1.0, 0.82, 1.15)), hand_pt)
-		var kn_y: Vector3 = along
-		var kn_z: Vector3 = (up - kn_y * up.dot(kn_y)).normalized()
-		var kn_x: Vector3 = kn_y.cross(kn_z).normalized()
-		_box(root, hand_pt + along * 0.030 - up * 0.012, kn_x, kn_y, kn_z, Vector3(0.048, 0.052, 0.024), mat_skin)
+	if frieze == "mirrored":
+		_sleeve_pair(root, rgt, -bck, up, y_sh - 0.020, sh_half * 0.96, -thrown, bk, hk, dkeys, crease_u, not empty, 0.86, mats)
+	elif frieze == "kannon":
+		for e in range(2):
+			var ef: float = -1.0 if e == 0 else 1.0
+			var ea: float = deg_to_rad(40.0) * ef
+			var rgt_e: Vector3 = rgt.rotated(Vector3.UP, ea)
+			var bck_e: Vector3 = bck.rotated(Vector3.UP, ea)
+			var th_e: float = -thrown if e == 0 else thrown
+			var y_e: float = y_sh - 0.105 - 0.085 * float(e)
+			_sleeve_pair(root, rgt_e, bck_e, up, y_e, sh_half * 0.90, th_e, bk * 0.92, hk * 0.84, dkeys, crease_u, not empty, 0.80, mats)
 
 	# --- crossed collar -------------------------------------------------------
 	for si in range(2):
@@ -306,62 +477,179 @@ static func build(root: Node3D, seed: int) -> void:
 	_box(root, knot_c + rgt * 0.115 + up * 0.020, rgt, up, bck, Vector3(0.110, 0.086, 0.062), mat_obi)
 	_box(root, knot_c - rgt * 0.115 - up * 0.012, rgt, up, bck, Vector3(0.110, 0.086, 0.062), mat_obi)
 
-	# --- head -----------------------------------------------------------------
+	# --- head(s) --------------------------------------------------------------
 	var hb: Basis = Basis(Vector3.UP, head_yaw) * Basis(Vector3.RIGHT, head_pitch) * Basis(Vector3.FORWARD, head_roll)
 	var h_org := Vector3(0.0, y_head, 0.0) - bck * 0.026
-	var face := SphereMesh.new()
-	face.radius = 0.098 * bk
-	face.height = 0.196 * bk
-	face.radial_segments = 20
-	face.rings = 12
-	var fm: MeshInstance3D = _add(root, face, mat_skin)
-	fm.transform = Transform3D(hb * Basis().scaled(Vector3(1.0, 1.13, 0.94)), h_org)
-
 	var rf: float = 0.098 * bk
-	# slit eyes and brows
+	if empty:
+		# the wearer gone: only the lacquer wig, hovering over the open collar
+		_build_head(root, h_org - Vector3(0.0, 0.030, 0.0), hb, rf, 5, 8, true, false, mats)
+	else:
+		_build_head(root, h_org, hb, rf, 5, 8, true, true, mats)
+
+	if frieze == "mirrored":
+		var hb_m: Basis = hb * Basis(Vector3.UP, PI)
+		var h_m: Vector3 = h_org + hb * Vector3(0.0, 0.0, rf * 1.05)
+		_build_head(root, h_m, hb_m, rf * 0.97, 3, 7, true, not empty, mats)
+	elif frieze == "triptych":
+		for e in range(2):
+			var ef2: float = -1.0 if e == 0 else 1.0
+			var hb_t: Basis = Basis(Vector3.UP, head_yaw + deg_to_rad(54.0) * ef2) * Basis(Vector3.FORWARD, deg_to_rad(26.0) * ef2)
+			var h_t: Vector3 = Vector3(0.0, y_head - 0.055, 0.0) + rgt * (ef2 * 0.178 * bk) - bck * 0.010
+			if not empty:
+				_capsule(root, Vector3(0.0, y_neck - 0.060, 0.0), h_t - Vector3(0.0, rf * 0.80, 0.0), 0.034 * bk, mat_skin)
+			_build_head(root, h_t, hb_t, rf * 0.86, 2, 6, true, not empty, mats)
+
+	# --- settle: floor, width, height -----------------------------------------
+	var box: AABB = _union_aabb(root)
+	var kfit: float = 1.0
+	var wide: float = maxf(box.size.x, box.size.z)
+	if wide > 1.2:
+		kfit = minf(kfit, 1.2 / wide)
+	if box.size.y > 1.68:
+		kfit = minf(kfit, 1.68 / box.size.y)
+	if kfit < 1.0:
+		for ch in root.get_children():
+			if not (ch is MeshInstance3D):
+				continue
+			var cmi: MeshInstance3D = ch
+			var tf: Transform3D = cmi.transform
+			cmi.transform = Transform3D(tf.basis.scaled(Vector3(kfit, kfit, kfit)), tf.origin * kfit)
+		box = _union_aabb(root)
+	var centre: Vector3 = box.position + box.size * 0.5
+	var shift := Vector3(-centre.x, 0.0, -centre.z)
+	if box.position.y < 0.0:
+		shift.y = -box.position.y
+	for ch in root.get_children():
+		if not (ch is MeshInstance3D):
+			continue
+		var cmi2: MeshInstance3D = ch
+		cmi2.transform = Transform3D(cmi2.transform.basis, cmi2.transform.origin + shift)
+
+
+# ---------------------------------------------------------------------------
+# a pair of furisode, with the arm, cuff and hand inside each
+
+static func _sleeve_pair(root: Node3D, rgt: Vector3, bck: Vector3, up: Vector3, y_sh: float, sh_half: float, thrown: float, bk: float, hk: float, dkeys: Array, crease_u: float, with_arm: bool, len_k: float, m: Dictionary) -> void:
+	var mat_cloth: StandardMaterial3D = m["cloth"]
+	var mat_cloth_tri: StandardMaterial3D = m["cloth_tri"]
+	var mat_lining: StandardMaterial3D = m["lining"]
+	var mat_skin: StandardMaterial3D = m["skin"]
 	for si in range(2):
-		var se: float = -1.0 if si == 0 else 1.0
-		var eb: Basis = hb * Basis(Vector3.FORWARD, se * deg_to_rad(11.0))
-		var ep: Vector3 = h_org + hb * Vector3(se * rf * 0.40, rf * 0.10, -rf * 0.87)
-		var em := BoxMesh.new()
-		em.size = Vector3(rf * 0.34, rf * 0.062, rf * 0.055)
-		var emi: MeshInstance3D = _add(root, em, mat_ink)
-		emi.transform = Transform3D(eb, ep)
-		var bb: Basis = hb * Basis(Vector3.FORWARD, se * deg_to_rad(17.0))
-		var bp: Vector3 = h_org + hb * Vector3(se * rf * 0.42, rf * 0.34, -rf * 0.86)
-		var bm3 := BoxMesh.new()
-		bm3.size = Vector3(rf * 0.38, rf * 0.055, rf * 0.050)
-		var bmi: MeshInstance3D = _add(root, bm3, mat_ink)
-		bmi.transform = Transform3D(bb, bp)
-		# kumadori: two red strokes per side sweeping up off the nose
-		for kk in range(2):
-			var kf: float = float(kk)
-			var kb: Basis = hb * Basis(Vector3.FORWARD, se * deg_to_rad(26.0 + kf * 16.0)) * Basis(Vector3.UP, se * deg_to_rad(-24.0))
-			var kp: Vector3 = h_org + hb * Vector3(se * rf * (0.42 + kf * 0.13), rf * (0.02 - kf * 0.30), -rf * (0.86 - kf * 0.06))
-			var km := BoxMesh.new()
-			km.size = Vector3(rf * (0.62 - kf * 0.10), rf * 0.085, rf * 0.055)
-			var kmi: MeshInstance3D = _add(root, km, mat_red)
-			kmi.transform = Transform3D(kb, kp)
-	# nose and mouth
-	var nose := SphereMesh.new()
-	nose.radius = rf * 0.10
-	nose.height = rf * 0.20
-	nose.radial_segments = 10
-	nose.rings = 6
-	var nmi: MeshInstance3D = _add(root, nose, mat_skin)
-	nmi.transform = Transform3D(hb * Basis().scaled(Vector3(0.6, 1.1, 1.0)), h_org + hb * Vector3(0.0, -rf * 0.12, -rf * 0.96))
-	var mouth := BoxMesh.new()
-	mouth.size = Vector3(rf * 0.22, rf * 0.10, rf * 0.06)
-	var mmi: MeshInstance3D = _add(root, mouth, mat_red)
-	mmi.transform = Transform3D(hb, h_org + hb * Vector3(0.0, -rf * 0.46, -rf * 0.86))
+		var sd: float = -1.0 if si == 0 else 1.0
+		var is_out: bool = (sd == thrown)
+		var sh_pt: Vector3 = Vector3(0.0, y_sh, 0.0) + rgt * (sd * sh_half) - bck * 0.010
+		var along: Vector3
+		var drop: Vector3
+		var len_a: float
+		var len_d: float
+		if is_out:
+			along = (rgt * (sd * 0.90) + up * 0.34 - bck * 0.20).normalized()
+			drop = (rgt * (sd * 0.34) - up * 0.88 + bck * 0.30).normalized()
+			len_a = 0.250 * bk * len_k
+			len_d = 0.470 * hk * len_k
+		else:
+			along = (rgt * (sd * 0.80) - up * 0.36 + bck * 0.14).normalized()
+			drop = (rgt * (sd * 0.07) - up * 0.99 + bck * 0.06).normalized()
+			len_a = 0.230 * bk * len_k
+			len_d = 0.560 * hk * len_k
+		var nrm: Vector3 = along.cross(drop).normalized()
+		var bulge: float = 0.030 if is_out else 0.022
+		var sleeve: ArrayMesh = _sleeve_mesh(sh_pt, along, drop, nrm, len_a, len_d, dkeys, 0.026, bulge, crease_u, 1.4, 2.7)
+		var sm: MeshInstance3D = _add(root, sleeve, mat_cloth)
+		sm.transform = Transform3D(Basis(), Vector3.ZERO)
+
+		if not with_arm:
+			continue
+
+		# the arm inside the sleeve, a cuff and a hand at its mouth
+		var wrist: Vector3 = sh_pt + along * (len_a * 0.94)
+		_taper(root, sh_pt, wrist, 0.062 * bk, 0.040 * bk, mat_cloth_tri)
+		var cuff := TorusMesh.new()
+		cuff.inner_radius = 0.036
+		cuff.outer_radius = 0.050
+		cuff.rings = 10
+		cuff.ring_segments = 8
+		var cm: MeshInstance3D = _add(root, cuff, mat_lining)
+		cm.transform = Transform3D(_basis_y_to(along), wrist)
+		var hand := SphereMesh.new()
+		hand.radius = 0.036
+		hand.height = 0.072
+		hand.radial_segments = 12
+		hand.rings = 8
+		var hm: MeshInstance3D = _add(root, hand, mat_skin)
+		var hand_pt: Vector3 = sh_pt + along * (len_a * 1.03)
+		hm.transform = Transform3D(Basis().scaled(Vector3(1.0, 0.82, 1.15)), hand_pt)
+		var kn_y: Vector3 = along
+		var kn_z: Vector3 = (up - kn_y * up.dot(kn_y)).normalized()
+		var kn_x: Vector3 = kn_y.cross(kn_z).normalized()
+		_box(root, hand_pt + along * 0.030 - up * 0.012, kn_x, kn_y, kn_z, Vector3(0.048, 0.052, 0.024), mat_skin)
+
+
+# ---------------------------------------------------------------------------
+# one mask head: face, kumadori, lacquer hair
+
+static func _build_head(root: Node3D, h_org: Vector3, hb: Basis, rf: float, hair_rows: int, hair_cols: int, crown: bool, face_on: bool, m: Dictionary) -> void:
+	var mat_skin: StandardMaterial3D = m["skin"]
+	var mat_ink: StandardMaterial3D = m["ink"]
+	var mat_red: StandardMaterial3D = m["red"]
+	var mat_hair: StandardMaterial3D = m["hair"]
+	var mat_bone: StandardMaterial3D = m["bone"]
+
+	if face_on:
+		var face := SphereMesh.new()
+		face.radius = rf
+		face.height = rf * 2.0
+		face.radial_segments = 20
+		face.rings = 12
+		var fm: MeshInstance3D = _add(root, face, mat_skin)
+		fm.transform = Transform3D(hb * Basis().scaled(Vector3(1.0, 1.13, 0.94)), h_org)
+
+		# slit eyes and brows
+		for si in range(2):
+			var se: float = -1.0 if si == 0 else 1.0
+			var eb: Basis = hb * Basis(Vector3.FORWARD, se * deg_to_rad(11.0))
+			var ep: Vector3 = h_org + hb * Vector3(se * rf * 0.40, rf * 0.10, -rf * 0.87)
+			var em := BoxMesh.new()
+			em.size = Vector3(rf * 0.34, rf * 0.062, rf * 0.055)
+			var emi: MeshInstance3D = _add(root, em, mat_ink)
+			emi.transform = Transform3D(eb, ep)
+			var bb: Basis = hb * Basis(Vector3.FORWARD, se * deg_to_rad(17.0))
+			var bp: Vector3 = h_org + hb * Vector3(se * rf * 0.42, rf * 0.34, -rf * 0.86)
+			var bm3 := BoxMesh.new()
+			bm3.size = Vector3(rf * 0.38, rf * 0.055, rf * 0.050)
+			var bmi: MeshInstance3D = _add(root, bm3, mat_ink)
+			bmi.transform = Transform3D(bb, bp)
+			# kumadori: two red strokes per side sweeping up off the nose
+			for kk in range(2):
+				var kf: float = float(kk)
+				var kb: Basis = hb * Basis(Vector3.FORWARD, se * deg_to_rad(26.0 + kf * 16.0)) * Basis(Vector3.UP, se * deg_to_rad(-24.0))
+				var kp: Vector3 = h_org + hb * Vector3(se * rf * (0.42 + kf * 0.13), rf * (0.02 - kf * 0.30), -rf * (0.86 - kf * 0.06))
+				var km := BoxMesh.new()
+				km.size = Vector3(rf * (0.62 - kf * 0.10), rf * 0.085, rf * 0.055)
+				var kmi: MeshInstance3D = _add(root, km, mat_red)
+				kmi.transform = Transform3D(kb, kp)
+		# nose and mouth
+		var nose := SphereMesh.new()
+		nose.radius = rf * 0.10
+		nose.height = rf * 0.20
+		nose.radial_segments = 10
+		nose.rings = 6
+		var nmi: MeshInstance3D = _add(root, nose, mat_skin)
+		nmi.transform = Transform3D(hb * Basis().scaled(Vector3(0.6, 1.1, 1.0)), h_org + hb * Vector3(0.0, -rf * 0.12, -rf * 0.96))
+		var mouth := BoxMesh.new()
+		mouth.size = Vector3(rf * 0.22, rf * 0.10, rf * 0.06)
+		var mmi: MeshInstance3D = _add(root, mouth, mat_red)
+		mmi.transform = Transform3D(hb, h_org + hb * Vector3(0.0, -rf * 0.46, -rf * 0.86))
 
 	# lacquer hair: a cap of small spheres over crown and nape
 	var r_hair: float = rf * 1.07
-	for row_i in range(5):
-		var pf: float = float(row_i) / 4.0
+	var row_div: int = maxi(hair_rows - 1, 1)
+	for row_i in range(hair_rows):
+		var pf: float = float(row_i) / float(row_div)
 		var phi: float = lerpf(0.10, 1.42, pf)
-		for col_i in range(8):
-			var tf: float = float(col_i) / 8.0
+		for col_i in range(hair_cols):
+			var tf: float = float(col_i) / float(hair_cols)
 			var tht: float = TAU * tf + 0.19
 			var hdir := Vector3(sin(phi) * sin(tht), cos(phi), -sin(phi) * cos(tht))
 			if hdir.y < 0.62 and hdir.z < -0.20:
@@ -373,6 +661,10 @@ static func build(root: Node3D, seed: int) -> void:
 			hs.rings = 6
 			var hmi: MeshInstance3D = _add(root, hs, mat_hair)
 			hmi.transform = Transform3D(hb * Basis().scaled(Vector3(1.0, 0.9, 1.0)), h_org + hb * (hdir * r_hair))
+
+	if not crown:
+		return
+
 	# side wings (tabo)
 	for si in range(2):
 		var sw: float = -1.0 if si == 0 else 1.0
@@ -404,32 +696,6 @@ static func build(root: Node3D, seed: int) -> void:
 		var pmi: MeshInstance3D = _add(root, pin, mat_bone)
 		var pin_b: Basis = hb * Basis(Vector3.FORWARD, deg_to_rad(90.0)) * Basis(Vector3.UP, sp * deg_to_rad(16.0))
 		pmi.transform = Transform3D(pin_b, h_org + hb * Vector3(0.0, rf * (0.68 + sp * 0.16), rf * 0.80))
-
-	# --- settle: floor, width, height -----------------------------------------
-	var box: AABB = _union_aabb(root)
-	var kfit: float = 1.0
-	var wide: float = maxf(box.size.x, box.size.z)
-	if wide > 1.2:
-		kfit = minf(kfit, 1.2 / wide)
-	if box.size.y > 1.68:
-		kfit = minf(kfit, 1.68 / box.size.y)
-	if kfit < 1.0:
-		for ch in root.get_children():
-			if not (ch is MeshInstance3D):
-				continue
-			var cmi: MeshInstance3D = ch
-			var tf: Transform3D = cmi.transform
-			cmi.transform = Transform3D(tf.basis.scaled(Vector3(kfit, kfit, kfit)), tf.origin * kfit)
-		box = _union_aabb(root)
-	var centre: Vector3 = box.position + box.size * 0.5
-	var shift := Vector3(-centre.x, 0.0, -centre.z)
-	if box.position.y < 0.0:
-		shift.y = -box.position.y
-	for ch in root.get_children():
-		if not (ch is MeshInstance3D):
-			continue
-		var cmi2: MeshInstance3D = ch
-		cmi2.transform = Transform3D(cmi2.transform.basis, cmi2.transform.origin + shift)
 
 
 # ---------------------------------------------------------------------------

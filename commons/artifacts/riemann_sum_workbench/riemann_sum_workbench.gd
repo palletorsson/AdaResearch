@@ -2,28 +2,16 @@ extends Node3D
 class_name RiemannSumWorkbench
 
 # @identity
-# essence: an interactive Riemann sum workbench — the player turns a slider for N (rectangle count) and watches the rectangles' total area converge toward the integral of f(x). At N=4 the rectangles undershoot and overshoot wildly; at N=128 they trace the curve. The convergence is the calculus, made hand-held.
-# desire: learner viscerally feels the calculus claim "integral = limit of Riemann sum as N → ∞" — the slider IS the limit
-# critical_parameter: N — the only knob. Drives the rectangle count, the sum, the error
-# triggers: _ready() builds slider + curve + rectangles + readout + error-bar; _on_slider_changed regenerates the rectangles and recomputes the sum
-# emerges: O(h²) midpoint-rule convergence made tactile — each doubling of N quarters the error
-# needs: slider_horizontal [present]; ImmediateMesh for curve+rectangles [present]; Label3D for readouts [present]; shannon_workbench as conceptual sibling [present]
-# relationships: paired with /riemann-sum-gallery (web cells of this exact instrument frozen at 6 N-values); sibling to tangent_slope_workbench (integral pair to derivative); embodies the change sequence's truth "things change, change accumulates"
-# truth: integration is the limit of a polygon. The polygon at N=4 is a coarse approximation; at N=128 it's perceptually smooth. The slider walks the limit.
+# essence: a finite sum made inspectable as rectangle contributions.
+# desire: compare the approximation with the function it samples.
+# critical_parameter: rectangle count; the optional comparison adapter also exposes the sampling rule.
+# relationships: shares f(x) with tangent_slope_workbench in Change_Intro.
+# truth: a finite slider explores approximations; it does not reach an infinite limit.
 
-## A horizontal workbench for the midpoint Riemann sum.
-##
-## One slider drives N (rectangle count), stepped through six tick stops
-## [4, 8, 16, 32, 64, 128]. As N grows:
-##   • the midpoint Riemann sum Σ f(x_k)·w is recomputed against the true
-##     integral of f(x) = 0.5 + 0.4·sin(2x) + 0.15·cos(5x) on [0, 5]
-##   • the rectangles regenerate (a single ImmediateMesh of N quads, blue,
-##     translucent) under the curve
-##   • the readout updates with sum, true integral, error, N
-##   • a small vertical error-bar on the side of the table shrinks
-##
-## The curve floats above the table — a literal landscape, and the
-## rectangles are the polygon you're using to chase it.
+## Midpoint by default; the museum comparison adds left/right rules and a held result.
+## Six count stops [4, 8, 16, 32, 64, 128] rebuild the rectangles and total.
+## The reference is a separate 4096-cell midpoint estimate, not an exact integral.
+## The curve drawing uses its own finite resolution, independent of the sum.
 
 # ── Configuration ─────────────────────────────────────────────────────
 
@@ -51,9 +39,9 @@ class_name RiemannSumWorkbench
 @export_group("Error Bar")
 ## How far to the right of the plot the error bar sits.
 @export var error_bar_x: float = 0.85
-## Maximum visual height of the error bar (at the worst N=4 case).
+## Maximum visual height of the difference bar.
 @export var error_bar_max_height: float = 0.4
-## Reference error used to scale the bar's height (~the N=4 error).
+## Differences at or above this value saturate the bar; the readout stays numeric.
 @export var error_bar_ref: float = 0.05
 @export var error_bar_color: Color = Color(1.0, 0.35, 0.25)
 
@@ -77,6 +65,8 @@ const N_STOPS: Array[int] = [4, 8, 16, 32, 64, 128]
 # For f(x) = 0.5 + 0.4·sin(2x) + 0.15·cos(5x) on [0, 5] this is ≈ 2.86384375
 # (analytically: 0.5·5 + 0.2·(1 - cos(10)) + 0.03·(sin(25))).
 var _true_integral: float = 0.0
+var sample_fraction: float = 0.5
+var comparison: Node3D
 
 var _n_index: int = 2          # default to N=16 — already converged enough to read, coarse enough to see the polygon
 var _n: int = 16
@@ -126,6 +116,10 @@ func _ready() -> void:
 	_build_plot()
 	_build_error_bar()
 	_build_axis_labels()
+	if str(get_meta("config_comparison", false)).to_lower() in ["true", "1"]:
+		comparison = preload("res://commons/artifacts/riemann_sum_workbench/accumulation_comparison.gd").new()
+		comparison.name = "AccumulationComparison"
+		add_child(comparison)
 	_refresh_all()
 
 
@@ -153,8 +147,8 @@ func _n_index_to_normalized(idx: int) -> float:
 # ── True integral (reference) ─────────────────────────────────────────
 
 func _compute_true_integral() -> float:
-	# Dense midpoint rule with 4096 sub-intervals — converges to ~10 decimals
-	# on this smooth analytic curve, plenty for the readout.
+	# Separate finite midpoint estimate; independent of the live sampling rule.
+	# The probe checks this against the antiderivative for the default domain.
 	var n_ref: int = 4096
 	var w: float = (x_max - x_min) / float(n_ref)
 	var s: float = 0.0
@@ -168,7 +162,7 @@ func _compute_riemann_sum(n_rects: int) -> float:
 	var w: float = (x_max - x_min) / float(n_rects)
 	var s: float = 0.0
 	for k in range(n_rects):
-		var xk: float = x_min + w * (float(k) + 0.5)
+		var xk: float = x_min + w * (float(k) + sample_fraction)
 		s += _f(xk)
 	return s * w
 
@@ -353,7 +347,7 @@ func _emit_rectangles() -> void:
 	for k in range(_n):
 		var x_left: float = x_min + w * float(k)
 		var x_right: float = x_min + w * float(k + 1)
-		var x_mid: float = x_min + w * (float(k) + 0.5)
+		var x_mid: float = x_min + w * (float(k) + sample_fraction)
 		var height: float = _f(x_mid)
 
 		var lx: float = _x_to_local(x_left)
@@ -462,9 +456,9 @@ func _refresh_readout() -> void:
 	var err: float = approx - _true_integral
 	var line2: String
 	if abs(err) < 0.0001:
-		line2 = "∫ %.4f · converged · N=%d" % [_true_integral, _n]
+		line2 = "ref4096 %.4f · |diff| < .0001 · N=%d" % [_true_integral, _n]
 	else:
-		line2 = "∫ %.4f · err %+.4f · N=%d" % [_true_integral, err, _n]
+		line2 = "ref4096 %.4f · diff %+.4f · N=%d" % [_true_integral, err, _n]
 	_plate_readout.text = "Σ = %.4f\n%s" % [approx, line2]
 
 
@@ -597,6 +591,7 @@ func _refresh_all() -> void:
 	_emit_rectangles()
 	_refresh_readout()
 	_refresh_error_bar()
+	if comparison: comparison.refresh()
 
 
 # ── Grid system integration ───────────────────────────────────────────

@@ -171,6 +171,9 @@ var _rng: RandomNumberGenerator = null
 ## Draws BATCH lands at once, without the rain.
 @export var batch_size: int = 100
 
+# Optional side-mounted record for a cabinet with a separate front console.
+var _readout_wing: bool = false
+
 ## The axis words, mapped onto the enum the rest of the file already uses.
 const LAW_TYPES := {
 	"uniform": DistType.UNIFORM,
@@ -750,6 +753,9 @@ func _read_meta_overrides() -> void:
 ## rebuild here must be earned: nothing is cleared unless a value this artifact
 ## owns actually differs from what it already built with.
 func apply_grid_config(config_data: Dictionary) -> void:
+	if config_data.has("readout"):
+		_readout_wing = str(config_data["readout"]) == "wing"
+		_position_readout()
 	# Parsed through str() first: a fixture that passes "7" rather than 7 would be
 	# rejected outright by set() on a typed int and the seed would silently not apply.
 	if config_data.has("sample_seed"):
@@ -804,6 +810,24 @@ func apply_grid_config(config_data: Dictionary) -> void:
 # THE CABINET — the staging (stand:cabinet), its readout, its ghosts, its buttons
 # ═════════════════════════════════════════════════════════════════════
 
+func _position_readout() -> void:
+	if _readout == null or _stand_root == null:
+		return
+	var plate: Node3D = _readout.get_parent()
+	plate.position = Vector3(-0.86, 1.43, CAB_FACE + 0.012) if _readout_wing else Vector3(0, CAB_H - 0.118, CAB_FACE + 0.012)
+	plate.scale = Vector3.ONE * (1.35 if _readout_wing else 1.0)
+	var stem := _stand_root.get_node_or_null("ReadoutStem") as MeshInstance3D
+	if _readout_wing and stem == null:
+		var material := StandardMaterial3D.new()
+		material.albedo_color = Color(0.13, 0.15, 0.18)
+		material.metallic = 0.5
+		stem = HangarKit.box(Vector3(-0.70, 1.18, 0.14), Vector3(0.025, 0.46, 0.045), material)
+		stem.name = "ReadoutStem"
+		_stand_root.add_child(stem)
+	if stem != null:
+		stem.visible = _readout_wing
+
+
 func _apply_stand() -> void:
 	if stand == "cabinet":
 		if sample_seed < 0:
@@ -816,6 +840,7 @@ func _apply_stand() -> void:
 			_clear_samples()
 		if _stand_root == null:
 			_build_cabinet()
+		_position_readout()
 		_update_readout()
 	elif _stand_root != null:
 		_lift_shipped(-CAB_H)

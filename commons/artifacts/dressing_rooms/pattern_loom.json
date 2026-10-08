@@ -1,51 +1,36 @@
 {
-  "rotations": [
-    "0",
-    "90",
-    "180",
-    "270"
-  ],
-  "approach": "south",
-  "exit": "north",
-  "footprint": [
-    1,
-    1,
-    1
-  ],
-  "clearance": [
-    3.0,
-    3.0,
-    3.0
-  ],
-  "extras": [],
   "lookup_name": "pattern_loom",
-  "posture": "floor",
+  "footprint": [2.525, 3.14, 1.225],
+  "rotations": ["0", "180"],
+  "approach": "south",
+  "exit": "south",
   "footing": {
-    "anchor": [
-      1,
-      1
-    ],
+    "anchor": [2, 2],
     "tiles": [
-      [
-        1,
-        1,
-        1
-      ],
-      [
-        1,
-        1,
-        1
-      ],
-      [
-        1,
-        1,
-        1
-      ]
+      [1,1,1,1,1],
+      [1,1,1,1,1],
+      [1,1,1,1,1],
+      [1,1,1,1,1],
+      [1,1,1,1,1],
+      [1,1,1,1,1],
+      [1,1,1,1,1],
+      [1,1,1,1,1]
     ]
   },
-  "artifact_offset": [
-    0.0,
-    0.0,
-    0.0
-  ]
+  "extras": [],
+  "artifact_offset": [0.0, 0.0, 0.0],
+  "clearance": [5, 8, 3],
+  "posture": "floor",
+  "show_info": false,
+  "show_dressing": false,
+  "placement_contract": {
+    "allowed_modes": ["freestanding", "against_wall"], "preferred_mode": "freestanding",
+    "hard_zone_m": [3, 4, 2], "preferred_zone_m": [5, 8, 3],
+    "required_support": "floor", "interaction_faces": ["south"],
+    "rear_clearance_m": 1.0, "front_clearance_m": 3.0,
+    "circulation": "output_runway", "circulation_behind": false,
+    "minimum_route_width_m": 0.9, "neighbor_policy": "protect_generated_textile_runway"
+  },
+  "production_grade": "test_candidate",
+  "placement_intent": "A floor-standing loom with an asymmetric eight-metre bay: compact service space behind and a protected runway for generated textile in front."
 }

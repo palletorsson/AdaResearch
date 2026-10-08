@@ -38,6 +38,9 @@
 extends Node3D
 class_name PatternMachineA
 
+const LoomRecipe = preload("res://commons/artifacts/pattern_machine_a/loom_recipe.gd")
+signal recipe_changed
+
 # ── DNA ──────────────────────────────────────────────────────────────────
 ## Wallpaper symmetry group (p1..p6m) — the weaving program.
 @export var group: String = "p4m"
@@ -210,6 +213,9 @@ var _elapsed: float = 0.0
 
 func _ready() -> void:
 	_read_overrides()
+	if str(get_meta("config_lesson", "")) == "shared_recipe":
+		randomize_on_start=false
+		group="p1"
 	_palette = PALETTE.duplicate()    # live palette; bands snapshot whatever this is at the time
 	_group_index = clampi(GROUP_NAMES.find(group.to_lower()), 0, GROUP_NAMES.size() - 1)
 	if _group_index < 0:
@@ -243,6 +249,10 @@ func _ready() -> void:
 	_build_control_plate()
 	_build_capture_camera()
 	_reweave()
+	if str(get_meta("config_lesson", "")) == "shared_recipe":
+		var study: Node3D = load("res://commons/artifacts/pattern_machine_a/recipe_study.gd").new()
+		study.name = "RecipeStudy"
+		add_child(study)
 	print("[PatternMachineA] Jacquard loom built — %dx%d card, group %s" % [
 		card_size, card_size, GROUP_NAMES[_group_index]])
 
@@ -275,8 +285,15 @@ func apply_grid_config(config: Dictionary) -> void:
 	if config.has("carpet_length"): carpet_length = maxf(0.3, float(config["carpet_length"]))
 	if config.has("carpet_repeats"): carpet_repeats = maxi(1, int(config["carpet_repeats"]))
 	if config.has("scroll_speed"): scroll_speed = float(config["scroll_speed"])
+	# Direct pre-tree configuration is built by normal ready.
+	if not is_inside_tree(): return
+	# The grid forwards lesson metadata after ready; that ready already read it.
+	if config.size()==1 and config.has("lesson") and has_node("RecipeStudy"): return
 	# Rebuild from scratch with the new DNA.
 	for c in get_children():
+		if c.has_method("update_specimens") and recipe_changed.is_connected(c.update_specimens):
+			recipe_changed.disconnect(c.update_specimens)
+		remove_child(c)
 		c.queue_free()
 	_peg_meshes.clear(); _peg_mats.clear()
 	_weave_mats.clear(); _warp_mats.clear()
@@ -396,17 +413,8 @@ func _on_plate_random() -> void:
 
 ## Recolour the existing peg meshes from the current card (no rebuild).
 func _refresh_pegs() -> void:
-	for y in range(_peg_mats.size()):
-		var row: Array = _peg_mats[y]
-		for x in range(row.size()):
-			var mat: StandardMaterial3D = row[x]
-			if mat == null:
-				continue
-			var ci: int = 0
-			if y < _card.size() and x < _card[y].size():
-				ci = int(_card[y][x])
-			var col: Color = PALETTE[ci] if ci > 0 and ci < PALETTE.size() else COL_PEG_HOLE
-			mat.albedo_color = col
+	_refresh_all_pegs()
+	_refresh_paint_indicator()
 
 # ═══════════════════════════════════════════════════════════════════════
 # CARD DATA
@@ -800,10 +808,10 @@ func _refresh_peg(gx: int, gy: int) -> void:
 	var peg: MeshInstance3D = _peg_meshes[gy][gx]
 	var mat: StandardMaterial3D = _peg_mats[gy][gx]
 	peg.visible = ci > 0
-	mat.albedo_color = PALETTE[ci]
+	mat.albedo_color = _palette[ci]
 	if ci > 0:
 		mat.emission_enabled = true
-		mat.emission = PALETTE[ci]
+		mat.emission = _palette[ci]
 		mat.emission_energy_multiplier = 0.6
 	else:
 		mat.emission_energy_multiplier = 0.0
@@ -827,15 +835,18 @@ func _cycle_group() -> void:
 	print("[PatternMachineA] Program -> %s" % group)
 
 func _cycle_paint() -> void:
-	_paint_color = 1 + (_paint_color % (PALETTE.size() - 1))
+	_paint_color = 1 + (_paint_color % (_palette.size() - 1))
+	_refresh_paint_indicator()
+	print("[PatternMachineA] Punch color -> %d" % _paint_color)
+
+func _refresh_paint_indicator() -> void:
 	# Re-tint the PUNCH button so the player sees the active color.
 	var btn := _card_root.get_node_or_null("PunchBtn")
 	if btn:
-		btn.set("pressed_color", PALETTE[_paint_color])
-		btn.set("released_color", PALETTE[_paint_color].darkened(0.45))
+		btn.set("pressed_color", _palette[_paint_color])
+		btn.set("released_color", _palette[_paint_color].darkened(0.45))
 		if btn.has_method("update_colors"):
 			btn.call("update_colors")
-	print("[PatternMachineA] Punch color -> %d" % _paint_color)
 
 func _reroll_card() -> void:
 	motif_seed = (motif_seed * 1103515245 + 12345) & 0x7fffffff
@@ -926,6 +937,46 @@ func _reweave() -> void:
 	var tex := ImageTexture.create_from_image(image)
 	if _carpet_mat:
 		_carpet_mat.albedo_texture = tex
+	recipe_changed.emit()
+
+var repeat_metres: float = 0.3
+var offset_metres: float = 0.0
+
+func set_offset_metres(value:float) -> void:
+	if not is_finite(value):return
+	offset_metres=clampf(value,0.0,0.3)
+	recipe_changed.emit()
+
+func set_repeat_metres(value:float) -> void:
+	if not is_finite(value):return
+	repeat_metres=clampf(value,0.15,0.6)
+	recipe_changed.emit()
+
+func export_recipe() -> Dictionary:
+	var history: Array = []
+	for band in _bands: history.append(LoomRecipe.encode_band(band))
+	return {"format":LoomRecipe.FORMAT,"version":LoomRecipe.VERSION,
+		"live":LoomRecipe.encode_band(_current_snapshot()),"bands":history,
+		"paint":_paint_color,"seed":motif_seed,"density":density,"repeat_metres":repeat_metres,"offset_metres":offset_metres,
+		"scroll_speed":scroll_speed,"elapsed":_elapsed,"phase":fposmod(_carpet_mat.uv1_offset.y,1.0)}
+
+func import_recipe(recipe: Variant) -> bool:
+	if not LoomRecipe.valid(recipe,card_size): return false
+	repeat_metres=float(recipe.get("repeat_metres",0.3))
+	offset_metres=float(recipe.get("offset_metres",0.0))
+	var live := LoomRecipe.decode_band(recipe.live)
+	_card=live.card; _palette.assign(live.palette); _group_index=live.group_index
+	group=GROUP_NAMES[_group_index]; _paint_color=int(recipe.paint)
+	motif_seed=int(recipe.seed); density=float(recipe.density)
+	scroll_speed=float(recipe.scroll_speed); _elapsed=float(recipe.elapsed)
+	_bands.clear()
+	for band in recipe.bands: _bands.append(LoomRecipe.decode_band(band))
+	_group_label.text=group.to_upper()
+	_refresh_pegs()
+	_carpet_mat.uv1_offset.y=float(recipe.phase)
+	_last_toggled=Vector2i(-999,-999)
+	_reweave()
+	return true
 
 func _group_enum_for(name: String) -> int:
 	## Map a group name string to the WallpaperGroups.Group enum value.

@@ -1,10 +1,10 @@
-# frozen_glass_vessel.gd — Walkable vessel whose shape came from physics.
+# frozen_glass_vessel.gd — A collidable frozen skin whose shape came from physics.
 #
 # Build a sphere mesh, pin the top ring (the blowpipe attachment), optionally
 # pre-inflate (pressure pulse), then run gravity + spring tension for N steps.
 # The simulation runs once at _ready(); the FROZEN POSE is the vessel.
 #
-# Walkable twin of gl01_classic_bulb in the soft-body gallery. Where that
+# Bodily-scale twin of gl01_classic_bulb in the soft-body gallery. Where that
 # image is the research artifact, this is the thesis artifact — a 2-meter
 # physics-grown vessel standing next to the player, labeled with its DNA.
 #
@@ -15,7 +15,7 @@
 # triggers: Change stiffness → from rigid orb to collapsing teardrop. Change gravity direction → lopsided handcraft. Change pin width → bottle neck vs bowl mouth.
 # emerges: An amphora, a bottle, a bowl, an urn — depending on force balance. Vessel type from force DNA.
 # needs: VR scale (1.5m tall), Label3D for pedagogy, double-sided material so interior is visible
-# relationships: Walkable twin of soft-body gallery gl01. Same DNA as trajectory-gallery tr01_unit_circle_spiral in spirit — both are "frozen processed form", but this one is 2D-surface instead of 1D-trajectory.
+# relationships: Frozen counterpart to the running body. A closed sphere remains closed: transparent rendering does not create a mouth.
 # truth: Duration is DNA. The clock is part of the genome.
 
 extends Node3D
@@ -161,19 +161,33 @@ func _build_vessel() -> void:
 		mat.emission = Color(vessel_color.r, vessel_color.g, vessel_color.b)
 		mat.emission_energy_multiplier = emission_boost
 	_mi.material_override = mat
+	# Display the complete result above the artifact's floor datum. Keep the
+	# computed vertex positions unchanged; this offset is staging, not physics.
+	_mi.position.y = -am.get_aabb().position.y
 	add_child(_mi)
+	var skin := StaticBody3D.new()
+	skin.name = "FrozenSkin"
+	skin.collision_layer = 1
+	skin.collision_mask = 1
+	var shape := CollisionShape3D.new()
+	shape.name = "Surface"
+	var triangles := am.create_trimesh_shape()
+	triangles.backface_collision = true
+	shape.shape = triangles
+	skin.add_child(shape)
+	_mi.add_child(skin)
 
 
 
 func _build_label() -> void:
 	_label = Label3D.new()
 	_label.name = "Label"
-	_label.text = "Frozen Glass Vessel\ngravity × pressure × %d steps\nno designer placed any vertex" % sim_steps
+	_label.text = "Frozen Glass Vessel\ngravity × initial inflation × %d steps\nclosed skin / held after simulation" % sim_steps
 	_label.pixel_size = 0.003
 	_label.font_size = 26
 	_label.modulate = Color(0.88, 0.86, 0.82)
 	_label.billboard = BaseMaterial3D.BILLBOARD_ENABLED
-	_label.position = Vector3(0, label_height, 0)
+	_label.position = Vector3(0, maxf(label_height, _mi.mesh.get_aabb().size.y + 0.18), 0)
 	add_child(_label)
 
 
@@ -189,6 +203,10 @@ func apply_grid_config(config_data: Dictionary) -> void:
 	if config_data.has("gravity_x"):          gravity_x = float(config_data["gravity_x"])
 	if config_data.has("sim_steps"):          sim_steps = clampi(int(config_data["sim_steps"]), 40, 800)
 	# Rebuild
-	for child in get_children(): child.queue_free()
+	# Detach the old collision immediately; no invisible earlier skin remains
+	# active while the next duration/force reconstruction is installed.
+	for child in get_children():
+		remove_child(child)
+		child.queue_free()
 	_build_vessel()
 	if show_label: _build_label()

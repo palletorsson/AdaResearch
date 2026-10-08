@@ -40,6 +40,9 @@ const BakedText := preload("res://commons/utils/baked_text_albedo.gd")
 @export var show_tray: bool = true
 ## Opt-in working drawing-paper surface and separate suspended board pens.
 @export var pens_enabled: bool = false
+## Opt-in reachable shelf, sculptural handles and dropped-tool recovery.
+@export var pen_shelf: bool = false
+@export var simple_pens: bool = false
 
 # ── Constants ─────────────────────────────────────────────────────────
 
@@ -89,6 +92,10 @@ func apply_grid_config(config_data: Dictionary) -> void:
 
 
 func _read_metadata_overrides() -> void:
+	if has_meta("config_pen_style"):
+		simple_pens = str(get_meta("config_pen_style")) == "simple"
+	if has_meta("config_pen_shelf"):
+		pen_shelf = str(get_meta("config_pen_shelf")).to_lower() in ["1", "true"]
 	if has_meta("config_pens"):
 		pens_enabled = str(get_meta("config_pens")).to_lower() in ["1", "true"]
 	if has_meta("config_board_width"):
@@ -122,7 +129,7 @@ func _build_board() -> void:
 	_built = true
 	_build_surface()
 	_build_frame()
-	if show_tray:
+	if show_tray and not (pens_enabled and pen_shelf):
 		_build_tray()
 	_build_text_lines()
 	if pens_enabled:
@@ -130,6 +137,8 @@ func _build_board() -> void:
 		drawing.name = "DrawingTools"
 		drawing.board_width = board_width
 		drawing.board_height = board_height
+		drawing.shelf_enabled = pen_shelf
+		drawing.simple_pens = simple_pens
 		add_child(drawing)
 
 

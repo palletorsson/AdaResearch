@@ -51,10 +51,16 @@ const WORKINGS: PackedStringArray = ["outcome", "trace", "operands", "expression
 
 
 func _ready() -> void:
+	if str(get_meta("config_lesson", "")) == "room_projection":
+		_reset_console()
+		var room=preload("res://commons/artifacts/vector_op_console/gap_projection_room.gd").new()
+		room.projection_mode=true;room.name="RoomProjection";add_child(room);return
 	_console_ready()
 
 
 func apply_grid_config(config_data: Dictionary) -> void:
+	if str(config_data.get("lesson",get_meta("config_lesson","")))=="room_projection":
+		set_meta("config_lesson","room_projection");return
 	if config_data.has("seed"): seed = int(config_data["seed"])
 	if config_data.has("projection"): projection = clampf(float(config_data["projection"]), 0.0, 1.0)
 	if config_data.has("complexity"): complexity = int(config_data["complexity"])

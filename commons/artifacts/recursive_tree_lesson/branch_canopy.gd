@@ -6,10 +6,11 @@ var geometry: Node3D
 var source_signature: Array = []
 var segment_count := 0
 var _elapsed := 0.0
+var pose_revision := -1
 
 func _ready() -> void:
 	source = get_parent().source
-	position = Vector3(-4, 0, -2)
+	position = Vector3(-3, 0, -2)
 	scale = Vector3.ONE * 1.8
 	refresh_geometry()
 
@@ -24,8 +25,21 @@ func refresh_geometry() -> void:
 	if not is_instance_valid(source) or not is_instance_valid(source.generated): return
 	var children: Array[Node] = source.generated.get_children()
 	var signature: Array = [source.segment_count, source.current_depth, source.branch_angle_min, source.length_reduction, source.branch_count, children[0].get_instance_id() if not children.is_empty() else 0]
-	if signature == source_signature: return
+	if signature == source_signature:
+		if pose_revision != source.geometry_revision:
+			for i in geometry.get_child_count():
+				var branch: Node3D = children[i]
+				var solid: Node3D = geometry.get_child(i)
+				var data: Dictionary = branch.get_meta("branch_data")
+				solid.transform = branch.transform
+				solid.get_child(0).transform = branch.get_child(0).transform
+				solid.get_child(1).transform = branch.get_child(0).transform
+				solid.set_meta("source_start", data.position)
+				solid.set_meta("source_end", data.position + data.direction * data.length)
+			pose_revision = source.geometry_revision
+		return
 	source_signature = signature
+	pose_revision = source.geometry_revision
 	if is_instance_valid(geometry):
 		remove_child(geometry)
 		geometry.queue_free()

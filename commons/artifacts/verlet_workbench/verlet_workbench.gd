@@ -13,7 +13,74 @@ class_name VerletWorkbench
 ## truth: "INTEGRATE POSITION FROM POSITION — THE CONSTRAINTS HOLD WITHOUT BEING SOLVED"
 ## applications: every game cloth, rope, and ragdoll — Verlet is the cheap, stable workhorse.
 
+## --- DNA (stage 2, promoted 2026-08-12) --------------------------------------------------
+## AXIS `relaxation` — HOW INSISTENTLY IS A DISTANCE CONSTRAINT ENFORCED.
+##
+## This artifact already WAS this axis; what it lacked was a word. The dial and the readout
+## were built on day one (see _build), `constraint_passes` was already a clamped config key,
+## and @identity states the claim outright: "crank the passes up and the cloth stiffens; drop
+## them and it sags — yet no linear system is ever solved." The word exists because
+## apply_dna_block refuses a numeric axis by design — sample points on a continuum are a
+## design choice, not a fact about the code — so the choice is named here and derived there:
+##
+##   nudged = 1     worked = 4 (the shipped literal)     pressed = 8     held = 12
+##
+## Shared with cloth_simulation in this wave, character for character: same question, same
+## four values, two independent solvers. Their bite numbers should ORDER the same way.
+##
+## IT IS A RESTING SHAPE, NOT A RATE — and that is measured, not argued. soft_body_sim.step()
+## was replicated in Python and each value run to its fixed point. The cloth's hanging height
+## is 0.6406 / 0.6071 / 0.6009 / 0.5988 m for nudged / worked / pressed / held, and its mean
+## SIGNED spring stretch over all 392 springs 0.701 / 0.168 / 0.080 / 0.051 % (the unsigned mean
+## is about twice that throughout, so quote the sign) — a clean 1/passes law (4.17x, 2.10x, 1.57x
+## against a predicted 4, 2, 1.5). Four different EQUILIBRIA, so a longer settle cannot
+## collapse them into one another.
+##
+## ONE CORRECTION TO THE APPROVED DESIGN, which claimed a longer pre-settle would make the
+## values MORE different. It makes them LESS different: nudged-vs-worked is 48.8 mm of max
+## vertex displacement after the shipped 60-step pre-settle and 34.5 mm at equilibrium — a
+## 29% shrink, because at 60 steps nudged is still in transient overshoot (moving 1.27 mm per
+## step). The ladder, its ordering and its ratios all survive; the mechanism claimed for them
+## did not, so it is written down here rather than quietly kept.
+##
+## PREDICTED CLOSEST PAIR: pressed vs held. Measured 2.154 mm max / 1.792 mm mean vertex
+## displacement, against nudged-vs-worked's 34.458 / 28.736 — a ratio of 16.0:1, where the
+## residual-stretch arithmetic predicted 18:1. At dna.framing 0.65 the frame is ~2.5 m wide
+## over 760 px, so pressed-vs-held is about 0.7 px and WILL read faint; nudged-vs-worked is
+## about 10 px across a cloth holding ~8% of frame.
+##
+## DECLINED. `damping` (0.99): four values, one drape, reached at different speeds — the
+## purest rate axis in the sequence and invisible to a still by construction. The gust
+## amplitudes (0.6 lateral on line ~247, 0.3 in Z) move the cloth more than the axis does and
+## are still wrong, because they are a DRIVE — `sin(_t * 0.8)` never stops, so photographing
+## them is photographing the clock; the fixture's whole job is to switch them off. Cloth
+## resolution (cloth_cols / cloth_rows / cell) is a real and interesting claim — the
+## discretization IS the material — but `grain` is already the corpus's word for how a body
+## is subdivided, across six artifacts with a different value set, and a seventh synonym
+## serving ONE placement is worse than one axis that is exactly right. The pin mode
+## (`top_corners`, six values already in soft_body_shapes._cloth_is_pin) is flagdancer's
+## `heading` in this same wave.
+##
+## DETERMINISM: see `still` and `settle_steps` below. As shipped this artifact could not be
+## measured at all; with the fixture two runs of a value are the same picture.
+## -----------------------------------------------------------------------------------------
+
 const SBShapes = preload("res://commons/soft_body/soft_body_shapes.gd")
+const PUSH = preload("res://commons/interactables/push_button.tscn")
+const COMPARISON_STEP: float = 0.0166667
+
+## The axis. Sets how many constraint-relaxation passes the solver runs per step — which is
+## the number the dial has always turned and the readout has always printed.
+@export_enum("nudged", "worked", "pressed", "held") var relaxation: String = "worked"
+
+## The word's arithmetic, kept next to it so apply_dna_block reads the values off the export
+## and this table can never drift from them silently.
+const RELAXATION_PASSES := {
+	"nudged": 1,
+	"worked": 4,
+	"pressed": 8,
+	"held": 12,
+}
 
 @export var cloth_cols: int = 10
 @export var cloth_rows: int = 8
@@ -25,6 +92,27 @@ const SBShapes = preload("res://commons/soft_body/soft_body_shapes.gd")
 @export var readout_col: Color = Color(0.55, 0.95, 0.70)
 @export var label_col: Color = Color(0.92, 0.95, 0.99)
 
+## --- capture fixture: both are exact no-ops at their defaults ------------------------------
+## `still` zeroes the four things this bench drives off the wall clock — the lateral gust
+## (0.6), the Z gust (0.3), the bench sway (0.06) and the dial spin (0.6) — so gravity stays
+## the constant (0, -3, 0) the pre-settle already used and the two rotating nodes hold 0. At
+## 1.45 s the gust alone is sin(1.16) * 0.6 = +0.55 against -3.0 vertical: a 10.4-degree tilt
+## that swings the free bottom edge roughly 108 mm, three times the whole axis's separation.
+@export var still: bool = false
+## `settle_steps` is the literal count the pre-settle loop has always run. Raised by the
+## fixture to 420 so every value reaches ITS OWN fixed point before frame 1. Measured: at 420
+## the pose is 0.05 mm from the 2400-step pose for nudged and bit-identical for the other
+## three, and 132 further rendered frames move nudged by at most 0.066 mm — 3% of the closest
+## pair's separation. At the shipped 60, the same 66-vs-87 frame difference moves nudged by
+## up to 21 mm, ten times that separation. The frame clock is why this export exists.
+@export var settle_steps: int = 60
+## A local lesson opt-in. Other placements keep the original ambient cloth and dial.
+@export var comparison: bool = false
+var buttons: Dictionary = {}
+var wind_enabled: bool = true
+var simulation_steps: int = 0
+var _step_accumulator: float = 0.0
+
 var _t: float = 0.0
 var _sway: Node3D = null
 var _sim = null
@@ -33,49 +121,127 @@ var _cloth_mat: StandardMaterial3D = null
 var _readout: Label3D = null
 var _dial: Node3D = null
 
+## Only the nodes THIS script added to itself. The old teardown freed every child, including
+## anything the grid had attached (highlights, colliders, the pickup plumbing).
+var _owned: Array[Node] = []
+## Signature of every value _build reads, so a config that changes nothing rebuilds nothing.
+var _sig: String = ""
+## True once a config has handed us an explicit numeric pass count. The pre-existing numeric
+## contract then wins over the word — it is strictly more expressive, and it is what any map
+## written before this promotion would carry.
+var _passes_pinned: bool = false
+
 
 func _ready() -> void:
-	_rng.randomize()
-	_build()
+	# Museum tokens can configure this node before it enters the tree. Do not build
+	# a second frozen cloth/readout over the already-configured live one.
+	var sig: String = _build_signature()
+	if _owned.is_empty() or sig != _sig:
+		if not _owned.is_empty():
+			_teardown()
+		_build()
+	_sig = sig
 	set_process(not Engine.is_editor_hint())
+	set_physics_process(comparison and not Engine.is_editor_hint())
 
 
 func apply_grid_config(config: Dictionary) -> void:
+	if config.has("comparison"):
+		comparison = str(config["comparison"]).to_lower() in ["true", "1"]
 	if config.has("emissive"):
 		emissive = bool(config["emissive"])
 	if config.has("cloth_cols"):
 		cloth_cols = clampi(int(config["cloth_cols"]), 4, 16)
 	if config.has("cloth_rows"):
 		cloth_rows = clampi(int(config["cloth_rows"]), 4, 14)
+	if config.has("relaxation"):
+		var word: String = str(config["relaxation"]).strip_edges().to_lower()
+		if RELAXATION_PASSES.has(word):
+			relaxation = word
 	if config.has("constraint_passes"):
 		constraint_passes = clampi(int(config["constraint_passes"]), 1, 12)
+		_passes_pinned = true
 	if config.has("stiffness"):
 		stiffness = clampf(float(config["stiffness"]), 0.2, 0.95)
 	if config.has("cloth_col"):
 		cloth_col = _parse_color(config["cloth_col"], cloth_col)
-	for c in get_children():
-		remove_child(c)
-		c.queue_free()
+	if config.has("still"):
+		still = bool(config["still"])
+	if config.has("settle_steps"):
+		settle_steps = clampi(int(config["settle_steps"]), 0, 4000)
+
+	var sig: String = _build_signature()
+	if sig == _sig and not _owned.is_empty():
+		return
+	_teardown()
+	_build()
+	_sig = sig
+	set_physics_process(comparison and not Engine.is_editor_hint())
+
+
+## Every value _build reads, in one string. Two configs with the same signature build the
+## same bench, so the second one is not built at all.
+func _build_signature() -> String:
+	return "%s|%d|%d|%d|%.6f|%d|%.6f|%s|%s|%s|%s|%d|%d|%d" % [
+		relaxation, _effective_passes(), cloth_cols, cloth_rows, cell,
+		int(emissive), stiffness,
+		cloth_col.to_html(true), panel_col.to_html(true),
+		readout_col.to_html(true), label_col.to_html(true),
+		int(still), settle_steps, int(comparison),
+	]
+
+
+## The pass count the solver actually runs. At the shipped default this returns the literal 4
+## that `@export var constraint_passes: int = 4` has always declared.
+func _effective_passes() -> int:
+	if _passes_pinned:
+		return clampi(constraint_passes, 1, 12)
+	if RELAXATION_PASSES.has(relaxation):
+		return int(RELAXATION_PASSES[relaxation])
+	return clampi(constraint_passes, 1, 12)
+
+
+func _teardown() -> void:
+	for n in _owned:
+		if is_instance_valid(n):
+			remove_child(n)
+			n.queue_free()
+	_owned.clear()
 	_sway = null
 	_sim = null
 	_cloth_mi = null
 	_cloth_mat = null
 	_readout = null
 	_dial = null
-	_build()
+	buttons.clear()
+
+
+## add_child + remember it, so _teardown frees only what this script made.
+func _own(n: Node) -> Node:
+	add_child(n)
+	_owned.append(n)
+	return n
 
 
 func _make_sim() -> void:
-	# A cloth pinned along its top row, hung in front of the bench (XY plane, +Z out).
+	# A cloth pinned at its two TOP CORNERS only — "top_corners" pins (r == 0 and c in {0, cols-1}),
+	# two particles, not the whole top row. The deep catenary between them is the drape the axis
+	# reshapes. Hung in front of the bench (XY plane, +Z out).
 	var sim = SBShapes.make_cloth(cloth_cols, cloth_rows, cell, "top_corners", stiffness)
-	sim.constraint_passes = constraint_passes
+	sim.constraint_passes = _effective_passes()
 	sim.gravity = Vector3(0.0, -3.0, 0.0)
 	sim.damping = 0.99
 	sim.floor_y = -10.0
 	_sim = sim
-	# Pre-settle so the very first frame shows a relaxed drape, not a flat sheet.
-	for _i in 60:
+	# Pre-settle so the very first frame shows a relaxed drape, not a flat sheet. Synchronous,
+	# fixed dt (soft_body_sim.step defaults to 1/60 and nobody passes another), so the pose
+	# here is a function of settle_steps and the pass count alone — not of the frame rate.
+	for _i in settle_steps:
 		_sim.step()
+	simulation_steps = settle_steps
+	_step_accumulator = 0.0
+	if comparison:
+		_t = 0.0
 
 
 func _rebuild_cloth_mesh() -> ArrayMesh:
@@ -105,16 +271,16 @@ func _rebuild_cloth_mesh() -> ArrayMesh:
 
 func _build() -> void:
 	# Bench
-	add_child(_box(Vector3(0.0, 0.10, 0.0), Vector3(1.2, 0.2, 0.7), _matte_mat(Color(0.16, 0.17, 0.20), 0.85)))
-	add_child(_cylinder(Vector3(0.0, 0.45, 0.0), 0.07, 0.5, _steel_mat(Color(0.34, 0.36, 0.40))))
+	_own(_box(Vector3(0.0, 0.10, 0.0), Vector3(1.2, 0.2, 0.7), _matte_mat(Color(0.16, 0.17, 0.20), 0.85)))
+	_own(_cylinder(Vector3(0.0, 0.45, 0.0), 0.07, 0.5, _steel_mat(Color(0.34, 0.36, 0.40))))
 	# A frame the cloth hangs from
-	add_child(_box(Vector3(0.0, 1.32, -0.05), Vector3(cloth_cols * cell + 0.12, 0.04, 0.06), _matte_mat(Color(0.30, 0.32, 0.36), 0.6)))
-	add_child(_cylinder_between(Vector3(-(cloth_cols * cell) * 0.5, 0.86, -0.05), Vector3(-(cloth_cols * cell) * 0.5, 1.32, -0.05), 0.02, _matte_mat(Color(0.30, 0.32, 0.36), 0.6)))
-	add_child(_cylinder_between(Vector3((cloth_cols * cell) * 0.5, 0.86, -0.05), Vector3((cloth_cols * cell) * 0.5, 1.32, -0.05), 0.02, _matte_mat(Color(0.30, 0.32, 0.36), 0.6)))
+	_own(_box(Vector3(0.0, 1.32, -0.05), Vector3(cloth_cols * cell + 0.12, 0.04, 0.06), _matte_mat(Color(0.30, 0.32, 0.36), 0.6)))
+	_own(_cylinder_between(Vector3(-(cloth_cols * cell) * 0.5, 0.86, -0.05), Vector3(-(cloth_cols * cell) * 0.5, 1.32, -0.05), 0.02, _matte_mat(Color(0.30, 0.32, 0.36), 0.6)))
+	_own(_cylinder_between(Vector3((cloth_cols * cell) * 0.5, 0.86, -0.05), Vector3((cloth_cols * cell) * 0.5, 1.32, -0.05), 0.02, _matte_mat(Color(0.30, 0.32, 0.36), 0.6)))
 
 	var sway := Node3D.new()
 	sway.name = "ClothSway"
-	add_child(sway)
+	_own(sway)
 	_sway = sway
 
 	_make_sim()
@@ -136,39 +302,154 @@ func _build() -> void:
 	_cloth_mi.material_override = _cloth_mat
 	cloth_holder.add_child(_cloth_mi)
 
-	# Constraint-pass dial + readout panel (the applied control surface)
-	var dial := Node3D.new()
-	dial.position = Vector3(0.62, 0.95, 0.28)
-	add_child(dial)
-	_dial = dial
-	dial.add_child(_cylinder(Vector3.ZERO, 0.07, 0.04, _steel_mat(Color(0.4, 0.42, 0.46))))
-	# A pointer notch on the dial so its rotation is legible.
-	dial.add_child(_box(Vector3(0.0, 0.03, 0.045), Vector3(0.012, 0.012, 0.05), _glow_mat(readout_col, 1.6)))
+	# The hall opts into real comparison controls; legacy props retain their dial.
+	if comparison:
+		wind_enabled = not still
+		_build_comparison_controls()
+	else:
+		var dial := Node3D.new()
+		dial.position = Vector3(0.62, 0.95, 0.28)
+		_own(dial)
+		_dial = dial
+		dial.add_child(_cylinder(Vector3.ZERO, 0.07, 0.04, _steel_mat(Color(0.4, 0.42, 0.46))))
+		# A pointer notch on the dial so its rotation is legible.
+		dial.add_child(_box(Vector3(0.0, 0.03, 0.045), Vector3(0.012, 0.012, 0.05), _glow_mat(readout_col, 1.6)))
 
-	add_child(_box(Vector3(0.55, 1.18, 0.25), Vector3(0.34, 0.18, 0.02), _matte_mat(panel_col, 0.4)))
-	_readout = _billboard_label(_readout_text(), Vector3(0.55, 1.18, 0.27), 16, readout_col)
-	add_child(_readout)
+		_own(_box(Vector3(0.55, 1.18, 0.25), Vector3(0.34, 0.18, 0.02), _matte_mat(panel_col, 0.4)))
+		_readout = _billboard_label(_readout_text(), Vector3(0.55, 1.18, 0.27), 16, readout_col)
+		_own(_readout)
 
-	add_child(_billboard_label("INTEGRATE POSITION FROM POSITION", Vector3(0.0, 1.62, 0.0), 22, label_col))
+		_own(_billboard_label("INTEGRATE POSITION FROM POSITION", Vector3(0.0, 1.62, 0.0), 22, label_col))
 
 
 func _readout_text() -> String:
+	if comparison:
+		var m := comparison_metrics()
+		var word: String = "custom"
+		for candidate in RELAXATION_PASSES:
+			if RELAXATION_PASSES[candidate] == _sim.constraint_passes:
+				word = candidate
+		return "VERLET / %d passes\n%s / %s / step %d\n\nDrop below pins: %.3f m\nMEAN |error|: %.2f%%\nWORST |error|: %.2f%%\n\nError = length / rest length - 1" % [
+			_sim.constraint_passes, word, "WIND ON" if wind_enabled else "WIND OFF", simulation_steps,
+			m.drop, m.mean_absolute_percent, m.worst_absolute_percent]
 	return "VERLET\npasses: %d\nstiffness: %.2f\n(constraints held, never solved)" % [_sim.constraint_passes, stiffness]
 
 
 func _process(delta: float) -> void:
-	if Engine.is_editor_hint():
+	if Engine.is_editor_hint() or comparison:
 		return
 	_t += delta
 	# Live cloth: re-run the integrator and rebuild only the surface positions.
 	if _sim != null:
-		# A faint breeze so the drape keeps moving (and the relaxation stays visible).
-		var gust: float = sin(_t * 0.8) * 0.6
-		_sim.gravity = Vector3(gust, -3.0, 0.3 * sin(_t * 0.5))
+		if still:
+			# Pose pinned. Constant gravity — the same vector _make_sim pre-settled under —
+			# so the cloth holds the drape ITS pass count converged to and a further step is
+			# a no-op. Two captures of one value are the same picture.
+			_sim.gravity = Vector3(0.0, -3.0, 0.0)
+		else:
+			# A faint breeze so the drape keeps moving (and the relaxation stays visible).
+			var gust: float = sin(_t * 0.8) * 0.6
+			_sim.gravity = Vector3(gust, -3.0, 0.3 * sin(_t * 0.5))
 		_sim.step()
 		if _cloth_mi != null:
 			_cloth_mi.mesh = _rebuild_cloth_mesh()
 	if _dial != null:
-		_dial.rotation.y = sin(_t * 0.3) * 0.6
+		_dial.rotation.y = 0.0 if still else sin(_t * 0.3) * 0.6
 	if _sway != null:
-		_sway.rotation.y = sin(_t * 0.25) * 0.06
+		_sway.rotation.y = 0.0 if still else sin(_t * 0.25) * 0.06
+
+
+func _build_comparison_controls() -> void:
+	# Controls and readout share a side bay so the cloth's lowest edge stays visible.
+	_own(_box(Vector3(1.0, 0.83, 0.66), Vector3(1.1, 0.16, 0.42), _matte_mat(panel_col, 0.4)))
+	for x in [0.53, 1.47]:
+		_own(_box(Vector3(x, 0.44, 0.66), Vector3(0.055, 0.82, 0.055), _steel_mat(panel_col)))
+	_own(_box(Vector3(0.92, 0.44, 0.15), Vector3(0.045, 0.88, 0.045), _steel_mat(panel_col)))
+	for i in 3:
+		var id: String = ["PASSES", "RESET", "WIND"][i]
+		var button = PUSH.instantiate()
+		button.name = id
+		button.position = Vector3(1.0 + (i - 1) * 0.38, 0.97, 0.63)
+		button.scale = Vector3.ONE * 0.8
+		button.play_press_sound = false
+		_own(button)
+		button.pressed.connect(act.bind(id))
+		buttons[id] = button
+		var caption := _billboard_label(id, button.position + Vector3(0.0, 0.015, 0.18), 32, label_col)
+		caption.pixel_size = 0.001
+		caption.outline_size = 2
+		caption.billboard = BaseMaterial3D.BILLBOARD_DISABLED
+		caption.no_depth_test = false
+		caption.rotation_degrees.x = -55
+		_own(caption)
+	_own(_box(Vector3(0.92, 1.19, 0.15), Vector3(0.87, 0.64, 0.04), _matte_mat(panel_col, 0.5)))
+	_readout = _billboard_label(_readout_text(), Vector3(0.92, 1.19, 0.175), 28, readout_col)
+	_readout.pixel_size = 0.00155
+	_readout.outline_size = 2
+	_readout.billboard = BaseMaterial3D.BILLBOARD_DISABLED
+	_readout.no_depth_test = false
+	_own(_readout)
+	var title := _billboard_label("CHANGE THE BUDGET. WATCH THE CLOTH.", Vector3(1.0, 0.81, 0.88), 32, label_col)
+	title.pixel_size = 0.001
+	title.outline_size = 2
+	title.billboard = BaseMaterial3D.BILLBOARD_DISABLED
+	title.no_depth_test = false
+	_own(title)
+	var note := _billboard_label("1 / 4 / 8 / 12 passes | each control restarts the same cloth\nWind off: compare relaxation. Wind on: keep disturbing it.", Vector3(1.0, 0.65, 0.89), 24, label_col)
+	note.pixel_size = 0.001
+	note.outline_size = 2
+	note.billboard = BaseMaterial3D.BILLBOARD_DISABLED
+	note.no_depth_test = false
+	_own(note)
+
+
+func act(id: String) -> void:
+	if not comparison:
+		return
+	if id == "PASSES":
+		var options: Array[int] = [1, 4, 8, 12]
+		var next: int = (options.find(_effective_passes()) + 1) % options.size()
+		constraint_passes = options[next]
+		_passes_pinned = true
+	elif id == "WIND":
+		wind_enabled = not wind_enabled
+	elif id != "RESET":
+		return
+	# A changed budget or wind starts from the same grid and the same pre-step count.
+	# No newly selected condition inherits the previous condition's moving state.
+	_make_sim()
+	_sig = _build_signature()
+	_refresh_comparison()
+
+
+func comparison_metrics() -> Dictionary:
+	var absolute_sum := 0.0
+	var worst := 0.0
+	var low := 0.0
+	for p in _sim.positions:
+		low = minf(low, p.y)
+	for s in _sim.springs:
+		var relative_error: float = absf(_sim.positions[s[0]].distance_to(_sim.positions[s[1]]) / s[2] - 1.0)
+		absolute_sum += relative_error
+		worst = maxf(worst, relative_error)
+	return {"drop": -low, "mean_absolute_percent": 100.0 * absolute_sum / _sim.springs.size(), "worst_absolute_percent": 100.0 * worst}
+
+
+func _physics_process(delta: float) -> void:
+	if not comparison or Engine.is_editor_hint() or _sim == null:
+		return
+	_step_accumulator += minf(maxf(delta, 0.0), 0.1)
+	while _step_accumulator + 0.000001 >= COMPARISON_STEP:
+		_step_accumulator = maxf(0.0, _step_accumulator - COMPARISON_STEP)
+		_t += COMPARISON_STEP
+		_sim.gravity = Vector3(sin(_t * 0.8) * 0.6, -3.0, 0.3 * sin(_t * 0.5)) if wind_enabled else Vector3(0.0, -3.0, 0.0)
+		_sim.step(COMPARISON_STEP)
+		simulation_steps += 1
+	_refresh_comparison()
+
+
+func _refresh_comparison() -> void:
+	if _cloth_mi != null:
+		_cloth_mi.mesh = _rebuild_cloth_mesh()
+	if _readout != null:
+		_readout.text = _readout_text()

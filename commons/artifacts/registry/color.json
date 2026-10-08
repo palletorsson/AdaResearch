@@ -17,7 +17,7 @@
 			"lookup_name": "MetamerismLab",
 			"map_ready": true,
 			"map_sequences": [
-				"color"
+				"tiling"
 			],
 			"name": "MetamerismLab",
 			"parameters": {
@@ -108,7 +108,7 @@
 				"derived_at": "2026-04-29T09:39:46.075577Z",
 				"derived_from": "aabb_size + category"
 			},
-			"qfep_connection": "One pure 580nm wave on the left, a red\u2013green duet on the right, and both resolve to spheres of the exact same yellow. Two different physical events collapse into one percept the eye cannot appeal \u2014 color as the retina's lossy compression, metamerism as where the loss shows."
+			"qfep_connection": "One pure 580nm wave on the left, a red–green duet on the right, and both resolve to spheres of the exact same yellow. Two different physical events collapse into one percept the eye cannot appeal — color as the retina's lossy compression, metamerism as where the loss shows."
 		},
 		"RotatingLaser": {
 			"category": "unknown",
@@ -127,7 +127,7 @@
 			"lookup_name": "RotatingLaser",
 			"map_ready": true,
 			"map_sequences": [
-				"color"
+				"tiling"
 			],
 			"name": "RotatingLaser",
 			"parameters": {
@@ -225,7 +225,7 @@
 				"derived_at": "2026-04-29T09:39:46.075577Z",
 				"derived_from": "aabb_size + category"
 			},
-			"qfep_connection": "Wave, focus, spread, scan, chaos \u2014 a concert rig's whole emotional vocabulary is one MultiMesh and a phase offset per beam, colors rotating on a ten-second timer. Spectacle revealed as cheap: crowd-shaped feelings driven by a pattern enum."
+			"qfep_connection": "Wave, focus, spread, scan, chaos — a concert rig's whole emotional vocabulary is one MultiMesh and a phase offset per beam, colors rotating on a ten-second timer. Spectacle revealed as cheap: crowd-shaped feelings driven by a pattern enum."
 		},
 		"SimultaneousContrast": {
 			"category": "unknown",
@@ -244,7 +244,7 @@
 			"lookup_name": "SimultaneousContrast",
 			"map_ready": true,
 			"map_sequences": [
-				"color"
+				"tiling"
 			],
 			"name": "SimultaneousContrast",
 			"parameters": {
@@ -338,10 +338,10 @@
 			"qfep_connection": "The same 0.5 gray twice, on dark and on light ground, and your visual system refuses to agree with the code. The hidden connector bar is the instrument's cruelty: proof that the difference you see was manufactured by context, never present in the value."
 		},
 		"SpectrumVisualizer": {
-			"capacity": "SEE that the color wheel is a perceptual invention \u2014 magenta is the seam where the brain closes what physics leaves open",
+			"capacity": "SEE that the color wheel is a perceptual invention — magenta is the seam where the brain closes what physics leaves open",
 			"category": "unknown",
 			"complexity": "beginner",
-			"description": "The visible spectrum bends from a line into a circle. Wavelength-to-color animation phases between linear layout (physics) and circular layout (perception). Magenta dots fill the gap that physics leaves empty \u2014 magenta is not a spectral color, it is the brain's invention to close the loop. The color wheel is a lie the brain tells to make the spectrum feel complete.",
+			"description": "The visible spectrum bends from a line into a circle. Wavelength-to-color animation phases between linear layout (physics) and circular layout (perception). Magenta dots fill the gap that physics leaves empty — magenta is not a spectral color, it is the brain's invention to close the loop. The color wheel is a lie the brain tells to make the spectrum feel complete.",
 			"dev_themes": [
 				"color",
 				"perception"
@@ -371,7 +371,7 @@
 				],
 				"size_group": "compact"
 			},
-			"qfep_connection": "Lambda between physics and perception \u2014 the linear spectrum is pure F (physics, ordered by wavelength). The circular wheel is F + E (perception, with magenta invented to fill the gap). The animation IS the lambda sweep from one to the other.",
+			"qfep_connection": "Lambda between physics and perception — the linear spectrum is pure F (physics, ordered by wavelength). The circular wheel is F + E (perception, with magenta invented to fill the gap). The animation IS the lambda sweep from one to the other.",
 			"scene": "res://algorithms/color/spectrum_visualizer/SpectrumVisualizer.tscn",
 			"size_group": "compact",
 			"tags": [
@@ -482,7 +482,7 @@
 			"lookup_name": "advancedglitch",
 			"map_ready": true,
 			"map_sequences": [
-				"color"
+				"tiling"
 			],
 			"name": "advancedglitch",
 			"parameters": {
@@ -573,12 +573,12 @@
 				"derived_at": "2026-04-29T09:39:46.075577Z",
 				"derived_from": "aabb_size + category"
 			},
-			"qfep_connection": "Datamosh, buffer overflow, memory leak \u2014 fifteen failure modes each given a pedestal, a name, and an animation schedule. Nothing here is actually broken, which is exactly how corruption becomes a repertoire: glitch as aesthetic requires the removal of loss."
+			"qfep_connection": "Datamosh, buffer overflow, memory leak — fifteen failure modes each given a pedestal, a name, and an animation schedule. Nothing here is actually broken, which is exactly how corruption becomes a repertoire: glitch as aesthetic requires the removal of loss."
 		},
 		"brick_wall_factory": {
 			"category": "unknown",
 			"complexity": "beginner",
-			"description": "grid(width, height) of BoxMesh bricks colored sequentially from a named palette \u2014 running bond pattern",
+			"description": "grid(width, height) of BoxMesh bricks colored sequentially from a named palette — running bond pattern",
 			"dev_themes": [
 				"color",
 				"perception"
@@ -693,7 +693,7 @@
 			"dna": {
 				"still_note": "AWAITING A RE-SWEEP ON A FIXED BENCH. Two separate faults were found on 2026-08-05, and the previous still_note was wrong about both. (1) THE AXIS WAS HOLLOW. The note claimed the three readings were implemented; they were not. commit 1fe54b36a says in its own message that it implemented them, and its diff never touches _add_glass_wall - the export, the MIXTURES allow-list and a thirty-line header existed and no function read the variable, so the byte-identical frames were honest. Now implemented as the header specifies: bench falls through the shipped material untouched, light sets alpha 1.0 and BLEND_MODE_ADD so the three 60-degree panes sum to a white core, retina goes opaque and unlit and builds no OmniLight3D at all. (2) THE GREEN WAS THE BENCH, AND IT IS NOT THIS ARTIFACT'S PROBLEM - it is on every sheet the rig has ever published, riemann_pump included. NatureRenderer is an autoload; its _find_world_environment walks the tree matching on CLASS, found capture_config_sweep's own staging WorldEnvironment, took its Environment resource and tweened fog_light_color to Color(0.6,0.6,0.6).lerp(Color(0.55,0.7,0.5), density), which at density 1.0 is exactly the measured RGB(130,165,118) by ratio (0.786/0.714 against 0.788/0.715). density comes from EcosystemManager restoring user://ecosystem_progression.json - the developer's own save, all 25 sequences complete - so the bench's background colour was a function of how much of the game the operator had played. Fixed in capture_config_sweep.gd: the Environment now lives on Camera3D.environment with no WorldEnvironment node for the bridge to find, the SubViewport owns its World3D, and the ecosystem autoloads are stood down. Not re-swept here - captures are serialised centrally. Expect a strong bite; if it still measures low, suspect the axis, not the fog.",
 				"declines": {
-					"pigment": "A fourth reading, refused. Subtractive mixing needs a white ground to subtract FROM, and a room of freestanding partitions has none - the light behind a cyan pane is whatever the next pane happens to be, so a pane that removed red would go black against half the room and read as an unlit slab rather than as ink. visual_color_mixing, the standing bench of the same sequence, solved this with a white TABLE. The architectural member of the family cannot borrow that answer, so it does not borrow the word."
+					"pigment": "Legacy mixture axis only (not layout=planes, added 2026-10-01 with pale backing and layered alpha tint). A fourth reading, refused. Subtractive mixing needs a white ground to subtract FROM, and a room of freestanding partitions has none - the light behind a cyan pane is whatever the next pane happens to be, so a pane that removed red would go black against half the room and read as an unlit slab rather than as ink. visual_color_mixing, the standing bench of the same sequence, solved this with a white TABLE. The architectural member of the family cannot borrow that answer, so it does not borrow the word."
 				},
 				"axes": {
 					"mixture": [
@@ -705,7 +705,7 @@
 			},
 			"category": "unknown",
 			"complexity": "beginner",
-			"description": "Office space with adaptive additive/subtractive constellations",
+			"description": "Color_Walls selects twelve freestanding colour filters, three workstations and a pale open gallery setting; filter/opaque comparison preserves passage. Cubicles and default mixing installation remain separate configurations.",
 			"dev_themes": [
 				"color",
 				"perception"
@@ -817,12 +817,20 @@
 				"approach_dir": "any",
 				"derived_at": "2026-04-29T09:39:46.075577Z",
 				"derived_from": "aabb_size + category"
+			},
+			"configuration_examples": {
+				"color_museum": {
+					"layout": "cubicles"
+				}
+			},
+			"configuration_notes": {
+				"layout": "Color_Walls selects twelve freestanding colour filters, three workstations and a pale open gallery setting; filter/opaque comparison preserves passage. Cubicles and default mixing installation remain separate configurations."
 			}
 		},
 		"color_mixing": {
 			"category": "color",
 			"complexity": "beginner",
-			"description": "Interactive color mixing \u2014 combine colors and see the result in different color spaces. Additive (light) vs subtractive (pigment) mixing made visible.",
+			"description": "Interactive color mixing — combine colors and see the result in different color spaces. Additive (light) vs subtractive (pigment) mixing made visible.",
 			"dev_themes": [
 				"color",
 				"perception"
@@ -831,7 +839,7 @@
 			"lookup_name": "color_mixing",
 			"map_ready": true,
 			"map_sequences": [
-				"color"
+				"tiling"
 			],
 			"name": "Color Mixing",
 			"parameters": {
@@ -944,7 +952,7 @@
 			"lookup_name": "color_scanner",
 			"map_ready": true,
 			"map_sequences": [
-				"color"
+				"tiling"
 			],
 			"name": "Color Scanner",
 			"parameters": {
@@ -1052,7 +1060,7 @@
 		"color_space_navigator": {
 			"category": "color",
 			"complexity": "intermediate",
-			"description": "3D RGB color cube with HSV cylinder \u2014 visualize color as a navigable 3D space. Eight corner spheres mark primary and secondary colors, 500 sample points fill the interior, and a companion HSV cylinder shows the same colors in cylindrical coordinates.",
+			"description": "3D RGB color cube with HSV cylinder — visualize color as a navigable 3D space. Eight corner spheres mark primary and secondary colors, 500 sample points fill the interior, and a companion HSV cylinder shows the same colors in cylindrical coordinates.",
 			"dev_themes": [
 				"color",
 				"perception"
@@ -1152,7 +1160,7 @@
 		"colorballs": {
 			"category": "unknown",
 			"complexity": "beginner",
-			"description": "N rigid spheres sampled from named color palettes \u2014 physics + palette = chromatic rain",
+			"description": "N rigid spheres sampled from named color palettes — physics + palette = chromatic rain",
 			"dev_themes": [
 				"color",
 				"perception"
@@ -1275,9 +1283,9 @@
 			"lookup_name": "coloredlines",
 			"map_ready": true,
 			"map_sequences": [
-				"color",
 				"unused",
-				"wavefunctions"
+				"wavefunctions",
+				"tiling"
 			],
 			"name": "Colored Lines",
 			"parameters": {
@@ -1379,7 +1387,7 @@
 		"colorsheets": {
 			"category": "color",
 			"complexity": "beginner",
-			"description": "Color reference sheets showing systematic color relationships \u2014 hue wheels, value scales, saturation gradients. A visual periodic table of color.",
+			"description": "Color reference sheets showing systematic color relationships — hue wheels, value scales, saturation gradients. A visual periodic table of color.",
 			"dev_themes": [
 				"color",
 				"perception"
@@ -1467,7 +1475,7 @@
 				1,
 				1
 			],
-			"qfep_connection": "Twenty palettes filed under culture and feeling, sixteen swatches each, captioned and hung as reference. The wall works precisely by suppressing everything about a color that is not its value \u2014 mood and heritage normalized into a 4\u00d74 grid."
+			"qfep_connection": "Twenty palettes filed under culture and feeling, sixteen swatches each, captioned and hung as reference. The wall works precisely by suppressing everything about a color that is not its value — mood and heritage normalized into a 4×4 grid."
 		},
 		"colortrails": {
 			"category": "unknown",
@@ -1486,8 +1494,8 @@
 			"lookup_name": "colortrails",
 			"map_ready": true,
 			"map_sequences": [
-				"color",
-				"unused"
+				"unused",
+				"tiling"
 			],
 			"name": "colortrails",
 			"parameters": {
@@ -1568,7 +1576,7 @@
 				"max_dimension_m": 0,
 				"measured_at": "2026-04-29T07:09:56.762620Z"
 			},
-			"qfep_connection": "Each hand writes a spline ribbon that begins dying the moment it exists \u2014 trail_lifetime caps the drawing at the last 1.75 seconds of you. Gesture is archived at exactly the rate it is erased, so the only way to keep the trace alive is to keep moving."
+			"qfep_connection": "Each hand writes a spline ribbon that begins dying the moment it exists — trail_lifetime caps the drawing at the last 1.75 seconds of you. Gesture is archived at exactly the rate it is erased, so the only way to keep the trace alive is to keep moving."
 		},
 		"dark_side_prism": {
 			"dna": {
@@ -1597,7 +1605,7 @@
 			},
 			"category": "unknown",
 			"complexity": "beginner",
-			"description": "Snell's law visualized \u2014 white beam enters prism, refracts into 7-color fan by wavelength-dependent angle",
+			"description": "Snell's law visualized — white beam enters prism, refracts into 7-color fan by wavelength-dependent angle",
 			"dev_themes": [
 				"color",
 				"perception"
@@ -1611,7 +1619,7 @@
 			"lookup_name": "dark_side_prism",
 			"map_ready": true,
 			"map_sequences": [
-				"color"
+				"tiling"
 			],
 			"name": "dark_side_prism",
 			"parameters": {
@@ -1728,7 +1736,7 @@
 			"lookup_name": "disco_lights",
 			"map_ready": true,
 			"map_sequences": [
-				"color"
+				"tiling"
 			],
 			"name": "disco_lights",
 			"parameters": {
@@ -1790,12 +1798,12 @@
 				"derived_at": "2026-04-29T09:39:46.075577Z",
 				"derived_from": "aabb_size + category"
 			},
-			"qfep_connection": "The geometry is a default sphere; the party is three sine waves at incommensurate frequencies inside the light() pass, red, green, and blue never returning to the same phase together. Disco as a Lissajous figure \u2014 spectacle located entirely in the lighting equation."
+			"qfep_connection": "The geometry is a default sphere; the party is three sine waves at incommensurate frequencies inside the light() pass, red, green, and blue never returning to the same phase together. Disco as a Lissajous figure — spectacle located entirely in the lighting equation."
 		},
 		"glitchcolor": {
 			"category": "color",
 			"complexity": "intermediate",
-			"description": "Color glitch effects \u2014 channel shifting, bit corruption, and chromatic aberration. What happens when color data breaks in beautiful ways.",
+			"description": "Color glitch effects — channel shifting, bit corruption, and chromatic aberration. What happens when color data breaks in beautiful ways.",
 			"dev_themes": [
 				"color",
 				"perception"
@@ -1804,7 +1812,7 @@
 			"lookup_name": "glitchcolor",
 			"map_ready": true,
 			"map_sequences": [
-				"color"
+				"tiling"
 			],
 			"name": "Glitch Color",
 			"scene": "res://algorithms/color/glitchcolor/glitchcolor.tscn",
@@ -1895,7 +1903,7 @@
 				"derived_at": "2026-04-29T09:39:46.075577Z",
 				"derived_from": "aabb_size + category"
 			},
-			"qfep_connection": "Bit rotation, XOR, quantization \u2014 integer operations performed on color, each cube a different violence to the byte. The resulting palette was never chosen by anyone; it is what the number system looks like when you watch it work."
+			"qfep_connection": "Bit rotation, XOR, quantization — integer operations performed on color, each cube a different violence to the byte. The resulting palette was never chosen by anyone; it is what the number system looks like when you watch it work."
 		},
 		"grab_stick": {
 			"category": "unknown",
@@ -1914,9 +1922,9 @@
 			"lookup_name": "grab_stick",
 			"map_ready": true,
 			"map_sequences": [
-				"color",
 				"proceduralgeneration",
-				"proceduralgeneration_all"
+				"proceduralgeneration_all",
+				"tiling"
 			],
 			"name": "grab_stick",
 			"parameters": {
@@ -2012,12 +2020,12 @@
 				"derived_at": "2026-04-29T09:39:46.075577Z",
 				"derived_from": "aabb_size + category"
 			},
-			"qfep_connection": "Grab it, point it, and it reads the texture's stored pixel at the hit UV \u2014 the asset, not the light. Color here was never a property of surfaces but an image wrapped around geometry, and the stick turns that archival fact into something you hold."
+			"qfep_connection": "Grab it, point it, and it reads the texture's stored pixel at the hit UV — the asset, not the light. Color here was never a property of surfaces but an image wrapped around geometry, and the stick turns that archival fact into something you hold."
 		},
 		"grab_stick_scanner": {
 			"category": "unknown",
 			"complexity": "beginner",
-			"description": "Grabbable stick with a UV-based texture-pixel scanner \u2014 samples the hit-point colour from any surface the tip touches, displaying the RGB value live.",
+			"description": "Grabbable stick with a UV-based texture-pixel scanner — samples the hit-point colour from any surface the tip touches, displaying the RGB value live.",
 			"dev_themes": [
 				"color",
 				"perception"
@@ -2031,7 +2039,7 @@
 			"lookup_name": "grab_stick_scanner",
 			"map_ready": true,
 			"map_sequences": [
-				"color"
+				"tiling"
 			],
 			"name": "grab_stick_scannerk",
 			"parameters": {
@@ -2127,7 +2135,7 @@
 				"derived_at": "2026-04-29T09:39:46.075577Z",
 				"derived_from": "aabb_size + category"
 			},
-			"qfep_connection": "e_entropy: the color thief \u2014 a grabbable stick whose tip samples the hit-point pixel of any surface and reports RGB live. Proof that what you see is an agreement: the number changes with the light, the angle, the neighbor."
+			"qfep_connection": "e_entropy: the color thief — a grabbable stick whose tip samples the hit-point pixel of any surface and reports RGB live. Proof that what you see is an agreement: the number changes with the light, the angle, the neighbor."
 		},
 		"grabcolorcollection": {
 			"dna": {
@@ -2156,7 +2164,7 @@
 			"lookup_name": "grabcolorcollection",
 			"map_ready": true,
 			"map_sequences": [
-				"color"
+				"tiling"
 			],
 			"name": "grabcolorcollection",
 			"parameters": {
@@ -2246,7 +2254,7 @@
 				"derived_at": "2026-04-29T09:39:46.075577Z",
 				"derived_from": "aabb_size + category"
 			},
-			"qfep_connection": "A palette becomes graspable paper: pull a sheet off the stack and the system names its color by nearest neighbor in the web-color table. Every hue you hold is snapped to the vocabulary a 1990s standards body left behind \u2014 continuous color, colonized by a finite lexicon."
+			"qfep_connection": "A palette becomes graspable paper: pull a sheet off the stack and the system names its color by nearest neighbor in the web-color table. Every hue you hold is snapped to the vocabulary a 1990s standards body left behind — continuous color, colonized by a finite lexicon."
 		},
 		"gridcolorizer": {
 			"category": "unknown",
@@ -2335,7 +2343,7 @@
 		"k_means_color": {
 			"category": "color",
 			"complexity": "intermediate",
-			"description": "Extract dominant colors from images using k-means clustering in color space. Machine learning meets aesthetics \u2014 the algorithm behind every 'color palette from image' tool.",
+			"description": "Extract dominant colors from images using k-means clustering in color space. Machine learning meets aesthetics — the algorithm behind every 'color palette from image' tool.",
 			"dev_themes": [
 				"art",
 				"color",
@@ -2425,12 +2433,12 @@
 				1,
 				1
 			],
-			"qfep_connection": "The 'Ada Lovelace portrait' being quantized is itself synthesized \u2014 skin tones assigned by distance from center \u2014 so k-means clusters a caricature into k representatives of a representation. The double compression is the honest part: every palette-from-image tool does this to its subject."
+			"qfep_connection": "The 'Ada Lovelace portrait' being quantized is itself synthesized — skin tones assigned by distance from center — so k-means clusters a caricature into k representatives of a representation. The double compression is the honest part: every palette-from-image tool does this to its subject."
 		},
 		"minimalglitch": {
 			"category": "color",
 			"complexity": "beginner",
-			"description": "Minimal glitch aesthetics \u2014 subtle data corruption effects that reveal the digital substrate beneath visual representation.",
+			"description": "Minimal glitch aesthetics — subtle data corruption effects that reveal the digital substrate beneath visual representation.",
 			"dev_themes": [
 				"art",
 				"color",
@@ -2440,7 +2448,7 @@
 			"lookup_name": "minimalglitch",
 			"map_ready": true,
 			"map_sequences": [
-				"color"
+				"tiling"
 			],
 			"name": "Minimal Glitch",
 			"scene": "res://algorithms/color/minimalglitch/minimalglitch.tscn",
@@ -2531,12 +2539,12 @@
 				"derived_at": "2026-04-29T09:39:46.075577Z",
 				"derived_from": "aabb_size + category"
 			},
-			"qfep_connection": "Corruption at survivable dosage: fifteen cubes cycling well-behaved functions that impersonate damage, in a demo that ships its own camera and lighting. That total safety is the aesthetic claim \u2014 glitch consumed as style only once it is separated from loss."
+			"qfep_connection": "Corruption at survivable dosage: fifteen cubes cycling well-behaved functions that impersonate damage, in a demo that ships its own camera and lighting. That total safety is the aesthetic claim — glitch consumed as style only once it is separated from loss."
 		},
 		"pillarcolorcollection": {
 			"category": "unknown",
 			"complexity": "beginner",
-			"description": "Spawns a grid of pillar prefabs and cycles palette-driven materials from the shared color catalog.",
+			"description": "Named palette columns by default; spatial_gradient maps X/Z to hue/saturation and height to value, with a matching colour ceiling, dark floor, grey reference and pickable RGB/HSV sampler.",
 			"dev_themes": [
 				"color",
 				"perception"
@@ -2646,6 +2654,14 @@
 				"approach_dir": "any",
 				"derived_at": "2026-04-29T09:42:50.263Z",
 				"derived_from": "manual"
+			},
+			"configuration_examples": {
+				"color_museum": {
+					"layout": "spatial_gradient"
+				}
+			},
+			"configuration_notes": {
+				"layout": "A 35-pillar field samples an HSV gradient by x/z position; the default retains the palette collection."
 			}
 		},
 		"shelf": {
@@ -2665,7 +2681,7 @@
 			"lookup_name": "shelf",
 			"map_ready": true,
 			"map_sequences": [
-				"color"
+				"tiling"
 			],
 			"name": "shelf",
 			"parameters": {
@@ -2758,7 +2774,7 @@
 				"derived_at": "2026-04-29T09:39:46.075577Z",
 				"derived_from": "aabb_size + category"
 			},
-			"qfep_connection": "Display furniture that holds other artifacts at hand height \u2014 the gallery's quiet servant, staging the exhibits without joining them."
+			"qfep_connection": "Display furniture that holds other artifacts at hand height — the gallery's quiet servant, staging the exhibits without joining them."
 		},
 		"shelf_with_stickers": {
 			"category": "unknown",
@@ -2777,7 +2793,7 @@
 			"lookup_name": "shelf_with_stickers",
 			"map_ready": true,
 			"map_sequences": [
-				"color"
+				"tiling"
 			],
 			"name": "shelf_with_stickers",
 			"parameters": {
@@ -2870,12 +2886,12 @@
 				"derived_at": "2026-04-29T09:39:46.075577Z",
 				"derived_from": "aabb_size + category"
 			},
-			"qfep_connection": "A CSG-carved wooden pigeonhole shelf whose compartments hold the project's own grant-application doubts as grabbable papers \u2014 'risk of aestheticizing harm,' 'what if the queer potential gets commodified.' Institutional self-audit turned into furniture you can rummage."
+			"qfep_connection": "A CSG-carved wooden pigeonhole shelf whose compartments hold the project's own grant-application doubts as grabbable papers — 'risk of aestheticizing harm,' 'what if the queer potential gets commodified.' Institutional self-audit turned into furniture you can rummage."
 		},
 		"spectrum_forest": {
 			"category": "unknown",
 			"complexity": "beginner",
-			"description": "hue(x) = remap(x, bounds) \u2014 5000 vertical lines colored by x-position across the visible spectrum",
+			"description": "hue(x) = remap(x, bounds) — 5000 vertical lines colored by x-position across the visible spectrum",
 			"dev_themes": [
 				"color",
 				"perception"
@@ -3002,7 +3018,7 @@
 			"lookup_name": "spherecolors",
 			"map_ready": true,
 			"map_sequences": [
-				"color"
+				"tiling"
 			],
 			"name": "spherecolors",
 			"parameters": {
@@ -3112,7 +3128,7 @@
 			"lookup_name": "strobe_lasers",
 			"map_ready": true,
 			"map_sequences": [
-				"color"
+				"tiling"
 			],
 			"name": "strobe_lasers",
 			"parameters": {
@@ -3204,7 +3220,7 @@
 				"derived_at": "2026-04-29T09:39:46.076073Z",
 				"derived_from": "aabb_size + category"
 			},
-			"qfep_connection": "Sixteen beams and one visibility bit flipped at 12Hz \u2014 the nightclub's oldest trick is a square wave applied to the whole scene at once. The strobe outsources half the animation to the viewer's retina, which insists on continuity the code never renders."
+			"qfep_connection": "Sixteen beams and one visibility bit flipped at 12Hz — the nightclub's oldest trick is a square wave applied to the whole scene at once. The strobe outsources half the animation to the viewer's retina, which insists on continuity the code never renders."
 		},
 		"textureglitch": {
 			"category": "unknown",
@@ -3223,7 +3239,7 @@
 			"lookup_name": "textureglitch",
 			"map_ready": true,
 			"map_sequences": [
-				"color"
+				"tiling"
 			],
 			"name": "textureglitch",
 			"parameters": {
@@ -3434,7 +3450,7 @@
 				"derived_at": "2026-04-29T09:39:46.076073Z",
 				"derived_from": "aabb_size + category"
 			},
-			"qfep_connection": "f_order: additive mixing staged live \u2014 channels summing to hues before your eyes; RGB shown as the negotiation it is."
+			"qfep_connection": "f_order: additive mixing staged live — channels summing to hues before your eyes; RGB shown as the negotiation it is."
 		},
 		"color_sets_overview": {
 			"dna": {
@@ -3456,7 +3472,7 @@
 			},
 			"name": "Color Sets Overview",
 			"lookup_name": "color_sets_overview",
-			"description": "Interactive color set grabber \u2014 explore color families, hue relationships, and palette structures through physical manipulation.",
+			"description": "Twelve grabbable palette sets mounted on a framed 6.4 m wall; default presentation remains available.",
 			"scene": "res://algorithms/color/grabcolor/color_sets_overview.tscn",
 			"category": "color",
 			"interaction": "grab",
@@ -3520,6 +3536,14 @@
 				"approach_dir": "any",
 				"derived_at": "2026-04-29T09:39:46.076073Z",
 				"derived_from": "aabb_size + category"
+			},
+			"configuration_examples": {
+				"color_museum": {
+					"mount": "wall"
+				}
+			},
+			"configuration_notes": {
+				"mount": "Twelve grabbable palette sets mounted on a framed 6.4 m wall; default presentation remains available."
 			}
 		},
 		"subpixel_display": {
@@ -3719,7 +3743,13 @@
 			"spatial_needs": {
 				"footprint_cells": 4,
 				"clearance_m": 0.6
-			}
+			},
+			"map_sequences": [
+				"tiling"
+			],
+			"lookup_name": "one_bulb_room",
+			"map_ready": true,
+			"include_in_map_data": true
 		},
 		"three_taps": {
 			"name": "Three Taps",
@@ -3756,7 +3786,13 @@
 			"spatial_needs": {
 				"footprint_cells": 4,
 				"clearance_m": 0.6
-			}
+			},
+			"map_sequences": [
+				"tiling"
+			],
+			"lookup_name": "hue_carousel",
+			"map_ready": true,
+			"include_in_map_data": true
 		},
 		"neon_garden": {
 			"name": "Neon Garden",
@@ -3774,7 +3810,13 @@
 			"spatial_needs": {
 				"footprint_cells": 3,
 				"clearance_m": 0.6
-			}
+			},
+			"map_sequences": [
+				"tiling"
+			],
+			"lookup_name": "neon_garden",
+			"map_ready": true,
+			"include_in_map_data": true
 		},
 		"the_dressing_room": {
 			"name": "The Dressing Room",
@@ -3812,7 +3854,13 @@
 			"spatial_needs": {
 				"footprint_cells": 4,
 				"clearance_m": 0.6
-			}
+			},
+			"map_sequences": [
+				"tiling"
+			],
+			"lookup_name": "two_roads",
+			"map_ready": true,
+			"include_in_map_data": true
 		},
 		"complementary_couple": {
 			"name": "Complementary Couple",
@@ -3943,7 +3991,7 @@
 	},
 	"registry_info": {
 		"category": "color",
-		"description": "Color theory and manipulation artifacts \u2014 mixing, scanning, clustering, and glitch aesthetics. Exploring color as data, perception, and creative material.",
+		"description": "Color theory and manipulation artifacts — mixing, scanning, clustering, and glitch aesthetics. Exploring color as data, perception, and creative material.",
 		"name": "color",
 		"theoretical_grounding": "Color spaces (RGB, HSV, Lab), perceptual color science, k-means clustering for palette extraction, color mixing models (additive, subtractive)"
 	}

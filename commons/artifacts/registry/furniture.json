@@ -2733,7 +2733,7 @@
 		"vr_component_demo": {
 			"category": "tools",
 			"complexity": "beginner",
-			"description": "Showcase panel of all interactable and display components. Sliders (vertical, horizontal, snap, bipolar, axis), dials, buttons, joystick, lever, wheel, XY pad, plus VR audio controls and waveform/spectrum/Lissajous displays. Press R to rebuild layout.",
+			"description": "A compact physical console with 11 family pages and all 28 original control/display specimens. Previous and Next buttons bring each family to operating height. Pages load fresh controls; R resets the current page. Text and legacy values appear on flat surfaces. Page changes wait for held controls.",
 			"dev_themes": [
 				"tools",
 				"ui",
@@ -2749,8 +2749,8 @@
 			"parameters": {
 				"footprint": [
 					2.0,
-					4.0,
-					5.0
+					2.0,
+					1.0
 				],
 				"size_group": "environment"
 			},
@@ -2791,7 +2791,7 @@
 				"vertex_estimate": "varies"
 			},
 			"spatial_needs": {
-				"platform": "table",
+				"platform": "floor",
 				"footprint_cells": 2,
 				"clearance": {
 					"front": 2,
@@ -2800,7 +2800,7 @@
 					"right": 2
 				},
 				"player_position": "front",
-				"wall_backing": true,
+				"wall_backing": false,
 				"orientation": "face_approach",
 				"isolation": 0,
 				"cluster_with": [],
@@ -2810,21 +2810,22 @@
 			},
 			"measurements": {
 				"aabb_size": [
-					1.36,
-					3.6,
-					0.24
+					1.1,
+					1.725,
+					0.535
 				],
 				"aabb_center": [
-					0.02,
-					-0.9,
-					0.09
+					0,
+					0.8625,
+					-0.0275
 				],
 				"grid_cells": [
-					2.0,
-					1.0
+					2,
+					1
 				],
-				"max_dimension_m": 3.6,
-				"measured_at": "2026-04-29T07:09:56.762620Z"
+				"max_dimension_m": 1.725,
+				"measured_at": "2026-09-21",
+				"source": "doc/reports/interfaces-2026-09-21/console-placement/after/checks.json; visible meshes across all 11 pages"
 			},
 			"footprint_measured": [
 				2.0,
@@ -2841,7 +2842,7 @@
 				"derived_at": "2026-04-29T09:39:46.110524Z",
 				"derived_from": "aabb_size + category"
 			},
-			"qfep_connection": "Every lever, dial, slider and pad the world offers, removed from context and pinned to one white backdrop \u2014 a natural history display of control itself. Stripped of anything to control, each interactable confesses its real output: a normalized number."
+			"qfep_connection": "The hand stays at one console while its available operations change. Continuous, stepped and returning controls expose different rules for accepting a gesture and retaining its result; paging decides what is available together."
 		},
 		"world_map_tablet": {
 			"category": "navigation",

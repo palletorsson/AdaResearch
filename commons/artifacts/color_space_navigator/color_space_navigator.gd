@@ -1,17 +1,17 @@
 # @identity
-# essence: a navigable 3D color space — RGB cube with wireframe edges, 8 corner spheres for primary/secondary colors, and ~500 sample points filling the interior; optional HSL cylinder shown alongside
-# desire: to make color theory spatial — the player stands inside the RGB cube and sees every achievable color as a point in space; the abstract three-channel model becomes a room you can walk through
-# critical_parameter: cube_size (0.7m default) — scales the entire color space; sample_count controls point density; show_hsl_cylinder toggles the HSL companion model beside the RGB cube
-# triggers: _ready() builds RGB cube (edges, corner spheres, sample MultiMesh) then optionally builds HSL cylinder; apply_grid_config() allows runtime reconfiguration of cube_size, sample_count, show_hsl
-# emerges: the companion — when show_hsl_cylinder is true, both models appear side by side, making the transformation between color spaces a spatial comparison rather than a formula
-# needs: apply_grid_config [has]; VR navigation through the space [missing — no grab/highlight on sample points]; HSL toggle control [missing VR button, has config flag]; RGB corner labels [has]
-# relationships: color sequence capstone map Color_Walls; conceptual pair with science_screen (2D color formula) vs this (3D color space); MultiMesh for performance at 500+ points
-# truth: a color is a position — color_space_navigator proves this by placing every achievable hue at its exact coordinate in a cube you can inhabit
+# essence: two finite colour-coordinate models: a 0.7 m RGB cube and an HSV cylinder, each with 500 samples by default
+# desire: compare straight channel coordinates with hue angle, saturation radius and value height
+# critical_parameter: cube_size controls display scale; sample_count controls displayed sampling density
+# triggers: _ready builds both displays; a comparison mount supplies a standing plinth
+# emerges: the same colour values admit different spatial organisations; the black corner is brightened for visibility
+# needs: no sample picking or body-scale navigation is implemented in this tabletop configuration
+# relationships: Color_Walls follows the cubicle visibility encounter with coordinate models and interpolation
+# truth: displayed samples are a finite model of RGB/HSV values, not every achievable colour or a perceptually uniform space
 
 extends Node3D
 class_name ColorSpaceNavigator
 
-## 3D RGB color cube — walk through color as a navigable 3D space.
+## Finite RGB cube and HSV cylinder for comparing colour coordinates.
 ## Eight corner spheres show primary/secondary colors, edges outline the cube,
 ## and ~500 random sample points fill the interior via MultiMesh.
 
@@ -38,6 +38,18 @@ func _ready() -> void:
 	_build_rgb_cube()
 	if show_hsl_cylinder:
 		_build_hsl_cylinder()
+	if str(get_meta("config_mount", "")) == "comparison":
+		var table := MeshInstance3D.new()
+		table.name = "ColourModelPlinth"
+		var box := BoxMesh.new()
+		box.size = Vector3(1.85,0.8,0.85)
+		table.mesh = box
+		table.position = Vector3(0.45,-0.8,0)
+		var mat := StandardMaterial3D.new()
+		mat.albedo_color = Color("cdc5ba")
+		table.material_override = mat
+		add_child(table)
+		table.create_convex_collision()
 
 
 # =============================================================================
@@ -187,7 +199,7 @@ func _add_axis_label(text: String, pos: Vector3, color: Color) -> void:
 
 
 # =============================================================================
-# HSL Cylinder (optional companion display)
+# HSV cylinder (legacy HSL identifiers retained for existing scenes/configuration)
 # =============================================================================
 
 func _build_hsl_cylinder() -> void:
@@ -204,7 +216,8 @@ func _build_hsl_cylinder() -> void:
 	var im := ImmediateMesh.new()
 	im.surface_begin(Mesh.PRIMITIVE_LINES)
 
-	# Draw horizontal rings at different lightness levels
+	# Draw horizontal rings at different HSV value levels. The local variable and
+	# older HSL member names are retained for compatibility; Color.from_hsv decides the model.
 	for s in range(stack_count + 1):
 		var y := -half_h + cyl_height * float(s) / float(stack_count)
 		var lightness := float(s) / float(stack_count)
@@ -248,14 +261,14 @@ func _build_hsl_cylinder() -> void:
 	_hsl_edge_mesh.material_override = edge_mat
 	add_child(_hsl_edge_mesh)
 
-	# --- HSL sample points via MultiMesh ---
+	# --- HSV sample points via MultiMesh ---
 	_hsl_sample_multimesh = _create_sample_points_hsl(offset, cyl_radius, cyl_height)
 	add_child(_hsl_sample_multimesh)
 
 	# --- Axis labels ---
 	_add_axis_label("H", Vector3(cyl_radius + 0.06, 0, 0) + offset, Color(1.0, 0.7, 0.3))
 	_add_axis_label("S", Vector3(0, 0, cyl_radius + 0.06) + offset, Color(0.7, 0.7, 0.7))
-	_add_axis_label("L", Vector3(0, half_h + 0.06, 0) + offset, Color.WHITE)
+	_add_axis_label("V", Vector3(0, half_h + 0.06, 0) + offset, Color.WHITE)
 
 	# --- Title ---
 	var title := Label3D.new()

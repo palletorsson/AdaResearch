@@ -1,58 +1,131 @@
 extends Node3D
-## Four open sightlines. Rods remain where the visitor releases them.
+## Museum studies of a line's material and its relations on separate plinths.
 ## The wall drawings stay fixed, so a moved body can disagree with its first view.
 const LINE := preload("res://commons/artifacts/line_relations_gallery/line_body.gd")
 const DETAIL := preload("res://commons/scenes/em/em_detail.gd")
 const KIT := preload("res://commons/artifacts/_hangar/hangar_kit.gd")
+const MUSEUM_STYLE := preload("res://commons/primitives/line/museum_line_style.gd")
 var lines: Array[Node3D] = []
 var first_poses: Array[Transform3D] = []
 
 func get_artifact_reaction_targets() -> Array:
-	# Each held rod is an example. A strike must not erase all four lanes.
+	# Each held rod is an example. A strike must not erase the whole gallery.
 	var targets: Array = lines.duplicate()
 	for child in get_children():
 		if child is MeshInstance3D: targets.append(child)
 	return targets
 
-const LANES := [-8.0,-3.0,2.0,7.0]
-const TITLES := ["TWO LINES / + AND X", "PARALLEL / BETWEEN", "VERTICAL / HORIZON", "MORE LINES / GRID"]
+const PODIUM_TOP := 0.9
+const RELATION_SPAN := 1.2
+const CROSS_DEPTH := 0.18
+const FOLLOW_COLUMN_CENTRE := Vector3(2,0,4.5)
 
 func _ready() -> void:
-	for i in range(4):
-		var x: float = LANES[i]
-		floor_words(TITLES[i],Vector3(x,0.016,-3.3),Vector2(3.4,0.2))
-		# A small empty viewing mark gives the eye a place to start, not a cage.
-		paint(Vector3(x-0.38,0.012,-3.9),Vector3(x+0.38,0.012,-3.9),0.04,Color("282b30"))
-	# Two pairs: same spans, different relations. The skins have thickness,
-	# so the two bars occupy slightly separated depth planes.
-	rod("plus_horizontal",Vector3(-8,1.35,0),Vector3.RIGHT,2.0,"stick")
-	rod("plus_vertical",Vector3(-8,1.35,0.07),Vector3.UP,2.0,"stick")
-	rod("cross_a",Vector3(-8,1.35,4),Vector3(1,1,0).normalized(),2.0,"stick")
-	rod("cross_b",Vector3(-8,1.35,4.07),Vector3(1,-1,0).normalized(),2.0,"stick")
-	rod("rail_a",Vector3(-3.65,1.0,1.0),Vector3.BACK,3.0,"plank")
-	rod("rail_b",Vector3(-2.35,1.0,1.0),Vector3.BACK,3.0,"plank")
-	rod("measure_a",Vector3(-3,1.05,5.0),Vector3.RIGHT,2.0,"measure")
-	rod("measure_b",Vector3(-3,1.45,5.0),Vector3.RIGHT,2.0,"measure")
-	rod("upright_a",Vector3(1.15,1.25,1),Vector3.UP,2.4,"beam")
-	rod("upright_b",Vector3(2.85,1.25,1),Vector3.UP,2.4,"beam")
-	rod("horizon",Vector3(2,1.55,4.0),Vector3.RIGHT,3.2,"light")
+	relation_podiums()
+	material_podium()
+	# Later studies keep the transition from a plane to a spatial grid.
 	for k in range(3):
 		var v: float = (k-1)*0.8
-		rod("grid_horizontal_%d"%k,Vector3(7,1.35+v,1.0),Vector3.RIGHT,2.4,"stick")
-		rod("grid_vertical_%d"%k,Vector3(7+v,1.35,1.08),Vector3.UP,2.4,"stick")
+		rod("grid_horizontal_%d"%k,Vector3(7,1.35+v,5.0),Vector3.RIGHT,2.4,"stick")
+		rod("grid_vertical_%d"%k,Vector3(7+v,1.35,5.08),Vector3.UP,2.4,"stick")
 	# A sparse spatial grid beyond the planar one: walking sideways separates
 	# its depth planes. It deliberately offers no fitted surfaces.
-	rod("depth_a",Vector3(6.2,1.25,5.0),Vector3.BACK,2.4,"beam")
-	rod("depth_b",Vector3(7.8,1.25,5.0),Vector3.BACK,2.4,"beam")
-	rod("depth_cross",Vector3(7,1.25,5.0),Vector3.RIGHT,2.4,"stick")
+	rod("depth_a",Vector3(6.2,1.25,8.5),Vector3.BACK,2.4,"beam")
+	rod("depth_b",Vector3(7.8,1.25,8.5),Vector3.BACK,2.4,"beam")
+	rod("depth_cross",Vector3(7,1.25,8.5),Vector3.RIGHT,2.4,"stick")
 	floor_words("GRAB A LINE. LEAVE ANOTHER ARRANGEMENT.",Vector3(-0.5,0.016,8.0),Vector2(7,0.22))
 	wall_studies()
 	wall_planks()
 	room_perspective()
-	# One continuous mark runs right into the east wall, then up its face.
-	paint(Vector3(-6,0.016,13.7),Vector3(12.49,0.016,13.7),0.065,Color("202329"))
-	paint(Vector3(12.49,0.016,13.7),Vector3(12.49,3.0,13.7),0.065,Color("202329"))
-	floor_words("FOLLOW THIS LINE",Vector3(7.5,0.018,14.1),Vector2(3.5,0.23))
+	follow_over_column()
+
+func follow_over_column() -> void:
+	# The eye can keep following; the visitor must leave the mark to walk around.
+	# This solid two-metre column occupies the open centre, away from the grids.
+	var column := MUSEUM_STYLE.plinth(self,FOLLOW_COLUMN_CENTRE+Vector3.UP,Vector3(1.15,2,1.15))
+	column.name="FollowColumn"
+	var ink := StandardMaterial3D.new();ink.albedo_color=Color("202329");ink.roughness=0.8
+	var marks := Node3D.new();marks.name="FollowRoute";marks.position=FOLLOW_COLUMN_CENTRE;add_child(marks)
+	# Thin ribbons hug five surfaces: floor, front, top, back, floor.
+	var ribbons := [
+		["Approach",Vector3(0,0.012,-2.6875),Vector3(0.10,0.003,4.225)],
+		["Up",Vector3(0,1.006,-0.577),Vector3(0.10,1.988,0.006)],
+		["Over",Vector3(0,2.002,0),Vector3(0.10,0.006,1.16)],
+		["Down",Vector3(0,1.006,0.577),Vector3(0.10,1.988,0.006)],
+		["Continue",Vector3(0,0.012,2.9875),Vector3(0.10,0.003,4.825)],
+	]
+	for entry in ribbons:
+		var stripe := MeshInstance3D.new();stripe.name=entry[0]
+		var box := BoxMesh.new();box.size=entry[2]
+		stripe.mesh=box;stripe.material_override=ink;stripe.position=entry[1]
+		stripe.cast_shadow=GeometryInstance3D.SHADOW_CASTING_SETTING_OFF;marks.add_child(stripe)
+	floor_words("START",FOLLOW_COLUMN_CENTRE+Vector3(0,0.018,-5.35),Vector2(0.8,0.20))
+	get_child(get_child_count()-1).name="FollowStart"
+	floor_words("FOLLOW THIS LINE",FOLLOW_COLUMN_CENTRE+Vector3(1.9,0.018,-3.3),Vector2(2.8,0.27))
+	get_child(get_child_count()-1).name="FollowInvitation"
+	study_light("FollowLight",FOLLOW_COLUMN_CENTRE+Vector3(-2.2,4.1,-2.5),FOLLOW_COLUMN_CENTRE+Vector3(0,1.2,0))
+
+func relation_podiums() -> void:
+	# One metre twenty between point centres in every study. The relationship
+	# changes; endpoint appearance and span do not. Leave 2.2m gaps for walking.
+	var titles := ["HORIZONTAL","VERTICAL","PARALLEL","PLUS","X"]
+	for i in range(5):
+		var x := -8.0+float(i)*4.0
+		podium("RelationPodium%d"%i,Vector3(x,0,0),Vector3(1.8,PODIUM_TOP,1.15),titles[i])
+		study_light("RelationLight%d"%i,Vector3(x,3.9,-1.1),Vector3(x,1.3,0))
+	var bottom := PODIUM_TOP+LINE.ENDPOINT_RADIUS
+	var centre := bottom+RELATION_SPAN*0.5
+	rod("horizontal",Vector3(-8,bottom,0),Vector3.RIGHT,RELATION_SPAN,"point_line")
+	rod("vertical",Vector3(-4,centre,0),Vector3.UP,RELATION_SPAN,"point_line")
+	rod("parallel_a",Vector3(0,bottom,0),Vector3.RIGHT,RELATION_SPAN,"point_line")
+	rod("parallel_b",Vector3(0,bottom+0.5,0),Vector3.RIGHT,RELATION_SPAN,"point_line")
+	rod("plus_horizontal",Vector3(4,centre,-CROSS_DEPTH*0.5),Vector3.RIGHT,RELATION_SPAN,"point_line")
+	rod("plus_vertical",Vector3(4,centre,CROSS_DEPTH*0.5),Vector3.UP,RELATION_SPAN,"point_line")
+	var cross_y := bottom+RELATION_SPAN*0.5/sqrt(2.0)
+	rod("cross_a",Vector3(8,cross_y,-CROSS_DEPTH*0.5),Vector3(1,1,0).normalized(),RELATION_SPAN,"point_line")
+	rod("cross_b",Vector3(8,cross_y,CROSS_DEPTH*0.5),Vector3(1,-1,0).normalized(),RELATION_SPAN,"point_line")
+	floor_words("TWO ENDS. ANOTHER RELATION.",Vector3(0,0.016,-2.0),Vector2(5.5,0.22))
+
+func material_podium() -> void:
+	podium("MaterialPodium",Vector3(-7,0,6),Vector3(3.6,PODIUM_TOP,1.2),"A BODY FOR A LINE")
+	var skins := ["plank","stick","light","measure"]
+	var labels := ["PLANK","ROD","LIGHT","MEASURE"]
+	for i in range(4):
+		var x := -8.2+float(i)*0.8
+		rod("material_"+skins[i],Vector3(x,PODIUM_TOP+0.9,6),Vector3.UP,1.8,skins[i])
+		if skins[i]=="plank":
+			# Present the broad wooden face to the approaching visitor.
+			lines[-1].rotate_object_local(Vector3.RIGHT,PI*0.5)
+			first_poses[-1]=lines[-1].transform
+		var label: MeshInstance3D=KIT.stencil(labels[i],Vector2(0.65,0.10),Color("25282d"))
+		label.name="MaterialLabel%d"%i;label.position=Vector3(x,0.7,5.396)
+		label.rotation.y=PI;get_node("MaterialPodium").add_child(label)
+		# Label coordinates above are gallery-local; the podium is offset.
+		label.position-=Vector3(-7,0,6)
+	study_light("MaterialLight",Vector3(-7,4.1,4.5),Vector3(-7,1.5,6))
+
+func podium(id: String, at: Vector3, size_m: Vector3, title: String) -> void:
+	# Furniture stays outside the tool-reaction targets; only studies can break.
+	var body := StaticBody3D.new();body.name=id;body.position=at
+	body.collision_layer=1;body.collision_mask=0;add_child(body)
+	var mesh := MeshInstance3D.new();mesh.name="Plinth"
+	var box := BoxMesh.new();box.size=size_m;mesh.mesh=box
+	var mat := StandardMaterial3D.new();mat.albedo_color=Color("eee8dd");mat.roughness=0.82
+	mesh.material_override=mat;mesh.position.y=size_m.y*0.5;body.add_child(mesh)
+	var collision := CollisionShape3D.new();collision.name="Boundary"
+	var shape := BoxShape3D.new();shape.size=size_m
+	collision.shape=shape;collision.position=mesh.position;body.add_child(collision)
+	var label: MeshInstance3D=KIT.stencil(title,Vector2(minf(size_m.x-0.18,2.8),0.13),Color("25282d"))
+	label.name="Title";label.position=Vector3(0,0.43,-size_m.z*0.5-0.003)
+	label.rotation.y=PI;body.add_child(label)
+
+func study_light(id: String, at: Vector3, target: Vector3) -> void:
+	var light := SpotLight3D.new();light.name=id;add_child(light)
+	light.position=at;light.look_at(to_global(target))
+	light.light_color=Color("fff1da");light.light_energy=2.5
+	light.spot_range=6.5;light.spot_angle=43;light.spot_attenuation=0.7
+	# Existing museum sun supplies shadows; these are local, cheap gallery fills.
+	light.shadow_enabled=false
 
 func rod(id: String, at: Vector3, direction: Vector3, length_m: float, finish: String) -> void:
 	var body := LINE.new()
@@ -112,8 +185,7 @@ func wall_planks() -> void:
 		rod("wall_plank_%d" % (i+1),centre,direction,length_m,"plank")
 
 func room_perspective() -> void:
-	# Two strong parallels make one readable depth study. Each of the four
-	# neighbouring arrangements keeps its short viewpoint mark, not another rail.
+	# The two existing parallels make a depth study through the room.
 	var ink := Color("202329")
 	for x in [-6.4,-1.6]:
 		paint(Vector3(x,0.031,-8.15),Vector3(x,0.031,11.5),0.06,ink)

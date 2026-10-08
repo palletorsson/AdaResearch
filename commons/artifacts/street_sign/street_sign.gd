@@ -43,6 +43,8 @@ class_name StreetSign
 @export var sign_text: String = "STOP"
 ## Secondary line beneath (e.g. the Chinese stop character).
 @export var subtext: String = "STOP"
+## Geometry-based direction symbols, independent of font glyph support.
+@export_enum("none", "left", "right", "ahead", "both") var direction: String = "none"
 
 # ── State ─────────────────────────────────────────────────────────────
 
@@ -67,6 +69,9 @@ func apply_grid_config(config_data: Dictionary) -> void:
 
 
 func _read_metadata_overrides() -> void:
+	if has_meta("config_direction"):
+		var value := str(get_meta("config_direction"))
+		if value in ["none", "left", "right", "ahead", "both"]: direction = value
 	if has_meta("config_pole_height"):
 		pole_height = float(str(get_meta("config_pole_height")))
 	if has_meta("config_pole_radius"):
@@ -116,7 +121,10 @@ func _build() -> void:
 	_build_sign_plate("SignFace", sign_radius * 0.86, sides,
 		sign_color, sign_y, plate_thickness * 0.6)
 	# Text on the +Z face of the red plate.
-	_build_labels(sign_y, plate_thickness)
+	if direction == "none":
+		_build_labels(sign_y, plate_thickness)
+	else:
+		_build_direction(sign_y)
 
 
 func _build_base_plate() -> void:
@@ -253,3 +261,38 @@ func _make_sign_mat(c: Color) -> StandardMaterial3D:
 	m.roughness = 0.4
 	m.metallic = 0.1
 	return m
+
+func _build_direction(center_y: float) -> void:
+	var symbol := Node3D.new()
+	symbol.name = "DirectionSymbol"
+	symbol.position = Vector3(0,center_y,pole_radius+0.048)
+	symbol.scale = Vector3.ONE * sign_radius / 0.28
+	add_child(symbol)
+	var angles: Array = [0.0]
+	if direction == "left": angles = [PI]
+	elif direction == "ahead": angles = [PI*0.5]
+	elif direction == "both": angles = [0.0,PI]
+	for angle: float in angles:
+		var arrow := Node3D.new()
+		arrow.name = "Arrow"
+		arrow.rotation.z = angle
+		symbol.add_child(arrow)
+		var material := _make_sign_mat(text_color)
+		var shaft := MeshInstance3D.new()
+		var box := BoxMesh.new()
+		box.size = Vector3(0.23,0.055,0.006)
+		shaft.mesh = box
+		shaft.position.x = -0.035
+		shaft.material_override = material
+		arrow.add_child(shaft)
+		var tip := MeshInstance3D.new()
+		tip.name = "ArrowHead"
+		var mesh := ImmediateMesh.new()
+		mesh.surface_begin(Mesh.PRIMITIVE_TRIANGLES)
+		mesh.surface_add_vertex(Vector3(0.05,0.10,0.004))
+		mesh.surface_add_vertex(Vector3(0.19,0,0.004))
+		mesh.surface_add_vertex(Vector3(0.05,-0.10,0.004))
+		mesh.surface_end()
+		tip.mesh = mesh
+		tip.material_override = material
+		arrow.add_child(tip)

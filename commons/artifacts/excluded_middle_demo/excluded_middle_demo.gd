@@ -13,7 +13,7 @@ class_name ExcludedMiddleDemo
 # emerges: the discomfort of undecidable propositions — some P genuinely cannot be decided
 # needs: VR horizontal slider for rejection toggle [has]
 # relationships: unlocks constructive_proof (if LEM is rejected, only constructive proofs survive); unlocks brouwer_choice_sequence; contrasts godel_statement_plaque (unprovable vs undecidable)
-# truth: the law of excluded middle is not a law of logic — it is a philosophical commitment about what "true" means
+# truth: excluded middle is valid classically but not a general principle of intuitionistic logic. Lacking a proof of either side is an evidential condition, not a third truth value. The third and spectrum DNA forms are separate visual comparisons, not semantics for intuitionistic logic.
 
 ## What stands between P and ¬P, and whether either disjunct is guaranteed a body.
 ##
@@ -288,9 +288,9 @@ func _create_label() -> void:
 	_label.pixel_size = 0.001
 	_label.font_size = 12
 	if show_rejection:
-		_label.text = "LAW OF EXCLUDED MIDDLE\nP ∨ ¬P\n\nBrouwer: \"Not always!\"\nSome P cannot be decided."
+		_label.text = "P ∨ ¬P\nCONSTRUCTIVE READING\nA proof of one side is needed.\nNo proof supplied is not a third truth value."
 	else:
-		_label.text = "LAW OF EXCLUDED MIDDLE\nP ∨ ¬P\n\"Either true or false\""
+		_label.text = "P ∨ ¬P\nCLASSICAL READING\nAvailable without deciding which side.\nThe slider changes the explanation, not P."
 	_label.position = Vector3(0, -0.25, 0)
 	_own(_label)
 
@@ -302,7 +302,7 @@ func _setup_controls() -> void:
 		# spheres standing — an aborted _ready() reads as an inert axis.
 		return
 	var panel = RackTpl.create_panel("EXCLUDED MIDDLE", [
-		[{"type": "slider_h", "label": "REJECTION", "default": 1.0}],
+		[{"type": "slider_h", "label": "READING", "default": 1.0}],
 	])
 	if panel == null or not (panel is Node3D):
 		return

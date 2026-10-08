@@ -36,6 +36,17 @@ extends RefCounted
 ## Given up: the neighbouring figures leaning on each other, the gallery, the sawn
 ## end-grain of the real material, the deep undercut hollows carved between the legs
 ## of the ochre group, and any face — the head stays a blank brick.
+##
+## AXES
+##   matter    — what the slabs ARE. plaster (solid blocks, today) · melted (they sag,
+##               splay and flatten downward into a poured puddle round the feet) ·
+##               swarm (every block bursts into three small ones, the mass granulating) ·
+##               cage (the flesh gone, each block only its two crossed plates) ·
+##               inflated (each block a bulging blob, the figure swollen tight).
+##   outgrowth — what grows out of the stack. none (today) · six_arms (two more pairs
+##               fanned off the shoulder bar) · crown (a ring of tapering spikes driven
+##               out of the head brick) · bloom (wrists and skull ending in petal
+##               flowers) · twin (a half-size second figure sprouting from the shoulder).
 
 const TEX_SIZE: int = 128
 const LAT: int = 8
@@ -54,7 +65,25 @@ static func describe() -> String:
 	return "A standing art-brut figure hacked out of chunky tipped slabs of matte chalky paint, weight on one leg, one arm hanging, a cream brick of a head cocked to the side."
 
 
-static func build(root: Node3D, seed: int) -> void:
+static func axes() -> Dictionary:
+	return {
+		"matter": ["plaster", "melted", "swarm", "cage", "inflated"],
+		"outgrowth": ["none", "six_arms", "crown", "bloom", "twin"],
+	}
+
+
+static func build(root: Node3D, seed: int, opts: Dictionary = {}) -> void:
+	var matter: String = str(opts.get("matter", "plaster"))
+	var outgrowth: String = str(opts.get("outgrowth", "none"))
+	var nscale: float = 1.0
+	if matter == "swarm":
+		nscale = 0.45
+	elif matter == "cage":
+		nscale = 0.70
+	elif matter == "inflated":
+		nscale = 0.80
+	var ctx: Dictionary = {"matter": matter, "nscale": nscale}
+
 	var rng := RandomNumberGenerator.new()
 	rng.seed = seed
 
@@ -126,24 +155,24 @@ static func build(root: Node3D, seed: int) -> void:
 	var arm_hot: Dictionary = hot if accent_arm == wt else body
 	var arm_cold: Dictionary = body if accent_arm == wt else hot
 
-	_clad(root, [st_hip, st_knee], rng.randi_range(5, 6), 0.160, 0.135, 0.86, 0.55, 1.25, 0.26, body, rng)
-	_clad(root, [st_knee, st_ankle], rng.randi_range(5, 6), 0.130, 0.108, 0.88, 0.55, 1.30, 0.28, leg_hot, rng)
-	_clad(root, [st_ankle, st_toe], 3, 0.115, 0.098, 1.20, 0.60, 1.10, 0.20, body, rng)
+	_clad(root, [st_hip, st_knee], rng.randi_range(5, 6), 0.160, 0.135, 0.86, 0.55, 1.25, 0.26, body, rng, ctx)
+	_clad(root, [st_knee, st_ankle], rng.randi_range(5, 6), 0.130, 0.108, 0.88, 0.55, 1.30, 0.28, leg_hot, rng, ctx)
+	_clad(root, [st_ankle, st_toe], 3, 0.115, 0.098, 1.20, 0.60, 1.10, 0.20, body, rng, ctx)
 
-	_clad(root, [fr_hip, fr_knee], rng.randi_range(5, 6), 0.156, 0.130, 0.86, 0.55, 1.25, 0.26, body, rng)
-	_clad(root, [fr_knee, fr_ankle], rng.randi_range(5, 6), 0.126, 0.104, 0.88, 0.55, 1.30, 0.28, leg_cold, rng)
-	_clad(root, [fr_ankle, fr_toe], 3, 0.112, 0.096, 1.20, 0.60, 1.10, 0.20, body, rng)
+	_clad(root, [fr_hip, fr_knee], rng.randi_range(5, 6), 0.156, 0.130, 0.86, 0.55, 1.25, 0.26, body, rng, ctx)
+	_clad(root, [fr_knee, fr_ankle], rng.randi_range(5, 6), 0.126, 0.104, 0.88, 0.55, 1.30, 0.28, leg_cold, rng, ctx)
+	_clad(root, [fr_ankle, fr_toe], 3, 0.112, 0.096, 1.20, 0.60, 1.10, 0.20, body, rng, ctx)
 
-	_clad(root, [fr_hip, pelvis, st_hip], rng.randi_range(6, 7), 0.172, 0.172, 1.02, 0.60, 1.15, 0.22, mid, rng)
-	_clad(root, [pelvis, waist, chest, sh_c], rng.randi_range(16, 21), 0.205, 0.248, 0.70, 0.45, 1.05, 0.30, body, rng)
-	_clad(root, [sh_fr, sh_c, sh_wt], rng.randi_range(5, 6), 0.150, 0.150, 1.05, 0.60, 1.20, 0.24, mid, rng)
+	_clad(root, [fr_hip, pelvis, st_hip], rng.randi_range(6, 7), 0.172, 0.172, 1.02, 0.60, 1.15, 0.22, mid, rng, ctx)
+	_clad(root, [pelvis, waist, chest, sh_c], rng.randi_range(16, 21), 0.205, 0.248, 0.70, 0.45, 1.05, 0.30, body, rng, ctx)
+	_clad(root, [sh_fr, sh_c, sh_wt], rng.randi_range(5, 6), 0.150, 0.150, 1.05, 0.60, 1.20, 0.24, mid, rng, ctx)
 
-	_clad(root, [sh_fr, hang_el], rng.randi_range(5, 6), 0.118, 0.102, 0.90, 0.55, 1.25, 0.26, body, rng)
-	_clad(root, [hang_el, hang_wr], rng.randi_range(5, 6), 0.100, 0.086, 0.90, 0.55, 1.30, 0.28, arm_hot, rng)
-	_clad(root, [sh_wt, bent_el], rng.randi_range(5, 6), 0.118, 0.102, 0.90, 0.55, 1.25, 0.26, body, rng)
-	_clad(root, [bent_el, bent_wr], rng.randi_range(5, 6), 0.100, 0.086, 0.90, 0.55, 1.30, 0.28, arm_cold, rng)
+	_clad(root, [sh_fr, hang_el], rng.randi_range(5, 6), 0.118, 0.102, 0.90, 0.55, 1.25, 0.26, body, rng, ctx)
+	_clad(root, [hang_el, hang_wr], rng.randi_range(5, 6), 0.100, 0.086, 0.90, 0.55, 1.30, 0.28, arm_hot, rng, ctx)
+	_clad(root, [sh_wt, bent_el], rng.randi_range(5, 6), 0.118, 0.102, 0.90, 0.55, 1.25, 0.26, body, rng, ctx)
+	_clad(root, [bent_el, bent_wr], rng.randi_range(5, 6), 0.100, 0.086, 0.90, 0.55, 1.30, 0.28, arm_cold, rng, ctx)
 
-	_clad(root, [neck_a, neck_b], 3, 0.106, 0.094, 0.92, 0.55, 1.05, 0.16, body, rng)
+	_clad(root, [neck_a, neck_b], 3, 0.106, 0.094, 0.92, 0.55, 1.05, 0.16, body, rng, ctx)
 
 	# hands: the only smooth pieces, and cut to six facets so they stay hacked
 	for hand_i in range(2):
@@ -163,14 +192,14 @@ static func build(root: Node3D, seed: int) -> void:
 	var brick_w: float = rng.randf_range(0.235, 0.275)
 	var brick_h: float = rng.randf_range(0.115, 0.145)
 	var brick_d: float = rng.randf_range(0.145, 0.180)
-	_block(root, h_org, hb * _wobble(rng), Vector3(brick_w, brick_h, brick_d), _paint(skull, rng))
-	_block(root, h_org + hb * Vector3(rng.randf_range(-0.030, 0.030), brick_h * 0.60, rng.randf_range(-0.030, 0.020)), hb * _wobble(rng), Vector3(brick_w * 0.72, rng.randf_range(0.060, 0.085), brick_d * 0.78), _paint(skull, rng))
-	_block(root, h_org + hb * Vector3(rng.randf_range(-0.040, 0.040), -brick_h * 0.34, -brick_d * 0.62), hb * _wobble(rng), Vector3(rng.randf_range(0.100, 0.145), rng.randf_range(0.075, 0.105), rng.randf_range(0.085, 0.120)), _paint(skull, rng))
+	_emit(root, h_org, hb * _wobble(rng), Vector3(brick_w, brick_h, brick_d), skull, rng, ctx)
+	_emit(root, h_org + hb * Vector3(rng.randf_range(-0.030, 0.030), brick_h * 0.60, rng.randf_range(-0.030, 0.020)), hb * _wobble(rng), Vector3(brick_w * 0.72, rng.randf_range(0.060, 0.085), brick_d * 0.78), skull, rng, ctx)
+	_emit(root, h_org + hb * Vector3(rng.randf_range(-0.040, 0.040), -brick_h * 0.34, -brick_d * 0.62), hb * _wobble(rng), Vector3(rng.randf_range(0.100, 0.145), rng.randf_range(0.075, 0.105), rng.randf_range(0.085, 0.120)), skull, rng, ctx)
 	var extra_head: int = rng.randi_range(0, 2)
 	for k in range(extra_head):
 		var sd: float = 1.0 if k == 0 else -1.0
 		var off: Vector3 = Vector3(sd * brick_w * rng.randf_range(0.34, 0.48), rng.randf_range(-0.045, 0.045), rng.randf_range(-0.030, 0.045))
-		_block(root, h_org + hb * off, hb * _wobble(rng), Vector3(rng.randf_range(0.075, 0.110), rng.randf_range(0.070, 0.100), rng.randf_range(0.070, 0.105)), _paint(skull, rng))
+		_emit(root, h_org + hb * off, hb * _wobble(rng), Vector3(rng.randf_range(0.075, 0.110), rng.randf_range(0.070, 0.100), rng.randf_range(0.070, 0.105)), skull, rng, ctx)
 
 	# --- shims: slabs rammed into the joints, left protruding ---------------------
 	var shim_pts: Array = [st_knee, fr_knee, st_hip, fr_hip, sh_wt, sh_fr, pelvis + Vector3(0.0, 0.02, -0.09)]
@@ -178,7 +207,57 @@ static func build(root: Node3D, seed: int) -> void:
 		var sp: Vector3 = shim_pts[k]
 		var jj: Vector3 = Vector3(rng.randf_range(-0.045, 0.045), rng.randf_range(-0.035, 0.035), rng.randf_range(-0.050, 0.050))
 		var shim_paint: Dictionary = mid if (k % 3) == 0 else body
-		_block(root, sp + jj, _wobble(rng), Vector3(rng.randf_range(0.090, 0.185), rng.randf_range(0.060, 0.105), rng.randf_range(0.075, 0.150)), _paint(shim_paint, rng))
+		_emit(root, sp + jj, _wobble(rng), Vector3(rng.randf_range(0.090, 0.185), rng.randf_range(0.060, 0.105), rng.randf_range(0.075, 0.150)), shim_paint, rng, ctx)
+
+	# --- the pour: when the slabs melt, what ran off them pools round the feet ------
+	if matter == "melted":
+		for k in range(6):
+			var pa: float = TAU * float(k) / 6.0 + rng.randf_range(-0.28, 0.28)
+			var pr: float = rng.randf_range(0.20, 0.46)
+			var pp := Vector3(cos(pa) * pr, rng.randf_range(0.014, 0.055), sin(pa) * pr)
+			var pb: Basis = Basis(Vector3(0.0, 1.0, 0.0), pa) * Basis(Vector3(1.0, 0.0, 0.0), deg_to_rad(rng.randf_range(-7.0, 7.0)))
+			_block(root, pp, pb, Vector3(rng.randf_range(0.24, 0.44), rng.randf_range(0.028, 0.070), rng.randf_range(0.20, 0.38)), _paint(mid, rng))
+
+	# --- outgrowth: what the stack puts out beyond the one figure -------------------
+	if outgrowth == "six_arms":
+		for pair in range(2):
+			var pf: float = float(pair)
+			for side in range(2):
+				var s: float = 1.0 if side == 0 else -1.0
+				var arm_root: Vector3 = sh_c + Vector3(s * sh_dx * 0.92, -0.020 - 0.030 * pf, 0.004)
+				var arm_el: Vector3 = arm_root + Vector3(s * (0.170 + 0.040 * pf), -0.200 + 0.340 * pf, -0.030 + 0.160 * pf)
+				var arm_wr: Vector3 = arm_el + Vector3(s * (0.110 + 0.090 * pf), -0.190 + 0.400 * pf, 0.150 - 0.280 * pf)
+				_clad(root, [arm_root, arm_el], 4, 0.112, 0.096, 0.90, 0.55, 1.25, 0.26, mid, rng, ctx)
+				_clad(root, [arm_el, arm_wr], 4, 0.094, 0.078, 0.90, 0.55, 1.30, 0.28, hot, rng, ctx)
+	elif outgrowth == "crown":
+		for i in range(7):
+			var ca: float = TAU * float(i) / 7.0 + rng.randf_range(-0.10, 0.10)
+			var cdir: Vector3 = (hb * Vector3(cos(ca) * 0.66, 1.0, sin(ca) * 0.66)).normalized()
+			var cbase: Vector3 = h_org + hb * Vector3(cos(ca) * brick_w * 0.34, brick_h * 0.50, sin(ca) * brick_d * 0.34)
+			for j in range(3):
+				var ct: float = (float(j) + 0.5) / 3.0
+				var cpos: Vector3 = cbase + cdir * (0.055 + ct * 0.290)
+				var cw: float = lerpf(0.078, 0.024, ct)
+				_emit(root, cpos, _basis_y_to(cdir) * _wobble(rng), Vector3(cw, 0.110, cw), skull, rng, ctx)
+	elif outgrowth == "bloom":
+		var hang_dir: Vector3 = (hang_wr - hang_el).normalized()
+		var bent_dir: Vector3 = (bent_wr - bent_el).normalized()
+		_flower(root, hang_wr + hang_dir * 0.058, hang_dir, rng.randf_range(0.128, 0.166), hot, rng, ctx)
+		_flower(root, bent_wr + bent_dir * 0.058, bent_dir, rng.randf_range(0.128, 0.166), hot, rng, ctx)
+		_flower(root, h_org + hb * Vector3(0.0, brick_h * 0.78, 0.0), (hb * Vector3(0.0, 1.0, 0.0)).normalized(), rng.randf_range(0.146, 0.184), skull, rng, ctx)
+	elif outgrowth == "twin":
+		var tw_k: float = 0.46
+		var tw_bs: Basis = Basis(Vector3(0.0, 0.0, 1.0), deg_to_rad(-wt * 62.0)) * Basis(Vector3(0.0, 1.0, 0.0), deg_to_rad(wt * 28.0))
+		var tw_tf := Transform3D(tw_bs * Basis.from_scale(Vector3(tw_k, tw_k, tw_k)), sh_wt + Vector3(wt * 0.045, 0.015, -0.010))
+		_clad(root, _tp(tw_tf, [st_hip, st_knee, st_ankle, st_toe]), 5, 0.150 * tw_k, 0.106 * tw_k, 0.88, 0.55, 1.28, 0.26, hot, rng, ctx)
+		_clad(root, _tp(tw_tf, [fr_hip, fr_knee, fr_ankle, fr_toe]), 5, 0.146 * tw_k, 0.102 * tw_k, 0.88, 0.55, 1.28, 0.26, hot, rng, ctx)
+		_clad(root, _tp(tw_tf, [fr_hip, pelvis, st_hip]), 3, 0.172 * tw_k, 0.172 * tw_k, 1.02, 0.60, 1.15, 0.22, mid, rng, ctx)
+		_clad(root, _tp(tw_tf, [pelvis, waist, chest, sh_c]), 6, 0.205 * tw_k, 0.248 * tw_k, 0.70, 0.45, 1.05, 0.30, hot, rng, ctx)
+		_clad(root, _tp(tw_tf, [sh_fr, sh_c, sh_wt]), 3, 0.150 * tw_k, 0.150 * tw_k, 1.05, 0.60, 1.20, 0.24, mid, rng, ctx)
+		_clad(root, _tp(tw_tf, [sh_fr, hang_el, hang_wr]), 4, 0.116 * tw_k, 0.086 * tw_k, 0.90, 0.55, 1.28, 0.26, hot, rng, ctx)
+		_clad(root, _tp(tw_tf, [sh_wt, bent_el, bent_wr]), 4, 0.116 * tw_k, 0.086 * tw_k, 0.90, 0.55, 1.28, 0.26, hot, rng, ctx)
+		_clad(root, _tp(tw_tf, [neck_a, neck_b]), 2, 0.106 * tw_k, 0.094 * tw_k, 0.92, 0.55, 1.05, 0.16, mid, rng, ctx)
+		_emit(root, tw_tf * h_org, tw_bs * hb * _wobble(rng), Vector3(brick_w, brick_h, brick_d) * tw_k * 1.15, skull, rng, ctx)
 
 	# --- centre on x/z, fit the 1.25 m box, then the measured settle ---------------
 	var box: AABB = _union_aabb(root)
@@ -205,9 +284,13 @@ static func build(root: Node3D, seed: int) -> void:
 # ---------------------------------------------------------------------------
 # cladding
 
-static func _clad(root: Node3D, pts: Array, n: int, g0: float, g1: float, dk: float, lf0: float, lf1: float, jit: float, paint: Dictionary, rng: RandomNumberGenerator) -> void:
-	for i in range(n):
-		var t: float = (float(i) + 0.5) / float(n)
+static func _clad(root: Node3D, pts: Array, n: int, g0: float, g1: float, dk: float, lf0: float, lf1: float, jit: float, paint: Dictionary, rng: RandomNumberGenerator, ctx: Dictionary) -> void:
+	# the matter axis pays for itself in block count: a swarm block costs three meshes,
+	# a cage block two, so the walk drops steps to keep the figure inside its budget
+	var ns: float = float(ctx.get("nscale", 1.0))
+	var nn: int = maxi(2, int(round(float(n) * ns)))
+	for i in range(nn):
+		var t: float = (float(i) + 0.5) / float(nn)
 		var p: Vector3 = _poly_at(pts, t)
 		var dir: Vector3 = _poly_dir(pts, t)
 		var bs: Basis = _basis_y_to(dir)
@@ -219,7 +302,77 @@ static func _clad(root: Node3D, pts: Array, n: int, g0: float, g1: float, dk: fl
 		var jz: float = g * dk * rng.randf_range(-jit, jit)
 		var jy: float = ln * rng.randf_range(-0.14, 0.14)
 		var org: Vector3 = p + bs * Vector3(jx, jy, jz)
-		_block(root, org, bs * _wobble(rng), Vector3(w, ln, d), _paint(paint, rng))
+		_emit(root, org, bs * _wobble(rng), Vector3(w, ln, d), paint, rng, ctx)
+
+
+# ---------------------------------------------------------------------------
+# matter: one slab of the stack, made of whatever the figure is made of today
+
+static func _emit(root: Node3D, org: Vector3, bs: Basis, sz: Vector3, paint: Dictionary, rng: RandomNumberGenerator, ctx: Dictionary) -> void:
+	var matter: String = str(ctx.get("matter", "plaster"))
+
+	if matter == "melted":
+		# the lower a slab sits, the more it has run: it flattens, spreads, splays out
+		var sag: float = clampf((1.06 - org.y) / 1.06, 0.0, 1.0)
+		sag = sag * sag
+		var sgn: float = 1.0 if org.x >= 0.0 else -1.0
+		var droop: Basis = Basis(Vector3(0.0, 0.0, 1.0), deg_to_rad(-sgn * sag * 44.0))
+		var msz := Vector3(sz.x * (1.0 + 0.90 * sag), sz.y * (1.0 - 0.58 * sag), sz.z * (1.0 + 0.72 * sag))
+		var morg := Vector3(org.x + sgn * 0.055 * sag, org.y - 0.085 * sag, org.z)
+		_block(root, morg, droop * bs, msz, _paint(paint, rng))
+		return
+
+	if matter == "swarm":
+		# the slab bursts into three of itself, strewn along its own axis
+		for i in range(3):
+			var t: float = (float(i) - 1.0) * 0.58
+			var off := Vector3(sz.x * rng.randf_range(-0.60, 0.60), sz.y * t + sz.y * rng.randf_range(-0.14, 0.14), sz.z * rng.randf_range(-0.60, 0.60))
+			var fsz := Vector3(sz.x * rng.randf_range(0.30, 0.54), sz.y * rng.randf_range(0.26, 0.48), sz.z * rng.randf_range(0.30, 0.54))
+			_block(root, org + bs * off, bs * _wobble(rng), fsz, _paint(paint, rng))
+		return
+
+	if matter == "cage":
+		# the plaster gone: only the two plates that crossed inside it, run oversize
+		var kk: float = 1.24
+		_block(root, org, bs, Vector3(sz.x * kk, sz.y * kk, sz.z * 0.12), _paint(paint, rng))
+		_block(root, org, bs, Vector3(sz.x * 0.12, sz.y * kk, sz.z * kk), _paint(paint, rng))
+		return
+
+	if matter == "inflated":
+		# the slab swollen until its corners are gone
+		var sph := SphereMesh.new()
+		sph.radius = 0.5
+		sph.height = 1.0
+		sph.radial_segments = 10
+		sph.rings = 6
+		var mi: MeshInstance3D = _add(root, sph, _paint(paint, rng))
+		var big: float = maxf(sz.x, maxf(sz.y, sz.z))
+		var bx: float = lerpf(sz.x, big, 0.55) * 1.30
+		var by: float = lerpf(sz.y, big, 0.38) * 1.22
+		var bz: float = lerpf(sz.z, big, 0.55) * 1.30
+		mi.transform = Transform3D(bs * Basis.from_scale(Vector3(bx, by, bz)), org)
+		return
+
+	_block(root, org, bs, sz, _paint(paint, rng))
+
+
+static func _flower(root: Node3D, ctr: Vector3, axis: Vector3, r: float, paint: Dictionary, rng: RandomNumberGenerator, ctx: Dictionary) -> void:
+	var bs0: Basis = _basis_y_to(axis)
+	for i in range(6):
+		var a: float = TAU * float(i) / 6.0 + rng.randf_range(-0.14, 0.14)
+		var tilt: float = deg_to_rad(rng.randf_range(38.0, 64.0))
+		var lb: Basis = bs0 * Basis(Vector3(0.0, 1.0, 0.0), a) * Basis(Vector3(1.0, 0.0, 0.0), tilt)
+		var pos: Vector3 = ctr + lb * Vector3(0.0, r * 0.95, 0.0)
+		_emit(root, pos, lb * _wobble(rng), Vector3(r * 0.52, r * 1.50, r * 0.16), paint, rng, ctx)
+	_emit(root, ctr, _wobble(rng), Vector3(r * 0.72, r * 0.56, r * 0.72), paint, rng, ctx)
+
+
+static func _tp(tf: Transform3D, pts: Array) -> Array:
+	var out: Array = []
+	for i in range(pts.size()):
+		var p: Vector3 = pts[i]
+		out.append(tf * p)
+	return out
 
 
 static func _wobble(rng: RandomNumberGenerator) -> Basis:

@@ -48,6 +48,19 @@ var laser_glow: MeshInstance3D
 var impact_particles: GPUParticles3D
 var eye_glow: MeshInstance3D
 
+# Placements can retain ball hunting without making the visitor a target.
+# Configuration may arrive before _ready or while a target is already locked.
+func apply_grid_config(config: Dictionary) -> void:
+	if not config.has("target_player"):
+		return
+	match str(config["target_player"]).strip_edges().to_lower():
+		"true", "1": target_player = true
+		"false", "0": target_player = false
+		_: return
+	if not target_player and is_inside_tree() and is_instance_valid(current_target):
+		if current_target == _find_player():
+			_lose_target()
+
 func _ready() -> void:
 	_build_turret()
 	_build_laser()
@@ -246,7 +259,7 @@ func _process(delta: float) -> void:
 	if current_target != null:
 		idle_time = 0.0  # Reset idle counter
 		
-		if not is_instance_valid(current_target):
+		if not is_instance_valid(current_target) or not current_target.visible:
 			_lose_target()
 			return
 		
@@ -291,7 +304,8 @@ func _find_target() -> void:
 	for ball in all_balls:
 		if not is_instance_valid(ball) or not ball.visible:
 			continue
-		var ball_pos = ball.global_position
+		var body := ball.get_node_or_null("RigidBody3D") as Node3D
+		var ball_pos: Vector3 = body.global_position if body != null else ball.global_position
 		var to_ball = ball_pos - global_position
 		var dist = to_ball.length()
 		if dist > detection_range:
@@ -392,11 +406,14 @@ func _track_target(delta: float) -> void:
 		last_target_direction = to_target.normalized()
 		last_target_position = target_pos
 	
-	var target_yaw = atan2(to_target.x, to_target.z)
+	var local_direction: Vector3 = global_basis.inverse() * to_target
+	var target_yaw = atan2(local_direction.x, local_direction.z)
 	turret_base.rotation.y = lerp_angle(turret_base.rotation.y, target_yaw + PI, rotation_speed * delta)
 	
-	var local_target = turret_head.global_transform.affine_inverse() * target_pos
-	var target_pitch = atan2(-local_target.y, -local_target.z)
+	# Measure in the unpitched parent frame, so the target angle does not feed
+	# back against the head's existing rotation. This barrel points along -Z.
+	var local_target = turret_base.to_local(target_pos) - turret_head.position
+	var target_pitch = atan2(local_target.y, -local_target.z)
 	target_pitch = clamp(target_pitch, -PI/3, PI/4)
 	turret_head.rotation.x = lerp_angle(turret_head.rotation.x, target_pitch, rotation_speed * delta)
 
@@ -441,6 +458,16 @@ func _apply_damage(delta: float) -> void:
 			gm.apply_health_damage(damage_per_second * delta)
 		return
 
+	if current_target.has_method("take_damage"):
+		var ball: Node3D = current_target
+		var pos := _get_target_position()
+		ball.take_damage(damage_per_second * delta)
+		if not is_instance_valid(ball) or not ball.visible:
+			emit_signal("ball_destroyed", ball, pos)
+			total_kills += 1
+			_lose_target()
+		return
+
 	if not current_target.has_meta("health"):
 		current_target.set_meta("health", 100.0)
 		current_target.set_meta("max_health", 100.0)
@@ -473,18 +500,16 @@ func _destroy_ball() -> void:
 		return
 	
 	var pos = _get_target_position()
-	var ball_color = current_target.get_meta("ball_color", Color(1, 0.5, 0.2))
-	
-	_spawn_explosion(pos, ball_color)
 	
 	emit_signal("ball_destroyed", current_target, pos)
 	total_kills += 1
-	
+	var recycled := false
 	for dropper in get_tree().get_nodes_in_group("ball_dropper"):
-		if dropper.has_method("remove_ball"):
-			dropper.remove_ball(current_target)
-	
-	if is_instance_valid(current_target):
+		if dropper.has_method("destroy_ball") and dropper.destroy_ball(current_target):
+			recycled = true
+			break
+	if not recycled and is_instance_valid(current_target):
+		preload("res://commons/artifacts/queer_confetti/queer_confetti.gd").burst(get_parent(), pos, 72, 1.25)
 		current_target.queue_free()
 	
 	current_target = null

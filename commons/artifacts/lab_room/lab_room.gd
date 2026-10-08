@@ -202,6 +202,8 @@ class_name LabRoom
 ## Which wall the title signage hangs on: "front"/"south", "back"/"north",
 ## "west", or "east". Default front wall (above the door / accent strip).
 @export var signage_wall: String = "front"
+## Placement-only offset so a title can clear mounted apparatus and fixtures.
+@export var signage_height_offset: float = 0.0
 
 @export_group("Lighting")
 ## 0.0 = warm yellow tint, 1.0 = cool blue tint on the directional light.
@@ -689,6 +691,8 @@ func _read_metadata_overrides() -> void:
 		signage_sub = str(get_meta("config_signage_sub"))
 	if has_meta("config_signage_wall"):
 		signage_wall = str(get_meta("config_signage_wall")).to_lower()
+	if has_meta("config_signage_height_offset"):
+		signage_height_offset = float(get_meta("config_signage_height_offset"))
 	if has_meta("config_annotation_top"):
 		annotation_top = str(get_meta("config_annotation_top"))
 	if has_meta("config_annotation_bottom"):
@@ -722,7 +726,7 @@ func _read_metadata_overrides() -> void:
 	if has_meta("config_seam_color"):
 		seam_color = _parse_color(str(get_meta("config_seam_color")), seam_color)
 	if has_meta("config_show_observation_window"):
-		show_observation_window = bool(get_meta("config_show_observation_window"))
+		show_observation_window = _parse_bool(str(get_meta("config_show_observation_window")), show_observation_window)
 	if has_meta("config_window_wall"):
 		window_wall = str(get_meta("config_window_wall"))
 	if has_meta("config_ceiling_style"):
@@ -3723,7 +3727,7 @@ func _build_signage() -> void:
 	# +Z by default, so each wall needs its own Y-rotation to read correctly.
 	var signage_root := Node3D.new()
 	signage_root.name = "Signage"
-	var y: float = room_height * 0.62
+	var y: float = room_height * 0.62 + signage_height_offset
 	var off: float = WALL_THICKNESS + 0.06
 	match signage_wall:
 		"west":            # -X wall, read from +X side → face +X

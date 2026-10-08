@@ -9,6 +9,7 @@ var range_mode := 0
 var reading: Node3D
 var cover: MeshInstance3D
 var fit_caption: Label3D
+var path_reader: Node3D
 
 func _ready() -> void:
 	source=get_parent()
@@ -32,6 +33,10 @@ func _ready() -> void:
 			_setup_reading()
 	_build_compact_console(ids,title)
 	begin()
+	if kind == "koch":
+		path_reader = load("res://commons/artifacts/koch_sierpinski_lesson/hand_path.gd").new()
+		path_reader.name = "HandPath"
+		add_child(path_reader)
 	_use_hall_light.call_deferred()
 
 func _setup_reading() -> void:
@@ -142,6 +147,7 @@ func refresh() -> void:
 		"measure":
 			var divs: int=source.GRID_SCALES[source._current_scale_idx]
 			readout.text="count occupied cells at several box sizes\nfit log(count) against log(1 / box size)" if show_rule else "%d x %d grid | %d occupied | box %.4f units\ncover %s | fit range %s" % [divs,divs,source._counts[source._current_scale_idx],6.0/divs,"on" if show_cover else "off",["all six","coarse three","fine three"][range_mode]]
+	if is_instance_valid(path_reader): path_reader.rebuild()
 
 func _use_hall_light() -> void:
 	var hall: Node=source

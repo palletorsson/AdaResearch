@@ -33,6 +33,29 @@ extends RefCounted
 ## Given up: the chamfered edges and the wiring in the gaps, the pink cloth and
 ## the hedge, the exact tapered chin of the AI helmet, and the crowd — this is
 ## one walker, not the procession.
+##
+## TWO AXES (see axes(); every plate in the body is emitted through _plate_bent /
+## _plate_box, so an axis reaches the whole suit at once):
+##
+##  panelling — what the floating armour DOES with its gap. `floating` is the
+##    suit as built; `shed` blows every plate outward along its own radius from
+##    the chest until the robot walks inside a cloud of its own armour; `swarmed`
+##    replaces each plate with a shoal of three small flakes of itself; `ribbed`
+##    strips the plates to their edges, hoops and bars only, the armour a cage
+##    around a bare undersuit; `molten` lets every plate sag off its mounting,
+##    drip, and pool in a lake of the body colour on the plinth.
+##
+##  assembly — what came off the line. `walker` is one robot; `totem` stacks
+##    three heads on the neck, each smaller and turned further, the top one
+##    crowned with a fan of blades; `twinned` buds a second, thicker-limbed robot
+##    out of its back, facing the other way, with its own head and two arms;
+##    `poured` drowns the legs to the hip in a solid glossy pour of the body's
+##    own colour, so the walker ends in a cone standing in a lake.
+##
+## Both defaults reproduce the original statue. build() now closes with the
+## measured settle every dream body owes the plinth: merge the child AABBs, scale
+## down into 1.20 x 1.20 x 1.68, centre x/z, stand the lowest point on y = 0 —
+## which is what lets a shed, molten or totem variant blow up and still fit.
 
 const PALETTE := [
 	Color(0.31, 0.71, 0.60),  # mint green
@@ -43,13 +66,26 @@ const PALETTE := [
 ]
 const UNIT_HEIGHT := 1.76  # metres of the unscaled rig, floor to the crown of the tallest head
 const PLINTH_H := 0.02
+## Hard ceiling on MeshInstance3D children. The swarmed panelling triples every
+## plate and the twinned assembly adds a second suit; the cap is what keeps the
+## worst crossing inside the contract instead of trusting arithmetic.
+const MESH_CAP := 252
 
 
 static func describe() -> String:
 	return "A panel-armoured humanoid robot caught mid-stride, one flat garden colour over a white undersuit with chrome joints, its plates floating apart with the gaps showing under a smooth visored helmet."
 
 
-static func build(root: Node3D, seed: int) -> void:
+static func axes() -> Dictionary:
+	return {
+		"panelling": ["floating", "shed", "swarmed", "ribbed", "molten"],
+		"assembly": ["walker", "totem", "twinned", "poured"],
+	}
+
+
+static func build(root: Node3D, seed: int, opts: Dictionary = {}) -> void:
+	var panelling: String = str(opts.get("panelling", "floating"))
+	var assembly: String = str(opts.get("assembly", "walker"))
 	var rng := RandomNumberGenerator.new()
 	rng.seed = seed
 
@@ -78,6 +114,10 @@ static func build(root: Node3D, seed: int) -> void:
 		"s": s,
 		"rng": rng,
 		"gap": gap,
+		"panelling": panelling,
+		"assembly": assembly,
+		"shards": 3 if assembly == "walker" else 2,
+		"hub": Vector3(0.0, 1.14, 0.0),
 		"second_chance": 0.32 if is_white else 0.14,
 		"plate": _mat(body, 0.55, 0.0, 0.3, tex),
 		"plate2": _mat(second, 0.55, 0.0, 0.3, tex),
@@ -89,6 +129,9 @@ static func build(root: Node3D, seed: int) -> void:
 		"red": _mat(Color(0.88, 0.22, 0.16), 0.4, 0.0, 0.0, null),
 		"ring": _mat(accent, 0.5, 0.0, 0.2, null),
 		"plinth": _mat(Color(0.30, 0.31, 0.33), 0.7, 0.0, 0.0, null),
+		# the body colour with the screws and the matte gone: what the suit
+		# becomes when it runs — drips, lake, and the pour that swallows the legs
+		"pour": _mat(body, 0.22, 0.0, 0.8, null),
 	}
 	var red_mat: StandardMaterial3D = _m(c, "red")
 	red_mat.emission_enabled = true
@@ -105,6 +148,8 @@ static func build(root: Node3D, seed: int) -> void:
 	# Pelvis frame: lean forward about X, twist the shoulders about Y.
 	var up_b: Basis = Basis(Vector3.UP, twist) * Basis(Vector3.RIGHT, -lean)
 	var up_xf := Transform3D(up_b, Vector3(0.0, 0.92 + PLINTH_H, 0.0))
+	# the chest is the point the shed panelling throws every plate away from
+	c["hub"] = up_xf * Vector3(0.0, 0.22, 0.0)
 	_torso(c, up_xf)
 
 	var head_b: Basis = up_b * Basis(Vector3.UP, head_yaw) * Basis(Vector3.BACK, head_tilt)
@@ -115,6 +160,22 @@ static func build(root: Node3D, seed: int) -> void:
 		var side: float = -1.0 if si == 0 else 1.0
 		_leg(c, up_xf, side, side == fwd_side, stride)
 		_arm(c, up_xf, side, side != fwd_side)
+
+	# --- what came off the line -----------------------------------------
+	match assembly:
+		"totem":
+			_totem(c, head_xf, eye_variant, eye_side)
+		"twinned":
+			_twin(c, up_xf, fwd_side)
+		"poured":
+			_pour(c)
+
+	# the melt needs somewhere to land
+	if panelling == "molten":
+		_lake(c)
+
+	# --- measured settle: fit, centre on x/z, stand on the floor ---------
+	_settle(root)
 
 
 # ---------------------------------------------------------------------------
@@ -132,27 +193,27 @@ static func _torso(c: Dictionary, u: Transform3D) -> void:
 	for si in range(2):
 		var side: float = -1.0 if si == 0 else 1.0
 		# split pectoral plates, each a bent shell swung 39 degrees off the front
-		_bent(c, 0.165, 68.0, 0.21, 0.02, _plate_mat(c), u * Transform3D(Basis(Vector3.UP, PI + side * 0.68), Vector3(0.0, 0.35, -0.01)))
+		_plate_bent(c, 0.165, 68.0, 0.21, 0.02, _plate_mat(c), u * Transform3D(Basis(Vector3.UP, PI + side * 0.68), Vector3(0.0, 0.35, -0.01)))
 		# pauldron: axis front-to-back, arc facing up and outward, capping the shoulder joint
 		var shoulder: Vector3 = Vector3(side * 0.21, 0.46, 0.0)
 		var pb: Basis = _basis_yz(Vector3(0.0, 0.0, 1.0), Vector3(side * 0.55, 0.83, 0.0))
-		_bent(c, 0.105, 115.0, 0.15, 0.02, _plate_mat(c), u * Transform3D(pb, shoulder + Vector3(side * 0.005, 0.0, 0.0)))
+		_plate_bent(c, 0.105, 115.0, 0.15, 0.02, _plate_mat(c), u * Transform3D(pb, shoulder + Vector3(side * 0.005, 0.0, 0.0)))
 		# hip skirt
-		_bent(c, 0.155, 80.0, 0.13, 0.018, _plate_mat(c), u * Transform3D(Basis(Vector3.UP, side * PI * 0.5), Vector3(0.0, -0.02, 0.0)))
+		_plate_bent(c, 0.155, 80.0, 0.13, 0.018, _plate_mat(c), u * Transform3D(Basis(Vector3.UP, side * PI * 0.5), Vector3(0.0, -0.02, 0.0)))
 		# abdomen side bands, staggered against the front rows
 		for row in range(2):
 			var yy: float = 0.10 + 0.07 * float(row)
-			_bent(c, 0.118, 58.0, 0.05, 0.014, _plate_mat(c), u * Transform3D(Basis(Vector3.UP, side * PI * 0.5), Vector3(0.0, yy, 0.0)))
+			_plate_bent(c, 0.118, 58.0, 0.05, 0.014, _plate_mat(c), u * Transform3D(Basis(Vector3.UP, side * PI * 0.5), Vector3(0.0, yy, 0.0)))
 	# back plate and the collar behind the neck
-	_bent(c, 0.15, 120.0, 0.24, 0.02, _plate_mat(c), u * Transform3D(Basis.IDENTITY, Vector3(0.0, 0.33, 0.0)))
-	_bent(c, 0.075, 170.0, 0.045, 0.012, _plate_mat(c), u * Transform3D(Basis.IDENTITY, Vector3(0.0, 0.515, 0.0)))
+	_plate_bent(c, 0.15, 120.0, 0.24, 0.02, _plate_mat(c), u * Transform3D(Basis.IDENTITY, Vector3(0.0, 0.33, 0.0)))
+	_plate_bent(c, 0.075, 170.0, 0.045, 0.012, _plate_mat(c), u * Transform3D(Basis.IDENTITY, Vector3(0.0, 0.515, 0.0)))
 	# abdomen front bands
 	for row in range(3):
 		var yy2: float = 0.08 + 0.07 * float(row)
-		_bent(c, 0.118, 95.0, 0.052, 0.014, _plate_mat(c), u * Transform3D(Basis(Vector3.UP, PI), Vector3(0.0, yy2, 0.0)))
+		_plate_bent(c, 0.118, 95.0, 0.052, 0.014, _plate_mat(c), u * Transform3D(Basis(Vector3.UP, PI), Vector3(0.0, yy2, 0.0)))
 	# codpiece and the back of the pelvis
-	_bent(c, 0.15, 55.0, 0.11, 0.018, _plate_mat(c), u * Transform3D(Basis(Vector3.UP, PI), Vector3(0.0, -0.03, 0.0)))
-	_bent(c, 0.15, 70.0, 0.10, 0.018, _plate_mat(c), u * Transform3D(Basis.IDENTITY, Vector3(0.0, -0.03, 0.0)))
+	_plate_bent(c, 0.15, 55.0, 0.11, 0.018, _plate_mat(c), u * Transform3D(Basis(Vector3.UP, PI), Vector3(0.0, -0.03, 0.0)))
+	_plate_bent(c, 0.15, 70.0, 0.10, 0.018, _plate_mat(c), u * Transform3D(Basis.IDENTITY, Vector3(0.0, -0.03, 0.0)))
 	# neck: chrome column with a ring in the accent colour at its base
 	_cyl_between(c, u * Vector3(0.0, 0.49, 0.0), u * Vector3(0.0, 0.60, 0.0), 0.035, chrome)
 	var ring := TorusMesh.new()
@@ -168,8 +229,8 @@ static func _head(c: Dictionary, hx: Transform3D, eye_variant: int, eye_side: fl
 	# the dome: an egg
 	_sphere(c, 0.115, plate, hx * Transform3D(Basis.from_scale(Vector3(0.92, 1.15, 1.0)), Vector3(0.0, 0.01, 0.0)))
 	# faceplate and chin band, both bent shells facing forward (-Z)
-	_bent(c, 0.13, 105.0, 0.13, 0.014, plate, hx * Transform3D(Basis(Vector3.UP, PI), Vector3(0.0, -0.01, 0.0)))
-	_bent(c, 0.088, 90.0, 0.04, 0.012, plate, hx * Transform3D(Basis(Vector3.UP, PI), Vector3(0.0, -0.10, 0.0)))
+	_plate_bent(c, 0.13, 105.0, 0.13, 0.014, plate, hx * Transform3D(Basis(Vector3.UP, PI), Vector3(0.0, -0.01, 0.0)))
+	_plate_bent(c, 0.088, 90.0, 0.04, 0.012, plate, hx * Transform3D(Basis(Vector3.UP, PI), Vector3(0.0, -0.10, 0.0)))
 	# chrome ear discs
 	for si in range(2):
 		var side: float = -1.0 if si == 0 else 1.0
@@ -232,12 +293,12 @@ static func _leg(c: Dictionary, u: Transform3D, side: float, forward: bool, stri
 	# kneecap: a flat plate floating in front of the knee sphere
 	var leg_dir: Vector3 = (hip - ankle).normalized()
 	var kb: Basis = _basis_yz(leg_dir, Vector3(0.0, 0.0, -1.0))
-	_box(c, Vector3(0.10, 0.085, 0.016), _plate_mat(c), Transform3D(kb, knee + kb.z * (0.06 + gap + 0.008)))
+	_plate_box(c, Vector3(0.10, 0.085, 0.016), _plate_mat(c), Transform3D(kb, knee + kb.z * (0.06 + gap + 0.008)))
 	# foot: undersuit block, bent toe cap, flat heel plate
 	_box(c, Vector3(0.10, 0.06, 0.25), under, Transform3D(foot_b, foot_centre))
 	var cap_b: Basis = foot_b * _basis_yz(Vector3(1.0, 0.0, 0.0), Vector3(0.0, 0.7, -0.7))
-	_bent(c, 0.062, 110.0, 0.11, 0.014, _plate_mat(c), Transform3D(cap_b, foot_centre + foot_b * Vector3(0.0, -0.012, -0.075)))
-	_box(c, Vector3(0.10, 0.05, 0.016), _plate_mat(c), Transform3D(foot_b, foot_centre + foot_b * Vector3(0.0, 0.012, 0.135)))
+	_plate_bent(c, 0.062, 110.0, 0.11, 0.014, _plate_mat(c), Transform3D(cap_b, foot_centre + foot_b * Vector3(0.0, -0.012, -0.075)))
+	_plate_box(c, Vector3(0.10, 0.05, 0.016), _plate_mat(c), Transform3D(foot_b, foot_centre + foot_b * Vector3(0.0, 0.012, 0.135)))
 
 
 static func _arm(c: Dictionary, u: Transform3D, side: float, forward: bool) -> void:
@@ -264,7 +325,7 @@ static func _arm(c: Dictionary, u: Transform3D, side: float, forward: bool) -> v
 	var hand_b: Basis = _basis_yz(fore_dir, Vector3(-side, 0.0, 0.0))
 	var palm_c: Vector3 = wrist + fore_dir * 0.075
 	_box(c, Vector3(0.075, 0.10, 0.035), under, Transform3D(hand_b, palm_c))
-	_box(c, Vector3(0.068, 0.085, 0.012), _plate_mat(c), Transform3D(hand_b, palm_c - hand_b.z * (0.0175 + gap)))
+	_plate_box(c, Vector3(0.068, 0.085, 0.012), _plate_mat(c), Transform3D(hand_b, palm_c - hand_b.z * (0.0175 + gap)))
 	var curl: float = deg_to_rad(rng.randf_range(22.0, 42.0))
 	var finger_b: Basis = hand_b * Basis(Vector3.RIGHT, curl)
 	var palm_end: Vector3 = wrist + fore_dir * 0.125
@@ -298,12 +359,237 @@ static func _plates_around(c: Dictionary, a: Vector3, b: Vector3, radius: float,
 		var yaw: Basis = Basis(Vector3.UP, PI * 0.5 - ang)
 		var mat: StandardMaterial3D = _plate_mat(c)
 		if bent:
-			_bent(c, r, arc_deg, plate_len, thickness, mat, Transform3D(axis_b * yaw, centre))
+			_plate_bent(c, r, arc_deg, plate_len, thickness, mat, Transform3D(axis_b * yaw, centre))
 		else:
 			var width: float = 2.0 * (radius + gap) * tan(deg_to_rad(arc_deg) * 0.5) * 0.92
 			var radial: Vector3 = Vector3(cos(ang), 0.0, sin(ang))
 			var pos: Vector3 = centre + axis_b * (radial * r)
-			_box(c, Vector3(width, plate_len, thickness), mat, Transform3D(axis_b * yaw, pos))
+			_plate_box(c, Vector3(width, plate_len, thickness), mat, Transform3D(axis_b * yaw, pos))
+
+
+# ---------------------------------------------------------------------------
+# AXIS 1 — panelling. Every armour plate in the body, torso, helmet, limbs and
+# the twin's suit alike, is emitted through these two doors, so one word rewrites
+# the whole suit. `floating` takes the original path and draws no extra numbers
+# from the generator, which is what keeps the default statue byte-identical.
+# ---------------------------------------------------------------------------
+
+static func _plate_bent(c: Dictionary, radius: float, arc_deg: float, height: float, thickness: float, mat: StandardMaterial3D, xf: Transform3D) -> void:
+	var mode: String = c["panelling"]
+	if mode == "floating":
+		_bent(c, radius, arc_deg, height, thickness, mat, xf)
+		return
+	var rng: RandomNumberGenerator = c["rng"]
+	if mode == "shed":
+		_bent(c, radius, arc_deg, height, thickness, mat, _shed_xf(c, xf, maxf(height, radius)))
+	elif mode == "swarmed":
+		var shards: int = c["shards"]
+		for _k in range(shards):
+			var f: float = rng.randf_range(0.30, 0.46)
+			_bent(c, radius, arc_deg * f + 8.0, height * f, thickness * 0.9, mat, _scatter_xf(c, xf, maxf(height, radius * 0.7)))
+	elif mode == "ribbed":
+		# only the two rims survive: the shell becomes a pair of hoops
+		var rib_h: float = maxf(thickness * 1.5, 0.010)
+		for k in range(2):
+			var sgn: float = -1.0 if k == 0 else 1.0
+			var off: float = height * 0.42 * sgn
+			_bent(c, radius, arc_deg, rib_h, thickness * 1.4, mat, Transform3D(xf.basis, xf.origin + xf.basis.y * off))
+	elif mode == "molten":
+		# the plate lets go of its mounting and hangs
+		var sag: float = deg_to_rad(rng.randf_range(24.0, 58.0))
+		var mb: Basis = xf.basis * Basis(Vector3.RIGHT, sag)
+		var mo: Vector3 = xf.origin + Vector3(0.0, -height * 0.30, 0.0)
+		_bent(c, radius, arc_deg, height * 1.25, thickness, mat, Transform3D(mb, mo))
+		if rng.randf() < 0.55:
+			_drip(c, mo + Vector3(0.0, -height * 0.55, 0.0), thickness)
+	else:
+		# an unspoken value falls back to the suit as built, so a typo photographs
+		# as an inert frame rather than quietly wearing another value's clothes
+		_bent(c, radius, arc_deg, height, thickness, mat, xf)
+
+
+static func _plate_box(c: Dictionary, dims: Vector3, mat: StandardMaterial3D, xf: Transform3D) -> void:
+	var mode: String = c["panelling"]
+	if mode == "floating":
+		_box(c, dims, mat, xf)
+		return
+	var rng: RandomNumberGenerator = c["rng"]
+	if mode == "shed":
+		_box(c, dims, mat, _shed_xf(c, xf, maxf(dims.x, dims.y)))
+	elif mode == "swarmed":
+		var shards: int = c["shards"]
+		for _k in range(shards):
+			var f: float = rng.randf_range(0.30, 0.46)
+			_box(c, Vector3(dims.x * f, dims.y * f, dims.z * 0.9), mat, _scatter_xf(c, xf, maxf(dims.x, dims.y)))
+	elif mode == "ribbed":
+		var bar_w: float = maxf(dims.x * 0.17, 0.008)
+		for k in range(2):
+			var sgn: float = -1.0 if k == 0 else 1.0
+			var off: float = dims.x * 0.42 * sgn
+			_box(c, Vector3(bar_w, dims.y, dims.z * 1.25), mat, Transform3D(xf.basis, xf.origin + xf.basis.x * off))
+	elif mode == "molten":
+		var sag: float = deg_to_rad(rng.randf_range(22.0, 55.0))
+		var mb: Basis = xf.basis * Basis(Vector3.RIGHT, sag)
+		var mo: Vector3 = xf.origin + Vector3(0.0, -dims.y * 0.28, 0.0)
+		_box(c, Vector3(dims.x, dims.y * 1.30, dims.z), mat, Transform3D(mb, mo))
+		if rng.randf() < 0.55:
+			_drip(c, mo + Vector3(0.0, -dims.y * 0.60, 0.0), dims.z)
+	else:
+		_box(c, dims, mat, xf)
+
+
+## Blow one plate outward along the line from the chest through its own centre,
+## and let it tumble. The downward component is clipped so a shed foot plate does
+## not dig under the plinth and lift the whole statue off it in the settle.
+static func _shed_xf(c: Dictionary, xf: Transform3D, span: float) -> Transform3D:
+	var rng: RandomNumberGenerator = c["rng"]
+	var hub: Vector3 = c["hub"]
+	var away: Vector3 = xf.origin - hub
+	if away.length_squared() < 0.0001:
+		away = Vector3(0.0, 1.0, 0.0)
+	away = away.normalized()
+	var push: float = 0.085 + span * 0.35 + rng.randf_range(0.0, 0.075)
+	var off: Vector3 = away * push
+	off.y = maxf(off.y, -0.055)
+	return Transform3D(_tumble(rng, 0.45) * xf.basis, xf.origin + off)
+
+
+## One flake of a swarmed plate: a small displacement on a sphere around where
+## the plate used to be, and a free rotation.
+static func _scatter_xf(c: Dictionary, xf: Transform3D, span: float) -> Transform3D:
+	var rng: RandomNumberGenerator = c["rng"]
+	var d: Vector3 = Vector3(rng.randf_range(-1.0, 1.0), rng.randf_range(-1.0, 1.0), rng.randf_range(-1.0, 1.0))
+	if d.length_squared() < 0.0001:
+		d = Vector3(0.0, 1.0, 0.0)
+	d = d.normalized()
+	var reach: float = 0.02 + span * rng.randf_range(0.25, 1.15)
+	var off: Vector3 = d * reach
+	off.y = maxf(off.y, -0.05)
+	return Transform3D(_tumble(rng, PI) * xf.basis, xf.origin + off)
+
+
+static func _tumble(rng: RandomNumberGenerator, amount: float) -> Basis:
+	var ax: Vector3 = Vector3(rng.randf_range(-1.0, 1.0), rng.randf_range(-1.0, 1.0), rng.randf_range(-1.0, 1.0))
+	if ax.length_squared() < 0.0001:
+		ax = Vector3(0.0, 1.0, 0.0)
+	return Basis(ax.normalized(), rng.randf_range(-amount, amount))
+
+
+## A tapering run of the body colour hanging straight down in world space. It is
+## cut short near the floor so the drips land in the lake instead of below it.
+static func _drip(c: Dictionary, top: Vector3, girth: float) -> void:
+	var rng: RandomNumberGenerator = c["rng"]
+	var room: float = maxf(top.y - (PLINTH_H + 0.012), 0.02)
+	var ln: float = clampf(rng.randf_range(0.05, 0.20), 0.02, room)
+	var r0: float = maxf(girth * 0.75, 0.010)
+	var cone := CylinderMesh.new()
+	cone.top_radius = r0
+	cone.bottom_radius = r0 * 0.22
+	cone.height = ln
+	cone.radial_segments = 8
+	cone.rings = 1
+	_add(c, cone, _m(c, "pour"), Transform3D(Basis.IDENTITY, top + Vector3(0.0, -ln * 0.5, 0.0)))
+
+
+## What the molten suit has run into: a lake of the body's colour on the plinth,
+## with a few tongues of it creeping outward.
+static func _lake(c: Dictionary) -> void:
+	var rng: RandomNumberGenerator = c["rng"]
+	var pour: StandardMaterial3D = _m(c, "pour")
+	var pool := CylinderMesh.new()
+	pool.top_radius = 0.40
+	pool.bottom_radius = 0.46
+	pool.height = 0.035
+	pool.radial_segments = 32
+	_add(c, pool, pour, Transform3D(Basis.IDENTITY, Vector3(0.0, PLINTH_H + 0.015, 0.0)))
+	for i in range(4):
+		var a: float = TAU * float(i) * 0.25 + rng.randf_range(-0.4, 0.4)
+		var rr: float = rng.randf_range(0.24, 0.40)
+		var blob_r: float = rng.randf_range(0.05, 0.10)
+		_sphere(c, blob_r, pour, Transform3D(Basis.from_scale(Vector3(1.0, 0.28, 1.0)), Vector3(cos(a) * rr, PLINTH_H + 0.018, sin(a) * rr)))
+
+
+# ---------------------------------------------------------------------------
+# AXIS 2 — assembly. Three ways the line can get the body wrong.
+# ---------------------------------------------------------------------------
+
+## totem: the neck keeps going. Two more helmets, each smaller and turned
+## further off the last, with a chrome collar between them, and a fan of thin
+## blades standing off the topmost crown.
+static func _totem(c: Dictionary, hx: Transform3D, eye_variant: int, eye_side: float) -> void:
+	var rng: RandomNumberGenerator = c["rng"]
+	var chrome: StandardMaterial3D = _m(c, "chrome")
+	var lvl: Transform3D = hx
+	for i in range(2):
+		# the collar the next head sits on; lvl.basis already carries the level's
+		# scale, so the disc is written at its own size and shrinks with the stack
+		var disc := CylinderMesh.new()
+		disc.top_radius = 0.085
+		disc.bottom_radius = 0.105
+		disc.height = 0.030
+		_add(c, disc, chrome, Transform3D(lvl.basis, lvl * Vector3(0.0, 0.135, 0.0)))
+		var nb: Basis = lvl.basis * Basis(Vector3.UP, rng.randf_range(-1.15, 1.15)) * Basis(Vector3.BACK, rng.randf_range(-0.14, 0.14)) * Basis.from_scale(Vector3(0.76, 0.76, 0.76))
+		lvl = Transform3D(nb, lvl * Vector3(0.0, 0.180, 0.0))
+		var ev: int = (eye_variant + i + 1) % 2
+		_head(c, lvl, ev, -eye_side)
+	var blades: int = rng.randi_range(7, 9)
+	var base: Vector3 = lvl * Vector3(0.0, 0.100, 0.0)
+	for b in range(blades):
+		var ang: float = TAU * float(b) / float(blades)
+		var bb: Basis = lvl.basis * Basis(Vector3.UP, ang) * Basis(Vector3.RIGHT, deg_to_rad(-26.0))
+		_bent(c, 0.05, 44.0, 0.28, 0.012, _plate_mat(c), Transform3D(bb, base + bb.y * 0.16))
+
+
+## twinned: a second suit budding out of the back, facing the other way, its head
+## rising past the host's — legless, because a bud has no floor to stand on.
+##
+## The scale stays near 1.0 on purpose. A plate transform inherits this basis and
+## shrinks with it, but _capsule_between and _cyl_between build the undersuit from
+## absolute radii and do not, so below about k = 0.85 the abdomen bands (r 0.118)
+## sink inside the spine capsule (r 0.10) and the twin photographs as a bare
+## undersuit wearing nothing. The twin is told apart by its facing and its lean.
+static func _twin(c: Dictionary, u: Transform3D, side: float) -> void:
+	var rng: RandomNumberGenerator = c["rng"]
+	var k: float = rng.randf_range(0.90, 1.00)
+	var yaw: float = PI + rng.randf_range(-0.30, 0.30)
+	var pitch: float = deg_to_rad(rng.randf_range(10.0, 26.0))
+	var tb: Basis = u.basis * Basis(Vector3.UP, yaw) * Basis(Vector3.RIGHT, pitch) * Basis.from_scale(Vector3(k, k, k))
+	var tu := Transform3D(tb, u * Vector3(side * 0.09, 0.24, 0.17))
+	_torso(c, tu)
+	var thb: Basis = tb * Basis(Vector3.UP, rng.randf_range(-0.50, 0.50)) * Basis(Vector3.BACK, rng.randf_range(-0.18, 0.18))
+	_head(c, Transform3D(thb, tu * Vector3(0.0, 0.66, 0.0)), 1, 1.0)
+	_arm(c, tu, -1.0, true)
+	_arm(c, tu, 1.0, false)
+
+
+## poured: the walk is over. A glossy cone of the body's own colour has risen to
+## the hip and taken the legs; the robot stands in the lake it came out of.
+static func _pour(c: Dictionary) -> void:
+	var rng: RandomNumberGenerator = c["rng"]
+	var pour: StandardMaterial3D = _m(c, "pour")
+	var top_y: float = rng.randf_range(0.72, 0.84)
+	var neck_r: float = rng.randf_range(0.17, 0.22)
+	var cone := CylinderMesh.new()
+	cone.top_radius = neck_r
+	cone.bottom_radius = rng.randf_range(0.40, 0.46)
+	cone.height = top_y - PLINTH_H
+	cone.radial_segments = 30
+	_add(c, cone, pour, Transform3D(Basis.IDENTITY, Vector3(0.0, PLINTH_H + cone.height * 0.5, 0.0)))
+	var pool := CylinderMesh.new()
+	pool.top_radius = 0.46
+	pool.bottom_radius = 0.50
+	pool.height = 0.040
+	pool.radial_segments = 32
+	_add(c, pool, pour, Transform3D(Basis.IDENTITY, Vector3(0.0, PLINTH_H + 0.020, 0.0)))
+	var lip := TorusMesh.new()
+	lip.inner_radius = neck_r * 0.86
+	lip.outer_radius = neck_r * 1.32
+	_add(c, lip, pour, Transform3D(Basis.IDENTITY, Vector3(0.0, top_y, 0.0)))
+	for i in range(3):
+		var a: float = TAU * float(i) / 3.0 + rng.randf_range(-0.5, 0.5)
+		var rr: float = rng.randf_range(0.28, 0.42)
+		var blob_r: float = rng.randf_range(0.06, 0.11)
+		_sphere(c, blob_r, pour, Transform3D(Basis.from_scale(Vector3(1.0, 0.26, 1.0)), Vector3(cos(a) * rr, PLINTH_H + 0.022, sin(a) * rr)))
 
 
 static func _plate_mat(c: Dictionary) -> StandardMaterial3D:
@@ -395,6 +681,8 @@ static func _tri(st: SurfaceTool, pa: Vector3, pb: Vector3, pc: Vector3, ta: Vec
 
 static func _add(c: Dictionary, mesh: Mesh, mat: Material, xf: Transform3D) -> MeshInstance3D:
 	var root: Node3D = c["root"]
+	if root.get_child_count() >= MESH_CAP:
+		return null
 	var s: float = c["s"]
 	var mi := MeshInstance3D.new()
 	mi.mesh = mesh
@@ -491,3 +779,52 @@ static func _basis_y(dir: Vector3) -> Basis:
 	if absf(dir.normalized().z) > 0.9:
 		hint = Vector3(1.0, 0.0, 0.0)
 	return _basis_yz(dir, hint)
+
+
+# ---------------------------------------------------------------------------
+# the measured settle
+# ---------------------------------------------------------------------------
+
+## Fit the built body into 1.20 x 1.20 x 1.68, centre it on x/z, and stand its
+## lowest point on y = 0. Shrinking only: a body that already fits is scaled by
+## 1.0. This is what lets a shed cloud, a molten lake or a three-headed totem
+## blow past the walker's envelope and still come back onto the plinth.
+static func _settle(root: Node3D) -> void:
+	var box: AABB = _union_aabb(root)
+	var kx: float = 1.20 / maxf(box.size.x, 0.001)
+	var kz: float = 1.20 / maxf(box.size.z, 0.001)
+	var ky: float = 1.68 / maxf(box.size.y, 0.001)
+	var kfit: float = minf(1.0, minf(kx, minf(kz, ky)))
+	if kfit < 1.0:
+		for ch in root.get_children():
+			if not (ch is MeshInstance3D):
+				continue
+			var mi: MeshInstance3D = ch
+			var tf: Transform3D = mi.transform
+			mi.transform = Transform3D(tf.basis.scaled(Vector3(kfit, kfit, kfit)), tf.origin * kfit)
+		box = _union_aabb(root)
+	var centre: Vector3 = box.position + box.size * 0.5
+	var shift := Vector3(-centre.x, -box.position.y, -centre.z)
+	for ch in root.get_children():
+		if not (ch is MeshInstance3D):
+			continue
+		var mi: MeshInstance3D = ch
+		mi.transform = Transform3D(mi.transform.basis, mi.transform.origin + shift)
+
+
+static func _union_aabb(root: Node3D) -> AABB:
+	var box := AABB()
+	var first: bool = true
+	for ch in root.get_children():
+		if not (ch is MeshInstance3D):
+			continue
+		var mi: MeshInstance3D = ch
+		if mi.mesh == null:
+			continue
+		var wb: AABB = mi.transform * mi.mesh.get_aabb()
+		if first:
+			box = wb
+			first = false
+		else:
+			box = box.merge(wb)
+	return box

@@ -6,35 +6,47 @@ var arrows: MeshInstance3D
 var buttons: Dictionary = {}
 var status: Label3D
 var age := 0.0
+var monitor: Node3D
+var button_labels: Array[Label3D] = []
 
 func _ready() -> void:
 	painter = get_parent()
 	painter._canvas_mesh.rotation_degrees.x = 0 # Match the actual XZ trail plane.
 	painter._info_label.hide() # The lesson status occupies this title position.
-	# Rest the existing controls above this lesson's tabletop, including RESET/SEED.
-	painter._control_panel.position.y = -0.015
-	painter._control_panel.rotation_degrees.x = -65
 	painter.num_particles = 80
 	painter._noise.seed = 43
 	painter._update_noise()
 	painter._create_particles()
 	painter.field_evolving = false
+	for i in 2:
+		var id = ["ARROWS", "FIELD TIME"][i]
+		var button = PUSH.instantiate();button.position=Vector3(-0.16+i*0.32,-0.025,0.51);button.scale=Vector3.ONE*0.35
+		add_child(button);buttons[id]=button;button.pressed.connect(act.bind(id))
+		var label=Label3D.new();label.text=id;label.font_size=28;label.pixel_size=0.00065;label.position=button.position+Vector3(0,0.035,0.045);label.rotation_degrees.x=-45;add_child(label)
+		button_labels.append(label)
+	status=Label3D.new();status.font_size=24;status.pixel_size=0.0007;status.position=Vector3(0,0.09,-0.24);add_child(status)
+	arrows=MeshInstance3D.new();arrows.name="SharedFieldArrows";var ink=StandardMaterial3D.new();ink.shading_mode=BaseMaterial3D.SHADING_MODE_UNSHADED;ink.albedo_color=Color("fff1a6");arrows.material_override=ink;add_child(arrows)
+	arrows.hide()
+	if str(painter.get_meta("config_display", "")) == "wall_monitor":
+		var layout = preload("res://commons/artifacts/flow_field_painter/wall_monitor.gd").new()
+		layout.name = "WallMonitorMount"
+		add_child(layout)
+		monitor = layout.build(painter, self, button_labels)
+	else:
+		_build_tabletop()
+	refresh()
+
+func _build_tabletop() -> void:
+	# Keep the original lesson arrangement for other placements.
+	painter._control_panel.position.y = -0.015
+	painter._control_panel.rotation_degrees.x = -65
 	var top = MeshInstance3D.new()
 	var box = BoxMesh.new(); box.size = Vector3(0.85,0.05,0.95); top.mesh = box
 	top.position = Vector3(0,-0.10,0.15)
 	var mat = StandardMaterial3D.new(); mat.albedo_color = Color("d9d0bc"); top.material_override = mat
 	add_child(top)
 	var leg = MeshInstance3D.new();var stem = BoxMesh.new();stem.size=Vector3(0.18,0.30,0.18);leg.mesh=stem;leg.position=Vector3(0,-0.275,0.12);leg.material_override=mat;add_child(leg)
-	for i in 2:
-		var id = ["ARROWS", "FIELD TIME"][i]
-		var button = PUSH.instantiate();button.position=Vector3(-0.16+i*0.32,-0.025,0.51);button.scale=Vector3.ONE*0.35
-		add_child(button);buttons[id]=button;button.pressed.connect(act.bind(id))
-		var label=Label3D.new();label.text=id;label.font_size=28;label.pixel_size=0.00065;label.position=button.position+Vector3(0,0.035,0.045);label.rotation_degrees.x=-45;add_child(label)
-	status=Label3D.new();status.font_size=24;status.pixel_size=0.0007;status.position=Vector3(0,0.09,-0.24);add_child(status)
-	arrows=MeshInstance3D.new();arrows.name="SharedFieldArrows";var ink=StandardMaterial3D.new();ink.shading_mode=BaseMaterial3D.SHADING_MODE_UNSHADED;ink.albedo_color=Color("fff1a6");arrows.material_override=ink;add_child(arrows)
-	arrows.hide()
 	var light=OmniLight3D.new();light.position=Vector3(0,0.8,0.4);light.omni_range=3;light.light_energy=1.4;add_child(light)
-	refresh()
 
 func act(id: String) -> void:
 	if id=="ARROWS":arrows.visible=not arrows.visible

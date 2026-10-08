@@ -1,20 +1,20 @@
 # schrodinger_box.gd
 # Schrödinger's cat thought experiment visualization
-# The box holds superposition until observed
+# This toy chooses a random outcome on desktop click.
 
 extends Node3D
 
 class_name SchrodingerBox
 
 # @identity
-# essence: |ψ⟩ = α|alive⟩ + β|dead⟩ → observation collapses to |alive⟩ or |dead⟩ with P = |α|²
-# desire: open the box and watch the superposition collapse — the lid swings, the state resolves, then resets
-# critical_parameter: remainder — where the box puts the part of the state it cannot show you (core | twin | seam | haze | witness); vantage — whether the argument is an object you hold or a room you stand in (specimen | stele | chamber). auto_reset_time is tempo, not stance: it sets how long the collapsed state persists.
-# triggers: click/observe collapses the wavefunction randomly; timer resets to superposition; lid animates open/close; apply_grid_config({remainder, vantage, box_size, auto_reset_time})
-# emerges: the discomfort of genuine indeterminacy — the cat is not secretly alive or dead, it is both
-# needs: VR click interaction [has via mouse], XR interaction [missing]
-# relationships: contrasts florensky_sphere (quantum vs paraconsistent superposition); paired with superposition_display (abstract vs physical metaphor) — the two share one `remainder`/`vantage` vocabulary
-# truth: observation does not reveal a pre-existing state — it creates one
+# essence: a scripted illustration of a sealed box and a revealed outcome, not a quantum simulation.
+# desire: compare the visible opening with what the program actually decides.
+# critical_parameter: remainder and vantage choose visual presentation; auto_reset_time sets the reveal duration.
+# triggers: desktop click picks a random ALIVE/DEAD result, animates the lid, then resets on a timer. Tracked-hand opening is not implemented.
+# emerges: a question about what a visual metaphor does and does not demonstrate.
+# needs: desktop opening exists; tracked-hand interaction remains missing.
+# relationships: shares remainder/vantage vocabulary with superposition_display; neither demonstrates logical contradiction.
+# truth: this implementation samples an ordinary random outcome. It does not model amplitudes, entanglement or quantum measurement.
 
 # ─────────────────────────────────────────────────────────────────────────────
 # STAGE-2 DNA PROMOTION (2026-07-27). Kin pair with superposition_display; the
@@ -256,7 +256,7 @@ func _create_labels():
 	_label = Label3D.new()
 	_label.pixel_size = 0.001
 	_label.font_size = 14
-	_label.text = "SCHRÖDINGER'S BOX\nClick to observe"
+	_label.text = "SCHRÖDINGER'S BOX — SCRIPTED TOY\nDesktop click: random outcome\nNot a quantum simulation"
 	_label.position = Vector3(0, -box_size.y / 2 - 0.1, 0)
 	_body.add_child(_label)
 

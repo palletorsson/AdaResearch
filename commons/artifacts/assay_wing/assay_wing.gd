@@ -453,11 +453,19 @@ func _u_drive(p: Vector3, t: float) -> Vector3:
 ## where they started.
 ##
 ## THIS IS THE TREATMENT THE MEAN UNDER-REPORTS, and that is content rather than
-## defect. Each of its 24 moving masses travels 0.311 unit — more than any mass
-## moves under gravity, load or drive — and its mean departure is 0.1991, the
-## LOWEST on the axis, because a mean over 75 divides a dramatic edge by a
+## defect. Each of its 24 moving masses travels 0.3111 unit — more than any mass
+## moves under load (0.2955) or drive (0.2079) — and its mean departure is 0.1991,
+## the LOWEST on the axis, because a mean over 75 divides a dramatic edge by a
 ## stationary middle. The gauge ranks the leak below the settle. The control cell
 ## does not.
+##
+## CORRECTED 2026-08-12 after an independent re-derivation: gravity was named in
+## this list and does not belong in it. Gravity's corner masses travel 0.3886 unit
+## — MORE than breach's 0.3111 — because at t = 1 its envelope has settled to
+## s = 0.9697 and a corner at h = 1.0 moves (0.1455, -0.3297, 0.1455). The claim
+## holds against load and drive only. The finding it supports is untouched: breach
+## still has the lowest mean of the five while moving individual masses further
+## than three of the other four treatments move any of theirs.
 func _u_breach(p: Vector3, t: float) -> Vector3:
 	if p.y >= BREACH_Y:
 		return Vector3.ZERO

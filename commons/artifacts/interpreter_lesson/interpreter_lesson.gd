@@ -91,9 +91,14 @@ func _stage_hall() -> void:
 	var hall: Node=source
 	while hall!=null and not hall.has_meta("em_map"):hall=hall.get_parent()
 	if hall==null or str(hall.get_meta("em_map"))!="LSystems_Grammars_And_Curves":return
-	for light in hall.find_children("*","DirectionalLight3D",true,false):light.hide()
-	for camera in hall.find_children("*","Camera3D",true,false):camera.current=false
+	# Stage the shared hall only. A monitor's private world owns its lighting,
+	# camera and captions even though it is a descendant of the hall node.
+	for light in hall.find_children("*","DirectionalLight3D",true,false):
+		if light.get_viewport()==hall.get_viewport():light.hide()
+	for camera in hall.find_children("*","Camera3D",true,false):
+		if camera.get_viewport()==hall.get_viewport():camera.current=false
 	for caption in hall.find_children("*","Label3D",true,false):
+		if caption.get_viewport()!=hall.get_viewport():continue
 		if not source.is_ancestor_of(caption) and caption.pixel_size>0.002:caption.pixel_size=0.002
 	for at in [Vector3(4,4,10),Vector3(15,4,10),Vector3(9.5,4,24)]:
 		var light:=OmniLight3D.new();light.position=at;light.omni_range=14;light.light_energy=2.0;hall.add_child(light)

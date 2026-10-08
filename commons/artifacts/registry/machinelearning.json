@@ -3632,117 +3632,117 @@
 			"qfep_connection": "Neuroevolution with speciation \u2014 populations splitting into protected species so new ideas survive infancy. NEAT's insight: innovation needs shelter, because a fresh mutation loses every fight until it matures. Evolution discovering the nursery."
 		},
 		"gradient_descent": {
-			"category": "machinelearning",
-			"complexity": "intermediate",
-			"description": "Gradient descent optimization demo \u2014 a ball rolling downhill on a loss surface, following the steepest path to the minimum. The foundational optimization algorithm behind all of deep learning.",
-			"dev_themes": [
-				"ai",
-				"education",
-				"machine_learning"
-			],
-			"include_in_map_data": true,
-			"lookup_name": "gradient_descent",
-			"map_ready": true,
-			"map_sequences": [
-				"machinelearning"
-			],
-			"name": "Gradient Descent",
-			"parameters": {
-				"footprint": [
-					20.0,
-					14.0,
-					20.0
-				],
-				"size_group": "world_scale"
-			},
-			"scene": "res://algorithms/machinelearning/gradientdescent/gradient_descent.tscn",
-			"sequence": "machinelearning",
-			"tags": [
-				"gradient_descent",
-				"optimization",
-				"loss_surface",
-				"learning"
-			],
-			"geometry_spec": {
-				"mesh_type": "hybrid",
-				"topology": "manifold_closed",
-				"construction": {
-					"method": "unknown",
-					"primitives": [
-						"sphere"
-					],
-					"operations": []
-				},
-				"material": {
-					"type": "standard",
-					"shading_model": "emissive",
-					"key_properties": [
-						"emission",
-						"metallic"
-					]
-				},
-				"animation": {
-					"type": "vertex",
-					"driven_by": "per_frame_rebuild",
-					"affects": [
-						"vertex_positions"
-					]
-				},
-				"instance_strategy": "single",
-				"vertex_estimate": "~256"
-			},
-			"spatial_needs": {
-				"platform": "none",
-				"footprint_cells": 9,
-				"clearance": {
-					"front": 2,
-					"back": 2,
-					"left": 2,
-					"right": 2
-				},
-				"player_position": "front",
-				"wall_backing": false,
-				"orientation": "face_approach",
-				"isolation": 0,
-				"cluster_with": [],
-				"preferred_zone": "any",
-				"measured_footprint_cells": 400,
-				"footprint_source": "measured_capped"
-			},
-			"measurements": {
-				"aabb_size": [
-					20.0,
-					3.67,
-					20.0
-				],
-				"aabb_center": [
-					0.0,
-					0.13,
-					0.0
-				],
-				"grid_cells": [
-					20.0,
-					20.0
-				],
-				"max_dimension_m": 20.0,
-				"measured_at": "2026-04-29T07:09:56.762620Z"
-			},
-			"footprint_measured": [
-				20.0,
-				1,
-				20.0
-			],
-			"spatial_profile": {
-				"dir_group": "plane",
-				"range": 35,
-				"density": "field",
-				"min_clearance": 0,
-				"stack_priority": 0.3,
-				"approach_dir": "any",
-				"derived_at": "2026-04-29T09:39:46.152793Z",
-				"derived_from": "aabb_size + category"
-			},
-			"qfep_connection": "Form-finding's engine, isolated: a ball rolling downhill on a loss surface, always stepping against the slope toward the nearest low point. The same descent that trains a network here shapes a form \u2014 the settling mesh, the hanging chain, all of it is this ball, finding a minimum it cannot see the whole of by only ever feeling the ground beneath its feet."
+		  "category": "machinelearning",
+		  "complexity": "intermediate",
+		  "description": "A marker takes finite-difference descent steps on seeded Perlin terrain, retaining a trail. Step size, small-gradient threshold and step budget control the local search. This is a numerical visualization, not a freely rolling rigid body or a trained network.",
+		  "dev_themes": [
+		    "ai",
+		    "education",
+		    "machine_learning"
+		  ],
+		  "include_in_map_data": true,
+		  "lookup_name": "gradient_descent",
+		  "map_ready": true,
+		  "map_sequences": [
+		    "machinelearning"
+		  ],
+		  "name": "Gradient Descent",
+		  "parameters": {
+		    "footprint": [
+		      20.0,
+		      14.0,
+		      20.0
+		    ],
+		    "size_group": "world_scale"
+		  },
+		  "scene": "res://algorithms/machinelearning/gradientdescent/gradient_descent.tscn",
+		  "sequence": "machinelearning",
+		  "tags": [
+		    "gradient_descent",
+		    "optimization",
+		    "loss_surface",
+		    "learning"
+		  ],
+		  "geometry_spec": {
+		    "mesh_type": "hybrid",
+		    "topology": "manifold_closed",
+		    "construction": {
+		      "method": "unknown",
+		      "primitives": [
+		        "sphere"
+		      ],
+		      "operations": []
+		    },
+		    "material": {
+		      "type": "standard",
+		      "shading_model": "emissive",
+		      "key_properties": [
+		        "emission",
+		        "metallic"
+		      ]
+		    },
+		    "animation": {
+		      "type": "vertex",
+		      "driven_by": "per_frame_rebuild",
+		      "affects": [
+		        "vertex_positions"
+		      ]
+		    },
+		    "instance_strategy": "single",
+		    "vertex_estimate": "~256"
+		  },
+		  "spatial_needs": {
+		    "platform": "none",
+		    "footprint_cells": 9,
+		    "clearance": {
+		      "front": 2,
+		      "back": 2,
+		      "left": 2,
+		      "right": 2
+		    },
+		    "player_position": "front",
+		    "wall_backing": false,
+		    "orientation": "face_approach",
+		    "isolation": 0,
+		    "cluster_with": [],
+		    "preferred_zone": "any",
+		    "measured_footprint_cells": 400,
+		    "footprint_source": "measured_capped"
+		  },
+		  "measurements": {
+		    "aabb_size": [
+		      20.0,
+		      3.67,
+		      20.0
+		    ],
+		    "aabb_center": [
+		      0.0,
+		      0.13,
+		      0.0
+		    ],
+		    "grid_cells": [
+		      20.0,
+		      20.0
+		    ],
+		    "max_dimension_m": 20.0,
+		    "measured_at": "2026-04-29T07:09:56.762620Z"
+		  },
+		  "footprint_measured": [
+		    20.0,
+		    1,
+		    20.0
+		  ],
+		  "spatial_profile": {
+		    "dir_group": "plane",
+		    "range": 35,
+		    "density": "field",
+		    "min_clearance": 0,
+		    "stack_priority": 0.3,
+		    "approach_dir": "any",
+		    "derived_at": "2026-04-29T09:39:46.152793Z",
+		    "derived_from": "aabb_size + category"
+		  },
+		  "qfep_connection": "A local update can reach different accepted states depending on landscape, start and stopping rule. Compare the retained-state marble and controlled objective lab in Descent; visual similarity does not make their update laws identical."
 		},
 		"gradient_descent_landscape": {
 			"category": "machinelearning",

@@ -236,14 +236,14 @@ func run() -> void:
 	await process_frame
 	st = rem.call("get_state")
 	var seed1: int = int(st["seed"])
-	check(seed1 != seed0 and int(st["removed"]) == 0 and int(st["remaining"]) == 16, "a new seed is named (%d) and the set restored" % seed1)
+	check(seed1 >= 10000 and seed1 <= 99999 and int(st["removed"]) == 0 and int(st["remaining"]) == 16, "a new seed is named (%d) and the set restored" % seed1)
 	for k in range(16):
 		_press(panel, "Btn_4")
 		await create_timer(0.55).timeout
 	st = rem.call("get_state")
 	var log_c: Array = st["removal_log"]
 	measurements["run_c_new_seed"] = {"seed": seed1, "log": log_c}
-	check(log_c != log_a and log_c.size() == 16, "under the new seed the same set empties in another order")
+	check(_is_permutation(log_c, want16), "NEW SEED empties the same set once each; seed and order may repeat")
 	check(status != null and status.text.begins_with("RANGE: columns 2-5, rows 2-5 · seed %d" % seed1), "the status names the new seed")
 
 	# ── 6. the masks: ROW, COLUMN, ALL — and the same seed over two masks ─────
@@ -304,8 +304,65 @@ func run() -> void:
 	for i in range8:
 		if not (int(i) in want16): range_ok = false
 	check(range_ok and row_ok, "seed 777 over two masks: the RANGE run stays in its block, the ROW run in its row")
-	check(range8 != row8, "…the same draws land on different cubes (%s vs %s)" % [str(range8), str(row8)])
+	check(range8 != row8, "…the same seed with different draw bounds selects different cubes (%s vs %s)" % [str(range8), str(row8)])
 	_press(panel, "Btn_0")
+	await process_frame
+	await process_frame
+
+	# Independent continuation: equal-sized sets, cancellation and complete captured histories.
+	rem.call("set_random_seed", 777)
+	_press(panel, "Btn_2")
+	await process_frame
+	await process_frame
+	for k in range(8):
+		_press(panel, "Btn_4")
+		await create_timer(0.4).timeout
+	var col8: Array = (rem.call("get_state") as Dictionary)["removal_log"]
+	var row_offsets := _offsets(row_set, row8)
+	var col_offsets := _offsets(col_set, col8)
+	check(_is_permutation(col8, col_set), "COLUMN removes each of its eight candidates once")
+	check(row_offsets == col_offsets, "ROW and COLUMN: same seed and equal draw bounds choose identical list offsets")
+	check(row8 != col8, "equal list offsets address different cells in ROW and COLUMN")
+	measurements["equal_sized_masks"] = {"seed": 777, "row": row8, "column": col8, "row_offsets": row_offsets, "column_offsets": col_offsets}
+	rem.call("set_random_seed", 777)
+	_press(panel, "Btn_3")
+	await process_frame
+	await process_frame
+	var all_set: Array = (rem.call("get_state") as Dictionary)["initial_eligible"]
+	for k in range(64):
+		_press(panel, "Btn_4")
+		await create_timer(0.4).timeout
+	var all64: Array = (rem.call("get_state") as Dictionary)["removal_log"]
+	check(_is_permutation(all64, all_set), "ALL removes each of the sixty-four cells once")
+	var history := {"range": {"seed": seed0, "eligible": want16, "order": log_a},
+		"range_replay": {"seed": seed0, "eligible": want16, "order": log_b},
+		"range_new_seed": {"seed": seed1, "eligible": want16, "order": log_c},
+		"row": {"seed": 777, "eligible": row_set, "order": row8},
+		"column": {"seed": 777, "eligible": col_set, "order": col8},
+		"all": {"seed": 777, "eligible": all_set, "order": all64}}
+	var hf := FileAccess.open(OUT + "histories.json", FileAccess.WRITE)
+	hf.store_string(JSON.stringify(history, "  ")); hf.close()
+	_press(panel, "Btn_0")
+	_press(panel, "Btn_4")
+	await create_timer(0.08).timeout
+	check(bool((rem.call("get_state") as Dictionary)["busy"]), "a pending red cube exists before cancellation")
+	_press(panel, "Btn_5")
+	await create_timer(0.4).timeout
+	st = rem.call("get_state")
+	check(int(st["removed"]) == 0 and int(st["remaining"]) == 16 and not bool(st["busy"]), "RESET cancels the pending deletion and leaves the restored set intact")
+	_press(panel, "Btn_4")
+	await create_timer(0.08).timeout
+	_press(panel, "Btn_1")
+	await create_timer(0.4).timeout
+	st = rem.call("get_state")
+	check(int(st["removed"]) == 0 and int(st["remaining"]) == 8 and str(st["mode"]) == "Row", "changing the mask cancels a pending deletion before it reaches the new run")
+	_press(panel, "Btn_0")
+	_press(panel, "Btn_4")
+	_press(panel, "Btn_4")
+	await create_timer(0.4).timeout
+	st = rem.call("get_state")
+	check(int(st["removed"]) == 1 and int(st["remaining"]) == 15, "a second press during the highlight does not schedule another removal")
+	_press(panel, "Btn_5")
 	await process_frame
 	await process_frame
 
@@ -540,6 +597,22 @@ func _cam_pose(cam: Camera3D) -> Dictionary:
 	return {"current_camera": str(cur.get_path()).right(50) if cur != null else "none", "is_ours": cur == cam,
 		"at": [snappedf(cam.global_position.x, 0.01), snappedf(cam.global_position.y, 0.01), snappedf(cam.global_position.z, 0.01)],
 		"forward": [snappedf(fwd.x, 0.01), snappedf(fwd.y, 0.01), snappedf(fwd.z, 0.01)]}
+
+func _is_permutation(order: Array, candidates: Array) -> bool:
+	var sorted_order := order.duplicate()
+	var sorted_candidates := candidates.duplicate()
+	sorted_order.sort(); sorted_candidates.sort()
+	return sorted_order == sorted_candidates
+
+func _offsets(candidates: Array, order: Array) -> Array:
+	var remaining := candidates.duplicate()
+	var offsets: Array = []
+	for index in order:
+		var offset := remaining.find(index)
+		if offset < 0: return [-1]
+		offsets.append(offset)
+		remaining.remove_at(offset)
+	return offsets
 
 func _finish() -> void:
 	var report := {"map": MAP, "checks": checks, "failures": failures, "measurements": measurements,

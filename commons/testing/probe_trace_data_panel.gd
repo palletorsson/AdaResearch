@@ -27,8 +27,8 @@ func run() -> void:
 	pen.set("record_only_when_grabbed", false)
 	pen.set("data_table_update_interval", 0.0)
 	var panel: Node3D = pen.get("_data_panel")
-	var count: Label3D = pen.get("_data_count_label")
-	var table: Label3D = pen.get("_data_table_label")
+	var count: Label = pen.get("_data_count_label")
+	var table: Label = pen.get("_data_table_label")
 	check(not panel.visible, "empty trace has no obsolete panel")
 	for i in range(1, 19):
 		move_pen(pen, Vector3(-0.45 + i * 0.055, 1.25 + sin(i * 0.35) * 0.1, 0))
@@ -37,7 +37,7 @@ func run() -> void:
 	check(table.text.contains("Retained: 18 / 4096"), "capacity remains explicit")
 	check(table.text.contains(" 9:") and table.text.contains("18:") and not table.text.contains(" 1:"), "last ten rows retain their current-line indices")
 	check(table.text.contains("WORLD POSITIONS (m)") and table.text.contains("Grid: 10"), "coordinate frame, units and grid remain explicit")
-	check(table.get_parent() == panel and count.get_parent() == panel and panel.has_node("PanelSurface"), "count and coordinates share one backed plane")
+	check(table.get_parent() == panel.get("viewport") and count.get_parent() == panel.get("viewport") and panel.has_node("PanelSurface"), "count and coordinates share one backed plane")
 	check(panel.global_basis.z.y > 0.5 and panel.global_basis.z.z > 0.7, "panel tilted upward 35 degrees, not horizontal or billboarded")
 	var pose := panel.global_transform
 	pen.call("_on_grab_point_dropped", pen.get_node("GrabPoint"))
@@ -46,11 +46,10 @@ func run() -> void:
 	await process_frame
 	var surface: MeshInstance3D = panel.get_node("PanelSurface")
 	var backing := surface.get_aabb()
-	var glyphs := table.get_aabb()
-	check(glyphs.position.y + table.position.y >= backing.position.y + surface.position.y,
-		"last coordinate row fits on the backing")
-	check(glyphs.end.x + table.position.x <= backing.end.x + surface.position.x,
-		"coordinate columns fit on the backing")
+	check(table.position.y + table.get_minimum_size().y <= panel.get("viewport").size.y-25,
+		"last coordinate row fits on the fixed backing")
+	check(table.position.x + table.get_minimum_size().x <= panel.get("viewport").size.x-25,
+		"coordinate columns fit on the fixed backing")
 	var casing: Node3D = panel.get_node("Casing")
 	var shell: MeshInstance3D = casing.get_node("Shell")
 	check(shell.get_aabb().size.z > 0.06, "casing has physical depth")
@@ -86,6 +85,27 @@ func run() -> void:
 	check(count.text == "1 POINT" and panel.visible, "new trace resets count and panel")
 	check(panel.global_basis.z.x < -0.7 and panel.global_basis.z.y > 0.5, "rotated pen gets corresponding tilted panel orientation")
 	check(not panel.global_transform.is_equal_approx(pose), "new trace establishes a new anchor")
+	# Large world offsets must not grow the case or silently lose precision.
+	var fixed_size: Vector2 = panel.get("screen").mesh.size
+	pen.call("clear_trail")
+	for i in 14: move_pen(pen, Vector3(-12345.678+i*.025, 1.234, 9876.543+i*.02))
+	await process_frame
+	await process_frame
+	check(panel.get("screen").mesh.size == fixed_size, "large signed coordinates do not enlarge the instrument")
+	check(table.text.contains("-12345.") and table.get_minimum_size().x <= panel.get("viewport").size.x-64, "large coordinates remain complete and fit")
+	# The inherited clock recorder adds a row and must keep its distinct gate.
+	var timed: Node3D = load("res://commons/primitives/point/draw_dot_time_domain.tscn").instantiate()
+	world.add_child(timed)
+	timed.set_process(false)
+	timed.set("record_only_when_grabbed",false)
+	timed.set("data_table_update_interval",0.0)
+	for i in 14: timed.call("_process",.05)
+	await process_frame
+	await process_frame
+	var timed_label: Label = timed.get("_data_table_label")
+	var timed_panel: Node3D = timed.get("_data_panel")
+	check(timed_label.text.contains("Sample gate:") and timed_label.text.contains("Z drift:"), "time recorder preserves its own sampling contract")
+	check(timed_label.get_minimum_size().y <= timed_panel.get("viewport").size.y-140, "clock recorder's additional row fits the fixed surface")
 	var report := {"checks":checks,"failures":failures,"scope":"Real recorder with supplied positions; screenshot is one trace, not a headset reading test."}
 	var f := FileAccess.open("res://ada_run/trace_data_panel/checks.json", FileAccess.WRITE)
 	f.store_string(JSON.stringify(report,"  "))

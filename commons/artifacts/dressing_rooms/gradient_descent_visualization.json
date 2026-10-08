@@ -1,51 +1,41 @@
 {
   "lookup_name": "gradient_descent_visualization",
-  "footprint": [
-    1,
-    1,
-    1
-  ],
-  "rotations": [
-    "0",
-    "90",
-    "180",
-    "270"
-  ],
+  "footprint": [8.84, 8.94, 4.92],
+  "rotations": ["0", "90", "180", "270"],
   "approach": "south",
   "exit": "north",
   "footing": {
-    "anchor": [
-      1,
-      1
-    ],
+    "anchor": [6, 6],
     "tiles": [
-      [
-        1,
-        1,
-        1
-      ],
-      [
-        1,
-        1,
-        1
-      ],
-      [
-        1,
-        1,
-        1
-      ]
+      [1,1,1,1,1,1,1,1,1,1,1,1,1],
+      [1,1,1,1,1,1,1,1,1,1,1,1,1],
+      [1,1,1,1,1,1,1,1,1,1,1,1,1],
+      [1,1,1,1,1,1,1,1,1,1,1,1,1],
+      [1,1,1,1,1,1,1,1,1,1,1,1,1],
+      [1,1,1,1,1,1,1,1,1,1,1,1,1],
+      [1,1,1,1,1,1,1,1,1,1,1,1,1],
+      [1,1,1,1,1,1,1,1,1,1,1,1,1],
+      [1,1,1,1,1,1,1,1,1,1,1,1,1],
+      [1,1,1,1,1,1,1,1,1,1,1,1,1],
+      [1,1,1,1,1,1,1,1,1,1,1,1,1],
+      [1,1,1,1,1,1,1,1,1,1,1,1,1],
+      [1,1,1,1,1,1,1,1,1,1,1,1,1]
     ]
   },
   "extras": [],
-  "artifact_offset": [
-    0.0,
-    0.0,
-    0.0
-  ],
-  "clearance": [
-    3,
-    3,
-    3
-  ],
-  "posture": "floor"
+  "artifact_offset": [0.0, 0.0, 0.0],
+  "clearance": [13, 13, 6],
+  "posture": "floor",
+  "show_info": false,
+  "show_dressing": false,
+  "placement_contract": {
+    "allowed_modes": ["freestanding"], "preferred_mode": "freestanding",
+    "hard_zone_m": [9, 9, 5], "preferred_zone_m": [13, 13, 6],
+    "required_support": "floor", "interaction_faces": ["south", "east", "north", "west"],
+    "rear_clearance_m": 2.0, "front_clearance_m": 2.0,
+    "circulation": "full_orbit", "circulation_behind": true,
+    "minimum_route_width_m": 1.0, "neighbor_policy": "no_artifacts_in_preferred_zone"
+  },
+  "production_grade": "test_candidate",
+  "placement_intent": "A room-scale optimization landscape whose full measured surface and height govern the gallery, with a continuous orbit for comparing descent paths."
 }

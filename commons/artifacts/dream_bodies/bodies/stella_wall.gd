@@ -25,20 +25,68 @@ extends RefCounted
 ##                                     sampled triplanar and multiplied under each albedo.
 ## Given up: the installation's room-high scale and its welded brackets; the shapes here are
 ## free-floating on their planes, and the perforations are texture, not geometry.
+##
+## THE TWO AXES (2026-09-03) - the relief as a family, not one wall:
+##   cutout  - what every flat cut-out IS. `flat` solid painted plates (today) · `melt`
+##             each shape stretched into a sagging teardrop, drips running off it and
+##             blobs pooling on the floor · `swarm` every plate broken into a cluster of
+##             small copies of its own outline · `fossil` the fill gone, only a rim of
+##             each outline left (hoops, wire spirals, an empty frame where the holed
+##             slab was) · `bloom` the plates shrunk and ringed with petal blades.
+##   backing - what the tangle hangs on. `black` the one near-black slab (today) ·
+##             `flood` the lower third poured solid, a wavy shore with islands surfacing
+##             through it · `mirror` the wall folded so an exact twin of the tangle grows
+##             out of the first, three centimetres in front of it · `unhoused` no wall at
+##             all, every piece hung on a thread from a rail above.
+## The default (flat, black) is the statue this file always built: every variant draw comes
+## out of a SECOND generator, so the original random stream is untouched, number for number.
 
 const WALL_W: float = 2.4
 const WALL_H: float = 1.6
 const MAX_DEPTH: float = 0.35
 const SLAB_T: float = 0.03
 
+const CUTOUTS: Array[String] = ["flat", "melt", "swarm", "fossil", "bloom"]
+const BACKINGS: Array[String] = ["black", "flood", "mirror", "unhoused"]
+## How far the mirrored twin slides out of its original, in metres.
+const MIRROR_DX: float = 0.14
+## The relief keeps to 40..260 meshes; a swarm, a drip or a petal stops adding at this
+## many, and no piece at all is hung past HARD_PIECES - a fold on top of a bloom would
+## otherwise walk straight through the ceiling. The default builds some fifty-odd.
+const MAX_PIECES: int = 236
+const HARD_PIECES: int = 250
+## The size the contract gives a relief (the probe allows 2.60 x 1.75).
+const FIT_W: float = 2.54
+const FIT_H: float = 1.72
+
+
+static func axes() -> Dictionary:
+	return {
+		"cutout": ["flat", "melt", "swarm", "fossil", "bloom"],
+		"backing": ["black", "flood", "mirror", "unhoused"],
+	}
+
 
 static func describe() -> String:
 	return "A Stella-like wall relief: some fifty flat cut-out arcs, rings, spiral ribbons, cones, notched plates and a holed slab in dusty mauve, slate teal and mustard with a few coral pieces, tilted on four depth planes in front of a black wall."
 
 
-static func build(root: Node3D, seed: int) -> void:
+static func build(root: Node3D, seed: int, opts: Dictionary = {}) -> void:
+	var cut: String = String(opts.get("cutout", "flat"))
+	if not CUTOUTS.has(cut):
+		cut = "flat"
+	var backing: String = String(opts.get("backing", "black"))
+	if not BACKINGS.has(backing):
+		backing = "black"
+
 	var rng := RandomNumberGenerator.new()
 	rng.seed = seed
+	# Every variant draw comes out of THIS generator, never out of `rng`: the default
+	# path has to consume the same numbers in the same order it consumed before the
+	# axes existed, or build(root, seed) stops being the statue it was.
+	var vrng := RandomNumberGenerator.new()
+	vrng.seed = seed * 7919 + 104729
+
 	var textures: Array[ImageTexture] = [_speckle(rng, 0.010), _speckle(rng, 0.017), _speckle(rng, 0.006)]
 	var palette: Array[Color] = [
 		Color(0.659, 0.455, 0.604),  # dusty mauve   #a8749a
@@ -46,19 +94,101 @@ static func build(root: Node3D, seed: int) -> void:
 		Color(0.839, 0.682, 0.282),  # mustard       #d6ae48
 		Color(0.776, 0.353, 0.314),  # coral         #c65a50
 	]
+	var swarm_k: int = 2 if backing == "mirror" else 3
+	var ctx: Dictionary = {"cut": cut, "back": backing, "vrng": vrng, "swarm": swarm_k, "mirror": false}
 
-	# 1. the wall: a thin black slab whose front face is the z = 0 plane
-	var slab := BoxMesh.new()
-	slab.size = Vector3(WALL_W, WALL_H, SLAB_T)
-	var slab_mat := StandardMaterial3D.new()
-	slab_mat.albedo_color = Color(0.10, 0.10, 0.11)
-	slab_mat.roughness = 0.96
-	slab_mat.metallic = 0.0
-	_add(root, slab, slab_mat, Vector3(0.0, WALL_H * 0.5, -SLAB_T * 0.5), Vector3.ZERO)
+	# 1. the wall: a thin black slab whose front face is the z = 0 plane.
+	#    `unhoused` takes it away and hangs the tangle on threads instead.
+	if backing != "unhoused":
+		var slab := BoxMesh.new()
+		slab.size = Vector3(WALL_W, WALL_H, SLAB_T)
+		var slab_mat := StandardMaterial3D.new()
+		slab_mat.albedo_color = Color(0.10, 0.10, 0.11)
+		slab_mat.roughness = 0.96
+		slab_mat.metallic = 0.0
+		_add(root, slab, slab_mat, Vector3(0.0, WALL_H * 0.5, -SLAB_T * 0.5), Vector3.ZERO)
+	if backing == "mirror":
+		# the fold: a second panel hinged behind the first, its edge showing past it
+		var fold := BoxMesh.new()
+		fold.size = Vector3(WALL_W * 0.62, WALL_H, SLAB_T)
+		var fold_mat := StandardMaterial3D.new()
+		fold_mat.albedo_color = Color(0.07, 0.07, 0.08)
+		fold_mat.roughness = 0.94
+		fold_mat.metallic = 0.0
+		_add(root, fold, fold_mat, Vector3(MIRROR_DX * 2.4, WALL_H * 0.5 - 0.03, 0.05), Vector3(0.0, 11.0, 3.5))
 
 	# the gesture: the whole tangle drifts one way, and the holed slab stands on the other side
 	var side: float = 1.0 if rng.randf() < 0.5 else -1.0
 	var lean: float = rng.randf_range(14.0, 26.0) * side
+
+	# The stream is bookmarked here so the fold can REPLAY it: the twin is the same
+	# fifty shapes, drawn again, placed at -x. A second seed would give a sibling; this
+	# gives a mirror.
+	var m_seed: int = int(rng.seed)
+	var m_state: int = int(rng.state)
+	_tangle(root, rng, textures, palette, side, lean, ctx)
+	if backing == "mirror":
+		var mrng := RandomNumberGenerator.new()
+		mrng.seed = m_seed
+		mrng.state = m_state
+		var mctx: Dictionary = ctx.duplicate()
+		mctx["mirror"] = true
+		_tangle(root, mrng, textures, palette, side, lean, mctx)
+
+	if backing == "flood":
+		_pour(root, vrng, textures, palette)
+	if backing == "unhoused":
+		_threads(root, vrng)
+	if cut == "melt":
+		_puddle(root, vrng, textures, palette)
+
+	# SETTLE ON ITS OWN BOTTOM EDGE. A tilted plate placed near y 0.2 can hang a
+	# hand's width below the relief's origin, and that origin is what a wall or a
+	# plinth is given: the piece would be buried. So the whole tangle is lifted by
+	# however far its lowest corner dipped - measured, because every seed dips
+	# differently (the gate caught -0.09 on seed 1).
+	#
+	# A variant can also GROW - a melt hangs below the floor, a bloom pushes past the
+	# wall's edge, a fold widens it - so anything that is not (flat, black) is measured
+	# and fitted back into the relief's box before it is floored and centred. The
+	# default path keeps the old lift alone, untouched, so its statue does not move.
+	if cut != "flat" or backing != "black":
+		var box: AABB = _union(root)
+		var wide: float = maxf(box.size.x, box.size.z)
+		var kfit: float = minf(1.0, minf(FIT_W / maxf(wide, 0.001), FIT_H / maxf(box.size.y, 0.001)))
+		if kfit < 1.0:
+			for c in root.get_children():
+				if c is MeshInstance3D:
+					var mi: MeshInstance3D = c
+					var tf: Transform3D = mi.transform
+					mi.transform = Transform3D(tf.basis.scaled(Vector3(kfit, kfit, kfit)), tf.origin * kfit)
+			box = _union(root)
+		# x is centred and y is floored; z is NOT centred, because a relief's z origin is
+		# its wall plane and that is the face a plinth or a wall is given.
+		var ctr_x: float = box.position.x + box.size.x * 0.5
+		for c in root.get_children():
+			if c is Node3D:
+				var n3: Node3D = c
+				n3.position = Vector3(n3.position.x - ctr_x, n3.position.y - box.position.y, n3.position.z)
+		return
+
+	var low: float = 1.0e9
+	for c in root.get_children():
+		if c is MeshInstance3D and (c as MeshInstance3D).mesh != null:
+			var a: AABB = (c as MeshInstance3D).transform * ((c as MeshInstance3D).mesh as Mesh).get_aabb()
+			low = minf(low, a.position.y)
+	if low < 0.0 and low > -1.0e8:
+		for c in root.get_children():
+			if c is Node3D:
+				(c as Node3D).position.y -= low
+
+
+## The tangle itself: the back plane's big pieces, then three layers of arcs, rings, spirals,
+## swooshes, cones and small plates. Called once for a relief, twice when the wall folds -
+## the second call replays the same stream and `ctx.mirror` sends every piece to -x.
+static func _tangle(root: Node3D, rng: RandomNumberGenerator, textures: Array[ImageTexture],
+		palette: Array[Color], side: float, lean: float, ctx: Dictionary) -> void:
+	var cut: String = String(ctx.get("cut", "flat"))
 
 	# ---- layer 0: the back plane - the holed mustard slab, big mauve plates, two wide arcs, a fan ----
 	var slab_w: float = rng.randf_range(0.42, 0.55)
@@ -66,9 +196,13 @@ static func build(root: Node3D, seed: int) -> void:
 	var hole_r: float = slab_w * rng.randf_range(0.18, 0.24)
 	var hole_at := Vector2(rng.randf_range(-0.05, 0.05) * slab_w, slab_h * rng.randf_range(0.18, 0.30))
 	var slab_thick: float = 0.035
-	_piece(root, rng, textures, _holed_slab_mesh(slab_w, slab_h, hole_at, hole_r, slab_thick),
+	# fossilised, the slab is only the frame it was drawn on - the hole eats the plate
+	var slab_mesh: ArrayMesh = _holed_slab_mesh(slab_w, slab_h, hole_at, hole_r, slab_thick)
+	if cut == "fossil":
+		slab_mesh = _rim_mesh(_rect_pts(slab_w, slab_h), slab_thick, 0.05)
+	_piece(root, rng, textures, slab_mesh,
 		palette[2], Vector2(side * 0.9, slab_h * 0.5 + 0.02), 0, slab_h * 0.55,
-		Vector2(slab_w * 0.5, slab_h * 0.5), rng.randf_range(-4.0, 4.0), slab_thick)
+		Vector2(slab_w * 0.5, slab_h * 0.5), rng.randf_range(-4.0, 4.0), slab_thick, ctx)
 
 	var n_plates: int = rng.randi_range(5, 7)
 	for k in range(n_plates):
@@ -79,27 +213,27 @@ static func build(root: Node3D, seed: int) -> void:
 		if rng.randf() < 0.35:
 			var w: float = r * rng.randf_range(1.2, 1.8)
 			var h: float = r * rng.randf_range(1.4, 2.2)
-			_piece(root, rng, textures, _polygon_mesh(_bitten_slab_pts(rng, w, h), thick), tint, at, 0,
-				sqrt(w * w + h * h) * 0.5, Vector2(w, h) * 0.45, rng.randf_range(-25.0, 25.0), thick)
+			_piece(root, rng, textures, _plate(_bitten_slab_pts(rng, w, h), thick, ctx), tint, at, 0,
+				sqrt(w * w + h * h) * 0.5, Vector2(w, h) * 0.45, rng.randf_range(-25.0, 25.0), thick, ctx)
 		else:
-			_piece(root, rng, textures, _polygon_mesh(_blob_pts(rng, r * 0.78, 44), thick), tint, at, 0,
-				r, Vector2(r, r) * 0.9, rng.randf_range(0.0, 360.0), thick)
+			_piece(root, rng, textures, _plate(_blob_pts(rng, r * 0.78, 44), thick, ctx), tint, at, 0,
+				r, Vector2(r, r) * 0.9, rng.randf_range(0.0, 360.0), thick, ctx)
 
 	for k in range(2):
 		var r_out: float = rng.randf_range(0.36, 0.5)
 		_lay_arc(root, rng, textures, _pick(rng, palette, 0.7, 0.15, 0.15, 0.0),
 			Vector2(clampf(rng.randfn(0.0, 0.5), -0.8, 0.8), rng.randf_range(0.5, 1.2)), 0,
-			r_out, r_out * rng.randf_range(0.22, 0.32), rng.randf_range(200.0, 330.0), rng.randf_range(0.025, 0.04))
+			r_out, r_out * rng.randf_range(0.22, 0.32), rng.randf_range(200.0, 330.0), rng.randf_range(0.025, 0.04), ctx)
 
 	_lay_sector(root, rng, textures, palette[2],
 		Vector2(-side * rng.randf_range(0.1, 0.5), rng.randf_range(0.8, 1.2)), 0,
-		rng.randf_range(0.38, 0.5), rng.randf_range(60.0, 110.0), 0.03, rng.randf_range(0.0, 360.0))
+		rng.randf_range(0.38, 0.5), rng.randf_range(60.0, 110.0), 0.03, rng.randf_range(0.0, 360.0), ctx)
 
 	# a coral wedge stands on the floor, leaning on the wall, on the drift side
 	var wedge_w: float = rng.randf_range(0.28, 0.4)
 	var wedge_h: float = rng.randf_range(0.55, 0.8)
-	_piece(root, rng, textures, _polygon_mesh(_wedge_pts(wedge_w, wedge_h, rng.randf_range(-0.3, 0.3) * wedge_w), 0.035),
-		palette[3], Vector2(-side * rng.randf_range(0.25, 0.6), 0.0), 1, wedge_h, Vector2(wedge_w * 0.5, 0.0), 0.0, 0.035)
+	_piece(root, rng, textures, _plate(_wedge_pts(wedge_w, wedge_h, rng.randf_range(-0.3, 0.3) * wedge_w), 0.035, ctx),
+		palette[3], Vector2(-side * rng.randf_range(0.25, 0.6), 0.0), 1, wedge_h, Vector2(wedge_w * 0.5, 0.0), 0.0, 0.035, ctx)
 
 	# ---- layers 1-3: the tangle - arcs, rings, spirals, swooshes, cones, small plates ----
 	for layer in range(1, 4):
@@ -113,38 +247,23 @@ static func build(root: Node3D, seed: int) -> void:
 			if roll < 0.36:
 				var r_out: float = rng.randf_range(0.14, 0.34) * shrink
 				var span: float = 360.0 if rng.randf() < 0.3 else rng.randf_range(120.0, 320.0)
-				_lay_arc(root, rng, textures, tint, at, layer, r_out, r_out * rng.randf_range(0.2, 0.34), span, thick)
+				_lay_arc(root, rng, textures, tint, at, layer, r_out, r_out * rng.randf_range(0.2, 0.34), span, thick, ctx)
 			elif roll < 0.62:
 				var r_out: float = rng.randf_range(0.14, 0.34) * shrink
 				_lay_spiral(root, rng, textures, tint, at, layer, r_out, r_out * rng.randf_range(0.16, 0.26),
-					rng.randf_range(0.7, 2.2), thick, lean + rng.randf_range(-30.0, 30.0))
+					rng.randf_range(0.7, 2.2), thick, lean + rng.randf_range(-30.0, 30.0), ctx)
 			elif roll < 0.74:
 				var length: float = rng.randf_range(0.35, 0.7) * shrink
 				_lay_swoosh(root, rng, textures, tint, at, layer, length, length * rng.randf_range(0.10, 0.16),
-					rng.randf_range(0.035, 0.07) * shrink, thick, lean + rng.randf_range(-40.0, 40.0))
+					rng.randf_range(0.035, 0.07) * shrink, thick, lean + rng.randf_range(-40.0, 40.0), ctx)
 			elif roll < 0.87:
 				_lay_sector(root, rng, textures, tint, at, layer, rng.randf_range(0.16, 0.34) * shrink,
-					rng.randf_range(35.0, 100.0), thick, lean + rng.randf_range(-60.0, 60.0))
+					rng.randf_range(35.0, 100.0), thick, lean + rng.randf_range(-60.0, 60.0), ctx)
 			else:
 				var w: float = rng.randf_range(0.18, 0.34) * shrink
 				var h: float = w * rng.randf_range(0.8, 1.6)
-				_piece(root, rng, textures, _polygon_mesh(_bitten_slab_pts(rng, w, h), thick), tint, at, layer,
-					sqrt(w * w + h * h) * 0.5, Vector2(w, h) * 0.45, lean + rng.randf_range(-35.0, 35.0), thick)
-
-	# SETTLE ON ITS OWN BOTTOM EDGE. A tilted plate placed near y 0.2 can hang a
-	# hand's width below the relief's origin, and that origin is what a wall or a
-	# plinth is given: the piece would be buried. So the whole tangle is lifted by
-	# however far its lowest corner dipped - measured, because every seed dips
-	# differently (the gate caught -0.09 on seed 1).
-	var low: float = 1.0e9
-	for c in root.get_children():
-		if c is MeshInstance3D and (c as MeshInstance3D).mesh != null:
-			var a: AABB = (c as MeshInstance3D).transform * ((c as MeshInstance3D).mesh as Mesh).get_aabb()
-			low = minf(low, a.position.y)
-	if low < 0.0 and low > -1.0e8:
-		for c in root.get_children():
-			if c is Node3D:
-				(c as Node3D).position.y -= low
+				_piece(root, rng, textures, _plate(_bitten_slab_pts(rng, w, h), thick, ctx), tint, at, layer,
+					sqrt(w * w + h * h) * 0.5, Vector2(w, h) * 0.45, lean + rng.randf_range(-35.0, 35.0), thick, ctx)
 
 
 # ----------------------------------------------------------------------------------------------
@@ -153,9 +272,20 @@ static func build(root: Node3D, seed: int) -> void:
 
 ## Adds one piece on its depth plane with a random z jitter and a tilt that stays inside
 ## the relief's depth budget (never past -MAX_DEPTH, never behind the wall face).
+##
+## This is also where the `cutout` axis lands, because every shape in the relief - arc,
+## ring, spiral, swoosh, cone, plate - arrives here. `flat` and `fossil` hang the mesh as
+## it came (fossil was already hollowed out where it was built); `melt` stretches it down
+## from its own top edge and lets a drip run off it; `swarm` throws the mesh away as a
+## handful of small copies; `bloom` shrinks it and rings it with petals. Every rng draw
+## above the branch is the ORIGINAL one, in the original order.
 static func _piece(root: Node3D, rng: RandomNumberGenerator, textures: Array[ImageTexture], mesh: ArrayMesh,
-		tint: Color, at: Vector2, layer: int, radius: float, half: Vector2, rot_z_deg: float, thick: float) -> void:
+		tint: Color, at: Vector2, layer: int, radius: float, half: Vector2, rot_z_deg: float, thick: float,
+		ctx: Dictionary = {}) -> void:
+	var mir: bool = bool(ctx.get("mirror", false))
 	var z_plane: float = -0.045 - 0.08 * float(layer) + rng.randf_range(-0.012, 0.012)
+	if mir:
+		z_plane -= 0.03
 	var fwd: float = MAX_DEPTH - thick + z_plane
 	var back: float = -z_plane - 0.005
 	var room: float = clampf(minf(fwd, back) / maxf(radius, 0.05), 0.0, 1.0)
@@ -164,7 +294,82 @@ static func _piece(root: Node3D, rng: RandomNumberGenerator, textures: Array[Ima
 	var tilt_y: float = rng.randf_range(-tilt_max, tilt_max) * 0.5
 	var clamped: Vector2 = _clamp_pos(at, half)
 	var mat: StandardMaterial3D = _mat(rng, tint, textures[rng.randi_range(0, textures.size() - 1)])
-	_add(root, mesh, mat, Vector3(clamped.x, clamped.y, z_plane), Vector3(tilt_x, tilt_y, rot_z_deg))
+	var px: float = clamped.x
+	var rz: float = rot_z_deg
+	if mir:
+		px = -clamped.x + MIRROR_DX
+		rz = -rot_z_deg
+		tilt_y = -tilt_y
+	var cut: String = String(ctx.get("cut", "flat"))
+	if cut == "flat" or cut == "fossil":
+		_add(root, mesh, mat, Vector3(px, clamped.y, z_plane), Vector3(tilt_x, tilt_y, rz))
+		return
+
+	var vrng: RandomNumberGenerator = ctx.get("vrng", rng)
+	var box: AABB = mesh.get_aabb()
+
+	if cut == "melt":
+		# sagging: the top edge stays where it was pinned and everything below it runs.
+		# The tilt and the spin are pulled most of the way out, so the run is downward.
+		var sy: float = vrng.randf_range(1.5, 2.6)
+		var sx: float = vrng.randf_range(0.62, 0.94)
+		var topy: float = box.position.y + box.size.y
+		var y_at: float = clamped.y + topy * (1.0 - sy)
+		var mi: MeshInstance3D = _add(root, mesh, mat, Vector3(px, y_at, z_plane),
+			Vector3(tilt_x * 0.4, tilt_y * 0.4, rz * 0.18))
+		mi.scale = Vector3(sx, sy, 1.0)
+		var bot: float = y_at + box.position.y * sy
+		if bot > 0.14 and vrng.randf() < 0.42 and _room(root):
+			var drip_len: float = minf(bot - 0.02, vrng.randf_range(0.14, 0.55))
+			var path := PackedVector2Array()
+			var n_d: int = 7
+			for i in range(n_d + 1):
+				var t: float = float(i) / float(n_d)
+				path.append(Vector2(sin(t * 3.4 + float(layer)) * 0.018 * t, -drip_len * t))
+			var w_top: float = maxf(thick * 1.4, 0.030)
+			var widths: PackedFloat32Array = _taper(path.size(), w_top, w_top * 0.22)
+			var drip_mat: StandardMaterial3D = _mat(vrng, tint, textures[vrng.randi_range(0, textures.size() - 1)])
+			drip_mat.roughness = 0.55
+			_add(root, _ribbon_mesh(path, widths, thick * 0.9), drip_mat,
+				Vector3(px + vrng.randf_range(-0.03, 0.03), bot + 0.01, z_plane - 0.006), Vector3.ZERO)
+		return
+
+	if cut == "swarm":
+		# the shape gives up being one thing: a scatter of small copies of its own outline
+		var k_n: int = int(ctx.get("swarm", 3))
+		for i in range(k_n):
+			if not _room(root):
+				return
+			var s: float = vrng.randf_range(0.24, 0.46)
+			var ox: float = vrng.randf_range(-1.0, 1.0) * radius * 1.25
+			var oy: float = vrng.randf_range(-1.0, 1.0) * radius * 1.25
+			var sm: StandardMaterial3D = _mat(vrng, tint, textures[vrng.randi_range(0, textures.size() - 1)])
+			var mi2: MeshInstance3D = _add(root, mesh, sm,
+				Vector3(clampf(px + ox, -WALL_W * 0.5 + 0.03, WALL_W * 0.5 - 0.03),
+					maxf(clamped.y + oy, 0.05), z_plane + vrng.randf_range(-0.028, 0.028)),
+				Vector3(tilt_x, tilt_y, vrng.randf_range(0.0, 360.0)))
+			mi2.scale = Vector3(s, s, 1.0)
+		return
+
+	# bloom: the cut-out pulls back and flowers along the rim it used to fill
+	var mi3: MeshInstance3D = _add(root, mesh, mat, Vector3(px, clamped.y, z_plane), Vector3(tilt_x, tilt_y, rz))
+	mi3.scale = Vector3(0.78, 0.78, 1.0)
+	if vrng.randf() > 0.64:
+		return
+	var n_pet: int = vrng.randi_range(3, 5)
+	var a0: float = vrng.randf_range(0.0, TAU)
+	for i in range(n_pet):
+		if not _room(root):
+			return
+		var ang: float = a0 + TAU * float(i) / float(n_pet) + vrng.randf_range(-0.22, 0.22)
+		var plen: float = radius * vrng.randf_range(0.55, 1.15)
+		var pw: float = plen * vrng.randf_range(0.20, 0.36)
+		var pr: float = radius * vrng.randf_range(0.45, 0.72)
+		var petal_tint: Color = tint.lerp(Color(0.94, 0.78, 0.36), vrng.randf_range(0.25, 0.75))
+		var pm: StandardMaterial3D = _mat(vrng, petal_tint, textures[vrng.randi_range(0, textures.size() - 1)])
+		_add(root, _polygon_mesh(_petal_pts(plen, pw, 9), thick * 0.85), pm,
+			Vector3(px + cos(ang) * pr, maxf(clamped.y + sin(ang) * pr, 0.05), z_plane - 0.014),
+			Vector3(0.0, 0.0, rad_to_deg(ang)))
 
 
 static func _clamp_pos(at: Vector2, half: Vector2) -> Vector2:
@@ -183,41 +388,53 @@ static func _add(root: Node3D, mesh: Mesh, mat: StandardMaterial3D, at: Vector3,
 	return mi
 
 
+## Fossilised, a band keeps its path and loses its body: the arc becomes a hoop, the
+## spiral and the swoosh become wire. One number, applied where the width is decided.
+static func _thin(ctx: Dictionary) -> float:
+	return 0.32 if String(ctx.get("cut", "flat")) == "fossil" else 1.0
+
+
 static func _lay_arc(root: Node3D, rng: RandomNumberGenerator, textures: Array[ImageTexture], tint: Color,
-		at: Vector2, layer: int, r_out: float, band: float, span_deg: float, thick: float) -> void:
+		at: Vector2, layer: int, r_out: float, band: float, span_deg: float, thick: float,
+		ctx: Dictionary = {}) -> void:
 	var span: float = deg_to_rad(span_deg)
 	var a0: float = rng.randf_range(0.0, TAU)
 	var segs: int = maxi(12, int(span_deg / 6.0))
-	var mesh: ArrayMesh = _arc_mesh(r_out - band, r_out, a0, a0 + span, segs, thick)
-	_piece(root, rng, textures, mesh, tint, at, layer, r_out, Vector2(r_out, r_out) * 0.85, 0.0, thick)
+	var mesh: ArrayMesh = _arc_mesh(r_out - band * _thin(ctx), r_out, a0, a0 + span, segs, thick)
+	_piece(root, rng, textures, mesh, tint, at, layer, r_out, Vector2(r_out, r_out) * 0.85, 0.0, thick, ctx)
 
 
 static func _lay_spiral(root: Node3D, rng: RandomNumberGenerator, textures: Array[ImageTexture], tint: Color,
-		at: Vector2, layer: int, r_out: float, width: float, turns: float, thick: float, rot_deg: float) -> void:
+		at: Vector2, layer: int, r_out: float, width: float, turns: float, thick: float, rot_deg: float,
+		ctx: Dictionary = {}) -> void:
 	var r0: float = r_out * rng.randf_range(0.2, 0.4)
 	var n: int = maxi(16, int(turns * 24.0))
 	var tail: float = r_out * rng.randf_range(0.0, 0.9)
 	var path: PackedVector2Array = _spiral_path(turns, r0, r_out, n, rng.randf_range(0.0, TAU), tail)
-	var widths: PackedFloat32Array = _taper(path.size(), width * rng.randf_range(0.35, 0.7), width)
+	var thin: float = _thin(ctx)
+	var widths: PackedFloat32Array = _taper(path.size(), width * rng.randf_range(0.35, 0.7) * thin, width * thin)
 	var mesh: ArrayMesh = _ribbon_mesh(path, widths, thick)
 	var reach: float = r_out + tail + width * 0.5
-	_piece(root, rng, textures, mesh, tint, at, layer, reach, Vector2(reach, reach) * 0.7, rot_deg, thick)
+	_piece(root, rng, textures, mesh, tint, at, layer, reach, Vector2(reach, reach) * 0.7, rot_deg, thick, ctx)
 
 
 static func _lay_swoosh(root: Node3D, rng: RandomNumberGenerator, textures: Array[ImageTexture], tint: Color,
-		at: Vector2, layer: int, length: float, amp: float, width: float, thick: float, rot_deg: float) -> void:
+		at: Vector2, layer: int, length: float, amp: float, width: float, thick: float, rot_deg: float,
+		ctx: Dictionary = {}) -> void:
 	var n: int = 28
 	var path: PackedVector2Array = _swoosh_path(length, amp, rng.randf_range(0.5, 1.0), rng.randf_range(0.0, TAU), n)
-	var widths: PackedFloat32Array = _taper(path.size(), width * rng.randf_range(0.4, 0.8), width)
+	var thin: float = _thin(ctx)
+	var widths: PackedFloat32Array = _taper(path.size(), width * rng.randf_range(0.4, 0.8) * thin, width * thin)
 	var mesh: ArrayMesh = _ribbon_mesh(path, widths, thick)
-	_piece(root, rng, textures, mesh, tint, at, layer, length * 0.5, Vector2(length * 0.45, amp + width), rot_deg, thick)
+	_piece(root, rng, textures, mesh, tint, at, layer, length * 0.5, Vector2(length * 0.45, amp + width), rot_deg, thick, ctx)
 
 
 static func _lay_sector(root: Node3D, rng: RandomNumberGenerator, textures: Array[ImageTexture], tint: Color,
-		at: Vector2, layer: int, r: float, span_deg: float, thick: float, rot_deg: float) -> void:
+		at: Vector2, layer: int, r: float, span_deg: float, thick: float, rot_deg: float,
+		ctx: Dictionary = {}) -> void:
 	var segs: int = maxi(8, int(span_deg / 8.0))
-	var mesh: ArrayMesh = _polygon_mesh(_sector_pts(r, deg_to_rad(span_deg), segs), thick)
-	_piece(root, rng, textures, mesh, tint, at, layer, r, Vector2(r, r) * 0.7, rot_deg, thick)
+	var mesh: ArrayMesh = _plate(_sector_pts(r, deg_to_rad(span_deg), segs), thick, ctx)
+	_piece(root, rng, textures, mesh, tint, at, layer, r, Vector2(r, r) * 0.7, rot_deg, thick, ctx)
 
 
 # ----------------------------------------------------------------------------------------------
@@ -581,3 +798,178 @@ static func _holed_slab_mesh(w: float, h: float, hole: Vector2, hole_r: float, t
 		var t: float = minf(tx, ty)
 		outer.append(hole + d * t)
 	return _band_mesh(inner, outer, thick, true)
+
+
+# ----------------------------------------------------------------------------------------------
+# the axes: what a cut-out is (cutout), and what it hangs on (backing)
+# ----------------------------------------------------------------------------------------------
+
+## Every solid shape in the relief comes through here. Fossilised, it is emptied out: the
+## outline survives as a rim and the plate it enclosed is gone.
+static func _plate(pts: PackedVector2Array, thick: float, ctx: Dictionary) -> ArrayMesh:
+	if String(ctx.get("cut", "flat")) == "fossil":
+		return _rim_mesh(pts, thick, 0.032)
+	return _polygon_mesh(pts, thick)
+
+
+## A closed band between an outline and a copy of itself pulled in toward its own centroid,
+## so any outline - blob, notched slab, wedge, cone - becomes a frame of about `rim` metres.
+## Scaling about the centroid keeps the two loops index-aligned, which is what the band
+## extruder wants; an offset routine would not, and a thin frame does not need the accuracy.
+static func _rim_mesh(pts: PackedVector2Array, thick: float, rim: float) -> ArrayMesh:
+	var n: int = pts.size()
+	if n < 3:
+		return _polygon_mesh(pts, thick)
+	var c := Vector2.ZERO
+	for i in range(n):
+		c += pts[i]
+	c /= float(n)
+	var mean_r: float = 0.0
+	for i in range(n):
+		mean_r += (pts[i] - c).length()
+	mean_r /= float(n)
+	var k: float = clampf(1.0 - rim / maxf(mean_r, 0.02), 0.30, 0.90)
+	var inner := PackedVector2Array()
+	for i in range(n):
+		inner.append(c + (pts[i] - c) * k)
+	return _band_mesh(inner, pts, thick, true)
+
+
+static func _rect_pts(w: float, h: float) -> PackedVector2Array:
+	var hw: float = w * 0.5
+	var hh: float = h * 0.5
+	var pts := PackedVector2Array()
+	pts.append(Vector2(-hw, -hh))
+	pts.append(Vector2(hw, -hh))
+	pts.append(Vector2(hw, hh))
+	pts.append(Vector2(-hw, hh))
+	return pts
+
+
+## A leaf from the origin out along +x: a swelling that narrows to a point.
+static func _petal_pts(length: float, wide: float, n: int) -> PackedVector2Array:
+	var pts := PackedVector2Array()
+	for i in range(n + 1):
+		var t: float = float(i) / float(n)
+		pts.append(Vector2(length * t, wide * sin(PI * t) * (1.0 - 0.35 * t)))
+	for i in range(n - 1, 0, -1):
+		var t2: float = float(i) / float(n)
+		pts.append(Vector2(length * t2, -wide * sin(PI * t2) * (1.0 - 0.35 * t2)))
+	return pts
+
+
+## The relief keeps to the contract's mesh count. A swarm of a fold of a bloom would run
+## past it, so every added-on piece asks first, and stops adding rather than overflow.
+static func _room(root: Node3D) -> bool:
+	return root.get_child_count() < MAX_PIECES
+
+
+static func _union(root: Node3D) -> AABB:
+	var box := AABB()
+	var first: bool = true
+	for c in root.get_children():
+		if c is MeshInstance3D and (c as MeshInstance3D).mesh != null:
+			var mi: MeshInstance3D = c
+			var a: AABB = mi.transform * (mi.mesh as Mesh).get_aabb()
+			if first:
+				box = a
+				first = false
+			else:
+				box = box.merge(a)
+	return box
+
+
+## FLOOD: the bottom of the wall is poured solid - one thick mass with a wavy shore,
+## standing out of the wall far enough to drown whatever the tangle put down there, with a
+## few plates surfacing through it like islands.
+static func _pour(root: Node3D, vrng: RandomNumberGenerator, textures: Array[ImageTexture], palette: Array[Color]) -> void:
+	var h: float = vrng.randf_range(0.36, 0.56)
+	var depth: float = vrng.randf_range(0.20, 0.30)
+	var hw: float = WALL_W * 0.5 + 0.04
+	var p1: float = vrng.randf_range(0.0, TAU)
+	var p2: float = vrng.randf_range(0.0, TAU)
+	var p3: float = vrng.randf_range(0.0, TAU)
+	var pts := PackedVector2Array()
+	pts.append(Vector2(-hw, 0.0))
+	pts.append(Vector2(hw, 0.0))
+	var n: int = 48
+	for i in range(n + 1):
+		var t: float = float(i) / float(n)
+		var x: float = lerpf(hw, -hw, t)
+		var y: float = h * (1.0 + 0.17 * sin(t * TAU * 1.5 + p1) + 0.10 * sin(t * TAU * 3.0 + p2) + 0.05 * sin(t * TAU * 6.0 + p3))
+		pts.append(Vector2(x, y))
+	var tint: Color = _pick(vrng, palette, 0.45, 0.2, 0.3, 0.05)
+	var mat: StandardMaterial3D = _mat(vrng, tint, textures[vrng.randi_range(0, textures.size() - 1)])
+	mat.roughness = 0.44
+	mat.metallic = 0.12
+	_add(root, _polygon_mesh(pts, depth), mat, Vector3(0.0, 0.0, 0.0), Vector3.ZERO)
+
+	var n_isl: int = vrng.randi_range(3, 6)
+	for i in range(n_isl):
+		if not _room(root):
+			return
+		var r: float = vrng.randf_range(0.10, 0.22)
+		var it: float = vrng.randf_range(0.04, 0.07)
+		var ix: float = vrng.randf_range(-hw + r, hw - r)
+		var itint: Color = _pick(vrng, palette, 0.25, 0.3, 0.25, 0.2)
+		var imat: StandardMaterial3D = _mat(vrng, itint, textures[vrng.randi_range(0, textures.size() - 1)])
+		_add(root, _polygon_mesh(_blob_pts(vrng, r, 30), it), imat,
+			Vector3(ix, h + vrng.randf_range(-0.02, 0.05), -depth * vrng.randf_range(0.25, 0.8)),
+			Vector3(-90.0, vrng.randf_range(0.0, 360.0), 0.0))
+
+
+## UNHOUSED: no wall. The tangle keeps its shape in the air and every piece that can reach
+## the rail above is hung from it on a thread.
+static func _threads(root: Node3D, vrng: RandomNumberGenerator) -> void:
+	var kids: Array = root.get_children()
+	var rail_y: float = WALL_H + 0.06
+	var rail := BoxMesh.new()
+	rail.size = Vector3(WALL_W + 0.10, 0.020, 0.020)
+	var rail_mat := StandardMaterial3D.new()
+	rail_mat.albedo_color = Color(0.14, 0.14, 0.15)
+	rail_mat.roughness = 0.6
+	rail_mat.metallic = 0.55
+	_add(root, rail, rail_mat, Vector3(0.0, rail_y, -0.16), Vector3.ZERO)
+	var thread_mat := StandardMaterial3D.new()
+	thread_mat.albedo_color = Color(0.17, 0.17, 0.18)
+	thread_mat.roughness = 0.85
+	thread_mat.metallic = 0.0
+	for c in kids:
+		if not (c is MeshInstance3D):
+			continue
+		var mi: MeshInstance3D = c
+		if mi.mesh == null or not _room(root):
+			continue
+		if vrng.randf() < 0.14:
+			continue
+		var a: AABB = mi.transform * (mi.mesh as Mesh).get_aabb()
+		var top: float = a.position.y + a.size.y
+		var span: float = rail_y - top
+		if span < 0.05:
+			continue
+		var wire := BoxMesh.new()
+		var gauge: float = vrng.randf_range(0.008, 0.014)
+		wire.size = Vector3(gauge, span, gauge)
+		_add(root, wire, thread_mat,
+			Vector3(a.position.x + a.size.x * 0.5 + vrng.randf_range(-0.02, 0.02), top + span * 0.5,
+				a.position.z + a.size.z * 0.5), Vector3.ZERO)
+
+
+## MELT: what ran off the wall has to end somewhere. A few flat blobs lie on the floor in
+## front of the relief, spread toward the viewer, the pool the drips are feeding.
+static func _puddle(root: Node3D, vrng: RandomNumberGenerator, textures: Array[ImageTexture], palette: Array[Color]) -> void:
+	var n: int = vrng.randi_range(3, 5)
+	for i in range(n):
+		if not _room(root):
+			return
+		var r: float = vrng.randf_range(0.18, 0.34)
+		var t: float = vrng.randf_range(0.045, 0.085)
+		var tint: Color = _pick(vrng, palette, 0.4, 0.25, 0.25, 0.1)
+		var mat: StandardMaterial3D = _mat(vrng, tint, textures[vrng.randi_range(0, textures.size() - 1)])
+		mat.roughness = 0.42
+		mat.metallic = 0.14
+		# rotated a quarter turn onto its back: the plate's own up becomes -z, so the
+		# blob spreads out toward the viewer, and its extrusion goes down onto the floor.
+		_add(root, _polygon_mesh(_blob_pts(vrng, r, 34), t), mat,
+			Vector3(vrng.randf_range(-0.95, 0.95), t, -vrng.randf_range(0.02, 0.14)),
+			Vector3(-90.0, vrng.randf_range(0.0, 360.0), 0.0))

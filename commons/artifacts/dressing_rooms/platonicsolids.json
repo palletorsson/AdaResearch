@@ -1,71 +1,46 @@
 {
- "lookup_name": "platonicsolids",
- "footprint": [
-  9,
-  9,
-  1
- ],
- "rotations": [
-  "0",
-  "90",
-  "180",
-  "270"
- ],
- "approach": "south",
- "exit": "north",
- "footing": {
-  "anchor": [
-   2,
-   2
+  "lookup_name": "platonicsolids",
+  "footprint": [7, 3, 1.2],
+  "rotations": ["0", "180"],
+  "approach": "south",
+  "exit": "north",
+  "footing": {
+    "anchor": [3, 5],
+    "tiles": [
+      [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
+      [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
+      [1, 1, 2, 2, 2, 2, 2, 2, 2, 1, 1],
+      [1, 1, 2, 2, 2, 2, 2, 2, 2, 1, 1],
+      [1, 1, 2, 2, 2, 2, 2, 2, 2, 1, 1],
+      [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
+      [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1]
+    ]
+  },
+  "artifact_offset": [0.0, 0.0, 0.0],
+  "artifact_config": {
+    "palette": "trans",
+    "staging": "bare"
+  },
+  "extras": [
+    {"type": "wp", "rotation": 180, "offset": [2, 0, 0]}
   ],
-  "tiles": [
-   [
-    3,
-    3,
-    3,
-    3,
-    3
-   ],
-   [
-    3,
-    1,
-    1,
-    1,
-    3
-   ],
-   [
-    3,
-    1,
-    1,
-    1,
-    3
-   ],
-   [
-    3,
-    1,
-    1,
-    1,
-    3
-   ],
-   [
-    3,
-    3,
-    3,
-    3,
-    3
-   ]
-  ]
- },
- "extras": [],
- "artifact_offset": [
-  0.0,
-  0.0,
-  0.0
- ],
- "clearance": [
-  3,
-  3,
-  3
- ],
- "posture": "pit"
+  "clearance": [11, 7, 4],
+  "posture": "platform",
+  "show_base": true,
+  "show_light": false,
+  "light_mode": "glow",
+  "show_info": false,
+  "placement_contract": {
+    "allowed_modes": ["freestanding"],
+    "preferred_mode": "freestanding",
+    "hard_zone_m": [9, 5, 4],
+    "preferred_zone_m": [11, 7, 4],
+    "required_support": "platform",
+    "interaction_faces": ["north", "east", "south", "west"],
+    "circulation": "full_orbit",
+    "minimum_route_width_m": 0.9,
+    "neighbor_policy": "outside_preferred_zone"
+  },
+  "production_grade": "featured_aaa",
+  "placement_intent": "A low island stage with a complete perimeter route; the museum owns the room, so the artifact's legacy 10 m floor is disabled."
 }

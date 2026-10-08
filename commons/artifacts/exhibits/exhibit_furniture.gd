@@ -98,6 +98,9 @@ const BakedText := preload("res://commons/utils/baked_text_albedo.gd")
 @export var panel_h: float = 2.6
 
 @export var mount: String = ""            # a lookup_name to seat on the bed's surface
+## Opted-in stations keep their hand controls on the furniture's floor at unit
+## scale. Set before tree entry; false preserves whole-artifact mounting.
+@export var floor_controls: bool = true
 
 ## AXIS 1 — the institution the furniture belongs to. Drives every surface:
 ## white_cube (legacy default) | wunderkammer | depot | forensic | didactic | derelict.
@@ -361,6 +364,8 @@ func _read_meta_overrides() -> void:
 		panel_h = float(str(get_meta("config_h")))
 	if has_meta("config_mount"):
 		mount = str(get_meta("config_mount"))
+	if has_meta("config_floor_controls"):
+		floor_controls = str(get_meta("config_floor_controls")).to_lower() not in ["false", "off", "0"]
 	# #house: is the family's word; #regard: is exhibit_podium's word for the same
 	# axis and is honoured here so one vocabulary works on either artifact. house
 	# wins when a map somehow carries both.
@@ -419,6 +424,16 @@ func _mount_artifact(lookup: String) -> void:
 		var on_panel := kind == "panel"
 		inst.position = Vector3(0, _surface_y(), 0.15 if on_panel else 0.0)
 		add_child(inst)
+		# Only artifacts declaring a separable station participate. Enclosures
+		# retain their authored restrictions; the adapter does not bypass glass.
+		if floor_controls and guard in ["none", "label", "fixture"] \
+				and kind in ["plinth", "hollow_plinth", "platform", "table_2m", "floor_work"] \
+				and inst.has_method("exhibit_control_parts"):
+			var station := preload("res://commons/ui/exhibit_control_mount.gd").new()
+			station.name = "ExhibitControlMount"
+			station.floor_host = self
+			station.front_extent = _bed_extent() + .04
+			inst.add_child(station)
 
 # ── house palette ────────────────────────────────────────────────────────────
 

@@ -384,7 +384,12 @@ func _add_plate() -> void:
 	ts.width_m = 0.44
 	ts.position = Vector3(0.0, PLINTH_H + 0.005, PLINTH_W * 0.5 - 0.16)
 	if ts.has_method("set_text"):
-		ts.set_text("SCHLEGEL DIAGRAM", "the thick bright cage is one cell — it encloses\nsix frusta, which enclose the thin dim cell\nat the centre. All eight are the same cube.")
+		# Authored to the plate's own measure: 0.44 m holds 5 lines of ~23
+		# characters. The previous copy was three 45-character lines, each of
+		# which reflowed into two — six lines into a five-line panel, and the
+		# last one was dropped.
+		ts.set_text("SCHLEGEL DIAGRAM",
+			"the bright cage is one\ncell; it holds six\nfrusta, which hold the\ndim centre cell.\nAll eight: one cube.")
 	_own(ts)
 
 

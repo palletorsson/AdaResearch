@@ -93,12 +93,16 @@ var _player: Node3D = null
 var _cooldown: float = 0.0
 var _spin_phase: float = 0.0
 var _built: bool = false
+var _flight_receiver: Node
 
 
 func _ready() -> void:
 	depiction = _valid(depiction, DEPICTIONS, "spiral")
 	warning = _valid(warning, WARNINGS, "none")
 	_build_all()
+	add_to_group("ada_museum_carry")
+	_flight_receiver=preload("res://commons/artifacts/force_play/player_launch.gd").new()
+	add_child(_flight_receiver)
 
 
 ## GUARDED, and it was not before. This used to free every child and re-enter _ready() on
@@ -136,6 +140,7 @@ func _valid(value: String, allowed: PackedStringArray, fallback: String) -> Stri
 
 func _rebuild() -> void:
 	for c in get_children():
+		if c==_flight_receiver:continue
 		remove_child(c)
 		c.queue_free()
 	_spinner = null
@@ -379,8 +384,6 @@ func _physics_process(delta: float) -> void:
 		_core_mat.emission_energy_multiplier = 2.4 + 1.0 * sin(_spin_phase * 2.0)
 
 	match _state:
-		S.CAPTURED:
-			_apply_vortex()
 		S.COOLDOWN:
 			_cooldown -= delta
 			if _cooldown <= 0.0:
@@ -406,13 +409,27 @@ func _apply_vortex() -> void:
 
 func _eject(rel: Vector3) -> void:
 	var outward := rel.normalized() if rel.length() > 0.1 else Vector3(1, 0, 0)
-	if is_instance_valid(_player) and "velocity" in _player:
-		_player.set("velocity", outward * eject_force + Vector3.UP * eject_up)
+	if is_instance_valid(_player) and _player is CharacterBody3D:
+		_flight_receiver.launch(_player,outward * eject_force + Vector3.UP * eject_up)
 	_player = null
 	_state = S.COOLDOWN
 	_cooldown = cooldown_time
 	for m in _accent_mats:
 		m.emission_energy_multiplier = 6.0
+
+
+func _point_inside(world: Vector3) -> bool:
+	return _state==S.CAPTURED and is_instance_valid(_player) and world.distance_to(_player.global_position)<0.25
+
+func carry_velocity(body: CharacterBody3D,_dt: float,incoming: Vector3) -> Vector3:
+	if body!=_player or _state!=S.CAPTURED:return incoming
+	# This older exhibit prescribes velocity. The neighbouring force_play_vortex
+	# integrates acceleration; keep that distinction explicit.
+	_apply_vortex()
+	return body.velocity
+
+func record_carry(_body: CharacterBody3D) -> void:pass
+func release_carry(_body: CharacterBody3D) -> void:pass
 
 
 # ── Helpers ──────────────────────────────────────────────────────────────

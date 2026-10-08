@@ -10,7 +10,7 @@
 			"scene": "res://commons/artifacts/dream_bodies/dream_bodies.tscn",
 			"class_name": "DreamBodies",
 			"name": "Dream Bodies",
-			"description": "A statue from one of twenty-eight families, chosen by figure and grown from a seed. Glazed and patterned figurines (rocaille, garet_still, nana_gloss), robots and machines (stijl_robot, panel_robot, brass_stamen, paik_light), beasts (dragon, oni_dragon, griffin_plume, vasarely_beast, batik_beast, sea_forms, coral_polyp, tube_reef), cloth and fibre (david_drape, hokusai_kimono, hicks_fiber, asawa_wire, kruger_suit), matter and structure (dubuffet, tatlin_red, hadid_shell, gehry_metal, panton_pop, mosaic_body, lava_bloom), and one wall relief (stella_wall).",
+			"description": "The whole cast in one artifact: a statue from any of the forty-one families, chosen by figure and grown from a seed. Each family is ALSO its own artifact with its own two axes of surreal variation - see commons/artifacts/registry/dream_figures.json and the dream_<family> tokens - which is where the DNA claim lives; this entry is the index, and declares no axis of its own.",
 			"category": "dream_bodies",
 			"complexity": "intermediate",
 			"include_in_map_data": true,
@@ -33,55 +33,7 @@
 				"sculpture",
 				"queer",
 				"museum"
-			],
-			"dna": {
-				"promoted": "2026-08-29",
-				"stage": "2 - variation",
-				"axes": {
-					"figure": [
-						"asawa_wire",
-						"batik_beast",
-						"brass_stamen",
-						"ceramic_puppet",
-						"coral_polyp",
-						"couch_lounge",
-						"crackle_peak",
-						"david_drape",
-						"dragon",
-						"dubuffet",
-						"food_table",
-						"garet_still",
-						"gehry_metal",
-						"griffin_plume",
-						"hadid_shell",
-						"hicks_fiber",
-						"hokusai_kimono",
-						"horse_hybrid",
-						"kruger_suit",
-						"lava_bloom",
-						"masked_dancer",
-						"mosaic_body",
-						"nana_gloss",
-						"oni_dragon",
-						"paik_light",
-						"panel_robot",
-						"panton_pop",
-						"pink_scaffold",
-						"piped_icing",
-						"porcelain_doll",
-						"rocaille",
-						"sea_forms",
-						"stella_wall",
-						"stijl_robot",
-						"tatlin_red",
-						"tube_reef",
-						"vasarely_beast"
-					]
-				},
-				"default": "figure=rocaille",
-				"predicted_degeneracy": "stijl_robot vs panel_robot, ~9%: both upright humanoids of about the same height and stance; they differ in slab-versus-panel skin and palette, which is a large share of frame but not the silhouette. stella_wall is the far value from everything: a 2.4 m relief where the others are 1.5 m statues.",
-				"note": "37 figures by 2026-08-29 evening, from five batches of panoramas. seed is not an axis: it is the individual. The builders live in commons/artifacts/dream_bodies/bodies/<figure>.gd, one file each, static build(root, seed) and describe()."
-			}
+			]
 		}
 	}
 }

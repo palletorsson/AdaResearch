@@ -11,11 +11,10 @@ class_name TheClockmakerOfRules
 ##   part you must build. Around the bench the built worlds stand: Rule 30's
 ##   deterministic snowstorm, Rule 90's Sierpinski, a Life field with a real glider
 ##   mid-flight, Brian's Brain never resting, Langton's ant with its highway, a
-##   Wireworld diode, and a Lenia blob with fractional cells. Each is computed here,
-##   not drawn.
+##   Wireworld diode, and a Lenia blob with fractional cells. Some are computed histories; Wireworld and the fractional ring are still illustrations.
 ## essence: Godot ships no CA primitive. A grid, a neighbourhood, a rule, and TIME —
 ##   and the last one is the whole secret: read the old tray, write the new, then
-##   swap. Every world on this bench was stepped by that crank.
+##   swap. The crank is ornamental; there is no live visitor-driven step.
 ## truth: local rules, global patterns — and you must build the clock yourself.
 ##
 ## The 2026-08-27 super-object pass (Palle: "make one super object for each").
@@ -285,7 +284,7 @@ func _build_wireworld() -> void:
 	_tag(Vector3(0.45, 0.98, 0.78), "Wireworld", "four states: wires, and wires make logic")
 
 func _build_lenia() -> void:
-	# continuous CA: cells are fractions, so the glider has a soft body
+	# Static radial illustration of fractional values; no Lenia update runs here.
 	for y in range(9):
 		for x in range(9):
 			var dx := float(x) - 4.0
@@ -295,7 +294,7 @@ func _build_lenia() -> void:
 			if v > 0.02:
 				_cell(Vector3(-0.9 + float(x) * 0.042, 1.02, -0.05 + float(y) * 0.042), 0.038,
 					Color(0.6, 0.35, 0.9) * (0.3 + 0.7 * v), 0.4 + 1.2 * v)
-	_tag(Vector3(-0.72, 0.98, 0.4), "Lenia", "fractions, not bits - the glider grows a body")
+	_tag(Vector3(-0.72, 0.98, 0.4), "fractional diagram", "still radial values - no Lenia update here")
 
 func _build_plaque() -> void:
 	var ts := TextScreenScript.new()
@@ -307,4 +306,4 @@ func _build_plaque() -> void:
 	add_child(ts)
 	if ts.has_method("set_text"):
 		ts.set_text("THE CLOCKMAKER OF RULES",
-			"The engine ships no cellular automaton. Four things must be built: a grid,\na neighbourhood, a rule - and TIME, the two trays and the crank between them.\nEvery world on this bench was stepped by that swap: Rule 30's snowstorm,\nRule 90's Sierpinski, a glider four generations on, an ant's highway.")
+			"The engine ships no cellular automaton. Four things must be built: a grid,\na neighbourhood, a rule - and TIME, the two trays and the crank between them.\nComputed histories sit beside still diagrams. The crank is ornamental.\nThe fractional ring has no evolving Lenia field; test exchange at the paired walls.")

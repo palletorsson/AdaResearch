@@ -4,9 +4,8 @@ class_name TheInvisiblePoint
 ## @identity
 ## lineage: the primitives taxonomy's rung 1 — a museum vitrine exhibiting NOTHING.
 ##   Four brass arrows converge on empty air; two hair-thin laser lines cross exactly
-##   there; a small stand-in sphere appears at the crossing for a few seconds at a
-##   time, then blinks out — and the arrows keep pointing, because the POINT never
-##   left. Only its stand-in did.
+##   there. The point is never given a visible body. Its position can be located
+##   through the surrounding geometry and read in the source.
 ## essence: a point is position without extension. The engine cannot draw one — Vector3
 ##   holds a where with no body, and everything you have ever seen called "a point"
 ##   was a sphere hired to stand in for it. This vitrine displays the difference.
@@ -17,40 +16,14 @@ class_name TheInvisiblePoint
 
 const TextScreenScript := preload("res://commons/ui/text_screen.gd")
 
-@export var seed: int = 51
-## Seconds the stand-in exists, and the gap it leaves. The gap is the exhibit.
-@export var present: float = 3.0
-@export var absent: float = 2.2
-
-var _standin: MeshInstance3D
-var _clock := 0.0
-var _readout: Node3D
+## No marker is created at this position, including at startup or in wireframe.
 const FOCUS := Vector3(0.0, 1.25, 0.0)
 
 func _ready() -> void:
-	_rng.seed = seed
-	_clock = _rng.randf_range(0.0, present)
 	_build_vitrine()
 	_build_arrows()
 	_build_lasers()
-	_build_standin()
 	_build_plaque()
-
-func apply_grid_config(config_data: Dictionary) -> void:
-	for key in ["seed", "present", "absent"]:
-		if config_data.has(key):
-			set(key, config_data[key])
-
-func _process(delta: float) -> void:
-	_clock += delta
-	var cycle := present + absent
-	var t := fmod(_clock, cycle)
-	var here := t < present
-	if _standin.visible != here:
-		_standin.visible = here
-		if _readout and _readout.has_method("set_text"):
-			_readout.set_text("Vector3(0, 1.25, 0)",
-				"stand-in on duty" if here else "the point remains; its body has stepped out")
 
 func _build_vitrine() -> void:
 	var plinth := MeshInstance3D.new()
@@ -127,16 +100,6 @@ func _build_lasers() -> void:
 		beam.material_override = _glow_mat(Color(0.9, 0.25, 0.2), 1.6)
 		add_child(beam)
 
-func _build_standin() -> void:
-	_standin = MeshInstance3D.new()
-	var sm := SphereMesh.new()
-	sm.radius = 0.035
-	sm.height = 0.07
-	_standin.mesh = sm
-	_standin.position = FOCUS
-	_standin.material_override = _glow_mat(Color(0.95, 0.9, 0.8), 2.2)
-	add_child(_standin)
-
 func _build_plaque() -> void:
 	var ts := TextScreenScript.new()
 	ts.name = "PointPlate"
@@ -147,10 +110,14 @@ func _build_plaque() -> void:
 	add_child(ts)
 	if ts.has_method("set_text"):
 		ts.set_text("THE INVISIBLE POINT",
-			"A point is position without extension - the engine cannot draw one.\nEvery 'point' you have seen was a sphere hired to stand in for it.\nThe arrows keep pointing while the stand-in steps out: the address remains.")
-	_readout = TextScreenScript.new()
-	_readout.mode = 2
-	_readout.width_m = 0.3
-	_readout.position = Vector3(0.75, 0.24, 0.75)
-	_readout.rotation.y = deg_to_rad(-38.0)
-	add_child(_readout)
+			"A point is position without extension.\nFollow the arrows and the crossing lines.\nThey locate a position that is never given a visible body.")
+	var readout := TextScreenScript.new()
+	readout.name = "PositionReadout"
+	readout.mode = 2
+	readout.width_m = 0.3
+	readout.position = Vector3(0.75, 0.24, 0.75)
+	readout.rotation.y = deg_to_rad(-38.0)
+	add_child(readout)
+	if readout.has_method("set_text"):
+		readout.set_text("Vector3(0, 1.25, 0)",
+			"A position in this case's local frame.\nNo sphere will appear here.")

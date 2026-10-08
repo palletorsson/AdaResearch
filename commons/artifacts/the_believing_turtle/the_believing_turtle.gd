@@ -3,14 +3,12 @@ class_name TheBelievingTurtle
 
 ## @identity
 ## lineage: the L-systems SUPER OBJECT — a scriptorium where one sentence becomes
-##   three plants. On the lectern, the alphabet: five brass glyphs (F + - [ ]) that
-##   mean nothing at all. Beside it the rule board, axiom and productions, and a
-##   generation ladder showing the string exploding 1 -> 5 -> 21 -> 89 symbols. Then
+##   three plants. On the lectern, the alphabet: five brass glyphs (F + - [ ]) awaiting an interpretation. Beside it the rule board, axiom and productions, and a
+##   generation ladder showing the string exploding actual symbol counts. Then
 ##   the argument: THREE turtles read the SAME final string and each believes it
 ##   differently — 25 degrees, 45 degrees, and one that reads F as a step sideways —
 ##   growing three unmistakably different plants from one identical sentence. A stack
-##   of brass plates beside the bracketed one rises and falls as the turtle pushes and
-##   pops, because branching is a stack. And at the end, a stochastic pair: the same
+##   of brass plates beside the bracketed one records the maximum nesting depth, because branching is a stack. And at the end, a stochastic pair: the same
 ##   rules, two seeds, two siblings that are family but not twins.
 ## essence: the engine ships nothing for this. A string that rewrites itself is half;
 ##   a reader that believes it is the other half — and they are INDEPENDENT. Every
@@ -29,6 +27,9 @@ const TextScreenScript := preload("res://commons/ui/text_screen.gd")
 @export var rule_f: String = "FF+[+F-F-F]-[-F+F+F]"
 
 var _final := ""
+var lesson_enabled := false
+var original_study: Node3D
+var _built := false
 
 func _ready() -> void:
 	_rng.seed = seed
@@ -41,11 +42,25 @@ func _ready() -> void:
 	_build_stack_plates()
 	_build_stochastic_pair()
 	_build_plaque()
+	_built = true
+	if lesson_enabled: _install_lesson()
 
 func apply_grid_config(config_data: Dictionary) -> void:
-	for key in ["seed", "generations", "axiom", "rule_f"]:
-		if config_data.has(key):
-			set(key, config_data[key])
+	if config_data.has("seed"): seed=int(config_data.seed)
+	if config_data.has("generations"): generations=clampi(int(config_data.generations),0,5)
+	if config_data.has("axiom"): axiom=str(config_data.axiom)
+	if config_data.has("rule_f"): rule_f=str(config_data.rule_f)
+	if str(config_data.get("lesson","false")).to_lower()=="true": lesson_enabled=true
+	if _built and lesson_enabled: _install_lesson()
+
+func _install_lesson() -> void:
+	if has_node("InterpreterLesson"):return
+	original_study=Node3D.new();original_study.name="OriginalStudy"
+	var previous:=get_children();add_child(original_study)
+	for child in previous:child.reparent(original_study)
+	original_study.position=Vector3(0,0,-7)
+	var desk=load("res://commons/artifacts/interpreter_lesson/interpreter_lesson.gd").new()
+	desk.name="InterpreterLesson";add_child(desk)
 
 func _tag(at: Vector3, title: String, sub: String) -> void:
 	var tag := TextScreenScript.new()
@@ -95,7 +110,7 @@ func _build_rule_board() -> void:
 	var board := Vector3(-1.9, 1.55, -0.2)
 	_slab(board, Vector3(0.8, 0.5, 0.03), Color(0.12, 0.12, 0.15))
 	_tag(board + Vector3(0.0, 0.12, 0.03), "axiom: %s" % axiom, "")
-	_tag(board + Vector3(0.0, -0.06, 0.03), "F -> %s" % rule_f.substr(0, 16), "every F, replaced at once")
+	_tag(board + Vector3(0.0, -0.06, 0.03), "F -> %s" % rule_f, "every F, replaced at once")
 
 func _build_generation_ladder() -> void:
 	# the string exploding: bar per generation, length = symbol count
@@ -108,51 +123,49 @@ func _build_generation_ladder() -> void:
 		_tag(Vector3(-1.12, 1.35 - 0.11 * float(g), 0.42), str(n), "")
 		if g < generations:
 			s = _rewrite(s, rule_f, 1)
-	_tag(Vector3(-0.65, 1.5, 0.42), "generations", "1 symbol, then 5, then 21, then 89...")
+	_tag(Vector3(-0.65, 1.5, 0.42), "generations", "actual counts / bars capped at 1.1 m")
 
 # --- the reader half: three turtles, one string ------------------------------------------
 
 ## THE SECOND HALF. Walk `_final` as a turtle and draw it. `angle` and `side` are the
 ## reader's beliefs; the string is identical in all three cases.
-func _walk(origin: Vector3, angle_deg: float, step: float, tint: Color, sideways: bool) -> void:
-	var stack: Array = []
-	var pos := origin
-	var heading := PI * 0.5              # up
-	var ang := deg_to_rad(angle_deg)
-	var drawn := 0
-	for i in range(_final.length()):
-		if drawn > 260:
-			break
-		var ch := _final[i]
+## Shared interpretation for the original studies and the step-by-step lesson.
+## A uniform x/y swap reflects the path; it does not change the saved heading.
+func interpret(sentence: String, angle_deg: float, step: float, sideways: bool, limit: int=-1) -> Dictionary:
+	var stack: Array=[]
+	var pos:=Vector3.ZERO
+	var heading:=PI*0.5
+	var ang:=deg_to_rad(angle_deg)
+	var segments: Array=[]
+	var frames: Array=[{"symbol":"START","pos":pos,"heading":heading,"count":0,"stack":0}]
+	for ch in sentence:
+		if limit>=0 and segments.size()>=limit:break
 		match ch:
 			"F":
 				var dir := Vector2(cos(heading), sin(heading))
 				if sideways:
-					dir = Vector2(dir.y, dir.x)   # this turtle believes F means "sidle"
+					dir = Vector2(dir.y, dir.x)
 				var nxt := pos + Vector3(dir.x, dir.y, 0.0) * step
-				var seg := MeshInstance3D.new()
-				var sm := CylinderMesh.new()
-				sm.top_radius = 0.006
-				sm.bottom_radius = 0.006
-				sm.height = step
-				seg.mesh = sm
-				seg.position = (pos + nxt) * 0.5
-				seg.rotation.z = atan2(nxt.y - pos.y, nxt.x - pos.x) - PI * 0.5
-				seg.material_override = _glow_mat(tint, 0.8)
-				add_child(seg)
-				pos = nxt
-				drawn += 1
-			"+":
-				heading += ang
-			"-":
-				heading -= ang
-			"[":
-				stack.append([pos, heading])          # PUSH
+				segments.append([pos,nxt]);pos=nxt
+			"+":heading+=ang
+			"-":heading-=ang
+			"[":stack.append([pos,heading])
 			"]":
 				if not stack.is_empty():
-					var st: Array = stack.pop_back()  # POP
-					pos = st[0]
-					heading = st[1]
+					var st: Array=stack.pop_back();pos=st[0];heading=st[1]
+		frames.append({"symbol":ch,"pos":pos,"heading":heading,"count":segments.size(),"stack":stack.size()})
+	return {"segments":segments,"frames":frames,"limited":frames.size()-1<sentence.length()}
+
+func _walk(origin: Vector3, angle_deg: float, step: float, tint: Color, sideways: bool) -> void:
+	# Preserve the former prefix: at most 261 F segments in the original study.
+	var reading:=interpret(_final,angle_deg,step,sideways,261)
+	for ends in reading.segments:
+		var pos: Vector3=origin+ends[0];var nxt: Vector3=origin+ends[1]
+		var seg:=MeshInstance3D.new();var sm:=CylinderMesh.new()
+		sm.top_radius=0.006;sm.bottom_radius=0.006;sm.height=step
+		seg.mesh=sm;seg.position=(pos+nxt)*0.5
+		seg.rotation.z=atan2(nxt.y-pos.y,nxt.x-pos.x)-PI*0.5
+		seg.material_override=_glow_mat(tint,0.8);add_child(seg)
 
 func _build_three_turtles() -> void:
 	_walk(Vector3(-0.55, 1.0, 0.0), 25.0, 0.055, Color(0.45, 0.85, 0.5), false)
@@ -161,7 +174,7 @@ func _build_three_turtles() -> void:
 	_tag(Vector3(0.35, 0.94, 0.2), "45 degrees", "same sentence")
 	_walk(Vector3(1.25, 1.0, 0.0), 25.0, 0.05, Color(0.5, 0.7, 0.95), true)
 	_tag(Vector3(1.25, 0.94, 0.2), "F means sidle", "same sentence, a different reader")
-	_tag(Vector3(0.35, 0.86, 0.5), "the two halves", "the string knows no geometry")
+	_tag(Vector3(0.35, 0.86, 0.5), "original comparison", "different step lengths / at most 261 segments each")
 
 func _build_stack_plates() -> void:
 	# the bracket made physical: a column of plates, one per open bracket depth
@@ -177,7 +190,7 @@ func _build_stack_plates() -> void:
 	for k in range(peak):
 		_slab(Vector3(2.05, 1.02 + 0.07 * float(k), 0.0), Vector3(0.22 - 0.02 * float(k), 0.035, 0.22 - 0.02 * float(k)),
 			Color(0.55, 0.46, 0.28), 0.5)
-	_tag(Vector3(2.05, 0.94, 0.2), "the stack", "[ pushes, ] pops - branching IS a stack (depth %d)" % peak)
+	_tag(Vector3(2.05, 0.94, 0.2), "peak stack", "static depth summary: %d" % peak)
 
 func _build_stochastic_pair() -> void:
 	# same rules, two seeds: family, not twins
@@ -228,7 +241,7 @@ func _build_stochastic_pair() -> void:
 						var st: Array = stack.pop_back()
 						pos = st[0]
 						heading = st[1]
-	_tag(Vector3(-1.08, 0.08, 0.78), "stochastic", "same rules, two seeds: family, not twins")
+	_tag(Vector3(-1.08, 0.08, 0.78), "stochastic", "two seeds / at most 91 segments each")
 
 func _build_plaque() -> void:
 	var ts := TextScreenScript.new()

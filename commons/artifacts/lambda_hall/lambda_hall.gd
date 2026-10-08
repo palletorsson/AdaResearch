@@ -1,16 +1,12 @@
 # lambda_hall.gd
-# Walk-in architecture: the lambda edge as a hall. The west wall is a
-# perfect frozen lattice (F: order), the east wall is the same lattice
-# shattered and boiling (E: entropy), and between them six column rows
-# interpolate by their x-position mapped to lambda 0..1. The only lit
-# floor is a narrow walkway at lambda = 0.35 — the player literally
-# walks the edge of chaos down the full length of the hall.
+# Walk-in analogy: repeated and dispersed forms across an authored spectrum.
+# lambda_value fixes its geometry and row emphasis. Optional visitor controls
+# move only the floor recommendation, leaving those choices visible in place.
 #
 # QFE = F − λ·E(S) + φ·dE — qfeplaboratory, spine order 18.
 #
 # @identity
-# essence: the complete QFEP formula embodied as a corridor — order to the
-#   left, entropy to the right, life only on the narrow band between
+# essence: an authored preference becomes architecture, then can be questioned
 # desire: a player pauses mid-hall, looks left at the crystal, right at the
 #   fire, then down at the glowing line under their feet and understands λ
 # critical_parameter: lambda_value — where the walkway sits between the walls
@@ -19,11 +15,8 @@
 # emerges: the spine's own phase structure (F_order → E_entropy → lambda_edge)
 #   made walkable at body scale
 # needs: nothing beyond the grid cell it occupies; open at both ends
-# relationships: cellularautomata (λ is Langton's lambda — the same edge in
-#   rule space); the spine's three-act phase structure; soft_stages ecology,
-#   whose density curve climbs exactly this band
-# truth: life is neither the crystal nor the fire — it is the corridor
-#   between them, and it is narrow
+# relationships: the entropy fan's counted alternatives and QFEP's revisable terms
+# truth: this staging measures no entropy and discovers no universal life interval
 #
 # GDScript 4.6. Procedural only — everything built in _ready().
 
@@ -40,6 +33,9 @@ class_name LambdaHall
 @export var chaos_color: Color = Color(1.0, 0.18, 0.55)    # hot magenta
 @export var chaos_color_b: Color = Color(1.0, 0.46, 0.10)  # hot orange
 @export var edge_color: Color = Color(0.30, 1.0, 0.72)     # phosphor green-cyan
+@export var recommendation_control: bool = false
+@export_range(0.20, 0.80) var recommendation_position: float = 0.35
+const InterfacePresets = preload("res://commons/ui/interface_presets.gd")
 
 const CUBE_SIZE: float = 0.42
 const WALL_STEP: float = 0.55
@@ -56,6 +52,13 @@ var _walk_mat: StandardMaterial3D = null
 var _walk_hsv: Vector3 = Vector3.ZERO
 var _time: float = 0.0
 var _built: bool = false
+var _owned: Array[Node] = []
+var _recommendation: Node3D
+var _route_labels: Array[Label3D] = []
+var _console: Node3D
+var _slider: Node3D
+var _route_readout: Label
+var _reset_button: Node3D
 
 
 func _ready() -> void:
@@ -65,6 +68,11 @@ func _ready() -> void:
 # ── grid config ──────────────────────────────────────────────────────
 
 func apply_grid_config(config_data: Dictionary) -> void:
+	var previous_settings: Array = _build_settings()
+	if config_data.has("recommendation_control"):
+		recommendation_control = str(config_data["recommendation_control"]).to_lower() in ["on", "true", "1"]
+	if config_data.has("recommendation_position"):
+		recommendation_position = clampf(float(config_data["recommendation_position"]), 0.20, 0.80)
 	if config_data.has("hall_length"):
 		hall_length = float(config_data["hall_length"])
 	if config_data.has("hall_width"):
@@ -86,7 +94,19 @@ func apply_grid_config(config_data: Dictionary) -> void:
 	if config_data.has("scale"):
 		var s: float = maxf(0.1, float(config_data["scale"]))
 		scale = Vector3(s, s, s)
-	_build()
+	# The grid may configure a fresh instance before adding it. Let _ready build
+	# its controls once in the tree, where deferred panel layout has transforms.
+	if not is_inside_tree():
+		return
+	if not _built or previous_settings != _build_settings():
+		_build()
+	else:
+		_update_recommendation()
+
+
+func _build_settings() -> Array:
+	return [hall_length, hall_width, hall_height, lambda_value, rng_seed,
+		order_color, chaos_color, chaos_color_b, edge_color, scale, recommendation_control]
 
 
 func _parse_color(value: Variant, fallback: Color) -> Color:
@@ -123,6 +143,9 @@ func _build() -> void:
 	_build_kerbs(half_w, half_l)
 	_build_inscriptions(half_l, walk_x)
 	_build_capture_camera(walk_x, half_l)
+	if recommendation_control:
+		_build_recommendation_controls(half_l)
+	_update_recommendation()
 	_built = true
 
 
@@ -132,9 +155,55 @@ func _clear_build() -> void:
 	_pulse_mats.clear()
 	_order_mat = null
 	_walk_mat = null
-	for child in get_children():
+	for child in _owned:
 		remove_child(child)
 		child.queue_free()
+	_owned.clear()
+	_route_labels.clear()
+	_recommendation = null
+	_console = null
+	_slider = null
+	_route_readout = null
+	_reset_button = null
+
+
+func _own(node: Node) -> void:
+	add_child(node)
+	_owned.append(node)
+
+
+func _build_recommendation_controls(half_l: float) -> void:
+	_console = InterfacePresets.build("machine", "Move the recommendation", 0.95)
+	_console.name = "RecommendationControls"
+	_console.position = Vector3(0.0, 0.95, half_l + 1.0)
+	_own(_console)
+	_route_readout = _console.add_readout("")
+	_slider = _console.add_slider("LIT STRIP", "Recommendation")
+	_slider.slider_moved.connect(_on_recommendation_moved)
+	_reset_button = _console.add_button("RETURN")
+	_reset_button.pressed.connect(_reset_recommendation)
+
+
+func _on_recommendation_moved(_value: float) -> void:
+	recommendation_position = lerpf(0.20, 0.80, _slider.get_normalized_value())
+	_update_recommendation()
+
+
+func _reset_recommendation() -> void:
+	recommendation_position = clampf(lambda_value, 0.20, 0.80)
+	_update_recommendation()
+
+
+func _update_recommendation() -> void:
+	if not is_instance_valid(_recommendation): return
+	var value: float = recommendation_position if recommendation_control else lambda_value
+	_recommendation.position.x = (value - 0.5) * hall_width
+	for label in _route_labels:
+		label.text = "SUGGESTED λ = %.2f" % value
+	if is_instance_valid(_slider):
+		_slider.set_normalized_value(inverse_lerp(0.20, 0.80, recommendation_position))
+	if is_instance_valid(_route_readout):
+		_route_readout.text = "Suggested λ = %.2f\nForms stay in place" % value
 
 
 func _cube_mesh() -> BoxMesh:
@@ -162,7 +231,7 @@ func _build_floor(half_w: float, half_l: float, walk_x: float, walk_half: float)
 	# Dark floor slab — the unlit ground everywhere except the walkway.
 	var floor_body := StaticBody3D.new()
 	floor_body.name = "FloorBody"
-	add_child(floor_body)
+	_own(floor_body)
 
 	var floor_mesh := MeshInstance3D.new()
 	floor_mesh.name = "FloorMesh"
@@ -183,7 +252,11 @@ func _build_floor(half_w: float, half_l: float, walk_x: float, walk_half: float)
 	fcol.position = Vector3(0.0, -0.04, 0.0)
 	floor_body.add_child(fcol)
 
-	# The walkway — the only lit floor, at the lambda line.
+	_recommendation = Node3D.new()
+	_recommendation.name = "Recommendation"
+	_own(_recommendation)
+
+	# A movable lit strip, without a separate floor collider.
 	var walk := MeshInstance3D.new()
 	walk.name = "Walkway"
 	var wbox := BoxMesh.new()
@@ -191,8 +264,8 @@ func _build_floor(half_w: float, half_l: float, walk_x: float, walk_half: float)
 	walk.mesh = wbox
 	_walk_mat = _emissive_mat(edge_color.darkened(0.35), edge_color, 1.6, false)
 	walk.material_override = _walk_mat
-	walk.position = Vector3(walk_x, 0.03, 0.0)
-	add_child(walk)
+	walk.position = Vector3(0.0, 0.03, 0.0)
+	_recommendation.add_child(walk)
 	_walk_hsv = Vector3(edge_color.h, edge_color.s, edge_color.v)
 
 	# Faint guide strips at the walkway edges.
@@ -202,8 +275,8 @@ func _build_floor(half_w: float, half_l: float, walk_x: float, walk_half: float)
 		sbox.size = Vector3(0.06, 0.08, hall_length)
 		strip.mesh = sbox
 		strip.material_override = _emissive_mat(edge_color, edge_color, 2.4, false)
-		strip.position = Vector3(walk_x + float(side) * walk_half, 0.04, 0.0)
-		add_child(strip)
+		strip.position = Vector3(float(side) * walk_half, 0.04, 0.0)
+		_recommendation.add_child(strip)
 
 
 # ── order wall: F ────────────────────────────────────────────────────
@@ -235,7 +308,7 @@ func _build_order_wall(wall_x: float, half_l: float) -> void:
 	_order_mat.roughness = 0.25
 	_order_mat.metallic = 0.4
 	inst.material_override = _order_mat
-	add_child(inst)
+	_own(inst)
 
 
 # ── chaos wall: E ────────────────────────────────────────────────────
@@ -292,7 +365,7 @@ func _build_chaos_wall(wall_x: float, half_l: float, rng: RandomNumberGenerator)
 	inst.name = "ChaosWall"
 	inst.multimesh = mm
 	inst.material_override = _emissive_mat(Color.WHITE, chaos_color.lerp(chaos_color_b, 0.4), 2.2, true)
-	add_child(inst)
+	_own(inst)
 
 
 func _spawn_drifter(pos: Vector3, col: Color, mat: StandardMaterial3D, rng: RandomNumberGenerator) -> void:
@@ -305,7 +378,7 @@ func _spawn_drifter(pos: Vector3, col: Color, mat: StandardMaterial3D, rng: Rand
 	cube.position = pos
 	var s: float = rng.randf_range(0.4, 0.9)
 	cube.scale = Vector3(s, s, s)
-	add_child(cube)
+	_own(cube)
 	_drifters.append({
 		"node": cube,
 		"base": pos,
@@ -373,7 +446,7 @@ func _build_lambda_rows(half_w: float, half_l: float, walk_x: float, walk_half: 
 		inst.multimesh = mm
 		var mat: StandardMaterial3D = _emissive_mat(Color.WHITE, row_col, energy, true)
 		inst.material_override = mat
-		add_child(inst)
+		_own(inst)
 
 		# The living band breathes.
 		if w > 0.35:
@@ -391,7 +464,7 @@ func _build_kerbs(half_w: float, half_l: float) -> void:
 		var kerb_x: float = float(side) * (half_w - 0.45)
 		var body := StaticBody3D.new()
 		body.name = "Kerb_East" if side > 0.0 else "Kerb_West"
-		add_child(body)
+		_own(body)
 
 		var mesh_inst := MeshInstance3D.new()
 		var kbox := BoxMesh.new()
@@ -417,18 +490,18 @@ func _build_kerbs(half_w: float, half_l: float) -> void:
 # ── inscriptions ─────────────────────────────────────────────────────
 
 func _build_inscriptions(half_l: float, walk_x: float) -> void:
-	var lam_text: String = "λ = %.2f — life walks here" % lambda_value
+	var lam_text: String = "SUGGESTED λ = %.2f" % lambda_value
 	# One at each open end, oriented for whoever walks in.
-	_floor_label(lam_text, Vector3(walk_x, 0.075, -half_l + 1.4), 180.0)
-	_floor_label(lam_text, Vector3(walk_x, 0.075, half_l - 1.4), 0.0)
-	_floor_label("QFE = F − λ·E(S) + φ·dE", Vector3(walk_x, 0.075, 0.0), 0.0)
+	_floor_label(lam_text, Vector3(0.0, 0.075, -half_l + 1.4), 180.0)
+	_floor_label(lam_text, Vector3(0.0, 0.075, half_l - 1.4), 0.0)
+	_floor_label("QFE = F − λ·E(S) + φ·dE", Vector3(0.0, 0.075, 0.0), 0.0)
 
 
 func _floor_label(text: String, pos: Vector3, yaw_deg: float) -> void:
 	var label := Label3D.new()
 	label.text = text
-	label.font_size = 64
-	label.pixel_size = 0.004
+	label.font_size = 44
+	label.pixel_size = 0.002
 	label.modulate = edge_color.lightened(0.2)
 	label.outline_size = 10
 	label.outline_modulate = Color(0.0, 0.0, 0.0, 0.85)
@@ -436,7 +509,9 @@ func _floor_label(text: String, pos: Vector3, yaw_deg: float) -> void:
 	# (top of the text points away from them); yaw 180 for a walker heading +Z.
 	label.rotation_degrees = Vector3(-90.0, yaw_deg, 0.0)
 	label.position = pos
-	add_child(label)
+	_recommendation.add_child(label)
+	if text.begins_with("SUGGESTED"):
+		_route_labels.append(label)
 
 
 # ── capture camera ───────────────────────────────────────────────────
@@ -449,7 +524,7 @@ func _build_capture_camera(walk_x: float, half_l: float) -> void:
 	# hall (−Z): order wall left, chaos wall right, glowing edge ahead.
 	cam.position = Vector3(walk_x, 1.6, half_l - 0.4)
 	cam.rotation_degrees = Vector3(-4.0, 0.0, 0.0)
-	add_child(cam)
+	_own(cam)
 
 
 # ── living edge ──────────────────────────────────────────────────────

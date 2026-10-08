@@ -100,6 +100,35 @@ const MAX_CELLS := 4096
 ## cue that this is a solid volume and not a wall, until you cut into it.
 @export var depth_shade: float = 0.45
 
+## LEAK - whether this lattice KEEPS what it refused (2026-09-23).
+##
+## The room already asks the question out loud: somebody following behind you
+## will find the cut already made, and will their body fit the passage yours
+## left? Until now the cut died when the room unloaded, so the book asked a
+## question the game declined to answer.
+##
+## The cut is this artifact's remainder. It is not what you meant to make - you
+## walked, and bite_m let you reach a little past where you were stopped. What
+## fell out is the edge of that rule, and [[leak_data]] is where edges go.
+##
+##   none   the shipped lattice. Cuts last while the room is loaded, then go
+##   keep   the cut is spilled to the leak bus and restored on the next arrival,
+##          so a second visit meets the first one already carved
+##
+## A word, not a number, so a token reads `#leak:keep` without needing a place
+## in CONFIG_PARAM_NAMES.
+@export_enum("none", "keep") var leak: String = "none"
+const LEAK_VALUES: PackedStringArray = ["none", "keep"]
+
+## Local centres of cubes this visit removed, waiting to be spilled. Held rather
+## than spilled per cube because one leak is one refusal EVENT, not one cube: a
+## bus that recorded 400 separate leaks for one walk would be a tally, and a tally
+## is the thing leak_data refuses to be.
+var _leak_pending: Array = []
+## False while the lattice re-applies an earlier cut, so a restored cube is not
+## recorded as freshly refused and spilled again on the way out.
+var _leak_recording: bool = true
+
 ## Cubes removed this frame. Fires only on frames that actually cut.
 signal carved(count: int)
 ## A visitor has been inside the lattice for INERT_AFTER_S and nothing has been
@@ -153,7 +182,16 @@ var _said_inert := false
 
 
 func _ready() -> void:
+	if has_meta("config_leak"):
+		var lv: String = str(get_meta("config_leak")).strip_edges().to_lower()
+		if LEAK_VALUES.has(lv):
+			leak = lv
 	_build()
+
+
+## The room unloading is the last chance to keep what it refused.
+func _exit_tree() -> void:
+	_leak_spill()
 
 
 func apply_grid_config(config_data: Dictionary) -> void:
@@ -178,6 +216,10 @@ func apply_grid_config(config_data: Dictionary) -> void:
 		regrow_s = float(config_data["regrow"])
 	if config_data.has("depth_shade"):
 		depth_shade = float(config_data["depth_shade"])
+	if config_data.has("leak"):
+		var lv: String = str(config_data["leak"]).strip_edges().to_lower()
+		if LEAK_VALUES.has(lv):
+			leak = lv
 	if config_data.has("visitor_radius"):
 		visitor_radius_m = float(config_data["visitor_radius"])
 	if config_data.has("visitor_height"):
@@ -254,6 +296,7 @@ func _build() -> void:
 	_build_draw()
 	_build_solid()
 	_build_area()
+	_leak_restore()
 
 
 func _build_draw() -> void:
@@ -576,6 +619,8 @@ func _bite_at(c: Vector3, r: float, hs: float) -> int:
 ## failure that would let a visitor walk into a hole that is still solid.
 func _kill(idx: int) -> void:
 	_alive[idx] = 0
+	if _leak_recording and leak == "keep":
+		_leak_pending.append(_centre[idx])
 	_mm.set_instance_transform(idx, Transform3D(_gone, _centre[idx]))
 	_solid.shape_owner_set_disabled(_owner[idx], true)
 	_carved += 1
@@ -660,6 +705,92 @@ func _heal_visitors() -> void:
 # ── for a map, and for a probe ───────────────────────────────────────────────
 
 ## How much of the block the room has eaten. The number a walk is worth.
+# -- the leak ----------------------------------------------------------------
+
+## The edge, named. Every leak this artifact produces carries it, so a later room
+## can ask what THIS restraint refused without knowing anything else about it.
+func _leak_rule() -> String:
+	return "carve_grid.bite"
+
+
+func _leak_bus() -> Node:
+	return get_node_or_null("/root/LeakData")
+
+
+## Which hall this happened in. A leak that cannot say where it came from is a
+## pile of coordinates, so fall back rather than give up.
+func _leak_room() -> String:
+	if has_meta("config_room"):
+		return str(get_meta("config_room"))
+	# GridSystem carries the hall name and is an ancestor in BOTH lanes. The
+	# museum's current_scene is the museum itself, so trusting it would file every
+	# leak in the building under one room.
+	var n: Node = get_parent()
+	while n != null:
+		if "map_name" in n and str(n.map_name) != "":
+			return str(n.map_name)
+		n = n.get_parent()
+	var t: SceneTree = get_tree()
+	if t != null and t.current_scene != null:
+		return str(t.current_scene.name)
+	return "unknown"
+
+
+## Hand the pending cut to the bus and forget it here. Safe to call repeatedly:
+## an empty buffer is the normal state and spills nothing.
+func _leak_spill() -> void:
+	if leak != "keep" or _leak_pending.is_empty():
+		return
+	var bus: Node = _leak_bus()
+	if bus == null or not bus.has_method("spill"):
+		_leak_pending.clear()
+		return
+	bus.spill(_leak_room(), _leak_rule(), "cells", _leak_pending, lattice_color, cell_m)
+	_leak_pending.clear()
+
+
+## Re-apply every cell this rule has ever refused, across visits. The union and
+## not the latest leak: two walks cut different cells, and the next arrival should
+## meet both. A cell that no longer exists at this configuration is skipped rather
+## than snapped to a neighbour, because a cut moved to fit is not the cut that
+## was made.
+func _leak_restore() -> void:
+	if leak != "keep" or _count == 0:
+		return
+	var bus: Node = _leak_bus()
+	if bus == null or not bus.has_method("points_by_rule"):
+		return
+	var prior: Array = bus.points_by_rule(_leak_rule())
+	if prior.is_empty():
+		return
+	var at: Dictionary = {}
+	for i in _count:
+		at[_leak_key(_centre[i])] = i
+	var restored: int = 0
+	var missed: int = 0
+	_leak_recording = false
+	for c: Vector3 in prior:
+		var k: String = _leak_key(c)
+		if not at.has(k):
+			missed += 1
+			continue
+		var idx: int = int(at[k])
+		if _alive[idx] == 1:
+			_kill(idx)
+			restored += 1
+	_leak_recording = true
+	if restored > 0 or missed > 0:
+		print("carve_grid: met an earlier cut - %d cells restored, %d no longer in this lattice"
+			% [restored, missed])
+
+
+## A centre quantised to a tenth of a millimetre. The lattice rebuilds its centres
+## by the same arithmetic every time, so this matches exactly on an unchanged
+## configuration and fails cleanly on a changed one.
+func _leak_key(c: Vector3) -> String:
+	return "%d,%d,%d" % [roundi(c.x * 10000.0), roundi(c.y * 10000.0), roundi(c.z * 10000.0)]
+
+
 func carved_fraction() -> float:
 	if _count <= 0:
 		return 0.0
@@ -681,6 +812,8 @@ func live_count() -> int:
 func reset_lattice() -> void:
 	if _mm == null or _solid == null:
 		return
+	# RESET is the room taking your cut back. That is exactly the moment to keep it.
+	_leak_spill()
 	for i in _count:
 		if _alive[i] == 0:
 			_revive(i)

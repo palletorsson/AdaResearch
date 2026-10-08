@@ -45,6 +45,20 @@ extends RefCounted
 ## Given up: the group (four or five bodies leaning into each other), the bare
 ## white body among them, the second and third cut-outs stacked in depth, the brick
 ## wall behind, and any suggestion that the printed letters spell actual words.
+##
+## DNA — two axes, both cut in geometry:
+##   wearer — who is inside the printed suit. kneeling (the reference body) ·
+##     inflated (the suit pumped until torso, limbs, hood and shoes are one balloon
+##     and the creases go taut) · multiplied (three hoods on the one neck, six arms
+##     fanning off the shoulders) · unravelling (the flesh thinned to a wire while
+##     the surface leaves as a long thread spiralling off the back) · hollow (the
+##     body gone, only the suit's seams left standing as a ribbed cage in the pose).
+##   flat — what the stage cut-out does. leaning (one flat standing behind, as in
+##     the reference) · chorus (five more flats fanned in an arc, crowding the
+##     figure, two of them taller than it) · flood (the flat poured out on the floor
+##     as a thick lobed puddle with two overflow lobes, drowning the kneeling half
+##     to the hip) · crown (the flat leaves the floor — seven petals ringing the
+##     crown of the hood and one blade rising out of it).
 
 const TEX: int = 256
 
@@ -74,9 +88,68 @@ static func describe() -> String:
 	return "A hooded figure in a graphic-printed body suit, half-kneeling with one arm braced on the floor and the head tucked down, a flat magenta or yellow cut-out shape leaning behind it."
 
 
-static func build(root: Node3D, seed: int) -> void:
+static func axes() -> Dictionary:
+	return {
+		"wearer": ["kneeling", "inflated", "multiplied", "unravelling", "hollow"],
+		"flat": ["leaning", "chorus", "flood", "crown"],
+	}
+
+
+static func build(root: Node3D, seed: int, opts: Dictionary = {}) -> void:
+	var wearer: String = str(opts.get("wearer", "kneeling"))
+	var flat_mode: String = str(opts.get("flat", "leaning"))
+
 	var rng := RandomNumberGenerator.new()
 	rng.seed = seed
+	# axis randomness draws from its own stream, so the pose and the print stay
+	# fixed across a sweep and only the axis moves
+	var rngx := RandomNumberGenerator.new()
+	rngx.seed = seed * 7919 + 104729
+
+	# --- axis: wearer --------------------------------------------------------
+	var girth: float = 1.0
+	var limb_k: float = 1.0
+	var joint_k: float = 1.0
+	var head_k: float = 1.0
+	var crease_k: float = 1.0
+	var shoe_k: float = 1.0
+	var extra_heads: int = 0
+	var extra_arms: int = 0
+	var do_cage: bool = false
+	var do_thread: bool = false
+	if wearer == "inflated":
+		girth = 1.72
+		limb_k = 1.85
+		joint_k = 1.70
+		head_k = 1.34
+		crease_k = 1.75
+		shoe_k = 1.45
+	elif wearer == "multiplied":
+		girth = 0.94
+		limb_k = 0.92
+		joint_k = 0.92
+		head_k = 0.88
+		crease_k = 0.90
+		extra_heads = 2
+		extra_arms = 4
+	elif wearer == "unravelling":
+		girth = 0.70
+		limb_k = 0.62
+		joint_k = 0.62
+		head_k = 0.92
+		crease_k = 0.70
+		shoe_k = 0.92
+		do_thread = true
+	elif wearer == "hollow":
+		girth = 0.34
+		limb_k = 0.30
+		joint_k = 0.52
+		head_k = 0.76
+		crease_k = 1.10
+		shoe_k = 0.86
+		do_cage = true
+	var hand_k: float = clampf(limb_k, 0.62, 1.45)
+	var collar_k: float = maxf(girth, 0.72)
 
 	# --- the print -----------------------------------------------------------
 	var suit_kind: int = rng.randi_range(0, 3)
@@ -111,6 +184,9 @@ static func build(root: Node3D, seed: int) -> void:
 	var mat_shoe: StandardMaterial3D = _flat_mat(shoe_col, 0.44, true)
 	var mat_cut: StandardMaterial3D = _flat_mat(cut_col, 0.90, false)
 	mat_cut.cull_mode = BaseMaterial3D.CULL_DISABLED
+	var alt_col: Color = Color("#C93C9C") if cut_yellow else Color("#E7C433")
+	var mat_cut_alt: StandardMaterial3D = _flat_mat(alt_col, 0.90, false)
+	mat_cut_alt.cull_mode = BaseMaterial3D.CULL_DISABLED
 
 	# --- this individual -----------------------------------------------------
 	var braced: float = 1.0 if rng.randf() < 0.5 else -1.0
@@ -144,23 +220,23 @@ static func build(root: Node3D, seed: int) -> void:
 		var tang: Vector3 = _tangent(pts, i)
 		var bs: Basis = _basis_y_to(tang) * Basis(Vector3.UP, twist * t)
 		var ctr: Vector3 = pts[i]
-		_ball(root, ctr, Vector3(w.x * body_k, spacing * 1.10, w.y * body_k), bs, mat_suit)
+		_ball(root, ctr, Vector3(w.x * body_k * girth, spacing * 1.10, w.y * body_k * girth), bs, mat_suit)
 
 	var p_top: Vector3 = pts[n_spine - 1]
 	var w_top: Vector2 = _torso_w(1.0)
 
 	# pelvis block and thigh roots
-	_ball(root, p_hip + Vector3(0.0, -0.035, 0.01), Vector3(0.175 * body_k, 0.105, 0.145 * body_k), Basis(), mat_suit)
+	_ball(root, p_hip + Vector3(0.0, -0.035, 0.01), Vector3(0.175 * body_k * girth, 0.105, 0.145 * body_k * girth), Basis(), mat_suit)
 	for sgn in [-1.0, 1.0]:
 		var sf: float = sgn
-		_ball(root, p_hip + Vector3(sf * 0.125, -0.05, 0.02), Vector3(0.085, 0.085, 0.100), Basis(), mat_suit)
+		_ball(root, p_hip + Vector3(sf * 0.125, -0.05, 0.02), Vector3(0.085 * girth, 0.085, 0.100 * girth), Basis(), mat_suit)
 
 	# shoulder caps
-	var sh_off: float = w_top.x * 0.92 * body_k
+	var sh_off: float = w_top.x * 0.92 * body_k * girth
 	for sgn in [-1.0, 1.0]:
 		var sf: float = sgn
-		_ball(root, p_top + Vector3(sf * sh_off, 0.005, 0.0), Vector3(0.078, 0.070, 0.086), Basis(), mat_suit)
-	_ball(root, p_top + Vector3(0.0, -0.03, 0.03), Vector3(w_top.x * 0.98 * body_k, 0.075, 0.105), Basis(), mat_suit)
+		_ball(root, p_top + Vector3(sf * sh_off, 0.005, 0.0), Vector3(0.078 * girth, 0.070, 0.086 * girth), Basis(), mat_suit)
+	_ball(root, p_top + Vector3(0.0, -0.03, 0.03), Vector3(w_top.x * 0.98 * body_k * girth, 0.075, 0.105 * girth), Basis(), mat_suit)
 
 	# creases down the back
 	for i in range(4):
@@ -170,7 +246,7 @@ static func build(root: Node3D, seed: int) -> void:
 		var q: Vector3 = _curve_at(pts, t)
 		var side_a: Vector3 = q + Vector3(-w.x * 0.55, 0.0, w.y * 0.86)
 		var side_b: Vector3 = q + Vector3(w.x * 0.55, 0.012, w.y * 0.80)
-		_limb(root, side_a, side_b, 0.019, 0.40, mat_fold)
+		_limb(root, side_a, side_b, 0.019 * crease_k, 0.40, mat_fold)
 
 	# --- neck, head, hood ----------------------------------------------------
 	var neck_base: Vector3 = p_top + Vector3(0.0, 0.045, 0.005)
@@ -184,28 +260,28 @@ static func build(root: Node3D, seed: int) -> void:
 	var hy: Vector3 = hz.cross(hx).normalized()
 	var head_bs := Basis(hx, hy, hz)
 
-	_limb(root, neck_base + Vector3(0.0, -0.03, 0.0), neck_base + head_dir * 0.09, 0.058 * body_k, 1.0, mat_suit)
+	_limb(root, neck_base + Vector3(0.0, -0.03, 0.0), neck_base + head_dir * 0.09, 0.058 * body_k * limb_k, 1.0, mat_suit)
 	var collar := TorusMesh.new()
-	collar.inner_radius = 0.062 * body_k
-	collar.outer_radius = 0.090 * body_k
+	collar.inner_radius = 0.062 * body_k * collar_k
+	collar.outer_radius = 0.090 * body_k * collar_k
 	collar.rings = 24
 	collar.ring_segments = 10
 	var col_mi: MeshInstance3D = _add(root, collar, mat_fold)
 	col_mi.transform = Transform3D(_basis_y_to(head_dir), neck_base + head_dir * 0.02)
 
 	# skull, then the hood shell over it
-	_ball(root, head_ctr, Vector3(0.092, 0.104, 0.116) * body_k, head_bs, mat_hood)
-	_ball(root, head_ctr - head_dir * 0.022, Vector3(0.104, 0.116, 0.122) * body_k, head_bs, mat_hood)
-	_ball(root, head_ctr - head_dir * 0.075, Vector3(0.100, 0.112, 0.110) * body_k, head_bs, mat_hood)
+	_ball(root, head_ctr, Vector3(0.092, 0.104, 0.116) * body_k * head_k, head_bs, mat_hood)
+	_ball(root, head_ctr - head_dir * 0.022, Vector3(0.104, 0.116, 0.122) * body_k * head_k, head_bs, mat_hood)
+	_ball(root, head_ctr - head_dir * 0.075, Vector3(0.100, 0.112, 0.110) * body_k * head_k, head_bs, mat_hood)
 	var peak_dir: Vector3 = (-head_dir + Vector3(0.0, 0.85, 0.0)).normalized()
-	_ball(root, head_ctr - head_dir * 0.10 + peak_dir * 0.055, Vector3(0.082, 0.068, 0.090) * body_k, head_bs, mat_hood)
-	_ball(root, head_ctr - head_dir * 0.10 + peak_dir * 0.115, Vector3(0.055, 0.044, 0.062) * body_k, head_bs, mat_hood)
+	_ball(root, head_ctr - head_dir * 0.10 + peak_dir * 0.055, Vector3(0.082, 0.068, 0.090) * body_k * head_k, head_bs, mat_hood)
+	_ball(root, head_ctr - head_dir * 0.10 + peak_dir * 0.115, Vector3(0.055, 0.044, 0.062) * body_k * head_k, head_bs, mat_hood)
 	for i in range(3):
 		var fi: float = float(i)
 		var ang: float = -0.7 + fi * 0.7
-		var ca: Vector3 = head_ctr + head_bs * Vector3(-0.10 * cos(ang), 0.09 * sin(ang), -0.075)
-		var cb: Vector3 = head_ctr + head_bs * Vector3(0.10 * cos(ang), 0.09 * sin(ang), -0.075)
-		_limb(root, ca, cb, 0.014, 0.42, mat_fold)
+		var ca: Vector3 = head_ctr + head_bs * Vector3(-0.10 * cos(ang) * head_k, 0.09 * sin(ang) * head_k, -0.075 * head_k)
+		var cb: Vector3 = head_ctr + head_bs * Vector3(0.10 * cos(ang) * head_k, 0.09 * sin(ang) * head_k, -0.075 * head_k)
+		_limb(root, ca, cb, 0.014 * crease_k, 0.42, mat_fold)
 
 	# --- legs: one knee down and forward, one planted with the knee up -------
 	var sd: float = braced
@@ -218,63 +294,172 @@ static func build(root: Node3D, seed: int) -> void:
 	var ank_b := Vector3(-sd * 0.212, 0.090, -0.285)
 	var toe_b := Vector3(-sd * 0.212, 0.058, -0.395)
 
-	_limb(root, hip_a, knee_a, 0.085 * body_k, 0.92, mat_suit)
-	_ball(root, knee_a, Vector3(0.078, 0.074, 0.082), Basis(), mat_suit)
-	_limb(root, knee_a, ank_a, 0.070 * body_k, 0.92, mat_suit)
-	_ball(root, ank_a, Vector3(0.062, 0.055, 0.062), Basis(), mat_suit)
-	_ball(root, (ank_a + toe_a) * 0.5 + Vector3(0.0, -0.028, 0.0), Vector3(0.055, 0.033, 0.082), Basis(), mat_shoe)
-	_ball(root, toe_a + Vector3(0.0, -0.020, 0.01), Vector3(0.050, 0.028, 0.036), Basis(), mat_shoe)
+	_limb(root, hip_a, knee_a, 0.085 * body_k * limb_k, 0.92, mat_suit)
+	_ball(root, knee_a, Vector3(0.078, 0.074, 0.082) * joint_k, Basis(), mat_suit)
+	_limb(root, knee_a, ank_a, 0.070 * body_k * limb_k, 0.92, mat_suit)
+	_ball(root, ank_a, Vector3(0.062, 0.055, 0.062) * joint_k, Basis(), mat_suit)
+	_ball(root, (ank_a + toe_a) * 0.5 + Vector3(0.0, -0.028, 0.0), Vector3(0.055, 0.033, 0.082) * shoe_k, Basis(), mat_shoe)
+	_ball(root, toe_a + Vector3(0.0, -0.020, 0.01), Vector3(0.050, 0.028, 0.036) * shoe_k, Basis(), mat_shoe)
 
-	_limb(root, hip_b, knee_b, 0.090 * body_k, 0.92, mat_suit)
-	_ball(root, knee_b, Vector3(0.082, 0.080, 0.084), Basis(), mat_suit)
-	_limb(root, knee_b, ank_b, 0.070 * body_k, 0.92, mat_suit)
-	_ball(root, ank_b, Vector3(0.060, 0.055, 0.060), Basis(), mat_suit)
-	_ball(root, (ank_b + toe_b) * 0.5 + Vector3(0.0, -0.040, 0.0), Vector3(0.056, 0.032, 0.086), Basis(), mat_shoe)
-	_ball(root, toe_b + Vector3(0.0, -0.028, -0.012), Vector3(0.050, 0.026, 0.038), Basis(), mat_shoe)
+	_limb(root, hip_b, knee_b, 0.090 * body_k * limb_k, 0.92, mat_suit)
+	_ball(root, knee_b, Vector3(0.082, 0.080, 0.084) * joint_k, Basis(), mat_suit)
+	_limb(root, knee_b, ank_b, 0.070 * body_k * limb_k, 0.92, mat_suit)
+	_ball(root, ank_b, Vector3(0.060, 0.055, 0.060) * joint_k, Basis(), mat_suit)
+	_ball(root, (ank_b + toe_b) * 0.5 + Vector3(0.0, -0.040, 0.0), Vector3(0.056, 0.032, 0.086) * shoe_k, Basis(), mat_shoe)
+	_ball(root, toe_b + Vector3(0.0, -0.028, -0.012), Vector3(0.050, 0.026, 0.038) * shoe_k, Basis(), mat_shoe)
 
 	# knee and lap creases
-	_limb(root, knee_a + Vector3(-0.06, 0.03, -0.03), knee_a + Vector3(0.06, 0.04, -0.04), 0.016, 0.40, mat_fold)
-	_limb(root, knee_b + Vector3(-0.06, 0.045, -0.05), knee_b + Vector3(0.06, 0.030, -0.05), 0.016, 0.40, mat_fold)
-	_limb(root, ank_a + Vector3(-0.05, 0.03, 0.01), ank_a + Vector3(0.05, 0.03, 0.01), 0.014, 0.40, mat_fold)
-	_limb(root, ank_b + Vector3(-0.05, 0.03, 0.0), ank_b + Vector3(0.05, 0.03, 0.0), 0.014, 0.40, mat_fold)
+	_limb(root, knee_a + Vector3(-0.06, 0.03, -0.03), knee_a + Vector3(0.06, 0.04, -0.04), 0.016 * crease_k, 0.40, mat_fold)
+	_limb(root, knee_b + Vector3(-0.06, 0.045, -0.05), knee_b + Vector3(0.06, 0.030, -0.05), 0.016 * crease_k, 0.40, mat_fold)
+	_limb(root, ank_a + Vector3(-0.05, 0.03, 0.01), ank_a + Vector3(0.05, 0.03, 0.01), 0.014 * crease_k, 0.40, mat_fold)
+	_limb(root, ank_b + Vector3(-0.05, 0.03, 0.0), ank_b + Vector3(0.05, 0.03, 0.0), 0.014 * crease_k, 0.40, mat_fold)
 	for i in range(3):
 		var fi: float = float(i)
 		var f: float = fi / 2.0
 		var ca: Vector3 = hip_a.lerp(knee_a, 0.25 + f * 0.30) + Vector3(0.0, 0.055, 0.0)
 		var cb: Vector3 = hip_b.lerp(knee_b, 0.25 + f * 0.30) + Vector3(0.0, 0.055, 0.0)
-		_limb(root, ca, cb, 0.016, 0.38, mat_fold)
+		_limb(root, ca, cb, 0.016 * crease_k, 0.38, mat_fold)
 
 	# --- arms ----------------------------------------------------------------
 	var b_sh: Vector3 = p_top + Vector3(sd * sh_off, 0.0, 0.005)
 	var b_el: Vector3 = b_sh + Vector3(sd * 0.105, -0.275, -0.115)
 	var b_ha := Vector3(sd * (0.295 + rng.randf_range(-0.02, 0.04)), 0.048, -0.245 + rng.randf_range(-0.05, 0.04))
-	_limb(root, b_sh, b_el, 0.062 * body_k, 0.94, mat_suit)
-	_ball(root, b_el, Vector3(0.058, 0.058, 0.060), Basis(), mat_suit)
-	_limb(root, b_el, b_ha, 0.044 * body_k, 0.94, mat_suit)
-	_ball(root, b_ha, Vector3(0.044, 0.040, 0.044), Basis(), mat_suit)
-	_limb(root, b_el + Vector3(-0.04, 0.035, -0.02), b_el + Vector3(0.04, 0.045, -0.02), 0.014, 0.40, mat_fold)
+	_limb(root, b_sh, b_el, 0.062 * body_k * limb_k, 0.94, mat_suit)
+	_ball(root, b_el, Vector3(0.058, 0.058, 0.060) * joint_k, Basis(), mat_suit)
+	_limb(root, b_el, b_ha, 0.044 * body_k * limb_k, 0.94, mat_suit)
+	_ball(root, b_ha, Vector3(0.044, 0.040, 0.044) * joint_k, Basis(), mat_suit)
+	_limb(root, b_el + Vector3(-0.04, 0.035, -0.02), b_el + Vector3(0.04, 0.045, -0.02), 0.014 * crease_k, 0.40, mat_fold)
 	var b_dir := Vector3(sd * 0.20, -0.12, -1.0).normalized()
-	_hand(root, b_ha, b_dir, Vector3(1.0, 0.0, 0.0), -0.20, mat_suit)
+	_hand(root, b_ha, b_dir, Vector3(1.0, 0.0, 0.0), -0.20, mat_suit, hand_k)
 
 	var f_sh: Vector3 = p_top + Vector3(-sd * sh_off, 0.0, 0.005)
 	var f_el: Vector3 = f_sh + Vector3(-sd * 0.085, -0.235, -0.115)
 	var f_ha: Vector3 = knee_b + Vector3(-sd * 0.005, 0.062, -0.030)
-	_limb(root, f_sh, f_el, 0.060 * body_k, 0.94, mat_suit)
-	_ball(root, f_el, Vector3(0.056, 0.056, 0.058), Basis(), mat_suit)
-	_limb(root, f_el, f_ha, 0.048 * body_k, 0.94, mat_suit)
-	_ball(root, f_ha, Vector3(0.044, 0.042, 0.044), Basis(), mat_suit)
-	_limb(root, f_el + Vector3(-0.04, 0.03, -0.025), f_el + Vector3(0.04, 0.04, -0.025), 0.014, 0.40, mat_fold)
+	_limb(root, f_sh, f_el, 0.060 * body_k * limb_k, 0.94, mat_suit)
+	_ball(root, f_el, Vector3(0.056, 0.056, 0.058) * joint_k, Basis(), mat_suit)
+	_limb(root, f_el, f_ha, 0.048 * body_k * limb_k, 0.94, mat_suit)
+	_ball(root, f_ha, Vector3(0.044, 0.042, 0.044) * joint_k, Basis(), mat_suit)
+	_limb(root, f_el + Vector3(-0.04, 0.03, -0.025), f_el + Vector3(0.04, 0.04, -0.025), 0.014 * crease_k, 0.40, mat_fold)
 	var f_dir := Vector3(-sd * 0.10, -0.55, -0.83).normalized()
-	_hand(root, f_ha, f_dir, Vector3(1.0, 0.0, 0.0), 0.18, mat_suit)
+	_hand(root, f_ha, f_dir, Vector3(1.0, 0.0, 0.0), 0.18, mat_suit, hand_k)
 
-	# --- the cut-out standing behind -----------------------------------------
+	# --- what the suit holds: more of it, less of it, or none of it ----------
+	if extra_heads > 0:
+		for i in range(extra_heads):
+			var yaw_h: float = deg_to_rad(58.0) * (1.0 if i == 0 else -1.0)
+			var hd2: Vector3 = (Basis(Vector3.UP, yaw_h) * head_dir).normalized()
+			hd2 = (hd2 + Vector3(0.0, 0.26, 0.0)).normalized()
+			_extra_hood(root, neck_base + Vector3(0.0, 0.02, 0.0), hd2, body_k, head_k * 0.94, mat_hood)
+
+	if extra_arms > 0:
+		for i in range(extra_arms):
+			var fi: float = float(i)
+			var side: float = 1.0 if (i % 2) == 0 else -1.0
+			var tier: float = floorf(fi * 0.5)
+			var sh_p: Vector3 = p_top + Vector3(side * sh_off * 0.92, -0.085 - tier * 0.115, 0.012)
+			var ad: Vector3 = Vector3(side * (0.85 + tier * 0.25), -0.30 + tier * 0.34, -0.42 + tier * 0.30).normalized()
+			_extra_arm(root, sh_p, ad, 0.40 - tier * 0.05, 0.048 * limb_k, hand_k, mat_suit)
+
+	if do_thread:
+		var t_ctr: Vector3 = p_top + Vector3(0.0, -0.06, 0.0)
+		_thread_run(root, t_ctr, 3.6, 0.14, 0.34, 0.56, 0.80, 54, 0.0095, twist, mat_fold)
+		var t_hip: Vector3 = p_hip + Vector3(0.0, -0.02, 0.0)
+		_thread_run(root, t_hip, 2.8, 0.30, 0.13, 0.52, 0.85, 34, 0.0105, twist + 2.1, mat_suit)
+
+	if do_cage:
+		var n_hoop: int = 8
+		for i in range(n_hoop):
+			var fi: float = float(i)
+			var t: float = fi / float(n_hoop - 1)
+			var w: Vector2 = _torso_w(t)
+			var q: Vector3 = _curve_at(pts, t)
+			var idx: int = int(round(t * float(n_spine - 1)))
+			var tg: Vector3 = _tangent(pts, mini(maxi(idx, 0), n_spine - 1))
+			_hoop(root, q, tg, w.x * 1.24 * body_k, w.y * 1.32 * body_k, 0.11, mat_fold)
+		var bones: Array = [
+			[hip_a, knee_a, 0.112], [knee_a, ank_a, 0.094],
+			[hip_b, knee_b, 0.118], [knee_b, ank_b, 0.094],
+			[b_sh, b_el, 0.086], [b_el, b_ha, 0.064],
+			[f_sh, f_el, 0.084], [f_el, f_ha, 0.068],
+		]
+		for bn in bones:
+			var seg: Array = bn
+			var pa: Vector3 = seg[0]
+			var pb: Vector3 = seg[1]
+			var rr: float = seg[2]
+			var ax: Vector3 = pb - pa
+			for j in range(3):
+				var fj: float = float(j)
+				var u: float = 0.22 + fj * 0.28
+				var cq: Vector3 = pa.lerp(pb, u)
+				_hoop(root, cq, ax, rr, rr * 0.86, 0.17, mat_fold)
+
+	# --- the flat: standing behind, crowding, poured out, or worn ------------
 	var cut_thick: float = rng.randf_range(0.028, 0.044)
-	var cut_mesh: ArrayMesh = _cutout_mesh(rng, cut_kind, cut_h, cut_thick)
-	var cut_bs: Basis = Basis(Vector3.UP, cut_yaw) * Basis(Vector3.RIGHT, cut_tilt)
-	var cut_mi: MeshInstance3D = _add(root, cut_mesh, mat_cut)
-	cut_mi.transform = Transform3D(cut_bs, Vector3(cut_x, cut_h * 0.5, 0.480))
-	var cut_box: AABB = cut_mi.transform * cut_mesh.get_aabb()
-	cut_mi.transform = Transform3D(cut_bs, cut_mi.transform.origin + Vector3(0.0, -cut_box.position.y, 0.0))
+	if flat_mode == "leaning" or flat_mode == "chorus":
+		var cut_mesh: ArrayMesh = _cutout_mesh(rng, cut_kind, cut_h, cut_thick)
+		var cut_bs: Basis = Basis(Vector3.UP, cut_yaw) * Basis(Vector3.RIGHT, cut_tilt)
+		var cut_mi: MeshInstance3D = _add(root, cut_mesh, mat_cut)
+		cut_mi.transform = Transform3D(cut_bs, Vector3(cut_x, cut_h * 0.5, 0.480))
+		var cut_box: AABB = cut_mi.transform * cut_mesh.get_aabb()
+		cut_mi.transform = Transform3D(cut_bs, cut_mi.transform.origin + Vector3(0.0, -cut_box.position.y, 0.0))
+
+	if flat_mode == "chorus":
+		var angs: Array = [-118.0, -66.0, -26.0, 34.0, 92.0]
+		for i in range(angs.size()):
+			var deg_a: float = angs[i]
+			var a: float = deg_to_rad(deg_a) + cut_yaw
+			var rad: float = rngx.randf_range(0.38, 0.50)
+			var hh: float = rngx.randf_range(0.86, 1.56)
+			var kk: int = rngx.randi_range(0, 1)
+			var th: float = rngx.randf_range(0.026, 0.042)
+			var cm2: ArrayMesh = _cutout_mesh(rngx, kk, hh, th)
+			var yaw2: float = a + PI + deg_to_rad(rngx.randf_range(-26.0, 26.0))
+			var bs2: Basis = Basis(Vector3.UP, yaw2) * Basis(Vector3.RIGHT, deg_to_rad(rngx.randf_range(2.0, 9.0)))
+			var mat2: StandardMaterial3D = mat_cut_alt if (i % 2) == 0 else mat_cut
+			var mi2: MeshInstance3D = _add(root, cm2, mat2)
+			mi2.transform = Transform3D(bs2, Vector3(sin(a) * rad, hh * 0.5, cos(a) * rad))
+			var bx2: AABB = mi2.transform * cm2.get_aabb()
+			mi2.transform = Transform3D(bs2, mi2.transform.origin + Vector3(0.0, -bx2.position.y, 0.0))
+	elif flat_mode == "flood":
+		var pour_mesh: ArrayMesh = _cutout_mesh(rngx, 0, 1.06, 0.42)
+		var pour_bs: Basis = Basis(Vector3.UP, cut_yaw * 0.5) * Basis(Vector3.RIGHT, -PI * 0.5) * Basis.from_scale(Vector3(1.52, 0.98, 1.0))
+		var pour_mi: MeshInstance3D = _add(root, pour_mesh, mat_cut)
+		pour_mi.transform = Transform3D(pour_bs, Vector3(0.0, 0.0, -0.02))
+		var pour_box: AABB = pour_mi.transform * pour_mesh.get_aabb()
+		pour_mi.transform = Transform3D(pour_bs, pour_mi.transform.origin + Vector3(0.0, -pour_box.position.y, 0.0))
+		for i in range(2):
+			var fi: float = float(i)
+			var lh: float = 0.72 + fi * 0.16
+			var lt: float = 0.15 - fi * 0.07
+			var lm: ArrayMesh = _cutout_mesh(rngx, 0, lh, lt)
+			var lbs: Basis = Basis(Vector3.UP, deg_to_rad(rngx.randf_range(-25.0, 25.0))) * Basis(Vector3.RIGHT, -PI * 0.5) * Basis.from_scale(Vector3(1.40 + fi * 0.18, 1.0, 1.0))
+			var lmat: StandardMaterial3D = mat_cut_alt if i == 1 else mat_cut
+			var lmi: MeshInstance3D = _add(root, lm, lmat)
+			lmi.transform = Transform3D(lbs, Vector3(rngx.randf_range(-0.05, 0.05), 0.0, rngx.randf_range(-0.08, 0.05)))
+			var lbox: AABB = lmi.transform * lm.get_aabb()
+			lmi.transform = Transform3D(lbs, lmi.transform.origin + Vector3(0.0, -lbox.position.y, 0.0))
+	elif flat_mode == "crown":
+		var crown_n: int = 7
+		var crown_up: Vector3 = (-head_dir + Vector3(0.0, 1.0, 0.0)).normalized()
+		var crown_bs: Basis = _dir_basis(crown_up)
+		var crown_root: Vector3 = head_ctr - head_dir * 0.10 + crown_up * 0.10
+		for i in range(crown_n):
+			var fi: float = float(i)
+			var a: float = TAU * fi / float(crown_n)
+			var ph: float = rngx.randf_range(0.22, 0.36)
+			var pm: ArrayMesh = _cutout_mesh(rngx, rngx.randi_range(0, 1), ph, 0.020)
+			var out_v: Vector3 = (crown_bs * Vector3(cos(a), sin(a), 0.0)).normalized()
+			var tilt_v: Vector3 = (crown_up * 1.45 + out_v).normalized()
+			var pbs: Basis = _basis_y_to(tilt_v) * Basis(Vector3.UP, a)
+			var pmat: StandardMaterial3D = mat_cut_alt if (i % 2) == 0 else mat_cut
+			var pmi: MeshInstance3D = _add(root, pm, pmat)
+			pmi.transform = Transform3D(pbs, crown_root + out_v * 0.055 + tilt_v * (ph * 0.52))
+		var blade_h: float = 0.54
+		var blade: ArrayMesh = _cutout_mesh(rngx, 1, blade_h, 0.030)
+		var blade_dir: Vector3 = (crown_up * 2.0 - head_dir * 0.30).normalized()
+		var bmi: MeshInstance3D = _add(root, blade, mat_cut)
+		bmi.transform = Transform3D(_basis_y_to(blade_dir) * Basis(Vector3.UP, deg_to_rad(14.0)), crown_root + blade_dir * (blade_h * 0.52))
 
 	# --- fit, centre, settle -------------------------------------------------
 	var box: AABB = _union_aabb(root)
@@ -338,7 +523,7 @@ static func _limb(root: Node3D, a: Vector3, b: Vector3, r: float, flat: float, m
 	return mi
 
 
-static func _hand(root: Node3D, wrist: Vector3, dir: Vector3, side_hint: Vector3, curl: float, mat: StandardMaterial3D) -> void:
+static func _hand(root: Node3D, wrist: Vector3, dir: Vector3, side_hint: Vector3, curl: float, mat: StandardMaterial3D, k: float = 1.0) -> void:
 	var bz: Vector3 = dir.normalized()
 	var bx: Vector3 = side_hint - bz * side_hint.dot(bz)
 	if bx.length() < 0.001:
@@ -346,15 +531,15 @@ static func _hand(root: Node3D, wrist: Vector3, dir: Vector3, side_hint: Vector3
 	bx = bx.normalized()
 	var by: Vector3 = bz.cross(bx).normalized()
 	var hb := Basis(bx, by, bz)
-	var palm: Vector3 = wrist + bz * 0.052
-	_ball(root, palm, Vector3(0.058, 0.026, 0.058), hb, mat)
+	var palm: Vector3 = wrist + bz * 0.052 * k
+	_ball(root, palm, Vector3(0.058, 0.026, 0.058) * k, hb, mat)
 	for i in range(4):
 		var fi: float = float(i)
 		var spread: float = (fi - 1.5) * 0.30
 		var fd: Vector3 = (bz * cos(spread) + bx * sin(spread) - by * curl).normalized()
-		var a: Vector3 = palm + bz * 0.030 + bx * (fi - 1.5) * 0.024
-		var b: Vector3 = a + fd * (0.062 - absf(fi - 1.5) * 0.008)
-		_limb(root, a, b, 0.013, 0.85, mat)
+		var a: Vector3 = palm + bz * 0.030 * k + bx * (fi - 1.5) * 0.024 * k
+		var b: Vector3 = a + fd * (0.062 - absf(fi - 1.5) * 0.008) * k
+		_limb(root, a, b, 0.013 * k, 0.85, mat)
 
 
 static func _curve_at(pts: Array, t: float) -> Vector3:
@@ -427,6 +612,70 @@ static func _union_aabb(root: Node3D) -> AABB:
 		else:
 			box = box.merge(wb)
 	return box
+
+
+# ---------------------------------------------------------------------------
+# axis parts: extra hoods and arms, the leaving thread, the empty cage
+
+static func _dir_basis(d: Vector3) -> Basis:
+	var bz: Vector3 = d.normalized()
+	var bx: Vector3 = Vector3.UP.cross(bz)
+	if bx.length() < 0.001:
+		bx = Vector3(1.0, 0.0, 0.0)
+	bx = bx.normalized()
+	var by: Vector3 = bz.cross(bx).normalized()
+	return Basis(bx, by, bz)
+
+
+static func _extra_hood(root: Node3D, neck: Vector3, dir: Vector3, body_k: float, k: float, mat: StandardMaterial3D) -> void:
+	var d: Vector3 = dir.normalized()
+	var bs: Basis = _dir_basis(d)
+	var ctr: Vector3 = neck + d * (0.175 * body_k)
+	_ball(root, ctr, Vector3(0.092, 0.104, 0.116) * body_k * k, bs, mat)
+	_ball(root, ctr - d * 0.022, Vector3(0.104, 0.116, 0.122) * body_k * k, bs, mat)
+	_ball(root, ctr - d * 0.075, Vector3(0.100, 0.112, 0.110) * body_k * k, bs, mat)
+	var pk: Vector3 = (-d + Vector3(0.0, 0.85, 0.0)).normalized()
+	_ball(root, ctr - d * 0.10 + pk * 0.055, Vector3(0.082, 0.068, 0.090) * body_k * k, bs, mat)
+	_ball(root, ctr - d * 0.10 + pk * 0.115, Vector3(0.055, 0.044, 0.062) * body_k * k, bs, mat)
+
+
+static func _extra_arm(root: Node3D, sh: Vector3, dir: Vector3, ln: float, r: float, hand_k: float, mat: StandardMaterial3D) -> void:
+	var d: Vector3 = dir.normalized()
+	var el: Vector3 = sh + d * (ln * 0.52) + Vector3(0.0, -0.02, 0.0)
+	var fold_dir: Vector3 = (d * 0.55 + Vector3(0.0, -0.82, 0.12)).normalized()
+	var wr: Vector3 = el + fold_dir * (ln * 0.48)
+	_limb(root, sh, el, r, 0.94, mat)
+	_ball(root, el, Vector3(r * 0.96, r * 0.96, r * 0.99), Basis(), mat)
+	_limb(root, el, wr, r * 0.78, 0.94, mat)
+	_ball(root, wr, Vector3(r * 0.74, r * 0.68, r * 0.74), Basis(), mat)
+	_hand(root, wr, fold_dir, Vector3(1.0, 0.0, 0.0), 0.22, mat, hand_k * 0.86)
+
+
+static func _thread_run(root: Node3D, ctr: Vector3, turns: float, rad0: float, rad1: float, rise: float, squash: float, n: int, r: float, phase: float, mat: StandardMaterial3D) -> void:
+	var prev := Vector3.ZERO
+	for i in range(n + 1):
+		var fi: float = float(i)
+		var u: float = fi / float(n)
+		var ang: float = phase + u * TAU * turns
+		var rr: float = lerpf(rad0, rad1, u)
+		var wob: float = 1.0 + 0.16 * sin(u * 21.0 + phase)
+		var p: Vector3 = ctr + Vector3(cos(ang) * rr * wob, rise * u, sin(ang) * rr * squash * wob)
+		if i > 0:
+			_limb(root, prev, p, r, 1.0, mat)
+		prev = p
+
+
+static func _hoop(root: Node3D, ctr: Vector3, axis: Vector3, rad_x: float, rad_z: float, tube: float, mat: StandardMaterial3D) -> void:
+	var tor := TorusMesh.new()
+	tor.inner_radius = maxf(1.0 - tube, 0.02)
+	tor.outer_radius = 1.0
+	tor.rings = 22
+	tor.ring_segments = 8
+	var mi: MeshInstance3D = _add(root, tor, mat)
+	var rx: float = maxf(rad_x, 0.002)
+	var rz: float = maxf(rad_z, 0.002)
+	var ry: float = (rx + rz) * 0.5
+	mi.transform = Transform3D(_basis_y_to(axis) * Basis.from_scale(Vector3(rx, ry, rz)), ctr)
 
 
 # ---------------------------------------------------------------------------

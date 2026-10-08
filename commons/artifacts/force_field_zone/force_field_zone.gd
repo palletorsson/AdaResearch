@@ -2,18 +2,19 @@ extends "res://commons/artifacts/_embodied/embodied_prop.gd"
 class_name ForceFieldZone
 
 ## @identity
-## lineage: a force made into a place — a 4 m cube of space where one vector rules. Step in
-##   (or throw a cube in) and gravity is replaced by whatever the vector machine is pointing;
-##   the void below is only a void if the field lets you fall.
-## essence: inside the cube the field is the only force. Point it down and everything drops
-##   into the void; point it up-and-across and the same cube — and the same you — is carried
-##   to the far side. The field lines and the central arrow show which way the world pushes.
-## truth: "falling" isn't a property of the void, it's a property of the field over it; change
-##   the vector and the impossible crossing becomes a step.
+## lineage: local acceleration made into a place — a default 5 m volume that replaces gravity
+##   for admitted receivers. The vector machine chooses the acceleration; contact, incoming
+##   motion and each receiver's controller still help determine the journey.
+## essence: released rigid bodies receive velocity += field_vector * dt without division by
+##   mass. The field supplies acceleration in m/s²; collisions and damping remain active.
+##   The force_as_place lesson also gives visitors a separate controller-owned carry receiver.
+## truth: the same acceleration increment need not produce the same journey in different bodies.
 ##
-## An Area3D volume. Bodies inside have their gravity replaced by field_vector (RigidBodies:
-## gravity_scale 0 + velocity += field·dt; the player_body: velocity += (field − its gravity)·dt).
-## The vector_machine finds this via group "force_field" and calls set_field_vector().
+## Area3D overlap admits rigid bodies, temporarily sets gravity_scale to zero and restores it
+## on exit. The opt-in lesson admits visitors by a feet-position test and retains post-collision
+## velocity through desktop/XR movement adapters. The legacy player path instead adds
+## (field_vector - ordinary_gravity) * dt to velocity. These are separate receiver contracts.
+## The vector_machine calls set_field_vector(); lesson machines publish only within their hall.
 
 ## ─── STAGE-2 DNA (promoted 2026-08-05) ────────────────────────────────────────
 ##
@@ -63,10 +64,18 @@ var _scale_mat: StandardMaterial3D
 var _restore: Dictionary = {}            # body -> original gravity_scale
 var _pb: CharacterBody3D                  # cached player body (the thing with .velocity)
 var _built: bool = false
+var _carry: Dictionary = {}
+
+func is_carry_lesson() -> bool:
+	return str(get_meta("config_lesson", "")) == "force_as_place"
 
 
 func _ready() -> void:
 	add_to_group("force_field")
+	if is_carry_lesson():
+		add_to_group("ada_museum_carry")
+		get_tree().node_added.connect(_carry_node_added)
+		install_carry_adapter.call_deferred()
 	_apply_law()
 	_build()
 	_built = true
@@ -196,6 +205,7 @@ func _apply_vector() -> void:
 		_flow_mat.set_shader_parameter("force_dir", dir)
 		_flow_mat.set_shader_parameter("force_mag", mag)
 	if _central:
+		if is_carry_lesson(): _central.visible = mag > 0.001
 		_central.basis = b
 		_central.scale = Vector3.ONE * clampf(mag / 9.8, 0.3, 2.2)
 	if _readout:
@@ -203,8 +213,12 @@ func _apply_vector() -> void:
 		var verb: String = "FALL" if down < -1.0 else ("RISE" if down > 1.0 else "DRIFT")
 		_readout.text = "FORCE FIELD\nF = (%.1f, %.1f, %.1f)\n|F| = %.1f   → %s" % [field_vector.x, field_vector.y, field_vector.z, mag, verb]
 
+		if is_carry_lesson():
+			_readout.text = "LOCAL ACCELERATION\na = (%.1f, %.1f, %.1f) m/s²\nReplace gravity / retain contact" % [field_vector.x, field_vector.y, field_vector.z]
 
 func set_field_vector(v: Vector3) -> void:
+	if field_vector.is_equal_approx(v):
+		return
 	field_vector = v
 	_apply_vector()
 
@@ -219,14 +233,16 @@ func _physics_process(delta: float) -> void:
 			var rb := body as RigidBody3D
 			if not _restore.has(rb):
 				_restore[rb] = rb.gravity_scale
-				rb.gravity_scale = 0.0                  # field is now the only force
+				rb.gravity_scale = 0.0                  # replace gravity; retain contact and damping
 			rb.linear_velocity += f * delta             # field as acceleration
 	# restore gravity to bodies that have left
 	for rb in _restore.keys():
-		if not is_instance_valid(rb) or rb not in _area.get_overlapping_bodies():
+		if not is_instance_valid(rb) or rb not in _area.get_overlapping_bodies() or rb.freeze:
 			if is_instance_valid(rb):
 				rb.gravity_scale = _restore[rb]
 			_restore.erase(rb)
+	if is_carry_lesson():
+		return # Carry is integrated by the owning movement controller.
 	# the player: while inside, net acceleration = the field (override its gravity)
 	var pb := _player_body()
 	if pb != null and _point_inside(pb.global_position):
@@ -306,3 +322,34 @@ func _parse_vec(v: Variant) -> Vector3:
 		var p: PackedStringArray = (v as String).split(",")
 		if p.size() >= 3: return Vector3(float(p[0]), float(p[1]), float(p[2]))
 	return field_vector
+
+
+# Retain post-collision velocity so normal locomotion cannot erase accumulation.
+# Entry receives the controller's incoming velocity, before ordinary gravity.
+func carry_velocity(body: CharacterBody3D, delta: float, incoming: Vector3) -> Vector3:
+	return Vector3(_carry.get(body.get_instance_id(), incoming)) + field_vector * delta
+
+func record_carry(body: CharacterBody3D) -> void:
+	_carry[body.get_instance_id()] = body.velocity
+
+func release_carry(body: CharacterBody3D) -> void:
+	_carry.erase(body.get_instance_id())
+
+func _exit_tree() -> void:
+	for body in _restore:
+		if is_instance_valid(body): body.gravity_scale = _restore[body]
+	_restore.clear()
+	_carry.clear()
+
+func _carry_node_added(node: Node) -> void:
+	if node is XRToolsPlayerBody: install_carry_adapter.call_deferred()
+
+func install_carry_adapter() -> void:
+	for body in get_tree().get_nodes_in_group("player_body"):
+		if not body is XRToolsPlayerBody or body.get_node_or_null("FieldCarryAdapter") != null: continue
+		var adapter = preload("res://commons/artifacts/force_field_zone/field_carry_provider.gd").new()
+		adapter.name = "FieldCarryAdapter"
+		adapter.receiver = body
+		body.add_child(adapter)
+		if adapter not in body._movement_providers: body._movement_providers.append(adapter)
+		body._movement_providers.sort_custom(body.sort_by_order)

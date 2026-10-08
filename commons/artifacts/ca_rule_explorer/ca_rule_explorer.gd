@@ -64,6 +64,10 @@ var _multimesh_instance: MultiMeshInstance3D
 var _multimesh: MultiMesh
 var _cell_size: Vector2
 var _generation_timer: float = 0.0
+var generation: int = 0
+var seed_pair: bool = false
+var sample_cell: int = 0
+var _neighbour_study: bool = false
 var _rule_label: Label3D
 var _created_nodes: Array[Node] = []
 
@@ -97,12 +101,25 @@ const FAMOUS_RULES = {
 
 
 func _ready() -> void:
+	_neighbour_study = str(get_meta("config_study", _grid_config.get("study", ""))) == "neighbours"
+	if _neighbour_study:
+		board_size = 1.6
+		cells_x = 32
+		rows_visible = 24
+		auto_run = false
+		rule = int(get_meta("config_rule", _grid_config.get("rule", 90)))
+		generations_per_second = 4.0
+	sample_cell = cells_x / 2
 	_cell_size = Vector2(board_size / maxi(cells_x, 1), board_size / maxi(rows_visible, 1))
 	_create_board()
 	_create_multimesh()
 	_create_rule_display()
 	_create_vr_controls()
 	_reset()
+	if _neighbour_study:
+		var study: Node3D = load("res://commons/artifacts/ca_rule_explorer/neighbour_study.gd").new()
+		study.name = "NeighbourStudy"
+		add_child(study)
 
 func _exit_tree() -> void:
 	for conn in _signal_connections:
@@ -333,12 +350,17 @@ func _update_rule_display() -> void:
 
 ## Clear grid and seed the center cell of the first row
 func _reset() -> void:
+	# A replay clears both the stored history and the visible history.
+	generation = 0
+	_generation_timer = 0.0
 	_grid.clear()
 	_current_row.clear()
 	_current_row.resize(cells_x)
 	for i in range(cells_x):
 		_current_row[i] = false
 	_current_row[cells_x / 2] = true
+	if seed_pair:
+		_current_row[(cells_x / 2 + 1) % cells_x] = true
 	_grid.append(_current_row.duplicate())
 	_update_display()
 
@@ -359,6 +381,7 @@ func _advance() -> void:
 		new_row[i] = _apply_rule(left, center, right)
 
 	_current_row = new_row
+	generation += 1
 	_grid.push_front(new_row.duplicate())
 
 	while _grid.size() > rows_visible:
@@ -368,8 +391,10 @@ func _advance() -> void:
 
 ## Push grid state to MultiMesh instance colors
 func _update_display() -> void:
-	for row in range(mini(_grid.size(), rows_visible)):
-		var row_data = _grid[row]
+	if _multimesh == null:
+		return
+	for row in range(rows_visible):
+		var row_data: Array = _grid[row] if row < _grid.size() else []
 		for col in range(cells_x):
 			var idx = row * cells_x + col
 			var alive = row_data[col] if col < row_data.size() else false
@@ -389,6 +414,9 @@ func _process(delta: float) -> void:
 
 # Keep keyboard for desktop testing
 func _input(event: InputEvent) -> void:
+	# Walking keys belong to the visitor in this museum installation.
+	if _neighbour_study:
+		return
 	if event is InputEventKey and event.pressed:
 		match event.keycode:
 			KEY_LEFT:
@@ -423,7 +451,25 @@ func toggle_pause() -> void:
 
 ## Advance one generation manually
 func step() -> void:
+	if _neighbour_study:
+		auto_run = false
+	_generation_timer = 0.0
 	_advance()
+
+## Read the inputs now; the output is a prediction for the next generation.
+func neighbourhood_readback() -> Dictionary:
+	var i: int = posmod(sample_cell, cells_x)
+	var left: bool = _current_row[posmod(i - 1, cells_x)]
+	var center: bool = _current_row[i]
+	var right: bool = _current_row[(i + 1) % cells_x]
+	return {"cell": i, "generation": generation, "inputs": [int(left), int(center), int(right)],
+		"next": int(_apply_rule(left, center, right)), "rule": rule, "running": auto_run,
+		"seed": "pair" if seed_pair else "single", "width": cells_x}
+
+func toggle_seed() -> void:
+	seed_pair = not seed_pair
+	auto_run = false
+	_reset()
 
 func apply_grid_config(config_data: Dictionary) -> void:
 	_grid_config = config_data

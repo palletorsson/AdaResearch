@@ -42,17 +42,68 @@ extends RefCounted
 ## Given up: the table and the second and third stands of the panorama, the
 ## forks and spoons lying in the food, the egg, the pancakes and the printed
 ## label on the tube of cream, and the painted cast shadows.
+##
+## AXES — one for the food, one for the porcelain it is served on. Both cut the
+## silhouette; neither is a repaint.
+##   spread  — what the FOOD is doing. heaped (the still life as it is today) ·
+##             rotted (every solid has gone over: it flattens, spreads, slides
+##             down off the heap and hangs under the plate rims in drips, the
+##             lettuce drooping instead of splaying, the grape bunches stretched
+##             into long runs) · swarm (each piece has come apart into three
+##             small copies of itself, hovering off the plates in a cloud, the
+##             bunches blown open) · blooming (the fruit has opened — where a
+##             tomato or a cut cube sat, a petalled flower stands, and each
+##             grape bunch ends in one) · reaching (the heap grows a body: three
+##             or four arms of bread and ham walk out of the food, curl over,
+##             and end in four splayed carrot fingers).
+##   service — what the STAND and the SHOE are doing. three_tier (today) ·
+##             flooded (a poured glaze drowns every tier under a wide overhanging
+##             disc, runs hang off each lip, and a lake on the floor swallows the
+##             foot and the shoe's heel) · tower (the service multiplies: three
+##             more empty plates climb above the food carrying one lone tomato
+##             each, and the one shoe becomes a queue of four stepping away —
+##             the settle then shrinks the whole still life to fit) · wire (the
+##             porcelain is gone: each stand is a rod, a hoop and six spokes, the
+##             shoe is two hoops on a spike, and the food hangs in the air where
+##             the plates used to be).
 
 const TEX: int = 128
+const MAX_MESH: int = 258
 
 
 static func describe() -> String:
 	return "A Wesselmann still life built as a statue: three white cake stands climbing through a glossy heap of bread, ham, tomatoes, grapes, carrots and lettuce, with a bottle, a bowl of berries, a cream swirl on top and a pink stiletto leaning at the foot."
 
 
-static func build(root: Node3D, seed: int) -> void:
+static func axes() -> Dictionary:
+	return {
+		"spread": ["heaped", "rotted", "swarm", "blooming", "reaching"],
+		"service": ["three_tier", "flooded", "tower", "wire"],
+	}
+
+
+static func build(root: Node3D, seed: int, opts: Dictionary = {}) -> void:
+	var spread: String = String(opts.get("spread", "heaped"))
+	var service: String = String(opts.get("service", "three_tier"))
+	var ctx: Dictionary = {"spread": spread, "service": service}
+
 	var rng := RandomNumberGenerator.new()
 	rng.seed = seed
+	# a private stream for the axes, so the default still draws exactly as it did
+	var vrng := RandomNumberGenerator.new()
+	vrng.seed = seed + 61403
+
+	# how much of the heap survives its own transformation: a swarming piece
+	# costs three meshes and an arm costs nine, so the food thins to pay for them
+	var food_k: float = 1.0
+	if spread == "swarm":
+		food_k = 0.42
+	elif spread == "rotted":
+		food_k = 0.80
+	elif spread == "blooming":
+		food_k = 0.66
+	elif spread == "reaching":
+		food_k = 0.60
 
 	# ---- palette ----------------------------------------------------------
 	var c_porcelain: Color = Color("#F2F0EA").lerp(Color("#FCFBF6"), rng.randf())
@@ -106,18 +157,26 @@ static func build(root: Node3D, seed: int) -> void:
 	var top_b := Vector3(off_b.x, y_b, off_b.z)
 	var top_c := Vector3(off_c.x, y_c, off_c.z)
 
-	_stand(root, Vector3.ZERO, y_a, r_a, mat_white)
-	_stand(root, Vector3(off_b.x, y_a, off_b.z), y_b, r_b, mat_white)
-	_stand(root, Vector3(off_c.x, y_b, off_c.z), y_c, r_c, mat_white)
+	_stand(root, Vector3.ZERO, y_a, r_a, mat_white, ctx)
+	_stand(root, Vector3(off_b.x, y_a, off_b.z), y_b, r_b, mat_white, ctx)
+	_stand(root, Vector3(off_c.x, y_b, off_c.z), y_c, r_c, mat_white, ctx)
 
 	# the sector kept clear on the bottom plate for the bottle and the cake
 	var keep_a: float = rng.randf_range(0.0, TAU)
 	var keep_b: float = rng.randf_range(0.0, TAU)
 
 	# ---- the bottom heap ---------------------------------------------------
+	# the counts are drawn in the old order, then thinned, so the seed still
+	# lands on the same numbers whatever the food is doing
+	var a_bread: int = rng.randi_range(6, 9)
+	var a_ham: int = rng.randi_range(5, 8)
+	var a_tom: int = rng.randi_range(3, 5)
+	var a_car: int = rng.randi_range(5, 8)
+	var a_cube: int = rng.randi_range(4, 7)
+	var a_leaf: int = rng.randi_range(2, 3)
 	_heap(root, rng, kit, top_a, r_a * 0.98, 0.115, 1.00, keep_a, 0.80,
-		rng.randi_range(6, 9), rng.randi_range(5, 8), rng.randi_range(3, 5),
-		rng.randi_range(5, 8), rng.randi_range(4, 7), rng.randi_range(2, 3))
+		_ct(a_bread, food_k), _ct(a_ham, food_k), _ct(a_tom, food_k),
+		_ct(a_car, food_k), _ct(a_cube, food_k), _ct(a_leaf, food_k), ctx)
 
 	# bottle, standing in the kept sector at the back of the bottom plate
 	var b_ang: float = keep_a - 0.34
@@ -144,9 +203,15 @@ static func build(root: Node3D, seed: int) -> void:
 		_add(root, lump, mat_cake, _rand_basis(rng, 0.5), lp)
 
 	# ---- the middle heap ---------------------------------------------------
+	var b_bread: int = rng.randi_range(3, 5)
+	var b_ham: int = rng.randi_range(3, 5)
+	var b_tom: int = rng.randi_range(2, 3)
+	var b_car: int = rng.randi_range(3, 5)
+	var b_cube: int = rng.randi_range(2, 4)
+	var b_leaf: int = rng.randi_range(1, 2)
 	_heap(root, rng, kit, top_b, r_b * 0.98, 0.095, 0.86, keep_b, 0.72,
-		rng.randi_range(3, 5), rng.randi_range(3, 5), rng.randi_range(2, 3),
-		rng.randi_range(3, 5), rng.randi_range(2, 4), rng.randi_range(1, 2))
+		_ct(b_bread, food_k), _ct(b_ham, food_k), _ct(b_tom, food_k),
+		_ct(b_car, food_k), _ct(b_cube, food_k), _ct(b_leaf, food_k), ctx)
 
 	# the white bowl of berries, in the middle plate's kept sector
 	var bowl_rad: float = r_b * rng.randf_range(0.42, 0.56)
@@ -154,7 +219,7 @@ static func build(root: Node3D, seed: int) -> void:
 	var bowl_r: float = rng.randf_range(0.062, 0.078)
 	var bowl_h: float = rng.randf_range(0.050, 0.064)
 	_add(root, _bowl_mesh(bowl_r, bowl_r * 0.52, bowl_h, 0.008), mat_white, Basis(), bowl_pos)
-	var n_bowl: int = rng.randi_range(10, 15)
+	var n_bowl: int = _ct(rng.randi_range(10, 15), food_k)
 	for i in range(n_bowl):
 		var t: float = float(i) / float(n_bowl)
 		var ba: float = t * 6.2 + rng.randf_range(-0.4, 0.4)
@@ -164,7 +229,7 @@ static func build(root: Node3D, seed: int) -> void:
 		sph.radius = brad
 		sph.height = brad * 1.9
 		var bp: Vector3 = bowl_pos + Vector3(cos(ba) * br, bowl_h * 0.78 + rng.randf_range(-0.006, 0.026), sin(ba) * br)
-		_add(root, sph, _gloss(c_berry.lightened(rng.randf_range(0.0, 0.16)), 0.14), _rand_basis(rng, 0.9), bp)
+		_food(root, sph, _gloss(c_berry.lightened(rng.randf_range(0.0, 0.16)), 0.14), _rand_basis(rng, 0.9), bp, bowl_pos, brad, ctx, rng)
 
 	# a whole lemon, wedged into the middle heap
 	var l_ang: float = keep_b + rng.randf_range(2.0, 4.2)
@@ -183,16 +248,19 @@ static func build(root: Node3D, seed: int) -> void:
 		_cone(root, lemon_pos + nub_dir * (lemon_r * 0.92), nub_dir, 0.016, 0.010, mat_lemon)
 
 	# ---- the crown: berries and cream on the top plate ---------------------
-	var n_top_berry: int = rng.randi_range(6, 10)
+	var n_top_berry: int = _ct(rng.randi_range(6, 10), food_k)
 	for i in range(n_top_berry):
 		var ta: float = rng.randf_range(0.0, TAU)
 		var tr: float = r_c * rng.randf_range(0.45, 0.95)
 		var brad2: float = rng.randf_range(0.016, 0.023)
+		var cal: Vector3 = top_c + Vector3(cos(ta) * tr, brad2 * 0.85, sin(ta) * tr)
+		if spread == "blooming":
+			_add(root, _flower_mesh(rng, brad2 * 2.7, rng.randi_range(5, 7)), _bloom_mat(c_berry.lightened(rng.randf_range(0.10, 0.34)), 0.20), _rand_basis(rng, 0.45), cal)
+			continue
 		var sph2 := SphereMesh.new()
 		sph2.radius = brad2
 		sph2.height = brad2 * 1.9
-		var cal: Vector3 = top_c + Vector3(cos(ta) * tr, brad2 * 0.85, sin(ta) * tr)
-		_add(root, sph2, _gloss(c_berry.lightened(rng.randf_range(0.0, 0.20)), 0.14), _rand_basis(rng, 1.0), cal)
+		_food(root, sph2, _gloss(c_berry.lightened(rng.randf_range(0.0, 0.20)), 0.14), _rand_basis(rng, 1.0), cal, top_c, brad2, ctx, rng)
 	var n_cream: int = rng.randi_range(6, 8)
 	var cream_phase: float = rng.randf_range(0.0, TAU)
 	var cream_top: float = 0.0
@@ -206,11 +274,15 @@ static func build(root: Node3D, seed: int) -> void:
 		dol.height = crad * 1.6
 		var cy: float = 0.020 + t2 * rng.randf_range(0.130, 0.160)
 		cream_top = cy + crad
-		_add(root, dol, mat_cream, Basis(Vector3.UP, sa), top_c + Vector3(cos(sa) * swr, cy, sin(sa) * swr))
-	var crown := SphereMesh.new()
-	crown.radius = 0.022
-	crown.height = 0.042
-	_add(root, crown, _gloss(c_berry, 0.13), _rand_basis(rng, 1.0), top_c + Vector3(0.0, cream_top + 0.006, 0.0))
+		_food(root, dol, mat_cream, Basis(Vector3.UP, sa), top_c + Vector3(cos(sa) * swr, cy, sin(sa) * swr), top_c, crad, ctx, rng)
+	if spread == "blooming":
+		# the swirl's one berry has opened into the flower that crowns the tower
+		_add(root, _flower_mesh(rng, 0.060, rng.randi_range(6, 8)), _bloom_mat(c_berry.lightened(0.22), 0.18), Basis(), top_c + Vector3(0.0, cream_top + 0.004, 0.0))
+	else:
+		var crown := SphereMesh.new()
+		crown.radius = 0.022
+		crown.height = 0.042
+		_add(root, crown, _gloss(c_berry, 0.13), _rand_basis(rng, 1.0), top_c + Vector3(0.0, cream_top + 0.006, 0.0))
 
 	# ---- grape bunches, cascading over the rims ----------------------------
 	var n_bunch: int = rng.randi_range(3, 4)
@@ -237,10 +309,108 @@ static func build(root: Node3D, seed: int) -> void:
 		var anchor: Vector3 = plate_c + outw * (plate_r * f_rad) + Vector3(0.0, f_lift, 0.0)
 		var drop: Vector3 = (outw * f_out + Vector3(0.0, -f_down, 0.0)).normalized()
 		var gc: Color = grape_cols[rng.randi_range(0, grape_cols.size() - 1)]
-		_grapes(root, rng, anchor, drop, rng.randi_range(14, 22), gc, mat_stem)
+		_grapes(root, rng, anchor, drop, _ct(rng.randi_range(14, 22), food_k), gc, mat_stem, ctx)
 
 	# ---- the pink shoe, leaning on the foot of the stand -------------------
-	_shoe(root, rng, r_a, c_shoe, c_shoe_deep)
+	_shoe(root, rng, r_a, c_shoe, c_shoe_deep, ctx, vrng)
+
+	# ---- rotted: what ran off the plates hangs under their rims ------------
+	if spread == "rotted":
+		var mat_drip: StandardMaterial3D = _gloss(c_ham.lerp(c_cake, 0.42), 0.09)
+		var plates: Array = [[top_a, r_a], [top_b, r_b], [top_c, r_c]]
+		for pi in range(plates.size()):
+			var pe: Array = plates[pi]
+			var pc: Vector3 = pe[0]
+			var pr: float = float(pe[1])
+			for k in range(2):
+				var da: float = vrng.randf_range(0.0, TAU)
+				var run_p: Vector3 = pc + Vector3(cos(da) * pr * 0.90, -0.018, sin(da) * pr * 0.90)
+				var nb: int = vrng.randi_range(2, 3)
+				for j in range(nb):
+					var f: float = float(j) / float(maxi(nb - 1, 1))
+					var rr: float = lerpf(0.030, 0.009, f)
+					var bead := SphereMesh.new()
+					bead.radius = rr
+					bead.height = rr * 2.0 * (1.0 + f * 1.7)
+					bead.radial_segments = 12
+					bead.rings = 6
+					_add(root, bead, mat_drip, Basis(), run_p)
+					run_p = run_p - Vector3(0.0, rr * 2.2, 0.0)
+
+	# ---- reaching: the heap puts out arms ----------------------------------
+	if spread == "reaching":
+		var n_arm: int = vrng.randi_range(3, 4)
+		for i in range(n_arm):
+			var aa: float = keep_a + PI + TAU * float(i) / float(n_arm) + vrng.randf_range(-0.35, 0.35)
+			var upper: bool = (i % 2) == 1
+			var arm_c: Vector3 = top_b if upper else top_a
+			var arm_r: float = r_b if upper else r_a
+			var arm_g: float = 0.048 if upper else 0.062
+			var arm_p: Vector3 = arm_c + Vector3(cos(aa) * arm_r * 0.55, 0.055, sin(aa) * arm_r * 0.55)
+			_limb_of_food(root, vrng, kit, arm_p, Vector3(cos(aa), 0.0, sin(aa)), vrng.randi_range(4, 6), arm_g)
+
+	# ---- flooded: a poured glaze drowns the tiers --------------------------
+	if service == "flooded":
+		var mat_glaze: StandardMaterial3D = _gloss(c_shoe.lerp(c_cream, 0.32), 0.05)
+		var tiers: Array = [[top_a, r_a, 0.115], [top_b, r_b, 0.095], [top_c, r_c, 0.075]]
+		for ti in range(tiers.size()):
+			var te: Array = tiers[ti]
+			var tc: Vector3 = te[0]
+			var tr3: float = float(te[1])
+			var trise: float = float(te[2])
+			var glz: float = tr3 * 1.16
+			var gprof := PackedVector2Array()
+			gprof.append(Vector2(0.0, 0.0))
+			gprof.append(Vector2(glz * 0.86, -0.006))
+			gprof.append(Vector2(glz, -0.032))
+			gprof.append(Vector2(glz * 0.96, -0.056))
+			gprof.append(Vector2(glz * 0.78, 0.014))
+			gprof.append(Vector2(0.0, 0.022))
+			_add(root, _lathe(gprof, 30), mat_glaze, Basis(), tc + Vector3(0.0, trise * 0.62, 0.0))
+			for k2 in range(3):
+				var ga2: float = vrng.randf_range(0.0, TAU)
+				var gl: float = vrng.randf_range(0.035, 0.085)
+				var drop_b := SphereMesh.new()
+				drop_b.radius = 0.019
+				drop_b.height = gl * 2.0
+				drop_b.radial_segments = 12
+				drop_b.rings = 6
+				_add(root, drop_b, mat_glaze, Basis(), tc + Vector3(cos(ga2) * glz * 0.95, trise * 0.62 - 0.036 - gl * 0.5, sin(ga2) * glz * 0.95))
+		# the lake it made on the floor, swallowing the foot and the heel
+		var lake_r: float = r_a * 1.06
+		var lprof := PackedVector2Array()
+		lprof.append(Vector2(0.0, 0.0))
+		lprof.append(Vector2(lake_r, 0.005))
+		lprof.append(Vector2(lake_r * 0.95, 0.046))
+		lprof.append(Vector2(0.0, 0.054))
+		_add(root, _lathe(lprof, 32), mat_glaze, Basis(), Vector3.ZERO)
+		for k3 in range(4):
+			var la3: float = vrng.randf_range(0.0, TAU)
+			var lr3: float = lake_r * vrng.randf_range(0.30, 0.52)
+			var lob := SphereMesh.new()
+			lob.radius = lr3
+			lob.height = lr3 * 0.55
+			lob.radial_segments = 16
+			lob.rings = 6
+			_add(root, lob, mat_glaze, Basis(), Vector3(cos(la3) * lake_r * 0.84, 0.022, sin(la3) * lake_r * 0.84))
+
+	# ---- tower: the service goes on stacking above the food ----------------
+	if service == "tower":
+		var pr_prev: float = r_c
+		var py_prev: float = y_c
+		var poff: Vector3 = off_c
+		for i in range(3):
+			var pr_next: float = pr_prev * vrng.randf_range(0.74, 0.86)
+			var py_next: float = py_prev + vrng.randf_range(0.250, 0.320)
+			var pnx: Vector3 = poff + Vector3(vrng.randf_range(-0.030, 0.030), 0.0, vrng.randf_range(-0.030, 0.030))
+			_stand(root, Vector3(pnx.x, py_prev, pnx.z), py_next, pr_next, mat_white, ctx)
+			var lone := SphereMesh.new()
+			lone.radius = pr_next * 0.34
+			lone.height = pr_next * 0.58
+			_add(root, lone, _gloss(c_tomato.lightened(vrng.randf_range(0.0, 0.14)), 0.12), Basis(), Vector3(pnx.x, py_next + pr_next * 0.29, pnx.z))
+			pr_prev = pr_next
+			py_prev = py_next
+			poff = pnx
 
 	# ---- measured settle: fit, centre on x/z, stand on y = 0 ---------------
 	var box: AABB = _union_aabb(root)
@@ -271,7 +441,43 @@ static func build(root: Node3D, seed: int) -> void:
 # ---------------------------------------------------------------------------
 # the stand
 
-static func _stand(root: Node3D, base: Vector3, top_y: float, plate_r: float, mat: StandardMaterial3D) -> void:
+static func _stand(root: Node3D, base: Vector3, top_y: float, plate_r: float, mat: StandardMaterial3D, ctx: Dictionary) -> void:
+	if String(ctx.get("service", "three_tier")) == "wire":
+		# the porcelain is gone and only the armature it was turned on is left:
+		# a rod, a foot ring, the hoop of the rim, and the spokes under the plate
+		var rod_h: float = maxf(top_y - base.y, 0.06)
+		var rod := CylinderMesh.new()
+		rod.top_radius = plate_r * 0.045
+		rod.bottom_radius = plate_r * 0.062
+		rod.height = rod_h
+		rod.radial_segments = 10
+		_add(root, rod, mat, Basis(), base + Vector3(0.0, rod_h * 0.5, 0.0))
+
+		var base_ring := TorusMesh.new()
+		base_ring.inner_radius = plate_r * 0.34
+		base_ring.outer_radius = plate_r * 0.44
+		base_ring.rings = 20
+		base_ring.ring_segments = 6
+		_add(root, base_ring, mat, Basis(), base + Vector3(0.0, plate_r * 0.052, 0.0))
+
+		var hoop := TorusMesh.new()
+		hoop.inner_radius = maxf(plate_r - 0.014, 0.02)
+		hoop.outer_radius = plate_r
+		hoop.rings = 34
+		hoop.ring_segments = 6
+		_add(root, hoop, mat, Basis(), Vector3(base.x, top_y, base.z))
+
+		for i in range(6):
+			var sa: float = TAU * float(i) / 6.0
+			var sd := Vector3(cos(sa), 0.0, sin(sa))
+			var spoke := CylinderMesh.new()
+			spoke.top_radius = plate_r * 0.026
+			spoke.bottom_radius = plate_r * 0.026
+			spoke.height = plate_r * 0.98
+			spoke.radial_segments = 8
+			_add(root, spoke, mat, _basis_y_to(sd), Vector3(base.x, top_y - 0.006, base.z) + sd * (plate_r * 0.49))
+		return
+
 	var foot := CylinderMesh.new()
 	foot.top_radius = plate_r * 0.34
 	foot.bottom_radius = plate_r * 0.50
@@ -310,7 +516,8 @@ static func _stand(root: Node3D, base: Vector3, top_y: float, plate_r: float, ma
 # ---------------------------------------------------------------------------
 # the heap
 
-static func _heap(root: Node3D, rng: RandomNumberGenerator, kit: Dictionary, centre: Vector3, r_out: float, rise: float, sc: float, avoid: float, half: float, n_bread: int, n_ham: int, n_tom: int, n_car: int, n_cube: int, n_leaf: int) -> void:
+static func _heap(root: Node3D, rng: RandomNumberGenerator, kit: Dictionary, centre: Vector3, r_out: float, rise: float, sc: float, avoid: float, half: float, n_bread: int, n_ham: int, n_tom: int, n_car: int, n_cube: int, n_leaf: int, ctx: Dictionary) -> void:
+	var spread: String = String(ctx.get("spread", "heaped"))
 	var c_crust: Color = kit["crust"]
 	var c_pale: Color = kit["pale"]
 	var c_ham: Color = kit["ham"]
@@ -329,7 +536,7 @@ static func _heap(root: Node3D, rng: RandomNumberGenerator, kit: Dictionary, cen
 		var msh: ArrayMesh = _extrude(_loaf_profile(hw, hh, 6), dp, rng.randf_range(0.52, 0.96))
 		var col: Color = c_crust.lerp(c_pale, rng.randf_range(0.0, 0.45)).darkened(rng.randf_range(0.0, 0.09))
 		var pos: Vector3 = _heap_pos(rng, centre, r_in, r_out, rise, avoid, half)
-		_add(root, msh, _tex_mat(col, tex_crumb, 7.5, 0.20), _rand_basis(rng, 0.30), pos + Vector3(0.0, 0.012, 0.0))
+		_food(root, msh, _tex_mat(col, tex_crumb, 7.5, 0.20), _rand_basis(rng, 0.30), pos + Vector3(0.0, 0.012, 0.0), centre, dp * 0.5, ctx, rng)
 
 	# ham slabs
 	for i in range(n_ham):
@@ -338,21 +545,27 @@ static func _heap(root: Node3D, rng: RandomNumberGenerator, kit: Dictionary, cen
 		bx.size = Vector3(rng.randf_range(0.072, 0.126) * sc, sy, rng.randf_range(0.058, 0.104) * sc)
 		var col2: Color = c_ham.darkened(rng.randf_range(0.0, 0.16)).lightened(rng.randf_range(0.0, 0.10))
 		var pos2: Vector3 = _heap_pos(rng, centre, r_in, r_out, rise, avoid, half)
-		_add(root, bx, _tex_mat(col2, tex_marble, 6.0, 0.16), _rand_basis(rng, 0.36), pos2 + Vector3(0.0, sy * 0.5 + 0.006, 0.0))
+		_food(root, bx, _tex_mat(col2, tex_marble, 6.0, 0.16), _rand_basis(rng, 0.36), pos2 + Vector3(0.0, sy * 0.5 + 0.006, 0.0), centre, sy, ctx, rng)
 
-	# tomatoes with a green calyx
+	# tomatoes with a green calyx — or, when the fruit has opened, flowers
 	for i in range(n_tom):
 		var tr: float = rng.randf_range(0.036, 0.050) * sc
+		var pos3: Vector3 = _heap_pos(rng, centre, r_in, r_out, rise, avoid, half)
+		var seat: Vector3 = pos3 + Vector3(0.0, tr * 0.86, 0.0)
+		if spread == "blooming":
+			_add(root, _flower_mesh(rng, tr * 2.35, rng.randi_range(5, 7)), _bloom_mat(c_tom.lightened(rng.randf_range(0.0, 0.18)), 0.22), _rand_basis(rng, 0.55), seat)
+			continue
 		var sph := SphereMesh.new()
 		sph.radius = tr
 		sph.height = tr * 2.0
-		var pos3: Vector3 = _heap_pos(rng, centre, r_in, r_out, rise, avoid, half)
-		var seat: Vector3 = pos3 + Vector3(0.0, tr * 0.86, 0.0)
-		_add(root, sph, _gloss(c_tom.lightened(rng.randf_range(0.0, 0.12)), 0.12), _rand_basis(rng, 0.5).scaled(Vector3(1.0, 0.86, 1.0)), seat)
+		_food(root, sph, _gloss(c_tom.lightened(rng.randf_range(0.0, 0.12)), 0.12), _rand_basis(rng, 0.5).scaled(Vector3(1.0, 0.86, 1.0)), seat, centre, tr, ctx, rng)
+		if spread == "rotted":
+			# the calyx is the first thing to go
+			continue
 		var cal := SphereMesh.new()
 		cal.radius = tr * 0.38
 		cal.height = tr * 0.30
-		_add(root, cal, _gloss(c_lf.darkened(0.22), 0.34), _rand_basis(rng, 0.3), seat + Vector3(0.0, tr * 0.74, 0.0))
+		_food(root, cal, _gloss(c_lf.darkened(0.22), 0.34), _rand_basis(rng, 0.3), seat + Vector3(0.0, tr * 0.74, 0.0), centre, tr * 0.4, ctx, rng)
 
 	# chopped carrot
 	for i in range(n_car):
@@ -361,18 +574,23 @@ static func _heap(root: Node3D, rng: RandomNumberGenerator, kit: Dictionary, cen
 		pr.size = Vector3(cs, cs * rng.randf_range(0.9, 1.4), cs * rng.randf_range(0.8, 1.2))
 		pr.left_to_right = rng.randf_range(0.2, 0.8)
 		var pos4: Vector3 = _heap_pos(rng, centre, r_in, r_out, rise, avoid, half)
-		_add(root, pr, _gloss(c_car.lightened(rng.randf_range(0.0, 0.14)), 0.16), _rand_basis(rng, 1.2), pos4 + Vector3(0.0, cs * 0.55, 0.0))
+		_food(root, pr, _gloss(c_car.lightened(rng.randf_range(0.0, 0.14)), 0.16), _rand_basis(rng, 1.2), pos4 + Vector3(0.0, cs * 0.55, 0.0), centre, cs, ctx, rng)
 
 	# pale cut bread cubes
 	for i in range(n_cube):
 		var qs: float = rng.randf_range(0.038, 0.062) * sc
+		if spread == "blooming":
+			var pos6: Vector3 = _heap_pos(rng, centre, r_in, r_out, rise, avoid, half)
+			_add(root, _flower_mesh(rng, qs * 1.55, rng.randi_range(4, 6)), _bloom_mat(c_pale.darkened(rng.randf_range(0.0, 0.12)), 0.26), _rand_basis(rng, 0.60), pos6 + Vector3(0.0, qs * 0.5, 0.0))
+			continue
 		var bx2 := BoxMesh.new()
 		bx2.size = Vector3(qs, qs * rng.randf_range(0.7, 1.1), qs * rng.randf_range(0.8, 1.2))
 		var col3: Color = c_pale.darkened(rng.randf_range(0.0, 0.12))
 		var pos5: Vector3 = _heap_pos(rng, centre, r_in, r_out, rise, avoid, half)
-		_add(root, bx2, _tex_mat(col3, tex_crumb, 11.0, 0.26), _rand_basis(rng, 0.9), pos5 + Vector3(0.0, qs * 0.55, 0.0))
+		_food(root, bx2, _tex_mat(col3, tex_crumb, 11.0, 0.26), _rand_basis(rng, 0.9), pos5 + Vector3(0.0, qs * 0.55, 0.0), centre, qs, ctx, rng)
 
-	# lettuce blades, planted at the rim and splayed out
+	# lettuce blades, planted at the rim and splayed out — or hanging, once
+	# the heap has gone over
 	for i in range(n_leaf):
 		var la: float = rng.randf_range(0.0, TAU - 2.0 * half)
 		var ang: float = fposmod(avoid + half + la, TAU)
@@ -380,7 +598,10 @@ static func _heap(root: Node3D, rng: RandomNumberGenerator, kit: Dictionary, cen
 		var ln: float = rng.randf_range(0.115, 0.175) * sc
 		var wd: float = rng.randf_range(0.036, 0.055) * sc
 		var msh2: ArrayMesh = _leaf_mesh(rng, ln, wd)
-		var bs: Basis = Basis(Vector3.UP, PI * 0.5 - ang) * Basis(Vector3.RIGHT, rng.randf_range(-0.75, -0.30))
+		var pitch: float = rng.randf_range(-0.75, -0.30)
+		if spread == "rotted":
+			pitch = rng.randf_range(0.55, 1.20)
+		var bs: Basis = Basis(Vector3.UP, PI * 0.5 - ang) * Basis(Vector3.RIGHT, pitch)
 		var mat_leaf: StandardMaterial3D = _gloss(c_lf.darkened(rng.randf_range(0.0, 0.18)), 0.24)
 		mat_leaf.cull_mode = BaseMaterial3D.CULL_DISABLED
 		_add(root, msh2, mat_leaf, bs, centre + Vector3(cos(ang) * lr, rng.randf_range(0.010, 0.045), sin(ang) * lr))
@@ -399,7 +620,8 @@ static func _heap_pos(rng: RandomNumberGenerator, centre: Vector3, r_in: float, 
 # ---------------------------------------------------------------------------
 # the set pieces
 
-static func _grapes(root: Node3D, rng: RandomNumberGenerator, anchor: Vector3, dir: Vector3, n: int, col: Color, mat_stem: StandardMaterial3D) -> void:
+static func _grapes(root: Node3D, rng: RandomNumberGenerator, anchor: Vector3, dir: Vector3, n: int, col: Color, mat_stem: StandardMaterial3D, ctx: Dictionary) -> void:
+	var spread: String = String(ctx.get("spread", "heaped"))
 	var d: Vector3 = dir.normalized()
 	var e1: Vector3 = Vector3.UP.cross(d)
 	if e1.length() < 0.001:
@@ -409,6 +631,18 @@ static func _grapes(root: Node3D, rng: RandomNumberGenerator, anchor: Vector3, d
 	var ln: float = rng.randf_range(0.150, 0.225)
 	var cluster: float = rng.randf_range(0.038, 0.055)
 	var brad: float = rng.randf_range(0.017, 0.022)
+	# the bunch answers to the spread axis: it runs long when the fruit has gone
+	# over, and blows apart when the food swarms
+	var loose: float = 1.0
+	var squash: Vector3 = Vector3.ONE
+	if spread == "rotted":
+		ln *= 1.80
+		cluster *= 0.70
+		squash = Vector3(1.28, 0.58, 1.28)
+	elif spread == "swarm":
+		cluster *= 2.70
+		brad *= 0.70
+		loose = 5.0
 	_taper_cyl(root, anchor - d * 0.02, anchor + d * (ln * 0.30), 0.008, 0.005, mat_stem)
 	for i in range(n):
 		var t: float = float(i) / float(n - 1)
@@ -416,7 +650,7 @@ static func _grapes(root: Node3D, rng: RandomNumberGenerator, anchor: Vector3, d
 		var rad: float = cluster * (1.0 - 0.82 * t) * (0.35 + 0.65 * sqrt(clampf(t * 3.0, 0.0, 1.0)))
 		var along: float = ln * (0.10 + 0.90 * t)
 		var pos: Vector3 = anchor + d * along + e1 * (cos(a) * rad) + e2 * (sin(a) * rad)
-		pos += Vector3(rng.randf_range(-0.006, 0.006), rng.randf_range(-0.006, 0.006), rng.randf_range(-0.006, 0.006))
+		pos += Vector3(rng.randf_range(-0.006, 0.006) * loose, rng.randf_range(-0.006, 0.006) * loose, rng.randf_range(-0.006, 0.006) * loose)
 		var r: float = brad * rng.randf_range(0.84, 1.10)
 		var sph := SphereMesh.new()
 		sph.radius = r
@@ -424,7 +658,10 @@ static func _grapes(root: Node3D, rng: RandomNumberGenerator, anchor: Vector3, d
 		sph.radial_segments = 14
 		sph.rings = 8
 		var c: Color = col.lightened(rng.randf_range(0.0, 0.14)).darkened(rng.randf_range(0.0, 0.10))
-		_add(root, sph, _gloss(c, 0.14), _rand_basis(rng, 1.0), pos)
+		_add(root, sph, _gloss(c, 0.14), _rand_basis(rng, 1.0).scaled(squash), pos)
+	if spread == "blooming":
+		# the bunch has flowered at its end, hanging upside down off the rim
+		_add(root, _flower_mesh(rng, cluster * 2.1, rng.randi_range(5, 7)), _bloom_mat(col.lightened(0.45), 0.24), _basis_y_to(-d), anchor + d * (ln * 1.02))
 
 
 static func _bottle(root: Node3D, base: Vector3, h: float, mat: StandardMaterial3D, yaw: float) -> void:
@@ -453,7 +690,8 @@ static func _bottle(root: Node3D, base: Vector3, h: float, mat: StandardMaterial
 	_add(root, ring, mat, Basis(), base + Vector3(0.0, h * 0.90, 0.0))
 
 
-static func _shoe(root: Node3D, rng: RandomNumberGenerator, stand_r: float, c_pink: Color, c_deep: Color) -> void:
+static func _shoe(root: Node3D, rng: RandomNumberGenerator, stand_r: float, c_pink: Color, c_deep: Color, ctx: Dictionary, vrng: RandomNumberGenerator) -> void:
+	var service: String = String(ctx.get("service", "three_tier"))
 	var mat_pink: StandardMaterial3D = _gloss(c_pink, 0.12)
 	var mat_deep: StandardMaterial3D = _gloss(c_deep, 0.18)
 	var ln: float = rng.randf_range(0.215, 0.250)
@@ -493,6 +731,25 @@ static func _shoe(root: Node3D, rng: RandomNumberGenerator, stand_r: float, c_pi
 		low = minf(low, (frame * pv).y)
 	var org: Vector3 = -outw * (stand_r * 0.50 + rng.randf_range(0.055, 0.095)) + Vector3(0.0, -low, 0.0)
 
+	var mode: String = "wire" if service == "wire" else "solid"
+	_shoe_body(root, ln, heel_y, frame, org, sole, mat_pink, mat_deep, mode)
+
+	if service == "tower":
+		# the one shoe becomes a queue of them, stepping away round the foot
+		for i in range(3):
+			var step_a: float = out_ang + float(i + 1) * vrng.randf_range(0.40, 0.62)
+			var ow2 := Vector3(cos(step_a), 0.0, sin(step_a))
+			var fr2: Basis = Basis(Vector3.UP, atan2(-ow2.x, -ow2.z)) * Basis(Vector3.BACK, tilt * side)
+			var low2: float = 1.0e9
+			for p2 in probe:
+				var pv2: Vector3 = p2
+				low2 = minf(low2, (fr2 * pv2).y)
+			var out_d: float = stand_r * 0.50 + 0.075 + float(i + 1) * vrng.randf_range(0.085, 0.130)
+			var org2: Vector3 = -ow2 * out_d + Vector3(0.0, -low2, 0.0)
+			_shoe_body(root, ln, heel_y, fr2, org2, sole, mat_pink, mat_deep, "lite")
+
+
+static func _shoe_body(root: Node3D, ln: float, heel_y: float, frame: Basis, org: Vector3, sole: ArrayMesh, mat_pink: StandardMaterial3D, mat_deep: StandardMaterial3D, mode: String) -> void:
 	_add(root, sole, mat_deep, frame, org)
 
 	# spike heel: from under the sole's heel end down to the floor
@@ -500,6 +757,33 @@ static func _shoe(root: Node3D, rng: RandomNumberGenerator, stand_r: float, c_pi
 	var heel_bot: Vector3 = org + frame * Vector3(0.0, 0.0, 0.004)
 	var up_heel: Vector3 = (heel_top - heel_bot).normalized()
 	_taper_cyl(root, heel_top, heel_bot, 0.017, 0.008, mat_pink)
+
+	if mode == "wire":
+		# the leather is gone: two hoops standing where the shoe used to close
+		var vamp_hoop := TorusMesh.new()
+		vamp_hoop.inner_radius = 0.034
+		vamp_hoop.outer_radius = 0.043
+		vamp_hoop.rings = 24
+		vamp_hoop.ring_segments = 6
+		_add(root, vamp_hoop, mat_pink, frame * Basis(Vector3.RIGHT, PI * 0.5), org + frame * Vector3(0.0, 0.040, -ln * 0.70))
+		var back_hoop := TorusMesh.new()
+		back_hoop.inner_radius = 0.030
+		back_hoop.outer_radius = 0.039
+		back_hoop.rings = 24
+		back_hoop.ring_segments = 6
+		_add(root, back_hoop, mat_pink, frame * Basis(Vector3.RIGHT, PI * 0.5), org + frame * Vector3(0.0, heel_y + 0.026, -ln * 0.10))
+		return
+
+	if mode == "lite":
+		# a shoe further down the queue: sole, spike, vamp, nothing more
+		var vamp_l := SphereMesh.new()
+		vamp_l.radius = 1.0
+		vamp_l.height = 2.0
+		vamp_l.radial_segments = 18
+		vamp_l.rings = 10
+		_add(root, vamp_l, mat_pink, frame * Basis.from_scale(Vector3(0.038, 0.038, 0.090)), org + frame * Vector3(0.0, 0.046, -ln * 0.66))
+		return
+
 	var tip := CylinderMesh.new()
 	tip.top_radius = 0.009
 	tip.bottom_radius = 0.010
@@ -690,6 +974,97 @@ static func _leaf_mesh(rng: RandomNumberGenerator, ln: float, wd: float) -> Arra
 	return st.commit()
 
 
+static func _flower_mesh(rng: RandomNumberGenerator, r: float, n_pet: int) -> ArrayMesh:
+	# blooming: what a tomato turns into. Every petal of the head lives in ONE
+	# ArrayMesh, so an opened fruit still costs the heap a single mesh
+	var st := SurfaceTool.new()
+	st.begin(Mesh.PRIMITIVE_TRIANGLES)
+	var nu: int = 5
+	var nv: int = 3
+	for p in range(n_pet):
+		var pa: float = TAU * float(p) / float(n_pet) + rng.randf_range(-0.13, 0.13)
+		var lift: float = rng.randf_range(0.35, 0.90)
+		var pl: float = r * rng.randf_range(0.82, 1.16)
+		var pw: float = pl * rng.randf_range(0.34, 0.54)
+		var ca: float = cos(pa)
+		var sa: float = sin(pa)
+		var grid: Array = []
+		for i in range(nu + 1):
+			var u: float = float(i) / float(nu)
+			var hw: float = pw * sin(PI * pow(u, 0.55)) + 0.0015
+			var row: Array = []
+			for j in range(nv + 1):
+				var v: float = float(j) / float(nv) * 2.0 - 1.0
+				var along: float = u * pl
+				var hgt: float = lift * pl * (u * u * 0.85 - u * 0.12) + pw * 0.32 * (v * v) * u
+				row.append(Vector3(ca * along - sa * (v * hw), hgt, sa * along + ca * (v * hw)))
+			grid.append(row)
+		for i in range(nu):
+			var r0: Array = grid[i]
+			var r1: Array = grid[i + 1]
+			for j in range(nv):
+				var p00: Vector3 = r0[j]
+				var p01: Vector3 = r0[j + 1]
+				var p10: Vector3 = r1[j]
+				var p11: Vector3 = r1[j + 1]
+				st.add_vertex(p00)
+				st.add_vertex(p10)
+				st.add_vertex(p11)
+				st.add_vertex(p00)
+				st.add_vertex(p11)
+				st.add_vertex(p01)
+	# the core the petals are set into
+	var seg: int = 9
+	var cr: float = r * 0.24
+	for k in range(seg):
+		var a0: float = TAU * float(k) / float(seg)
+		var a1: float = TAU * float(k + 1) / float(seg)
+		st.add_vertex(Vector3(0.0, cr * 1.05, 0.0))
+		st.add_vertex(Vector3(cos(a0) * cr, 0.0, sin(a0) * cr))
+		st.add_vertex(Vector3(cos(a1) * cr, 0.0, sin(a1) * cr))
+	st.generate_normals()
+	return st.commit()
+
+
+static func _limb_of_food(root: Node3D, rng: RandomNumberGenerator, kit: Dictionary, start: Vector3, out_v: Vector3, n: int, g: float) -> void:
+	# reaching: the heap puts out an arm — bread and ham knuckles walking out of
+	# the food, curling over as they go, ending in four splayed carrot fingers
+	var c_crust: Color = kit["crust"]
+	var c_ham: Color = kit["ham"]
+	var c_car: Color = kit["carrot"]
+	var tex_crumb: ImageTexture = kit["crumb"]
+	var tex_marble: ImageTexture = kit["marble"]
+	var outn: Vector3 = out_v.normalized()
+	var d: Vector3 = (outn + Vector3(0.0, rng.randf_range(0.40, 1.05), 0.0)).normalized()
+	var curl: float = rng.randf_range(0.14, 0.32)
+	var p: Vector3 = start
+	for i in range(n):
+		var t: float = float(i) / float(n)
+		var gg: float = g * (1.0 - 0.40 * t)
+		var step: float = gg * rng.randf_range(1.7, 2.3)
+		var nxt: Vector3 = p + d * step
+		var lay: Basis = _basis_y_to(d) * Basis(Vector3.RIGHT, -PI * 0.5)
+		if (i % 2) == 0:
+			var msh: ArrayMesh = _extrude(_loaf_profile(gg * 0.92, gg * 0.80, 6), gg * 2.1, 0.72)
+			var col: Color = c_crust.darkened(rng.randf_range(0.0, 0.10))
+			_add(root, msh, _tex_mat(col, tex_crumb, 7.5, 0.20), lay * Basis(Vector3.BACK, rng.randf_range(-0.50, 0.50)), (p + nxt) * 0.5)
+		else:
+			var bx := BoxMesh.new()
+			bx.size = Vector3(gg * 1.75, gg * 1.20, gg * 2.05)
+			var col2: Color = c_ham.darkened(rng.randf_range(0.0, 0.14))
+			_add(root, bx, _tex_mat(col2, tex_marble, 6.0, 0.16), lay * Basis(Vector3.BACK, rng.randf_range(-0.40, 0.40)), (p + nxt) * 0.5)
+		d = (d + Vector3(0.0, -curl, 0.0) + outn * (curl * 0.55)).normalized()
+		p = nxt
+	for f in range(4):
+		var fa: float = TAU * float(f) / 4.0 + rng.randf_range(-0.22, 0.22)
+		var fd: Vector3 = (d * 1.15 + _perp_h(d, fa) * 0.85).normalized()
+		var fl: float = g * rng.randf_range(1.6, 2.5)
+		var pr := PrismMesh.new()
+		pr.size = Vector3(g * 0.54, fl, g * 0.46)
+		pr.left_to_right = rng.randf_range(0.25, 0.75)
+		_add(root, pr, _gloss(c_car.lightened(rng.randf_range(0.0, 0.14)), 0.16), _basis_y_to(fd), p + fd * (fl * 0.5))
+
+
 static func _quad_out(st: SurfaceTool, a: Vector3, b: Vector3, c: Vector3, d: Vector3, inside: Vector3) -> void:
 	# emit a quad whose Godot front face (clockwise) points away from `inside`
 	var n_front: Vector3 = (c - a).cross(b - a)
@@ -727,12 +1102,81 @@ static func _tri_out(st: SurfaceTool, a: Vector3, b: Vector3, c: Vector3, inside
 # small helpers
 
 static func _add(root: Node3D, msh: Mesh, mat: StandardMaterial3D, bs: Basis, pos: Vector3) -> MeshInstance3D:
+	# the budget never bites on the default still life (231 meshes at its
+	# fattest seed); it is here so a swarming, flooded, six-tier one cannot
+	# walk past the contract
+	if root.get_child_count() >= MAX_MESH:
+		return null
 	var mi := MeshInstance3D.new()
 	mi.mesh = msh
 	mi.material_override = mat
 	root.add_child(mi)
 	mi.transform = Transform3D(bs, pos)
 	return mi
+
+
+static func _ct(n: int, k: float) -> int:
+	if k >= 0.999:
+		return n
+	return maxi(2, int(round(float(n) * k)))
+
+
+static func _food(root: Node3D, msh: Mesh, mat: StandardMaterial3D, bs: Basis, pos: Vector3, centre: Vector3, sz: float, ctx: Dictionary, rng: RandomNumberGenerator) -> void:
+	# one solid of the heap, made of whatever the food is doing today
+	var spread: String = String(ctx.get("spread", "heaped"))
+
+	if spread == "rotted":
+		# it has gone over: it flattens, spreads, and slides off the heap
+		var out_v := Vector3(pos.x - centre.x, 0.0, pos.z - centre.z)
+		if out_v.length() < 0.001:
+			out_v = Vector3(1.0, 0.0, 0.0)
+		out_v = out_v.normalized()
+		var run: float = rng.randf_range(0.35, 1.20)
+		var wide: float = 1.42 + run * 0.55
+		var drop: float = sz * (0.55 + run * 0.95)
+		_add(root, msh, mat, bs.scaled(Vector3(wide, 0.30, wide)), pos + out_v * (sz * run * 1.15) - Vector3(0.0, drop, 0.0))
+		return
+
+	if spread == "swarm":
+		# it has come apart into three small copies of itself, hovering off
+		# the plate
+		for k in range(3):
+			var u: Vector3 = _rand_unit(rng)
+			var off: Vector3 = u * (sz * rng.randf_range(1.2, 3.6)) + Vector3(0.0, sz * rng.randf_range(0.3, 2.9), 0.0)
+			var k_sm: float = rng.randf_range(0.24, 0.44)
+			_add(root, msh, mat, bs.scaled(Vector3(k_sm, k_sm, k_sm)) * Basis(Vector3.UP, rng.randf_range(0.0, TAU)), pos + off)
+		return
+
+	_add(root, msh, mat, bs, pos)
+
+
+static func _bloom_mat(c: Color, rough: float) -> StandardMaterial3D:
+	var m: StandardMaterial3D = _gloss(c, rough)
+	m.cull_mode = BaseMaterial3D.CULL_DISABLED
+	return m
+
+
+static func _rand_unit(rng: RandomNumberGenerator) -> Vector3:
+	var z: float = rng.randf_range(-1.0, 1.0)
+	var a: float = rng.randf_range(0.0, TAU)
+	var r: float = sqrt(maxf(1.0 - z * z, 0.0))
+	return Vector3(r * cos(a), z, r * sin(a))
+
+
+static func _perp_h(d: Vector3, ang: float) -> Vector3:
+	var dn: Vector3 = d.normalized()
+	var ref: Vector3 = Vector3.UP if absf(dn.y) < 0.9 else Vector3.RIGHT
+	var e1: Vector3 = ref.cross(dn)
+	if e1.length() < 0.0001:
+		e1 = Vector3.FORWARD.cross(dn)
+	if e1.length() < 0.0001:
+		return Vector3.RIGHT
+	e1 = e1.normalized()
+	var e2: Vector3 = dn.cross(e1).normalized()
+	var out_v: Vector3 = e1 * cos(ang) + e2 * sin(ang)
+	if out_v.length() < 0.0001:
+		return e1
+	return out_v.normalized()
 
 
 static func _gloss(c: Color, rough: float) -> StandardMaterial3D:

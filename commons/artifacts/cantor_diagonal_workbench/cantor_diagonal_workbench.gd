@@ -2,14 +2,14 @@ extends Node3D
 class_name CantorDiagonalWorkbench
 
 # @identity
-# essence: an interactive Cantor diagonal workbench — the player turns a slider for N and watches the list grow, the diagonal extend, and the constructed real d built bit-by-bit underneath. d is guaranteed not to be in the list because it disagrees with row k at position k for every k. The proof of uncountability made into a hand-cranked procedure.
+# essence: N displayed N-bit rows and a constructed N-bit string d; d differs from each displayed row k at bit k. A finite stage of the diagonal argument.
 # desire: learner viscerally feels uncountability — you can list "all" reals, and we will construct one that isn't in the list, just by flipping the diagonal
 # critical_parameter: N — drives list size, diagonal length, d's bit-length
 # triggers: _ready() builds slider + grid + d-row + readout; _on_slider_changed regenerates the list at new N, recomputes d
 # emerges: the diagonal argument as a mechanical procedure that scales — the longer the list, the longer the diagonal that excludes from it
 # needs: slider_horizontal [present]; small BoxMesh grid (N+1 × N+1 cells) [present]; Label3D readouts [present]
 # relationships: paired with /cantor-diagonal-gallery (web cells frozen at 8 (N, rule) combinations); sibling to halting_workbench, russell_paradox_workbench, complexity_dial_workbench — together they make the limits-of-math substrate walkable
-# truth: given any countable list of reals, there is always a real not in that list. The slider walks the proof: more rows, longer diagonal, still excluded.
+# truth: the finite strings demonstrate diagonal disagreement. An infinite sequence argument extends the rule to every row of a hypothetical countable list; this display never stores a completed infinite object.
 
 ## A horizontal workbench for the Cantor diagonal argument.
 ##
@@ -41,6 +41,8 @@ class_name CantorDiagonalWorkbench
 @export var grid_height: float = 1.45
 ## Forward distance of grid in front of plate.
 @export var grid_depth: float = -0.20
+## Optional lateral monitor position keeps the constructed row clear of the console.
+@export var display_offset_x: float = 0.0
 ## Allowed N values — the slider snaps to one of these.
 @export var n_steps: PackedInt32Array = PackedInt32Array([4, 8, 16, 24, 32])
 ## Colors — matching the gallery vocabulary.
@@ -86,7 +88,7 @@ var _plate_readout: Label       # 2D-in-3D readout integrated on the console boa
 var _guidance: Label3D
 var _guidance_t: float = 0.0  # time remaining for flash
 
-const GUIDANCE_TEXT: String = "constructed real d (red) flips each diagonal bit. d is not in any row."
+const GUIDANCE_TEXT: String = "Finite string d (red) differs from every displayed row at its diagonal bit."
 
 
 # ── Lifecycle ─────────────────────────────────────────────────────────
@@ -221,6 +223,7 @@ func _build_grid_root() -> void:
 	# (replaces the old free-floating position that intersected the console).
 	# Screen tall enough for list + gap + d-row at the smallest N (tallest grid).
 	var screen: Node3D = _plate_root.add_monitor(Vector2(grid_width + 0.16, grid_width + 0.42))
+	_plate_root.viz_anchor().position.x = display_offset_x
 	_grid_root = Node3D.new()
 	_grid_root.name = "BitGrid"
 	_grid_root.position = Vector3(0.0, 0.11, 0.0)   # recentre list+d-row on the screen
@@ -368,7 +371,7 @@ func _rebuild_grid() -> void:
 
 	# "list" label (above the grid) and "d (constructed real)" label (below d-row).
 	var list_label := Label3D.new()
-	list_label.text = "list of %d binary reals" % _n
+	list_label.text = "%d rows of %d bits" % [_n, _n]
 	list_label.font_size = 24
 	list_label.outline_size = 3
 	list_label.pixel_size = 0.001
@@ -378,7 +381,7 @@ func _rebuild_grid() -> void:
 	_grid_root.add_child(list_label)
 
 	var d_label := Label3D.new()
-	d_label.text = "d (constructed real)"
+	d_label.text = "d: constructed finite string"
 	d_label.font_size = 24
 	d_label.outline_size = 3
 	d_label.pixel_size = 0.001
@@ -450,14 +453,14 @@ func _build_readout_panel() -> void:
 
 func _refresh_readout() -> void:
 	# Build d's string. For long N, truncate to first 12 bits + "…".
-	var d_str: String = "0."
+	var d_str: String = ""
 	var max_show: int = min(_n, 12)
 	for i in range(max_show):
 		d_str += str(_d[i])
 	if _n > 12:
 		d_str += "…"
 	if _plate_readout:
-		_plate_readout.text = "d = %s\nd ≠ any row · N=%d" % [d_str, _n]
+		_plate_readout.text = "d = %s\nd differs from all %d displayed rows" % [d_str, _n]
 
 
 # ── Guidance flash ────────────────────────────────────────────────────
@@ -490,6 +493,10 @@ func _flash_guidance() -> void:
 # ── Grid system integration ───────────────────────────────────────────
 
 func apply_grid_config(config_data: Dictionary) -> void:
+	if config_data.has("display_offset_x"):
+		display_offset_x = float(config_data["display_offset_x"])
+		if _plate_root:
+			_plate_root.viz_anchor().position.x = display_offset_x
 	if config_data.has("list_seed"):
 		list_seed = int(config_data["list_seed"])
 		_regenerate_list()

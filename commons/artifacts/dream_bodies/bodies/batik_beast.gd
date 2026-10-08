@@ -41,8 +41,22 @@ extends RefCounted
 ## resting on each other, the real fabric's stretch wrinkles gathering at the
 ## joints (stuffing rings stand in for them), and the printed-on inner-ear and
 ## cheek markings that some of the reference heads carry.
+##
+## DNA axes:
+##   stuffing — what is inside the suit: stuffed (as sewn) · inflated (every mass
+##     blown to bursting) · melted (the whole figure sags and spreads, drips
+##     hanging off the wrists and hips into a pour on the floor) · swarmed (the
+##     body scattered into a cloud of small copies of its own lumps) · unpicked
+##     (the cloth gone, only the thread that held it, coil after coil).
+##   head — what stands on the neck: muzzled (one animal head) · herd (three
+##     heads on splayed necks, the reference crowd folded into one body) ·
+##     crowned (seven horns swept up off the skull) · blooming (the muzzle opens
+##     into a corolla, the ears grow extra petals) · boned (the head fossilised
+##     to hoops and rails, empty sockets where the beads were).
 
 const TEX: int = 192
+const MAX_MI: int = 250
+const MELT_H: float = 1.70
 
 # ground, ink, accent, muzzle, thread, ear inner
 const SCHEMES: Array = [
@@ -55,13 +69,25 @@ const SCHEMES: Array = [
 ]
 
 
+static func axes() -> Dictionary:
+	return {
+		"stuffing": ["stuffed", "inflated", "melted", "swarmed", "unpicked"],
+		"head": ["muzzled", "herd", "crowned", "blooming", "boned"],
+	}
+
+
 static func describe() -> String:
 	return "A soft cloth figure in a batik-printed bodysuit, standing with one hand on its hip under a long-muzzled animal head with big leaf ears and painted bead eyes."
 
 
-static func build(root: Node3D, seed: int) -> void:
+static func build(root: Node3D, seed: int, opts: Dictionary = {}) -> void:
+	var stuffing: String = String(opts.get("stuffing", "stuffed"))
+	var head_mode: String = String(opts.get("head", "muzzled"))
 	var rng := RandomNumberGenerator.new()
 	rng.seed = seed
+	# a second stream, so the variants never disturb the seeded figure itself
+	var frng := RandomNumberGenerator.new()
+	frng.seed = seed * 7919 + 104729
 
 	var si: int = rng.randi_range(0, SCHEMES.size() - 1)
 	var sch: Array = SCHEMES[si]
@@ -110,6 +136,17 @@ static func build(root: Node3D, seed: int) -> void:
 	var ear_len: float = rng.randf_range(0.130, 0.152)
 	var muzzle_len: float = rng.randf_range(0.222, 0.258)
 
+	# every soft mass of the suit goes through one brush, which is where the
+	# stuffing axis lives: a lump, a balloon, a granule, or a coil of thread
+	var brush := {
+		"mode": stuffing,
+		"rng": frng,
+		"wire": mat_thread,
+		"i": 0,
+	}
+	# a suit coming apart into grains has no seams left to show
+	var stitch_on: bool = stuffing != "swarmed"
+
 	# --- torso ----------------------------------------------------------------
 	var n_t: int = 14
 	var spine: Array = []
@@ -130,7 +167,7 @@ static func build(root: Node3D, seed: int) -> void:
 		var g: Vector2 = girth[i]
 		var tang: Vector3 = _tangent(spine, i)
 		var bs: Basis = _basis_y_to(tang) * Basis(Vector3.UP, twist * t)
-		_ball(root, q, Vector3(g.x, 0.058 * body_k, g.y), bs, mat_cloth)
+		_soft(root, q, Vector3(g.x, 0.058 * body_k, g.y), bs, mat_cloth, brush)
 
 	var p_hip: Vector3 = spine[0]
 	var p_top: Vector3 = spine[n_t - 1]
@@ -139,8 +176,8 @@ static func build(root: Node3D, seed: int) -> void:
 	# hip cheeks and shoulder caps, the two soft corners of the silhouette
 	for k in range(2):
 		var sd: float = -1.0 if k == 0 else 1.0
-		_ball(root, p_hip + Vector3(sd * 0.078 * body_k, -0.030, 0.006), Vector3(0.098, 0.086, 0.115) * body_k, Basis(), mat_cloth)
-		_ball(root, p_top + bs_top * Vector3(sd * 0.128 * body_k, -0.006, 0.0), Vector3(0.086, 0.074, 0.098) * body_k, bs_top, mat_cloth)
+		_soft(root, p_hip + Vector3(sd * 0.078 * body_k, -0.030, 0.006), Vector3(0.098, 0.086, 0.115) * body_k, Basis(), mat_cloth, brush)
+		_soft(root, p_top + bs_top * Vector3(sd * 0.128 * body_k, -0.006, 0.0), Vector3(0.086, 0.074, 0.098) * body_k, bs_top, mat_cloth, brush)
 
 	# --- legs -----------------------------------------------------------------
 	var leg_pts: Array = []
@@ -154,21 +191,22 @@ static func build(root: Node3D, seed: int) -> void:
 		var ankle_p := Vector3(hip_p.x + sd * (0.006 + out_k), 0.104, -0.006 - fwd_k)
 		var mid_p: Vector3 = (hip_p + ankle_p) * 0.5
 		var knee_p: Vector3 = mid_p + Vector3(sd * 0.008, 0.014, -0.026 - bend_k)
-		_soft_chain(root, hip_p, knee_p, 0.090 * body_k, 0.070 * body_k, 5, 1.02, mat_cloth)
-		_soft_chain(root, knee_p, ankle_p, 0.070 * body_k, 0.050 * body_k, 5, 1.02, mat_cloth)
-		_ball(root, knee_p, Vector3(0.074, 0.070, 0.076) * body_k, Basis(), mat_cloth)
+		_soft_chain(root, hip_p, knee_p, 0.090 * body_k, 0.070 * body_k, 5, 1.02, mat_cloth, brush)
+		_soft_chain(root, knee_p, ankle_p, 0.070 * body_k, 0.050 * body_k, 5, 1.02, mat_cloth, brush)
+		_soft(root, knee_p, Vector3(0.074, 0.070, 0.076) * body_k, Basis(), mat_cloth, brush)
 		# foot: heel, arch, toe, sole flat on y = 0
 		var toe_p := Vector3(ankle_p.x + sd * 0.004, 0.046, ankle_p.z - 0.110)
 		var heel_p := Vector3(ankle_p.x, 0.050, ankle_p.z + 0.030)
-		_ball(root, heel_p, Vector3(0.050, 0.050, 0.056), Basis(), mat_cloth)
-		_ball(root, (heel_p + toe_p) * 0.5, Vector3(0.052, 0.047, 0.066), Basis(), mat_cloth)
-		_ball(root, toe_p, Vector3(0.049, 0.046, 0.058), Basis(), mat_cloth)
+		_soft(root, heel_p, Vector3(0.050, 0.050, 0.056), Basis(), mat_cloth, brush)
+		_soft(root, (heel_p + toe_p) * 0.5, Vector3(0.052, 0.047, 0.066), Basis(), mat_cloth, brush)
+		_soft(root, toe_p, Vector3(0.049, 0.046, 0.058), Basis(), mat_cloth, brush)
 		# stuffing rings at knee and ankle
 		_ring(root, knee_p + Vector3(0.0, -0.006, 0.0), 0.062 * body_k, 0.010, Basis(Vector3.RIGHT, 0.12), mat_cloth)
 		_ring(root, ankle_p, 0.046 * body_k, 0.009, Basis(Vector3.RIGHT, 0.10), mat_cloth)
 		leg_pts.append([hip_p, knee_p, ankle_p, sd])
 
 	# --- arms -----------------------------------------------------------------
+	var arm_wrists: Array = []
 	for k in range(2):
 		var sd: float = -1.0 if k == 0 else 1.0
 		var on_hip: bool = sd == hip_side
@@ -187,12 +225,13 @@ static func build(root: Node3D, seed: int) -> void:
 			wrist_p = elbow_p + Vector3(sd * rng.randf_range(0.038, 0.066), -0.218, rng.randf_range(0.018, 0.044))
 			hand_dir = (Vector3(sd * 0.10, -0.96, 0.24)).normalized()
 			curl_dir = (Vector3(-sd * 0.42, -0.10, -0.90)).normalized()
-		_ball(root, sh_p + Vector3(0.0, 0.012, 0.0), Vector3(0.074, 0.072, 0.080) * body_k, Basis(), mat_cloth)
-		_soft_chain(root, sh_p, elbow_p, 0.064 * body_k, 0.051 * body_k, 4, 1.0, mat_cloth)
-		_ball(root, elbow_p, Vector3(0.055, 0.053, 0.056) * body_k, Basis(), mat_cloth)
-		_soft_chain(root, elbow_p, wrist_p, 0.051 * body_k, 0.040 * body_k, 4, 1.0, mat_cloth)
+		_soft(root, sh_p + Vector3(0.0, 0.012, 0.0), Vector3(0.074, 0.072, 0.080) * body_k, Basis(), mat_cloth, brush)
+		_soft_chain(root, sh_p, elbow_p, 0.064 * body_k, 0.051 * body_k, 4, 1.0, mat_cloth, brush)
+		_soft(root, elbow_p, Vector3(0.055, 0.053, 0.056) * body_k, Basis(), mat_cloth, brush)
+		_soft_chain(root, elbow_p, wrist_p, 0.051 * body_k, 0.040 * body_k, 4, 1.0, mat_cloth, brush)
 		_ring(root, wrist_p, 0.040 * body_k, 0.008, _basis_y_to(wrist_p - elbow_p), mat_cloth)
-		_hand(root, wrist_p, hand_dir, Vector3(sd, 0.0, 0.0), curl_dir, 0.052 * body_k, mat_cloth)
+		_hand(root, wrist_p, hand_dir, Vector3(sd, 0.0, 0.0), curl_dir, 0.052 * body_k, mat_cloth, brush)
+		arm_wrists.append(wrist_p)
 		# the shoulder-to-elbow seam, riding the outer face of the sleeve
 		var l_dir: Vector3 = (elbow_p - sh_p).normalized()
 		var away := Vector3(sd * 0.86, 0.34, 0.10)
@@ -203,7 +242,8 @@ static func build(root: Node3D, seed: int) -> void:
 			var q: Vector3 = _lerp3(sh_p + Vector3(0.0, 0.030, 0.0), elbow_p, t)
 			var rr: float = lerpf(0.074, 0.052, t) * body_k
 			arm_line.append(q + away * rr)
-		_seam(root, arm_line, 0.0056, 0.60, mat_thread)
+		if stitch_on:
+			_seam(root, arm_line, 0.0056, 0.60, mat_thread)
 
 	# --- neck and head --------------------------------------------------------
 	var neck_dir := Vector3(sin(head_yaw) * 0.16, 1.0, -0.06).normalized()
@@ -212,75 +252,41 @@ static func build(root: Node3D, seed: int) -> void:
 		var t: float = float(i) / 2.0
 		var c: Vector3 = neck_base + neck_dir * (t * 0.090)
 		var r: float = lerpf(0.066, 0.056, t) * body_k
-		_ball(root, c, Vector3(r, 0.040, r * 0.94), _basis_y_to(neck_dir), mat_cloth)
+		_soft(root, c, Vector3(r, 0.040, r * 0.94), _basis_y_to(neck_dir), mat_cloth, brush)
 	_ring(root, neck_base + neck_dir * 0.052, 0.058 * body_k, 0.012, _basis_y_to(neck_dir), mat_head)
 
 	var hb: Basis = Basis(Vector3.UP, head_yaw) * Basis(Vector3.RIGHT, head_pitch)
 	var h_org: Vector3 = neck_base + neck_dir * 0.108 + Vector3(0.0, 0.048, 0.0)
 
-	_ball(root, h_org + hb * Vector3(0.0, 0.008, 0.014), Vector3(0.092, 0.096, 0.104) * body_k, hb, mat_head)
-	_ball(root, h_org + hb * Vector3(0.0, -0.030, -0.052), Vector3(0.080, 0.072, 0.086) * body_k, hb, mat_head)
-	_ball(root, h_org + hb * Vector3(0.0, -0.020, -0.086), Vector3(0.070, 0.062, 0.064) * body_k, hb, mat_pale)
+	var mats := {
+		"head": mat_head,
+		"pale": mat_pale,
+		"ear": mat_ear,
+		"dark": mat_dark,
+		"bead": mat_bead,
+		"spark": mat_spark,
+		"thread": mat_thread,
+	}
+	var head_out: Dictionary = _build_head(root, h_org, hb, body_k, muzzle_len, ear_len, ear_out, ear_back, mats, head_mode, 1, frng)
+	var mz_pts: Array = head_out["pts"]
+	var mz_rad: Array = head_out["rad"]
 
-	# muzzle: a swept elliptical tube curving down and forward
-	var mz_n: int = 9
-	var mz_pts: Array = []
-	var mz_rad: Array = []
-	for i in range(mz_n):
-		var t: float = float(i) / float(mz_n - 1)
-		var mz: float = lerpf(-0.052, -0.052 - muzzle_len, t)
-		var my: float = lerpf(-0.018, -0.086, t) - 0.020 * sin(PI * t)
-		mz_pts.append(Vector3(0.0, my, mz))
-		var rw: float = lerpf(0.068, 0.040, pow(t, 0.85)) * body_k
-		var rh: float = lerpf(0.077, 0.043, pow(t, 0.78)) * body_k
-		mz_rad.append(Vector2(rw, rh))
-	var muzzle_mesh: ArrayMesh = _swept_tube(mz_pts, mz_rad, 14)
-	var mz_mi: MeshInstance3D = _add(root, muzzle_mesh, mat_pale)
-	mz_mi.transform = Transform3D(hb, h_org)
-
-	var tip_local: Vector3 = mz_pts[mz_n - 1]
-	var snout_p: Vector3 = h_org + hb * (tip_local + Vector3(0.0, -0.004, -0.014))
-	_ball(root, snout_p, Vector3(0.046, 0.040, 0.038) * body_k, hb, mat_pale)
-	for k in range(2):
-		var sd: float = -1.0 if k == 0 else 1.0
-		_ball(root, snout_p + hb * Vector3(sd * 0.019, 0.000, -0.034), Vector3(0.011, 0.014, 0.009), hb, mat_dark)
-	# mouth line, a dark stitched crease sunk into the underside of the muzzle
-	var mouth_pts: Array = []
-	for i in range(6):
-		var t: float = float(i) / 5.0
-		var u: float = lerpf(0.40, 0.99, t)
-		var mp: Vector3 = _curve_at(mz_pts, u)
-		var rr: Vector2 = _rad_at(mz_rad, u)
-		mouth_pts.append(h_org + hb * (mp + Vector3(0.0, -rr.y * 0.94, 0.0)))
-	_seam(root, mouth_pts, 0.0055, 0.72, mat_dark)
-
-	# eyes, set proud of the skull so the bead reads from every angle
-	for k in range(2):
-		var sd: float = -1.0 if k == 0 else 1.0
-		var eye_local := Vector3(sd * 0.078, 0.014, -0.050)
-		var nrm: Vector3 = (hb * Vector3(sd * 0.88, 0.20, -0.44)).normalized()
-		var eye_p: Vector3 = h_org + hb * eye_local + nrm * 0.008
-		_ball(root, eye_p, Vector3(0.038, 0.012, 0.032), _basis_y_to(nrm), mat_pale)
-		var bead_p: Vector3 = eye_p + nrm * 0.016
-		_ball(root, bead_p, Vector3(0.021, 0.020, 0.019), _basis_y_to(nrm), mat_bead)
-		_ball(root, bead_p + nrm * 0.014 + hb * Vector3(0.0, 0.008, -0.007), Vector3(0.006, 0.006, 0.006), Basis(), mat_spark)
-
-	# ears: leaf blades, cupped forward
-	for k in range(2):
-		var sd: float = -1.0 if k == 0 else 1.0
-		var base_p: Vector3 = h_org + hb * Vector3(sd * 0.060, 0.080, 0.030)
-		var ey_e: Vector3 = (hb * Vector3(sd * sin(ear_out), cos(ear_out) * cos(ear_back), sin(ear_back))).normalized()
-		var want: Vector3 = hb * Vector3(sd * 0.32, 0.0, -0.95)
-		var ez_e: Vector3 = (want - ey_e * want.dot(ey_e)).normalized()
-		var ex_e: Vector3 = ey_e.cross(ez_e).normalized()
-		var eb := Basis(ex_e, ey_e, ez_e)
-		_ball(root, base_p, Vector3(0.038, 0.034, 0.034), eb, mat_head)
-		var blade: ArrayMesh = _leaf_blade(ear_len, 0.078 * body_k, 0.011, 0.030, -0.016, 9, 6)
-		var bl_mi: MeshInstance3D = _add(root, blade, mat_head)
-		bl_mi.transform = Transform3D(eb, base_p)
-		var inner: ArrayMesh = _leaf_blade(ear_len * 0.70, 0.050 * body_k, 0.006, 0.024, -0.010, 7, 5)
-		var in_mi: MeshInstance3D = _add(root, inner, mat_ear)
-		in_mi.transform = Transform3D(eb, base_p + ez_e * 0.011 + ey_e * (ear_len * 0.10))
+	# the crowd the reference had, folded back into the one body
+	if head_mode == "herd":
+		for k in range(2):
+			var sd: float = -1.0 if k == 0 else 1.0
+			var yaw2: float = head_yaw + deg_to_rad(sd * frng.randf_range(38.0, 62.0))
+			var nd2: Vector3 = Vector3(sd * 0.46 + sin(yaw2) * 0.10, 1.0, -0.10).normalized()
+			var nb2: Vector3 = p_top + bs_top * Vector3(sd * 0.100 * body_k, 0.004, 0.004)
+			for i in range(3):
+				var t2: float = float(i) / 2.0
+				var c2: Vector3 = nb2 + nd2 * (t2 * 0.112)
+				var r2: float = lerpf(0.058, 0.046, t2) * body_k
+				_soft(root, c2, Vector3(r2, 0.038, r2 * 0.94), _basis_y_to(nd2), mat_cloth, brush)
+			var hb2: Basis = Basis(Vector3.UP, yaw2) * Basis(Vector3.RIGHT, head_pitch - deg_to_rad(7.0))
+			var h2: Vector3 = nb2 + nd2 * 0.134 + Vector3(0.0, 0.038, 0.0)
+			if _has_room(root, 22):
+				_build_head(root, h2, hb2, body_k * 0.80, muzzle_len * 0.84, ear_len * 0.84, ear_out, ear_back, mats, "muzzled", 0, frng)
 
 	# --- stitched seams -------------------------------------------------------
 	var front_pts: Array = []
@@ -290,7 +296,8 @@ static func build(root: Node3D, seed: int) -> void:
 		var g: Vector2 = Vector2(_key(t, [0.150, 0.153, 0.150, 0.159, 0.180, 0.186]), _key(t, [0.120, 0.133 * belly, 0.130 * belly, 0.117, 0.110, 0.104])) * body_k
 		var fr: Vector3 = Basis(Vector3.UP, twist * t) * Vector3(0.0, 0.0, -1.0)
 		front_pts.append(q + fr * (g.y + 0.004))
-	_seam(root, front_pts, 0.0058, 0.66, mat_thread)
+	if stitch_on:
+		_seam(root, front_pts, 0.0058, 0.66, mat_thread)
 
 	for k in range(2):
 		var sd: float = -1.0 if k == 0 else 1.0
@@ -304,7 +311,8 @@ static func build(root: Node3D, seed: int) -> void:
 			var q: Vector3 = _lerp3(l_hip, l_knee, clampf(t * 2.0, 0.0, 1.0)) if t < 0.5 else _lerp3(l_knee, l_ankle, clampf((t - 0.5) * 2.0, 0.0, 1.0))
 			var r: float = lerpf(0.092, 0.052, t) * body_k
 			leg_line.append(q + Vector3(sd * (r + 0.004), 0.0, 0.0))
-		_seam(root, leg_line, 0.0058, 0.62, mat_thread)
+		if stitch_on:
+			_seam(root, leg_line, 0.0058, 0.62, mat_thread)
 
 	var crown_pts: Array = []
 	for i in range(7):
@@ -324,6 +332,34 @@ static func build(root: Node3D, seed: int) -> void:
 		mz_seam.append(h_org + hb * (mp + Vector3(0.0, rr.y * 0.96, 0.0)))
 	_seam(root, mz_seam, 0.0050, 0.60, mat_thread)
 
+	# --- the melt -------------------------------------------------------------
+	# drips first, so the warp below carries them down with everything else
+	if stuffing == "melted":
+		for i in range(arm_wrists.size()):
+			var wp: Vector3 = arm_wrists[i]
+			_drip(root, wp + Vector3(0.0, -0.072, 0.008), 0.040 * body_k, mat_cloth)
+		for k in range(2):
+			var sd: float = -1.0 if k == 0 else 1.0
+			_drip(root, p_hip + Vector3(sd * 0.120 * body_k, -0.076, 0.034), 0.048 * body_k, mat_cloth)
+		# the pour that has already reached the floor
+		_ball(root, Vector3(0.000, 0.028, -0.020), Vector3(0.150, 0.029, 0.126), Basis(), mat_cloth)
+		_ball(root, Vector3(-0.062, 0.024, 0.046), Vector3(0.104, 0.025, 0.096), Basis(), mat_cloth)
+		_ball(root, Vector3(0.078, 0.024, -0.086), Vector3(0.112, 0.025, 0.090), Basis(), mat_cloth)
+		# a height-graded squash: the closer to the floor, the wider and flatter
+		for ch in root.get_children():
+			if not (ch is MeshInstance3D):
+				continue
+			var mm: MeshInstance3D = ch
+			var mt: Transform3D = mm.transform
+			var o: Vector3 = mt.origin
+			var yn: float = clampf(o.y / MELT_H, 0.0, 1.0)
+			var down: float = pow(1.0 - yn, 2.1)
+			var sxz: float = 1.0 + 1.58 * down
+			var sy: float = 1.0 - 0.58 * down
+			var ny: float = MELT_H * 0.90 * pow(yn, 1.38)
+			var sq: Basis = Basis.from_scale(Vector3(sxz, sy, sxz))
+			mm.transform = Transform3D(sq * mt.basis, Vector3(o.x * sxz, ny, o.z * sxz))
+
 	# --- fit, centre, settle --------------------------------------------------
 	var box: AABB = _union_aabb(root)
 	var kx: float = 1.20 / maxf(box.size.x, 0.001)
@@ -341,7 +377,8 @@ static func build(root: Node3D, seed: int) -> void:
 
 	var mid: Vector3 = box.position + box.size * 0.5
 	var shift := Vector3(-mid.x, 0.0, -mid.z)
-	if box.position.y < 0.0:
+	# a coil body has no soles, so it can also end up hovering: seat it either way
+	if box.position.y < 0.0 or box.position.y > 0.006:
 		shift.y = -box.position.y
 	for ch in root.get_children():
 		if not (ch is MeshInstance3D):
@@ -388,17 +425,64 @@ static func _ring(root: Node3D, ctr: Vector3, rad: float, thick: float, bs: Basi
 	return mi
 
 
-static func _soft_chain(root: Node3D, a: Vector3, b: Vector3, r0: float, r1: float, n: int, along: float, mat: StandardMaterial3D) -> void:
+static func _has_room(root: Node3D, n: int) -> bool:
+	return root.get_child_count() + n <= MAX_MI
+
+
+## The stuffing axis in one place: every soft mass of the suit is emitted here.
+## stuffed = the sewn lump; inflated = the same lump blown up; swarmed = a
+## granule of it, thrown off its own centre; unpicked = only the thread that
+## went round it, with a shrunken core every third mass to hold the shape.
+static func _soft(root: Node3D, ctr: Vector3, half: Vector3, bs: Basis, mat: StandardMaterial3D, brush: Dictionary) -> void:
+	var mode: String = String(brush.get("mode", "stuffed"))
+	var idx: int = int(brush.get("i", 0))
+	brush["i"] = idx + 1
+	if mode == "inflated":
+		_ball(root, ctr, half * 1.66, bs, mat)
+		return
+	if mode == "swarmed":
+		var rr: RandomNumberGenerator = brush["rng"]
+		var spread: float = maxf(half.x, half.z) * 0.98
+		var off := Vector3(rr.randf_range(-1.0, 1.0), rr.randf_range(-0.7, 0.7), rr.randf_range(-1.0, 1.0))
+		_ball(root, ctr + off * spread, half * 0.44, bs, mat)
+		if _has_room(root, 70) and rr.randf() < 0.62:
+			var off2 := Vector3(rr.randf_range(-1.7, 1.7), rr.randf_range(-1.2, 1.2), rr.randf_range(-1.7, 1.7))
+			_ball(root, ctr + off2 * spread, half * 0.27, bs, mat)
+		return
+	if mode == "unpicked":
+		var wire: StandardMaterial3D = brush["wire"]
+		var rad: float = maxf(half.x, half.z) * 1.04
+		var th: float = clampf(rad * 0.12, 0.0035, 0.011)
+		_ring(root, ctr, rad, th, bs, wire)
+		if idx % 3 == 0:
+			_ball(root, ctr, half * 0.30, bs, mat)
+		return
+	_ball(root, ctr, half, bs, mat)
+
+
+## A thread of cloth pulled off a joint by its own weight: it thins as it falls
+## and pools where it lands.
+static func _drip(root: Node3D, from_p: Vector3, r0: float, mat: StandardMaterial3D) -> void:
+	var n: int = 7
+	for i in range(n):
+		var t: float = float(i) / float(n - 1)
+		var dy: float = lerpf(from_p.y, 0.034, t)
+		var w: float = lerpf(r0, r0 * 0.36, sqrt(t)) * (1.0 + 1.55 * pow(t, 3.0))
+		var h: float = lerpf(r0 * 1.10, r0 * 0.32, t)
+		_ball(root, Vector3(from_p.x, dy, from_p.z), Vector3(w, h, w * 0.94), Basis(), mat)
+
+
+static func _soft_chain(root: Node3D, a: Vector3, b: Vector3, r0: float, r1: float, n: int, along: float, mat: StandardMaterial3D, brush: Dictionary) -> void:
 	var d: Vector3 = b - a
 	var bs: Basis = _basis_y_to(d)
 	for i in range(n):
 		var t: float = float(i) / float(maxi(n - 1, 1))
 		var r: float = lerpf(r0, r1, t)
 		var c: Vector3 = a + d * t
-		_ball(root, c, Vector3(r, r * along, r * 0.96), bs, mat)
+		_soft(root, c, Vector3(r, r * along, r * 0.96), bs, mat, brush)
 
 
-static func _hand(root: Node3D, wrist: Vector3, dir: Vector3, out_hint: Vector3, curl_dir: Vector3, r: float, mat: StandardMaterial3D) -> void:
+static func _hand(root: Node3D, wrist: Vector3, dir: Vector3, out_hint: Vector3, curl_dir: Vector3, r: float, mat: StandardMaterial3D, brush: Dictionary) -> void:
 	var bz: Vector3 = dir.normalized()
 	var bx: Vector3 = out_hint - bz * out_hint.dot(bz)
 	if bx.length() < 0.001:
@@ -407,7 +491,7 @@ static func _hand(root: Node3D, wrist: Vector3, dir: Vector3, out_hint: Vector3,
 	var by: Vector3 = bz.cross(bx).normalized()
 	var hb := Basis(bx, by, bz)
 	var palm: Vector3 = wrist + bz * (r * 1.05)
-	_ball(root, palm, Vector3(r * 1.00, r * 0.52, r * 0.88), hb, mat)
+	_soft(root, palm, Vector3(r * 1.00, r * 0.52, r * 0.88), hb, mat, brush)
 	var cd: Vector3 = curl_dir.normalized()
 	for i in range(4):
 		var fi: float = float(i)
@@ -415,10 +499,10 @@ static func _hand(root: Node3D, wrist: Vector3, dir: Vector3, out_hint: Vector3,
 		var fd: Vector3 = (bz * cos(spread) + bx * sin(spread) + cd * 0.55).normalized()
 		var fa: Vector3 = palm + bz * (r * 0.72) + bx * ((fi - 1.5) * r * 0.50)
 		var fb: Vector3 = fa + fd * (r * 1.30 - absf(fi - 1.5) * r * 0.16)
-		_soft_chain(root, fa, fb, r * 0.30, r * 0.24, 2, 1.0, mat)
+		_soft_chain(root, fa, fb, r * 0.30, r * 0.24, 2, 1.0, mat, brush)
 	var td: Vector3 = (bz * 0.42 - bx * 0.82 + cd * 0.34).normalized()
 	var ta: Vector3 = palm - bx * (r * 0.82) + bz * (r * 0.06)
-	_soft_chain(root, ta, ta + td * (r * 1.00), r * 0.34, r * 0.26, 2, 1.0, mat)
+	_soft_chain(root, ta, ta + td * (r * 1.00), r * 0.34, r * 0.26, 2, 1.0, mat, brush)
 
 
 static func _dash(root: Node3D, a: Vector3, b: Vector3, r: float, mat: StandardMaterial3D) -> void:
@@ -527,6 +611,186 @@ static func _union_aabb(root: Node3D) -> AABB:
 		else:
 			box = box.merge(wb)
 	return box
+
+
+# ---------------------------------------------------------------------------
+# the head axis: one animal head, built at h_org in the basis hb.
+# lvl 1 = the full head, lvl 0 = a lean one for the extra necks of a herd.
+# Returns the muzzle curve so the caller can lay the crown and muzzle seams.
+
+static func _build_head(root: Node3D, h_org: Vector3, hb: Basis, body_k: float, muzzle_len: float, ear_len: float, ear_out: float, ear_back: float, mats: Dictionary, mode: String, lvl: int, frng: RandomNumberGenerator) -> Dictionary:
+	var mat_head: StandardMaterial3D = mats["head"]
+	var mat_pale: StandardMaterial3D = mats["pale"]
+	var mat_ear: StandardMaterial3D = mats["ear"]
+	var mat_dark: StandardMaterial3D = mats["dark"]
+	var mat_bead: StandardMaterial3D = mats["bead"]
+	var mat_spark: StandardMaterial3D = mats["spark"]
+	var mat_thread: StandardMaterial3D = mats["thread"]
+	var boned: bool = mode == "boned"
+	var bloom: bool = mode == "blooming"
+
+	if boned:
+		# the cloth gone: five hoops through the skull and two rails over it
+		for i in range(5):
+			var t: float = float(i) / 4.0
+			var cy: float = lerpf(0.012, -0.026, t)
+			var cz: float = lerpf(0.026, -0.086, t)
+			var hoop_r: float = lerpf(0.098, 0.062, t) * body_k
+			_ring(root, h_org + hb * Vector3(0.0, cy, cz), hoop_r, 0.0065, hb * Basis(Vector3.RIGHT, deg_to_rad(90.0)), mat_thread)
+		for k in range(2):
+			var sd: float = -1.0 if k == 0 else 1.0
+			var rail: Array = []
+			for i in range(7):
+				var t: float = float(i) / 6.0
+				var ang: float = lerpf(1.05, -1.05, t)
+				var ry: float = 0.006 + 0.100 * cos(ang) * body_k
+				var rz: float = 0.010 + 0.106 * sin(ang) * body_k
+				rail.append(h_org + hb * Vector3(sd * 0.036 * body_k, ry, rz))
+			_seam(root, rail, 0.0060, 0.94, mat_thread)
+	else:
+		_ball(root, h_org + hb * Vector3(0.0, 0.008, 0.014), Vector3(0.092, 0.096, 0.104) * body_k, hb, mat_head)
+		_ball(root, h_org + hb * Vector3(0.0, -0.030, -0.052), Vector3(0.080, 0.072, 0.086) * body_k, hb, mat_head)
+		_ball(root, h_org + hb * Vector3(0.0, -0.020, -0.086), Vector3(0.070, 0.062, 0.064) * body_k, hb, mat_pale)
+
+	# muzzle: a swept elliptical tube curving down and forward
+	var mz_n: int = 9
+	var mz_pts: Array = []
+	var mz_rad: Array = []
+	for i in range(mz_n):
+		var t: float = float(i) / float(mz_n - 1)
+		var mzz: float = lerpf(-0.052, -0.052 - muzzle_len, t)
+		var my: float = lerpf(-0.018, -0.086, t) - 0.020 * sin(PI * t)
+		mz_pts.append(Vector3(0.0, my, mzz))
+		var rw: float = lerpf(0.068, 0.040, pow(t, 0.85)) * body_k
+		var rh: float = lerpf(0.077, 0.043, pow(t, 0.78)) * body_k
+		mz_rad.append(Vector2(rw, rh))
+	if boned:
+		for i in range(mz_n):
+			var pp: Vector3 = mz_pts[i]
+			var pr: Vector2 = mz_rad[i]
+			var tg: Vector3 = _tangent(mz_pts, i)
+			_ring(root, h_org + hb * pp, maxf(pr.x, pr.y), 0.0055, hb * _basis_y_to(tg), mat_thread)
+	else:
+		var muzzle_mesh: ArrayMesh = _swept_tube(mz_pts, mz_rad, 14)
+		var mz_mi: MeshInstance3D = _add(root, muzzle_mesh, mat_pale)
+		mz_mi.transform = Transform3D(hb, h_org)
+
+	var tip_local: Vector3 = mz_pts[mz_n - 1]
+	var snout_p: Vector3 = h_org + hb * (tip_local + Vector3(0.0, -0.004, -0.014))
+	if bloom:
+		_bloom(root, snout_p, hb, body_k, mat_ear, mat_pale, mat_dark, mat_spark, frng)
+	else:
+		var mat_snout: StandardMaterial3D = mat_thread if boned else mat_pale
+		_ball(root, snout_p, Vector3(0.046, 0.040, 0.038) * body_k, hb, mat_snout)
+		for k in range(2):
+			var sd: float = -1.0 if k == 0 else 1.0
+			_ball(root, snout_p + hb * Vector3(sd * 0.019, 0.000, -0.034), Vector3(0.011, 0.014, 0.009), hb, mat_dark)
+
+	# mouth line, a dark stitched crease sunk into the underside of the muzzle
+	if lvl > 0 and not boned and not bloom:
+		var mouth_pts: Array = []
+		for i in range(6):
+			var t: float = float(i) / 5.0
+			var u: float = lerpf(0.40, 0.99, t)
+			var mp: Vector3 = _curve_at(mz_pts, u)
+			var rr: Vector2 = _rad_at(mz_rad, u)
+			mouth_pts.append(h_org + hb * (mp + Vector3(0.0, -rr.y * 0.94, 0.0)))
+		_seam(root, mouth_pts, 0.0055, 0.72, mat_dark)
+
+	# eyes, set proud of the skull so the bead reads from every angle
+	for k in range(2):
+		var sd: float = -1.0 if k == 0 else 1.0
+		var eye_local := Vector3(sd * 0.078, 0.014, -0.050)
+		var nrm: Vector3 = (hb * Vector3(sd * 0.88, 0.20, -0.44)).normalized()
+		var eye_p: Vector3 = h_org + hb * eye_local + nrm * 0.008
+		if boned:
+			_ring(root, eye_p + nrm * 0.004, 0.026 * body_k, 0.0055, _basis_y_to(nrm), mat_thread)
+			_ball(root, eye_p - nrm * 0.012, Vector3(0.020, 0.008, 0.020), _basis_y_to(nrm), mat_dark)
+		else:
+			_ball(root, eye_p, Vector3(0.038, 0.012, 0.032), _basis_y_to(nrm), mat_pale)
+			var bead_p: Vector3 = eye_p + nrm * 0.016
+			_ball(root, bead_p, Vector3(0.021, 0.020, 0.019), _basis_y_to(nrm), mat_bead)
+			if lvl > 0:
+				_ball(root, bead_p + nrm * 0.014 + hb * Vector3(0.0, 0.008, -0.007), Vector3(0.006, 0.006, 0.006), Basis(), mat_spark)
+
+	# ears: leaf blades, cupped forward
+	for k in range(2):
+		var sd: float = -1.0 if k == 0 else 1.0
+		var base_p: Vector3 = h_org + hb * Vector3(sd * 0.060, 0.080, 0.030)
+		var ey_e: Vector3 = (hb * Vector3(sd * sin(ear_out), cos(ear_out) * cos(ear_back), sin(ear_back))).normalized()
+		var want: Vector3 = hb * Vector3(sd * 0.32, 0.0, -0.95)
+		var ez_e: Vector3 = (want - ey_e * want.dot(ey_e)).normalized()
+		var ex_e: Vector3 = ey_e.cross(ez_e).normalized()
+		var eb := Basis(ex_e, ey_e, ez_e)
+		var mat_lobe: StandardMaterial3D = mat_thread if boned else mat_head
+		_ball(root, base_p, Vector3(0.038, 0.034, 0.034), eb, mat_lobe)
+		var blade: ArrayMesh = _leaf_blade(ear_len, 0.078 * body_k, 0.011, 0.030, -0.016, 9, 6)
+		var bl_mi: MeshInstance3D = _add(root, blade, mat_lobe)
+		bl_mi.transform = Transform3D(eb, base_p)
+		if lvl > 0 and not boned:
+			var inner: ArrayMesh = _leaf_blade(ear_len * 0.70, 0.050 * body_k, 0.006, 0.024, -0.010, 7, 5)
+			var in_mi: MeshInstance3D = _add(root, inner, mat_ear)
+			in_mi.transform = Transform3D(eb, base_p + ez_e * 0.011 + ey_e * (ear_len * 0.10))
+		if bloom and _has_room(root, 8):
+			for p in range(2):
+				var ps: float = -1.0 if p == 0 else 1.0
+				var pb: Basis = eb * Basis(Vector3.BACK, deg_to_rad(ps * 38.0))
+				var pet: ArrayMesh = _leaf_blade(ear_len * 0.66, 0.034 * body_k, 0.006, 0.024, -0.014, 7, 5)
+				var pet_mi: MeshInstance3D = _add(root, pet, mat_ear)
+				pet_mi.transform = Transform3D(pb, base_p + ez_e * 0.006)
+
+	# a crown of horns swept up and back off the skull
+	if mode == "crowned":
+		var n_h: int = 7
+		for i in range(n_h):
+			var f: float = float(i) / float(n_h - 1)
+			var sx: float = lerpf(-1.0, 1.0, f)
+			var base_l := Vector3(sx * 0.068 * body_k, 0.080 * body_k, lerpf(0.028, -0.050, absf(sx)))
+			var hl: float = (0.150 + 0.140 * (1.0 - absf(sx))) * body_k * frng.randf_range(0.88, 1.12)
+			var hp: Array = []
+			var hr: Array = []
+			for s in range(6):
+				var u: float = float(s) / 5.0
+				var px: float = base_l.x + sx * 0.36 * hl * u * u
+				var py: float = base_l.y + hl * u * (1.0 - 0.20 * u)
+				var pz: float = base_l.z - 0.30 * hl * u * u + 0.12 * hl * u
+				hp.append(Vector3(px, py, pz))
+				var tr: float = lerpf(0.024, 0.005, u) * body_k
+				hr.append(Vector2(tr, tr))
+			var horn: ArrayMesh = _swept_tube(hp, hr, 8)
+			var hm: MeshInstance3D = _add(root, horn, mat_pale)
+			hm.transform = Transform3D(hb, h_org)
+			var tip_p: Vector3 = hp[5]
+			_ball(root, h_org + hb * tip_p, Vector3(0.009, 0.009, 0.009), hb, mat_bead)
+
+	return {"pts": mz_pts, "rad": mz_rad}
+
+
+## The muzzle opens instead of ending: a corolla of petals off the tip, with a
+## short stamen cluster standing in the middle of it.
+static func _bloom(root: Node3D, tip: Vector3, hb: Basis, body_k: float, mat_petal: StandardMaterial3D, mat_pale: StandardMaterial3D, mat_dark: StandardMaterial3D, mat_spark: StandardMaterial3D, frng: RandomNumberGenerator) -> void:
+	var fwd: Vector3 = (hb * Vector3(0.0, -0.24, -1.0)).normalized()
+	var up_ref: Vector3 = hb * Vector3(0.0, 1.0, 0.0)
+	var ax: Vector3 = fwd.cross(up_ref).normalized()
+	var ay: Vector3 = ax.cross(fwd).normalized()
+	_ball(root, tip, Vector3(0.030, 0.030, 0.030) * body_k, hb, mat_pale)
+	var n_p: int = 8
+	for i in range(n_p):
+		var a: float = TAU * float(i) / float(n_p)
+		var out_d: Vector3 = ax * cos(a) + ay * sin(a)
+		var dirp: Vector3 = (fwd * 0.52 + out_d * 0.86).normalized()
+		var ez_p: Vector3 = (out_d - dirp * out_d.dot(dirp)).normalized()
+		var ex_p: Vector3 = dirp.cross(ez_p).normalized()
+		var pb := Basis(ex_p, dirp, ez_p)
+		var pl: float = 0.092 * body_k * frng.randf_range(0.84, 1.16)
+		var petal: ArrayMesh = _leaf_blade(pl, 0.044 * body_k, 0.006, 0.022, -0.014, 7, 5)
+		var pm: MeshInstance3D = _add(root, petal, mat_petal)
+		pm.transform = Transform3D(pb, tip + dirp * (0.014 * body_k))
+	for i in range(4):
+		var a: float = TAU * float(i) / 4.0 + 0.4
+		var stem_d: Vector3 = (fwd * 0.92 + (ax * cos(a) + ay * sin(a)) * 0.32).normalized()
+		_ball(root, tip + stem_d * (0.030 * body_k), Vector3(0.008, 0.008, 0.008), Basis(), mat_dark)
+		_ball(root, tip + stem_d * (0.045 * body_k), Vector3(0.007, 0.007, 0.007), Basis(), mat_spark)
 
 
 # ---------------------------------------------------------------------------

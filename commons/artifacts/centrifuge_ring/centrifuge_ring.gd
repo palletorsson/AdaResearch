@@ -25,14 +25,21 @@ var _pod: Node3D
 var _vectors: Node3D
 var _t: float = 0.0
 var _omega: float = 1.0
+var _phase: float = 0.0
+var _controls: Node3D
 
 
 func _ready() -> void:
+	if str(get_meta("config_lesson", "")) == "hand_ring":
+		set_meta("em_keep_scale",true)
+		var ride=preload("res://commons/artifacts/centrifuge_ring/hand_ring.gd").new()
+		ride.name="HandRing";add_child(ride);set_process(false);return
 	_build()
 	set_process(not Engine.is_editor_hint())
 
 
 func apply_grid_config(config: Dictionary) -> void:
+	if str(get_meta("config_lesson", "")) == "hand_ring":return
 	if config.has("radius"): radius = float(config["radius"])
 	if config.has("speed"): speed = clampf(float(config["speed"]), 0.0, 1.0)
 	if config.has("emissive"): emissive = bool(config["emissive"])
@@ -43,7 +50,8 @@ func apply_grid_config(config: Dictionary) -> void:
 
 
 func _build() -> void:
-	_omega = lerpf(0.35, 1.5, speed)
+	radius = maxf(radius, 0.5)
+	_omega = lerpf(2.0, 9.0, speed) / radius
 	var steel := _steel_mat(Color(0.32, 0.34, 0.4))
 	# the neon ring track + a bright inner line
 	add_child(_torus(Vector3(0, TRACK_Y, 0), radius, 0.09, _glow_mat(track_color, 1.6)))
@@ -67,8 +75,16 @@ func _build() -> void:
 	_vectors = Node3D.new(); add_child(_vectors)
 
 	var v: float = lerpf(2.0, 9.0, speed)
+	# These two arrows rotate with the pod; no geometry allocation per frame.
+	_vectors.add_child(_arrow(Vector3.ZERO, Vector3.BACK * v * 0.18, 0.05, _glow_mat(vel_color, 1.6)))
+	_vectors.add_child(_arrow(Vector3.ZERO, Vector3.LEFT * v * v / radius * 0.10, 0.055, _glow_mat(force_color, 1.6)))
 	add_child(_billboard_label("CENTRIPETAL\na = v²/r\nv = %.1f  r = %.1f\na = %.1f  (F = m·a, inward)" % [v, radius, v * v / radius],
 		Vector3(0, TRACK_Y + 2.0, 0), 30, track_color.lerp(Color.WHITE, 0.3)))
+	if str(get_meta("config_lesson", "")) == "kinetic_turn":
+		_controls = preload("res://commons/artifacts/timing_machines/machine_stage.gd").new()
+		add_child(_controls)
+		_controls.console(["SPEED"], radius + 1.0, "PRESCRIBED CIRCLE / speed 2, 4, 6 m/s")
+		_controls.buttons["SPEED"].pressed.connect(_cycle_speed)
 	_advance()
 
 
@@ -76,19 +92,20 @@ func _process(delta: float) -> void:
 	if Engine.is_editor_hint() or _pod == null:
 		return
 	_t += delta
+	_phase += _omega * delta
 	_advance()
 
 
 func _advance() -> void:
-	var theta: float = _t * _omega
+	var theta: float = _phase
 	var pos := Vector3(cos(theta) * radius, TRACK_Y, sin(theta) * radius)
 	_pod.position = pos
 	_pod.rotation.y = -theta
-	# the two vectors, body-scale
-	for c in _vectors.get_children():
-		_vectors.remove_child(c); c.queue_free()
-	var tangent := Vector3(-sin(theta), 0, cos(theta))
-	var inward := Vector3(-cos(theta), 0, -sin(theta))
-	var v: float = lerpf(2.0, 9.0, speed)
-	_vectors.add_child(_arrow(pos, pos + tangent * (v * 0.18), 0.05, _glow_mat(vel_color, 1.6)))                 # velocity (tangent, ∝v)
-	_vectors.add_child(_arrow(pos, pos + inward * (v * v / radius * 0.10), 0.055, _glow_mat(force_color, 1.4 + speed * 2.0)))  # centripetal (inward, ∝v²/r)
+	_vectors.position = pos
+	_vectors.rotation.y = -theta
+
+func _cycle_speed() -> void:
+	var v := lerpf(2.0, 9.0, speed)
+	var next := 4.0 if v < 3 else (6.0 if v < 5 else 2.0)
+	# Rebuild only on an explicit parameter change; phase is retained.
+	apply_grid_config.call_deferred({"speed": (next - 2.0) / 7.0})

@@ -6,7 +6,7 @@
 		"wallpaper_cage": {
 			"category": "symmetry",
 			"complexity": "intermediate",
-			"description": "The symmetry seam. Rotation is a continuous dial - any real angle turns the circle (SO(2), a smooth infinity of symmetries). But a periodic tiling admits only 1, 2, 3, 4, 6-fold rotation - the crystallographic restriction. Five-fold never closes. Amber: the continuous dial. Blue: the five allowed orders. Red: the forbidden ones. From this cage falls a finite catalogue - exactly 17 wallpaper groups, the complete list of ways a pattern can repeat. The continuum walks in, a countable law walks out.",
+			"description": "The symmetry seam. Rotation is a continuous dial: any real angle preserves the circle. A periodic planar lattice permits only rotation orders 1, 2, 3, 4 and 6. Amber marks the continuous dial, blue the compatible lattice orders, and red the excluded orders 5 and 7. These restrictions concern the whole lattice, not shapes placed inside a motif. The cage diagrams the crystallographic rotation restriction; it does not derive the full classification of 17 wallpaper groups.",
 			"dev_themes": [
 				"digital_bias",
 				"seam"

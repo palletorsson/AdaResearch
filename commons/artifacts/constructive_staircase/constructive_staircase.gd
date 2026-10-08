@@ -3,16 +3,9 @@ class_name ConstructiveStaircase
 
 ## @identity
 ## name: Constructive Staircase
-## lineage: Brouwer's intuitionism — a mathematical object exists only once you
-##   have CONSTRUCTED it. The law of the excluded middle (P or not-P) is rejected:
-##   before construction, a statement is neither true nor false.
-## essence: a staircase that builds itself one step at a time. Built steps are
-##   solid white treads with crisp wire edges. The region ahead is not empty and
-##   not solid — it is an undetermined cyan haze, ghost-steps that are neither
-##   there nor not-there. A pulse of construction crystallises the next step out
-##   of the haze; when the flight completes it dissolves back and begins again.
-## truth: the next step isn't true-or-false until you build it — existence is
-##   construction, not the absence of a contradiction.
+## lineage: a timed illustration of making a finite object, beside the visitor-authored choice sequence.
+## essence: seven mesh steps appear on a timer and dissolve. Haze previews planned geometry; it is not a third truth value.
+## truth: the timer supplies the construction. This model has no tread collision and is not a walkable flight or a proof of intuitionism.
 
 # NOTE: `emissive` is declared by the parent (embodied_prop.gd) — do not redeclare.
 @export var cool_white: Color = Color(0.92, 0.94, 1.0)
@@ -70,7 +63,7 @@ func _build() -> void:
 
 	# --- labels ---
 	add_child(_billboard_label("CONSTRUCTIVE STAIRCASE", Vector3(0.0, 1.5, 0.0), 30, cool_white))
-	add_child(_billboard_label("exists only once built — no excluded middle", Vector3(0.0, 1.36, 0.0), 16, accent_cyan))
+	add_child(_billboard_label("TIMED MODEL — watch a finite construction", Vector3(0.0, 1.36, 0.0), 16, accent_cyan))
 	# running tally of how many steps have been constructed so far
 	_counter = _billboard_label("0 / %d built" % step_count, Vector3(0.0, 1.20, 0.0), 18, cool_white)
 	add_child(_counter)

@@ -123,9 +123,14 @@ var _rng: RandomNumberGenerator = null
 # VR Controls
 var _speed_slider: Node
 var _control_panel: Node3D
+var _study_requested: bool = false
+var _built: bool = false
 
 
 func _ready():
+	if _study_requested or str(get_meta("config_study", "")) == "addresses":
+		_study_requested = true
+		_address_dimensions()
 	_cell_size = dish_size / grid_size
 	_create_dish()
 	_create_multimesh()
@@ -133,6 +138,44 @@ func _ready():
 	_create_vr_controls()
 	_init_grid()
 	_sow()
+	_built = true
+	if _study_requested:
+		_mount_address_study()
+
+func _address_dimensions() -> void:
+	grid_size = 24
+	dish_size = 1.15
+	auto_run = false
+	culture = "none"
+
+## Only the reviewed museum placement asks for a held address/receiver study.
+## Original preset buttons and the 64-site dish remain in other placements.
+func _mount_address_study() -> void:
+	if not _built or has_node("AddressStudy"):
+		return
+	if grid_size != 24:
+		for path in ["Dish", "Rim", "CellMultiMesh", "InfoLabel"]:
+			var old: Node = get_node(path)
+			remove_child(old)
+			old.queue_free()
+		_address_dimensions()
+		_cell_size = dish_size / grid_size
+		_create_dish()
+		_create_multimesh()
+		_create_labels()
+		_init_grid()
+	set_process(false)
+	set_process_input(false)
+	auto_run = false
+	if is_instance_valid(_control_panel):
+		remove_child(_control_panel)
+		_control_panel.queue_free()
+	_control_panel = null
+	_speed_slider = null
+	_info_label.visible = false
+	var study: Node3D = load("res://commons/artifacts/game_of_life_petri/address_study.gd").new()
+	study.name = "AddressStudy"
+	add_child(study)
 
 func _create_dish():
 	# Petri dish base
@@ -432,6 +475,9 @@ func reset():
 	_clear_grid()
 
 func apply_grid_config(config_data: Dictionary):
+	if str(config_data.get("study", "")) == "addresses":
+		_study_requested = true
+		_mount_address_study()
 	for key in config_data:
 		if key == "culture" or key == "culture_seed":
 			continue                          # normalised below, never set raw

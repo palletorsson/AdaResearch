@@ -228,6 +228,11 @@ func run() -> void:
 	await get_tree().process_frame
 	check(bool(bar0.get("is_resonating")) and (bar0.get("audio_player") as AudioStreamPlayer3D).playing, "the first note was not stolen by the second: still ringing, still playing")
 	check(status != null and status.text.begins_with("2 voices"), "the readout names two voices with their Hz, level and age (%s)" % (status.text if status != null else ""))
+	_check_audio_scope(vis, bars)
+	for pair in [[bar0, "audio_C4.wav"], [bar4, "audio_A4.wav"]]:
+		var wav: AudioStreamWAV = (pair[0].get("audio_player") as AudioStreamPlayer3D).stream
+		check(wav.save_to_wav(_evidence + str(pair[1])) == OK, "exported the bar's generated PCM for remote comparison: " + str(pair[1]))
+	measurements["audio_files"] = ["audio_C4.wav", "audio_A4.wav"]
 	if wave_mesh != null and wave_mesh.mesh != null:
 		var im: ImmediateMesh = wave_mesh.mesh
 		var nverts: int = 0
@@ -469,6 +474,55 @@ func _cam_pose(cam: Camera3D) -> Dictionary:
 	return {"current_camera": str(cur.get_path()).right(50) if cur != null else "none", "is_ours": cur == cam,
 		"at": [snappedf(cam.global_position.x, 0.01), snappedf(cam.global_position.y, 0.01), snappedf(cam.global_position.z, 0.01)],
 		"forward": [snappedf(fwd.x, 0.01), snappedf(fwd.y, 0.01), snappedf(fwd.z, 0.01)]}
+
+## Independent PCM decoding and geometry checks: the display must preserve each
+## voice's own age and player gain, and add those source samples before drawing.
+func _check_audio_scope(vis: Node3D, bars: Array) -> void:
+	check(bool(vis.get("sample_audio")), "table scope uses generated note samples")
+	var window_s: float = float(vis.get("window_seconds"))
+	var count: int = int(vis.get("num_points"))
+	check(is_equal_approx(window_s, 0.012) and count == 512, "the scope declares a 12 ms window with 512 points")
+	var windows: Array = vis.get("_audio_windows")
+	check(windows.size() == 2, "two separate playback windows feed the sum")
+	var expected := PackedFloat64Array(); expected.resize(count); expected.fill(0.0)
+	var err: float = 0.0
+	var ages: Array = []
+	for w: Dictionary in windows:
+		ages.append(w["age"])
+		var bar: ResonatingBar
+		for candidate in bars:
+			if is_equal_approx(candidate.frequency, float(w["frequency"])): bar = candidate; break
+		if bar == null:
+			check(false, "scope window has a corresponding bar"); continue
+		var player: AudioStreamPlayer3D = bar.audio_player
+		var stream: AudioStreamWAV = player.stream
+		var pcm: PackedByteArray = stream.data
+		var shown: PackedFloat32Array = w["samples"]
+		for i in count:
+			var frame: int = int((float(w["age"]) + float(i) * window_s / float(count - 1)) * stream.mix_rate)
+			var value: float = 0.0
+			if frame * 2 + 1 < pcm.size():
+				var signed: int = int(pcm[frame * 2]) | (int(pcm[frame * 2 + 1]) << 8)
+				if signed >= 32768: signed -= 65536
+				value = float(signed) / 32768.0 * pow(10.0, player.volume_db / 20.0)
+			err = maxf(err, absf(value - shown[i]))
+			expected[i] += value
+	check(err < 0.000001, "scope reads the PCM with each player's gain (max error %.9f)" % err)
+	check(ages.size() == 2 and absf(ages[0] - ages[1]) > 1.0, "overlapping notes retain different playback ages")
+	var summed: PackedFloat32Array = vis.get("_summed_samples")
+	var sum_err: float = 0.0
+	for i in count: sum_err = maxf(sum_err, absf(summed[i] - expected[i]))
+	check(sum_err < 0.000001, "sum equals independently decoded contributors")
+	var wave_mesh: MeshInstance3D = vis.get("_wave_mesh")
+	var verts: PackedVector3Array = wave_mesh.mesh.surface_get_arrays(0)[Mesh.ARRAY_VERTEX]
+	var geometry_err: float = 0.0
+	for i in range(0, count - 1, 17):
+		var centre: Vector3 = (verts[i * 6] + verts[i * 6 + 5]) * 0.5
+		geometry_err = maxf(geometry_err, absf(centre.y - clampf(expected[i], -1.0, 1.0) * float(vis.get("wave_height_scale"))))
+	check(geometry_err < 0.000001, "drawn ribbon follows the PCM sum at a fixed gain")
+	var label: Label3D = vis.get("_status_label")
+	check(label.text.contains("12 ms") and label.text.contains("source samples"), "the instrument names the selected window")
+	measurements["audio_scope"] = {"window_seconds": window_s, "points": count, "ages": ages, "pcm_error": err, "sum_error": sum_err, "geometry_error": geometry_err, "label": label.text, "position_note": "reported source playback positions, before spatial/bus/device processing"}
 
 func _finish() -> void:
 	var report := {"map": MAP, "checks": checks, "failures": failures, "measurements": measurements,

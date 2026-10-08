@@ -35,11 +35,18 @@ var _amp: float = 0.6
 
 
 func _ready() -> void:
+	if str(get_meta("config_lesson", "")) == "restoring_forces":
+		var chamber = preload("res://commons/artifacts/spring_tower/restoring_forces.gd").new()
+		chamber.name = "RestoringForces"
+		add_child(chamber)
+		set_process(false)
+		return
 	_build()
 	set_process(not Engine.is_editor_hint())
 
 
 func apply_grid_config(config: Dictionary) -> void:
+	if str(get_meta("config_lesson", "")) == "restoring_forces": return
 	if config.has("stiffness"): stiffness = clampf(float(config["stiffness"]), 0.0, 1.0)
 	if config.has("emissive"): emissive = bool(config["emissive"])
 	coil_color = _parse_color(config.get("coil_color", coil_color), coil_color)

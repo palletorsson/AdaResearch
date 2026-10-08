@@ -37,6 +37,17 @@ extends RefCounted
 ## real bandage (my bands are clean toruses), the wigged figure with the red hair,
 ## translucency in the porcelain, the lace at the bodice hem, fingernails, and the tiny
 ## hinge hardware inside the joints.
+##
+## AXES
+##   winding — what the bandage IS on every limb: clean torus bands (bandage), threads that
+##     have left the limb and hang in the air (unravelling), thin iron hoops on three rails
+##     with the porcelain flesh gone from inside them (cage), whorls of four petals at every
+##     turn (blooming), or clusters of tiny eggs — copies of her own head — crowding the
+##     limb (swarm). Silhouette, part count and material all change with it.
+##   figure — what body she makes: one doll reaching (reaching), three necks and three faces
+##     rising out of the one collar (three_headed), a second small doll growing head-first
+##     out of her back with its own arm (budding), or both legs gone, drowned to the hip in
+##     a wide set pour of porcelain she stands in (flooded).
 
 const TEX_SIZE: int = 256
 
@@ -45,9 +56,21 @@ static func describe() -> String:
 	return "A bald porcelain doll standing in a stiff gold brocade bodice with a high collar, her limbs bound in spiralling pale pink bandage over visible ball joints, one arm reaching out on thin wires."
 
 
-static func build(root: Node3D, seed: int) -> void:
+static func axes() -> Dictionary:
+	return {
+		"winding": ["bandage", "unravelling", "cage", "blooming", "swarm"],
+		"figure": ["reaching", "three_headed", "budding", "flooded"],
+	}
+
+
+static func build(root: Node3D, seed: int, opts: Dictionary = {}) -> void:
 	var rng := RandomNumberGenerator.new()
 	rng.seed = seed
+
+	# --- axes ---------------------------------------------------------------
+	var winding: String = String(opts.get("winding", "bandage"))
+	var figure: String = String(opts.get("figure", "reaching"))
+	var hollow: bool = winding == "cage"
 
 	# --- variant ------------------------------------------------------------
 	var maze_skin: bool = rng.randf() < 0.45
@@ -98,6 +121,33 @@ static func build(root: Node3D, seed: int) -> void:
 	mat_wire.metallic = 0.85
 	mat_wire.roughness = 0.38
 
+	# materials the winding axis needs — floss, blackened iron, petal, tiny egg
+	var mat_thread := StandardMaterial3D.new()
+	mat_thread.albedo_color = Color("#EFD6CE")
+	mat_thread.roughness = 0.86
+	mat_thread.metallic = 0.0
+	var mat_cage := StandardMaterial3D.new()
+	mat_cage.albedo_color = Color("#332E2B")
+	mat_cage.metallic = 0.88
+	mat_cage.roughness = 0.34
+	var mat_petal := StandardMaterial3D.new()
+	mat_petal.albedo_color = Color("#F7C6C2")
+	mat_petal.roughness = 0.44
+	mat_petal.metallic = 0.0
+	mat_petal.cull_mode = BaseMaterial3D.CULL_DISABLED
+	var mat_pip: StandardMaterial3D = _porcelain(Color("#F3E5DD"), 0.14)
+	var mat_pour: StandardMaterial3D = _porcelain(Color("#E9E2DC"), 0.07)
+
+	var wrap_alt: StandardMaterial3D = mat_thread
+	if winding == "cage":
+		wrap_alt = mat_cage
+	elif winding == "blooming":
+		wrap_alt = mat_petal
+	elif winding == "swarm":
+		wrap_alt = mat_pip
+	elif winding != "unravelling":
+		wrap_alt = null
+
 	# --- proportions --------------------------------------------------------
 	var y_ankle: float = 0.078
 	var y_knee: float = rng.randf_range(0.395, 0.435)
@@ -113,6 +163,11 @@ static func build(root: Node3D, seed: int) -> void:
 	var band_tilt: float = deg_to_rad(rng.randf_range(8.0, 15.0))
 	var band_step: float = TAU / rng.randf_range(4.4, 6.6)
 
+	# the flood swallows the legs and raises the floor the wires stand on
+	var legs_on: bool = figure != "flooded"
+	var pour_top: float = 0.0
+	var wire_foot_y: float = 0.006
+
 	# --- legs ---------------------------------------------------------------
 	for side_i in range(2):
 		var sd: float = -1.0 if side_i == 0 else 1.0
@@ -125,31 +180,71 @@ static func build(root: Node3D, seed: int) -> void:
 		var r_thigh: float = rng.randf_range(0.062, 0.070)
 		var r_shin: float = rng.randf_range(0.043, 0.050)
 
-		_limb(root, hip_p, knee_p, r_thigh * 0.86, mat_skin)
-		_limb(root, knee_p, ankle_p, r_shin * 0.86, mat_skin)
-		_ball(root, hip_p, r_thigh * 1.06, mat_joint)
-		_ball(root, knee_p, r_shin * 1.16, mat_joint)
-		_ball(root, ankle_p, r_shin * 0.92, mat_joint)
+		if legs_on:
+			if not hollow:
+				_limb(root, hip_p, knee_p, r_thigh * 0.86, mat_skin)
+				_limb(root, knee_p, ankle_p, r_shin * 0.86, mat_skin)
+			_ball(root, hip_p, r_thigh * 1.06, mat_joint)
+			_ball(root, knee_p, r_shin * 1.16, mat_joint)
+			_ball(root, ankle_p, r_shin * 0.92, mat_joint)
 
-		var n_thigh: int = rng.randi_range(7, 10)
-		var n_shin: int = rng.randi_range(6, 9)
-		# the wrap tapers, but never below the capsule under it or the band vanishes
-		_wrap(root, hip_p, knee_p, r_thigh, r_thigh * 0.90, n_thigh, 0.0060, band_tilt, rng.randf_range(0.0, TAU), band_step, band_mats)
-		_wrap(root, knee_p, ankle_p, r_shin * 1.05, r_shin * 0.94, n_shin, 0.0052, band_tilt, rng.randf_range(0.0, TAU), band_step, band_mats)
+		var n_thigh: int = _wrap_count(rng.randi_range(7, 10), winding)
+		var n_shin: int = _wrap_count(rng.randi_range(6, 9), winding)
+		var ph_thigh: float = rng.randf_range(0.0, TAU)
+		var ph_shin: float = rng.randf_range(0.0, TAU)
+		if legs_on:
+			# the wrap tapers, but never below the capsule under it or the band vanishes
+			_wrap(root, hip_p, knee_p, r_thigh, r_thigh * 0.90, n_thigh, 0.0060, band_tilt, ph_thigh, band_step, band_mats, winding, wrap_alt)
+			_wrap(root, knee_p, ankle_p, r_shin * 1.05, r_shin * 0.94, n_shin, 0.0052, band_tilt, ph_shin, band_step, band_mats, winding, wrap_alt)
 
 		# foot: a turned-out block, sole flat on the floor
 		var foot_yaw: float = sd * rng.randf_range(0.12, 0.34)
 		var fb: Basis = Basis(Vector3.UP, foot_yaw)
-		var box := BoxMesh.new()
-		box.size = Vector3(0.076, 0.050, 0.180)
 		var foot_c: Vector3 = ankle_p + fb * Vector3(0.0, 0.0, -0.052)
-		var fm: MeshInstance3D = _add(root, box, mat_skin)
-		fm.transform = Transform3D(fb, Vector3(foot_c.x, 0.025, foot_c.z))
-		var toe := SphereMesh.new()
-		toe.radius = 0.038
-		toe.height = 0.062
-		var tm: MeshInstance3D = _add(root, toe, mat_skin)
-		tm.transform = Transform3D(_scale_local(fb, Vector3(1.0, 0.72, 1.0)), Vector3(foot_c.x, 0.028, foot_c.z) + fb * Vector3(0.0, 0.0, -0.080))
+		if legs_on:
+			var box := BoxMesh.new()
+			box.size = Vector3(0.076, 0.050, 0.180)
+			var fm: MeshInstance3D = _add(root, box, mat_skin)
+			fm.transform = Transform3D(fb, Vector3(foot_c.x, 0.025, foot_c.z))
+			var toe := SphereMesh.new()
+			toe.radius = 0.038
+			toe.height = 0.062
+			var tm: MeshInstance3D = _add(root, toe, mat_skin)
+			tm.transform = Transform3D(_scale_local(fb, Vector3(1.0, 0.72, 1.0)), Vector3(foot_c.x, 0.028, foot_c.z) + fb * Vector3(0.0, 0.0, -0.080))
+
+	# --- the pour: legs drowned in porcelain that has set --------------------
+	if figure == "flooded":
+		pour_top = y_hip + rng.randf_range(0.010, 0.060)
+		var n_pour: int = 10
+		for i in range(n_pour):
+			var fp: float = float(i) / float(n_pour - 1)
+			var yy: float = pour_top * (1.0 - pow(fp, 1.35))
+			var rr: float = lerpf(0.150, 0.500, pow(fp, 0.70))
+			var flat: float = lerpf(0.34, 0.17, fp)
+			var pour_s := SphereMesh.new()
+			pour_s.radius = rr
+			pour_s.height = rr * 2.0
+			pour_s.radial_segments = 26
+			pour_s.rings = 12
+			var pmi: MeshInstance3D = _add(root, pour_s, mat_pour)
+			pmi.transform = Transform3D(_scale_local(Basis(Vector3.UP, float(i) * 0.37), Vector3(1.0, flat, 0.87)), Vector3(lean_x * 0.25, yy, lean_z * 0.25))
+		var rim := TorusMesh.new()
+		rim.outer_radius = 0.212
+		rim.inner_radius = 0.146
+		rim.rings = 28
+		rim.ring_segments = 8
+		var rmi: MeshInstance3D = _add(root, rim, mat_pour)
+		rmi.transform = Transform3D(_scale_local(Basis(), Vector3(1.0, 0.52, 0.88)), Vector3(0.0, pour_top - 0.014, 0.0))
+		for i in range(6):
+			var ang: float = rng.randf_range(0.0, TAU)
+			var rad_d: float = rng.randf_range(0.235, 0.455)
+			var drop_r: float = rng.randf_range(0.021, 0.048)
+			var drop := SphereMesh.new()
+			drop.radius = drop_r
+			drop.height = drop_r * 2.0
+			var dy: float = _pour_y(pour_top, rad_d)
+			var dmi: MeshInstance3D = _add(root, drop, mat_pour)
+			dmi.transform = Transform3D(_scale_local(Basis(Vector3.UP, ang), Vector3(1.0, 1.55, 1.0)), Vector3(sin(ang) * rad_d, dy + drop_r * 0.6, -cos(ang) * rad_d))
 
 	# --- torso --------------------------------------------------------------
 	var n_torso: int = rng.randi_range(7, 9)
@@ -198,16 +293,17 @@ static func build(root: Node3D, seed: int) -> void:
 		var r_up: float = rng.randf_range(0.046, 0.053)
 		var r_fore: float = rng.randf_range(0.035, 0.041)
 
-		_limb(root, shoulder, elbow, r_up * 0.84, mat_skin)
-		_limb(root, elbow, wrist, r_fore * 0.84, mat_skin)
+		if not hollow:
+			_limb(root, shoulder, elbow, r_up * 0.84, mat_skin)
+			_limb(root, elbow, wrist, r_fore * 0.84, mat_skin)
 		_ball(root, shoulder, r_up * 1.22, mat_joint)
 		_ball(root, elbow, r_fore * 1.30, mat_joint)
 		_ball(root, wrist, r_fore * 0.98, mat_joint)
 
-		var n_up: int = rng.randi_range(5, 8)
-		var n_fore: int = rng.randi_range(5, 8)
-		_wrap(root, shoulder, elbow, r_up, r_up * 0.92, n_up, 0.0050, band_tilt, rng.randf_range(0.0, TAU), band_step, band_mats)
-		_wrap(root, elbow, wrist, r_fore * 1.04, r_fore * 0.94, n_fore, 0.0042, band_tilt, rng.randf_range(0.0, TAU), band_step, band_mats)
+		var n_up: int = _wrap_count(rng.randi_range(5, 8), winding)
+		var n_fore: int = _wrap_count(rng.randi_range(5, 8), winding)
+		_wrap(root, shoulder, elbow, r_up, r_up * 0.92, n_up, 0.0050, band_tilt, rng.randf_range(0.0, TAU), band_step, band_mats, winding, wrap_alt)
+		_wrap(root, elbow, wrist, r_fore * 1.04, r_fore * 0.94, n_fore, 0.0042, band_tilt, rng.randf_range(0.0, TAU), band_step, band_mats, winding, wrap_alt)
 
 		# hand and fingers
 		var f_dir: Vector3 = (wrist - elbow).normalized()
@@ -240,70 +336,70 @@ static func build(root: Node3D, seed: int) -> void:
 	var hb: Basis = Basis(Vector3.UP, head_yaw) * Basis(Vector3.FORWARD, head_roll) * Basis(Vector3.RIGHT, head_pitch)
 	var neck_top: Vector3 = p_top + hb * Vector3(0.0, 0.085, 0.0)
 	_tapered_cyl(root, p_top - Vector3(0.0, 0.02, 0.0), neck_top, 0.052, 0.043, mat_skin)
-	var n_neckband: int = rng.randi_range(1, 3)
-	_wrap(root, p_top + Vector3(0.0, 0.005, 0.0), neck_top, 0.060, 0.051, n_neckband, 0.0034, band_tilt * 0.5, rng.randf_range(0.0, TAU), band_step, band_mats)
-
-	var rx: float = 0.098
-	var ry: float = 0.125
-	var rz: float = 0.098
-	var h_org: Vector3 = neck_top + hb * Vector3(0.0, ry * 0.86, -0.006)
-	var egg := SphereMesh.new()
-	egg.radius = rx
-	egg.height = ry * 2.0
-	egg.radial_segments = 32
-	egg.rings = 20
-	var em: MeshInstance3D = _add(root, egg, mat_head)
-	em.transform = Transform3D(hb, h_org)
-	var chin := SphereMesh.new()
-	chin.radius = 0.058
-	chin.height = 0.104
-	var cm: MeshInstance3D = _add(root, chin, mat_head)
-	cm.transform = Transform3D(_scale_local(hb, Vector3(1.0, 0.92, 1.02)), h_org + hb * Vector3(0.0, -0.078, -0.028))
-	for side_i in range(2):
-		var sd: float = -1.0 if side_i == 0 else 1.0
-		var ear := SphereMesh.new()
-		ear.radius = 0.030
-		ear.height = 0.058
-		var erm: MeshInstance3D = _add(root, ear, mat_head)
-		erm.transform = Transform3D(_scale_local(hb * Basis(Vector3.UP, sd * 0.35), Vector3(0.34, 1.0, 0.86)), h_org + hb * Vector3(sd * rx * 0.93, -0.010, 0.008))
-
-	# painted face — eyes, lash lines, brows, mouth
-	var eye_x: float = 0.040
-	var eye_y: float = 0.020
-	for side_i in range(2):
-		var sd: float = -1.0 if side_i == 0 else 1.0
-		var ez: float = _face_z(rx, ry, rz, eye_x, eye_y) * 0.965
-		var eye := SphereMesh.new()
-		eye.radius = 0.027
-		eye.height = 0.054
-		var eyb: Basis = _scale_local(hb * Basis(Vector3.UP, sd * 0.22), Vector3(1.0, 0.50, 0.26))
-		var eym: MeshInstance3D = _add(root, eye, mat_eye)
-		eym.transform = Transform3D(eyb, h_org + hb * Vector3(sd * eye_x, eye_y, ez))
-		var lash := BoxMesh.new()
-		lash.size = Vector3(0.050, 0.0055, 0.004)
-		var lz: float = _face_z(rx, ry, rz, eye_x, eye_y + 0.013) * 0.985
-		var lm: MeshInstance3D = _add(root, lash, mat_line)
-		lm.transform = Transform3D(hb * Basis(Vector3.FORWARD, -sd * 0.16), h_org + hb * Vector3(sd * eye_x, eye_y + 0.013, lz))
-		var brow := BoxMesh.new()
-		brow.size = Vector3(0.046, 0.0045, 0.004)
-		var bz: float = _face_z(rx, ry, rz, eye_x, eye_y + 0.046) * 0.985
-		var bwm: MeshInstance3D = _add(root, brow, mat_line)
-		bwm.transform = Transform3D(hb * Basis(Vector3.FORWARD, -sd * 0.24), h_org + hb * Vector3(sd * eye_x * 1.02, eye_y + 0.046, bz))
+	var n_neckband: int = _wrap_count(rng.randi_range(1, 3), winding)
+	_wrap(root, p_top + Vector3(0.0, 0.005, 0.0), neck_top, 0.060, 0.051, n_neckband, 0.0034, band_tilt * 0.5, rng.randf_range(0.0, TAU), band_step, band_mats, winding, wrap_alt)
 	var mouth_w: float = rng.randf_range(0.016, 0.022)
-	for k in range(3):
-		var kx: float = (float(k) - 1.0) * mouth_w
-		var ky: float = -0.052 + (0.004 if k == 1 else 0.0)
-		var mz: float = _face_z(rx, ry, rz, absf(kx), ky) * 0.985
-		var lip := BoxMesh.new()
-		lip.size = Vector3(mouth_w * 1.25, 0.0060, 0.005)
-		var mm: MeshInstance3D = _add(root, lip, mat_mouth)
-		mm.transform = Transform3D(hb * Basis(Vector3.FORWARD, -float(k - 1) * 0.30), h_org + hb * Vector3(kx, ky, mz))
-	var nose := SphereMesh.new()
-	nose.radius = 0.019
-	nose.height = 0.038
-	var nz: float = _face_z(rx, ry, rz, 0.0, -0.018) * 0.92
-	var nm: MeshInstance3D = _add(root, nose, mat_head)
-	nm.transform = Transform3D(_scale_local(hb, Vector3(0.72, 1.30, 0.90)), h_org + hb * Vector3(0.0, -0.018, nz))
+
+	var head_k: float = 1.0
+	var h_org: Vector3 = neck_top + hb * Vector3(0.0, 0.125 * head_k * 0.86, -0.006 * head_k)
+	_head(root, h_org, hb, head_k, mouth_w, mat_head, mat_eye, mat_line, mat_mouth)
+
+	# --- figure: two more heads out of the one collar ------------------------
+	if figure == "three_headed":
+		for side_i in range(2):
+			var sd: float = -1.0 if side_i == 0 else 1.0
+			var yaw2: float = head_yaw + sd * rng.randf_range(0.55, 1.00)
+			var roll2: float = sd * rng.randf_range(0.22, 0.50)
+			var pitch2: float = rng.randf_range(-0.12, 0.10)
+			var hb2: Basis = Basis(Vector3.UP, yaw2) * Basis(Vector3.FORWARD, roll2) * Basis(Vector3.RIGHT, pitch2)
+			var nb2: Vector3 = p_top + Vector3(sd * 0.058, -0.014, 0.016)
+			var nt2: Vector3 = nb2 + hb2 * Vector3(sd * 0.064, 0.078, 0.0)
+			_tapered_cyl(root, nb2, nt2, 0.040, 0.032, mat_skin)
+			_wrap(root, nb2, nt2, 0.047, 0.038, _wrap_count(2, winding), 0.0030, band_tilt * 0.5, rng.randf_range(0.0, TAU), band_step, band_mats, winding, wrap_alt)
+			var k2: float = 0.78
+			var org2: Vector3 = nt2 + hb2 * Vector3(0.0, 0.125 * k2 * 0.86, -0.006 * k2)
+			_head(root, org2, hb2, k2, mouth_w * k2, mat_head, mat_eye, mat_line, mat_mouth)
+
+	# --- figure: a second doll growing head-first out of her back ------------
+	elif figure == "budding":
+		var bud_side: float = -reach_side
+		var bud_dir: Vector3 = Vector3(bud_side * 0.42, 0.66, 0.62).normalized()
+		var bud_base: Vector3 = p_chest + Vector3(bud_side * r_chest * 0.62, -0.034, 0.072)
+		var bud_len: float = rng.randf_range(0.255, 0.330)
+		var n_bud: int = 5
+		for i in range(n_bud):
+			var ub: float = float(i) / float(n_bud - 1)
+			var rb: float = lerpf(0.082, 0.043, ub)
+			var bs := SphereMesh.new()
+			bs.radius = rb
+			bs.height = rb * 2.0
+			var bmi: MeshInstance3D = _add(root, bs, mat_skin)
+			bmi.transform = Transform3D(_scale_local(_basis_y_to(bud_dir), Vector3(1.0, 0.94, 0.80)), bud_base + bud_dir * (bud_len * ub))
+		_wrap(root, bud_base + bud_dir * (bud_len * 0.18), bud_base + bud_dir * (bud_len * 0.92), 0.080, 0.050, _wrap_count(4, winding), 0.0044, band_tilt, rng.randf_range(0.0, TAU), band_step, band_mats, winding, wrap_alt)
+		var bud_neck: Vector3 = bud_base + bud_dir * bud_len
+		_tapered_cyl(root, bud_neck - bud_dir * 0.020, bud_neck + bud_dir * 0.046, 0.033, 0.026, mat_skin)
+		var bud_yaw: float = bud_side * 0.40 + rng.randf_range(-0.45, 0.45)
+		var bhb: Basis = Basis(Vector3.UP, bud_yaw) * Basis(Vector3.FORWARD, bud_side * rng.randf_range(0.15, 0.48)) * Basis(Vector3.RIGHT, rng.randf_range(-0.26, 0.06))
+		var bud_k: float = 0.62
+		var bud_org: Vector3 = bud_neck + bud_dir * 0.046 + bhb * Vector3(0.0, 0.125 * bud_k * 0.86, -0.006 * bud_k)
+		_head(root, bud_org, bhb, bud_k, mouth_w * bud_k, mat_head, mat_eye, mat_line, mat_mouth)
+		var bsh: Vector3 = bud_base + bud_dir * (bud_len * 0.74) + Vector3(bud_side * 0.058, 0.0, 0.012)
+		var bel: Vector3 = bsh + Vector3(bud_side * 0.092, -0.024, 0.118)
+		var bwr: Vector3 = bel + Vector3(bud_side * 0.048, 0.058, 0.132)
+		if not hollow:
+			_limb(root, bsh, bel, 0.029, mat_skin)
+			_limb(root, bel, bwr, 0.023, mat_skin)
+		_ball(root, bsh, 0.038, mat_joint)
+		_ball(root, bel, 0.033, mat_joint)
+		_ball(root, bwr, 0.026, mat_joint)
+		_wrap(root, bsh, bel, 0.034, 0.030, _wrap_count(4, winding), 0.0034, band_tilt, rng.randf_range(0.0, TAU), band_step, band_mats, winding, wrap_alt)
+		_wrap(root, bel, bwr, 0.029, 0.025, _wrap_count(4, winding), 0.0030, band_tilt, rng.randf_range(0.0, TAU), band_step, band_mats, winding, wrap_alt)
+		var bud_hand := SphereMesh.new()
+		bud_hand.radius = 0.028
+		bud_hand.height = 0.056
+		var bud_fwd: Vector3 = (bwr - bel).normalized()
+		var bhm: MeshInstance3D = _add(root, bud_hand, mat_skin)
+		bhm.transform = Transform3D(_scale_local(_basis_y_to(bud_fwd), Vector3(1.0, 1.0, 0.70)), bwr + bud_fwd * 0.030)
 
 	# --- the stiff bodice ----------------------------------------------------
 	var u_hem: float = rng.randf_range(0.24, 0.32)
@@ -391,7 +487,11 @@ static func build(root: Node3D, seed: int) -> void:
 		var foot_z: float = clampf(a.z * rng.randf_range(0.45, 0.85), -0.36, 0.30)
 		if i == 2:
 			foot_z = rng.randf_range(0.20, 0.30)
-		var b := Vector3(foot_x, 0.006, foot_z)
+		var foot_y: float = wire_foot_y
+		if figure == "flooded":
+			# the wire stand has been swallowed too — it starts on the set surface
+			foot_y = _pour_y(pour_top, sqrt(foot_x * foot_x + foot_z * foot_z)) - 0.008
+		var b := Vector3(foot_x, foot_y, foot_z)
 		_tapered_cyl(root, b, a, 0.0038, 0.0028, mat_wire)
 		var clip := SphereMesh.new()
 		clip.radius = 0.010
@@ -450,6 +550,76 @@ static func _lobe(th: float, centre_a: float, width: float) -> float:
 static func _face_z(rx: float, ry: float, rz: float, x: float, y: float) -> float:
 	var q: float = 1.0 - (x * x) / (rx * rx) - (y * y) / (ry * ry)
 	return -rz * sqrt(maxf(q, 0.05))
+
+
+static func _pour_y(top: float, rad: float) -> float:
+	# the height of the set pour's surface at a given distance from the axis — the
+	# inverse of the profile the pour is stacked from, so drops and wire feet sit ON it
+	var f: float = pow(clampf((rad - 0.150) / 0.350, 0.0, 1.0), 1.0 / 0.70)
+	return top * (1.0 - pow(f, 1.35))
+
+
+static func _head(root: Node3D, h_org: Vector3, hb: Basis, k: float, mouth_w: float, mat_head: StandardMaterial3D, mat_eye: StandardMaterial3D, mat_line: StandardMaterial3D, mat_mouth: StandardMaterial3D) -> void:
+	# one bald egg head with its painted face, at scale k — k = 1.0 is her own
+	var rx: float = 0.098 * k
+	var ry: float = 0.125 * k
+	var rz: float = 0.098 * k
+	var egg := SphereMesh.new()
+	egg.radius = rx
+	egg.height = ry * 2.0
+	egg.radial_segments = 32
+	egg.rings = 20
+	var em: MeshInstance3D = _add(root, egg, mat_head)
+	em.transform = Transform3D(hb, h_org)
+	var chin := SphereMesh.new()
+	chin.radius = 0.058 * k
+	chin.height = 0.104 * k
+	var cm: MeshInstance3D = _add(root, chin, mat_head)
+	cm.transform = Transform3D(_scale_local(hb, Vector3(1.0, 0.92, 1.02)), h_org + hb * Vector3(0.0, -0.078 * k, -0.028 * k))
+	for side_i in range(2):
+		var sd: float = -1.0 if side_i == 0 else 1.0
+		var ear := SphereMesh.new()
+		ear.radius = 0.030 * k
+		ear.height = 0.058 * k
+		var erm: MeshInstance3D = _add(root, ear, mat_head)
+		erm.transform = Transform3D(_scale_local(hb * Basis(Vector3.UP, sd * 0.35), Vector3(0.34, 1.0, 0.86)), h_org + hb * Vector3(sd * rx * 0.93, -0.010 * k, 0.008 * k))
+
+	# painted face — eyes, lash lines, brows, mouth
+	var eye_x: float = 0.040 * k
+	var eye_y: float = 0.020 * k
+	for side_i in range(2):
+		var sd: float = -1.0 if side_i == 0 else 1.0
+		var ez: float = _face_z(rx, ry, rz, eye_x, eye_y) * 0.965
+		var eye := SphereMesh.new()
+		eye.radius = 0.027 * k
+		eye.height = 0.054 * k
+		var eyb: Basis = _scale_local(hb * Basis(Vector3.UP, sd * 0.22), Vector3(1.0, 0.50, 0.26))
+		var eym: MeshInstance3D = _add(root, eye, mat_eye)
+		eym.transform = Transform3D(eyb, h_org + hb * Vector3(sd * eye_x, eye_y, ez))
+		var lash := BoxMesh.new()
+		lash.size = Vector3(0.050 * k, 0.0055 * k, 0.004 * k)
+		var lz: float = _face_z(rx, ry, rz, eye_x, eye_y + 0.013 * k) * 0.985
+		var lm: MeshInstance3D = _add(root, lash, mat_line)
+		lm.transform = Transform3D(hb * Basis(Vector3.FORWARD, -sd * 0.16), h_org + hb * Vector3(sd * eye_x, eye_y + 0.013 * k, lz))
+		var brow := BoxMesh.new()
+		brow.size = Vector3(0.046 * k, 0.0045 * k, 0.004 * k)
+		var bz: float = _face_z(rx, ry, rz, eye_x, eye_y + 0.046 * k) * 0.985
+		var bwm: MeshInstance3D = _add(root, brow, mat_line)
+		bwm.transform = Transform3D(hb * Basis(Vector3.FORWARD, -sd * 0.24), h_org + hb * Vector3(sd * eye_x * 1.02, eye_y + 0.046 * k, bz))
+	for li in range(3):
+		var kx: float = (float(li) - 1.0) * mouth_w
+		var ky: float = -0.052 * k + (0.004 * k if li == 1 else 0.0)
+		var mz: float = _face_z(rx, ry, rz, absf(kx), ky) * 0.985
+		var lip := BoxMesh.new()
+		lip.size = Vector3(mouth_w * 1.25, 0.0060 * k, 0.005 * k)
+		var mm: MeshInstance3D = _add(root, lip, mat_mouth)
+		mm.transform = Transform3D(hb * Basis(Vector3.FORWARD, -float(li - 1) * 0.30), h_org + hb * Vector3(kx, ky, mz))
+	var nose := SphereMesh.new()
+	nose.radius = 0.019 * k
+	nose.height = 0.038 * k
+	var nz: float = _face_z(rx, ry, rz, 0.0, -0.018 * k) * 0.92
+	var nm: MeshInstance3D = _add(root, nose, mat_head)
+	nm.transform = Transform3D(_scale_local(hb, Vector3(0.72, 1.30, 0.90)), h_org + hb * Vector3(0.0, -0.018 * k, nz))
 
 
 static func _scale_local(b: Basis, s: Vector3) -> Basis:
@@ -525,15 +695,124 @@ static func _tapered_cyl(root: Node3D, a: Vector3, b: Vector3, r0: float, r1: fl
 	return mi
 
 
-static func _wrap(root: Node3D, a: Vector3, b: Vector3, r0: float, r1: float, n: int, proud: float, tilt: float, phase0: float, step: float, mats: Array) -> void:
-	# bandage: a run of rings along the limb, each turned a little further round the
-	# axis and slanted, so the gaps between them read as one continuous spiral
+static func _wrap_count(n: int, mode: String) -> int:
+	# each winding puts a different number of meshes on one turn, so the run thins out
+	# where the turn is expensive and the body stays inside its mesh budget
+	if mode == "unravelling":
+		return maxi(2, int(round(float(n) * 0.80)))
+	if mode == "cage":
+		return maxi(3, int(round(float(n) * 0.70)))
+	if mode == "blooming":
+		return maxi(2, int(round(float(n) * 0.40)))
+	if mode == "swarm":
+		return maxi(3, int(round(float(n) * 0.75)))
+	return n
+
+
+static func _wrap(root: Node3D, a: Vector3, b: Vector3, r0: float, r1: float, n: int, proud: float, tilt: float, phase0: float, step: float, mats: Array, mode: String = "bandage", alt: StandardMaterial3D = null) -> void:
+	# what the bandage IS — the winding axis lives here
 	if n <= 0:
 		return
 	var d: Vector3 = b - a
 	var ln: float = maxf(d.length(), 0.01)
 	var dir: Vector3 = d / ln
 	var base: Basis = _basis_y_to(dir)
+
+	if mode == "unravelling":
+		# the wrap has come off: every turn is a thread that leaves the limb and hangs
+		for i in range(n):
+			var t: float = (float(i) + 0.5) / float(n)
+			var r: float = lerpf(r0, r1, t)
+			var ph: float = phase0 + float(i) * step
+			var radial: Vector3 = (base * Vector3(sin(ph), 0.0, -cos(ph))).normalized()
+			var c: Vector3 = a + dir * (ln * t)
+			var reach: float = r * (1.4 + 2.4 * absf(cos(float(i) * 0.9 + phase0)))
+			var fall: float = r * (2.0 + 3.2 * absf(sin(float(i) * 1.7 + phase0)))
+			var p0: Vector3 = c + radial * (r * 0.88)
+			var p1: Vector3 = p0 + radial * reach - Vector3(0.0, fall * 0.42, 0.0)
+			var p2: Vector3 = p1 + radial * (reach * 0.30) - Vector3(0.0, fall, 0.0)
+			var floss: StandardMaterial3D = mats[i % mats.size()]
+			if alt != null:
+				floss = alt
+			_tapered_cyl(root, p0, p1, r * 0.090 + proud, r * 0.058 + proud * 0.6, floss)
+			_tapered_cyl(root, p1, p2, r * 0.058 + proud * 0.6, r * 0.028, mats[i % mats.size()])
+		return
+
+	if mode == "cage":
+		# the flesh is gone; the wrap has set into iron hoops on three long rails
+		var iron: StandardMaterial3D = mats[0]
+		if alt != null:
+			iron = alt
+		for i in range(n):
+			var t: float = (float(i) + 0.5) / float(n)
+			var r: float = lerpf(r0, r1, t)
+			var hoop: float = r * 1.62
+			var tor := TorusMesh.new()
+			tor.outer_radius = hoop + r * 0.11
+			tor.inner_radius = maxf(hoop - r * 0.11, 0.002)
+			tor.rings = 22
+			tor.ring_segments = 6
+			var ph: float = phase0 + float(i) * step
+			var bb: Basis = base * Basis(Vector3.UP, ph * 0.30) * Basis(Vector3.RIGHT, tilt * 0.35)
+			var mi: MeshInstance3D = _add(root, tor, iron)
+			mi.transform = Transform3D(bb, a + dir * (ln * t))
+		for j in range(3):
+			var pa: float = phase0 + float(j) * (TAU / 3.0)
+			var radial: Vector3 = (base * Vector3(sin(pa), 0.0, -cos(pa))).normalized()
+			_tapered_cyl(root, a + radial * (r0 * 1.58), b + radial * (r1 * 1.58), r0 * 0.10, r1 * 0.10, iron)
+		return
+
+	if mode == "blooming":
+		# every turn opens into a whorl of four petals facing down the limb
+		for i in range(n):
+			var t: float = (float(i) + 0.5) / float(n)
+			var r: float = lerpf(r0, r1, t)
+			var ph: float = phase0 + float(i) * step
+			var c: Vector3 = a + dir * (ln * t)
+			for j in range(4):
+				var pa: float = ph + float(j) * (TAU / 4.0)
+				var radial: Vector3 = (base * Vector3(sin(pa), 0.0, -cos(pa))).normalized()
+				var tip: float = 0.28 + 0.26 * sin(float(i) * 1.3 + float(j))
+				var out_v: Vector3 = (radial + dir * tip).normalized()
+				var petal := SphereMesh.new()
+				petal.radius = r * 2.10
+				petal.height = r * 4.20
+				petal.radial_segments = 10
+				petal.rings = 6
+				var pmat: StandardMaterial3D = mats[(i + j) % mats.size()]
+				if alt != null and posmod(i + j, 2) == 0:
+					pmat = alt
+				var pmi: MeshInstance3D = _add(root, petal, pmat)
+				pmi.transform = Transform3D(_scale_local(_basis_y_to(out_v), Vector3(0.55, 1.0, 0.14)), c + out_v * (r * 1.85))
+		return
+
+	if mode == "swarm":
+		# the wrap has bred: every turn is a pair of tiny eggs, her own head over again
+		for i in range(n):
+			var t: float = (float(i) + 0.5) / float(n)
+			var r: float = lerpf(r0, r1, t)
+			var ph: float = phase0 + float(i) * step
+			var c: Vector3 = a + dir * (ln * t)
+			for j in range(2):
+				var pa: float = ph + float(j) * PI + 0.45 * sin(float(i) * 1.9)
+				var radial: Vector3 = (base * Vector3(sin(pa), 0.0, -cos(pa))).normalized()
+				var er: float = r * (0.68 + 0.40 * absf(sin(float(i) * 2.3 + float(j))))
+				var lean: float = 0.55 if j == 0 else -0.55
+				var egg_s := SphereMesh.new()
+				egg_s.radius = er
+				egg_s.height = er * 2.45
+				egg_s.radial_segments = 12
+				egg_s.rings = 8
+				var eb: Basis = _basis_y_to((radial * 0.85 + dir * lean + Vector3.UP * 0.30).normalized())
+				var emat: StandardMaterial3D = mats[(i + j) % mats.size()]
+				if alt != null and posmod(i + j, 3) != 0:
+					emat = alt
+				var emi: MeshInstance3D = _add(root, egg_s, emat)
+				emi.transform = Transform3D(_scale_local(eb, Vector3(0.88, 1.0, 0.88)), c + radial * (r * 0.74))
+		return
+
+	# bandage: a run of rings along the limb, each turned a little further round the
+	# axis and slanted, so the gaps between them read as one continuous spiral
 	for i in range(n):
 		var t: float = (float(i) + 0.5) / float(n)
 		var r: float = lerpf(r0, r1, t)

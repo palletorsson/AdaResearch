@@ -63,6 +63,12 @@ const INFO_UPDATE_INTERVAL: float = 0.1
 
 
 func _ready():
+	if str(get_meta("config_lesson", "")) == "gravity_orbit":
+		var chamber = preload("res://commons/artifacts/orbital_mechanics_demo/gravity_relations.gd").new()
+		chamber.name = "GravityOrbit"
+		add_child(chamber)
+		set_physics_process(false)
+		return
 	_create_planet()
 	_create_satellite()
 	_create_velocity_arrow()
@@ -352,6 +358,7 @@ func reset():
 	_reset_orbit()
 
 func apply_grid_config(config_data: Dictionary):
+	if str(get_meta("config_lesson", "")) == "gravity_orbit": return
 	for key in config_data:
 		if key in self:
 			set(key, config_data[key])

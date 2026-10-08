@@ -42,6 +42,18 @@ extends RefCounted
 ## Given up: the garden and the crowd (these bodies lean on each other), the
 ## woven-fabric figure, real openings in the honeycomb cone (printed, not
 ## pierced), and the soft subsurface glow the thin pink shells have on camera.
+##
+## Axes (DNA):
+##   mould — what the moulded plastic has become. shell = the reference slab;
+##     melt = the S slumps forward, widens into a spreading sled and drips into a
+##     poured puddle on the floor; swarm = the skin is gone and the body is a
+##     hundred loose tiles of itself drifting off its own surface; cage = the
+##     flesh is gone, only the mould's rails and hoops stand; inflate = the slab
+##     blows up to four times thick, the ovals close and the beads swell.
+##   crown — what grows above the seat. ball = one head, one arm loop (today);
+##     hydra = three necked heads fanned off the back and three thin arms; bloom =
+##     head and arm end open into petal flowers with buds down the rim; mirror = a
+##     second smaller body turned back to back and growing out of the first.
 
 const TEX: int = 160
 const NS: int = 104
@@ -67,7 +79,17 @@ static func describe() -> String:
 	return "A glossy moulded pop body swept as one thick Panton S — floor sled, seat, leaning back — pierced by big ovals, ribbed and bead-edged, with a ball head and one thick arm loop around an empty middle."
 
 
-static func build(root: Node3D, seed: int) -> void:
+static func axes() -> Dictionary:
+	return {
+		"mould": ["shell", "melt", "swarm", "cage", "inflate"],
+		"crown": ["ball", "hydra", "bloom", "mirror"],
+	}
+
+
+static func build(root: Node3D, seed: int, opts: Dictionary = {}) -> void:
+	var mould: String = String(opts.get("mould", "shell"))
+	var crown: String = String(opts.get("crown", "ball"))
+
 	var rng := RandomNumberGenerator.new()
 	rng.seed = seed
 
@@ -126,6 +148,21 @@ static func build(root: Node3D, seed: int) -> void:
 	var head_r: float = rng.randf_range(0.134, 0.166)
 	var has_twin: bool = rng.randf() < 0.5
 
+	# --- axis "mould": all axis randomness comes from a SECOND stream, so the
+	# base body is bit-identical across the whole sweep and only the treatment moves
+	var arng := RandomNumberGenerator.new()
+	arng.seed = seed ^ 0x5F3A7C1D
+	var skin_on: bool = mould != "swarm" and mould != "cage"
+	var beads_on: bool = mould == "shell" or mould == "melt" or mould == "inflate"
+	var ribs_on: bool = skin_on
+	if mould == "inflate":
+		ht *= 3.8
+		width_k *= 1.22
+		dish_k *= 0.30
+		rib_r *= 1.9
+	elif mould == "melt":
+		dish_k *= 0.55
+
 	var a_v: Array = [
 		0.0,
 		0.0,
@@ -155,6 +192,17 @@ static func build(root: Node3D, seed: int) -> void:
 		var px: float = sway * sin(PI * ti) + lean * ti * ti * ti
 		pts[i] = Vector3(px, q.y, q.z)
 
+	# the melt: the free end of the S loses its height and slides forward
+	if mould == "melt":
+		for i in range(NS + 1):
+			var tm2: float = float(i) / float(NS)
+			var q2: Vector3 = pts[i]
+			var sag: float = tm2 * tm2 * tm2
+			var my: float = q2.y * (1.0 - 0.66 * sag) - 0.12 * sag
+			var mz: float = q2.z + 0.46 * sag
+			var mx: float = q2.x + 0.18 * sag * side
+			pts[i] = Vector3(mx, my, mz)
+
 	# --- frames, half-widths, camber ----------------------------------------
 	var tgs: Array = []
 	var rts: Array = []
@@ -174,8 +222,14 @@ static func build(root: Node3D, seed: int) -> void:
 		tgs.append(tg)
 		rts.append((bt * rt).normalized())
 		nrs.append((bt * nr).normalized())
-		hws.append(_key_lerp(ti, W_T, W_V) * width_k)
-		dss.append(_key_lerp(ti, D_T, D_V) * dish_k)
+		var hw_i: float = _key_lerp(ti, W_T, W_V) * width_k
+		var ds_i: float = _key_lerp(ti, D_T, D_V) * dish_k
+		if mould == "melt":
+			var pool: float = pow(1.0 - ti, 2.2)
+			hw_i *= 1.0 + 1.30 * pool
+			ds_i *= 1.0 - 0.72 * pool
+		hws.append(hw_i)
+		dss.append(ds_i)
 
 	# --- the big oval holes, in (length, width) parameter space --------------
 	var n_holes: int = rng.randi_range(3, 7)
@@ -200,6 +254,23 @@ static func build(root: Node3D, seed: int) -> void:
 				ok = false
 		if ok:
 			holes.append([hs, hu, rs, ru])
+
+	# the mould decides what the ovals do: an inflated skin closes them, a melting
+	# one lets them run open. (Re-keyed after the draw, so the rng stream is intact.)
+	if mould == "inflate":
+		var tight: Array = []
+		for h in holes:
+			var hh: Array = h
+			if tight.size() >= 2:
+				break
+			tight.append([hh[0], hh[1], float(hh[2]) * 0.40, float(hh[3]) * 0.40])
+		holes = tight
+	elif mould == "melt":
+		var sagged: Array = []
+		for h in holes:
+			var hh: Array = h
+			sagged.append([hh[0], hh[1], float(hh[2]) * 1.35, float(hh[3]) * 1.15])
+		holes = sagged
 
 	# --- mid surface, normals, the two faces --------------------------------
 	var mids: Array = []
@@ -253,7 +324,7 @@ static func build(root: Node3D, seed: int) -> void:
 		var ts: float = (float(i) + 0.5) / float(NS)
 		for j in range(NU):
 			var uu: float = (float(j) + 0.5) / float(NU) * 2.0 - 1.0
-			row.append(not _in_hole(ts, uu, holes))
+			row.append(skin_on and not _in_hole(ts, uu, holes))
 		solid.append(row)
 
 	# --- the shell: faces in one surface, hole walls in another -------------
@@ -262,10 +333,12 @@ static func build(root: Node3D, seed: int) -> void:
 	var stw := SurfaceTool.new()
 	stw.begin(Mesh.PRIMITIVE_TRIANGLES)
 	var wall_quads: int = 0
+	var face_quads: int = 0
 	for i in range(NS):
 		for j in range(NU):
 			if not bool(solid[i][j]):
 				continue
+			face_quads += 1
 			var t00: Vector3 = top[i][j]
 			var t10: Vector3 = top[i + 1][j]
 			var t11: Vector3 = top[i + 1][j + 1]
@@ -348,16 +421,79 @@ static func build(root: Node3D, seed: int) -> void:
 					wall_quads += 1
 				else:
 					_quad(st, wa, wb, wc, wd, qa, qb, qb, qa, outw, -1)
-	st.generate_normals()
-	_add(root, st.commit(), mat_shell)
+	if face_quads > 0:
+		st.generate_normals()
+		_add(root, st.commit(), mat_shell)
 	if wall_quads > 0:
 		stw.generate_normals()
 		_add(root, stw.commit(), mat_line)
 
+	# --- mould "swarm": no skin — the shell is a cloud of tiles of itself ----
+	if mould == "swarm":
+		var mats_sw: Array = [mat_shell, mat_shell, mat_bead, mat_line]
+		var i_sw: int = 0
+		while i_sw <= NS:
+			var t_sw: float = float(i_sw) / float(NS)
+			for jc in range(5):
+				var j_sw: int = clampi(int(round(float(jc) / 4.0 * float(NU))), 0, NU)
+				var uu_sw: float = float(j_sw) / float(NU) * 2.0 - 1.0
+				if _in_hole(t_sw, uu_sw, holes):
+					continue
+				var drift: float = arng.randf_range(-1.0, 1.0) * (0.02 + 0.17 * t_sw * t_sw)
+				var slide: float = arng.randf_range(-0.06, 0.06) * (0.3 + t_sw)
+				var pc_sw: Vector3 = mids[i_sw][j_sw] + nms[i_sw][j_sw] * drift + rts[i_sw] * slide
+				var sc_sw: float = arng.randf_range(0.55, 1.30) * (1.0 - 0.32 * t_sw)
+				var tile := BoxMesh.new()
+				tile.size = Vector3(float(hws[i_sw]) * 0.46 * sc_sw, ht * 2.4, (arc / float(NS)) * 3.6 * sc_sw)
+				var m_sw: StandardMaterial3D = mats_sw[(i_sw + jc) % 4]
+				var mi_sw: MeshInstance3D = _add(root, tile, m_sw)
+				var b_sw := Basis(rts[i_sw], nrs[i_sw], tgs[i_sw])
+				mi_sw.transform = Transform3D(b_sw.rotated(nrs[i_sw], arng.randf_range(-0.8, 0.8) * t_sw), pc_sw)
+			i_sw += 5
+		for k in range(18):
+			var fk2: float = float(k) / 17.0
+			var t_fl: float = lerpf(0.52, 1.0, fk2)
+			var i_fl: int = clampi(int(round(t_fl * float(NS))), 0, NS)
+			var j_fl: int = clampi(int(round(arng.randf_range(0.0, float(NU)))), 0, NU)
+			var off_fl := Vector3(arng.randf_range(-0.24, 0.24), arng.randf_range(0.02, 0.34) * fk2, arng.randf_range(-0.24, 0.24))
+			var fl_r: float = ht * arng.randf_range(0.8, 1.8)
+			var fl_m := SphereMesh.new()
+			fl_m.radius = fl_r
+			fl_m.height = fl_r * 2.0
+			fl_m.radial_segments = 8
+			fl_m.rings = 5
+			var fmi: MeshInstance3D = _add(root, fl_m, mat_bead)
+			fmi.transform = Transform3D(Basis(), mids[i_fl][j_fl] + off_fl)
+
+	# --- mould "cage": the flesh is gone, the mould's own frame stands -------
+	if mould == "cage":
+		var rod_r: float = ht * 0.85
+		var rails: Array = [0, int(float(NU) / 3.0), int(float(NU) * 2.0 / 3.0), NU]
+		for rj in rails:
+			var j_r: int = int(rj)
+			var uu_r: float = float(j_r) / float(NU) * 2.0 - 1.0
+			var i_r: int = 0
+			while i_r + 6 <= NS:
+				var t_a: float = (float(i_r) + 3.0) / float(NS)
+				if not _in_hole(t_a, uu_r, holes):
+					_tube(root, mids[i_r][j_r], mids[i_r + 6][j_r], rod_r, mat_body)
+				i_r += 6
+		var i_h: int = 0
+		while i_h <= NS:
+			var t_h: float = float(i_h) / float(NS)
+			for k in range(3):
+				var ja2: int = int(rails[k])
+				var jb2: int = int(rails[k + 1])
+				var uu_h: float = (float(ja2 + jb2) * 0.5) / float(NU) * 2.0 - 1.0
+				if _in_hole(t_h, uu_h, holes):
+					continue
+				_tube(root, mids[i_h][ja2], mids[i_h][jb2], rod_r * 0.85, mat_bead)
+			i_h += 9
+
 	# --- the rolled edge: bead chains down both long sides -------------------
 	var bead_r: float = ht * 1.30
 	var i_b: int = 0
-	while i_b <= NS:
+	while beads_on and i_b <= NS:
 		for j in [0, NU]:
 			var jj: int = j
 			var bp: Vector3 = mids[i_b][jj]
@@ -371,7 +507,8 @@ static func build(root: Node3D, seed: int) -> void:
 		i_b += rim_step
 
 	# --- ripple ribs across the concave face --------------------------------
-	for k in range(n_ribs):
+	var n_ribs_use: int = n_ribs if ribs_on else 0
+	for k in range(n_ribs_use):
 		var fk: float = float(k) / float(maxi(n_ribs - 1, 1))
 		var tr: float = lerpf(0.265, 0.955, fk)
 		var ir: int = clampi(int(round(tr * float(NS))), 0, NS)
@@ -399,76 +536,131 @@ static func build(root: Node3D, seed: int) -> void:
 	var rt_top: Vector3 = rts[NS]
 	var p_top: Vector3 = pts[NS]
 	var head_c: Vector3 = p_top + tg_top * (head_r * 0.74) - nr_top * (head_r * 0.30)
-	var hs_m := SphereMesh.new()
-	hs_m.radius = head_r
-	hs_m.height = head_r * 2.0
-	hs_m.radial_segments = 24
-	hs_m.rings = 14
-	var hm: MeshInstance3D = _add(root, hs_m, mat_head)
-	# columns must stay right-handed: nr = tg x rt, so the x column is negated
-	hm.transform = Transform3D(Basis(-rt_top * 1.02, tg_top * 1.10, nr_top * 0.94), head_c)
 
-	var col_m := SphereMesh.new()
-	col_m.radius = head_r * 0.62
-	col_m.height = head_r * 1.24
-	col_m.radial_segments = 16
-	col_m.rings = 10
-	var cm: MeshInstance3D = _add(root, col_m, mat_head)
-	cm.transform = Transform3D(Basis(), p_top - tg_top * (head_r * 0.10))
+	if crown == "hydra":
+		# three necked heads fanned off the top of the back
+		var neck_r: float = head_r * 0.66
+		for k in range(3):
+			var fk3: float = float(k) / 2.0
+			var t_hd: float = lerpf(0.70, 1.0, fk3)
+			var i_hd: int = clampi(int(round(t_hd * float(NS))), 0, NS)
+			var fan: float = lerpf(-1.0, 1.0, fk3) * side
+			var base_hd: Vector3 = pts[i_hd] + rts[i_hd] * (fan * float(hws[i_hd]) * 0.72)
+			var tip_hd: Vector3 = base_hd + tgs[i_hd] * (0.19 + 0.17 * fk3) + rts[i_hd] * (fan * 0.15) - nrs[i_hd] * 0.05
+			_tube(root, base_hd, tip_hd, neck_r * 0.32, mat_head)
+			var hd_m := SphereMesh.new()
+			hd_m.radius = neck_r
+			hd_m.height = neck_r * 2.0
+			hd_m.radial_segments = 20
+			hd_m.rings = 12
+			var hdmi: MeshInstance3D = _add(root, hd_m, mat_head)
+			hdmi.transform = Transform3D(Basis(-rts[i_hd] * 1.04, tgs[i_hd] * 1.12, nrs[i_hd] * 0.90), tip_hd + tgs[i_hd] * (neck_r * 0.80))
+			var ch_m := SphereMesh.new()
+			ch_m.radius = neck_r * 0.42
+			ch_m.height = neck_r * 0.84
+			ch_m.radial_segments = 12
+			ch_m.rings = 8
+			var chmi: MeshInstance3D = _add(root, ch_m, mat_bead)
+			chmi.transform = Transform3D(Basis(), tip_hd + tgs[i_hd] * (neck_r * 0.70) - nrs[i_hd] * (neck_r * 0.78))
+	elif crown == "bloom":
+		# the head opens: a stem and a petal flower, with buds down the rim
+		var stem_top: Vector3 = p_top + tg_top * (head_r * 1.10)
+		_tube(root, p_top - tg_top * 0.05, stem_top, head_r * 0.26, mat_head)
+		_flower(root, stem_top, tg_top, head_r * 1.30, mat_bead, mat_ink, 7)
+		for k in range(3):
+			var fk4: float = float(k) / 2.0
+			var t_bf: float = lerpf(0.30, 0.66, fk4)
+			var i_bf: int = clampi(int(round(t_bf * float(NS))), 0, NS)
+			var j_bf: int = NU if (k % 2 == 0) else 0
+			var dir_bf: float = 1.0 if j_bf == NU else -1.0
+			var root_bf: Vector3 = mids[i_bf][j_bf]
+			var pos_bf: Vector3 = root_bf + rts[i_bf] * (dir_bf * 0.11) + nrs[i_bf] * 0.03
+			_tube(root, root_bf, pos_bf, head_r * 0.10, mat_head)
+			_flower(root, pos_bf, (pos_bf - root_bf).normalized(), head_r * 0.60, mat_line, mat_ink, 5)
+	else:
+		var hs_m := SphereMesh.new()
+		hs_m.radius = head_r
+		hs_m.height = head_r * 2.0
+		hs_m.radial_segments = 24
+		hs_m.rings = 14
+		var hm: MeshInstance3D = _add(root, hs_m, mat_head)
+		# columns must stay right-handed: nr = tg x rt, so the x column is negated
+		hm.transform = Transform3D(Basis(-rt_top * 1.02, tg_top * 1.10, nr_top * 0.94), head_c)
 
-	_tube(root, p_top - tg_top * 0.05, head_c, head_r * 0.46, mat_head)
+		var col_m := SphereMesh.new()
+		col_m.radius = head_r * 0.62
+		col_m.height = head_r * 1.24
+		col_m.radial_segments = 16
+		col_m.rings = 10
+		var cm: MeshInstance3D = _add(root, col_m, mat_head)
+		cm.transform = Transform3D(Basis(), p_top - tg_top * (head_r * 0.10))
 
-	var chin_m := SphereMesh.new()
-	chin_m.radius = head_r * 0.44
-	chin_m.height = head_r * 0.88
-	chin_m.radial_segments = 14
-	chin_m.rings = 9
-	var chm: MeshInstance3D = _add(root, chin_m, mat_head)
-	chm.transform = Transform3D(Basis(), head_c - nr_top * (head_r * 0.80) - tg_top * (head_r * 0.22))
+		_tube(root, p_top - tg_top * 0.05, head_c, head_r * 0.46, mat_head)
 
-	if has_twin:
-		var i_tw: int = int(floor(float(NS) * 0.86))
-		var j_tw: int = 0 if side > 0.0 else NU
-		var base_tw: Vector3 = mids[i_tw][j_tw]
-		var tg_tw: Vector3 = tgs[i_tw]
-		var rt_tw: Vector3 = rts[i_tw]
-		var top_tw: Vector3 = base_tw + tg_tw * 0.20 - rt_tw * (side * 0.06)
-		_tube(root, base_tw, top_tw, head_r * 0.20, mat_head)
-		var tw_m := SphereMesh.new()
-		tw_m.radius = head_r * 0.56
-		tw_m.height = head_r * 1.12
-		tw_m.radial_segments = 18
-		tw_m.rings = 11
-		var twm: MeshInstance3D = _add(root, tw_m, mat_head)
-		twm.transform = Transform3D(Basis(), top_tw + tg_tw * (head_r * 0.50))
+		var chin_m := SphereMesh.new()
+		chin_m.radius = head_r * 0.44
+		chin_m.height = head_r * 0.88
+		chin_m.radial_segments = 14
+		chin_m.rings = 9
+		var chm: MeshInstance3D = _add(root, chin_m, mat_head)
+		chm.transform = Transform3D(Basis(), head_c - nr_top * (head_r * 0.80) - tg_top * (head_r * 0.22))
 
-	# --- one thick limb loop -------------------------------------------------
-	var i_sh: int = int(floor(float(NS) * 0.90))
-	var i_lp: int = int(floor(float(NS) * 0.455))
-	var p_sh: Vector3 = pts[i_sh]
-	var r_sh: Vector3 = rts[i_sh]
-	var n_sh: Vector3 = nrs[i_sh]
-	var p_lp: Vector3 = pts[i_lp]
-	var r_lp: Vector3 = rts[i_lp]
-	var p0: Vector3 = p_sh + r_sh * (side * float(hws[i_sh]) * 0.82) + n_sh * 0.02
-	var p3: Vector3 = p_lp + r_lp * (side * float(hws[i_lp]) * 0.62)
-	var fwd := Vector3(0.0, 0.0, 1.0)
-	var p1: Vector3 = p0 + fwd * (0.30 * loop_k) + Vector3(side * 0.13, -0.10, 0.0)
-	var p2: Vector3 = p3 + fwd * (0.25 * loop_k) + Vector3(side * 0.13, 0.42 * loop_k, 0.0)
-	var prev: Vector3 = p0
-	for i in range(1, n_loop + 1):
-		var fl: float = float(i) / float(n_loop)
-		var nxt: Vector3 = _bez(p0, p1, p2, p3, fl)
-		var rr: float = 0.052 + 0.036 * sin(PI * fl)
-		_tube(root, prev, nxt, rr, mat_body)
-		prev = nxt
-	var joint := SphereMesh.new()
-	joint.radius = 0.062
-	joint.height = 0.124
-	joint.radial_segments = 14
-	joint.rings = 9
-	var jm: MeshInstance3D = _add(root, joint, mat_body)
-	jm.transform = Transform3D(Basis(), p0)
+		if has_twin:
+			var i_tw: int = int(floor(float(NS) * 0.86))
+			var j_tw: int = 0 if side > 0.0 else NU
+			var base_tw: Vector3 = mids[i_tw][j_tw]
+			var tg_tw: Vector3 = tgs[i_tw]
+			var rt_tw: Vector3 = rts[i_tw]
+			var top_tw: Vector3 = base_tw + tg_tw * 0.20 - rt_tw * (side * 0.06)
+			_tube(root, base_tw, top_tw, head_r * 0.20, mat_head)
+			var tw_m := SphereMesh.new()
+			tw_m.radius = head_r * 0.56
+			tw_m.height = head_r * 1.12
+			tw_m.radial_segments = 18
+			tw_m.rings = 11
+			var twm: MeshInstance3D = _add(root, tw_m, mat_head)
+			twm.transform = Transform3D(Basis(), top_tw + tg_tw * (head_r * 0.50))
+
+	# --- the limb loop, one arm or three ------------------------------------
+	var n_arms: int = 3 if crown == "hydra" else 1
+	var arm_segs: int = n_loop
+	var arm_thin: float = 1.0
+	if n_arms > 1:
+		arm_segs = clampi(int(round(float(n_loop) / float(n_arms))) + 5, 10, 20)
+		arm_thin = 0.68
+	for a in range(n_arms):
+		var fa: float = 0.0 if n_arms == 1 else float(a) / float(n_arms - 1)
+		var a_side: float = side if (a % 2 == 0) else -side
+		var sh_t: float = lerpf(0.90, 0.72, fa)
+		var lp_t: float = lerpf(0.455, 0.63, fa)
+		var i_sh: int = int(floor(float(NS) * sh_t))
+		var i_lp: int = int(floor(float(NS) * lp_t))
+		var p_sh: Vector3 = pts[i_sh]
+		var r_sh: Vector3 = rts[i_sh]
+		var n_sh: Vector3 = nrs[i_sh]
+		var p_lp: Vector3 = pts[i_lp]
+		var r_lp: Vector3 = rts[i_lp]
+		var p0: Vector3 = p_sh + r_sh * (a_side * float(hws[i_sh]) * 0.82) + n_sh * 0.02
+		var p3: Vector3 = p_lp + r_lp * (a_side * float(hws[i_lp]) * 0.62)
+		var fwd := Vector3(0.0, 0.0, 1.0)
+		var p1: Vector3 = p0 + fwd * (0.30 * loop_k) + Vector3(a_side * 0.13, -0.10, 0.0)
+		var p2: Vector3 = p3 + fwd * (0.25 * loop_k) + Vector3(a_side * 0.13, 0.42 * loop_k, 0.0)
+		var prev: Vector3 = p0
+		for i in range(1, arm_segs + 1):
+			var fl: float = float(i) / float(arm_segs)
+			var nxt: Vector3 = _bez(p0, p1, p2, p3, fl)
+			var rr: float = (0.052 + 0.036 * sin(PI * fl)) * arm_thin
+			_tube(root, prev, nxt, rr, mat_body)
+			prev = nxt
+		var joint := SphereMesh.new()
+		joint.radius = 0.062 * arm_thin
+		joint.height = 0.124 * arm_thin
+		joint.radial_segments = 14
+		joint.rings = 9
+		var jm: MeshInstance3D = _add(root, joint, mat_body)
+		jm.transform = Transform3D(Basis(), p0)
+		if crown == "bloom":
+			_flower(root, p3, (p3 - p2).normalized(), 0.155, mat_line, mat_ink, 6)
 
 	# --- glide pads under the sled ------------------------------------------
 	var pad_spec: Array = [[4, 3], [4, NU - 3], [int(float(NS) * 0.19), int(float(NU) * 0.5)]]
@@ -489,6 +681,85 @@ static func build(root: Node3D, seed: int) -> void:
 		var pt_v: Vector3 = tgs[pi_i]
 		var pb := Basis(pr, pn * 0.42, pt_v * 1.25)
 		pm.transform = Transform3D(pb, pp - nn * (ht + 0.014))
+
+	# --- the melt runs off the rim in threads -------------------------------
+	if mould == "melt":
+		var y_low: float = 0.0
+		for i in range(NS + 1):
+			var pv: Vector3 = pts[i]
+			y_low = minf(y_low, pv.y)
+		for k in range(5):
+			var fk5: float = float(k) / 4.0
+			var t_dr: float = lerpf(0.34, 0.96, fk5)
+			var i_dr: int = clampi(int(round(t_dr * float(NS))), 0, NS)
+			var j_dr: int = NU if (k % 2 == 0) else 0
+			var a_dr: Vector3 = mids[i_dr][j_dr]
+			var b_dr := Vector3(a_dr.x + arng.randf_range(-0.03, 0.03), y_low - 0.02, a_dr.z + arng.randf_range(-0.03, 0.03))
+			if a_dr.y - b_dr.y < 0.06:
+				continue
+			_tube(root, a_dr, b_dr, ht * arng.randf_range(0.9, 1.7), mat_body)
+			var dr_m := SphereMesh.new()
+			dr_m.radius = ht * 2.1
+			dr_m.height = ht * 4.2
+			dr_m.radial_segments = 10
+			dr_m.rings = 6
+			var drmi: MeshInstance3D = _add(root, dr_m, mat_bead)
+			drmi.transform = Transform3D(Basis(), b_dr)
+
+	# --- crown "mirror": a second body turned back to back out of the first --
+	if crown == "mirror":
+		var src: Array = []
+		for ch in root.get_children():
+			if ch is MeshInstance3D:
+				src.append(ch)
+		var box0: AABB = _union(src)
+		var piv: Vector3 = box0.position + box0.size * 0.5
+		piv.y = box0.position.y
+		var k_tw: float = 0.84
+		var rb: Basis = Basis(Vector3.UP, PI).scaled(Vector3(k_tw, k_tw, k_tw))
+		var off_tw := Vector3(0.0, 0.0, -0.30 * maxf(box0.size.z, 0.2))
+		var m_tw := Transform3D(rb, piv + off_tw - rb * piv)
+		var stride: int = maxi(1, int(ceil(float(src.size()) / 40.0)))
+		var idx: int = 0
+		while idx < src.size():
+			var srcm: MeshInstance3D = src[idx]
+			if srcm.mesh != null:
+				var dup := MeshInstance3D.new()
+				dup.mesh = srcm.mesh
+				dup.material_override = srcm.material_override
+				root.add_child(dup)
+				dup.transform = m_tw * srcm.transform
+			idx += stride
+
+	# --- the pour the melt stands in ----------------------------------------
+	if mould == "melt":
+		var wet: Array = []
+		for ch in root.get_children():
+			if ch is MeshInstance3D:
+				wet.append(ch)
+		var pbox: AABB = _union(wet)
+		var pcen: Vector3 = pbox.position + pbox.size * 0.5
+		var prad: float = maxf(pbox.size.x, pbox.size.z) * 0.50
+		var pool_m := CylinderMesh.new()
+		pool_m.top_radius = prad
+		pool_m.bottom_radius = prad * 1.04
+		pool_m.height = 0.045
+		pool_m.radial_segments = 28
+		pool_m.rings = 1
+		var pmi: MeshInstance3D = _add(root, pool_m, mat_body)
+		pmi.transform = Transform3D(Basis(), Vector3(pcen.x, pbox.position.y + 0.022, pcen.z))
+		for k in range(3):
+			var srad: float = prad * arng.randf_range(0.15, 0.28)
+			var sat := CylinderMesh.new()
+			sat.top_radius = srad
+			sat.bottom_radius = srad * 1.10
+			sat.height = 0.030
+			sat.radial_segments = 16
+			sat.rings = 1
+			var smi: MeshInstance3D = _add(root, sat, mat_bead)
+			var ang2: float = arng.randf_range(0.0, TAU)
+			var dist2: float = prad * arng.randf_range(0.80, 1.05)
+			smi.transform = Transform3D(Basis(), Vector3(pcen.x + cos(ang2) * dist2, pbox.position.y + 0.015, pcen.z + sin(ang2) * dist2))
 
 	# --- settle: measure, fit the box, land on the floor, centre ------------
 	var kids: Array = []
@@ -610,6 +881,40 @@ static func _tube(root: Node3D, a: Vector3, b: Vector3, r: float, mat: StandardM
 	var mi: MeshInstance3D = _add(root, cap, mat)
 	mi.transform = Transform3D(_basis_y_to(d), (a + b) * 0.5)
 	return mi
+
+
+static func _flower(root: Node3D, c: Vector3, dir: Vector3, r: float, m_pet: StandardMaterial3D, m_core: StandardMaterial3D, n: int) -> void:
+	var f: Vector3 = dir.normalized()
+	if f.length() < 0.5:
+		f = Vector3.UP
+	var a: Vector3 = Vector3.UP.cross(f)
+	if a.length() < 0.02:
+		a = Vector3.RIGHT.cross(f)
+	a = a.normalized()
+	var b: Vector3 = f.cross(a).normalized()
+	for k in range(n):
+		var th: float = TAU * float(k) / float(n)
+		var rad: Vector3 = (a * cos(th) + b * sin(th)).normalized()
+		var tilt: Vector3 = (rad * 0.88 + f * 0.50).normalized()
+		var pet := SphereMesh.new()
+		pet.radius = r * 0.62
+		pet.height = r * 1.24
+		pet.radial_segments = 12
+		pet.rings = 7
+		var mi: MeshInstance3D = _add(root, pet, m_pet)
+		var sv: Vector3 = f.cross(tilt)
+		if sv.length() < 0.02:
+			sv = a
+		sv = sv.normalized()
+		var uv3: Vector3 = tilt.cross(sv).normalized()
+		mi.transform = Transform3D(Basis(sv * 0.44, uv3 * 0.26, tilt), c + tilt * (r * 0.92))
+	var core := SphereMesh.new()
+	core.radius = r * 0.40
+	core.height = r * 0.80
+	core.radial_segments = 14
+	core.rings = 9
+	var cmi: MeshInstance3D = _add(root, core, m_core)
+	cmi.transform = Transform3D(Basis(), c + f * (r * 0.16))
 
 
 static func _quad(st: SurfaceTool, a: Vector3, b: Vector3, c: Vector3, d: Vector3, ua: Vector2, ub: Vector2, uc: Vector2, ud: Vector2, outward: Vector3, sg: int) -> void:

@@ -1,5 +1,5 @@
 {
-	"_comment": "Grid3D substrate \u2014 dual MultiMesh (nodes + edges) for 3D graph algorithms.",
+	"_comment": "Grid3D substrate — dual MultiMesh (nodes + edges) for 3D graph algorithms.",
 	"artifacts": {
 		"grid3d": {
 			"dna": {
@@ -37,7 +37,8 @@
 				"graphtheory",
 				"searchpathfinding",
 				"randomness",
-				"proceduralgeneration"
+				"proceduralgeneration",
+				"tiling"
 			],
 			"dev_themes": [
 				"3d",
@@ -112,10 +113,10 @@
 				1,
 				2
 			],
-			"qfep_connection": "The array grown a third dimension: a lattice of spheres and edges, traversed by BFS. Where the bar row was 1D and the tiles 2D, this is the array as volume \u2014 a graph in space, indices become coordinates, and the data structure becomes a place you could walk. The bridge from list to world."
+			"qfep_connection": "The array grown a third dimension: a lattice of spheres and edges, traversed by BFS. Where the bar row was 1D and the tiles 2D, this is the array as volume — a graph in space, indices become coordinates, and the data structure becomes a place you could walk. The bridge from list to world."
 		},
 		"grid3d_bfs": {
-			"name": "Grid3D \u2014 BFS",
+			"name": "Grid3D — BFS",
 			"lookup_name": "grid3d_bfs",
 			"description": "Breadth-first search on a 3D graph. Watch the wavefront expand uniformly from the source. Yellow frontier, green visited.",
 			"scene": "res://commons/substrates/grid3d/grid3d_substrate.tscn",
@@ -211,7 +212,7 @@
 			"qfep_connection": "Fairness as an algorithm: a plain queue guarantees every node is reached at its shortest hop-distance from the source, and the green-and-yellow wavefront is what that guarantee looks like in motion."
 		},
 		"grid3d_dfs": {
-			"name": "Grid3D \u2014 DFS",
+			"name": "Grid3D — DFS",
 			"lookup_name": "grid3d_dfs",
 			"description": "Depth-first search with backtracking. Watch the explorer plunge deep, then retreat. Orange stack, green visited.",
 			"scene": "res://commons/substrates/grid3d/grid3d_substrate.tscn",
@@ -305,10 +306,10 @@
 				1,
 				2
 			],
-			"qfep_connection": "Depth-first commitment made spatial: the orange stack plunges along one lineage until it meets its own past \u2014 a red back-edge \u2014 and must publicly retreat. The backtrack is the honest part; the algorithm's record of having been wrong renders as visibly as its progress."
+			"qfep_connection": "Depth-first commitment made spatial: the orange stack plunges along one lineage until it meets its own past — a red back-edge — and must publicly retreat. The backtrack is the honest part; the algorithm's record of having been wrong renders as visibly as its progress."
 		},
 		"grid3d_dijkstra": {
-			"name": "Grid3D \u2014 Dijkstra",
+			"name": "Grid3D — Dijkstra",
 			"lookup_name": "grid3d_dijkstra",
 			"description": "Dijkstra's shortest path algorithm. Greedy expansion by distance. Cyan frontier settles to green.",
 			"scene": "res://commons/substrates/grid3d/grid3d_substrate.tscn",
@@ -402,10 +403,10 @@
 				1,
 				2
 			],
-			"qfep_connection": "From one magenta source the frontier settles whoever is currently cheapest, distance the only virtue it can perceive. The green order that spreads is a hierarchy of arrival cost \u2014 nearness mistaken for mattering, greedily, one node per tick."
+			"qfep_connection": "From one magenta source the frontier settles whoever is currently cheapest, distance the only virtue it can perceive. The green order that spreads is a hierarchy of arrival cost — nearness mistaken for mattering, greedily, one node per tick."
 		},
 		"grid3d_kruskal": {
-			"name": "Grid3D \u2014 Kruskal's MST",
+			"name": "Grid3D — Kruskal's MST",
 			"lookup_name": "grid3d_kruskal",
 			"description": "Kruskal's minimum spanning tree. Sorted edges, Union-Find. Green edges accepted, red edges rejected (would form cycle).",
 			"scene": "res://commons/substrates/grid3d/grid3d_substrate.tscn",
@@ -500,10 +501,10 @@
 				1,
 				2
 			],
-			"qfep_connection": "Edges arrive pre-sorted by cheapness and Union-Find asks a single question \u2014 would this close a loop? \u2014 so the red rejections are the visible price of insisting the network remain a tree."
+			"qfep_connection": "Edges arrive pre-sorted by cheapness and Union-Find asks a single question — would this close a loop? — so the red rejections are the visible price of insisting the network remain a tree."
 		},
 		"grid3d_prim": {
-			"name": "Grid3D \u2014 Prim's MST",
+			"name": "Grid3D — Prim's MST",
 			"lookup_name": "grid3d_prim",
 			"description": "Prim's minimum spanning tree. Grows from source, always adding cheapest edge to frontier. Cyan frontier, green tree.",
 			"scene": "res://commons/substrates/grid3d/grid3d_substrate.tscn",
@@ -597,7 +598,7 @@
 				1,
 				2
 			],
-			"qfep_connection": "The tree grows by pure local greed \u2014 always the cheapest edge crossing the frontier \u2014 and still ends globally minimal, one of the few places where miserliness is provably virtuous. The cyan band is the real object: not the tree but the border where it is still deciding what to annex."
+			"qfep_connection": "The tree grows by pure local greed — always the cheapest edge crossing the frontier — and still ends globally minimal, one of the few places where miserliness is provably virtuous. The cyan band is the real object: not the tree but the border where it is still deciding what to annex."
 		},
 		"grid3d_force_directed": {
 			"dna_declined": {
@@ -608,7 +609,7 @@
 				"underlying_finding": "The shipped artifact overruns its own declared bounds by an order of magnitude. grid3d_substrate.gd declares bounds = Vector3(2.0, 1.5, 2.0) and initialize() seeds inside it, but step() applies no containment, so within about one second of play the graph is 8-20 units across with 0.06 m nodes - a hairline cobweb sprawling far outside its map cell. Two of the four placements (Test_Substrates, Zone_TemporalStorage) stand in ordinary rooms. That is a defect to decide about, not an axis to declare, and capping it would change what all 4 placements look like.",
 				"also": "The layout is additionally unseeded (Grid3DCartridge.initialize uses global randf/randf_range) and time-domain (get_warmup_steps() is 0, so the still is whatever 1.1 s of relaxation reached). Both are fixable with a seed export and a warmup fixture; neither is the blocker. force_directed_layout in algorithms_misc.json is a DIFFERENT script (algorithms/graphtheory/force_directed_layout/) and shares nothing with this one - its earlier refusal is a separate question. grid3d_substrate.tscn is shared by nine tokens (grid3d, _bfs, _dfs, _dijkstra, _kruskal, _prim, _force_directed, _random_graph, _entropy), which pick their cartridge from the artifact_lookup_name meta."
 			},
-			"name": "Grid3D \u2014 Force-Directed Layout",
+			"name": "Grid3D — Force-Directed Layout",
 			"lookup_name": "grid3d_force_directed",
 			"description": "Force-directed graph layout. Nodes repel, edges attract. Watch the graph self-organize into readable structure.",
 			"scene": "res://commons/substrates/grid3d/grid3d_substrate.tscn",
@@ -705,9 +706,9 @@
 			"qfep_connection": "No node is told where to stand; pairwise repulsion, spring edges, and a cooling temperature negotiate the layout, so legibility arrives as a truce E_flux settles into rather than a plan F_order issued."
 		},
 		"grid3d_random_graph": {
-			"name": "Grid3D \u2014 Random Graph",
+			"name": "Grid3D — Random Graph",
 			"lookup_name": "grid3d_random_graph",
-			"description": "Erd\u0151s\u2013R\u00e9nyi random graph. Edges appear one at a time, nodes color by accumulated degree. Hubs emerge from randomness.",
+			"description": "Erdős–Rényi random graph. Edges appear one at a time, nodes color by accumulated degree. Hubs emerge from randomness.",
 			"scene": "res://commons/substrates/grid3d/grid3d_substrate.tscn",
 			"category": "substrate",
 			"artifact_type": "interactive_algorithm",
@@ -798,12 +799,12 @@
 				1,
 				2
 			],
-			"qfep_connection": "Erd\u0151s\u2013R\u00e9nyi dealt one edge at a time, nodes recoloring as their degree climbs: hubs are not designed, they are what repeated coin flips look like once you agree to keep score."
+			"qfep_connection": "Erdős–Rényi dealt one edge at a time, nodes recoloring as their degree climbs: hubs are not designed, they are what repeated coin flips look like once you agree to keep score."
 		},
 		"grid3d_entropy": {
-			"name": "Grid3D \u2014 Entropy Field",
+			"name": "Grid3D — Entropy Field",
 			"lookup_name": "grid3d_entropy",
-			"description": "Order-to-chaos point cloud. Grid nodes displaced by increasing randomness along Z. Blue order \u2192 red chaos. No edges.",
+			"description": "Order-to-chaos point cloud. Grid nodes displaced by increasing randomness along Z. Blue order → red chaos. No edges.",
 			"scene": "res://commons/substrates/grid3d/grid3d_substrate.tscn",
 			"category": "substrate",
 			"artifact_type": "interactive_algorithm",

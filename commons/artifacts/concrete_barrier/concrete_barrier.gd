@@ -39,6 +39,8 @@ class_name ConcreteBarrier
 ## Show the two steel lifting hooks on the crown. ON = liftable /
 ## temporary; OFF = permanent / poured-in-place.
 @export var show_hooks: bool = true
+## Opt-in physical boundary for movement experiments.
+@export var blocking: bool = false
 
 # ── Constants ─────────────────────────────────────────────────────────
 
@@ -71,6 +73,8 @@ func apply_grid_config(config_data: Dictionary) -> void:
 
 
 func _read_metadata_overrides() -> void:
+	if has_meta("config_blocking"):
+		blocking = str(get_meta("config_blocking")) in ["1", "true"]
 	if has_meta("config_barrier_length"):
 		barrier_length = float(str(get_meta("config_barrier_length")))
 	if has_meta("config_barrier_height"):
@@ -119,6 +123,15 @@ func _build() -> void:
 	body.mesh = MF.extrude_profile(outline, barrier_length, barrier_height)
 	body.material_override = stripe_mat
 	add_child(body)
+	if blocking:
+		var obstacle := StaticBody3D.new()
+		obstacle.name = "TrafficCollision"
+		obstacle.collision_layer = 1
+		var shape := CollisionShape3D.new()
+		shape.name = "CollisionShape3D"
+		shape.shape = body.mesh.create_convex_shape()
+		obstacle.add_child(shape)
+		add_child(obstacle)
 
 	# ── 2. Steel lifting hooks on the crown ──────────────────────────
 	if show_hooks:

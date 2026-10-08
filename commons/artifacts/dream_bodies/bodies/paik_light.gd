@@ -40,6 +40,19 @@ extends RefCounted
 ## Given up: the crowd (this is one body, not the row), the painted backdrop,
 ## the real transparency of the plastic, the video content inside the monitors,
 ## and the light actually spilling onto neighbouring bodies.
+##
+## AXES
+##   signal — what the transmission does to the flesh it lands on: scatter (the
+##     reference: light stuck on whole white plastic) · raster (the body torn
+##     into 40-odd offset scanline slabs, loose bars firing past it) · swarm
+##     (every segment dissolved into a cloud of small copies of itself around a
+##     thin core) · chassis (the plastic gone, only a dark metal hoop-cage of
+##     the same figure, the light still stuck to its ribs) · melt (the legs sunk
+##     into one solid pour, torso and skull sagging, lit drips hanging off it).
+##   crowd — how many bodies the one body admits: one (the reference) · twin (a
+##     half-size mannequin growing head-down out of the free shoulder) · chorus
+##     (six arms fanned off the ribcage, three heads on the neck) · aerial (the
+##     skull crowned with a rack of antennae, dishes and two halo hoops).
 
 const TEX: int = 256
 
@@ -62,9 +75,23 @@ static func describe() -> String:
 	return "A glossy white gallery mannequin standing hand on hip, its skin scattered with glowing patches of magenta, cyan and yellow light, black cables looping over one shoulder and trailing to the floor."
 
 
-static func build(root: Node3D, seed: int) -> void:
+static func axes() -> Dictionary:
+	return {
+		"broadcast": ["scatter", "raster", "swarm", "chassis", "melt"],
+		"crowd": ["one", "twin", "chorus", "aerial"],
+	}
+
+
+static func build(root: Node3D, seed: int, opts: Dictionary = {}) -> void:
 	var rng := RandomNumberGenerator.new()
 	rng.seed = seed
+
+	var sig: String = String(opts.get("broadcast", "scatter"))
+	var crowd: String = String(opts.get("crowd", "one"))
+	var raster: bool = sig == "raster"
+	var swarm: bool = sig == "swarm"
+	var chassis: bool = sig == "chassis"
+	var melt: bool = sig == "melt"
 
 	# ---- the individual ----------------------------------------------------
 	var total_h: float = rng.randf_range(1.47, 1.63)
@@ -82,6 +109,10 @@ static func build(root: Node3D, seed: int) -> void:
 	var n_conn: int = rng.randi_range(3, 5)
 	var n_decal: int = rng.randi_range(26, 44)
 	var phase: float = rng.randf()
+	if swarm:
+		n_decal = int(round(float(n_decal) * 0.45))
+	elif chassis:
+		n_decal = int(round(float(n_decal) * 0.72))
 
 	# ---- skeleton heights (unscaled, total 1.625) --------------------------
 	var y_ankle: float = 0.078 * k
@@ -132,6 +163,18 @@ static func build(root: Node3D, seed: int) -> void:
 	mat_strap.albedo_color = Color("#101015")
 	mat_strap.roughness = 0.62
 
+	# the fossil frame — used for every structural part when signal = chassis
+	var mat_frame := StandardMaterial3D.new()
+	mat_frame.albedo_color = Color("#484D58")
+	mat_frame.roughness = 0.26
+	mat_frame.metallic = 0.88
+	mat_frame.emission_enabled = true
+	mat_frame.emission = Color("#141B2C")
+	mat_frame.emission_energy_multiplier = 0.45
+	var mat_body: StandardMaterial3D = mat_skin
+	if chassis:
+		mat_body = mat_frame
+
 	# shared unit meshes
 	var unit_sph := SphereMesh.new()
 	unit_sph.radius = 1.0
@@ -159,20 +202,60 @@ static func build(root: Node3D, seed: int) -> void:
 		var q: Vector3 = spine_pts[i]
 		var hw: float = spine_hw[i]
 		var hd: float = spine_hd[i]
-		var mi: MeshInstance3D = _add(root, unit_sph, mat_skin)
-		mi.transform = Transform3D(Basis.from_scale(Vector3(hw, seg_y, hd)), q)
+		var tt: float = float(i) / float(n_spine - 1)
+		if raster:
+			# the torso torn into scan bands, each one slipped off the axis
+			var rx: float = sin(float(i) * 2.71 + phase * 6.0) * 0.056 * k
+			var rz: float = cos(float(i) * 1.93 + phase * 4.0) * 0.040 * k
+			var mi_r: MeshInstance3D = _add(root, unit_sph, mat_body)
+			mi_r.transform = Transform3D(Basis.from_scale(Vector3(hw * 1.16, seg_y * 0.38, hd * 1.16)), q + Vector3(rx, 0.0, rz))
+		elif chassis:
+			_hoop(root, q, Vector3.UP, hw * 1.05, hd * 1.05, 0.013 * k, mat_body)
+		elif swarm:
+			var mi_c: MeshInstance3D = _add(root, unit_sph, mat_body)
+			mi_c.transform = Transform3D(Basis.from_scale(Vector3(hw * 0.34, seg_y * 0.74, hd * 0.34)), q)
+			for c in range(2):
+				var ang2: float = rng.randf_range(0.0, TAU)
+				var rad2: float = rng.randf_range(1.15, 2.40)
+				var pos2: Vector3 = q + Vector3(cos(ang2) * hw * rad2, rng.randf_range(-0.055, 0.055) * k, sin(ang2) * hd * rad2)
+				var ss: float = rng.randf_range(0.22, 0.46)
+				var mi_s: MeshInstance3D = _add(root, unit_sph, mat_body)
+				mi_s.transform = Transform3D(Basis(Vector3.UP, ang2) * Basis.from_scale(Vector3(hw * ss, seg_y * ss * 1.5, hd * ss)), pos2)
+		else:
+			var mw: float = hw
+			var mdp: float = hd
+			var my: float = seg_y
+			if melt:
+				var fat: float = lerpf(1.36, 0.90, tt)
+				mw = hw * fat
+				mdp = hd * fat
+				my = seg_y * 1.32
+			var mi: MeshInstance3D = _add(root, unit_sph, mat_body)
+			mi.transform = Transform3D(Basis.from_scale(Vector3(mw, my, mdp)), q)
 
 	var p_hip: Vector3 = spine_pts[0]
 	var p_top: Vector3 = spine_pts[n_spine - 1]
 	var i_chest: int = int(floor(float(n_spine - 1) * 0.60))
 	var p_chest: Vector3 = spine_pts[i_chest]
 
+	# the four vertical stringers that hold the hoop cage together
+	if chassis:
+		for ri in range(4):
+			var rang: float = TAU * float(ri) / 4.0 + 0.4
+			var r_lo: Vector3 = spine_pts[0] + Vector3(cos(rang) * spine_hw[0] * 0.94, 0.0, sin(rang) * spine_hd[0] * 0.94)
+			var r_hi: Vector3 = spine_pts[n_spine - 1] + Vector3(cos(rang) * spine_hw[n_spine - 1] * 0.94, 0.0, sin(rang) * spine_hd[n_spine - 1] * 0.94)
+			_tapered_cyl(root, r_lo, r_hi, 0.011 * k, 0.008 * k, mat_body)
+
 	# glute / hip mass, so the pelvis is not a bare ellipsoid
 	for si in range(2):
 		var sd: float = -1.0 if si == 0 else 1.0
-		var gm: MeshInstance3D = _add(root, unit_sph, mat_skin)
 		var gp := Vector3(p_hip.x + sd * 0.070 * k * girth, y_hip - 0.055 * k, p_hip.z + 0.030 * k)
-		gm.transform = Transform3D(Basis.from_scale(Vector3(0.085, 0.090, 0.090) * k * girth), gp)
+		if chassis:
+			_hoop(root, gp, Vector3(0.0, 1.0, 0.25).normalized(), 0.090 * k * girth, 0.092 * k * girth, 0.012 * k, mat_body)
+			continue
+		var gm: MeshInstance3D = _add(root, unit_sph, mat_body)
+		var gs: float = 1.24 if melt else 1.0
+		gm.transform = Transform3D(Basis.from_scale(Vector3(0.085 * gs, 0.090, 0.090 * gs) * k * girth), gp)
 
 	# ---- surface anchors for the light blobs -------------------------------
 	var anchors: Array = []
@@ -200,20 +283,29 @@ static func build(root: Node3D, seed: int) -> void:
 		var ankle_pt := Vector3(ank_x, y_ankle, ank_z)
 		var r_thigh: float = 0.079 * k * girth
 		var r_shin: float = 0.055 * k * girth
-		_limb(root, hip_pt, knee_pt, r_thigh, mat_skin)
-		_limb(root, knee_pt, ankle_pt, r_shin, mat_skin)
-		_ball(root, unit_sph, knee_pt, Vector3(0.062, 0.066, 0.062) * k * girth, mat_skin)
-		_ball(root, unit_sph, ankle_pt, Vector3(0.048, 0.048, 0.050) * k * girth, mat_skin)
+		if melt:
+			# the leg is swallowed: only the top of the thigh is still a leg
+			_limb(root, hip_pt, hip_pt.lerp(knee_pt, 0.60), r_thigh * 1.16, mat_body)
+			_leg_anchors(anchors, hip_pt, knee_pt, r_thigh, 3, rng)
+			continue
+		_skin_limb(root, hip_pt, knee_pt, r_thigh, mat_body, sig, unit_sph, k, rng)
+		_skin_limb(root, knee_pt, ankle_pt, r_shin, mat_body, sig, unit_sph, k, rng)
+		_ball(root, unit_sph, knee_pt, Vector3(0.062, 0.066, 0.062) * k * girth, mat_body)
+		_ball(root, unit_sph, ankle_pt, Vector3(0.048, 0.048, 0.050) * k * girth, mat_body)
 		var turn: float = deg_to_rad((13.0 if free else 7.0) * sd)
 		var fb := Basis(Vector3.UP, turn)
 		var foot_c: Vector3 = ankle_pt + fb * Vector3(0.0, -0.040 * k, -0.052 * k)
-		var fm: MeshInstance3D = _add(root, unit_box, mat_skin)
+		var fm: MeshInstance3D = _add(root, unit_box, mat_body)
 		fm.transform = Transform3D(fb * Basis.from_scale(Vector3(0.088, 0.058, 0.185) * k), foot_c)
 		var toe_c: Vector3 = ankle_pt + fb * Vector3(0.0, -0.049 * k, -0.148 * k)
-		var tm: MeshInstance3D = _add(root, unit_box, mat_skin)
+		var tm: MeshInstance3D = _add(root, unit_box, mat_body)
 		tm.transform = Transform3D(fb * Basis(Vector3.RIGHT, deg_to_rad(-7.0)) * Basis.from_scale(Vector3(0.076, 0.040, 0.070) * k), toe_c)
 		_leg_anchors(anchors, hip_pt, knee_pt, r_thigh, 3, rng)
 		_leg_anchors(anchors, knee_pt, ankle_pt, r_shin, 3, rng)
+
+	# the pour the melted legs stand in
+	if melt:
+		_pour(root, unit_sph, Vector3(p_hip.x, 0.0, p_hip.z), y_hip * 0.90, k, mat_body)
 
 	# ---- arms --------------------------------------------------------------
 	var sh_pts: Array = []
@@ -224,7 +316,7 @@ static func build(root: Node3D, seed: int) -> void:
 		var on_hip: bool = sd == hip_side
 		var sh_y: float = y_sh + (-0.018 * k if sd == weight_side else 0.008 * k)
 		var sh_pt := Vector3(p_top.x + sd * 0.126 * k * girth, sh_y, p_chest.z + 0.004 * k)
-		_ball(root, unit_sph, sh_pt, Vector3(0.066, 0.072, 0.066) * k * girth, mat_skin)
+		_ball(root, unit_sph, sh_pt, Vector3(0.066, 0.072, 0.066) * k * girth, mat_body)
 		var elbow_pt: Vector3
 		var wrist_pt: Vector3
 		if on_hip:
@@ -235,14 +327,19 @@ static func build(root: Node3D, seed: int) -> void:
 			wrist_pt = elbow_pt + Vector3(sd * rng.randf_range(0.010, 0.048) * k, -0.238 * k, rng.randf_range(-0.070, -0.014) * k)
 		var r_up: float = 0.055 * k * girth
 		var r_fore: float = 0.043 * k * girth
-		_limb(root, sh_pt, elbow_pt, r_up, mat_skin)
-		_limb(root, elbow_pt, wrist_pt, r_fore, mat_skin)
-		_ball(root, unit_sph, elbow_pt, Vector3(0.048, 0.050, 0.048) * k * girth, mat_skin)
-		_ball(root, unit_sph, wrist_pt, Vector3(0.038, 0.040, 0.038) * k * girth, mat_skin)
+		_skin_limb(root, sh_pt, elbow_pt, r_up, mat_body, sig, unit_sph, k, rng)
+		_skin_limb(root, elbow_pt, wrist_pt, r_fore, mat_body, sig, unit_sph, k, rng)
+		_ball(root, unit_sph, elbow_pt, Vector3(0.048, 0.050, 0.048) * k * girth, mat_body)
+		_ball(root, unit_sph, wrist_pt, Vector3(0.038, 0.040, 0.038) * k * girth, mat_body)
 		var hand_dir: Vector3 = (wrist_pt - elbow_pt).normalized()
-		var hand_c: Vector3 = wrist_pt + hand_dir * (0.058 * k)
-		var hm: MeshInstance3D = _add(root, unit_box, mat_skin)
-		hm.transform = Transform3D(_basis_y_to(hand_dir) * Basis.from_scale(Vector3(0.052, 0.115, 0.030) * k), hand_c)
+		var hand_len: float = 0.115
+		var hand_reach: float = 0.058
+		if melt:
+			hand_len = 0.235
+			hand_reach = 0.118
+		var hand_c: Vector3 = wrist_pt + hand_dir * (hand_reach * k)
+		var hm: MeshInstance3D = _add(root, unit_box, mat_body)
+		hm.transform = Transform3D(_basis_y_to(hand_dir) * Basis.from_scale(Vector3(0.052, hand_len, 0.030) * k), hand_c)
 		sh_pts.append(sh_pt)
 		elbow_pts.append(elbow_pt)
 		wrist_pts.append(wrist_pt)
@@ -254,14 +351,41 @@ static func build(root: Node3D, seed: int) -> void:
 	# ---- neck and head -----------------------------------------------------
 	var head_c := Vector3(p_top.x + sin(head_yaw) * 0.010 * k, y_head, p_top.z - 0.014 * k)
 	var neck_top := Vector3(p_top.x, y_neck + 0.026 * k, p_top.z - 0.004 * k)
-	_tapered_cyl(root, Vector3(p_top.x, y_neck - 0.048 * k, p_top.z), neck_top, 0.060 * k * girth, 0.049 * k * girth, mat_skin)
+	_tapered_cyl(root, Vector3(p_top.x, y_neck - 0.048 * k, p_top.z), neck_top, 0.060 * k * girth, 0.049 * k * girth, mat_body)
 	var hb := Basis(Vector3.UP, head_yaw) * Basis(Vector3.RIGHT, head_tilt)
-	var hs := Vector3(0.084, 0.104, 0.094) * k * girth
-	var head_m: MeshInstance3D = _add(root, unit_sph, mat_skin)
-	head_m.transform = Transform3D(hb * Basis.from_scale(hs), head_c)
-	var jaw_m: MeshInstance3D = _add(root, unit_sph, mat_skin)
-	jaw_m.transform = Transform3D(hb * Basis.from_scale(Vector3(0.066, 0.058, 0.074) * k * girth), head_c + hb * Vector3(0.0, -0.062 * k, -0.014 * k))
-	var nose_m: MeshInstance3D = _add(root, unit_sph, mat_skin)
+	var hs: Vector3 = Vector3(0.084, 0.104, 0.094) * k * girth
+	if melt:
+		hs = Vector3(0.080, 0.138, 0.090) * k * girth
+	if chassis:
+		# the skull is three hoops and a small hard core
+		for hi in range(3):
+			var hf: float = float(hi) * 0.5
+			var hr: float = lerpf(0.092, 0.056, absf(hf - 0.5) * 2.0) * k * girth
+			_hoop(root, head_c + hb * Vector3(0.0, lerpf(-0.078, 0.072, hf) * k, 0.0), hb * Vector3.UP, hr, hr * 1.06, 0.011 * k, mat_body)
+		var core_m: MeshInstance3D = _add(root, unit_sph, mat_body)
+		core_m.transform = Transform3D(hb * Basis.from_scale(hs * 0.44), head_c)
+	elif raster:
+		# the skull sliced across the scan, each slice slipped sideways
+		for hi in range(4):
+			var hf2: float = (float(hi) + 0.5) / 4.0
+			var bulge: float = 0.52 + 0.66 * sin(PI * hf2)
+			var shx: float = sin(float(hi) * 2.24 + phase * 3.0) * 0.040 * k
+			var mi_h: MeshInstance3D = _add(root, unit_sph, mat_body)
+			mi_h.transform = Transform3D(hb * Basis.from_scale(Vector3(hs.x * bulge, hs.y * 0.24, hs.z * bulge)), head_c + hb * Vector3(shx, lerpf(-0.086, 0.082, hf2) * k, 0.0))
+	else:
+		var head_m: MeshInstance3D = _add(root, unit_sph, mat_body)
+		head_m.transform = Transform3D(hb * Basis.from_scale(hs), head_c)
+		var jaw_m: MeshInstance3D = _add(root, unit_sph, mat_body)
+		jaw_m.transform = Transform3D(hb * Basis.from_scale(Vector3(0.066, 0.058, 0.074) * k * girth), head_c + hb * Vector3(0.0, -0.062 * k, -0.014 * k))
+		if swarm:
+			# a ring of small heads shed by the head
+			for hi2 in range(4):
+				var ang4: float = TAU * float(hi2) / 4.0 + phase * 3.0
+				var hsz: float = rng.randf_range(0.30, 0.54)
+				var hpos: Vector3 = head_c + Vector3(cos(ang4) * 0.155 * k, rng.randf_range(-0.05, 0.11) * k, sin(ang4) * 0.155 * k)
+				var mh2: MeshInstance3D = _add(root, unit_sph, mat_body)
+				mh2.transform = Transform3D(Basis(Vector3.UP, ang4) * Basis.from_scale(hs * hsz), hpos)
+	var nose_m: MeshInstance3D = _add(root, unit_sph, mat_body)
 	nose_m.transform = Transform3D(hb * Basis.from_scale(Vector3(0.017, 0.034, 0.026) * k), head_c + hb * Vector3(0.0, -0.016 * k, -0.082 * k))
 	for a in range(6):
 		var ang: float = TAU * float(a) / 6.0 + 0.3
@@ -347,6 +471,27 @@ static func build(root: Node3D, seed: int) -> void:
 			var mi_d2: MeshInstance3D = _add(root, unit_box, mat_d)
 			mi_d2.transform = Transform3D(db * Basis.from_scale(Vector3(bw, bh, 0.008 * k)), apos + jit + anrm * (0.004 * k))
 
+	# ---- the signal overshooting the body ----------------------------------
+	if raster:
+		for bi in range(9):
+			var bcol: Color = Color(str(LIGHT_COLS[rng.randi_range(0, LIGHT_COLS.size() - 1)]))
+			var mat_bar := StandardMaterial3D.new()
+			mat_bar.albedo_color = bcol
+			mat_bar.roughness = 0.18
+			mat_bar.emission_enabled = true
+			mat_bar.emission = bcol
+			mat_bar.emission_energy_multiplier = rng.randf_range(1.8, 3.1)
+			var by: float = lerpf(y_ankle + 0.08 * k, y_head + 0.07 * k, float(bi) / 8.0) + rng.randf_range(-0.025, 0.025) * k
+			var bw: float = rng.randf_range(0.20, 0.44) * k
+			var bx: float = rng.randf_range(-0.24, 0.24) * k
+			var bz: float = rng.randf_range(-0.22, 0.22) * k
+			var bh: float = rng.randf_range(0.008, 0.021) * k
+			var mi_b: MeshInstance3D = _add(root, unit_box, mat_bar)
+			mi_b.transform = Transform3D(Basis(Vector3.UP, rng.randf_range(-0.55, 0.55)) * Basis.from_scale(Vector3(bw, bh, 0.010 * k)), Vector3(bx, by, bz))
+
+	if melt:
+		_drips(root, unit_sph, anchors, 9, k, mat_body, rng)
+
 	# ---- cables ------------------------------------------------------------
 	var floor_y: float = 0.011
 	for ci in range(n_cable):
@@ -421,6 +566,72 @@ static func build(root: Node3D, seed: int) -> void:
 					Vector3(w.x - hip_side * (0.10 + rng.randf_range(0.0, 0.10)) * k, floor_y, w.z - (0.06 + rng.randf_range(0.0, 0.20)) * k),
 				]
 		_cable(root, ctrl, r_cab, r_cab * rng.randf_range(0.75, 1.0), mat_cable, floor_y)
+
+	# ---- crowd: what else the one body admits ------------------------------
+	if crowd == "twin":
+		# a half-size mannequin growing head-down out of the free shoulder
+		var sd_free: float = -hip_side
+		var tw_yaw: float = deg_to_rad(rng.randf_range(-34.0, 34.0))
+		var tw_base := Transform3D(
+			Basis(Vector3(0.0, 0.0, 1.0), deg_to_rad(148.0 * hip_side)) * Basis(Vector3.UP, tw_yaw),
+			sh_free + Vector3(sd_free * 0.052 * k, 0.046 * k, -0.012 * k)
+		)
+		_mini_figure(root, tw_base, 0.46 * k * girth, mat_body, unit_sph, rng)
+	elif crowd == "chorus":
+		# six arms off the ribcage, three heads on the neck
+		for ai in range(4):
+			var sd3: float = -1.0 if ai % 2 == 0 else 1.0
+			var tier: int = 0 if ai < 2 else 1
+			var zk: float = 0.030 if tier == 0 else -0.040
+			var y_root: float = y_sh - float(tier) * 0.200 * k - 0.030 * k
+			var root_pt := Vector3(p_chest.x + sd3 * hw_chest * 0.94, y_root, p_chest.z + zk * k)
+			var a_ang: float = deg_to_rad(lerpf(12.0, 66.0, float(ai) / 3.0) + rng.randf_range(-9.0, 9.0))
+			var out_dir: Vector3 = Vector3(sd3 * cos(a_ang), -sin(a_ang), rng.randf_range(-0.30, 0.34)).normalized()
+			var el2: Vector3 = root_pt + out_dir * (0.212 * k)
+			var w_ang: float = a_ang + deg_to_rad(rng.randf_range(20.0, 64.0))
+			var w_dir: Vector3 = Vector3(sd3 * cos(w_ang), -sin(w_ang), rng.randf_range(-0.34, 0.26)).normalized()
+			var wr2: Vector3 = el2 + w_dir * (0.200 * k)
+			_ball(root, unit_sph, root_pt, Vector3(0.058, 0.062, 0.058) * k * girth, mat_body)
+			_skin_limb(root, root_pt, el2, 0.048 * k * girth, mat_body, sig, unit_sph, k, rng)
+			_skin_limb(root, el2, wr2, 0.038 * k * girth, mat_body, sig, unit_sph, k, rng)
+			_ball(root, unit_sph, el2, Vector3(0.042, 0.044, 0.042) * k * girth, mat_body)
+			var hd2: Vector3 = (wr2 - el2).normalized()
+			var hmx: MeshInstance3D = _add(root, unit_box, mat_body)
+			hmx.transform = Transform3D(_basis_y_to(hd2) * Basis.from_scale(Vector3(0.046, 0.100, 0.026) * k), wr2 + hd2 * (0.050 * k))
+		for hi3 in range(2):
+			var sd4: float = -1.0 if hi3 == 0 else 1.0
+			var hb3: Basis = Basis(Vector3(0.0, 0.0, 1.0), deg_to_rad(-26.0 * sd4)) * Basis(Vector3.UP, deg_to_rad(rng.randf_range(-34.0, 34.0)))
+			var hc3: Vector3 = neck_top + Vector3(sd4 * 0.100 * k, 0.046 * k, rng.randf_range(-0.022, 0.022) * k)
+			_tapered_cyl(root, neck_top + Vector3(sd4 * 0.020 * k, -0.020 * k, 0.0), hc3 + hb3 * Vector3(0.0, -0.062 * k, 0.0), 0.032 * k, 0.024 * k, mat_body)
+			var hm3: MeshInstance3D = _add(root, unit_sph, mat_body)
+			hm3.transform = Transform3D(hb3 * Basis.from_scale(Vector3(0.074, 0.092, 0.082) * k * girth), hc3)
+			var jm3: MeshInstance3D = _add(root, unit_sph, mat_body)
+			jm3.transform = Transform3D(hb3 * Basis.from_scale(Vector3(0.058, 0.050, 0.064) * k * girth), hc3 + hb3 * Vector3(0.0, -0.056 * k, -0.012 * k))
+	elif crowd == "aerial":
+		# the skull crowned with a receiving rack
+		var crown: Vector3 = head_c + hb * Vector3(0.0, 0.084 * k * girth, 0.0)
+		var dcol: Color = Color(str(LIGHT_COLS[rng.randi_range(0, LIGHT_COLS.size() - 1)]))
+		var mat_dish := StandardMaterial3D.new()
+		mat_dish.albedo_color = dcol
+		mat_dish.roughness = 0.18
+		mat_dish.emission_enabled = true
+		mat_dish.emission = dcol
+		mat_dish.emission_energy_multiplier = 2.4
+		for ri2 in range(7):
+			var ang5: float = TAU * float(ri2) / 7.0 + phase * 2.4
+			var tilt: float = deg_to_rad(rng.randf_range(10.0, 54.0))
+			var dir3: Vector3 = Vector3(cos(ang5) * sin(tilt), cos(tilt), sin(ang5) * sin(tilt)).normalized()
+			var ln3: float = rng.randf_range(0.11, 0.30) * k
+			var tip: Vector3 = crown + dir3 * ln3
+			_tapered_cyl(root, crown + dir3 * (0.015 * k), tip, 0.012 * k, 0.005 * k, mat_box)
+			if ri2 % 2 == 0:
+				var dm: MeshInstance3D = _add(root, unit_sph, mat_dish)
+				dm.transform = Transform3D(_basis_z_to(dir3) * Basis.from_scale(Vector3(0.044, 0.044, 0.012) * k), tip)
+			else:
+				var cm: MeshInstance3D = _add(root, unit_box, mat_box)
+				cm.transform = Transform3D(_basis_y_to(dir3) * Basis(Vector3.UP, rng.randf_range(0.0, 1.4)) * Basis.from_scale(Vector3(0.062, 0.010, 0.013) * k), tip - dir3 * (0.022 * k))
+		_hoop(root, head_c + Vector3(0.0, 0.030 * k, 0.0), Vector3.UP, 0.152 * k, 0.152 * k, 0.011 * k, mat_strap)
+		_hoop(root, head_c + Vector3(0.0, -0.010 * k, 0.0), Vector3(0.34, 0.22, 1.0).normalized(), 0.134 * k, 0.134 * k, 0.010 * k, mat_strap)
 
 	_settle(root)
 
@@ -563,6 +774,129 @@ static func _limb(root: Node3D, a: Vector3, b: Vector3, r: float, mat: StandardM
 	var mi: MeshInstance3D = _add(root, cap, mat)
 	mi.transform = Transform3D(_basis_y_to(d), (a + b) * 0.5)
 	return mi
+
+
+## One limb of the figure, told in whatever substance the signal has left it.
+static func _skin_limb(root: Node3D, a: Vector3, b: Vector3, r: float, mat: StandardMaterial3D, mode: String, unit_sph: Mesh, k: float, rng: RandomNumberGenerator) -> void:
+	if mode == "raster":
+		var n: int = 5
+		for i in range(n):
+			var f: float = (float(i) + 0.16) / float(n)
+			var c: Vector3 = a.lerp(b, f)
+			var slip: float = sin(float(i) * 2.33 + c.y * 19.0) * 0.042 * k
+			var mi: MeshInstance3D = _add(root, unit_sph, mat)
+			mi.transform = Transform3D(Basis.from_scale(Vector3(r * 1.32, r * 0.34, r * 1.32)), c + Vector3(slip, 0.0, slip * 0.62))
+		return
+	if mode == "chassis":
+		var n2: int = 4
+		var axis: Vector3 = b - a
+		for i in range(n2):
+			var f2: float = (float(i) + 0.5) / float(n2)
+			_hoop(root, a.lerp(b, f2), axis, r * 1.08, r * 1.08, 0.010 * k, mat)
+		_tapered_cyl(root, a, b, r * 0.24, r * 0.20, mat)
+		return
+	if mode == "swarm":
+		var n3: int = 4
+		var axis2: Vector3 = b - a
+		for i in range(n3):
+			var f3: float = (float(i) + 0.5) / float(n3)
+			var c2: Vector3 = a.lerp(b, f3)
+			var ang: float = rng.randf_range(0.0, TAU)
+			var rad: float = r * rng.randf_range(1.15, 2.70)
+			var off: Vector3 = _perp(axis2, ang) * rad + Vector3(0.0, rng.randf_range(-0.035, 0.035) * k, 0.0)
+			var cap := CapsuleMesh.new()
+			cap.radius = r * rng.randf_range(0.20, 0.32)
+			cap.height = r * rng.randf_range(1.6, 2.8)
+			cap.radial_segments = 7
+			cap.rings = 3
+			var tumble: Vector3 = Vector3(rng.randf_range(-1.0, 1.0), rng.randf_range(-1.0, 1.0), rng.randf_range(-1.0, 1.0))
+			var mi2: MeshInstance3D = _add(root, cap, mat)
+			mi2.transform = Transform3D(_basis_y_to(tumble), c2 + off)
+		_limb(root, a, b, r * 0.30, mat)
+		return
+	_limb(root, a, b, r, mat)
+
+
+## A flattened torus ring — the cage rib, the halo, the hoop round a hip.
+static func _hoop(root: Node3D, at: Vector3, axis: Vector3, rx: float, rz: float, thick: float, mat: StandardMaterial3D) -> void:
+	var base_r: float = maxf((rx + rz) * 0.5, 0.006)
+	var t := TorusMesh.new()
+	t.inner_radius = maxf(base_r - maxf(thick, 0.002), 0.001)
+	t.outer_radius = base_r
+	t.rings = 12
+	t.ring_segments = 6
+	var mi: MeshInstance3D = _add(root, t, mat)
+	mi.transform = Transform3D(_basis_y_to(axis) * Basis.from_scale(Vector3(rx / base_r, 1.0, rz / base_r)), at)
+
+
+## The solid pour the melted legs stand in — a widening stack down to a skirt.
+static func _pour(root: Node3D, unit_sph: Mesh, at: Vector3, top_y: float, k: float, mat: StandardMaterial3D) -> void:
+	var n: int = 13
+	for i in range(n):
+		var f: float = float(i) / float(n - 1)
+		var yy: float = lerpf(0.030 * k, top_y, f)
+		var rr: float = lerpf(0.330, 0.088, pow(f, 0.62)) * k
+		var wob: float = 1.0 + sin(f * 9.0 + at.x * 11.0) * 0.11
+		var hgt: float = lerpf(0.062, 0.090, f) * k
+		var mi: MeshInstance3D = _add(root, unit_sph, mat)
+		mi.transform = Transform3D(
+			Basis(Vector3.UP, f * 1.7) * Basis.from_scale(Vector3(rr * wob, hgt, rr * (2.0 - wob) * 0.92)),
+			Vector3(at.x + sin(f * 5.0) * 0.014 * k, yy, at.z + cos(f * 4.0) * 0.016 * k)
+		)
+	var skirt: MeshInstance3D = _add(root, unit_sph, mat)
+	skirt.transform = Transform3D(Basis.from_scale(Vector3(0.395 * k, 0.032 * k, 0.340 * k)), Vector3(at.x, 0.026 * k, at.z))
+
+
+## Drips: the plastic running off the body, each one ending in a lit bead.
+static func _drips(root: Node3D, unit_sph: Mesh, anchors: Array, n: int, k: float, mat: StandardMaterial3D, rng: RandomNumberGenerator) -> void:
+	if anchors.size() == 0:
+		return
+	for i in range(n):
+		var an: Array = anchors[rng.randi_range(0, anchors.size() - 1)]
+		var a: Vector3 = an[0]
+		var ln: float = rng.randf_range(0.09, 0.34) * k
+		var by: float = maxf(a.y - ln, 0.020 * k)
+		var b := Vector3(a.x + rng.randf_range(-0.022, 0.022) * k, by, a.z + rng.randf_range(-0.022, 0.022) * k)
+		_tapered_cyl(root, a, b, rng.randf_range(0.013, 0.027) * k, 0.004 * k, mat)
+		var col: Color = Color(str(LIGHT_COLS[rng.randi_range(0, LIGHT_COLS.size() - 1)]))
+		var mat_bead := StandardMaterial3D.new()
+		mat_bead.albedo_color = col
+		mat_bead.roughness = 0.20
+		mat_bead.emission_enabled = true
+		mat_bead.emission = col
+		mat_bead.emission_energy_multiplier = rng.randf_range(1.7, 2.8)
+		var br: float = rng.randf_range(0.012, 0.023) * k
+		var bead: MeshInstance3D = _add(root, unit_sph, mat_bead)
+		bead.transform = Transform3D(Basis.from_scale(Vector3(br, br * 1.35, br)), b + Vector3(0.0, -br * 0.55, 0.0))
+
+
+## A whole small mannequin, built in its own frame and hung on the given base.
+static func _mini_figure(root: Node3D, base: Transform3D, s: float, mat: StandardMaterial3D, unit_sph: Mesh, rng: RandomNumberGenerator) -> void:
+	var n: int = 8
+	for i in range(n):
+		var t: float = float(i) / float(n - 1)
+		var yy: float = lerpf(0.520, 0.860, t)
+		var hw: float = lerpf(0.090, 0.072, t) * s
+		var hd: float = lerpf(0.072, 0.058, t) * s
+		var mi: MeshInstance3D = _add(root, unit_sph, mat)
+		mi.transform = Transform3D(base.basis * Basis.from_scale(Vector3(hw, 0.050 * s, hd)), base * (Vector3(0.0, yy, 0.0) * s))
+	var neck_a: Vector3 = Vector3(0.0, 0.860, 0.0) * s
+	var neck_b: Vector3 = Vector3(0.0, 0.905, 0.0) * s
+	_tapered_cyl(root, base * neck_a, base * neck_b, 0.040 * s, 0.034 * s, mat)
+	var hm: MeshInstance3D = _add(root, unit_sph, mat)
+	hm.transform = Transform3D(base.basis * Basis(Vector3.UP, rng.randf_range(-0.5, 0.5)) * Basis.from_scale(Vector3(0.064, 0.080, 0.072) * s), base * (Vector3(0.0, 0.960, 0.0) * s))
+	for si in range(2):
+		var sd: float = -1.0 if si == 0 else 1.0
+		var hip: Vector3 = Vector3(sd * 0.056, 0.500, 0.0) * s
+		var knee: Vector3 = Vector3(sd * 0.064, 0.275, rng.randf_range(-0.040, 0.040)) * s
+		var ank: Vector3 = Vector3(sd * 0.060, 0.038, rng.randf_range(-0.060, 0.030)) * s
+		_limb(root, base * hip, base * knee, 0.048 * s, mat)
+		_limb(root, base * knee, base * ank, 0.034 * s, mat)
+		var sh: Vector3 = Vector3(sd * 0.084, 0.845, 0.0) * s
+		var el: Vector3 = Vector3(sd * (0.100 + rng.randf_range(0.0, 0.075)), 0.680, rng.randf_range(-0.060, 0.070)) * s
+		var wr: Vector3 = Vector3(sd * (0.090 + rng.randf_range(0.0, 0.110)), 0.520, rng.randf_range(-0.090, 0.060)) * s
+		_limb(root, base * sh, base * el, 0.036 * s, mat)
+		_limb(root, base * el, base * wr, 0.028 * s, mat)
 
 
 static func _tapered_cyl(root: Node3D, a: Vector3, b: Vector3, r0: float, r1: float, mat: StandardMaterial3D) -> MeshInstance3D:

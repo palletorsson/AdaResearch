@@ -25,10 +25,15 @@ const GRAVITY := 3.0
 
 
 func _ready() -> void:
+	if str(get_meta("config_lesson", "")) == "live_fountain":
+		set_meta("em_keep_scale",true)
+		var chamber=preload("res://commons/artifacts/firework_burst/live_fountain.gd").new()
+		chamber.name="LiveFountain";add_child(chamber);return
 	_console_ready()
 
 
 func apply_grid_config(config_data: Dictionary) -> void:
+	if str(get_meta("config_lesson", "")) == "live_fountain":return
 	if config_data.has("seed"): seed = int(config_data["seed"])
 	if config_data.has("burst"): burst = clampf(float(config_data["burst"]), 0.0, 1.0)
 	if config_data.has("complexity"): complexity = int(config_data["complexity"])

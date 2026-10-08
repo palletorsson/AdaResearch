@@ -292,7 +292,7 @@ func run() -> void:
 	measurements["size_off"] = {"size_variation": st4["size_variation"], "same_but_scale": same4, "all_scale_one": all_one, "line": st4["lines"][4]}
 	check(not bool(st4["size_variation"]) and all_one, "SIZE off stands every mushroom at scale 1")
 	check(bool(same4["same"]), "SIZE off keeps every template, kind, position and yaw — the draws are still made (%s)" % str(same4))
-	check(str(st4["lines"][4]) == "SIZE off · every mushroom at 1 · same seed", "the readout says SIZE off (%s)" % str(st4["lines"][4]))
+	check(str(st4["lines"][4]) == "SIZE off · scale 1 · template sizes kept", "the readout says SIZE off (%s)" % str(st4["lines"][4]))
 	check(_press(panel, "Btn_2"), "SIZE pressed again")
 	await get_tree().process_frame; await get_tree().process_frame
 	var st5: Dictionary = prim.call("get_specimen_state")

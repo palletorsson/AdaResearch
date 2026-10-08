@@ -2,18 +2,18 @@ extends "res://commons/artifacts/_embodied/embodied_prop.gd"
 class_name CalderMobile
 
 ## @identity
-## lineage: a hanging Calder mobile that is actually balanced — every arm obeys the lever
-##   law τ = w·d, with leaf masses computed from real sheet-aluminium geometry (π r²·t·ρ),
-##   so each rod would hang level in the world, not just in the eye.
+## lineage: a static Calder-inspired mobile that encodes a chosen lever model.
+##   Nominal disc masses use sheet-aluminium geometry (π r²·t·ρ); rods and wires
+##   are massless in the calculation. No rigid-body balance or wind is simulated.
 ## essence: a binary tree of steel arms. Build a node's two children first, weigh them, then
 ##   place the pivot so w_left·d_left = w_right·d_right; the heavier child rides the shorter
-##   arm. Recurse, and the whole thing balances from a single point at the ceiling.
-## truth: a mobile is the lever law made into art — Calder's genius was that the weights and
-##   the lengths are doing real arithmetic while they drift.
+##   arm. Recurse, and the default solved pose satisfies this ideal mass model.
+## truth: the weights and lengths expose arithmetic in a frozen sculpture;
+##   the rendering does not establish the balance of its suggested materials.
 ##
 ## use_objects=false → Calder's flat painted discs (red/yellow/blue/black/white). use_objects
 ## =true → the project's own primitives (point, sphere, pyramid, arch) hung as the weights.
-## A plaque states the real total mass and the balance principle.
+## A plaque states the total modelled leaf mass and the omitted rod/wire masses.
 
 @export var seed: int = 4
 @export var use_objects: bool = false
@@ -24,14 +24,13 @@ class_name CalderMobile
 
 ## --- DNA (stage 2, promoted 2026-08-04) --------------------------------------------
 ## lever — WHETHER THE LAW BINDS. The artifact's whole claim is that τ = w·d is solved at
-##   every arm, and the claim is checkable from a photograph, because a mobile that does
-##   not balance hangs crooked. `solved` is the shipped mobile, pivot placed so
+##   every arm in the default pose. `solved` is the shipped mobile, pivot placed so
 ##   w_l·d_l = w_r·d_r and every rod dead level. `halved` ignores the law and cuts each
 ##   rod in the middle — the mistake anyone makes who thinks symmetry is balance.
 ##   `inverted` applies the law with the ratio the wrong way round, the heavier child on
 ##   the LONGER arm. Both leave a residual moment, and the rod is then hung BY that
-##   residual instead of pretending it is zero: an honest lie the sculpture tells about
-##   itself. The residual is derived, not styled — see _build_subtree.
+##   residual instead of pretending it is zero. This tilt is a diagram of the
+##   residual, not a physical equilibrium angle — see _build_subtree.
 ## evidence — how much of the arithmetic stands beside the sculpture. Family word, taken
 ##   character for character from force_field_visualizer / weather_vector_field / the 32
 ##   others; three tiers, not four, because there is no symbolic-assertion-only state
@@ -103,11 +102,11 @@ func _build() -> void:
 	(sub["node"] as Node3D).position = Vector3(0, top_y, 0)
 	add_child(sub["node"])
 
-	# the plaque — the real measurement. Withheld below `longhand`: at `trace` the gram
+	# The plaque reports the mass model. Withheld below `longhand`: at `trace` the gram
 	# tags stay and the total does not, at `result` the sculpture stands on its own.
 	if evidence == "longhand":
 		_plaque = _billboard_label(
-			"ALEXANDER CALDER — mobile\n%s: τ = w·d at every arm\n%d %s · total %.2f kg\n%s" % [
+			"CALDER-INSPIRED — STATIC MOMENT MODEL\n%s: left m·d = right m·d\n%d %s · modelled leaf mass %.2f kg\n%s\nMassless rods and wires; no dynamic solver" % [
 				("balanced" if lever == "solved" else "NOT balanced"),
 				_n_leaves, ("objects" if use_objects else "discs"), sub["mass"],
 				("project primitives" if use_objects else "sheet aluminium, 3 mm")],

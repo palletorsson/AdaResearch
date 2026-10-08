@@ -9,6 +9,7 @@ var show_rule := false
 var notice := ""
 var kind := "menger"
 var last_build_ms := 0.0
+var cell_reader: Node3D
 
 func _ready() -> void:
 	source = get_parent()
@@ -18,6 +19,9 @@ func _ready() -> void:
 	_build_compact_console(["NEXT", "BACK", "GHOST", "FRAME", "RESET", "RULE"], "WHICH HOLE CAN BECOME A PLACE?")
 	_build_frame()
 	set_stage(0)
+	cell_reader = preload("res://commons/artifacts/menger_lesson/hand_cells.gd").new()
+	cell_reader.name = "CellReader"
+	add_child(cell_reader)
 
 func _build_frame() -> void:
 	frame = Node3D.new()
@@ -77,6 +81,7 @@ func set_stage(n: int) -> void:
 	source.is_subdividing = false
 	last_build_ms = (Time.get_ticks_usec()-started)/1000.0
 	_apply_views()
+	if is_instance_valid(cell_reader): cell_reader.rebuild()
 	refresh()
 
 func _apply_views() -> void:
@@ -84,6 +89,7 @@ func _apply_views() -> void:
 	for child in source.get_children():
 		if child is MeshInstance3D and child.get_meta("menger_removed", false):
 			child.visible = show_removed
+	if is_instance_valid(cell_reader): cell_reader.set_ghosts(show_removed)
 
 func kept_volume() -> float:
 	var volume := 0.0

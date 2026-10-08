@@ -1,51 +1,24 @@
 {
   "lookup_name": "random_walk_leash",
-  "footprint": [
-    1,
-    1,
-    1
-  ],
-  "rotations": [
-    "0",
-    "90",
-    "180",
-    "270"
-  ],
+  "footprint": [0.77, 0.621, 1.55],
+  "rotations": ["0", "180"],
   "approach": "south",
-  "exit": "north",
-  "footing": {
-    "anchor": [
-      1,
-      1
-    ],
-    "tiles": [
-      [
-        1,
-        1,
-        1
-      ],
-      [
-        1,
-        1,
-        1
-      ],
-      [
-        1,
-        1,
-        1
-      ]
-    ]
-  },
+  "exit": "south",
+  "footing": {"anchor": [1, 1], "tiles": [[1,1,1],[1,1,1],[1,1,1],[1,1,1]]},
   "extras": [],
-  "artifact_offset": [
-    0.0,
-    0.0,
-    0.0
-  ],
-  "clearance": [
-    3,
-    3,
-    3
-  ],
-  "posture": "floor"
+  "artifact_offset": [0.0, 0.0, 0.0],
+  "clearance": [3, 4, 3],
+  "posture": "floor",
+  "show_info": false,
+  "show_dressing": false,
+  "placement_contract": {
+    "allowed_modes": ["freestanding", "against_wall"], "preferred_mode": "freestanding", "wall_side": "north",
+    "hard_zone_m": [1, 1, 2], "preferred_zone_m": [3, 4, 3],
+    "required_support": "floor", "interaction_faces": ["south"],
+    "rear_clearance_m": 0.0, "front_clearance_m": 2.0,
+    "circulation": "frontal", "circulation_behind": false,
+    "minimum_route_width_m": 0.9, "neighbor_policy": "protect_handle_sweep"
+  },
+  "production_grade": "test_candidate",
+  "placement_intent": "A narrow embodied-randomness kiosk with a clear standing bay and protected space for the visitor's leash gesture."
 }

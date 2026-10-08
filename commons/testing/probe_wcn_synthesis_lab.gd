@@ -355,6 +355,7 @@ func run() -> void:
 	check(maxima >= 14 and maxima <= 24, "five terms ripple: about five local maxima per cycle where a sawtooth has one (%d over four cycles)" % maxima)
 	check(rise_samples >= 4, "the sawtooth's cliff takes a finite width here: the rise from trough to crest is %d samples, %.3f m of a 0.5 m cycle" % [rise_samples, rise_width_m])
 	check(max_err_corner > 1.0 and max_err_flank < 0.4, "the five-term sum misses the ideal sawtooth by up to %.2f at the corner and %.2f on the flank" % [max_err_corner, max_err_flank])
+	await _check_recipe_labels(demo, capture, cam)
 	demo.call("set_held", false)
 	await process_frame
 	check(not bool(demo.get("held")), "HOLD released: the scroll runs again")
@@ -384,7 +385,7 @@ func run() -> void:
 	measurements["plinths"] = plinths
 	var in_rect := false
 	for p in plinths:
-		for rc in [[2, 2, 6, 4], [6, 0, 8, 3], [7, 3, 7, 11], [5, 10, 8, 13]]:
+		for rc in [[2, 2, 6, 7], [6, 0, 8, 3], [7, 3, 8, 12], [5, 10, 8, 13]]:
 			if int(p[1]) >= rc[0] and int(p[1]) < rc[2] and int(p[2]) >= rc[1] and int(p[2]) < rc[3]: in_rect = true   # the far edge is exclusive, as the museum reads it
 	check(not in_rect, "no dealt plinth stands in the clear rects (the bench, the north door, the corridor column, the south door approach) (plinths: %s)" % str(plinths))
 	var rows: Array = em.get("_built") if em.get("_built") != null else []
@@ -696,3 +697,50 @@ func _finish() -> void:
 	f.store_string(JSON.stringify(report, "  ")); f.close()
 	print("[wcn-synthesis] ", checks, " checks; ", failures.size(), " failures")
 	quit(0 if failures.is_empty() else 1)
+
+## Regressions for labels that used to ignore upper sliders or misname a quiet sine.
+## Exercise real slider paths and independently evaluate all 256 drawn samples.
+func _check_recipe_labels(demo: Node3D, capture: bool, cam: Camera3D) -> void:
+	var examples: Array = [
+		[[0.0, 0.0, 0.0, 0.0, 0.0], "Zero waveform", "zero"],
+		[[0.6, 0.0, 0.0, 0.0, 0.0], "Pure Sine Wave", "quiet fundamental"],
+		[[0.0, 0.0, 0.7, 0.0, 0.0], "Pure Sine Wave", "third alone"],
+		[[1.0, 0.5, 0.333, 0.8, 0.2], "Custom Waveform", "fourth leaves sawtooth"],
+		[[1.0, 0.5, 0.333, 0.25, 0.8], "Custom Waveform", "fifth leaves sawtooth"],
+		[[1.0, 0.0, 0.333, 0.0, 0.8], "Custom Waveform", "fifth leaves square"],
+		[[1.0, 0.0, 0.111, 0.0, 0.04], "Odd 1/n² mix (positive terms)", "legacy positive odd mix"],
+		[[1.0, 0.5, 0.333, 0.25, 0.22], "≈ Sawtooth Wave (all harmonics)", "inside label tolerance"],
+		[[1.0, 0.5, 0.333, 0.25, 0.24], "Custom Waveform", "outside label tolerance"],
+		[[0.5, 0.25, 0.1665, 0.125, 0.1], "≈ Sawtooth Wave (all harmonics)", "scaled sawtooth"],
+	]
+	var rows: Array = []
+	var worst: float = 0.0
+	var sliders: Array = demo.get("harmonic_sliders")
+	for example in examples:
+		var targets: Array = example[0]
+		for h in range(5):
+			var xr: Node = sliders[h].get_node("SliderOrigin/InteractableSlider")
+			xr.call("move_slider", lerpf(float(xr.get("slider_limit_min")), float(xr.get("slider_limit_max")), float(targets[h])))
+		await process_frame
+		await process_frame
+		var label: String = (demo.get("preset_label") as Label3D).text
+		check(label == str(example[1]), "recipe label: %s → %s" % [str(example[2]), label])
+		var actual: Array = demo.get("harmonic_amplitudes")
+		var points: Array = _centerline(demo.get("wave_mesh"))
+		for i in range(points.size()):
+			var phase: float = float(i) / 255.0 * TAU * 4.0 + float(demo.get("_time")) * TAU
+			var expected: float = 0.0
+			for h in range(5): expected += float(actual[h]) * sin(float(h + 1) * phase)
+			worst = maxf(worst, absf(float((points[i] as Vector3).y) / 0.3 - expected))
+		rows.append({"name": example[2], "amplitudes": actual.duplicate(), "label": label})
+		if capture and str(example[2]) == "outside label tolerance":
+			for i in range(4): cam.make_current(); await process_frame
+			await create_timer(0.2, true, false, true).timeout
+			root.get_texture().get_image().save_png(_evidence + "probe_synthesis_lab_custom.png")
+	measurements["recipe_labels"] = rows
+	measurements["recipe_drawn_error"] = worst
+	check(worst < 0.00001, "labels do not change the five-term arithmetic across 256 samples in ten settings (error %.8f)" % worst)
+	demo.call("restore_baseline")
+	await process_frame
+	await process_frame
+	check(_amps_equal(demo.get("harmonic_amplitudes"), SAWTOOTH), "label probes leave the original arrival coefficients restored")

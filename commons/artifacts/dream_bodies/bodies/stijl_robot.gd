@@ -32,6 +32,21 @@ extends RefCounted
 ## Given up: the crowd (one robot only), the shop shelves and the other posts, the
 ## loose robot parts lying on the floor, and the moulded ribbing along the image's
 ## limbs — the bars here are plain matte boxes.
+##
+## AXES (two, swept as a gallery):
+##   assembly — how tightly the toy is screwed together: danced (the shop-floor pose),
+##     exploded (every slab drifted out along its own radius, a catalogue diagram left
+##     hanging in the air), swarmed (each part shrunk and reprinted two or three times
+##     until the robot is a cloud of its own spare parts), melted (the slabs sag, squash
+##     and spread down into a poured puddle of white, pink and saffron), skeletal (the
+##     flesh gone — every slab thinned to a two-rail armature bar and every ball joint
+##     swollen, a De Stijl scaffold in the shape of a dance).
+##   crown — what tops the neck: helmet (the domed white helmet with its pink dot),
+##     chorus (three smaller helmets strung along a white bar, each turned its own way),
+##     bloom (the helmet opens into nine petals round a saffron disc, and the hands
+##     flower too), cage (the dome fossilised into ten graphite ribs and two ring
+##     courses, empty), post (no head at all — the pink shop post erupts up out of the
+##     neck, crossbar, white cap and red tab included, and the hands carry post stubs).
 
 const WHITE: Color = Color(0.94, 0.93, 0.90)
 const SAFFRON: Color = Color(0.93, 0.78, 0.09)
@@ -45,9 +60,23 @@ static func describe() -> String:
 	return "A De Stijl toy robot of white, saffron and pink slabs with black ball joints, dancing with its weight on one leg and one arm raised beside a thin pink shop post."
 
 
-static func build(root: Node3D, seed: int) -> void:
+static func axes() -> Dictionary:
+	return {
+		"assembly": ["danced", "exploded", "swarmed", "melted", "skeletal"],
+		"crown": ["helmet", "chorus", "bloom", "cage", "post"],
+	}
+
+
+static func build(root: Node3D, seed: int, opts: Dictionary = {}) -> void:
+	var assembly: String = String(opts.get("assembly", "danced"))
+	var crown: String = String(opts.get("crown", "helmet"))
+
 	var rng: RandomNumberGenerator = RandomNumberGenerator.new()
 	rng.seed = seed
+	# A second stream for the variant extras, so the default draw order — and therefore
+	# the default statue — is untouched by anything the axes add.
+	var vrng: RandomNumberGenerator = RandomNumberGenerator.new()
+	vrng.seed = seed ^ 0x5713
 
 	# ---- materials: matte toy plastic, one glazed helmet, dark joints ----
 	var white: StandardMaterial3D = _mat(WHITE, 0.55, 0.0, 0.0)
@@ -179,25 +208,25 @@ static func build(root: Node3D, seed: int) -> void:
 	_cyl(root, 0.016, bar_w + 0.06, graphite, elbow_h, _basis_along(pin_h))
 	_ball(root, 0.028, graphite, wrist_r)
 	_ball(root, 0.028, graphite, wrist_h)
-	_hand(root, wrist_r, fore_dir, white, red)
-	_hand(root, wrist_h, reach_dir, white, red)
+	_hand(root, wrist_r, fore_dir, white, red, crown, pink)
+	_hand(root, wrist_h, reach_dir, white, red, crown, pink)
 
-	# ---- neck and the domed helmet ----
+	# ---- neck, then whatever the `crown` axis puts on top of it ----
 	var neck_c: Vector3 = torso_c + torso_b * Vector3(0.0, torso_h * 0.5 + 0.03, 0.0)
 	_cyl(root, 0.028, 0.08, ink, neck_c, torso_b)
 	var head_b: Basis = torso_b * Basis(Vector3.UP, head_yaw) * Basis(Vector3.RIGHT, deg_to_rad(-4.0))
 	var head_c: Vector3 = torso_c + torso_b * Vector3(0.0, torso_h * 0.5 + 0.05 + head_r * 1.1, 0.0)
-	var dome: SphereMesh = SphereMesh.new()
-	dome.radius = head_r
-	dome.height = head_r * 2.2
-	dome.radial_segments = 48
-	dome.rings = 24
-	_place(root, dome, helmet, head_c, head_b)
-	_box(root, Vector3(head_r * 0.85, head_r * 0.7, 0.06), ink, head_c + head_b * Vector3(0.0, -head_r * 0.28, head_r - 0.02), head_b)
-	_box(root, Vector3(head_r * 0.7, 0.012, 0.012), graphite, head_c + head_b * Vector3(0.0, -head_r * 0.12, head_r + 0.008), head_b)
-	var dot_b: Basis = head_b * _basis_along(Vector3(mirror, 0.0, 0.0))
-	_cyl(root, 0.035, 0.012, dot_mat, head_c + head_b * Vector3(mirror * (head_r + 0.001), head_r * 0.05, head_r * 0.1), dot_b)
-	_box(root, Vector3(0.025, 0.05, 0.04), red, head_c + head_b * Vector3(-mirror * (head_r + 0.004), -head_r * 0.05, 0.0), head_b)
+	match crown:
+		"chorus":
+			_crown_chorus(root, head_c, head_b, head_r, mirror, helmet, ink, graphite, dot_mat, red, white, vrng)
+		"bloom":
+			_crown_bloom(root, head_c, head_b, head_r, pink, yellow, red, white, ink, vrng)
+		"cage":
+			_crown_cage(root, head_c, head_b, head_r, graphite, ink, white, red, vrng)
+		"post":
+			_crown_post(root, head_c, head_b, head_r, pink, white, red, ink, graphite)
+		_:
+			_crown_helmet(root, head_c, head_b, head_r, mirror, helmet, ink, graphite, dot_mat, red)
 
 	# ---- the pink post, standing a little behind the robot on the weight side ----
 	var px: float = wl * 0.44
@@ -210,6 +239,285 @@ static func build(root: Node3D, seed: int) -> void:
 	var low_y: float = rng.randf_range(0.30, 0.50)
 	_box(root, Vector3(0.26, 0.05, 0.05), pink, Vector3(px + wl * 0.03, low_y, pz), Basis.IDENTITY)
 	_ball(root, 0.03, ink, Vector3(px, 1.28, pz + 0.035))
+
+	# ---- the `assembly` axis: how tightly the toy is screwed together ----
+	_assemble(root, assembly, vrng)
+	if assembly == "melted":
+		_pour(root, white, pink, yellow, ink, vrng)
+
+	# --- measured settle: floor it, centre it, fit it ---------------------------
+	var box: AABB = _union_aabb(root)
+	var w_now: float = maxf(box.size.x, box.size.z)
+	var kfit: float = 1.0
+	if w_now > 1.2:
+		kfit = minf(kfit, 1.2 / w_now)
+	if box.size.y > 1.68:
+		kfit = minf(kfit, 1.68 / box.size.y)
+	if kfit < 1.0:
+		for ch in root.get_children():
+			if not (ch is MeshInstance3D):
+				continue
+			var cm: MeshInstance3D = ch
+			var ctf: Transform3D = cm.transform
+			cm.transform = Transform3D(ctf.basis.scaled(Vector3(kfit, kfit, kfit)), ctf.origin * kfit)
+		box = _union_aabb(root)
+	var centre: Vector3 = box.position + box.size * 0.5
+	var shift: Vector3 = Vector3(-centre.x, 0.0, -centre.z)
+	if box.position.y < 0.0:
+		shift.y = -box.position.y
+	for ch2 in root.get_children():
+		if not (ch2 is MeshInstance3D):
+			continue
+		var cm2: MeshInstance3D = ch2
+		cm2.transform = Transform3D(cm2.transform.basis, cm2.transform.origin + shift)
+
+
+# ---------------------------------------------------------------------------
+# crown — what tops the neck
+
+
+## The shop-floor helmet: a glazed dome, a dark face plate, a graphite visor slit,
+## the pink side dot and the red ear tab. This is the default head.
+static func _crown_helmet(root: Node3D, c: Vector3, b: Basis, r: float, mirror: float, helmet: StandardMaterial3D, ink: StandardMaterial3D, graphite: StandardMaterial3D, dot_mat: StandardMaterial3D, red: StandardMaterial3D) -> void:
+	var dome: SphereMesh = SphereMesh.new()
+	dome.radius = r
+	dome.height = r * 2.2
+	dome.radial_segments = 48
+	dome.rings = 24
+	_place(root, dome, helmet, c, b)
+	_box(root, Vector3(r * 0.85, r * 0.7, 0.06), ink, c + b * Vector3(0.0, -r * 0.28, r - 0.02), b)
+	_box(root, Vector3(r * 0.7, 0.012, 0.012), graphite, c + b * Vector3(0.0, -r * 0.12, r + 0.008), b)
+	var dot_b: Basis = b * _basis_along(Vector3(mirror, 0.0, 0.0))
+	_cyl(root, 0.035, 0.012, dot_mat, c + b * Vector3(mirror * (r + 0.001), r * 0.05, r * 0.1), dot_b)
+	_box(root, Vector3(0.025, 0.05, 0.04), red, c + b * Vector3(-mirror * (r + 0.004), -r * 0.05, 0.0), b)
+
+
+## MULTIPLIED: three smaller helmets threaded on one white bar, each looking its own
+## way, the outer two dropped on short ink neck stubs.
+static func _crown_chorus(root: Node3D, c: Vector3, b: Basis, r: float, mirror: float, helmet: StandardMaterial3D, ink: StandardMaterial3D, graphite: StandardMaterial3D, dot_mat: StandardMaterial3D, red: StandardMaterial3D, white: StandardMaterial3D, rng: RandomNumberGenerator) -> void:
+	var rr: float = r * 0.74
+	_box(root, Vector3(0.46, 0.045, 0.055), white, c + b * Vector3(0.0, -rr * 0.72, 0.0), b)
+	for i in range(3):
+		var k: int = int(i) - 1
+		var ox: float = float(k) * 0.168
+		var lift: float = 0.0 if k == 0 else rng.randf_range(-0.035, 0.055)
+		var yaw: float = deg_to_rad(rng.randf_range(-42.0, 42.0))
+		var hb: Basis = b * Basis(Vector3.UP, yaw)
+		var hc: Vector3 = c + b * Vector3(ox, lift, 0.0)
+		var d: SphereMesh = SphereMesh.new()
+		d.radius = rr
+		d.height = rr * 2.2
+		d.radial_segments = 40
+		d.rings = 20
+		_place(root, d, helmet, hc, hb)
+		_box(root, Vector3(rr * 0.85, rr * 0.7, 0.055), ink, hc + hb * Vector3(0.0, -rr * 0.28, rr - 0.018), hb)
+		_box(root, Vector3(rr * 0.7, 0.012, 0.012), graphite, hc + hb * Vector3(0.0, -rr * 0.12, rr + 0.008), hb)
+		var db: Basis = hb * _basis_along(Vector3(mirror, 0.0, 0.0))
+		_cyl(root, 0.028, 0.012, dot_mat, hc + hb * Vector3(mirror * (rr + 0.001), rr * 0.05, rr * 0.1), db)
+		if k != 0:
+			_cyl(root, 0.022, 0.075, ink, hc + b * Vector3(0.0, -rr * 0.9, 0.0), b)
+	_box(root, Vector3(0.065, 0.09, 0.012), red, c + b * Vector3(0.0, -rr * 1.15, 0.05), b)
+
+
+## BLOOMING: the helmet opens. A small white calyx, a saffron disc, nine thin petals
+## fanned outward on their own tilts, one ink stamen bead.
+static func _crown_bloom(root: Node3D, c: Vector3, b: Basis, r: float, pink: StandardMaterial3D, yellow: StandardMaterial3D, red: StandardMaterial3D, white: StandardMaterial3D, ink: StandardMaterial3D, rng: RandomNumberGenerator) -> void:
+	var calyx: SphereMesh = SphereMesh.new()
+	calyx.radius = r * 0.62
+	calyx.height = r * 1.15
+	calyx.radial_segments = 32
+	calyx.rings = 16
+	_place(root, calyx, white, c + b * Vector3(0.0, -r * 0.22, 0.0), b)
+	var n: int = 9
+	for i in range(n):
+		var ang: float = deg_to_rad(360.0 / float(n)) * float(i)
+		var tilt: float = deg_to_rad(rng.randf_range(46.0, 68.0))
+		var pb: Basis = b * Basis(Vector3.UP, ang) * Basis(Vector3.RIGHT, -tilt)
+		var plen: float = rng.randf_range(0.17, 0.26)
+		var pc: Vector3 = c + b * Vector3(0.0, r * 0.10, 0.0) + pb * Vector3(0.0, plen * 0.5, 0.0)
+		var pm: StandardMaterial3D = pink if int(i) % 2 == 0 else red
+		_box(root, Vector3(0.072, plen, 0.011), pm, pc, pb)
+	_cyl(root, r * 0.52, 0.022, yellow, c + b * Vector3(0.0, r * 0.22, 0.0), b)
+	_ball(root, 0.028, ink, c + b * Vector3(0.0, r * 0.32, 0.0))
+
+
+## FOSSILISED: the dome's flesh gone. Ten graphite ribs standing on a circle, two ring
+## courses of short ink segments, a white cap disc and one red knob. Empty inside.
+static func _crown_cage(root: Node3D, c: Vector3, b: Basis, r: float, graphite: StandardMaterial3D, ink: StandardMaterial3D, white: StandardMaterial3D, red: StandardMaterial3D, rng: RandomNumberGenerator) -> void:
+	var bars: int = 10
+	var h: float = r * 2.05
+	for i in range(bars):
+		var ang: float = deg_to_rad(360.0 / float(bars)) * float(i)
+		var rb: Basis = b * Basis(Vector3.UP, ang)
+		var tip: float = deg_to_rad(rng.randf_range(-8.0, 8.0))
+		var bb: Basis = rb * Basis(Vector3.BACK, tip)
+		_box(root, Vector3(0.016, h, 0.016), graphite, c + rb * Vector3(0.0, 0.0, r * 0.87), bb)
+	var ring: int = 12
+	for j in range(ring):
+		var a2: float = deg_to_rad(360.0 / float(ring)) * float(j)
+		var jb: Basis = b * Basis(Vector3.UP, a2)
+		_box(root, Vector3(0.076, 0.014, 0.016), ink, c + jb * Vector3(0.0, -r * 0.74, r * 0.87), jb)
+		_box(root, Vector3(0.064, 0.014, 0.016), ink, c + jb * Vector3(0.0, r * 0.62, r * 0.72), jb)
+	_cyl(root, r * 0.55, 0.018, white, c + b * Vector3(0.0, r * 1.04, 0.0), b)
+	_ball(root, 0.03, red, c + b * Vector3(0.0, r * 1.14, 0.0))
+
+
+## GROWN THROUGH: no head. The family's own pink shop post erupts out of the neck —
+## mast, crossbar, white cap, red tab, one dark bolt and a low crossing bar.
+static func _crown_post(root: Node3D, c: Vector3, b: Basis, r: float, pink: StandardMaterial3D, white: StandardMaterial3D, red: StandardMaterial3D, ink: StandardMaterial3D, graphite: StandardMaterial3D) -> void:
+	var base: Vector3 = c + b * Vector3(0.0, -r * 1.18, 0.0)
+	_cyl(root, 0.052, 0.05, graphite, base, b)
+	var mast: float = 0.46
+	_box(root, Vector3(0.058, mast, 0.058), pink, base + b * Vector3(0.0, mast * 0.5 + 0.02, 0.0), b)
+	_box(root, Vector3(0.048, 0.048, 0.28), pink, base + b * Vector3(0.0, mast * 0.74, -0.10), b)
+	_box(root, Vector3(0.09, 0.08, 0.09), white, base + b * Vector3(0.0, mast + 0.07, 0.0), b)
+	_box(root, Vector3(0.02, 0.05, 0.035), red, base + b * Vector3(0.0, mast * 0.74, -0.235), b)
+	_ball(root, 0.03, ink, base + b * Vector3(0.0, mast * 0.68, 0.04))
+	_box(root, Vector3(0.21, 0.045, 0.045), pink, base + b * Vector3(0.0, mast * 0.34, 0.0), b)
+
+
+# ---------------------------------------------------------------------------
+# assembly — how tightly the toy is screwed together
+
+
+## Runs over every slab, ball and pin already placed and re-assembles the whole
+## tableau. `danced` returns untouched, which is what keeps the default statue exact.
+static func _assemble(root: Node3D, mode: String, rng: RandomNumberGenerator) -> void:
+	if mode == "danced":
+		return
+	var kids: Array = []
+	for ch in root.get_children():
+		if not (ch is MeshInstance3D):
+			continue
+		var cm: MeshInstance3D = ch
+		if cm.mesh == null:
+			continue
+		kids.append(cm)
+	if kids.is_empty():
+		return
+	var hub: Vector3 = Vector3.ZERO
+	for k0 in kids:
+		var m0: MeshInstance3D = k0
+		hub += m0.transform.origin
+	hub /= float(kids.size())
+
+	match mode:
+		"exploded":
+			for k in kids:
+				var mi: MeshInstance3D = k
+				var tf: Transform3D = mi.transform
+				var d: Vector3 = tf.origin - hub
+				if d.length() < 0.02:
+					d = _rand_axis(rng)
+				var dn: Vector3 = d.normalized()
+				var push: float = 0.12 + 0.44 * clampf(d.length(), 0.0, 1.0)
+				mi.transform = Transform3D(_rand_spin(rng, 28.0) * tf.basis, tf.origin + dn * push)
+		"swarmed":
+			var n0: int = kids.size()
+			var copies: int = clampi(int(228.0 / float(maxi(n0, 1))) - 1, 1, 3)
+			for k in kids:
+				var mi: MeshInstance3D = k
+				var tf: Transform3D = mi.transform
+				var d: Vector3 = tf.origin - hub
+				var dn: Vector3 = d.normalized() if d.length() > 0.02 else Vector3.UP
+				mi.transform = Transform3D(tf.basis.scaled(Vector3(0.46, 0.46, 0.46)), tf.origin + dn * 0.03)
+				for c in range(copies):
+					var jitter: Vector3 = Vector3(rng.randf_range(-1.0, 1.0), rng.randf_range(-0.7, 1.0), rng.randf_range(-1.0, 1.0)) * 0.115
+					var off: Vector3 = jitter + dn * rng.randf_range(0.02, 0.17)
+					var sc: float = rng.randf_range(0.24, 0.50)
+					var cp: MeshInstance3D = MeshInstance3D.new()
+					cp.mesh = mi.mesh
+					cp.material_override = mi.material_override
+					cp.transform = Transform3D((_rand_spin(rng, 180.0) * tf.basis).scaled(Vector3(sc, sc, sc)), tf.origin + off)
+					root.add_child(cp)
+		"melted":
+			for k in kids:
+				var mi: MeshInstance3D = k
+				var tf: Transform3D = mi.transform
+				var p: Vector3 = tf.origin
+				var t: float = clampf(p.y / 1.55, 0.0, 1.0)
+				var sag: float = t * t * 0.74
+				var ny: float = maxf(0.025, p.y - sag)
+				var radial: Vector3 = Vector3(p.x, 0.0, p.z) * (t * 0.55)
+				var flat: float = maxf(0.16, 1.0 - t * 0.80)
+				var wide: float = 1.0 + t * 0.95
+				var sq: Basis = tf.basis.scaled(Vector3(wide, flat, wide))
+				mi.transform = Transform3D(sq, Vector3(p.x + radial.x, ny, p.z + radial.z))
+		"skeletal":
+			for k in kids:
+				var mi: MeshInstance3D = k
+				var bm: BoxMesh = mi.mesh as BoxMesh
+				if bm != null:
+					var s: Vector3 = bm.size
+					var t: float = 0.026
+					var ns: Vector3 = Vector3(t, t, t)
+					var rail: Vector3 = Vector3.ZERO
+					if s.x >= s.y and s.x >= s.z:
+						ns.x = s.x
+						if s.y >= s.z:
+							rail = Vector3(0.0, s.y * 0.4, 0.0)
+						else:
+							rail = Vector3(0.0, 0.0, s.z * 0.4)
+					elif s.y >= s.z:
+						ns.y = s.y
+						if s.x >= s.z:
+							rail = Vector3(s.x * 0.4, 0.0, 0.0)
+						else:
+							rail = Vector3(0.0, 0.0, s.z * 0.4)
+					else:
+						ns.z = s.z
+						if s.x >= s.y:
+							rail = Vector3(s.x * 0.4, 0.0, 0.0)
+						else:
+							rail = Vector3(0.0, s.y * 0.4, 0.0)
+					bm.size = ns
+					if rail.length() > 0.028:
+						var tf: Transform3D = mi.transform
+						var cp: MeshInstance3D = MeshInstance3D.new()
+						cp.mesh = bm
+						cp.material_override = mi.material_override
+						cp.transform = Transform3D(tf.basis, tf.origin + tf.basis * rail)
+						root.add_child(cp)
+					continue
+				var sp: SphereMesh = mi.mesh as SphereMesh
+				if sp != null:
+					sp.radius = sp.radius * 1.5
+					sp.height = sp.height * 1.5
+					continue
+				var cy: CylinderMesh = mi.mesh as CylinderMesh
+				if cy != null:
+					cy.top_radius = cy.top_radius * 0.62
+					cy.bottom_radius = cy.bottom_radius * 0.62
+
+
+## FLOODED: the pour the melted robot has run down into — three flat discs of white,
+## pink and saffron, six standing drips and one dark bead that did not dissolve.
+static func _pour(root: Node3D, white: StandardMaterial3D, pink: StandardMaterial3D, yellow: StandardMaterial3D, ink: StandardMaterial3D, rng: RandomNumberGenerator) -> void:
+	_cyl(root, 0.46, 0.05, white, Vector3(0.0, 0.025, 0.02), Basis.IDENTITY)
+	_cyl(root, 0.33, 0.055, pink, Vector3(-0.10, 0.062, -0.04), Basis.IDENTITY)
+	_cyl(root, 0.22, 0.05, yellow, Vector3(0.13, 0.086, 0.06), Basis.IDENTITY)
+	for i in range(6):
+		var ang: float = deg_to_rad(60.0) * float(i) + 0.3
+		var rr: float = rng.randf_range(0.20, 0.44)
+		var hh: float = rng.randf_range(0.06, 0.21)
+		var dm: StandardMaterial3D = white if int(i) % 2 == 0 else pink
+		_box(root, Vector3(0.05, hh, 0.05), dm, Vector3(cos(ang) * rr, hh * 0.5 + 0.03, sin(ang) * rr), Basis.IDENTITY)
+	_ball(root, 0.05, ink, Vector3(0.06, 0.055, 0.22))
+
+
+static func _rand_axis(rng: RandomNumberGenerator) -> Vector3:
+	var ax: Vector3 = Vector3(rng.randf_range(-1.0, 1.0), rng.randf_range(-0.4, 1.0), rng.randf_range(-1.0, 1.0))
+	if ax.length() < 0.001:
+		return Vector3.UP
+	return ax.normalized()
+
+
+static func _rand_spin(rng: RandomNumberGenerator, amp_deg: float) -> Basis:
+	return Basis(_rand_axis(rng), deg_to_rad(rng.randf_range(-amp_deg, amp_deg)))
+
+
+# ---------------------------------------------------------------------------
+# parts
 
 
 ## A Rietveld limb: a white core bar that overshoots both joints, a coloured block
@@ -228,12 +536,38 @@ static func _limb(root: Node3D, a: Vector3, b: Vector3, w: float, core_mat: Stan
 	_box(root, Vector3(0.016, seg * 0.8, w * 0.7), strip_mat, strip_pos, bb)
 
 
-## A hand: a flat white block continuing the forearm, with a red fingertip block.
-static func _hand(root: Node3D, wrist: Vector3, dir: Vector3, white: StandardMaterial3D, red: StandardMaterial3D) -> void:
+## A hand. By default a flat white block continuing the forearm with a red fingertip;
+## the `crown` axis carries down into it, so a chorus body buds a second small hand,
+## a blooming body flowers at the wrist, a cage body forks into two prongs and a
+## post body grips a pink post stub with a white cap.
+static func _hand(root: Node3D, wrist: Vector3, dir: Vector3, white: StandardMaterial3D, red: StandardMaterial3D, style: String = "helmet", accent: StandardMaterial3D = null) -> void:
 	var d: Vector3 = dir.normalized()
 	var bb: Basis = _basis_along(d)
-	_box(root, Vector3(0.06, 0.065, 0.03), white, wrist + d * 0.042, bb)
-	_box(root, Vector3(0.062, 0.018, 0.032), red, wrist + d * 0.083, bb)
+	var acc: StandardMaterial3D = accent if accent != null else red
+	match style:
+		"chorus":
+			_box(root, Vector3(0.06, 0.065, 0.03), white, wrist + d * 0.042, bb)
+			_box(root, Vector3(0.062, 0.018, 0.032), red, wrist + d * 0.083, bb)
+			_box(root, Vector3(0.042, 0.048, 0.022), white, wrist + d * 0.05 + bb * Vector3(0.058, 0.0, 0.0), bb)
+			_box(root, Vector3(0.044, 0.014, 0.024), red, wrist + d * 0.05 + bb * Vector3(0.058, 0.032, 0.0), bb)
+		"bloom":
+			_ball(root, 0.028, white, wrist + d * 0.035)
+			for i in range(5):
+				var a: float = deg_to_rad(72.0) * float(i)
+				var pb: Basis = bb * Basis(Vector3.UP, a) * Basis(Vector3.RIGHT, deg_to_rad(-58.0))
+				_box(root, Vector3(0.038, 0.088, 0.008), red, wrist + d * 0.048 + pb * Vector3(0.0, 0.044, 0.0), pb)
+			_cyl(root, 0.021, 0.012, acc, wrist + d * 0.066, bb)
+		"cage":
+			_box(root, Vector3(0.014, 0.078, 0.014), white, wrist + d * 0.046 + bb * Vector3(0.025, 0.0, 0.0), bb)
+			_box(root, Vector3(0.014, 0.078, 0.014), white, wrist + d * 0.046 + bb * Vector3(-0.025, 0.0, 0.0), bb)
+			_box(root, Vector3(0.064, 0.014, 0.014), red, wrist + d * 0.085, bb)
+		"post":
+			_box(root, Vector3(0.05, 0.055, 0.028), white, wrist + d * 0.04, bb)
+			_box(root, Vector3(0.03, 0.17, 0.03), acc, wrist + d * 0.13, bb)
+			_box(root, Vector3(0.055, 0.05, 0.055), white, wrist + d * 0.225, bb)
+		_:
+			_box(root, Vector3(0.06, 0.065, 0.03), white, wrist + d * 0.042, bb)
+			_box(root, Vector3(0.062, 0.018, 0.032), red, wrist + d * 0.083, bb)
 
 
 ## A basis whose Y axis runs along `dir`, with its Z axis kept as close to the
@@ -305,3 +639,22 @@ static func _cyl(root: Node3D, r: float, h: float, mat: StandardMaterial3D, pos:
 	cyl.height = h
 	cyl.radial_segments = 24
 	return _place(root, cyl, mat, pos, b)
+
+
+static func _union_aabb(root: Node3D) -> AABB:
+	var box: AABB = AABB()
+	var first: bool = true
+	for ch in root.get_children():
+		if not (ch is MeshInstance3D):
+			continue
+		var cm: MeshInstance3D = ch
+		if cm.mesh == null:
+			continue
+		var local: AABB = cm.mesh.get_aabb()
+		var wb: AABB = cm.transform * local
+		if first:
+			box = wb
+			first = false
+		else:
+			box = box.merge(wb)
+	return box

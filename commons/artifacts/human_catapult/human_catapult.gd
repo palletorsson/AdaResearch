@@ -2,17 +2,16 @@ extends Node3D
 class_name HumanCatapult
 
 # @identity
-# essence: a catapult that launches YOU. Walk into the basket, set the angle and
-#          force, pull FIRE, and the arm flings the VR player up and away on a
-#          real ballistic arc — F=ma made personal.
+# essence: a catapult that launches YOU. Set angle and speed, board the basket,
+#          count 3–2–1, then follow the red ballistic arc. Step out to cancel.
 # desire: to put the player inside the vector. The teaching catapult throws a
 #         ball at the trajectory; this one throws the player ALONG it, so the
 #         parabola is felt in the body, not watched from outside.
 # critical_parameter: launch_force + launch_angle — the v0 of p(t)=p0+v0*t+½g*t².
 #         Together they set where you land; the live arc previews it before you commit.
-# triggers: player Area3D (mask 524288 / group player_body) arms the seat; the FIRE
-#           button fires; _fire() sets the player CharacterBody3D's velocity and
-#           swings the arm.
+# triggers: Area3D detects the desktop or XR player; feet inside the cup start
+#           the countdown. _fire() hands velocity to the museum movement owner
+#           and animates release. The swing does not calculate the impulse.
 # emerges: locomotion as lesson — gravity owns you the instant you leave the cup.
 # needs: a heavy frame + throwing arm + a player-sized basket you can stand in
 #        [present]; ANGLE/FORCE sliders + a FIRE button reachable from the basket
@@ -27,6 +26,8 @@ const SliderScene := "res://commons/interactables/slider_horizontal.tscn"
 
 # Player body lives on physics layer 20 → mask 524288 (same as jump_pad.gd).
 const PLAYER_MASK := 524288
+const COUNTDOWN_SECONDS := 3.0
+const TRAJECTORY_RED := Color(1.0, 0.075, 0.12)
 
 # ─────────────────────────────────────────────────────────────────────────────
 # STAGE-2 DNA PROMOTION (2026-08-05). Three placements, and every knob it had was
@@ -79,7 +80,7 @@ const GRAVITY_COLOR := Color(0.95, 0.45, 0.25)
 @export var launch_force: float = 12.0
 ## Launch angle above horizontal (deg).
 @export var launch_angle: float = 52.0
-## Gravity used for the trajectory preview (player body uses project gravity).
+## Gravity shared by the trajectory preview and the player launch receiver.
 @export var gravity_magnitude: float = 9.8
 @export var frame_color: Color = Color(0.33, 0.22, 0.13)   # timber
 @export var metal_color: Color = Color(0.3, 0.32, 0.36)
@@ -103,16 +104,27 @@ var _angle_deg: float = 52.0
 var _force: float = 12.0
 var _accent_mats: Array[StandardMaterial3D] = []
 var _elapsed: float = 0.0
+var _flight_receiver: Node
+var _player_zone: Area3D
+var _basket_collision: CollisionShape3D
+var _countdown := -1.0
+var _count_label: Label3D
+var _launch_count := 0
+var _shot_origin := Vector3.ZERO
+var _shot_velocity := Vector3.ZERO
+var _preview_cache: Array = []
 
 
 func _ready() -> void:
 	_angle_deg = launch_angle
 	_force = launch_force
+	set_meta("em_keep_scale", true)
 	_build_frame()
 	_build_arm_and_basket()
 	_build_player_zone()
 	_build_console()
 	_build_indicators()
+	_build_boarding_ramp()
 	_refresh()
 	_built = true
 
@@ -185,6 +197,8 @@ func _rebuild() -> void:
 	_armed = false
 	_firing = false
 	_fire_t = 0.0
+	_countdown = -1.0
+	_preview_cache.clear()
 	_built = false
 	_ready()
 
@@ -233,8 +247,9 @@ func _build_arm_and_basket() -> void:
 	var fcol := CollisionShape3D.new()
 	var fshape := BoxShape3D.new(); fshape.size = Vector3(1.3, 0.1, 1.3)
 	fcol.shape = fshape; floor_body.add_child(fcol)
-	# low walls
-	for w in [Vector3(0, 0.35, 0.65), Vector3(0, 0.35, -0.65), Vector3(0.65, 0.35, 0), Vector3(-0.65, 0.35, 0)]:
+	_basket_collision = fcol
+	# Open the +Z boarding side toward the ramp.
+	for w in [Vector3(0, 0.35, -0.65), Vector3(0.65, 0.35, 0), Vector3(-0.65, 0.35, 0)]:
 		var horiz: bool = absf(w.x) < 0.01
 		var sz: Vector3 = Vector3(1.3, 0.55, 0.08) if horiz else Vector3(0.08, 0.55, 1.3)
 		_child_box(_basket, sz, w, frame_color.lightened(0.05))
@@ -243,6 +258,9 @@ func _build_arm_and_basket() -> void:
 
 	# Arm starts pitched down at the front (basket low/forward).
 	_arm_pivot.rotation_degrees = Vector3(_rest_pitch(), 0, 0)
+	_basket.rotation_degrees.x = -_rest_pitch()
+	# Keep the boarding cup level. The swing is a release gesture, not a moving
+	# collider that must push the player out through its own floor.
 
 
 func _rest_pitch() -> float:
@@ -255,9 +273,10 @@ func _rest_pitch() -> float:
 
 func _build_player_zone() -> void:
 	var area := Area3D.new()
+	_player_zone = area
 	area.name = "PlayerZone"
 	area.collision_layer = 0
-	area.collision_mask = PLAYER_MASK
+	area.collision_mask = PLAYER_MASK | 1 # XR body and the museum's desktop walker.
 	_basket.add_child(area)
 	area.position = Vector3(0, 0.6, 0)
 	var col := CollisionShape3D.new()
@@ -269,17 +288,47 @@ func _build_player_zone() -> void:
 
 
 func _on_zone_entered(body: Node3D) -> void:
-	if body.is_in_group("player_body") or body is CharacterBody3D:
+	if not _firing and body is CharacterBody3D and (body.is_in_group("player_body") or body.is_in_group("em_walker")):
 		_player_node = body
-		_armed = true
-		_set_accent_energy(2.4)   # light up: armed
 
 
 func _on_zone_exited(body: Node3D) -> void:
 	if body == _player_node:
 		_player_node = null
 		_armed = false
+		_countdown = -1.0
 		_set_accent_energy(0.8)
+
+
+func _within_basket(body: Node3D) -> bool:
+	if not is_instance_valid(body): return false
+	var p := _basket.to_local(body.global_position)
+	return absf(p.x) < 0.58 and absf(p.z) < 0.58 and p.y > -0.18 and p.y < 0.65
+
+
+func _build_boarding_ramp() -> void:
+	var at := to_local(_basket_world_pos())
+	# Overlap the cup floor and crest slightly above it, avoiding a vertical
+	# collision seam that catches a walking capsule at the end of the slope.
+	var height := at.y + 0.13
+	var length := 1.85
+	var ramp := StaticBody3D.new()
+	ramp.name = "BoardingRamp"
+	ramp.position = Vector3(0, height * 0.5 - 0.025, at.z + 0.30 + length * 0.5)
+	ramp.rotation.x = atan2(height, length)
+	add_child(ramp)
+	_child_box(ramp, Vector3(1.3, 0.05, length), Vector3.ZERO, accent_color)
+	var col := CollisionShape3D.new()
+	var shape := BoxShape3D.new(); shape.size = Vector3(1.3, 0.05, length)
+	col.shape = shape; ramp.add_child(col)
+	_count_label = Label3D.new()
+	_count_label.name = "LaunchCountdown"
+	_count_label.position = at + Vector3(0.95, 1.65, -0.3)
+	_count_label.font_size = 100; _count_label.pixel_size = 0.0017
+	_count_label.modulate = TRAJECTORY_RED
+	_count_label.billboard = BaseMaterial3D.BILLBOARD_ENABLED
+	_count_label.outline_size = 9
+	add_child(_count_label)
 
 
 # ── Console: ANGLE + FORCE sliders, FIRE button ────────────────────────
@@ -291,15 +340,17 @@ func _build_console() -> void:
 	add_child(console)
 	_box_at(console, Vector3(0.9, 0.9, 0.08), Vector3(0, 0.95, 0), metal_color.darkened(0.3))
 	_make_slider(console, Vector3(0, 1.18, 0.06), "ANGLE", 10.0, 80.0, _angle_deg, _on_angle)
-	_make_slider(console, Vector3(0, 0.95, 0.06), "FORCE", 5.0, 18.0, _force, _on_force)
-	# FIRE button — reachable from inside the basket (which rests near z~2.0).
-	_make_button(Vector3(0.0, 0.95, 2.5), Color(0.85, 0.18, 0.15), _on_fire)
+	_make_slider(console, Vector3(0, 0.95, 0.06), "SPEED", 5.0, 18.0, _force, _on_force)
+	# Within reach beside the basket; its collider must leave the entry clear.
+	_make_button(Vector3(0.9, 1.05, 2.0), Color(0.85, 0.18, 0.15), _on_fire)
 
 
 func _on_angle(norm: float) -> void:
+	if _countdown >= 0 or _firing: return
 	_angle_deg = lerpf(10.0, 80.0, norm); _refresh()
 
 func _on_force(norm: float) -> void:
+	if _countdown >= 0 or _firing: return
 	_force = lerpf(5.0, 18.0, norm); _refresh()
 
 
@@ -367,8 +418,8 @@ func _build_indicators() -> void:
 			add_child(_vel_arrow)
 	_traj_mesh = MeshInstance3D.new()
 	_traj_mat = StandardMaterial3D.new()
-	_traj_mat.albedo_color = accent_color
-	_traj_mat.emission_enabled = true; _traj_mat.emission = accent_color
+	_traj_mat.albedo_color = TRAJECTORY_RED
+	_traj_mat.emission_enabled = true; _traj_mat.emission = TRAJECTORY_RED
 	_traj_mat.emission_energy_multiplier = 1.4
 	_traj_mat.shading_mode = BaseMaterial3D.SHADING_MODE_UNSHADED
 	_traj_mesh.material_override = _traj_mat
@@ -390,16 +441,31 @@ func _basket_world_pos() -> Vector3:
 
 func _launch_dir_local() -> Vector3:
 	var a := deg_to_rad(_angle_deg)
-	return Vector3(0.0, sin(a), cos(a)).normalized()   # forward(+Z) + up
+	return Vector3(0.0, sin(a), -cos(a)).normalized() # Over the axle, away from boarding.
+
+
+func launch_velocity_world() -> Vector3:
+	return (global_basis * _launch_dir_local()).normalized() * _force
+
+
+func preview_origin_local() -> Vector3:
+	if _firing: return to_local(_shot_origin)
+	if _armed and is_instance_valid(_player_node): return to_local(_player_node.global_position)
+	return to_local(_basket_world_pos() + Vector3.UP * 0.055)
+
+
+func trajectory_point(origin: Vector3, seconds: float) -> Vector3:
+	var velocity := _shot_velocity if _firing else launch_velocity_world()
+	return to_local(to_global(origin) + velocity * seconds + Vector3.DOWN * (0.5 * gravity_magnitude * seconds * seconds))
 
 
 func _refresh() -> void:
 	# Velocity arrow from the basket along the launch direction.
-	var origin := _basket_world_pos() - global_position + Vector3(0, 0.5, 0)
+	var origin := preview_origin_local()
 	if vectors == "components":
 		var a := deg_to_rad(_angle_deg)
 		var s: float = clampf(_force * 0.12, 0.4, 2.2)
-		_position_arrow(_vel_arrow, origin, Vector3(0.0, 0.0, cos(a)) * s)
+		_position_arrow(_vel_arrow, origin, Vector3(0.0, 0.0, -cos(a)) * s)
 		_position_arrow(_vel_arrow_up, origin, Vector3(0.0, sin(a), 0.0) * s)
 	else:
 		var dir := _launch_dir_local() * clampf(_force * 0.12, 0.4, 2.2)
@@ -408,9 +474,16 @@ func _refresh() -> void:
 		var g_len: float = clampf(gravity_magnitude * 0.06, 0.35, 1.1)
 		_position_arrow(_grav_arrow, origin + Vector3(0.0, 1.1, 0.0), Vector3.DOWN * g_len)
 	# foresight — how much of the flight is drawn before the FIRE button is pressed.
-	_traj_mesh.mesh = _foresight_mesh(origin)
+	var key: Array = [origin, _angle_deg, _force, gravity_magnitude, foresight, global_basis, _firing]
+	if key != _preview_cache:
+		_preview_cache = key
+		_traj_mesh.mesh = _foresight_mesh(origin)
 	var range_flat: float = (_force * _force) * sin(2.0 * deg_to_rad(_angle_deg)) / maxf(gravity_magnitude, 0.001)
-	_readout.text = "angle %d°   force %.0f m/s\nrange ~ %.0f m" % [int(round(_angle_deg)), _force, range_flat]
+	_readout.text = "angle %d°   speed %.0f m/s\nrange ~ %.0f m" % [int(round(_angle_deg)), _force, range_flat]
+	if is_instance_valid(_count_label):
+		if _firing: _count_label.text = "LAUNCH!"
+		elif _countdown >= 0: _count_label.text = "%d\nSTEP OFF TO CANCEL" % maxi(1, int(ceil(_countdown)))
+		else: _count_label.text = "BOARD TO LAUNCH\n3 · 2 · 1"
 
 
 func _foresight_mesh(origin: Vector3) -> Mesh:
@@ -425,22 +498,32 @@ func _foresight_mesh(origin: Vector3) -> Mesh:
 			return _arc_mesh(origin)
 
 
-## foresight:parabola — the whole flight, and the shipped arithmetic character for
-## character: p(t)=p0+v0*t+0.5*g*t^2 in local space, sampled every 0.08 s until it drops
-## below the machine's own floor or 4 s runs out.
+## Sample world-space ballistics every 0.08 s and draw in artifact-local space.
+## Stop at the machine's floor height or the receiver's five-second limit.
 func _arc_mesh(origin: Vector3) -> Mesh:
-	var v0 := _launch_dir_local() * _force
-	var p0 := origin
 	var st := SurfaceTool.new()
-	st.begin(Mesh.PRIMITIVE_LINE_STRIP)
-	var t := 0.0
-	while t < 4.0:
-		var p := p0 + v0 * t + Vector3(0, -0.5 * gravity_magnitude * t * t, 0)
-		if p.y < 0.0:
-			break
-		st.add_vertex(p)
+	st.begin(Mesh.PRIMITIVE_TRIANGLES)
+	var previous := origin
+	var t := 0.08
+	while t < 5.0:
+		var p := trajectory_point(origin, t)
+		if p.y < 0.025:
+			p = previous.lerp(p, clampf((previous.y - 0.025) / maxf(previous.y - p.y, 0.001), 0, 1))
+		_arc_segment(st, previous, p)
+		if p.y <= 0.026: break
+		previous = p
 		t += 0.08
 	return st.commit()
+
+
+func _arc_segment(st: SurfaceTool, a: Vector3, b: Vector3) -> void:
+	var length := a.distance_to(b)
+	if length < 0.001: return
+	var cylinder := CylinderMesh.new()
+	cylinder.top_radius = 0.022; cylinder.bottom_radius = 0.022
+	cylinder.height = length; cylinder.radial_segments = 6
+	var frame := Transform3D(Basis(Quaternion(Vector3.UP, (b-a)/length)), (a+b)*0.5)
+	st.append_from(cylinder, 0, frame)
 
 
 ## foresight:apex — the summit only. How HIGH this throws you, and nothing at all about
@@ -502,19 +585,51 @@ func _on_fire(_a = null) -> void:
 	if not _armed or _player_node == null or not is_instance_valid(_player_node):
 		_readout.text = "step into the basket first"
 		return
-	_fire()
+	if _countdown < 0: _countdown = COUNTDOWN_SECONDS
 
 
 func _fire() -> void:
-	var world_dir: Vector3 = (global_transform.basis * _launch_dir_local()).normalized()
-	var launch_vel: Vector3 = world_dir * _force
+	if not _player_node is CharacterBody3D or not is_instance_valid(_player_node): return
+	var launch_vel := launch_velocity_world()
+	_shot_origin = _player_node.global_position
+	_shot_velocity = launch_vel
 	# Launch the VR player body (CharacterBody3D); gravity arcs them down.
-	if "velocity" in _player_node:
-		_player_node.set("velocity", launch_vel)
+	if _player_node is CharacterBody3D:
+		if not is_instance_valid(_flight_receiver):
+			_flight_receiver=preload("res://commons/artifacts/force_play/player_launch.gd").new()
+			add_child(_flight_receiver)
+		_flight_receiver.gravity=gravity_magnitude
+		_flight_receiver.launch(_player_node,launch_vel)
+		_flight_receiver.install() # Ready before the next XR movement tick.
+	_launch_count += 1
+	_countdown = -1.0
+	_basket_collision.set_deferred("disabled", true)
 	_firing = true
 	_fire_t = 0.0
 	_armed = false
 	_set_accent_energy(3.0)
+
+
+func _physics_process(delta: float) -> void:
+	if _firing: return
+	# Poll actual overlaps as well as entry signals: returning after the arm
+	# settles and bodies present at scene load must also be detected.
+	if not is_instance_valid(_player_node):
+		for body in _player_zone.get_overlapping_bodies():
+			_on_zone_entered(body)
+			if is_instance_valid(_player_node): break
+	if _within_basket(_player_node):
+		if not _armed:
+			_armed = true
+			_countdown = COUNTDOWN_SECONDS
+			_set_accent_energy(2.4)
+		else:
+			_countdown -= delta
+			if _countdown <= 0: _fire()
+	else:
+		_armed = false
+		_countdown = -1.0
+	_refresh()
 
 
 func _process(delta: float) -> void:
@@ -532,6 +647,7 @@ func _process(delta: float) -> void:
 				_arm_pivot.rotation_degrees.x = lerpf(_arm_pivot.rotation_degrees.x, _rest_pitch(), 0.1)
 			if absf(_arm_pivot.rotation_degrees.x - _rest_pitch()) < 1.0:
 				_firing = false
+				_basket_collision.set_deferred("disabled", false)
 				_set_accent_energy(0.8)
 		_refresh()
 	# Gentle armed pulse.

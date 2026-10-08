@@ -421,7 +421,11 @@ func _add_plate() -> void:
 	ts.width_m = 0.42
 	ts.position = Vector3(0.0, BASE_H + 0.005, -0.16)
 	if ts.has_method("set_text"):
-		ts.set_text("BACKPROPAGATION", "brightness is |dE/dw|, normalised —\nthe pulse runs output to input and\nruns out of error on the way")
+		# 0.42 m holds 4 lines of ~22 characters. The old copy was three
+		# 33-character lines, so every one of them reflowed and the panel lost
+		# the ending — which was the whole joke.
+		ts.set_text("BACKPROPAGATION",
+			"brightness is |dE/dw|,\nnormalised. The pulse\nruns output to input\nand runs out of error.")
 	_own(ts)
 
 

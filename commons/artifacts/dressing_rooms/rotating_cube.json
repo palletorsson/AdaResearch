@@ -1,77 +1,25 @@
 {
-  "approach": "south",
-  "artifact_offset": [
-    0.0,
-    0.0,
-    0.0
-  ],
-  "clearance": [
-    3.0,
-    3.0,
-    3.0
-  ],
-  "exit": "north",
-  "extras": [],
-  "footing": {
-    "anchor": [
-      2,
-      2
-    ],
-    "tiles": [
-      [
-        1,
-        1,
-        1,
-        1,
-        1
-      ],
-      [
-        1,
-        2,
-        2,
-        2,
-        1
-      ],
-      [
-        1,
-        2,
-        2,
-        2,
-        1
-      ],
-      [
-        1,
-        2,
-        2,
-        2,
-        1
-      ],
-      [
-        1,
-        1,
-        1,
-        1,
-        1
-      ]
-    ]
-  },
-  "footprint": [
-    1,
-    1,
-    1
-  ],
   "lookup_name": "rotating_cube",
-  "notes": {
-    "tags": [
-      "artifact-needs-fix"
-    ],
-    "text": "[auto] AABB.y min = -0.50 \u2014 body sinks into / floats above floor"
+  "footprint": [1.29, 1.29, 1.21],
+  "rotations": ["0", "90", "180", "270"],
+  "approach": "south",
+  "exit": "north",
+  "footing": {"anchor": [2, 2], "tiles": [[1,1,1,1,1],[1,2,2,2,1],[1,2,2,2,1],[1,2,2,2,1],[1,1,1,1,1]]},
+  "extras": [],
+  "artifact_offset": [0.0, 0.03, 0.0],
+  "clearance": [5, 5, 3],
+  "posture": "table",
+  "show_info": false,
+  "show_dressing": false,
+  "placement_contract": {
+    "allowed_modes": ["host_mounted"], "preferred_mode": "host_mounted",
+    "hard_zone_m": [2, 2, 3], "preferred_zone_m": [5, 5, 3],
+    "required_support": "table", "support_surface_height_m": [0.9, 1.1],
+    "interaction_faces": ["south", "east", "north", "west"],
+    "rear_clearance_m": 1.0, "front_clearance_m": 1.0,
+    "circulation": "full_orbit", "circulation_behind": true,
+    "minimum_route_width_m": 0.9, "neighbor_policy": "no_artifacts_in_preferred_zone"
   },
-  "rotations": [
-    "0",
-    "90",
-    "180",
-    "270"
-  ],
-  "posture": "table"
+  "production_grade": "test_candidate",
+  "placement_intent": "The rotating body reserves its 1.44 m sweep, a stable working table, and a complete five-metre orbit."
 }

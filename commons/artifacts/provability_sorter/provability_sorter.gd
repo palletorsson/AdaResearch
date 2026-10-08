@@ -11,8 +11,7 @@ class_name ProvabilitySorter
 ##   settle in the inner PROVABLE disc, but some land in the gold GAP band
 ##   between the rings — "TRUE BUT UNPROVABLE" — where the Godel sentence sits
 ##   glowing, never falling inward.
-## truth: the provable is a proper subset of the true. The gold band is never
-##   empty and never closes; some truths have no proof.
+## truth: for a sound, effective theory with sufficient arithmetic, provable statements form a proper subset of truths in the intended natural numbers. Tokens have illustrative destinations chosen in advance. Ring areas and token counts measure no proportion of mathematical truths.
 
 # NOTE: `emissive` is declared by the parent (embodied_prop.gd) — do not redeclare.
 @export var cool_white: Color = Color(0.90, 0.93, 1.0)
@@ -369,7 +368,7 @@ func _build() -> void:
 
 	# --- title ---
 	_own(_billboard_label("PROVABILITY SORTER", Vector3(0.0, 1.5, 0.0), 30, cool_white))
-	_own(_billboard_label("the provable is a proper part of the true",
+	_own(_billboard_label("ILLUSTRATION: sound arithmetic\nareas and tokens are not counts of truths",
 		Vector3(0.0, 1.36, 0.0), 14, wire_purple))
 
 	_apply_emissive()

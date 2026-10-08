@@ -159,6 +159,57 @@
 				1,
 				25
 			]
+		},
+		"konigsberg_observation_court": {
+			"lookup_name": "konigsberg_observation_court",
+			"scene": "res://commons/artifacts/museum/konigsberg_observation_court.tscn",
+			"class_name": "KonigsbergObservationCourt",
+			"name": "Königsberg Dedicated Observation Court",
+			"category": "museum",
+			"complexity": "advanced",
+			"description": "A full-scale 56 x 38 m dedicated-world host for KonigsbergBridge: a three-metre, one-metre-tiled observation ring surrounds the untouched 50 x 32 m artifact. Two dark museum-access tongues connect circulation to the north and south landmasses while remaining visually distinct from Euler's seven graph edges.",
+			"qfep_connection": "The court protects structural truth by separating the graph's mathematical edges from the museum's access infrastructure. The artifact keeps its full scale and parity logic; architecture negotiates around it instead of rewriting it.",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"auto_ground": false,
+			"map_sequences": [],
+			"interactions": [
+				"walk the three-metre observation ring",
+				"enter the historical bridge graph through the marked museum-access tongue",
+				"compare the access route with the seven edges counted by Euler's theorem"
+			],
+			"parameters": {
+				"parity": "blocked",
+				"enable_collision": true,
+				"show_access_labels": true,
+				"size_group": "world_scale"
+			},
+			"footprint": [
+				56.0,
+				5.0,
+				38.0
+			],
+			"footprint_measured": [
+				56,
+				5,
+				38
+			],
+			"measurements": {
+				"aabb_size": [56.0, 5.0, 38.0],
+				"aabb_center": [-0.5, 2.5, -0.5],
+				"grid_cells": [56, 38],
+				"max_dimension_m": 56.0,
+				"measured_at": "2026-08-15T00:00:00Z",
+				"source": "authored dedicated-world contract"
+			},
+			"tags": [
+				"museum",
+				"dedicated_world",
+				"graphtheory",
+				"konigsberg",
+				"observation_court",
+				"one_metre_grid"
+			]
 		}
 	}
 }

@@ -6,13 +6,16 @@ class_name AccountabilityLedger
 ## truth: Stay answerable for what you leave out.
 ##
 ## Ethical design after incompleteness — APPLIED, device (~1m + readout Label3D).
-## A running ledger: it logs each design choice and WHO IT EXCLUDES. A scrolling
+## An illustrative ledger cycles through prewritten choices and exclusions. A scrolling
 ## readout lists answerability entries; a fresh entry is stamped at a steady
 ## interval and pushes the list up. An amber "ON THE RECORD" lamp pulses each
 ## time a line is committed. Cool/formal housing, constructive amber accent.
 
 @export var log_interval: float = 1.8      # seconds between new ledger entries
 @export var visible_lines: int = 6         # entries shown in the readout
+@export var visitor_record: bool = false  # Final hall: actual Assembly pose instead of illustrative examples.
+const PoseRecord = preload("res://algorithms/computationalbiology/molecular_framework/AssemblyPoseRecord.gd")
+var _pose_revision := "unbuilt"
 
 const COOL_WHITE := Color(0.90, 0.92, 0.97)
 const SLATE := Color(0.34, 0.38, 0.48)
@@ -44,21 +47,33 @@ var _t: float = 0.0
 var _timer: float = 0.0
 var _commit_flash: float = 0.0
 var _count: int = 0
+var _owned: Array[Node] = []
 
 
 func _ready() -> void:
 	_rng.randomize()
-	_build()
+	_rebuild()
 	set_process(not Engine.is_editor_hint())
 
 
 func apply_grid_config(config: Dictionary) -> void:
 	if config.has("emissive"):
-		emissive = bool(config["emissive"])
-	for c in get_children():
-		remove_child(c)
-		c.queue_free()
+		emissive = str(config.emissive).to_lower() in ["true","1"]
+	if config.has("log_interval"): log_interval = clampf(float(config.log_interval),.5,60)
+	if config.has("visible_lines"): visible_lines = clampi(int(config.visible_lines),1,6)
+	if config.has("visitor_record"): visitor_record = str(config.visitor_record).to_lower() in ["true","1"]
+	if is_node_ready(): _rebuild()
+
+func _rebuild() -> void:
+	for child in _owned:
+		if is_instance_valid(child):
+			remove_child(child)
+			child.queue_free()
+	_owned.clear()
+	var external: Array[Node] = get_children()
 	_build()
+	for child in get_children():
+		if child not in external: _owned.append(child)
 
 
 func _build() -> void:
@@ -76,7 +91,8 @@ func _build() -> void:
 	add_child(_box(Vector3(0.29, 0.42, 0.19), Vector3(0.012, 0.40, 0.012), _glow_mat(PURPLE, 1.4)))
 
 	# dark "paper" readout panel the entries scroll across
-	add_child(_box(Vector3(0, 0.42, 0.185), Vector3(0.55, 0.38, 0.006), _glass_mat(PAPER, 0.85)))
+	# Opaque backing avoids transparent sorting over the lower text rows.
+	add_child(_box(Vector3(0, 0.42, 0.185), Vector3(0.55, 0.38, 0.006), _matte_mat(PAPER, 0.8)))
 
 	# --- Feed spool (teal) on the side — the ongoing record ----------------
 	_spool = _cylinder(Vector3(-0.42, 0.42, 0), 0.07, 0.06, _glow_mat(TEAL, 1.3))
@@ -99,17 +115,18 @@ func _build() -> void:
 		var ly: float = top_y - line_h * float(i)
 		var lab := Label3D.new()
 		lab.text = ""
-		lab.font_size = 13
+		lab.font_size = 18
+		lab.pixel_size = .0012
 		lab.modulate = COOL_WHITE
 		lab.outline_size = 6
-		lab.no_depth_test = true
+		lab.no_depth_test = false
 		lab.horizontal_alignment = HORIZONTAL_ALIGNMENT_LEFT
 		lab.position = Vector3(-0.26, ly, 0.20)
 		add_child(lab)
 		_line_labels.append(lab)
 
 	# --- A header readout Label3D (applied-tier requirement) ---------------
-	_readout = _billboard_label("LEDGER — choice ▸ excluded", Vector3(0, 0.92, 0), 18, TEAL)
+	_readout = _billboard_label("ASSEMBLY RECORD" if visitor_record else "LEDGER — choice ▸ excluded", Vector3(0, 0.92, 0), 18, TEAL)
 	add_child(_readout)
 	_counter_label = _billboard_label("entries: 0", Vector3(0, 0.78, 0), 14, AMBER)
 	add_child(_counter_label)
@@ -118,12 +135,21 @@ func _build() -> void:
 	add_child(_billboard_label("ACCOUNTABILITY LEDGER", Vector3(0, 1.08, 0), 26, COOL_WHITE))
 
 	# seed a couple of starting entries so the panel is never blank
-	_push_entry()
-	_push_entry()
-	_refresh_lines()
+	if visitor_record:
+		_refresh_record(true)
+	else:
+		_push_entry()
+		_push_entry()
+		_refresh_lines()
+	# Keep headings at the scale of the device, with normal scene occlusion.
+	for child in get_children():
+		if child is Label3D and child not in _line_labels:
+			child.pixel_size = .0015
+			child.no_depth_test = false
 
 
 func _push_entry() -> void:
+	if visitor_record: return
 	var ci: int = _rng.randi_range(0, CHOICES.size() - 1)
 	var line: String = CHOICES[ci] + "  ▸  " + EXCLUDED[ci]
 	_entries.push_front(line)
@@ -143,11 +169,31 @@ func _refresh_lines() -> void:
 			var col: Color = TEAL.lerp(SLATE, 1.0 - fade)
 			if i == 0:
 				col = AMBER
-			lab.modulate = col
+			# These are fields of one record, not progressively older events.
+			lab.modulate = (AMBER if i == 0 else COOL_WHITE) if visitor_record else col
 		else:
 			lab.text = ""
 	if _counter_label != null:
 		_counter_label.text = "entries: " + str(_count)
+
+func _refresh_record(force: bool = false) -> void:
+	var record := PoseRecord.read(get_tree())
+	var revision: String = str(record.get("revision","empty"))
+	if not force and revision==_pose_revision: return
+	_pose_revision = revision
+	_entries.clear()
+	if record.is_empty():
+		_entries.assign(["No pose kept yet.","Visit Assembly Laboratory.","Move a joint; let go.","The released pose returns here."])
+		_count = 0
+	else:
+		var stamp := Time.get_datetime_string_from_unix_time(int(record.get("saved_unix",0))).replace("T"," ")
+		_entries.assign(["Assembly Laboratory",stamp+" UTC","%d / 13 joints displaced" % PoseRecord.changed(record),"12 connections retained","Latest pose; not a gesture log",str(record.get("persistence","this session only"))])
+		if PoseRecord.changed_connections(record)>0:
+			_entries[3] = "12 connections; %d rerouted" % PoseRecord.changed_connections(record)
+		_count = int(record.get("completed_edits",0))
+		_commit_flash = 1.0
+	_refresh_lines()
+	_counter_label.text = "released edits: %d" % _count
 
 
 func _process(delta: float) -> void:
@@ -157,7 +203,10 @@ func _process(delta: float) -> void:
 	_timer += delta
 
 	# Commit a new ledger entry at a steady interval — the running process.
-	if _timer >= log_interval:
+	if visitor_record and _timer >= 1.0:
+		_timer = 0.0
+		_refresh_record()
+	elif not visitor_record and _timer >= log_interval:
 		_timer = 0.0
 		_push_entry()
 		_refresh_lines()
@@ -175,9 +224,12 @@ func _process(delta: float) -> void:
 
 	# Feed spool turns continuously — the record never stops advancing.
 	if _spool != null:
-		_spool.rotation.y = _t * 2.0
+		if visitor_record:
+			_spool.rotation.y += delta * _commit_flash
+		else:
+			_spool.rotation.y = _t * 2.0
 
 	# Newest line gently rises into place (scroll feel).
-	if _line_labels.size() > 0:
+	if not visitor_record and _line_labels.size() > 0:
 		var nudge: float = (1.0 - clampf(_timer / log_interval, 0.0, 1.0)) * 0.01
 		_line_labels[0].position.y = 0.58 - nudge

@@ -5,13 +5,13 @@ class_name LaundryLineCathedral
 ## lineage: the Catenary hero — Gaudí's upside-down trick done as laundry. Three
 ##   washing lines sag between poles, each a true catenary (cosh, not a guess), pegged
 ##   with towels and shirts; and ABOVE each line hangs its ghost: the same curve
-##   mirrored upward as a pale arch, because a hanging chain flipped is a standing
-##   vault. The washing knows structural engineering; the cathedral is implied.
-## essence: a chain settles where pulling tension along itself costs least - y =
-##   a·cosh(x/a). Nobody drew it: gravity solved it. Mirror the solution and
-##   compression replaces tension - the arch that stands is the chain that hung.
-## truth: form is the answer to a minimization problem. The laundry finds it every
-##   time, without being asked.
+##   mirrored upward as a pale arch. The cathedral is implied by a shared curve.
+## essence: sample a·cosh(x/a) with three chosen sag parameters, then mirror it.
+##   This is analytic geometry, not a settling chain or masonry simulation. The
+##   clothes are decorative: adding them does not change the curve's load.
+## truth: a physical hanging model can inform a compression structure under
+##   corresponding loads and supports. This drawing makes the inversion visible;
+##   it does not test whether the mirrored structure stands.
 ##
 ## The 2026-08-27 category-heroes pass, formfinding.
 
@@ -62,9 +62,19 @@ func _build_poles() -> void:
 		foot.position = Vector3(sx, 0.04, 0.0)
 		foot.material_override = _matte_mat(Color(0.12, 0.12, 0.14), 0.9)
 		add_child(foot)
-	# crossbars so three lines can share two poles
-	for z in [-0.8, 0.0, 0.8]:
-		pass  # lines anchor at pole tops offset in z via their own geometry
+	# All analytic line endpoints meet one of these two support rails. The rails
+	# make the chosen boundary visible; they do not solve forces in the ropes.
+	var z_min := -0.8
+	var z_max := maxf(z_min, float(sags.size() - 2) * 0.8)
+	for index in 2:
+		var crossbar := MeshInstance3D.new()
+		crossbar.name = "AnchorCrossbar%d" % index
+		var crossbar_mesh := BoxMesh.new()
+		crossbar_mesh.size = Vector3(0.10, 0.10, z_max - z_min + 0.20)
+		crossbar.mesh = crossbar_mesh
+		crossbar.position = Vector3((-1.0 if index == 0 else 1.0) * span * 0.5, pole_h, (z_min + z_max) * 0.5)
+		crossbar.material_override = _matte_mat(Color(0.35, 0.22, 0.12), 0.85)
+		add_child(crossbar)
 
 func _build_line(z: float, a: float, idx: int) -> void:
 	var n := 30
@@ -117,8 +127,7 @@ func _build_line(z: float, a: float, idx: int) -> void:
 		cloth_mesh.size = Vector3(w, h, 0.015)
 		cloth.mesh = cloth_mesh
 		cloth.position = Vector3(x, y - h * 0.5, z)
-		# a towel hangs plumb even on a slope - one more small proof of gravity's
-		# opinion, and the slight yaw is the wind's counter-signature
+		# Plumb cloth and a slight yaw suggest weight and wind; both are drawn poses.
 		cloth.rotation.y = _rng.randf_range(-0.12, 0.12)
 		cloth.material_override = _matte_mat(CLOTH[(k + idx) % CLOTH.size()], 0.95)
 		add_child(cloth)
@@ -134,11 +143,14 @@ func _build_line(z: float, a: float, idx: int) -> void:
 func _build_plaque() -> void:
 	var ts := TextScreenScript.new()
 	ts.name = "LaundryPlate"
-	ts.mode = 2
-	ts.width_m = 0.44
-	ts.position = Vector3(-span * 0.5 - 0.4, 0.24, 1.15)
-	ts.rotation.y = deg_to_rad(35.0)
+	# Face the approach from the hall entrance. The old floor pad beside the
+	# left pole overlapped this hall's boundary wall after catalog recovery.
+	ts.mode = 1
+	ts.width_m = 0.65
+	ts.stand_height = 1.15
+	ts.position = Vector3(1.2, 0.0, -1.25)
+	ts.rotation.y = PI
 	add_child(ts)
 	if ts.has_method("set_text"):
-		ts.set_text("LAUNDRY LINE CATHEDRAL - y = a cosh(x/a)",
-			"A chain settles where tension costs least; nobody drew it, gravity solved\nit. Mirror the sag and the arch STANDS - the ghost above each line is\nGaudi's whole method. The washing knew. The cathedral is implied.")
+		ts.set_text("LAUNDRY LINE CATHEDRAL - cosh + reflection",
+			"cosh draws three sags.\nThe clothes add no load.\nMirror it: an arch appears.\nThis is not a gravity solver.")

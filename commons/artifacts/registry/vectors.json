@@ -4,7 +4,7 @@
 			"capacity": "FEEL orientation as embodied direction by standing inside the coordinate frame",
 			"category": "unknown",
 			"complexity": "intermediate",
-			"description": "Stand inside the coordinate system. Three meter-long axes \u2014 X red, Y green, Z blue \u2014 establish the right-handed frame that every 3D operation assumes. A gyroscope gadget shows your orientation relative to the axes. The arbitrary nature of axis conventions becomes visible: right-handed vs left-handed, Y-up vs Z-up are choices, not laws.",
+			"description": "Stand inside the coordinate system. Three meter-long axes — X red, Y green, Z blue — establish the right-handed frame that every 3D operation assumes. A gyroscope gadget shows your orientation relative to the axes. The arbitrary nature of axis conventions becomes visible: right-handed vs left-handed, Y-up vs Z-up are choices, not laws.",
 			"dev_themes": [
 				"linear_algebra",
 				"math",
@@ -30,6 +30,11 @@
 			],
 			"name": "CoordinateSystem3M",
 			"parameters": {
+				"axis_palette": "rgb (default) or pink_grey_black; colours are shared by axes and moving projection markers",
+				"axis_opacity": "0–1; opacity of unshaded rods; use 1 for the solid hall treatment",
+				"axis_unshaded": "1 (default) for diagram lighting, 0 for shaded solid rods",
+				"axis_length": "Drawn arm length in local units; does not change the frame transform or its coordinate readings",
+				"axis_thickness": "Rod radius in local units",
 				"footprint": [
 					1,
 					1,
@@ -37,7 +42,7 @@
 				],
 				"size_group": "compact"
 			},
-			"qfep_connection": "Pure F \u2014 the coordinate system is the most fundamental structure, the frame from which all measurement begins. Without agreed axes, no vector has components, no transform has a matrix.",
+			"qfep_connection": "Pure F — the coordinate system is the most fundamental structure, the frame from which all measurement begins. Without agreed axes, no vector has components, no transform has a matrix.",
 			"scene": "res://algorithms/vectors/00_coordinates/CoordinateSystem3M.tscn",
 			"size_group": "compact",
 			"tags": [
@@ -136,7 +141,7 @@
 			"capacity": "FEEL that force and acceleration are the same shape by dragging an arrow and watching the ball respond proportionally",
 			"category": "unknown",
 			"complexity": "beginner",
-			"description": "Drag the force arrow longer and the ball accelerates harder. F = ma made visceral \u2014 magnitude is felt, not read. The ball's trajectory traces the force's history. Reset with R, freeze with Space. Contrasts with WorkEnergyDemo (same force, different measure); feeds into CombinedForcesDemo (multiple forces). DNA: measure selects which read-only companions stand beside the red force arrow (both = the legacy three, acceleration = force and a = F/m alone, velocity = force and v alone, none = the arrow and the ball with no receipt); body selects what the force is pushing (light 0.25 kg \u00b7 standard 1.0 \u00b7 heavy 4.0 \u00b7 immovable 16.0, radius following mass^(1/3) so the bulk is visible). Use #measure: and #body:.",
+			"description": "Drag the force arrow longer and the ball accelerates harder. F = ma made visceral — magnitude is felt, not read. The ball's trajectory traces the force's history. Reset with R, freeze with Space. Contrasts with WorkEnergyDemo (same force, different measure); feeds into CombinedForcesDemo (multiple forces). DNA: measure selects which read-only companions stand beside the red force arrow (both = the legacy three, acceleration = force and a = F/m alone, velocity = force and v alone, none = the arrow and the ball with no receipt); body selects what the force is pushing (light 0.25 kg · standard 1.0 · heavy 4.0 · immovable 16.0, radius following mass^(1/3) so the bulk is visible). Use #measure: and #body:.",
 			"dev_themes": [
 				"linear_algebra",
 				"math",
@@ -190,7 +195,7 @@
 				"measure": "both | acceleration | velocity | none - which companion arrows and readout blocks stand beside the force (default both)",
 				"body": "light | standard | heavy | immovable - the mass the force is pushing (default standard = the base class's 1.0 kg)"
 			},
-			"qfep_connection": "Classical F \u2014 force as deterministic law. Drag the arrow, the ball obeys. No randomness, no emergence. Pure Newtonian causality where every input produces a proportional output.",
+			"qfep_connection": "Classical F — force as deterministic law. Drag the arrow, the ball obeys. No randomness, no emergence. Pure Newtonian causality where every input produces a proportional output.",
 			"scene": "res://algorithms/vectors/01_vector_basics/ForceMagnitudeDemo.tscn",
 			"size_group": "compact",
 			"tags": [
@@ -284,7 +289,7 @@
 			"capacity": "SEE that the ball knows only the sum of all forces, not the individual forces themselves",
 			"category": "unknown",
 			"complexity": "intermediate",
-			"description": "Two force arrows, one ball, one truth: nature does not apply forces one at a time. Drag F1 and F2 independently \u2014 the yellow net force arrow updates as their vector sum, and the ball accelerates along it. Cancellation when forces oppose. Diagonal trajectories from perpendicular forces. Superposition as felt experience.",
+			"description": "Two force arrows, one ball, one truth: nature does not apply forces one at a time. Drag F1 and F2 independently — the yellow net force arrow updates as their vector sum, and the ball accelerates along it. Cancellation when forces oppose. Diagonal trajectories from perpendicular forces. Superposition as felt experience.",
 			"dev_themes": [
 				"linear_algebra",
 				"math",
@@ -340,7 +345,7 @@
 				],
 				"size_group": "compact"
 			},
-			"qfep_connection": "F-composition \u2014 two deterministic forces combine into one deterministic result. Superposition is linearity made visible. The net force IS the sum, no approximation, no loss.",
+			"qfep_connection": "F-composition — two deterministic forces combine into one deterministic result. Superposition is linearity made visible. The net force IS the sum, no approximation, no loss.",
 			"scene": "res://algorithms/vectors/02_vector_addition/VectorAddition.tscn",
 			"size_group": "compact",
 			"tags": [
@@ -472,7 +477,7 @@
 				],
 				"size_group": "room_scale"
 			},
-			"qfep_connection": "F-composition at body scale \u2014 superposition becomes a place you stand inside rather than a diagram you read.",
+			"qfep_connection": "F-composition at body scale — superposition becomes a place you stand inside rather than a diagram you read.",
 			"size_group": "room_scale",
 			"tags": [
 				"vector_addition",
@@ -504,7 +509,7 @@
 			}
 		},
 		"VectorBasics": {
-			"capacity": "UNDERSTAND that a vector is not a number and not a point \u2014 it is a displacement carrying both how far and which way",
+			"capacity": "UNDERSTAND that a vector is not a number and not a point — it is a displacement carrying both how far and which way",
 			"dna": {
 				"promoted": "2026-07-29",
 				"stage": "2 - variation",
@@ -527,7 +532,7 @@
 			},
 			"category": "unknown",
 			"complexity": "beginner",
-			"description": "Grab an arrow and stretch it. Watch magnitude, unit vector, and components all update as one system. v = |v| * v-hat \u2014 a vector is magnitude times direction, decomposed into (x,y,z) components along the axes. The magnitude arc sweeps from the x-axis. The spring scale responds to vector length like a physical instrument. DNA: reading picks which decomposition the bench argues IS the vector (full=both at once, polar=|v| and v-hat only, cartesian=components only, bare=the arrow alone, refusing both); reference picks the direction the magnitude arc is measured from (x/y/z/ground), making visible that no frame is privileged.",
+			"description": "Grab an arrow and stretch it. Watch magnitude, unit vector, and components all update as one system. v = |v| * v-hat — a vector is magnitude times direction, decomposed into (x,y,z) components along the axes. The magnitude arc sweeps from the x-axis. The spring scale responds to vector length like a physical instrument. DNA: reading picks which decomposition the bench argues IS the vector (full=both at once, polar=|v| and v-hat only, cartesian=components only, bare=the arrow alone, refusing both); reference picks the direction the magnitude arc is measured from (x/y/z/ground), making visible that no frame is privileged.",
 			"dev_themes": [
 				"linear_algebra",
 				"math",
@@ -561,7 +566,7 @@
 				],
 				"size_group": "compact"
 			},
-			"qfep_connection": "Pure F-decomposition \u2014 breaking a single quantity into orthogonal components. The vector IS its components, and the components ARE the vector. No information lost, no approximation.",
+			"qfep_connection": "Pure F-decomposition — breaking a single quantity into orthogonal components. The vector IS its components, and the components ARE the vector. No information lost, no approximation.",
 			"scene": "res://algorithms/vectors/01_vector_basics/VectorBasics.tscn",
 			"size_group": "compact",
 			"tags": [
@@ -683,7 +688,7 @@
 			"capacity": "FEEL that torque is not a force but the force's opinion about rotation, measured by how far off-center and how perpendicular it acts",
 			"category": "unknown",
 			"complexity": "intermediate",
-			"description": "Drag the force and its application point. The purple torque vector pops out perpendicular to both, spinning the ball via the right-hand rule. tau = r x F \u2014 the cross product. Zero torque when force passes through center (r parallel to F). Maximum torque when perpendicular to the lever arm.",
+			"description": "Drag the force and its application point. The purple torque vector pops out perpendicular to both, spinning the ball via the right-hand rule. tau = r x F — the cross product. Zero torque when force passes through center (r parallel to F). Maximum torque when perpendicular to the lever arm.",
 			"dev_themes": [
 				"linear_algebra",
 				"math",
@@ -717,7 +722,7 @@
 				],
 				"size_group": "compact"
 			},
-			"qfep_connection": "F-perpendicularity \u2014 the cross product extracts the component of interaction that is orthogonal to both inputs. It measures not agreement (that is dot product) but the capacity for rotation.",
+			"qfep_connection": "F-perpendicularity — the cross product extracts the component of interaction that is orthogonal to both inputs. It measures not agreement (that is dot product) but the capacity for rotation.",
 			"scene": "res://algorithms/vectors/06_vector_cross_product/VectorCrossProduct.tscn",
 			"size_group": "compact",
 			"tags": [
@@ -849,7 +854,7 @@
 				],
 				"size_group": "room_scale"
 			},
-			"qfep_connection": "F-perpendicularity at body scale \u2014 the orthogonal axis of rotation becomes a thing you can stand beneath.",
+			"qfep_connection": "F-perpendicularity at body scale — the orthogonal axis of rotation becomes a thing you can stand beneath.",
 			"size_group": "room_scale",
 			"tags": [
 				"cross_product",
@@ -882,10 +887,10 @@
 			}
 		},
 		"VectorDotProduct": {
-			"capacity": "SEE that pushing sideways does nothing \u2014 work is the component of force that agrees with motion",
+			"capacity": "SEE that pushing sideways does nothing — work is the component of force that agrees with motion",
 			"category": "unknown",
 			"complexity": "intermediate",
-			"description": "Push a ball and watch the work meter tick up. Push perpendicular and it stays at zero. W = F . d = |F||d|cos(theta) \u2014 the dot product made visceral. The meter turns green for positive work, red for negative, yellow for zero. Total work accumulates as a running dot-product integrator over the path.",
+			"description": "Push a ball and watch the work meter tick up. Push perpendicular and it stays at zero. W = F . d = |F||d|cos(theta) — the dot product made visceral. The meter turns green for positive work, red for negative, yellow for zero. Total work accumulates as a running dot-product integrator over the path.",
 			"dev_themes": [
 				"linear_algebra",
 				"math",
@@ -918,7 +923,7 @@
 				],
 				"size_group": "compact"
 			},
-			"qfep_connection": "F-projection \u2014 the dot product extracts the component of one vector that agrees with another. It measures alignment. Perpendicular forces do zero work because they have zero agreement with the direction of motion.",
+			"qfep_connection": "F-projection — the dot product extracts the component of one vector that agrees with another. It measures alignment. Perpendicular forces do zero work because they have zero agreement with the direction of motion.",
 			"scene": "res://algorithms/vectors/03_dot_product/VectorDotProduct.tscn",
 			"size_group": "compact",
 			"tags": [
@@ -1051,7 +1056,7 @@
 				],
 				"size_group": "room_scale"
 			},
-			"qfep_connection": "F-projection at body scale \u2014 alignment becomes an angle you walk into, and zero work is a right angle you can feel.",
+			"qfep_connection": "F-projection at body scale — alignment becomes an angle you walk into, and zero work is a right angle you can feel.",
 			"size_group": "room_scale",
 			"tags": [
 				"dot_product",
@@ -1229,7 +1234,7 @@
 		"VectorForces": {
 			"category": "unknown",
 			"complexity": "intermediate",
-			"description": "VectorForces \u2014 Newton's second law as a live argument between forces. DNA: regime selects WHICH forces are in the room to disagree (crosswind = sideways thrust vs gravity, freefall = gravity alone, stalemate = thrust exactly cancels weight so the ball hangs, liftoff = thrust wins); diagram selects which of the six arrows the chart draws (taxonomy = all six, inputs = the three being summed, resultant = only the sum, kinematics = only what the sum produced). Use #regime: and #diagram:.",
+			"description": "VectorForces — Newton's second law as a live argument between forces. DNA: regime selects WHICH forces are in the room to disagree (crosswind = sideways thrust vs gravity, freefall = gravity alone, stalemate = thrust exactly cancels weight so the ball hangs, liftoff = thrust wins); diagram selects which of the six arrows the chart draws (taxonomy = all six, inputs = the three being summed, resultant = only the sum, kinematics = only what the sum produced). Use #regime: and #diagram:.",
 			"dna": {
 				"promoted": "2026-07-29",
 				"stage": "2 - variation",
@@ -1358,7 +1363,7 @@
 		"VectorMotion": {
 			"category": "unknown",
 			"complexity": "intermediate",
-			"description": "A moving ball carrying three live arrows \u2014 position (green, from the origin), velocity (cyan) and acceleration (orange, grabbable) at the ball \u2014 plus a fading 50-point trail, so the chain 'acceleration changes velocity changes position' is one picture instead of three equations. DNA axes: drive (constant / central / inertial / resisted \u2014 what the acceleration is bound to, and therefore whether the trail is a parabola, an orbit, a straight line or a slide into terminal velocity) and chain (triple / derivatives / state / path \u2014 which depths of change are drawn).",
+			"description": "A moving ball carrying three live arrows — position (green, from the origin), velocity (cyan) and acceleration (orange, grabbable) at the ball — plus a fading 50-point trail, so the chain 'acceleration changes velocity changes position' is one picture instead of three equations. DNA axes: drive (constant / central / inertial / resisted — what the acceleration is bound to, and therefore whether the trail is a parabola, an orbit, a straight line or a slide into terminal velocity) and chain (triple / derivatives / state / path — which depths of change are drawn).",
 			"dna": {
 				"promoted": "2026-08-03",
 				"stage": "2 - variation",
@@ -1634,7 +1639,7 @@
 				],
 				"size_group": "room_scale"
 			},
-			"qfep_connection": "F-decomposition at body scale \u2014 the plane and its normal become a floor you stand on and an axis you bounce across.",
+			"qfep_connection": "F-decomposition at body scale — the plane and its normal become a floor you stand on and an axis you bounce across.",
 			"size_group": "room_scale",
 			"tags": [
 				"projection",
@@ -1668,7 +1673,7 @@
 			}
 		},
 		"vector_addition_xl_laser": {
-			"capacity": "Stand inside a 4 m+ vector-addition exhibit and move the arrow tips with the VR laser pointer \u2014 point, hold trigger, sweep, and the green sum diagonal follows across the room",
+			"capacity": "Stand inside a 4 m+ vector-addition exhibit and move the arrow tips with the VR laser pointer — point, hold trigger, sweep, and the green sum diagonal follows across the room",
 			"category": "vectors",
 			"complexity": "intermediate",
 			"description": "The walk-inside vector addition exhibit, sized so the tips are out of arm's reach and grabbed with the laser pointer instead. Point either hand's laser at a glowing endpoint (it highlights green), hold the trigger, and sweep to move it; the sum vector and dotted parallelogram update live.",
@@ -1709,7 +1714,7 @@
 				],
 				"size_group": "room_scale"
 			},
-			"qfep_connection": "F-composition at room scale, reached by light \u2014 pointing becomes touching, and superposition is a place you stand inside.",
+			"qfep_connection": "F-composition at room scale, reached by light — pointing becomes touching, and superposition is a place you stand inside.",
 			"size_group": "room_scale",
 			"tags": [
 				"vector_addition",
@@ -1723,7 +1728,7 @@
 			]
 		},
 		"vector_subtraction_xl_laser": {
-			"capacity": "Stand inside a 4 m+ vector-subtraction exhibit and move the arrow tips with the VR laser pointer \u2014 watch a \u2212 b appear as the arrow from b's tip to a's tip",
+			"capacity": "Stand inside a 4 m+ vector-subtraction exhibit and move the arrow tips with the VR laser pointer — watch a − b appear as the arrow from b's tip to a's tip",
 			"category": "vectors",
 			"complexity": "intermediate",
 			"description": "The walk-inside vector subtraction exhibit, sized so the tips are out of arm's reach and grabbed with the laser pointer. Point a hand's laser at a glowing endpoint (it highlights green), hold the trigger, and sweep to move it; the difference vector, -b, and the tip-to-tail construction update live.",
@@ -1763,7 +1768,7 @@
 				],
 				"size_group": "room_scale"
 			},
-			"qfep_connection": "Subtraction as displacement between tips, reached by light \u2014 the negative vector made walkable.",
+			"qfep_connection": "Subtraction as displacement between tips, reached by light — the negative vector made walkable.",
 			"size_group": "room_scale",
 			"tags": [
 				"vector_subtraction",
@@ -2415,7 +2420,7 @@
 			"category": "mathematics",
 			"class_name": "BasisVectorsRig",
 			"complexity": "intermediate",
-			"description": "Interactive basis vectors (\u00ee, \u0135, k\u0302) showing how any 3D point is a linear combination: P = x\u00ee + y\u0135 + zk\u0302.",
+			"description": "Interactive basis vectors (î, ĵ, k̂) showing how any 3D point is a linear combination: P = xî + yĵ + zk̂.",
 			"dev_category": "vector_operations",
 			"dev_themes": [
 				"vectors",
@@ -2550,7 +2555,7 @@
 			"category": "mathematics",
 			"class_name": "CoordinateSystemSwitcher",
 			"complexity": "intermediate",
-			"description": "Shows the same 3D point in Cartesian (x,y,z), Cylindrical (r,\u03b8,z), and Spherical (\u03c1,\u03b8,\u03c6) coordinates simultaneously. ImmediateMesh axes and arcs with projection lines showing how each system maps. Color-coded: Cartesian=RGB, Cylindrical=yellow, Spherical=magenta.",
+			"description": "Shows the same 3D point in Cartesian (x,y,z), Cylindrical (r,θ,z), and Spherical (ρ,θ,φ) coordinates simultaneously. ImmediateMesh axes and arcs with projection lines showing how each system maps. Color-coded: Cartesian=RGB, Cylindrical=yellow, Spherical=magenta.",
 			"dev_category": "vector_operations",
 			"dev_themes": [
 				"vectors",
@@ -2564,7 +2569,7 @@
 				"vectors"
 			],
 			"name": "Coordinate System Switcher",
-			"qfep_connection": "Multiple coordinate systems as multiple perspectives on the same reality \u2014 the point doesn't change, only the language describing it.",
+			"qfep_connection": "Multiple coordinate systems as multiple perspectives on the same reality — the point doesn't change, only the language describing it.",
 			"scene": "res://commons/artifacts/coordinate_system_switcher/coordinate_system_switcher.tscn",
 			"tags": [
 				"vectors",
@@ -2767,13 +2772,13 @@
 				"derived_at": "2026-04-29T09:39:46.292842Z",
 				"derived_from": "aabb_size + category"
 			},
-			"qfep_connection": "Three colored lines and three letters, with every grab handle deliberately hidden and the process loop switched off \u2014 the one scene in the vector rooms that refuses to move. X, Y, Z held perfectly still is the quiet trick: a chosen convention posing long enough to be mistaken for the world."
+			"qfep_connection": "Three colored lines and three letters, with every grab handle deliberately hidden and the process loop switched off — the one scene in the vector rooms that refuses to move. X, Y, Z held perfectly still is the quiet trick: a chosen convention posing long enough to be mistaken for the world."
 		},
 		"cross_product_demo": {
 			"category": "mathematics",
 			"class_name": "CrossProductDemo",
 			"complexity": "intermediate",
-			"description": "Interactive cross product: A \u00d7 B produces a vector perpendicular to both. Shows parallelogram area and right-hand rule.",
+			"description": "Interactive cross product: A × B produces a vector perpendicular to both. Shows parallelogram area and right-hand rule.",
 			"dev_category": "vector_operations",
 			"dev_themes": [
 				"vectors"
@@ -3004,12 +3009,12 @@
 				"derived_at": "2026-04-29T09:39:46.292842Z",
 				"derived_from": "aabb_size + category"
 			},
-			"qfep_connection": "Born already shattered: twelve Voronoi fragments are computed at _ready, frozen and invisible beneath one smooth mesh, and the hit only grants them permission to exist. Destruction is not calculated at impact but pre-authored \u2014 the ruin was the cube's real body all along."
+			"qfep_connection": "Born already shattered: twelve Voronoi fragments are computed at _ready, frozen and invisible beneath one smooth mesh, and the hit only grants them permission to exist. Destruction is not calculated at impact but pre-authored — the ruin was the cube's real body all along."
 		},
 		"destructibles_test_scene": {
 			"category": "unknown",
 			"complexity": "beginner",
-			"description": "impact \u2192 destroy(method). Eight destruction methods: instant, health-based, face-peel, Cantor recursion, Voronoi fracture, planar crack, prism shatter. Topology of breaking.",
+			"description": "impact → destroy(method). Eight destruction methods: instant, health-based, face-peel, Cantor recursion, Voronoi fracture, planar crack, prism shatter. Topology of breaking.",
 			"dev_themes": [
 				"linear_algebra",
 				"math",
@@ -3140,7 +3145,7 @@
 			"category": "mathematics",
 			"class_name": "DotProductProjector",
 			"complexity": "intermediate",
-			"description": "Interactive dot product visualizer showing A \u00b7 B = |A||B|cos(\u03b8). Demonstrates projection and alignment measurement.",
+			"description": "Interactive dot product visualizer showing A · B = |A||B|cos(θ). Demonstrates projection and alignment measurement.",
 			"dev_category": "vector_operations",
 			"dev_themes": [
 				"vectors"
@@ -3403,7 +3408,7 @@
 				"derived_at": "2026-04-29T09:39:46.292842Z",
 				"derived_from": "aabb_size + category"
 			},
-			"qfep_connection": "Six floats kept by hand \u2014 x, y, z and their speeds, each ledger line written separately. The ball bounces fine without vectors, which is the lesson: physics never needed the abstraction, the person writing the next nine examples did."
+			"qfep_connection": "Six floats kept by hand — x, y, z and their speeds, each ledger line written separately. The ball bounces fine without vectors, which is the lesson: physics never needed the abstraction, the person writing the next nine examples did."
 		},
 		"example_1_2_bouncing_ball_with_vectors_vr": {
 			"category": "unknown",
@@ -3514,7 +3519,7 @@
 				"derived_at": "2026-04-29T09:39:46.292842Z",
 				"derived_from": "aabb_size + category"
 			},
-			"qfep_connection": "Position and velocity collapse into two Vector3s and each wall becomes a single sign flip; the pink arrow renders velocity as a thing the ball carries with it. The vector notation buys no new physics, only new grammar \u2014 motion turned into a noun you can point at."
+			"qfep_connection": "Position and velocity collapse into two Vector3s and each wall becomes a single sign flip; the pink arrow renders velocity as a thing the ball carries with it. The vector notation buys no new physics, only new grammar — motion turned into a noun you can point at."
 		},
 		"example_1_3_vector_subtraction_vr": {
 			"category": "unknown",
@@ -3651,7 +3656,7 @@
 				"derived_at": "2026-04-29T09:39:46.292842Z",
 				"derived_from": "aabb_size + category"
 			},
-			"qfep_connection": "Three arrows from one center, A, B, and A\u2212B recomputed live from sliders: difference staged as its own object \u2014 the displacement you would have to travel to make one vector into the other."
+			"qfep_connection": "Three arrows from one center, A, B, and A−B recomputed live from sliders: difference staged as its own object — the displacement you would have to travel to make one vector into the other."
 		},
 		"example_1_4_vector_multiplication_vr": {
 			"dna": {
@@ -4089,7 +4094,7 @@
 				"derived_at": "2026-04-29T09:39:46.292842Z",
 				"derived_from": "aabb_size + category"
 			},
-			"qfep_connection": "The original arrow and its unit-length shadow drawn together while the readout collapses magnitude to 1.000 \u2014 normalization staged as what is kept (direction) by showing exactly what is thrown away."
+			"qfep_connection": "The original arrow and its unit-length shadow drawn together while the readout collapses magnitude to 1.000 — normalization staged as what is kept (direction) by showing exactly what is thrown away."
 		},
 		"example_1_7_motion_101_velocity_vr": {
 			"category": "unknown",
@@ -4486,10 +4491,10 @@
 				"derived_at": "2026-04-29T09:39:46.292842Z",
 				"derived_from": "aabb_size + category"
 			},
-			"qfep_connection": "Velocity accumulates a fresh random nudge every frame \u2014 the drunkard's walk relocated from position into acceleration, so the mover keeps its whole history while its next step stays unwritable."
+			"qfep_connection": "Velocity accumulates a fresh random nudge every frame — the drunkard's walk relocated from position into acceleration, so the mover keeps its whole history while its next step stays unwritable."
 		},
 		"exercise_1_3_solution_3_d_bouncing_ball_vr": {
-			"capacity": "WATCH a bouncing ball as a clock that runs down \u2014 each bounce measures how much the universe forgot",
+			"capacity": "WATCH a bouncing ball as a clock that runs down — each bounce measures how much the universe forgot",
 			"category": "physics",
 			"complexity": "beginner",
 			"description": "A ball trapped in a box, slowly dying. Position accumulates velocity, velocity accumulates gravity, walls reverse and damp. Each bounce lower than the last as elasticity drains energy. A trail draws the ball's parabolic history as a fading line. The simplest dynamics: one force, one constraint, and the slow settling as the universe forgets.",
@@ -4525,7 +4530,7 @@
 				],
 				"size_group": "compact"
 			},
-			"qfep_connection": "Pure F with dissipation \u2014 gravity is constant F, the wall's elasticity coefficient IS lambda. At e=1.0 energy is conserved forever. Below 1.0, each bounce leaks energy into the wall. Lambda controls how fast the system forgets its initial conditions.",
+			"qfep_connection": "Pure F with dissipation — gravity is constant F, the wall's elasticity coefficient IS lambda. At e=1.0 energy is conserved forever. Below 1.0, each bounce leaks energy into the wall. Lambda controls how fast the system forgets its initial conditions.",
 			"dna": {
 				"promoted": "2026-08-03",
 				"stage": "2 - variation",
@@ -4653,10 +4658,10 @@
 			}
 		},
 		"exercise_1_5_solution_accelerate_and_decelerate_vr": {
-			"capacity": "SEE that smooth deceleration emerges from scaling desired speed by distance \u2014 arrival is a feedback loop, not a decision",
+			"capacity": "SEE that smooth deceleration emerges from scaling desired speed by distance — arrival is a feedback loop, not a decision",
 			"category": "physics",
 			"complexity": "beginner",
-			"description": "A ball chases a moving target, steering with arrival behavior \u2014 accelerating toward the target and decelerating as it approaches. The target traces sinusoidal curves through 3D space. When far, the ball applies maximum force. When close, force scales down proportionally, producing smooth deceleration. Seek behavior with distance-based speed ramping.",
+			"description": "A ball chases a moving target, steering with arrival behavior — accelerating toward the target and decelerating as it approaches. The target traces sinusoidal curves through 3D space. When far, the ball applies maximum force. When close, force scales down proportionally, producing smooth deceleration. Seek behavior with distance-based speed ramping.",
 			"dev_themes": [
 				"linear_algebra",
 				"math",
@@ -4689,7 +4694,7 @@
 				],
 				"size_group": "compact"
 			},
-			"qfep_connection": "F-feedback \u2014 the steering force depends on the gap between current and desired velocity. Close to the target, F diminishes. This is a self-regulating system: the closer you get, the gentler the approach. Negative feedback as navigation strategy.",
+			"qfep_connection": "F-feedback — the steering force depends on the gap between current and desired velocity. Close to the target, F diminishes. This is a self-regulating system: the closer you get, the gentler the approach. Negative feedback as navigation strategy.",
 			"dna": {
 				"promoted": "2026-08-04",
 				"stage": "2 - variation",
@@ -4805,10 +4810,10 @@
 			}
 		},
 		"exercise_1_8_solution_attraction_magnitude_vr": {
-			"capacity": "FEEL that an orbit is a perpetual fall that always misses the ground \u2014 attraction creates structure from distance and direction",
+			"capacity": "FEEL that an orbit is a perpetual fall that always misses the ground — attraction creates structure from distance and direction",
 			"category": "physics",
 			"complexity": "beginner",
-			"description": "Inverse-square attraction. Closer means stronger. A ball orbits a grabbable attractor \u2014 drag it in VR and the orbit reshapes in real time. Elliptical paths emerge from the interplay of tangential velocity and radial pull. F = strength * dir / r-squared. An orbit is a perpetual fall that always misses the ground.",
+			"description": "Inverse-square attraction. Closer means stronger. A ball orbits a grabbable attractor — drag it in VR and the orbit reshapes in real time. Elliptical paths emerge from the interplay of tangential velocity and radial pull. F = strength * dir / r-squared. An orbit is a perpetual fall that always misses the ground.",
 			"dev_themes": [
 				"linear_algebra",
 				"math",
@@ -4842,7 +4847,7 @@
 				],
 				"size_group": "compact"
 			},
-			"qfep_connection": "F as geometry \u2014 inverse-square means force IS a function of distance. The orbit shape encodes the relationship between speed and attraction. Move the attractor mid-orbit and watch deterministic chaos: same law, different trajectory.",
+			"qfep_connection": "F as geometry — inverse-square means force IS a function of distance. The orbit shape encodes the relationship between speed and attraction. Move the attractor mid-orbit and watch deterministic chaos: same law, different trajectory.",
 			"scene": "res://algorithms/vectors/noc_ch01/exercise_1_8_solution_attraction_magnitude_vr.tscn",
 			"size_group": "compact",
 			"tags": [
@@ -5268,7 +5273,7 @@
 			"lookup_name": "laser_turret",
 			"map_ready": true,
 			"map_sequences": [
-				"color"
+				"tiling"
 			],
 			"name": "Laser Turret",
 			"parameters": {
@@ -5517,7 +5522,7 @@
 		"sphere_splitting_showcase": {
 			"category": "unknown",
 			"complexity": "beginner",
-			"description": "sphere \u2192 fragments(method). Five fracture algorithms: planar cut, octree division, orange-peel sectors, CSG boolean, pre-segmented mesh. One sphere, five deaths.",
+			"description": "sphere → fragments(method). Five fracture algorithms: planar cut, octree division, orange-peel sectors, CSG boolean, pre-segmented mesh. One sphere, five deaths.",
 			"dev_themes": [
 				"linear_algebra",
 				"math",
@@ -5770,13 +5775,13 @@
 				"derived_at": "2026-04-29T09:39:46.292842Z",
 				"derived_from": "aabb_size + category"
 			},
-			"qfep_connection": "F_force: the thrown ball \u2014 impulse at release, gravity thereafter; the whole chapter compressed into one arc from the hand."
+			"qfep_connection": "F_force: the thrown ball — impulse at release, gravity thereafter; the whole chapter compressed into one arc from the hand."
 		},
 		"turret_boll_infoboard": {
 			"category": "mathematics",
 			"class_name": "TurretBollInfoBoard",
 			"complexity": "beginner",
-			"description": "3m \u00d7 6m semi-transparent infoboard showing ALL vector operations in one static diagram: subtraction (direction), magnitude (range), normalization (aim), dot product (lock), projection (prediction). Visual reference for turret targeting math.",
+			"description": "3m × 6m semi-transparent infoboard showing ALL vector operations in one static diagram: subtraction (direction), magnitude (range), normalization (aim), dot product (lock), projection (prediction). Visual reference for turret targeting math.",
 			"dev_category": "vector_operations",
 			"dev_themes": [
 				"vectors",
@@ -6398,7 +6403,7 @@
 			"category": "mathematics",
 			"class_name": "VectorFieldVisualizer",
 			"complexity": "intermediate",
-			"description": "3D arrow field showing flow \u2014 vortex, source, sink, or dipole fields. An 8x8x4 grid of arrow glyphs colored by magnitude (blue=slow, red=fast). Each arrow drawn with ImmediateMesh lines for shaft and arrowhead.",
+			"description": "3D arrow field showing flow — vortex, source, sink, or dipole fields. An 8x8x4 grid of arrow glyphs colored by magnitude (blue=slow, red=fast). Each arrow drawn with ImmediateMesh lines for shaft and arrowhead.",
 			"dev_category": "vector_operations",
 			"dev_themes": [
 				"vectors",
@@ -6412,7 +6417,7 @@
 				"forces"
 			],
 			"name": "Vector Field Visualizer",
-			"qfep_connection": "Vector fields as continuous flow \u2014 every point in space carries a direction, the field as a living topology of force and movement.",
+			"qfep_connection": "Vector fields as continuous flow — every point in space carries a direction, the field as a living topology of force and movement.",
 			"scene": "res://commons/artifacts/vector_field_visualizer/vector_field_visualizer.tscn",
 			"tags": [
 				"vectors",
@@ -6536,7 +6541,7 @@
 				],
 				"size_group": "world_scale"
 			},
-			"qfep_connection": "Vectors as embodied forces \u2014 abstract math becomes physical machinery that moves, tilts, spins, and bounces at human scale",
+			"qfep_connection": "Vectors as embodied forces — abstract math becomes physical machinery that moves, tilts, spins, and bounces at human scale",
 			"scene": "res://algorithms/vectors/playground/vector_joint_playground.tscn",
 			"sequence": "vectors",
 			"signals": [],
@@ -6642,7 +6647,7 @@
 			"category": "mathematics",
 			"class_name": "VectorMagnitudeDemo",
 			"complexity": "beginner",
-			"description": "Visualizes vector magnitude (length) using Pythagorean theorem. Shows |V| = \u221a(x\u00b2 + y\u00b2 + z\u00b2).",
+			"description": "Visualizes vector magnitude (length) using Pythagorean theorem. Shows |V| = √(x² + y² + z²).",
 			"dev_category": "vector_operations",
 			"dev_themes": [
 				"vectors"
@@ -6779,151 +6784,151 @@
 			}
 		},
 		"vector_normalize_demo": {
-			"category": "mathematics",
-			"class_name": "VectorNormalizeDemo",
-			"complexity": "beginner",
-			"description": "Shows normalization: V\u0302 = V/|V|. Converts any vector to unit length while preserving direction.",
-			"dev_category": "vector_operations",
-			"dev_themes": [
-				"vectors"
-			],
-			"include_in_map_data": true,
-			"interaction": "grab",
-			"interactions": [
-				"grab"
-			],
-			"lookup_name": "vector_normalize_demo",
-			"map_ready": true,
-			"map_sequences": [
-				"forces",
-				"testmaps",
-				"transformation"
-			],
-			"name": "Vector Normalization",
-			"parameters": {
-				"footprint": [
-					2,
-					2,
-					1
-				],
-				"size_group": "compact"
-			},
-			"qfep_connection": "Pure direction - stripping magnitude to reveal only orientation",
-			"dna": {
-				"promoted": "2026-07-29",
-				"stage": "2 - variation",
-				"axes": {
-					"input_mode": [
-						"long",
-						"short",
-						"unit"
-					],
-					"reference_mode": [
-						"sphere",
-						"rings",
-						"none"
-					]
-				},
-				"default": "input_mode=long, reference_mode=sphere - the shipped V = (1.2, 0.8, 0.4) inside the translucent unit shell with its three rings, so all 8 existing placements are unchanged",
-				"was": "no exports of its own: the input vector, the unit shell and its rings were hard-coded in _ready(), and apply_grid_config() was an empty pass",
-				"framing": 0.34,
-				"framing_why": "SOLVED, NOT GUESSED, by tools/solve_framing.py. At framing 1.0 this artifact's subject bounding box filled 33.6% of frame width and 26.7% of its height, with a subject share of 4.96%. The visible frame is 2 * PAD * radius * framing metres wide, so the box grows as 1/framing; solving for a target of 78% of the smaller-headroom dimension gives 0.34. THE ARTIFACT WAS NEVER DARK, EMPTY OR MISSING A FIXTURE - the camera was between three and eight times too far away, and the near-zero subject share this token had on record was a fact about the standpoint rather than about the axis."
-			},
-			"scene": "res://commons/artifacts/vector_normalize_demo/vector_normalize_demo.tscn",
-			"sequence": "forces",
-			"tags": [
-				"vectors",
-				"normalize",
-				"unit_vector",
-				"direction",
-				"interactive"
-			],
-			"geometry_spec": {
-				"mesh_type": "instanced_particles",
-				"topology": "scattered",
-				"construction": {
-					"method": "multimesh_instancing",
-					"primitives": [
-						"sphere",
-						"cylinder"
-					],
-					"operations": [
-						"allocate_instances",
-						"set_transforms",
-						"update_per_frame"
-					]
-				},
-				"material": {
-					"type": "standard",
-					"shading_model": "wireframe",
-					"key_properties": [
-						"grid_overlay",
-						"transparency",
-						"double_sided"
-					]
-				},
-				"animation": {
-					"type": "particle_lifecycle",
-					"driven_by": "cpu_simulation",
-					"affects": [
-						"transform",
-						"color"
-					]
-				},
-				"instance_strategy": "multimesh",
-				"vertex_estimate": "~3072"
-			},
-			"spatial_needs": {
-				"platform": "none",
-				"footprint_cells": 1,
-				"clearance": {
-					"front": 2,
-					"back": 1,
-					"left": 1,
-					"right": 1
-				},
-				"player_position": "front",
-				"wall_backing": false,
-				"orientation": "face_approach",
-				"isolation": 0,
-				"cluster_with": [],
-				"preferred_zone": "entry",
-				"measured_footprint_cells": 1,
-				"footprint_source": "measured"
-			},
-			"measurements": {
-				"aabb_size": [
-					1.13,
-					1.0,
-					0.99
-				],
-				"aabb_center": [
-					0.23,
-					0.17,
-					0.16
-				],
-				"grid_cells": [
-					2,
-					1
-				],
-				"max_dimension_m": 1.13,
-				"measured_at": "2026-08-12T04:39:51.280397Z"
-			},
-			"footprint_measured": [
-				2,
-				1,
-				1
-			],
-			"spatial_profile": {
-				"dir_group": "omni",
-				"range": 2,
-				"density": "medium",
-				"min_clearance": 1,
-				"stack_priority": 0.5,
-				"approach_dir": "any",
-				"derived_at": "2026-04-29T09:39:46.292842Z",
-				"derived_from": "aabb_size + category"
-			}
+		  "category": "mathematics",
+		  "class_name": "VectorNormalizeDemo",
+		  "complexity": "beginner",
+		  "description": "Compare a vector with its normalized direction. The implemented threshold uses the measured magnitude: greater than 0.001 returns a unit vector; at or below it returns zero. Direction is preserved when normalization is admitted, while magnitude is discarded.",
+		  "dev_category": "vector_operations",
+		  "dev_themes": [
+		    "vectors"
+		  ],
+		  "include_in_map_data": true,
+		  "interaction": "grab",
+		  "interactions": [
+		    "grab"
+		  ],
+		  "lookup_name": "vector_normalize_demo",
+		  "map_ready": true,
+		  "map_sequences": [
+		    "forces",
+		    "testmaps",
+		    "transformation"
+		  ],
+		  "name": "Vector Normalization",
+		  "parameters": {
+		    "footprint": [
+		      2,
+		      2,
+		      1
+		    ],
+		    "size_group": "compact"
+		  },
+		  "qfep_connection": "An example of chosen reduction: magnitude is discarded, and the numerical threshold decides which measured vectors retain a direction. This association is not a computed QFEP quantity.",
+		  "dna": {
+		    "promoted": "2026-07-29",
+		    "stage": "2 - variation",
+		    "axes": {
+		      "input_mode": [
+		        "long",
+		        "short",
+		        "unit"
+		      ],
+		      "reference_mode": [
+		        "sphere",
+		        "rings",
+		        "none"
+		      ]
+		    },
+		    "default": "input_mode=long, reference_mode=sphere - the shipped V = (1.2, 0.8, 0.4) inside the translucent unit shell with its three rings, so all 8 existing placements are unchanged",
+		    "was": "no exports of its own: the input vector, the unit shell and its rings were hard-coded in _ready(), and apply_grid_config() was an empty pass",
+		    "framing": 0.34,
+		    "framing_why": "SOLVED, NOT GUESSED, by tools/solve_framing.py. At framing 1.0 this artifact's subject bounding box filled 33.6% of frame width and 26.7% of its height, with a subject share of 4.96%. The visible frame is 2 * PAD * radius * framing metres wide, so the box grows as 1/framing; solving for a target of 78% of the smaller-headroom dimension gives 0.34. THE ARTIFACT WAS NEVER DARK, EMPTY OR MISSING A FIXTURE - the camera was between three and eight times too far away, and the near-zero subject share this token had on record was a fact about the standpoint rather than about the axis."
+		  },
+		  "scene": "res://commons/artifacts/vector_normalize_demo/vector_normalize_demo.tscn",
+		  "sequence": "forces",
+		  "tags": [
+		    "vectors",
+		    "normalize",
+		    "unit_vector",
+		    "direction",
+		    "interactive"
+		  ],
+		  "geometry_spec": {
+		    "mesh_type": "instanced_particles",
+		    "topology": "scattered",
+		    "construction": {
+		      "method": "multimesh_instancing",
+		      "primitives": [
+		        "sphere",
+		        "cylinder"
+		      ],
+		      "operations": [
+		        "allocate_instances",
+		        "set_transforms",
+		        "update_per_frame"
+		      ]
+		    },
+		    "material": {
+		      "type": "standard",
+		      "shading_model": "wireframe",
+		      "key_properties": [
+		        "grid_overlay",
+		        "transparency",
+		        "double_sided"
+		      ]
+		    },
+		    "animation": {
+		      "type": "particle_lifecycle",
+		      "driven_by": "cpu_simulation",
+		      "affects": [
+		        "transform",
+		        "color"
+		      ]
+		    },
+		    "instance_strategy": "multimesh",
+		    "vertex_estimate": "~3072"
+		  },
+		  "spatial_needs": {
+		    "platform": "none",
+		    "footprint_cells": 1,
+		    "clearance": {
+		      "front": 2,
+		      "back": 1,
+		      "left": 1,
+		      "right": 1
+		    },
+		    "player_position": "front",
+		    "wall_backing": false,
+		    "orientation": "face_approach",
+		    "isolation": 0,
+		    "cluster_with": [],
+		    "preferred_zone": "entry",
+		    "measured_footprint_cells": 1,
+		    "footprint_source": "measured"
+		  },
+		  "measurements": {
+		    "aabb_size": [
+		      1.13,
+		      1.0,
+		      0.99
+		    ],
+		    "aabb_center": [
+		      0.23,
+		      0.17,
+		      0.16
+		    ],
+		    "grid_cells": [
+		      2,
+		      1
+		    ],
+		    "max_dimension_m": 1.13,
+		    "measured_at": "2026-08-12T04:39:51.280397Z"
+		  },
+		  "footprint_measured": [
+		    2,
+		    1,
+		    1
+		  ],
+		  "spatial_profile": {
+		    "dir_group": "omni",
+		    "range": 2,
+		    "density": "medium",
+		    "min_clearance": 1,
+		    "stack_priority": 0.5,
+		    "approach_dir": "any",
+		    "derived_at": "2026-04-29T09:39:46.292842Z",
+		    "derived_from": "aabb_size + category"
+		  }
 		},
 		"vector_projection_demo": {
 			"category": "mathematics",
@@ -7528,7 +7533,7 @@
 				"derived_at": "2026-04-29T09:39:46.292842Z",
 				"derived_from": "aabb_size + category"
 			},
-			"qfep_connection": "A grab-sphere frozen at (1,1,1) with its three axis-colored components computed once \u2014 then set_process(false): decomposition presented as a fact, not a becoming. The point is locked precisely so the lines can't lie; a coordinate breakdown is only trustworthy against a position forbidden to move."
+			"qfep_connection": "A grab-sphere frozen at (1,1,1) with its three axis-colored components computed once — then set_process(false): decomposition presented as a fact, not a becoming. The point is locked precisely so the lines can't lie; a coordinate breakdown is only trustworthy against a position forbidden to move."
 		}
 	},
 	"registry_info": {

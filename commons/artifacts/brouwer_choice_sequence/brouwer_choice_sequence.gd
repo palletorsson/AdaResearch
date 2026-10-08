@@ -7,12 +7,20 @@ class_name BrouwerChoiceSequence
 # @identity
 # essence: a₁, a₂, a₃, ... , ?, ? — each term chosen freely, never completed
 # desire: feel the openness of an infinite sequence that is always unfinished
-# critical_parameter: time — the sequence unfolds perpetually, dots gently bobbing
-# triggers: each dot fades in opacity toward the future; the question mark asserts genuine openness
+# critical_parameter: visitor_choices opts into an explicitly chosen finite binary prefix; horizon preserves the earlier visual studies.
+# triggers: CHOOSE 0 / CHOOSE 1 append one term, RESET empties the prefix. No timer chooses a term.
 # emerges: the intuition that infinity is a process, not a completed object
-# needs: VR controls [missing] — could add ability to "choose" the next term
+# needs: reachable physical buttons [present when visitor_choices is on]
 # relationships: depends on excluded_middle_demo (LEM rejection enables choice sequences); contrasts constructive_proof (witness vs process)
-# truth: an infinite object that is never finished is not incomplete — it is the only honest way to talk about infinity
+# truth: this finite instrument records choices, not a completed infinity or proof of mathematical lawlessness. The legacy dots are a fixed illustration; time only animates their positions.
+
+@export var visitor_choices: bool = false
+signal term_chosen(index: int, value: int)
+var terms: Array[int] = []
+var _choice_view: Node3D
+var _choice_status: Label3D
+const MAX_TERMS := 256
+const VISIBLE_TERMS := 10
 
 # ═══════════════════════════════════════════════════════════════════
 # STAGE-2 DNA — axis `horizon`
@@ -93,6 +101,9 @@ func _ready() -> void:
 # ═══════════════════════════════════════════════════════════════════
 
 func _build_all() -> void:
+	if visitor_choices:
+		_build_choice_bench()
+		return
 	_create_sequence()
 	_create_label()
 
@@ -276,6 +287,7 @@ func _attach(n: Node) -> void:
 	_built_nodes.append(n)
 
 func _process(delta):
+	if visitor_choices: return
 	_time += delta
 	var n: int = mini(_dots.size(), _dot_base_y.size())
 	for i in range(n):
@@ -286,12 +298,15 @@ func _process(delta):
 # --- Grid Integration ---
 func apply_grid_config(config_data: Dictionary) -> void:
 	var before_horizon: String = horizon
+	var before_choices := visitor_choices
+	if config_data.has("visitor_choices"):
+		visitor_choices = str(config_data.visitor_choices).to_lower() in ["on","true","1"]
 	if config_data.has("horizon"):
 		horizon = _pick_axis(str(config_data["horizon"]), HORIZONS, horizon)
 
 	if not _built:
 		return
-	if horizon == before_horizon:
+	if horizon == before_horizon and visitor_choices == before_choices:
 		# curation_station's {"emissive": false} lands here. Touch nothing: a
 		# rebuild would free the labels it framed one line earlier.
 		return
@@ -318,3 +333,82 @@ func _rebuild_now() -> void:
 	_dot_base_y.clear()
 	_label = null
 	_build_all()
+
+
+func _build_choice_bench() -> void:
+	var bench = preload("res://commons/ui/interface_presets.gd").build("workbench", "THE NEXT TERM", 0.94)
+	bench.position = Vector3(0,0.94,0.25)
+	_attach(bench)
+	_choice_view = Node3D.new()
+	_choice_view.name = "ChosenPrefix"
+	_attach(_choice_view)
+	_choice_status = Label3D.new()
+	_choice_status.name = "ChoiceStatus"
+	_choice_status.position = Vector3(0,1.54,-0.08)
+	_choice_status.font_size = 24
+	_choice_status.pixel_size = 0.001
+	_attach(_choice_status)
+	var actions: Array[Callable] = [choose.bind(0),choose.bind(1),reset_choices]
+	for i in 3:
+		var button := preload("res://commons/interactables/push_button.tscn").instantiate()
+		button.name = ["Choose0","Choose1","ResetChoices"][i]
+		button.position = Vector3((i-1)*0.28,1.0,0.54)
+		_attach(button)
+		button.pressed.connect(actions[i])
+		var caption := Label3D.new()
+		caption.text = ["CHOOSE 0","CHOOSE 1","RESET"][i]
+		caption.position = button.position+Vector3(0,0.09,0)
+		caption.font_size = 20
+		caption.pixel_size = 0.001
+		_attach(caption)
+	_refresh_choices()
+
+func choose(value: int) -> bool:
+	if not visitor_choices or value not in [0,1] or terms.size() >= MAX_TERMS:
+		return false
+	terms.append(value)
+	_refresh_choices()
+	term_chosen.emit(terms.size()-1,value)
+	return true
+
+func reset_choices() -> void:
+	terms.clear()
+	if visitor_choices and is_instance_valid(_choice_view): _refresh_choices()
+
+func _refresh_choices() -> void:
+	if not is_instance_valid(_choice_view): return
+	for child in _choice_view.get_children():
+		_choice_view.remove_child(child)
+		child.queue_free()
+	var start := maxi(0,terms.size()-VISIBLE_TERMS)
+	for i in range(start,terms.size()):
+		var dot := MeshInstance3D.new()
+		dot.name = "Term_%d" % i
+		var sphere := SphereMesh.new()
+		sphere.radius = 0.045
+		sphere.height = 0.09
+		dot.mesh = sphere
+		dot.position = Vector3(-0.65+float(i-start)*0.13,1.27,-0.10)
+		var mat := StandardMaterial3D.new()
+		mat.albedo_color = Color(0.24,0.62,0.96) if terms[i]==0 else Color(1.0,0.69,0.28)
+		dot.material_override = mat
+		_choice_view.add_child(dot)
+		var digit := Label3D.new()
+		digit.text = str(terms[i])
+		digit.position = dot.position+Vector3(0,0.10,0)
+		digit.font_size = 30
+		digit.pixel_size = 0.001
+		_choice_view.add_child(digit)
+	var next := Label3D.new()
+	next.name = "Unchosen"
+	next.text = "?" if terms.size()<MAX_TERMS else "|"
+	next.position = Vector3(-0.65+float(terms.size()-start)*0.13,1.27,-0.10)
+	next.font_size = 34
+	next.pixel_size = 0.001
+	_choice_view.add_child(next)
+	if terms.size()>=MAX_TERMS:
+		_choice_status.text = "256 stored — this instrument is full\nRESET starts a new finite prefix"
+	elif terms.is_empty():
+		_choice_status.text = "No terms chosen\nWhat will you put here?"
+	else:
+		_choice_status.text = "%d terms chosen | showing %d–%d\nThe next term waits for you" % [terms.size(),start+1,terms.size()]

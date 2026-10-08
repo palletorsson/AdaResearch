@@ -2,14 +2,13 @@ extends "res://commons/artifacts/_embodied/embodied_prop.gd"
 class_name SevenWordsChoir
 
 ## @identity
-## lineage: the primitives taxonomy's "seven words" rung — the engine's entire
-##   primitive vocabulary on choir risers: Plane, Box, Sphere, Cylinder, Capsule,
+## lineage: the primitives taxonomy's "seven words" rung — seven familiar
+##   primitive forms on choir risers: Plane, Box, Sphere, Cylinder, Capsule,
 ##   Prism, Torus, each in its own robe, each with its name on a plate, arranged
 ##   like a choir mid-hymn. Every body in this world is sentences made of these.
-## essence: PrimitiveMesh has exactly these words. Everything the corpus has ever
-##   shown — the fountains, the mobiles, the mirrors — is composition, never new
-##   vocabulary: cylinders wearing arm duties, spheres hired as points, boxes as
-##   crates and chairs and museums. Meet the whole alphabet at once, undisguised.
+## essence: a selected vocabulary, not the complete PrimitiveMesh class family.
+##   Cylinders can become arms, spheres can represent points, boxes can become
+##   crates and rooms. The adjacent library makes further engine forms visible.
 ## truth: seven words, infinite sentences.
 ##
 ## The 2026-08-27 primitives taxonomy refinement (doc/PRIMITIVES_TAXONOMY.md).
@@ -50,7 +49,7 @@ func _build_risers() -> void:
 		add_child(riser)
 
 func _build_choir() -> void:
-	# the whole vocabulary, front row four, back row three — robes from one warm choir
+	# seven selected forms, front row four, back row three — one warm choir
 	# palette so the SHAPES carry all the difference
 	var words: Array = []
 	var plane := PlaneMesh.new()
@@ -111,4 +110,4 @@ func _build_plaque() -> void:
 	add_child(ts)
 	if ts.has_method("set_text"):
 		ts.set_text("SEVEN WORDS CHOIR",
-			"PrimitiveMesh has exactly these words: Plane, Box, Sphere, Cylinder,\nCapsule, Prism, Torus. Everything in this world - fountains, mobiles,\nmirrors - is composition, never new vocabulary. Seven words, infinite sentences.")
+			"Seven familiar forms: Plane, Box, Sphere, Cylinder, Capsule, Prism, Torus.\nThis choir is a selection; the engine offers other mesh types too.\nThe same form can serve another purpose. What would you make with it?")

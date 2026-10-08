@@ -2,23 +2,14 @@ extends Node3D
 class_name ShannonWorkbench
 
 # @identity
-# essence: an interactive Shannon-bound workbench — the player turns a slider for p and watches the binary entropy hill H(p) light up at their position, sees the 16×16 sample grid regenerate, and reads the compression bound that those bits cannot fall below. At p=0.5, the slider sits at the peak of the hill, the sample grid looks like salt-and-pepper, and the readout says "incompressible: 256/256 bits"
-# desire: learner viscerally locates the lambda_edge between F (order) and E (entropy) — the slope of H(p) is the rate at which structure becomes possible, and the peak is where it's maximally absent
-# critical_parameter: p — the operating knob, drives the sample distribution, the entropy readout, and the dot position on the hill; evidence — how many draws the bench is standing on when you find it (none | anecdote | sample | census), which decides whether the grid is an anecdote you can count or a texture you cannot
-# triggers: _ready() builds slider + grid + readout panel + hill curve + marker; _on_slider_changed regenerates the sample grid (with fixed seed), recomputes H(p), updates the readout, slides the marker dot
-# emerges: the binary entropy formula made into a physical landscape — the player walks the hill with their hand
-# needs: slider_horizontal [present]; ImmediateMesh for the curve [present]; BakedText boards for the readouts [present]; shannon_entropy_meter as conceptual sibling [present]
-# relationships: complements shannon_entropy_meter (this is the source side, that's the measurement side); sits with halting_bench and cantor_diagonal as a limits-of-X instrument; embodies the lambda_edge phase color from the timeline
-# truth: between pure order and pure noise lies a mathematical landscape with a floor Shannon named. The floor is H(p) bits/symbol; you can approach it asymptotically but never beat it. The slider lets you walk along the floor.
-
-## A horizontal workbench for the binary entropy function.
-##
-## One slider drives p ∈ [0, 1]. As you move it:
-##   • a 16×16 Bernoulli(p) sample grid regenerates (same seed, only the threshold shifts)
-##   • the binary entropy H(p) = -p·log₂(p) - (1-p)·log₂(1-p) is recomputed
-##   • a red marker dot rides along the curve y = H(p), at the player's current p
-##
-## The curve floats above the table — a literal landscape the slider explores.
+# essence: A fixed-seed Bernoulli sample and binary source entropy H(p).
+# desire: Distinguish source uncertainty from errors made by a particular predictor.
+# critical_parameter: p changes the source; EXPECT 0/1 changes only the optional predictor.
+# triggers: Threshold the same stored draws; compute H from p and count mismatches in the sample.
+# emerges: Equal source entropy can coexist with opposite predictor performance.
+# needs: Headset reach/readability and learner checks; no variational free-energy calculation.
+# relationships: Returns to the introduction's equal totals; prepares the E hall's explicit alternatives.
+# truth: H(p) is a source quantity, not the exact shortest encoding of a particular finite grid.
 
 # ── Configuration ─────────────────────────────────────────────────────
 
@@ -31,53 +22,11 @@ class_name ShannonWorkbench
 @export var plate_scale: float = 2.0
 
 # ─────────────────────────────────────────────────────────────────────────────
-# STAGE-2 DNA PROMOTION (2026-07-27), shared with galton_board.
-#
-# This bench draws 256 Bernoulli(p) bits and prints a bound those bits cannot
-# fall below. It has always drawn exactly 256, and it has never said so — the
-# claim "incompressible: 256/256 bits" is stated in the same flat voice whether
-# it rests on sixteen draws or a thousand. That is the machine's blind spot, and
-# it is the same blind spot the galton board has from the other side: a still of
-# the galton board shows an empty apparatus, and a still of this one shows a
-# sample whose size is not part of the argument.
-#
-# So both machines take the same axis, with the same four words in the same
-# order — how many independent trials the instrument is standing on:
-#
-#   evidence   none · anecdote · sample · census
-#
-#   none      the apparatus with no measurement taken. Every cell goes NEUTRAL
-#             GREY — not the zero-colour, because an unmeasured cell is not a
-#             cell that measured zero, and collapsing those two is the exact
-#             mistake this axis exists to name. The hill, the marker and H(p)
-#             stay: perfect theory standing over an empty field.
-#   anecdote  a 4×4 grid. Sixteen draws, each cell 150 mm across — you can count
-#             the whole sample by eye and the lit fraction will not be p.
-#   sample    16×16 = 256 draws, 37.5 mm cells. THE LEGACY DEFAULT, unchanged.
-#   census    32×32 = 1024 draws, 19 mm cells. The speckle stops resolving into
-#             countable squares and becomes the texture the readout describes.
-#
-# The two machines default to DIFFERENT rungs and that is the finding, not an
-# inconsistency: this bench always shows you a sample, the galton board shows
-# you nothing until someone presses DROP. `sample` here is 256 bits; `sample`
-# there is twelve beads, which is 96 binary choices — the same order of
-# evidence, reached by different machinery.
-#
-# The panel does NOT change size across the rungs: grid_width, the monitor it
-# mounts on and the hill screen stacked above it are all untouched, so the
-# artifact's silhouette, footprint and reach band are identical at every value.
-# Only the sample changes. `evidence` now owns grid_side (the "sample" entry is
-# 16, byte-identical to the export default it replaces, and neither the .tscn
-# nor any of the 5 placements sets grid_side).
-#
-# Nothing computed moves. H(p) is the same formula, the draws come from the same
-# seeded generator in the same order — census simply reads further down the
-# sequence, anecdote stops after sixteen.
-#
-# Deliberately NOT promoted: p itself. It is the operating knob, it is already
-# readable from a map through apply_grid_config("initial_p"), and moving it
-# changes what the machine asserts rather than how much it has looked.
-# ─────────────────────────────────────────────────────────────────────────────
+# The evidence axis changes sample size without changing the source formula:
+# none (no observation), anecdote (4x4), sample (16x16), census (32x32).
+# "census" is a legacy preset name; even 1024 draws remain a finite sample.
+# Fixed stored draws are re-thresholded as p changes. Unsampled grey differs
+# from observed zero. All presets use the same physical monitor size.
 
 @export_group("Evidence")
 ## AXIS — how many independent draws this bench is standing on when you find it.
@@ -133,6 +82,16 @@ const EVIDENCE_DRAWS := {
 ## as p changes — making the visual progression read as one sequence reshaped.
 @export var draw_seed: int = 1234
 
+## Compare constant predictors against this same displayed sample. Default off.
+@export var prediction_study: bool = false
+var _prediction: int = 0
+var _prediction_buttons: Array = []
+var _error_marks: Array[MeshInstance3D] = []
+var _prediction_monitor: Node3D
+var _prediction_text: Node3D
+var _prediction_lines: Array = []
+var _observed_errors: int = 0
+
 # ── Internal state ────────────────────────────────────────────────────
 
 const SLIDER_SCENE_PATH: String = "res://commons/interactables/slider_horizontal.tscn"
@@ -177,6 +136,7 @@ func _ready() -> void:
 	_build_bit_grid()
 	_build_entropy_hill()
 	_build_axis_labels()
+	_build_prediction_controls()
 	_refresh_all()
 
 
@@ -202,7 +162,7 @@ func _build_plate_and_slider() -> void:
 	# CONFIG (InterfacePresets) — one source of truth for desktop form / body /
 	# viz floor. Houses the Braun plate with the seated P(1) slider AND the live
 	# readout as a 2D-in-3D screen on the board.
-	_plate_root = InterfacePresets.build("workbench", "Shannon Entropy", plate_height)
+	_plate_root = InterfacePresets.build("workbench", "Shannon Entropy", plate_height, "braun", "instrument")
 	_plate_root.position = Vector3(0.0, plate_height, plate_offset_z)
 	add_child(_plate_root)
 
@@ -287,6 +247,19 @@ func _populate_bit_grid() -> void:
 
 			_grid_root.add_child(cell)
 			_grid_materials.append(mat)
+			if prediction_study:
+				var mark := MeshInstance3D.new()
+				mark.name = "Error_%d_%d" % [r, c]
+				var bar := QuadMesh.new()
+				bar.size = Vector2(cell_visible, cell_size * 0.13)
+				mark.mesh = bar
+				var amber := StandardMaterial3D.new()
+				amber.albedo_color = Color(1.0, 0.55, 0.12)
+				amber.shading_mode = BaseMaterial3D.SHADING_MODE_UNSHADED
+				mark.material_override = amber
+				mark.position = Vector3(x, y - cell_size * 0.36, 0.004)
+				_grid_root.add_child(mark)
+				_error_marks.append(mark)
 
 
 func _refresh_bit_grid() -> void:
@@ -323,21 +296,10 @@ func _refresh_readout() -> void:
 		return
 	var h: float = _binary_entropy(_p)
 	if not _sample_drawn():
-		# The bound is a fact about p, not about a sample — so H still prints.
-		# What cannot be printed is a bit count, because no bits were drawn, and
-		# printing "min 128/256" over an unmeasured field would be the machine
-		# claiming evidence it does not have.
-		_plate_readout.text = "H = %.3f bits/sym\nno sample drawn" % h
+		_plate_readout.text = "Source H = %.3f bits/symbol\nno sample drawn" % h
 		return
 	var total_bits: int = grid_side * grid_side
-	var min_bits: float = h * float(total_bits)
-	var ratio: float = 1.0 - h  # fraction compressible
-	var line2: String
-	if h >= 0.999:
-		line2 = "min %d/%d · incompressible" % [total_bits, total_bits]
-	else:
-		line2 = "min %.0f/%d · %.0f%% compress" % [min_bits, total_bits, ratio * 100.0]
-	_plate_readout.text = "H = %.3f bits/sym\n%s" % [h, line2]
+	_plate_readout.text = "Source H = %.3f bits/symbol\nN = %d draws (not encoded size)" % [h, total_bits]
 
 
 static func _binary_entropy(p: float) -> float:
@@ -531,6 +493,69 @@ func _refresh_all() -> void:
 	_refresh_bit_grid()
 	_refresh_readout()
 	_refresh_marker()
+	_refresh_prediction()
+
+
+func _build_prediction_controls() -> void:
+	if _prediction_buttons.is_empty() and prediction_study:
+		for bit in range(2):
+			var button: Node3D = _plate_root.add_button("EXPECT %d" % bit)
+			button.pressed.connect(_set_prediction.bind(bit))
+			_prediction_buttons.append(button)
+		_prediction_monitor = _plate_root.add_monitor(Vector2(0.84, 0.60), Vector3(0.87, 0.05, 0))
+		_prediction_monitor.name = "PredictionReadout"
+		_plate_root.refit_housing()
+	for button in _prediction_buttons:
+		button.visible = prediction_study
+	if _prediction_monitor != null:
+		_prediction_monitor.get_parent().visible = prediction_study
+
+
+func _set_prediction(bit: int) -> void:
+	_prediction = clampi(bit, 0, 1)
+	_refresh_prediction()
+
+
+## Expected error comes from the chosen source. Observed error counts THIS sample.
+## No draws or source settings are changed when a prediction button is pressed.
+func prediction_reading() -> Dictionary:
+	var n := _draws.size() if _sample_drawn() else 0
+	var errors := 0
+	for i in range(n):
+		if int(_draws[i] < _p) != _prediction:
+			errors += 1
+	return {"p":_p, "prediction":_prediction, "source_h":_binary_entropy(_p),
+		"expected_error":_p if _prediction == 0 else 1.0-_p,
+		"observed_errors":errors, "sample_count":n}
+
+
+func _refresh_prediction() -> void:
+	for bit in _prediction_buttons.size():
+		_prediction_buttons[bit].set_selected(prediction_study and bit == _prediction)
+	if not prediction_study:
+		for mark in _error_marks: mark.hide()
+		return
+	var reading := prediction_reading()
+	_observed_errors = int(reading.observed_errors)
+	for i in range(_error_marks.size()):
+		_error_marks[i].visible = _sample_drawn() and int(_draws[i] < _p) != _prediction
+	_prediction_lines = ["EXPECT %d" % _prediction, "Source p(1) = %.2f" % _p,
+		"Source H = %.3f bits/symbol" % reading.source_h,
+		"Expected errors: %.1f%%" % (100.0*float(reading.expected_error))]
+	if int(reading.sample_count) > 0:
+		_prediction_lines.append("Observed: %d / %d (%.1f%%)" % [_observed_errors, reading.sample_count, 100.0*_observed_errors/float(reading.sample_count)])
+	else:
+		_prediction_lines.append("Observed: no sample drawn")
+	_prediction_lines.append("Amber underlines mark misses")
+	_prediction_lines.append("Change the guess; keep the grid")
+	if _prediction_monitor == null: return
+	if is_instance_valid(_prediction_text):
+		_prediction_monitor.remove_child(_prediction_text)
+		_prediction_text.queue_free()
+	_prediction_text = BakedText.make_text_block(_prediction_lines, Color(0.95,0.95,0.91), 0.033, 0.77, 0.014, true)
+	if _prediction_text != null:
+		_prediction_text.position.z = 0.006
+		_prediction_monitor.add_child(_prediction_text)
 
 
 # ── DNA: evidence ─────────────────────────────────────────────────────
@@ -548,6 +573,8 @@ static func _axis_value(raw: String, allowed, fallback: String) -> String:
 
 
 func _read_meta_overrides() -> void:
+	if has_meta("config_prediction_study"):
+		prediction_study = str(get_meta("config_prediction_study")).to_lower() in ["on", "true", "1"]
 	if has_meta("config_evidence"):
 		evidence = _axis_value(str(get_meta("config_evidence")),
 				EVIDENCE_DRAWS.keys(), evidence)
@@ -580,6 +607,7 @@ func _rebuild_sample() -> void:
 			_grid_root.remove_child(child)
 			child.queue_free()
 		_grid_materials.clear()
+		_error_marks.clear()
 		_populate_bit_grid()
 	_refresh_all()
 
@@ -587,6 +615,13 @@ func _rebuild_sample() -> void:
 # ── Grid system integration ───────────────────────────────────────────
 
 func apply_grid_config(config_data: Dictionary) -> void:
+	if config_data.has("prediction_study"):
+		var enabled := str(config_data["prediction_study"]).to_lower() in ["on", "true", "1"]
+		if enabled != prediction_study:
+			prediction_study = enabled
+			if _plate_root != null:
+				_build_prediction_controls()
+				_rebuild_sample()
 	# The late path for `evidence`: in the real grid flow the metadata is set
 	# before add_child, so _ready() has already sized the grid and this deferred
 	# call finds nothing changed. It matters for a caller holding the scene by
@@ -599,7 +634,7 @@ func apply_grid_config(config_data: Dictionary) -> void:
 	if config_data.has("draw_seed"):
 		draw_seed = int(config_data["draw_seed"])
 		_initialize_draws()
-		_refresh_bit_grid()
+		_refresh_all()
 	if config_data.has("plate_scale"):
 		plate_scale = float(config_data["plate_scale"])
 		if _plate_root:

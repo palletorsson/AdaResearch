@@ -91,6 +91,8 @@ const InterfacePresets = preload("res://commons/ui/interface_presets.gd")
 # We use a slightly larger margin so the subplot has headroom.
 const DERIVATIVE_MAX_ABS: float = 1.6
 
+var comparison: Node3D
+
 var _x: float = 1.0  # current sample position
 
 var _plate_root: Node3D
@@ -147,6 +149,10 @@ func _ready() -> void:
 	_build_derivative_subplot()
 	_build_sign_indicator()
 	_build_axis_labels()
+	if str(get_meta("config_comparison", false)).to_lower() in ["true", "1"]:
+		comparison = preload("res://commons/artifacts/tangent_slope_workbench/rate_comparison.gd").new()
+		comparison.name = "RateComparison"
+		add_child(comparison)
 	_refresh_all()
 
 
@@ -589,7 +595,7 @@ func _refresh_readout() -> void:
 static func _slope_word(d: float) -> String:
 	# Threshold for "horizontal" — anything within ~0.05 reads visually flat.
 	if absf(d) < 0.05:
-		return "horizontal"
+		return "near zero (|slope| < 0.05)"
 	if d > 0.0:
 		return "rising"
 	return "falling"
@@ -688,7 +694,7 @@ func _refresh_sign_indicator() -> void:
 
 	# Update caption to mirror the state.
 	if absf(d) < 0.05:
-		_sign_label.text = "horizontal  ·  extremum"
+		_sign_label.text = "near zero\n|f'| < 0.05"
 	elif d > 0.0:
 		_sign_label.text = "rising  ·  f' > 0"
 	else:
@@ -739,6 +745,7 @@ func _refresh_all() -> void:
 	_refresh_derivative_marker()
 	_refresh_readout()
 	_refresh_sign_indicator()
+	if comparison: comparison.refresh()
 
 
 # ── Grid system integration ───────────────────────────────────────────

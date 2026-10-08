@@ -11,7 +11,7 @@ const BakedText = preload("res://commons/utils/baked_text_albedo.gd")
 # emerges: the arm always jams and always retracts, and the verdict is always the same gold sentence — so incompleteness reads not as a bug the machine will fix next cycle but as the honest, permanent limit of the wall the whole book has been building.
 # needs: the panel + G sentence [present]; the self-reference loop + arrowhead biting back into G [present]; the prover arm + PROVE clamp [present]; the jam spark [present]; the gold verdict [present].
 # relationships: the keystone of foundationscrisis — the crack in every formal wall. Its TWIN limit, the halting problem (Turing — no machine decides whether an arbitrary program stops), is a SEPARATE artifact; this machine focuses purely on GODEL (a true sentence no proof reaches), leaving the un-decidable-run limit to that sibling. Kin to any fixed-point / self-reference artifact (the diagonal lemma is the same trick as Cantor's diagonal and the liar paradox made rigorous).
-# truth: if G were provable it would be false (it asserts its own unprovability); a sound system proves no falsehoods, so G is not provable — and therefore G is true. True, and out of reach of proof. Every system strong enough to count is either unsound or incomplete; this machine chooses to stay honest, and so stays incomplete.
+# truth: for an effectively axiomatized theory with sufficient arithmetic, sound in the intended natural numbers, the constructed G is true there but unprovable in that theory. This timed sculpture illustrates the argument; its animation is not proof search.
 
 # NOTE: `emissive` is declared by the parent (embodied_prop.gd) — do not redeclare.
 @export var cool_white: Color = Color(0.90, 0.93, 1.0)
@@ -264,6 +264,7 @@ func _build() -> void:
 			# honest — the shipped gold plate, eased in over the conclude window.
 			_build_verdict_plate("TRUE — BUT UNPROVABLE", true_gold, Color(0.10, 0.08, 0.03))
 
+	_add_tag("ILLUSTRATION - NOT PROOF SEARCH", Vector3(0.0, 1.40, 0.0), 0.036, cool_white)
 	# --- title ---
 	_add_tag("GODEL SENTENCE MACHINE", Vector3(0.0, 1.5, 0.0), 0.088, cool_white)
 

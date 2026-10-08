@@ -12,6 +12,7 @@ var show_u:bool=false
 var coating:bool=true
 var injections:int=0
 var exchange_revealed:bool=false
+var walk_seed:bool=false
 var console:Node3D
 var reading:Label3D
 var left_title:Label3D
@@ -24,6 +25,19 @@ var last_batch_usec:int=0
 func _ready() -> void:
 	right.exchange=false
 	_build_space();_build_console();reset()
+	_sync_seed_crossing()
+
+func configure_walk_seed(enabled:bool) -> void:
+	walk_seed=enabled
+	if is_node_ready():_sync_seed_crossing()
+
+func _sync_seed_crossing() -> void:
+	var existing:Node=get_node_or_null("WalkSeed")
+	if walk_seed and existing==null:
+		var crossing:Node3D=load("res://commons/artifacts/rd_artifact/walk_seed.gd").new()
+		crossing.name="WalkSeed";add_child(crossing)
+	elif not walk_seed and existing!=null:
+		remove_child(existing);existing.queue_free()
 
 func reset() -> void:
 	left.reset();right.reset();running=false;target=0;elapsed=0;injections=0;_paint()

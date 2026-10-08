@@ -1,12 +1,8 @@
 # @identity
-# essence: 3 bars, 3 right angles, each corner coherent, the whole impossible -- visual Goedel in 3D
-# desire: a triangle that looks correct from one viewpoint but is geometrically impossible in 3-space
-# critical_parameter: disclosure -- how much the object confesses; _is_at_sweet_spot -- whether the viewer stands where illusion coheres
-# triggers: player position relative to sweet spot; indicator shows when the impossible view aligns
-# emerges: local validity does not guarantee global consistency -- the triangle knows what formal systems learned
-# needs: bar meshes [has]; sweet spot detection [has]; info label [has]; VR viewpoint tracking [missing]
-# relationships: paired with escher_staircase (impossible objects family); feeds Dark_Room_Paradox
-# truth: each corner is valid, the object is not -- incompleteness you can hold in your hands.
+# essence: three-beam perspective study; separated top endpoints project together from the marked eye position.
+# desire: compare a connection in the image with a connection in space by moving the viewer.
+# critical_parameter: disclosure controls the gap; track_viewer opts into active Camera3D alignment feedback.
+# truth: endpoint projection can coincide without a shared spatial endpoint. These equilateral beams are not a reconstruction of the classic three-right-angle Penrose tribar and do not demonstrate Godel's theorem.
 
 # penrose_triangle.gd
 # The impossible triangle - locally coherent, globally impossible
@@ -24,6 +20,7 @@ signal illusion_revealed
 @export var auto_rotate: bool = false
 @export var rotation_speed: float = 0.2
 @export var show_sweet_spot: bool = true
+@export var track_viewer: bool = false
 
 ## DNA axis — how much the object gives away about its own contradiction.
 ## Not a styling knob: it is the ladder a formal system can climb when it meets
@@ -80,7 +77,10 @@ func _create_impossible_triangle():
 	# `sealed` sets it to zero: the beams meet, the object becomes possible, and
 	# the whole argument quietly evaporates. Every other value keeps the gap.
 	var z_gap: float = 0.0 if disclosure == "sealed" else size * 0.25
-	var v_top_back = Vector3(v_top.x, v_top.y, -z_gap)
+	var eye := Vector3(0,0,size * 2.5)
+	# Place the back endpoint ON the ray through the front endpoint. Merely
+	# shifting its z coordinate does not align them under perspective.
+	var v_top_back: Vector3 = eye + (v_top-eye) * ((eye.z+z_gap)/eye.z)
 
 	var mat_a = StandardMaterial3D.new()
 	mat_a.albedo_color = Color(0.85, 0.78, 0.65)
@@ -164,7 +164,7 @@ func _create_info_label():
 	_info_label.name = "InfoLabel"
 	_info_label.pixel_size = 0.001
 	_info_label.font_size = 14
-	_info_label.text = "PENROSE TRIANGLE\nLocally coherent\nGlobally impossible"
+	_info_label.text = "PERSPECTIVE STUDY\nDo the ends meet, or only their images?"
 	_info_label.position = Vector3(0, -size * 0.8, 0)
 	_info_label.modulate = Color(0.8, 0.8, 0.8)
 	add_child(_info_label)
@@ -200,28 +200,45 @@ func _create_sweet_spot_indicator():
 func _process(delta):
 	if auto_rotate:
 		rotation.y += delta * rotation_speed
+	if track_viewer:
+		var camera := get_viewport().get_camera_3d()
+		if camera: check_viewer_position(camera.global_position)
 
 func check_viewer_position(viewer_pos: Vector3) -> bool:
-	# Check if viewer is near the sweet spot where illusion works
-	var local_pos = to_local(viewer_pos)
-	var sweet_spot = Vector3(0, 0, size * 2.5)
-	var distance = local_pos.distance_to(sweet_spot)
-	
 	var was_at_sweet_spot = _is_at_sweet_spot
-	_is_at_sweet_spot = distance < size * 0.5
+	_is_at_sweet_spot = disclosure in ["marker", "bare", "seam"] and to_local(viewer_pos).z > size*0.5 and alignment_error_degrees(viewer_pos) < 0.5
 	
 	if _is_at_sweet_spot and not was_at_sweet_spot:
 		viewpoint_locked.emit()
 		# `bare` builds no label. The signal still fires; there is just nothing
 		# on the object willing to say so.
 		if is_instance_valid(_info_label):
-			_info_label.text = "ILLUSION ACTIVE\nFrom here, it looks possible"
+			_info_label.text = "ENDPOINTS PROJECT TOGETHER\nMove sideways to inspect the gap"
 	elif not _is_at_sweet_spot and was_at_sweet_spot:
 		illusion_revealed.emit()
 		if is_instance_valid(_info_label):
-			_info_label.text = "PENROSE TRIANGLE\nLocally coherent\nGlobally impossible"
+			_info_label.text = "PERSPECTIVE STUDY\nDo the ends meet, or only their images?"
 
 	return _is_at_sweet_spot
+
+func joint_positions() -> Array[Vector3]:
+	var front := Vector3(0,size * 0.866 * 2.0/3.0,0)
+	var eye := Vector3(0,0,size * 2.5)
+	var gap: float = 0.0 if disclosure == "sealed" else size*0.25
+	var back := eye+(front-eye)*((eye.z+gap)/eye.z)
+	if disclosure == "exploded":
+		var h := size*0.866
+		var left_mid := (front+Vector3(-size*0.5,-h/3.0,0))*0.5
+		var right_mid := (back+Vector3(size*0.5,-h/3.0,0))*0.5
+		front += Vector3(left_mid.x,left_mid.y,0).normalized()*size*0.28
+		back += Vector3(right_mid.x,right_mid.y,0).normalized()*size*0.28
+	return [to_global(front),to_global(back)]
+
+func alignment_error_degrees(viewer: Vector3) -> float:
+	var joints := joint_positions()
+	var a := (joints[0]-viewer).normalized()
+	var b := (joints[1]-viewer).normalized()
+	return rad_to_deg(atan2(a.cross(b).length(),a.dot(b)))
 
 func normalise_disclosure(raw: String, fallback: String) -> String:
 	# An unknown string keeps what we had. A map that mistypes a value gets the
@@ -232,7 +249,9 @@ func normalise_disclosure(raw: String, fallback: String) -> String:
 func apply_grid_config(config_data: Dictionary):
 	var before: String = disclosure
 	for key in config_data:
-		if key in self:
+		if key == "track_viewer":
+			track_viewer = str(config_data[key]).to_lower() in ["on","true","1"]
+		elif key in self:
 			set(key, config_data[key])
 	disclosure = normalise_disclosure(disclosure, before)
 	# Rebuild ONLY when the axis actually moved, and never before _ready has

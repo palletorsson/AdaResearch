@@ -53,10 +53,15 @@ var _last_pos: Vector3
 var _roll: float = 0.0
 var _readout: Label3D                         # the W = F d cos θ display (updates live)
 var _dist: float = 0.0                        # distance pushed so far → d in the work
+var _work: float = 0.0                       # signed work of the nominal drawn force
+var _measurement_started := false
 var _theta: float = 0.0
 var _lawn: Node3D                             # the stationary lawn the mower mows (a sibling)
 var _blades: Array = []                       # [{node, wx, wz}] world XZ of each uncut blade
 var _ground_y: float = 0.0                    # locked floor height while grabbed (grounded)
+var garden_mode := false
+var garden: Node3D
+var grip_local := Vector3.ZERO
 
 const LAWN_HX := 3.2                          # lawn half-extents (world units) — a big patch
 const LAWN_HZ := 2.4
@@ -64,11 +69,24 @@ const CUT_R := 0.42                           # cutting-deck radius
 
 
 func _ready() -> void:
+	garden_mode = str(get_meta("config_lesson", "")) == "flower_garden"
 	super()                                  # pickable.gd._ready — grab the handle to push
 	freeze = true
 	process_physics_priority = 100           # constrain AFTER the grab driver has moved us
 	_ensure_collision(Vector3(3.0, 2.4, 1.4))
 	_build()
+	if garden_mode:
+		set_meta("em_keep_scale", true)
+		enabled = false # Pick the handle; do not teleport the mower into a hand.
+		collision_layer = 1; collision_mask = 1 | 4
+		var shape := BoxShape3D.new(); shape.size = Vector3(0.78, 0.32, 0.60)
+		get_node("CollisionShape3D").shape = shape
+		get_node("CollisionShape3D").position.y = 0.25
+		mass = 14.0; gravity_scale = 0.0
+		axis_lock_linear_y = true; axis_lock_angular_x = true; axis_lock_angular_z = true
+		linear_damp_mode = RigidBody3D.DAMP_MODE_REPLACE; linear_damp = 0.0
+		angular_damp_mode = RigidBody3D.DAMP_MODE_REPLACE; angular_damp = 0.0
+		_start_garden.call_deferred()
 	_last_pos = global_position
 	_ground_y = global_position.y
 	call_deferred("_ensure_lawn")            # spawn the lawn as a sibling (stays put while we mow)
@@ -78,6 +96,7 @@ func _ready() -> void:
 # clamp the transform to the ground plane: floor height locked, upright, yaw (turning) only.
 # Runs after the grab driver (high physics priority) so it has the final say each frame.
 func _physics_process(_delta: float) -> void:
+	if garden_mode: return # The garden applies push, steering torque and drag.
 	if Engine.is_editor_hint():
 		return
 	if is_picked_up():
@@ -100,6 +119,7 @@ func _grounded_transform(t: Transform3D) -> Transform3D:
 
 # A stationary lawn at the mower's spawn — a sibling so it does NOT move with the mower.
 func _ensure_lawn() -> void:
+	if garden_mode: return
 	if _lawn != null or not is_inside_tree():
 		return
 	var host := get_parent()
@@ -131,13 +151,24 @@ func _ensure_lawn() -> void:
 
 
 func _exit_tree() -> void:
+	if is_instance_valid(garden): garden.queue_free()
 	if is_instance_valid(_lawn):
 		_lawn.queue_free()
 	_lawn = null
 	_blades.clear()
+	super()
+
+func _start_garden() -> void:
+	if is_instance_valid(garden) or not is_inside_tree(): return
+	garden = load("res://commons/artifacts/force_mower/flower_garden.gd").new()
+	garden.mower = self
+	garden.lawn_width = float(get_meta("config_lawn_width", 20.0))
+	garden.lawn_length = float(get_meta("config_lawn_length", 28.0))
+	get_parent().add_child(garden)
 
 
 func apply_grid_config(config_data: Dictionary) -> void:
+	if garden_mode: return # Authored before ready; moving the handle does not rebuild the lawn.
 	if config_data.has("seed"): seed = int(config_data["seed"])
 	if config_data.has("push_angle"): push_angle = clampf(float(config_data["push_angle"]), 0.0, 1.0)
 	if config_data.has("emissive"): emissive = bool(config_data["emissive"])
@@ -195,6 +226,10 @@ func _build() -> void:
 	for sz in [-0.16, 0.16]:
 		rig.add_child(_cylinder_between(attach + Vector3(0, 0, sz), grip + Vector3(0, 0, sz), 0.022, steel))
 	rig.add_child(_cylinder_between(grip + Vector3(0, 0, -0.18), grip + Vector3(0, 0, 0.18), 0.028, steel))  # cross-grip
+	if garden_mode:
+		rig.position.y = 0.08
+		grip_local = grip + Vector3.UP * 0.08
+		return # Human-sized mower; live readings are at its handle, not a floating diagram.
 
 	# --- the force vectors on the object ----------------------------------------
 	var push_dir := Vector3(cos(theta), -sin(theta), 0.0)        # F: push down the handle, into the mower
@@ -225,8 +260,8 @@ func _build() -> void:
 
 	# --- readout (d + W climb as you push it) -----------------------------------
 	_readout = _billboard_label(
-		"W = F d cos θ\nθ = %d°\nF cos θ = %.2f\nd = %.2f m\nW = %.2f"
-			% [int(roundf(rad_to_deg(theta))), F_MAG * cos(theta), _dist, F_MAG * _dist * cos(theta)],
+		"NOMINAL FORCE / not measured hand effort\nθ = %d° / F cos θ = %.2f N\npath = %.2f m / signed W = %.2f J"
+			% [int(roundf(rad_to_deg(theta))), F_MAG * cos(theta), _dist, _work],
 		grip + Vector3(0.1, 0.6, 0.0), 28, Color(0.96, 0.98, 1.0))
 	rig.add_child(_readout)
 
@@ -345,7 +380,12 @@ func _workings_expression(rig: Node3D, grip: Vector3, theta: float) -> void:
 
 ## Spin the wheels + climb the work readout as the mower is pushed.
 func _process(_delta: float) -> void:
+	if garden_mode: return
 	if Engine.is_editor_hint() or _wheels.is_empty():
+		return
+	if not _measurement_started:
+		_last_pos = global_position
+		_measurement_started = true
 		return
 	var disp: Vector3 = global_position - _last_pos
 	_last_pos = global_position
@@ -356,9 +396,11 @@ func _process(_delta: float) -> void:
 	for p in _wheels:
 		(p as Node3D).rotation.z = -_roll
 	_dist += disp.length()
+	var nominal_force = global_transform.basis.x.normalized() * F_MAG * cos(_theta) + Vector3.DOWN * F_MAG * sin(_theta)
+	_work += nominal_force.dot(disp)
 	if _readout:
-		_readout.text = "W = F d cos θ\nθ = %d°\nF cos θ = %.2f\nd = %.2f m\nW = %.2f" % [
-			int(roundf(rad_to_deg(_theta))), F_MAG * cos(_theta), _dist, F_MAG * _dist * cos(_theta)]
+		_readout.text = "NOMINAL FORCE / not measured hand effort\nθ = %d° / F cos θ = %.2f N\npath = %.2f m / signed W = %.2f J" % [
+			int(roundf(rad_to_deg(_theta))), F_MAG * cos(_theta), _dist, _work]
 	# mow: cut the blades the deck passes over
 	var vis := get_node_or_null("Visual")
 	if vis:

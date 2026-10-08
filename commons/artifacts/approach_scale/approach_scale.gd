@@ -225,7 +225,11 @@ func _build() -> void:
 		# reason and said so in writing before this file was fixed to match.
 		var body := AnimatableBody3D.new()
 		body.name = "Block%d" % i
-		body.position = centre
+		# Seed the standing pose before entering the tree. With sync_to_physics,
+		# the physics server otherwise restores the initial y=0 pose after
+		# _apply_size, and deferred grounding lifts the entire field by half
+		# a block. Later size changes would then float above the floor.
+		body.position = centre + Vector3.UP * (block_m * 0.5)
 		body.sync_to_physics = true
 		# On layer 1 on purpose: it has to be solid to the same bodies the area is
 		# watching. It is refused as a visitor by ancestry — see _is_visitor.

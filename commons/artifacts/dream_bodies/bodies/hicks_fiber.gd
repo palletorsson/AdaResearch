@@ -43,6 +43,21 @@ extends RefCounted
 ## Given up: the wall of fibre behind the figure (this is one body, not the
 ## installation), true yarn twist and fly-away fibres, the pink drawn-thread
 ## drawing at the right edge of the reference, and any suggestion of a face.
+##
+## AXES
+##   fibre  — what the wool is DOING: roving (fat unspun ropes, the body as
+##            built) · unravelling (near twice the ropes at a third the
+##            thickness, the mass turning to hair) · matted (half as many,
+##            felted almost twice as fat, the sag gone, the pile lumpy) ·
+##            shorn (the fleece cropped to short stubble hugging the body, the
+##            mannequin laid bare) · blooming (every second rope ends in a
+##            burst of petals).
+##   wearer — what is INSIDE the wool: mannequin (one shop dummy, as built) ·
+##            twinned (a second torso, head and arm budding out of the buried
+##            shoulder) · hydra (three heads on splayed necks and six arms) ·
+##            hollow (no body at all — a dark thread cage the wool hangs on) ·
+##            flooded (legs and feet drowned in a solid pour of felt that
+##            reaches the floor).
 
 const TEX_SIZE: int = 128
 const CORE_COLOR: String = "#F2EFE9"
@@ -65,7 +80,47 @@ static func describe() -> String:
 	return "A smooth featureless white mannequin buried to the shoulders in fat ropes of dusty pink, olive, slate and cream wool roving, one bare arm coming clear, coiled hanks heaped at its feet."
 
 
-static func build(root: Node3D, seed: int) -> void:
+static func axes() -> Dictionary:
+	return {
+		"fibre": ["roving", "unravelling", "matted", "shorn", "blooming"],
+		"wearer": ["mannequin", "twinned", "hydra", "hollow", "flooded"],
+	}
+
+
+static func build(root: Node3D, seed: int, opts: Dictionary = {}) -> void:
+	var fibre: String = String(opts.get("fibre", "roving"))
+	var wearer: String = String(opts.get("wearer", "mannequin"))
+
+	# fibre grammar — every multiplier is exactly 1.0 (or off) for "roving",
+	# so the default path is bit-identical to the statue as first built
+	var fk: Dictionary = {"tube": 1.0, "loop": 1.0, "sag": 1.0, "out": 1.0, "stub": false, "bloom": 0.0}
+	var rope_k: float = 1.0
+	var fall_k: float = 1.0
+	var hank_k: float = 1.0
+	match fibre:
+		"unravelling":
+			fk = {"tube": 0.34, "loop": 1.24, "sag": 1.90, "out": 1.50, "stub": false, "bloom": 0.0}
+			rope_k = 1.80
+			fall_k = 2.20
+		"matted":
+			fk = {"tube": 1.70, "loop": 0.86, "sag": 0.30, "out": 1.90, "stub": false, "bloom": 0.0}
+			rope_k = 0.55
+			fall_k = 0.50
+			hank_k = 0.55
+		"shorn":
+			fk = {"tube": 0.50, "loop": 0.46, "sag": 0.20, "out": 0.35, "stub": true, "bloom": 0.0}
+			rope_k = 0.70
+			fall_k = 0.60
+			hank_k = 0.50
+		"blooming":
+			fk = {"tube": 0.70, "loop": 0.92, "sag": 0.80, "out": 1.15, "stub": false, "bloom": 0.55}
+			rope_k = 0.85
+			fall_k = 0.80
+			hank_k = 0.90
+	var tube_k: float = float(fk["tube"])
+	var solid: bool = wearer != "hollow"
+	var flooded: bool = wearer == "flooded"
+
 	var rng := RandomNumberGenerator.new()
 	rng.seed = seed
 
@@ -107,116 +162,115 @@ static func build(root: Node3D, seed: int) -> void:
 	mat_core.clearcoat_roughness = 0.28
 
 	# ---- the mannequin core ------------------------------------------------
+	# the skeleton of positions is pure geometry — no rng — so every wearer
+	# variant can read it, whether or not the white flesh is actually built
+	var spine_pts: Array = []
 	for i in range(9):
-		var t: float = float(i) / 8.0
-		var p: Vector3 = _spine(t, hip_x, neck_x, bow, lean_z, y_hip, y_neck)
-		var r: float = _key(TORSO_R, t)
-		var sph := SphereMesh.new()
-		sph.radius = r
-		sph.height = r * 2.0
-		sph.radial_segments = 20
-		sph.rings = 12
-		var mi: MeshInstance3D = _add(root, sph, mat_core)
-		var sc := Vector3(_key(TORSO_SX, t), 1.0, _key(TORSO_SZ, t))
-		mi.transform = Transform3D(Basis().scaled(sc), p)
+		spine_pts.append(_spine(float(i) / 8.0, hip_x, neck_x, bow, lean_z, y_hip, y_neck))
 
 	var hip_p: Vector3 = _spine(0.0, hip_x, neck_x, bow, lean_z, y_hip, y_neck)
 	var top_p: Vector3 = _spine(1.0, hip_x, neck_x, bow, lean_z, y_hip, y_neck)
 
 	var sh_w: Vector3 = top_p + Vector3(w_side * 0.135, 0.022, -0.004)
 	var sh_b: Vector3 = top_p + Vector3(b_side * 0.135, -0.008, -0.004)
-	for sp in [sh_w, sh_b]:
-		var sv: Vector3 = sp
-		var sph := SphereMesh.new()
-		sph.radius = 0.082
-		sph.height = 0.164
-		sph.radial_segments = 18
-		sph.rings = 10
-		var mi: MeshInstance3D = _add(root, sph, mat_core)
-		mi.transform = Transform3D(Basis().scaled(Vector3(1.0, 0.86, 0.84)), sv)
 
-	# pelvis blend
-	for side_i in range(2):
-		var sd: float = -1.0 if side_i == 0 else 1.0
-		var sph := SphereMesh.new()
-		sph.radius = 0.078
-		sph.height = 0.156
-		sph.radial_segments = 18
-		sph.rings = 10
-		var mi: MeshInstance3D = _add(root, sph, mat_core)
-		mi.transform = Transform3D(Basis().scaled(Vector3(1.0, 0.92, 0.82)), hip_p + Vector3(sd * 0.070, -0.030, 0.0))
-
-	# neck
-	_limb(root, Vector3(neck_x, 1.288, lean_z - 0.002), Vector3(neck_x * 0.92, 1.376, lean_z - 0.008), 0.046, mat_core)
-
-	# head — smooth, blank
 	var head_c := Vector3(neck_x * 0.88, 1.462, lean_z - 0.006)
 	var hb: Basis = Basis(Vector3.UP, head_yaw) * Basis(Vector3.RIGHT, head_tilt)
-	var skull := SphereMesh.new()
-	skull.radius = 0.094
-	skull.height = 0.238
-	skull.radial_segments = 24
-	skull.rings = 14
-	var skull_mi: MeshInstance3D = _add(root, skull, mat_core)
-	skull_mi.transform = Transform3D(hb * Basis().scaled(Vector3(0.98, 1.0, 1.06)), head_c)
-	var cran := SphereMesh.new()
-	cran.radius = 0.084
-	cran.height = 0.168
-	cran.radial_segments = 20
-	cran.rings = 12
-	var cran_mi: MeshInstance3D = _add(root, cran, mat_core)
-	cran_mi.transform = Transform3D(hb * Basis().scaled(Vector3(0.98, 0.94, 1.0)), head_c + hb * Vector3(0.0, 0.024, 0.030))
-	var jaw := SphereMesh.new()
-	jaw.radius = 0.064
-	jaw.height = 0.128
-	jaw.radial_segments = 18
-	jaw.rings = 10
-	var jaw_mi: MeshInstance3D = _add(root, jaw, mat_core)
-	jaw_mi.transform = Transform3D(hb * Basis().scaled(Vector3(0.92, 0.82, 1.02)), head_c + hb * Vector3(0.0, -0.064, -0.020))
 
-	# the bare arm — hangs clear of the fibre
 	var el_b := Vector3(b_side * 0.212, 1.020, -0.018)
 	var wr_b := Vector3(b_side * 0.234, 0.812, -0.050)
 	var hd_b := Vector3(b_side * 0.240, 0.736, -0.062)
-	_limb(root, sh_b, el_b, 0.057, mat_core)
-	_limb(root, el_b, wr_b, 0.045, mat_core)
-	_limb(root, wr_b, hd_b, 0.038, mat_core)
-	var hand_b := SphereMesh.new()
-	hand_b.radius = 0.050
-	hand_b.height = 0.100
-	hand_b.radial_segments = 16
-	hand_b.rings = 9
-	var hb_mi: MeshInstance3D = _add(root, hand_b, mat_core)
-	hb_mi.transform = Transform3D(_basis_y_to(hd_b - wr_b) * Basis().scaled(Vector3(0.70, 1.0, 0.46)), hd_b)
 
-	# the buried arm — bent across the front, under the drape
 	var el_w := Vector3(w_side * 0.238, 1.035, -0.030)
 	var wr_w := Vector3(w_side * 0.150, 0.930, -0.152)
 	var hd_w := Vector3(w_side * 0.096, 0.890, -0.192)
-	_limb(root, sh_w, el_w, 0.057, mat_core)
-	_limb(root, el_w, wr_w, 0.045, mat_core)
-	_limb(root, wr_w, hd_w, 0.038, mat_core)
-	var hand_w := SphereMesh.new()
-	hand_w.radius = 0.048
-	hand_w.height = 0.096
-	hand_w.radial_segments = 16
-	hand_w.rings = 9
-	var hw_mi: MeshInstance3D = _add(root, hand_w, mat_core)
-	hw_mi.transform = Transform3D(_basis_y_to(hd_w - wr_w) * Basis().scaled(Vector3(0.70, 1.0, 0.46)), hd_w)
 
-	# legs
+	var legs: Array = []
 	for side_i in range(2):
 		var sd: float = -1.0 if side_i == 0 else 1.0
 		var fwd: float = 0.030 if sd == step_side else -0.006
 		var hp := hip_p + Vector3(sd * 0.078, -0.036, 0.0)
 		var knee := Vector3(sd * 0.076 + hip_shift * 0.3, 0.452, -0.008 - fwd * 0.5)
 		var ankle := Vector3(sd * 0.070, 0.116, 0.006 - fwd)
-		_limb(root, hp, knee, 0.090, mat_core)
-		_limb(root, knee, ankle, 0.062, mat_core)
-		var foot := BoxMesh.new()
-		foot.size = Vector3(0.086, 0.058, 0.206)
-		var fm: MeshInstance3D = _add(root, foot, mat_core)
-		fm.transform = Transform3D(Basis(Vector3.UP, sd * 0.16), Vector3(ankle.x, 0.030, ankle.z - 0.052))
+		legs.append([sd, hp, knee, ankle])
+
+	if solid:
+		for i in range(9):
+			var t: float = float(i) / 8.0
+			var p: Vector3 = spine_pts[i]
+			var r: float = _key(TORSO_R, t)
+			var sph := SphereMesh.new()
+			sph.radius = r
+			sph.height = r * 2.0
+			sph.radial_segments = 20
+			sph.rings = 12
+			var mi: MeshInstance3D = _add(root, sph, mat_core)
+			var sc := Vector3(_key(TORSO_SX, t), 1.0, _key(TORSO_SZ, t))
+			mi.transform = Transform3D(Basis().scaled(sc), p)
+
+		for sp in [sh_w, sh_b]:
+			var sv: Vector3 = sp
+			var sph := SphereMesh.new()
+			sph.radius = 0.082
+			sph.height = 0.164
+			sph.radial_segments = 18
+			sph.rings = 10
+			var mi: MeshInstance3D = _add(root, sph, mat_core)
+			mi.transform = Transform3D(Basis().scaled(Vector3(1.0, 0.86, 0.84)), sv)
+
+		# pelvis blend
+		for side_i in range(2):
+			var sd: float = -1.0 if side_i == 0 else 1.0
+			var sph := SphereMesh.new()
+			sph.radius = 0.078
+			sph.height = 0.156
+			sph.radial_segments = 18
+			sph.rings = 10
+			var mi: MeshInstance3D = _add(root, sph, mat_core)
+			mi.transform = Transform3D(Basis().scaled(Vector3(1.0, 0.92, 0.82)), hip_p + Vector3(sd * 0.070, -0.030, 0.0))
+
+		# neck
+		_limb(root, Vector3(neck_x, 1.288, lean_z - 0.002), Vector3(neck_x * 0.92, 1.376, lean_z - 0.008), 0.046, mat_core)
+
+		# head — smooth, blank
+		_head(root, head_c, hb, 1.0, mat_core)
+
+		# the bare arm — hangs clear of the fibre
+		_arm(root, sh_b, el_b, wr_b, hd_b, 0.050, mat_core, 1.0)
+
+		# the buried arm — bent across the front, under the drape
+		_arm(root, sh_w, el_w, wr_w, hd_w, 0.048, mat_core, 1.0)
+
+	# legs — the pour swallows them whole
+	if solid and not flooded:
+		for lg in legs:
+			var sd2: float = lg[0]
+			var hp2: Vector3 = lg[1]
+			var knee2: Vector3 = lg[2]
+			var ankle2: Vector3 = lg[3]
+			_limb(root, hp2, knee2, 0.090, mat_core)
+			_limb(root, knee2, ankle2, 0.062, mat_core)
+			var foot := BoxMesh.new()
+			foot.size = Vector3(0.086, 0.058, 0.206)
+			var fm: MeshInstance3D = _add(root, foot, mat_core)
+			fm.transform = Transform3D(Basis(Vector3.UP, sd2 * 0.16), Vector3(ankle2.x, 0.030, ankle2.z - 0.052))
+
+	# ---- what is inside the wool (axis: wearer) ----------------------------
+	match wearer:
+		"twinned":
+			_twin(root, rng, sh_w, w_side, mat_core)
+		"hydra":
+			_hydra(root, rng, top_p, hip_p, w_side, mat_core)
+		"hollow":
+			var chains: Array = [
+				[sh_b, el_b, wr_b, hd_b],
+				[sh_w, el_w, wr_w, hd_w],
+				[legs[0][1], legs[0][2], legs[0][3]],
+				[legs[1][1], legs[1][2], legs[1][3]],
+			]
+			_cage(root, spine_pts, chains, head_c, sh_b, sh_w, _wool(Color("#3C382F"), roving))
+		"flooded":
+			_pour(root, rng, hip_p, deal, cream, roving)
 
 	# ---- the three drapes --------------------------------------------------
 	var wq: float = w_side
@@ -277,16 +331,23 @@ static func build(root: Node3D, seed: int) -> void:
 	var n_a: int = rng.randi_range(22, 32)
 	var n_b: int = rng.randi_range(12, 18)
 	var n_c: int = rng.randi_range(10, 16)
+	if absf(rope_k - 1.0) > 0.0001:
+		n_a = clampi(int(round(float(n_a) * rope_k)), 8, 60)
+		n_b = clampi(int(round(float(n_b) * rope_k)), 5, 34)
+		n_c = clampi(int(round(float(n_c) * rope_k)), 4, 30)
 	var zones_a: Array = _zones(rng, deal, rng.randi_range(4, 6))
 	var zones_b: Array = _zones(rng, deal, rng.randi_range(3, 5))
 	var zones_c: Array = _zones(rng, deal, rng.randi_range(3, 5))
 
-	_lay_drape(root, rng, drape_a_p, drape_a_o, drape_a_r, n_a, zones_a, deal, cream, roving, 0.55, 0.62, true)
-	_lay_drape(root, rng, drape_b_p, drape_b_o, drape_b_r, n_b, zones_b, deal, cream, roving, 0.0, 0.34, false)
-	_lay_drape(root, rng, drape_c_p, drape_c_o, drape_c_r, n_c, zones_c, deal, cream, roving, 0.0, 0.30, false)
+	_lay_drape(root, rng, drape_a_p, drape_a_o, drape_a_r, n_a, zones_a, deal, cream, roving, 0.55, 0.62, true, fk)
+	_lay_drape(root, rng, drape_b_p, drape_b_o, drape_b_r, n_b, zones_b, deal, cream, roving, 0.0, 0.34, false, fk)
+	_lay_drape(root, rng, drape_c_p, drape_c_o, drape_c_r, n_c, zones_c, deal, cream, roving, 0.0, 0.30, false, fk)
 
 	# ---- falling strands ---------------------------------------------------
 	var n_fall: int = rng.randi_range(4, 8)
+	if absf(fall_k - 1.0) > 0.0001:
+		n_fall = clampi(int(round(float(n_fall) * fall_k)), 2, 18)
+	var fall_floor: float = 0.44 if flooded else 0.0
 	for i in range(n_fall):
 		var u: float = clampf((float(i) + rng.randf_range(0.1, 0.9)) / float(n_fall), 0.0, 1.0)
 		var from_bib: bool = rng.randf() < 0.65
@@ -296,20 +357,22 @@ static func build(root: Node3D, seed: int) -> void:
 		var sm: Array = _sample(src, sro, srr, clampf(0.45 + u * 0.5, 0.0, 1.0))
 		var start: Vector3 = sm[0]
 		var od: Vector3 = sm[1]
-		var tube_r: float = rng.randf_range(0.032, 0.050)
+		var tube_r: float = clampf(rng.randf_range(0.032, 0.050) * tube_k, 0.008, 0.086)
 		var reach: float = rng.randf_range(0.10, 0.24)
 		var curl_r: float = rng.randf_range(0.075, 0.150)
-		var path: Array = _fall_path(start + od * 0.06, od, tube_r * 1.10 + 0.004, tube_r, reach, curl_r, rng, 34)
+		var path: Array = _fall_path(start + od * 0.06, od, fall_floor + tube_r * 1.10 + 0.004, tube_r, reach, curl_r, rng, 34)
 		var col: Color = _dye(deal[rng.randi_range(0, deal.size() - 1)], rng, cream)
 		var mesh: ArrayMesh = _tube_mesh(path[0], path[1], 8, false, 0.34)
 		_add(root, mesh, _wool(col, roving))
 
 	# ---- coiled hanks heaped at the feet -----------------------------------
 	var n_hank: int = rng.randi_range(6, 14)
+	if absf(hank_k - 1.0) > 0.0001:
+		n_hank = clampi(int(round(float(n_hank) * hank_k)), 3, 16)
 	for i in range(n_hank):
 		var ang: float = TAU * (float(i) + rng.randf_range(-0.35, 0.35)) / float(n_hank)
 		var dist: float = rng.randf_range(0.130, 0.320)
-		var tube_r: float = rng.randf_range(0.032, 0.050)
+		var tube_r: float = clampf(rng.randf_range(0.032, 0.050) * tube_k, 0.008, 0.086)
 		var turns: float = rng.randf_range(2.4, 4.0)
 		var r0: float = rng.randf_range(0.030, 0.055)
 		var r1: float = rng.randf_range(0.100, 0.150)
@@ -317,7 +380,12 @@ static func build(root: Node3D, seed: int) -> void:
 		var tilt_dir: float = rng.randf_range(0.0, TAU)
 		var stacked: bool = rng.randf() < 0.28
 		var lift: float = 0.052 if stacked else 0.0
-		var y0: float = tube_r * 1.42 + r1 * sin(tilt) + 0.004 + lift
+		# the hanks ride up the slope of the pour instead of lying on the floor
+		var mound: float = 0.0
+		if flooded:
+			dist = dist + 0.220
+			mound = maxf(0.0, 0.34 * (1.0 - clampf((dist - 0.32) / 0.28, 0.0, 1.0)))
+		var y0: float = tube_r * 1.42 + r1 * sin(tilt) + 0.004 + lift + mound
 		var pts_n: int = int(clampf(turns * 17.0, 30.0, 72.0))
 		var path: Array = _hank_path(turns, r0, r1, tube_r, rng, pts_n)
 		var hb2: Basis = Basis(Vector3(cos(tilt_dir), 0.0, sin(tilt_dir)).normalized(), tilt) * Basis(Vector3.UP, rng.randf_range(0.0, TAU))
@@ -351,7 +419,13 @@ static func build(root: Node3D, seed: int) -> void:
 
 static func _lay_drape(root: Node3D, rng: RandomNumberGenerator, ps: Array, os: Array, rs: Array,
 		count: int, zones: Array, deal: Array, cream: Color, roving: ImageTexture,
-		helix_bias: float, ring_bias: float, arm: bool) -> void:
+		helix_bias: float, ring_bias: float, arm: bool, fk: Dictionary = {}) -> void:
+	var tube_k: float = float(fk.get("tube", 1.0))
+	var loop_k: float = float(fk.get("loop", 1.0))
+	var sag_k: float = float(fk.get("sag", 1.0))
+	var out_k: float = float(fk.get("out", 1.0))
+	var stub: bool = bool(fk.get("stub", false))
+	var bloom: float = float(fk.get("bloom", 0.0))
 	for i in range(count):
 		var u: float = clampf((float(i) + rng.randf_range(-0.42, 0.42)) / float(maxi(count - 1, 1)), 0.0, 1.0)
 		var sm: Array = _sample(ps, os, rs, u)
@@ -367,11 +441,12 @@ static func _lay_drape(root: Node3D, rng: RandomNumberGenerator, ps: Array, os: 
 		if roll > 0.86:
 			layer = 2
 		var lay_f: float = float(layer)
-		var centre: Vector3 = c + od * (0.020 + lay_f * 0.040)
-		var loop_r: float = rad + lay_f * 0.014 + rng.randf_range(-0.018, 0.016)
+		var centre: Vector3 = c + od * ((0.020 + lay_f * 0.040) * out_k)
+		var loop_r: float = (rad + lay_f * 0.014 + rng.randf_range(-0.018, 0.016)) * loop_k
 		var tube_r: float = rng.randf_range(0.031, 0.056)
 		if arm and u > 0.62:
 			tube_r = rng.randf_range(0.030, 0.046)
+		tube_r = clampf(tube_r * tube_k, 0.008, 0.100)
 
 		var zi: int = clampi(int(u * float(zones.size())), 0, zones.size() - 1)
 		var base_c: Color = zones[zi]
@@ -382,13 +457,17 @@ static func _lay_drape(root: Node3D, rng: RandomNumberGenerator, ps: Array, os: 
 		var kind: float = rng.randf()
 		var path: Array = []
 		var closed: bool = true
-		if arm and u > 0.58 and kind < helix_bias:
+		if stub:
+			# shorn: the loop is cropped to a short arc lying flat on the body
+			path = _stub_path(centre, tg, od, loop_r, tube_r, rng, 10)
+			closed = false
+		elif arm and u > 0.58 and kind < helix_bias:
 			var turns: float = rng.randf_range(1.15, 2.60)
 			var span: float = rng.randf_range(0.090, 0.210)
 			path = _helix_path(centre, tg, od, loop_r, tube_r, turns, span, rng, 30)
 			closed = false
 		elif kind < ring_bias:
-			var sag: float = rng.randf_range(0.16, 0.46)
+			var sag: float = rng.randf_range(0.16, 0.46) * sag_k
 			var drift: float = rng.randf_range(0.010, 0.052)
 			# the loop HANGS: drop its centre so the mass falls below the drape line
 			var hung: Vector3 = centre - Vector3(0.0, loop_r * 0.30, 0.0)
@@ -398,6 +477,18 @@ static func _lay_drape(root: Node3D, rng: RandomNumberGenerator, ps: Array, os: 
 
 		var mesh: ArrayMesh = _tube_mesh(path[0], path[1], 8, closed, 0.34)
 		_add(root, mesh, _wool(col, roving))
+
+		# blooming: the rope ends in a burst of petals pointing off the body
+		if bloom > 0.0:
+			if rng.randf() < bloom:
+				var tip: Vector3 = centre + od * (loop_r * 0.55 + tube_r * 1.3)
+				var pet: int = rng.randi_range(5, 9)
+				var span_b: float = loop_r * rng.randf_range(0.95, 1.80)
+				var wide_b: float = tube_r * rng.randf_range(1.1, 2.1)
+				var bm: ArrayMesh = _bloom_mesh(rng, pet, span_b, wide_b)
+				var bcol: Color = _dye(deal[rng.randi_range(0, deal.size() - 1)], rng, cream)
+				var bmi: MeshInstance3D = _add(root, bm, _wool(bcol, roving))
+				bmi.transform = Transform3D(_basis_y_to(od), tip)
 
 
 # ---------------------------------------------------------------------------
@@ -461,6 +552,26 @@ static func _helix_path(c: Vector3, tg: Vector3, od: Vector3, rad: float, tube_r
 		var p: Vector3 = c + tg * ((f - 0.5) * span) + e1 * (rr * cos(th)) + e2 * (rr * sin(th))
 		pts.append(p)
 		radii.append(tube_r * (0.90 + 0.20 * sin(1.0 * th)))
+	return [pts, radii]
+
+
+static func _stub_path(c: Vector3, tg: Vector3, od: Vector3, rad: float, tube_r: float,
+		rng: RandomNumberGenerator, n: int) -> Array:
+	# a cropped arc — the fleece cut back to stubble, tapered at both ends
+	var e1: Vector3 = _perp(od, tg)
+	var e2: Vector3 = tg.cross(e1).normalized()
+	var a0: float = rng.randf_range(0.0, TAU)
+	var arc: float = rng.randf_range(1.0, 2.3)
+	var hook: float = rng.randf_range(0.010, 0.038)
+	var pts: Array = []
+	var radii: Array = []
+	for j in range(n):
+		var f: float = float(j) / float(n - 1)
+		var th: float = a0 + arc * f
+		var rr: float = rad * (1.0 + 0.14 * sin(3.0 * th))
+		var p: Vector3 = c + e1 * (rr * cos(th)) + e2 * (rr * sin(th)) + od * (hook * sin(PI * f))
+		pts.append(p)
+		radii.append(tube_r * (0.46 + 0.66 * sin(PI * clampf(f, 0.0, 1.0)) + 0.10))
 	return [pts, radii]
 
 
@@ -673,6 +784,246 @@ static func _cap(st: SurfaceTool, ring: Array, ctr: Vector3, outside: Vector3) -
 			st.add_vertex(c)
 			st.set_uv(Vector2(float(j) / float(m), 0.0))
 			st.add_vertex(b)
+
+
+# ---------------------------------------------------------------------------
+# the bloom — one mesh, many tapered petals bursting from a single point
+
+static func _bloom_mesh(rng: RandomNumberGenerator, petals: int, span: float, wide: float) -> ArrayMesh:
+	var st := SurfaceTool.new()
+	st.begin(Mesh.PRIMITIVE_TRIANGLES)
+	var sides: int = 5
+	var stations: int = 4
+	for k in range(petals):
+		var a: float = TAU * float(k) / float(petals) + rng.randf_range(-0.16, 0.16)
+		var pitch: float = rng.randf_range(0.30, 1.18)
+		var dir: Vector3 = Vector3(cos(a) * cos(pitch), sin(pitch), sin(a) * cos(pitch)).normalized()
+		var ln: float = span * rng.randf_range(0.68, 1.28)
+		var e1: Vector3 = _perp(Vector3.UP, dir)
+		var e2: Vector3 = dir.cross(e1).normalized()
+		var curl: float = rng.randf_range(-0.26, 0.26)
+		var rings: Array = []
+		for s in range(stations):
+			var f: float = float(s) / float(stations - 1)
+			var rr: float = wide * (0.26 + 0.90 * sin(PI * clampf(f * 0.86 + 0.07, 0.0, 1.0)))
+			if s == stations - 1:
+				rr = wide * 0.11
+			var ctr: Vector3 = dir * (ln * f) + e2 * (curl * ln * sin(PI * f))
+			var row: Array = []
+			for j in range(sides):
+				var th: float = TAU * float(j) / float(sides)
+				row.append(ctr + e1 * (rr * cos(th)) + e2 * (rr * 0.52 * sin(th)))
+			rings.append(row)
+		for s in range(stations - 1):
+			var row0: Array = rings[s]
+			var row1: Array = rings[s + 1]
+			var inside: Vector3 = dir * (ln * (float(s) + 0.5) / float(stations - 1))
+			for j in range(sides):
+				var j2: int = (j + 1) % sides
+				_quad_uv(st, row0[j], row0[j2], row1[j2], row1[j],
+					Vector2(0.0, 0.0), Vector2(0.5, 0.0), Vector2(0.5, 0.6), Vector2(0.0, 0.6), inside)
+	st.generate_normals()
+	return st.commit()
+
+
+# ---------------------------------------------------------------------------
+# the wearer — what the wool is hung on
+
+static func _head(root: Node3D, c: Vector3, hb: Basis, k: float, mat: StandardMaterial3D) -> void:
+	var skull := SphereMesh.new()
+	skull.radius = 0.094 * k
+	skull.height = 0.238 * k
+	skull.radial_segments = 24
+	skull.rings = 14
+	var skull_mi: MeshInstance3D = _add(root, skull, mat)
+	skull_mi.transform = Transform3D(hb * Basis().scaled(Vector3(0.98, 1.0, 1.06)), c)
+	var cran := SphereMesh.new()
+	cran.radius = 0.084 * k
+	cran.height = 0.168 * k
+	cran.radial_segments = 20
+	cran.rings = 12
+	var cran_mi: MeshInstance3D = _add(root, cran, mat)
+	cran_mi.transform = Transform3D(hb * Basis().scaled(Vector3(0.98, 0.94, 1.0)), c + hb * Vector3(0.0, 0.024 * k, 0.030 * k))
+	var jaw := SphereMesh.new()
+	jaw.radius = 0.064 * k
+	jaw.height = 0.128 * k
+	jaw.radial_segments = 18
+	jaw.rings = 10
+	var jaw_mi: MeshInstance3D = _add(root, jaw, mat)
+	jaw_mi.transform = Transform3D(hb * Basis().scaled(Vector3(0.92, 0.82, 1.02)), c + hb * Vector3(0.0, -0.064 * k, -0.020 * k))
+
+
+static func _arm(root: Node3D, sh: Vector3, el: Vector3, wr: Vector3, hd: Vector3,
+		hand_r: float, mat: StandardMaterial3D, k: float = 1.0) -> void:
+	_limb(root, sh, el, 0.057 * k, mat)
+	_limb(root, el, wr, 0.045 * k, mat)
+	_limb(root, wr, hd, 0.038 * k, mat)
+	var hand := SphereMesh.new()
+	hand.radius = hand_r
+	hand.height = hand_r * 2.0
+	hand.radial_segments = 16
+	hand.rings = 9
+	var mi: MeshInstance3D = _add(root, hand, mat)
+	mi.transform = Transform3D(_basis_y_to(hd - wr) * Basis().scaled(Vector3(0.70, 1.0, 0.46)), hd)
+
+
+static func _twin(root: Node3D, rng: RandomNumberGenerator, sh_w: Vector3, w_side: float,
+		mat: StandardMaterial3D) -> void:
+	# a second body budding out of the buried shoulder, head clear of the wool
+	var dir: Vector3 = Vector3(w_side * 0.52, 0.84, -0.12).normalized()
+	var bud_r: Array = [0.104, 0.096, 0.086]
+	for i in range(3):
+		var f: float = float(i) / 2.0
+		var rr: float = float(bud_r[i]) * rng.randf_range(0.95, 1.07)
+		var sph := SphereMesh.new()
+		sph.radius = rr
+		sph.height = rr * 2.0
+		sph.radial_segments = 20
+		sph.rings = 12
+		var mi: MeshInstance3D = _add(root, sph, mat)
+		mi.transform = Transform3D(Basis().scaled(Vector3(1.06, 1.0, 0.82)), sh_w + dir * (0.052 + f * 0.134))
+
+	_limb(root, sh_w + dir * 0.214, sh_w + dir * 0.292, 0.038, mat)
+
+	var hc: Vector3 = sh_w + dir * 0.372
+	var yaw2: float = deg_to_rad(rng.randf_range(-52.0, 52.0))
+	var tilt2: float = deg_to_rad(rng.randf_range(-16.0, 9.0)) + w_side * 0.10
+	var b2: Basis = Basis(Vector3.UP, yaw2) * Basis(Vector3.RIGHT, tilt2)
+	_head(root, hc, b2, rng.randf_range(0.80, 0.94), mat)
+
+	var sh2: Vector3 = sh_w + dir * 0.148 + Vector3(w_side * 0.072, 0.0, 0.012)
+	var ball := SphereMesh.new()
+	ball.radius = 0.068
+	ball.height = 0.136
+	ball.radial_segments = 18
+	ball.rings = 10
+	var bmi: MeshInstance3D = _add(root, ball, mat)
+	bmi.transform = Transform3D(Basis().scaled(Vector3(1.0, 0.88, 0.86)), sh2)
+
+	var el2: Vector3 = sh2 + Vector3(w_side * 0.128, -0.182, 0.038)
+	var wr2: Vector3 = el2 + Vector3(w_side * 0.046, -0.194, 0.064)
+	var hd2: Vector3 = wr2 + Vector3(w_side * 0.010, -0.078, 0.026)
+	_arm(root, sh2, el2, wr2, hd2, 0.044, mat, 0.86)
+
+
+static func _hydra(root: Node3D, rng: RandomNumberGenerator, top_p: Vector3, hip_p: Vector3,
+		w_side: float, mat: StandardMaterial3D) -> void:
+	# three heads on splayed necks, six arms down the flanks
+	for i in range(2):
+		var sd: float = -1.0 if i == 0 else 1.0
+		var lean: float = rng.randf_range(0.16, 0.32)
+		var base: Vector3 = top_p + Vector3(sd * 0.086, -0.014, 0.012)
+		var tip: Vector3 = top_p + Vector3(sd * (0.148 + lean * 0.5), 0.192, -0.028 + rng.randf_range(-0.05, 0.05))
+		_limb(root, base, tip, 0.042, mat)
+		var hc: Vector3 = tip + Vector3(sd * lean * 0.44, 0.086, -0.012)
+		var yaw: float = deg_to_rad(rng.randf_range(-40.0, 40.0)) + sd * 0.42 + w_side * 0.08
+		var tl: float = deg_to_rad(rng.randf_range(-10.0, 17.0))
+		var b2: Basis = Basis(Vector3.UP, yaw) * Basis(Vector3.RIGHT, tl)
+		_head(root, hc, b2, rng.randf_range(0.72, 0.90), mat)
+
+	for i in range(4):
+		var sd: float = -1.0 if (i % 2) == 0 else 1.0
+		var lvl: float = 0.76 if i < 2 else 0.48
+		var sy: float = lerpf(hip_p.y, top_p.y, lvl)
+		var sh: Vector3 = Vector3(sd * 0.118, sy, hip_p.z * 0.5 - 0.012)
+		var swing: float = rng.randf_range(0.15, 0.27)
+		var el: Vector3 = Vector3(sd * (0.118 + swing), sy - 0.148, -0.032 + rng.randf_range(-0.06, 0.06))
+		var wr: Vector3 = Vector3(sd * (0.118 + swing * 1.26), sy - 0.348, -0.068 + rng.randf_range(-0.08, 0.06))
+		var hd: Vector3 = wr + (wr - el).normalized() * 0.086
+		_arm(root, sh, el, wr, hd, 0.042, mat, 0.80)
+
+
+static func _cage(root: Node3D, spine_pts: Array, chains: Array, head_c: Vector3,
+		sh_b: Vector3, sh_w: Vector3, wire: StandardMaterial3D) -> void:
+	# no flesh at all — a dark thread armature the wool hangs on
+	var thin: float = 0.013
+	var sr: Array = []
+	for i in range(spine_pts.size()):
+		sr.append(thin * (1.0 + 0.24 * sin(float(i) * 0.7)))
+	_add(root, _tube_mesh(spine_pts, sr, 6, false, 0.34), wire)
+
+	for ch in chains:
+		var cpts: Array = ch
+		var crad: Array = []
+		for i in range(cpts.size()):
+			crad.append(thin * 0.86)
+		_add(root, _tube_mesh(cpts, crad, 6, false, 0.34), wire)
+
+	_add(root, _tube_mesh([sh_b, spine_pts[8], sh_w], [thin * 0.9, thin * 0.9, thin * 0.9], 6, false, 0.34), wire)
+
+	for i in range(6):
+		var t: float = 0.06 + float(i) * 0.17
+		var c: Vector3 = _lerp_poly(spine_pts, t)
+		var rad: float = _key(TORSO_R, t) * 1.06
+		var pts: Array = []
+		var radii: Array = []
+		for j in range(24):
+			var th: float = TAU * float(j) / 24.0
+			pts.append(c + Vector3(cos(th) * rad * _key(TORSO_SX, t), 0.014 * sin(2.0 * th), sin(th) * rad * _key(TORSO_SZ, t)))
+			radii.append(thin * 0.74)
+		_add(root, _tube_mesh(pts, radii, 6, true, 0.34), wire)
+
+	var pelvis: Vector3 = spine_pts[0] + Vector3(0.0, -0.032, 0.0)
+	var ppts: Array = []
+	var prad: Array = []
+	for j in range(24):
+		var th: float = TAU * float(j) / 24.0
+		ppts.append(pelvis + Vector3(cos(th) * 0.122, 0.010 * sin(3.0 * th), sin(th) * 0.086))
+		prad.append(thin * 0.80)
+	_add(root, _tube_mesh(ppts, prad, 6, true, 0.34), wire)
+
+	for i in range(2):
+		var ax: Vector3 = Vector3(1.0, 0.0, 0.0) if i == 0 else Vector3(0.0, 0.0, 1.0)
+		var hpts: Array = []
+		var hrad: Array = []
+		for j in range(20):
+			var th: float = TAU * float(j) / 20.0
+			hpts.append(head_c + Vector3(0.0, 1.0, 0.0) * (0.102 * cos(th)) + ax * (0.092 * sin(th)))
+			hrad.append(thin * 0.70)
+		_add(root, _tube_mesh(hpts, hrad, 6, true, 0.34), wire)
+
+
+static func _pour(root: Node3D, rng: RandomNumberGenerator, hip_p: Vector3, deal: Array,
+		cream: Color, roving: ImageTexture) -> void:
+	# the lower half drowned — a solid mound of felt standing in for the legs
+	var base: Color = _dye(deal[rng.randi_range(0, deal.size() - 1)], rng, cream)
+	# levels chosen so the flattest, widest blob still rests its underside on y=0
+	var ys: Array = [0.18, 0.30, 0.42, 0.55, 0.68]
+	var rs: Array = [0.44, 0.38, 0.32, 0.26, 0.20]
+	var sy: Array = [0.40, 0.52, 0.66, 0.86, 1.00]
+	for i in range(ys.size()):
+		var rr: float = float(rs[i]) * rng.randf_range(0.94, 1.07)
+		var sph := SphereMesh.new()
+		sph.radius = rr
+		sph.height = rr * 2.0
+		sph.radial_segments = 24
+		sph.rings = 14
+		var col: Color = _dye(base, rng, cream)
+		var mi: MeshInstance3D = _add(root, sph, _wool(col, roving))
+		var yy: float = float(ys[i])
+		var syy: float = float(sy[i])
+		var spin: float = rng.randf_range(0.0, TAU)
+		mi.transform = Transform3D(Basis(Vector3.UP, spin).scaled(Vector3(1.0, syy, 0.92)),
+			Vector3(hip_p.x * 0.4 + rng.randf_range(-0.022, 0.022), yy, rng.randf_range(-0.022, 0.022)))
+
+	for i in range(5):
+		var yy: float = 0.12 + float(i) * 0.135
+		var rr: float = lerpf(0.430, 0.210, float(i) / 4.0) * rng.randf_range(0.92, 1.07)
+		var tr: float = rng.randf_range(0.046, 0.076)
+		var path: Array = _ring_path(Vector3(0.0, yy, 0.0), Vector3.UP, Vector3.FORWARD, rr, tr, 0.05, 0.030, rng, 26)
+		var col: Color = _dye(deal[rng.randi_range(0, deal.size() - 1)], rng, cream)
+		_add(root, _tube_mesh(path[0], path[1], 8, true, 0.34), _wool(col, roving))
+
+
+static func _lerp_poly(pts: Array, t: float) -> Vector3:
+	var n: int = pts.size()
+	var f: float = clampf(t, 0.0, 0.99999) * float(n - 1)
+	var i: int = int(floor(f))
+	var i2: int = mini(i + 1, n - 1)
+	var s: float = f - float(i)
+	var pa: Vector3 = pts[i]
+	var pb: Vector3 = pts[i2]
+	return pa.lerp(pb, s)
 
 
 # ---------------------------------------------------------------------------

@@ -53,7 +53,7 @@ const PLINTH_HEIGHT: float = 0.8
 const PLINTH_REVEAL: float = 0.015  # shadow gap — the crack passes under
 
 const STATEMENT_MAIN: String = "THIS ROOM CANNOT PROVE THIS ROOM."
-const STATEMENT_SUB: String = "— and it is true"
+const STATEMENT_SUB: String = "A spatial metaphor / finite recursion"
 const STATEMENT_COLOR: Color = Color(0.93, 0.96, 1.0)
 
 @export var room_size: float = 8.0
@@ -253,7 +253,7 @@ func _build_statement(parent: Node3D, s: float, depth: int, z_face_n: float, f_t
 		var main_lbl := Label3D.new()
 		main_lbl.text = STATEMENT_MAIN
 		main_lbl.font_size = 80
-		main_lbl.pixel_size = 0.004
+		main_lbl.pixel_size = 0.004 * minf(room_size / 8.0, 1.0)
 		main_lbl.modulate = STATEMENT_COLOR
 		main_lbl.outline_size = 4
 		main_lbl.position = Vector3(0.0, f_top + 3.15 * s, z_lbl)
@@ -263,7 +263,7 @@ func _build_statement(parent: Node3D, s: float, depth: int, z_face_n: float, f_t
 		var sub_lbl := Label3D.new()
 		sub_lbl.text = STATEMENT_SUB
 		sub_lbl.font_size = 44
-		sub_lbl.pixel_size = 0.004
+		sub_lbl.pixel_size = 0.004 * minf(room_size / 8.0, 1.0)
 		sub_lbl.modulate = STATEMENT_COLOR
 		sub_lbl.outline_size = 2
 		sub_lbl.position = Vector3(0.0, f_top + 2.78 * s, z_lbl)

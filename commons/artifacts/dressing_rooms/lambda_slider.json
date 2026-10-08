@@ -1,69 +1,44 @@
 {
- "approach": "south",
- "artifact_offset": [
-  -0.25,
-  0.4,
-  0.0
- ],
- "clearance": [
-  3.0,
-  3.0,
-  4.0
- ],
- "exit": "north",
- "extras": [
-  {
-   "offset": [
-    -1.0,
-    0.0,
-    0.0
-   ],
-   "text": "\u03bb",
-   "type": "3t"
+  "lookup_name": "lambda_slider",
+  "footprint": [0.69, 0.33, 1.31],
+  "rotations": ["0"],
+  "approach": "south",
+  "exit": "south",
+  "footing": {
+    "anchor": [1, 1],
+    "tiles": [
+      [4, 4, 4],
+      [1, 1, 1],
+      [1, 1, 1]
+    ]
   },
-  {
-   "key": "lambda_explainer",
-   "offset": [
-    0.0,
-    1.0,
-    0.0
-   ],
-   "type": "tt"
-  }
- ],
- "footing": {
-  "anchor": [
-   1.0,
-   1.0
-  ],
-  "tiles": [
-   [
-    1.0,
-    1.0,
-    1.0
-   ],
-   [
-    1.0,
-    2,
-    1.0
-   ],
-   [
-    1.0,
-    1.0,
-    1
-   ]
-  ]
- },
- "footprint": [
-  8,
-  8,
-  2.5
- ],
- "lookup_name": "lambda_slider",
- "rotations": [
-  "0",
-  "90",
-  "180",
-  "270"
- ]
+  "artifact_offset": [0.0, 0.0, -0.74],
+  "artifact_config": {
+    "calibration": "dispute"
+  },
+  "extras": [],
+  "clearance": [3, 3, 3],
+  "posture": "wall",
+  "show_base": true,
+  "show_light": true,
+  "light_mode": "glow",
+  "show_info": false,
+  "show_dressing": false,
+  "placement_contract": {
+    "allowed_modes": ["against_wall", "freestanding"],
+    "preferred_mode": "against_wall",
+    "wall_side": "north",
+    "hard_zone_m": [1, 3, 3],
+    "preferred_zone_m": [3, 3, 3],
+    "required_support": "wall",
+    "interaction_faces": ["south"],
+    "rear_clearance_m": 0.0,
+    "front_clearance_m": 2.0,
+    "circulation": "frontal",
+    "circulation_behind": false,
+    "minimum_route_width_m": 0.9,
+    "neighbor_policy": "no_artifacts_in_preferred_zone"
+  },
+  "production_grade": "featured_aaa",
+  "placement_intent": "A solitary control that may stand freely but prefers the north wall: a 2 cm installation gap, no rear circulation, two metres of frontal interaction space, and no neighboring artifacts or separate display props."
 }

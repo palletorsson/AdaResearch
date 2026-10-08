@@ -53,6 +53,9 @@ signal terrain_controls_changed(payload: Dictionary)
 @export var voxel_color: Color = Color(0.3, 0.7, 0.4)
 @export var height_gradient: bool = true
 
+## Standalone shortcuts remain available; museum placements can reserve keys for movement.
+@export var keyboard_shortcuts: bool = true
+
 # ── THE CONTRACT (stand:lattice) — N4, 12 September 2026 ────────────────────
 #
 # WHEN DOES A VALUE BECOME A PLACE A BODY CAN OCCUPY? This bench and the voxel
@@ -240,6 +243,7 @@ func _create_base():
 	add_child(base)
 
 func _create_labels():
+	if stand == "lattice": return # All numbers belong on the instrument case.
 	_info_label = Label3D.new()
 	_info_label.name = "InfoLabel"
 	_info_label.pixel_size = 0.002
@@ -250,6 +254,7 @@ func _create_labels():
 	_update_info()
 
 func _create_vr_controls():
+	if stand == "lattice": return # The cased lattice panel supplies its own controls.
 	var total_size = grid_size * voxel_size
 	var RackTpl: GDScript = load("res://commons/audio/rack_templates/RackTemplates.gd")
 	var mount: String = str(_grid_config.get("mount", ""))
@@ -314,6 +319,9 @@ func _on_scale_slider_moved(_position):
 		noise_scale = 0.5 + norm * 19.5
 
 func _on_new_seed():
+	if stand == "lattice":
+		new_lattice_seed()
+		return
 	_noise.seed = randi()
 	_generate_terrain()
 	_broadcast_controls_to_voxelnoise()
@@ -399,6 +407,8 @@ func _rebuild_multimesh():
 	_update_info()
 
 func _input(event):
+	if not keyboard_shortcuts:
+		return
 	if event is InputEventKey and event.pressed:
 		match event.keycode:
 			KEY_UP:
@@ -415,6 +425,12 @@ func _input(event):
 				_on_new_seed()
 
 func reset():
+	if stand == "lattice":
+		_threshold_i = 2
+		threshold = 0.0
+		noise_scale = 4.0
+		new_lattice_seed()
+		return
 	threshold = 0.0
 	noise_scale = 4.0
 	_noise.seed = randi()
@@ -433,8 +449,10 @@ func _build_voxelnoise_payload() -> Dictionary:
 		# Under the staging the receiver is told to use the CONTRACT rather than its
 		# own coordinates: one field, two representations. Absent, the legacy link.
 		"contract": stand == "lattice",
+		"grid_size": grid_size,
 		"contract_span": CONTRACT_SPAN,
 		"contract_bias_scale": CONTRACT_BIAS_SCALE,
+		"selected_cell": [_cell.x, _cell.y, _cell.z],
 	}
 
 func _broadcast_controls_to_voxelnoise() -> void:
@@ -475,6 +493,8 @@ func _hall_ancestor() -> Node:
 
 func apply_grid_config(config_data: Dictionary):
 	_grid_config = config_data
+	if config_data.has("keyboard"):
+		keyboard_shortcuts = str(config_data["keyboard"]).to_lower() != "off"
 	for key in config_data:
 		if key in self:
 			set(key, config_data[key])
@@ -555,6 +575,13 @@ func _build_lattice_stand() -> void:
 	_lattice_root = Node3D.new()
 	_lattice_root.name = "LatticeStand"
 	add_child(_lattice_root)
+	var support := StaticBody3D.new()
+	support.name = "LatticePedestal"
+	_lattice_root.add_child(support)
+	support.add_child(HangarKit.box(Vector3(0,-0.90,0.18),Vector3(2.2,0.75,1.5),dark))
+	var shape := BoxShape3D.new();shape.size=Vector3(2.2,0.75,1.5)
+	var collision := CollisionShape3D.new();collision.shape=shape;collision.position=Vector3(0,-0.90,0.18)
+	support.add_child(collision)
 
 	var case_root := Node3D.new()
 	case_root.name = "Readout"
@@ -562,21 +589,21 @@ func _build_lattice_stand() -> void:
 	case_root.position = Vector3(0.0, -0.42, 0.62)
 	case_root.rotation_degrees = Vector3(-20, 0, 0)
 	_lattice_root.add_child(case_root)
-	case_root.add_child(HangarKit.box(Vector3.ZERO, Vector3(1.20, 0.30, 0.014), dark))
+	case_root.add_child(HangarKit.box(Vector3.ZERO, Vector3(1.42, 0.30, 0.025), dark))
 	_lattice_readout = Label3D.new()
 	_lattice_readout.name = "Text"
-	_lattice_readout.pixel_size = 0.00090
-	_lattice_readout.font_size = 17
+	_lattice_readout.pixel_size = 0.0014
+	_lattice_readout.font_size = 21
 	_lattice_readout.line_spacing = 0.5
 	_lattice_readout.modulate = Color(0.88, 0.94, 1.0)
 	_lattice_readout.outline_size = 3
 	_lattice_readout.outline_modulate = Color(0, 0, 0, 1)
 	_lattice_readout.horizontal_alignment = HORIZONTAL_ALIGNMENT_LEFT
 	_lattice_readout.vertical_alignment = VERTICAL_ALIGNMENT_TOP
-	_lattice_readout.position = Vector3(-0.575, 0.138, 0.010)
+	_lattice_readout.position = Vector3(-0.68, 0.135, 0.018)
 	case_root.add_child(_lattice_readout)
 
-	# the marker: a wire cage round the cell the plate is talking about
+	# Translucent marker; neighbours may hide it until CUT opens the model.
 	var marker := MeshInstance3D.new()
 	marker.name = "CellMarker"
 	var bm := BoxMesh.new()
@@ -597,9 +624,9 @@ func _build_lattice_stand() -> void:
 		], true)
 		panel.name = "Panel"
 		panel.set_meta("em_local_instrument", true)
-		panel.position = Vector3(0.78, -0.36, 0.66)
-		panel.rotation_degrees = Vector3(-26, 0, 0)
-		panel.scale = Vector3(1.4, 1.4, 1.4)
+		panel.position = Vector3(0.93, -0.36, 0.78)
+		panel.rotation_degrees = Vector3(-45, 0, 0)
+		panel.scale = Vector3(1.8, 1.8, 1.8)
 		_lattice_root.add_child(panel)
 		var actions := {"Btn_0": func(): next_threshold(), "Btn_1": func(): next_cell(), "Btn_2": func(): new_lattice_seed(), "Btn_3": func(): toggle_cut()}
 		for btn_name in actions.keys():
@@ -620,7 +647,7 @@ func _place_cell_marker() -> void:
 	if marker == null:
 		return
 	var half: float = grid_size / 2.0
-	marker.position = Vector3((_cell.x - half) * voxel_size, (_cell.y - half) * voxel_size, (_cell.z - half) * voxel_size)
+	marker.position = Vector3((_cell.x - half + 0.5) * voxel_size, (_cell.y - half + 0.5) * voxel_size, (_cell.z - half + 0.5) * voxel_size)
 
 
 func _update_lattice_readout() -> void:
@@ -629,13 +656,13 @@ func _update_lattice_readout() -> void:
 	var r: Dictionary = cell_report()
 	var o: Dictionary = occupancy_report()
 	var lines: PackedStringArray = PackedStringArray()
-	lines.append("seed %d · threshold %+.2f · %d³ cells · rebuilt in %.1f ms" % [_named_seed, threshold, grid_size, _last_rebuild_ms])
-	lines.append("cell %d,%d,%d   field %+.4f   bias %+.4f" % [int(r["cell"][0]), int(r["cell"][1]), int(r["cell"][2]), float(r["value"]), float(r["bias"])])
-	lines.append("%+.4f − %+.4f = %+.4f  %s  %+.2f   →   %s" % [float(r["value"]), float(r["bias"]),
-		float(r["value"]) - float(r["bias"]), ">", float(r["threshold"]),
-		("OCCUPIED" if bool(r["decision"]) else "empty")])
-	lines.append("%d of %d cells occupied, in %d separate pieces (the largest %d)" % [int(o["occupied"]), int(o["cells"]), int(o["pieces"]), int(o["largest_piece"])])
-	lines.append("connected is not walkable: this is a set of cells, not a verified passage")
+	lines.append("seed %d | threshold %+.2f | %d cubed" % [_named_seed,threshold,grid_size])
+	lines.append("cell %d,%d,%d | field %+.4f" % [int(r.cell[0]),int(r.cell[1]),int(r.cell[2]),float(r.value)])
+	lines.append("field - bias %+.4f = %+.4f" % [float(r.bias),float(r.value)-float(r.bias)])
+	lines.append("score > %+.2f ? %s" % [threshold,"OCCUPIED" if r.decision else "EMPTY"])
+	lines.append("%d occupied | %d pieces | largest %d" % [o.occupied,o.pieces,o.largest_piece])
+	lines.append("CUT %s | connected is not walkable" % ["ON: view only" if _cut else "OFF"])
+
 	_lattice_readout.text = "\n".join(lines)
 
 
@@ -644,9 +671,7 @@ func next_threshold() -> void:
 	if stand != "lattice":
 		return
 	_threshold_i = (_threshold_i + 1) % LATTICE_THRESHOLDS.size()
-	threshold = float(LATTICE_THRESHOLDS[_threshold_i])
-	_generate_terrain()
-	_broadcast_controls_to_voxelnoise()
+	threshold = float(LATTICE_THRESHOLDS[_threshold_i]) # Setter rebuilds and broadcasts once.
 
 
 func next_cell() -> void:
@@ -661,6 +686,18 @@ func next_cell() -> void:
 	_cell = step[i]
 	_place_cell_marker()
 	_update_lattice_readout()
+	_broadcast_cell_selection()
+
+
+## Move the address marker without rebuilding either body or changing its field.
+func _broadcast_cell_selection() -> void:
+	if stand != "lattice" or not is_inside_tree(): return
+	var hall: Node = _hall_ancestor()
+	for receiver in get_tree().get_nodes_in_group("voxelnoise_receivers"):
+		if hall != null and not hall.is_ancestor_of(receiver): continue
+		if receiver.has_method("apply_perlin_cell_selection"):
+			receiver.call("apply_perlin_cell_selection", _cell)
+
 
 
 func new_lattice_seed() -> void:

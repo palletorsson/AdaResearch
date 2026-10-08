@@ -33,12 +33,21 @@ var _t: float = 0.0
 
 
 func _ready() -> void:
+	if str(get_meta("config_lesson", "")) == "kinetic_drag":
+		var chamber = preload("res://commons/artifacts/drag_corridor/kinetic_drag.gd").new()
+		chamber.name = "KineticDrag"
+		add_child(chamber)
+		set_process(false)
+		set_physics_process(false)
+		return
 	_build()
 	set_physics_process(not Engine.is_editor_hint())
 	set_process(not Engine.is_editor_hint())
 
 
 func apply_grid_config(config: Dictionary) -> void:
+	if str(get_meta("config_lesson", "")) == "kinetic_drag":
+		return
 	if config.has("length"): length = float(config["length"])
 	if config.has("emissive"): emissive = bool(config["emissive"])
 	for c in get_children():

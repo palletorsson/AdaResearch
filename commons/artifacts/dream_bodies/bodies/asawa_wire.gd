@@ -37,6 +37,22 @@ extends RefCounted
 ## the mannequin head with painted eyes and knitted cap, true interlocked stitch
 ## topology (the dense patches are crowded rings, not knitting), and the loose
 ## cord ends that trail out of the reference's tangles.
+##
+## DNA axes — two, in the family's own language:
+##   winding — what the wound cord is DOING as a whole. figure = one standing
+##     figure (today's statue). mirrored = a second, smaller body buds sideways
+##     out of the shoulder and reaches back, tied on by two running cords.
+##     skein = the figure dissolves into a swarm of small wound balls of its own
+##     rings, heaped at the feet. unravelled = the skin becomes long single
+##     threads that spiral the whole body and spill into a flat coil on the
+##     floor. flooded = the lower half is drowned in a solid pour the torso
+##     rises out of, legs gone.
+##   strand — what the cord IS. fibre = twisted two-ply yarn (today). fossil =
+##     the flesh gone, cord bleached to chalk and more than twice as thick, with
+##     concretions grown on it. molten = glossy sagging wax, every ring drooped
+##     and dripping bulbed threads, the floor ball flattened to a puddle.
+##     bloom = the cord flowers — hands, crown, tangle-ends and buds along the
+##     body burst into petal fans.
 
 const TEX_SIZE: int = 128
 
@@ -58,14 +74,50 @@ const LEGKEYS: Array = [0.040, 0.056, 0.060, 0.048, 0.060, 0.076, 0.092]
 const V0_Y: float = 0.44   # v = 0 sits at 0.44 * height
 const V_SPAN: float = 0.56 # v = 1 sits at 1.00 * height
 
+const FLOOD_FRAC: float = 0.58 # flooded: the pour surface, as a fraction of height
+
 
 static func describe() -> String:
 	return "A hollow standing figure drawn only in looping cord — a hundred-odd rings and swept loops trace hips, waist, shoulders and skull, crowding into knitted skin in two bands and unravelling into open tangle elsewhere, so you see through the body to the far side."
 
 
-static func build(root: Node3D, seed: int) -> void:
+static func axes() -> Dictionary:
+	return {
+		"winding": ["figure", "mirrored", "skein", "unravelled", "flooded"],
+		"strand": ["fibre", "fossil", "molten", "bloom"],
+	}
+
+
+static func build(root: Node3D, seed: int, opts: Dictionary = {}) -> void:
+	var winding: String = String(opts.get("winding", "figure"))
+	var strand: String = String(opts.get("strand", "fibre"))
+
 	var rng := RandomNumberGenerator.new()
 	rng.seed = seed
+
+	# --- what the axes cost in rings, so the mesh budget survives every value --
+	var w_spread: float = 1.0
+	if winding == "mirrored":
+		w_spread = 1.55
+	elif winding == "skein":
+		w_spread = 2.45
+	elif winding == "unravelled":
+		w_spread = 3.05
+	elif winding == "flooded":
+		w_spread = 1.12
+	var s_spread: float = 1.0
+	var s_thick: float = 1.0
+	if strand == "fossil":
+		s_spread = 1.30
+		s_thick = 2.15
+	elif strand == "molten":
+		s_spread = 1.18
+		s_thick = 1.55
+	elif strand == "bloom":
+		s_spread = 1.30
+		s_thick = 1.05
+	var spread: float = minf(3.40, w_spread * s_spread)
+	var flooded: bool = winding == "flooded"
 
 	var scheme: Array = SCHEMES[rng.randi_range(0, SCHEMES.size() - 1)]
 	var col_main: Color = _c(scheme, 0)
@@ -75,18 +127,36 @@ static func build(root: Node3D, seed: int) -> void:
 
 	var tex_tight: ImageTexture = _cord_texture(rng, 7, 4, 0.34)
 	var tex_loose: ImageTexture = _cord_texture(rng, 4, 3, 0.26)
+	var tex_main: ImageTexture = tex_tight
+	var tex_second: ImageTexture = tex_loose
+	if strand == "fossil":
+		var tex_chalk: ImageTexture = _grain_texture(rng, 0.46)
+		tex_main = tex_chalk
+		tex_second = tex_chalk
+		col_main = _bone(col_main)
+		col_alt = _bone(col_alt)
+		col_knot = _bone(col_knot).darkened(0.12)
+		col_ball = _bone(col_ball)
+	elif strand == "molten":
+		var tex_wax: ImageTexture = _cord_texture(rng, 2, 1, 0.11)
+		tex_main = tex_wax
+		tex_second = tex_wax
+		col_main = _wax(col_main)
+		col_alt = _wax(col_alt)
+		col_knot = _wax(col_knot)
+		col_ball = _wax(col_ball)
 
 	var mats_main: Array = [
-		_cord(col_main, tex_tight, 12.0),
-		_cord(col_main.lightened(0.09), tex_tight, 12.0),
-		_cord(col_main.darkened(0.09), tex_tight, 12.0),
+		_cord2(strand, col_main, tex_main, 12.0),
+		_cord2(strand, col_main.lightened(0.09), tex_main, 12.0),
+		_cord2(strand, col_main.darkened(0.09), tex_main, 12.0),
 	]
 	var mats_alt: Array = [
-		_cord(col_alt, tex_loose, 10.0),
-		_cord(col_alt.lightened(0.10), tex_loose, 10.0),
+		_cord2(strand, col_alt, tex_second, 10.0),
+		_cord2(strand, col_alt.lightened(0.10), tex_second, 10.0),
 	]
-	var mat_knot: StandardMaterial3D = _cord(col_knot, tex_tight, 26.0)
-	var mat_ball: StandardMaterial3D = _cord(col_ball, tex_loose, 8.0)
+	var mat_knot: StandardMaterial3D = _cord2(strand, col_knot, tex_main, 26.0)
+	var mat_ball: StandardMaterial3D = _cord2(strand, col_ball, tex_second, 8.0)
 
 	# --- this individual ----------------------------------------------------
 	var body_h: float = rng.randf_range(1.42, 1.62)
@@ -110,6 +180,19 @@ static func build(root: Node3D, seed: int) -> void:
 	var knit_b: float = rng.randf_range(0.48, 0.72)
 	var knit_w: float = rng.randf_range(0.050, 0.085)
 
+	var cord: float = cord_r * s_thick
+	var flood_y: float = FLOOD_FRAC * body_h
+	var flood_v: float = clampf((FLOOD_FRAC - V0_Y) / V_SPAN, 0.0, 1.0)
+
+	# molten lets every ring sag and spread on the way down
+	var sag_x: float = 1.0
+	var sag_z: float = 1.0
+	var sag_y: float = 0.0
+	if strand == "molten":
+		sag_x = 1.12
+		sag_z = 0.86
+		sag_y = 0.055
+
 	var bp := {
 		"h": body_h,
 		"k": body_k,
@@ -118,6 +201,14 @@ static func build(root: Node3D, seed: int) -> void:
 		"sw": sway,
 		"dlo": depth_lo,
 	}
+
+	# points on the skin, harvested as the body is drawn: drips, concretions and
+	# buds all hang off these, so no mode has to re-derive the surface
+	var surf_sites: Array = []
+	# flower sites, collected always, grown only when the strand blooms
+	var bloom_p: Array = []
+	var bloom_d: Array = []
+	var bloom_s: Array = []
 
 	# --- torso: the lathe drawn as a stack of rings -------------------------
 	var v: float = 0.0
@@ -131,21 +222,27 @@ static func build(root: Node3D, seed: int) -> void:
 		var yaw: float = twist * v + rng.randf_range(-0.06, 0.06)
 		var tx: float = tilt_amp * sin(v * 7.0 + tilt_ph) + rng.randf_range(-0.035, 0.035)
 		var tz: float = tilt_amp * cos(v * 5.3 + tilt_ph * 1.7) + rng.randf_range(-0.035, 0.035)
-		var frame: Basis = Basis(Vector3.UP, yaw) * Basis(Vector3.RIGHT, tx) * Basis(Vector3.FORWARD, tz) * Basis.from_scale(Vector3(1.0, 1.0, dk))
+		ctr.y -= sag_y * r_maj
+		var frame: Basis = Basis(Vector3.UP, yaw) * Basis(Vector3.RIGHT, tx) * Basis(Vector3.FORWARD, tz) * Basis.from_scale(Vector3(sag_x, 1.0, dk * sag_z))
 		var use_alt: bool = _in_band(v, alt_a, alt_w) or _in_band(v, alt_b, alt_w) or rng.randf() < 0.05
 		var mat: StandardMaterial3D = null
 		if use_alt:
 			mat = mats_alt[rng.randi_range(0, mats_alt.size() - 1)]
 		else:
 			mat = mats_main[rng.randi_range(0, mats_main.size() - 1)]
-		var thick: float = cord_r * (0.82 if dense else 1.0)
-		_ring(root, ctr, frame, r_maj, thick, mat)
+		var thick: float = cord * (0.82 if dense else 1.0)
+		var drowned: bool = flooded and ctr.y < flood_y
+		if not drowned:
+			_ring(root, ctr, frame, r_maj, thick, mat)
+			if guard % 4 == 2:
+				var th_s: float = float(guard) * 1.71
+				surf_sites.append(Vector3(ctr.x + cos(th_s) * r_maj, ctr.y, ctr.z + sin(th_s) * r_maj * dk))
 		var dy: float = 0.0165
 		if dense:
 			dy = 0.0072
 		elif v > 0.80:
 			dy = 0.0110
-		v += dy / (body_h * V_SPAN)
+		v += dy * spread / (body_h * V_SPAN)
 
 	# --- skull: three meridian rings close the head cage ---------------------
 	var skull_v: float = 0.925
@@ -154,23 +251,28 @@ static func build(root: Node3D, seed: int) -> void:
 	for m_i in range(3):
 		var phi: float = PI * float(m_i) / 3.0 + twist
 		var ax: Vector3 = Vector3(cos(phi), 0.0, sin(phi))
-		_ring(root, skull_c, _basis_y_to(ax), skull_r * 0.96, cord_r * 0.9, mats_main[m_i % mats_main.size()])
+		_ring(root, skull_c, _basis_y_to(ax), skull_r * 0.96, cord * 0.9, mats_main[m_i % mats_main.size()])
+	bloom_p.append(skull_c + Vector3(0.0, skull_r * 0.9, 0.0))
+	bloom_d.append(Vector3(0.0, 1.0, 0.0))
+	bloom_s.append(0.082)
 
 	# --- legs: two ring columns, one standing, one free and forward ----------
 	var hip_off: Vector3 = _axis_at(bp, 0.10)
 	for side_i in range(2):
+		if flooded:
+			continue
 		var sd: float = -1.0 if side_i == 0 else 1.0
 		var is_stand: bool = (sd == stand_leg)
 		var foot_fwd: float = -0.030 if is_stand else 0.060
-		var spread: float = 0.046 if is_stand else 0.082
+		var spread_leg: float = 0.046 if is_stand else 0.082
 		var knee_out: float = 0.012 if is_stand else 0.030
 		var y_ankle: float = 0.030
 		var y_hip: float = 0.50 * body_h
-		var steps: int = clampi(int(round((y_hip - y_ankle) / 0.030)), 12, 28)
+		var steps: int = clampi(int(round((y_hip - y_ankle) / (0.030 * spread))), 8, 28)
 		var prev: Vector3 = Vector3.ZERO
 		for k in range(steps + 1):
 			var w: float = float(k) / float(steps)
-			var lx: float = sd * lerpf(spread, 0.085, w) * body_k + hip_off.x * (w * w) + sd * knee_out * sin(PI * w)
+			var lx: float = sd * lerpf(spread_leg, 0.085, w) * body_k + hip_off.x * (w * w) + sd * knee_out * sin(PI * w)
 			var lz: float = hip_off.z * (w * w) - foot_fwd * (1.0 - w) - 0.030 * sin(PI * w)
 			var ly: float = lerpf(y_ankle, y_hip, w)
 			var q := Vector3(lx, ly, lz)
@@ -181,23 +283,25 @@ static func build(root: Node3D, seed: int) -> void:
 			var r_leg: float = _leg_at(w) * body_k
 			var jx: float = rng.randf_range(-0.06, 0.06)
 			var jz: float = rng.randf_range(-0.06, 0.06)
-			var lf: Basis = _basis_y_to(tang) * Basis(Vector3.RIGHT, jx) * Basis(Vector3.FORWARD, jz) * Basis.from_scale(Vector3(1.0, 1.0, 0.86))
+			var lf: Basis = _basis_y_to(tang) * Basis(Vector3.RIGHT, jx) * Basis(Vector3.FORWARD, jz) * Basis.from_scale(Vector3(sag_x, 1.0, 0.86 * sag_z))
 			var lm: StandardMaterial3D = null
 			if rng.randf() < 0.10:
 				lm = mats_alt[rng.randi_range(0, mats_alt.size() - 1)]
 			else:
 				lm = mats_main[rng.randi_range(0, mats_main.size() - 1)]
-			_ring(root, q, lf, r_leg, cord_r, lm)
+			_ring(root, q, lf, r_leg, cord, lm)
+			if k % 5 == 3:
+				surf_sites.append(q + Vector3(sd * r_leg, 0.0, 0.0))
 			prev = q
 		# foot: three near-flat rings running forward from the ankle
-		var ankle := Vector3(sd * spread * body_k, y_ankle, -foot_fwd)
+		var ankle := Vector3(sd * spread_leg * body_k, y_ankle, -foot_fwd)
 		for f_i in range(3):
 			var ff: float = float(f_i)
 			var fr: float = 0.042 - ff * 0.007
 			var fy: float = 0.023 - ff * 0.002
 			var fz: float = ankle.z - 0.030 - ff * 0.028
 			var fax := Vector3(sd * 0.10, 1.0, -0.26).normalized()
-			_ring(root, Vector3(ankle.x + sd * 0.004 * ff, fy, fz), _basis_y_to(fax), fr * body_k, cord_r * 0.9, mats_main[f_i % mats_main.size()])
+			_ring(root, Vector3(ankle.x + sd * 0.004 * ff, fy, fz), _basis_y_to(fax), fr * body_k, cord * 0.9, mats_main[f_i % mats_main.size()])
 
 	# --- arms: one hanging, one reaching out ---------------------------------
 	var v_sh: float = 0.640
@@ -215,7 +319,7 @@ static func build(root: Node3D, seed: int) -> void:
 		else:
 			el = sp + Vector3(sd * 0.058, -0.235, 0.028)
 			wr = el + Vector3(-sd * 0.010, -0.215, 0.048 + rng.randf_range(-0.03, 0.03))
-		var a_steps: int = 13
+		var a_steps: int = clampi(int(round(13.0 / spread)), 5, 13)
 		for k in range(a_steps + 1):
 			var s: float = 0.05 + 0.95 * float(k) / float(a_steps)
 			var q: Vector3 = _bez(sp, el, wr, s)
@@ -225,39 +329,50 @@ static func build(root: Node3D, seed: int) -> void:
 			var r_arm: float = lerpf(0.056, 0.030, pow(s, 0.85)) * body_k
 			var jx: float = rng.randf_range(-0.10, 0.10)
 			var jz: float = rng.randf_range(-0.10, 0.10)
-			var af: Basis = _basis_y_to(d.normalized()) * Basis(Vector3.RIGHT, jx) * Basis(Vector3.FORWARD, jz) * Basis.from_scale(Vector3(1.0, 1.0, 0.90))
+			var af: Basis = _basis_y_to(d.normalized()) * Basis(Vector3.RIGHT, jx) * Basis(Vector3.FORWARD, jz) * Basis.from_scale(Vector3(sag_x, 1.0, 0.90 * sag_z))
 			var am: StandardMaterial3D = null
 			if rng.randf() < 0.16:
 				am = mats_alt[rng.randi_range(0, mats_alt.size() - 1)]
 			else:
 				am = mats_main[rng.randi_range(0, mats_main.size() - 1)]
-			_ring(root, q, af, r_arm, cord_r * 0.95, am)
+			_ring(root, q, af, r_arm, cord * 0.95, am)
+			if k % 4 == 1:
+				surf_sites.append(q + Vector3(0.0, -r_arm * 0.9, 0.0))
 		# a knot of two crossed rings for the hand
 		var hd: Vector3 = (wr - el).normalized()
 		var hx: Vector3 = hd.cross(Vector3.UP)
 		if hx.length() < 0.0001:
 			hx = hd.cross(Vector3.RIGHT)
-		_ring(root, wr + hd * 0.020, _basis_y_to(hx.normalized()), 0.036 * body_k, cord_r * 0.9, mat_knot)
-		_ring(root, wr + hd * 0.036, _basis_y_to(hd), 0.030 * body_k, cord_r * 0.9, mat_knot)
+		_ring(root, wr + hd * 0.020, _basis_y_to(hx.normalized()), 0.036 * body_k, cord * 0.9, mat_knot)
+		_ring(root, wr + hd * 0.036, _basis_y_to(hd), 0.030 * body_k, cord * 0.9, mat_knot)
+		bloom_p.append(wr + hd * 0.062)
+		bloom_d.append(hd)
+		bloom_s.append(0.078)
 
 	# --- knitted patches: small stitch rings lying on the skin ---------------
-	for band_i in range(2):
-		var bc: float = knit_a if band_i == 0 else knit_b
-		var th0: float = -PI * 0.5 + rng.randf_range(-0.7, 0.7)
-		for r_i in range(2):
-			for c_i in range(5):
-				var vv: float = bc + (float(r_i) - 0.5) * 0.034
-				var th: float = th0 + (float(c_i) - 2.0) * 0.40
-				var pos: Vector3 = _body_point(bp, vv, th, 1.0)
-				var dk2: float = _depth_at(vv, depth_lo)
-				var nn: Vector3 = Vector3(cos(th), 0.14, sin(th) / maxf(dk2, 0.35)).normalized()
-				_ring(root, pos + nn * (cord_r * 0.5), _basis_y_to(nn), cord_r * 2.5, cord_r * 0.7, mat_knot)
+	if winding != "unravelled":
+		for band_i in range(2):
+			var bc: float = knit_a if band_i == 0 else knit_b
+			var th0: float = -PI * 0.5 + rng.randf_range(-0.7, 0.7)
+			for r_i in range(2):
+				for c_i in range(5):
+					var vv: float = bc + (float(r_i) - 0.5) * 0.034
+					var th: float = th0 + (float(c_i) - 2.0) * 0.40
+					var pos: Vector3 = _body_point(bp, vv, th, 1.0)
+					if flooded and pos.y < flood_y:
+						continue
+					var dk2: float = _depth_at(vv, depth_lo)
+					var nn: Vector3 = Vector3(cos(th), 0.14, sin(th) / maxf(dk2, 0.35)).normalized()
+					_ring(root, pos + nn * (cord * 0.5), _basis_y_to(nn), cord * 2.5, cord * 0.7, mat_knot)
 
 	# --- continuous loops climbing and wrapping the body ---------------------
 	var n_loops: int = rng.randi_range(3, 5)
 	for l_i in range(n_loops):
 		var v0: float = rng.randf_range(0.0, 0.42)
 		var v1: float = minf(0.95, v0 + rng.randf_range(0.26, 0.55))
+		if flooded:
+			v0 = maxf(v0, flood_v + 0.03)
+			v1 = maxf(v1, v0 + 0.22)
 		var turns: int = rng.randi_range(1, 3)
 		var phase: float = rng.randf_range(0.0, TAU)
 		var bulge: float = rng.randf_range(0.03, 0.15)
@@ -274,13 +389,16 @@ static func build(root: Node3D, seed: int) -> void:
 			lm = mats_alt[rng.randi_range(0, mats_alt.size() - 1)]
 		else:
 			lm = mats_main[rng.randi_range(0, mats_main.size() - 1)]
-		_tube(root, path, cord_r * 0.92, lm, true)
+		_tube(root, path, cord * 0.92, lm, true)
 
 	# --- open tangle arcs that balloon off the surface and re-land -----------
 	var n_tangle: int = rng.randi_range(2, 3)
 	for t_i in range(n_tangle):
 		var va: float = rng.randf_range(0.06, 0.72)
 		var vb: float = clampf(va + rng.randf_range(-0.24, 0.26), 0.02, 0.94)
+		if flooded:
+			va = maxf(va, flood_v + 0.04)
+			vb = maxf(vb, flood_v + 0.04)
 		var tha: float = rng.randf_range(0.0, TAU)
 		var thb: float = tha + rng.randf_range(1.1, 3.4)
 		var bulge2: float = rng.randf_range(0.40, 1.00)
@@ -299,18 +417,251 @@ static func build(root: Node3D, seed: int) -> void:
 			tm = mats_alt[rng.randi_range(0, mats_alt.size() - 1)]
 		else:
 			tm = mats_main[rng.randi_range(0, mats_main.size() - 1)]
-		_tube(root, path2, cord_r * 0.85, tm, false)
+		_tube(root, path2, cord * 0.85, tm, false)
+		var apex: Vector3 = path2[16]
+		var apex_ax: Vector3 = _axis_at(bp, lerpf(va, vb, 0.5))
+		var apex_d: Vector3 = apex - apex_ax
+		apex_d.y = maxf(apex_d.y, 0.10)
+		bloom_p.append(apex)
+		bloom_d.append(apex_d.normalized())
+		bloom_s.append(0.055)
 
 	# --- a ball of wound cord on the floor beside the feet -------------------
 	var ball_r: float = rng.randf_range(0.085, 0.115)
 	var ball_side: float = 1.0 if rng.randf() < 0.5 else -1.0
-	var ball_c := Vector3(ball_side * rng.randf_range(0.22, 0.30), ball_r + cord_r * 1.4 + 0.003, rng.randf_range(-0.06, 0.16))
+	var ball_c := Vector3(ball_side * rng.randf_range(0.22, 0.30), ball_r + cord * 1.4 + 0.003, rng.randf_range(-0.06, 0.16))
+	if flooded:
+		ball_c = Vector3(ball_side * 0.13, flood_y + ball_r * 0.50, 0.05)
+	if strand == "molten":
+		ball_c.y = ball_r * 0.42
 	var n_ball: int = rng.randi_range(7, 9)
 	for b_i in range(n_ball):
 		var fb: float = float(b_i) / float(n_ball)
 		var ax2 := Vector3(sin(fb * 9.4 + 0.7), cos(fb * 6.1), sin(fb * 4.3 + 2.1)).normalized()
 		var rb: float = ball_r * (0.78 + 0.22 * cos(fb * 5.0))
-		_ring(root, ball_c, _basis_y_to(ax2), rb, cord_r * 1.05, mat_ball)
+		var bb: Basis = _basis_y_to(ax2)
+		if strand == "molten":
+			bb = bb * Basis.from_scale(Vector3(1.55, 0.30, 1.55))
+		_ring(root, ball_c, bb, rb, cord * 1.05, mat_ball)
+
+	# --- winding: mirrored — a second body budding out of the shoulder -------
+	if winding == "mirrored":
+		var bud_side: float = -reach
+		var bud_k: float = rng.randf_range(0.50, 0.66)
+		var bud_v: float = rng.randf_range(0.64, 0.78)
+		var bud_lean: float = deg_to_rad(rng.randf_range(44.0, 64.0)) * bud_side
+		var bud_yaw: float = rng.randf_range(-0.8, 0.8)
+		var bud_rot: Basis = Basis(Vector3.FORWARD, bud_lean) * Basis(Vector3.UP, bud_yaw)
+		var bud_org: Vector3 = _axis_at(bp, bud_v) + Vector3(bud_side * _profile_at(bud_v) * body_k * 1.05, 0.0, 0.0)
+		var b_steps: int = 20
+		for k in range(b_steps + 1):
+			var vv: float = float(k) / float(b_steps)
+			var lp: Vector3 = _axis_at(bp, vv)
+			lp.y -= V0_Y * body_h
+			var wp: Vector3 = bud_org + bud_rot * (lp * bud_k)
+			var rr: float = _profile_at(vv) * body_k * bud_k
+			var dk3: float = _depth_at(vv, depth_lo)
+			var bf: Basis = bud_rot * Basis(Vector3.UP, twist * vv) * Basis(Vector3.RIGHT, rng.randf_range(-0.06, 0.06)) * Basis.from_scale(Vector3(sag_x, 1.0, dk3 * sag_z))
+			var bm: StandardMaterial3D = null
+			if rng.randf() < 0.24:
+				bm = mats_alt[rng.randi_range(0, mats_alt.size() - 1)]
+			else:
+				bm = mats_main[rng.randi_range(0, mats_main.size() - 1)]
+			_ring(root, wp, bf, rr, cord * 0.92, bm)
+			if k % 4 == 2:
+				surf_sites.append(wp + bud_rot * Vector3(rr, 0.0, 0.0))
+		var blp: Vector3 = _axis_at(bp, 0.93)
+		blp.y -= V0_Y * body_h
+		var bskull: Vector3 = bud_org + bud_rot * (blp * bud_k)
+		var bsr: float = _profile_at(0.93) * body_k * bud_k
+		for m_i in range(3):
+			var phi2: float = PI * float(m_i) / 3.0
+			var ax3: Vector3 = bud_rot * Vector3(cos(phi2), 0.0, sin(phi2))
+			_ring(root, bskull, _basis_y_to(ax3), bsr * 0.96, cord * 0.85, mats_main[m_i % mats_main.size()])
+		bloom_p.append(bskull + bud_rot * Vector3(0.0, bsr * 1.1, 0.0))
+		bloom_d.append((bud_rot * Vector3(0.0, 1.0, 0.0)).normalized())
+		bloom_s.append(0.060)
+		# the bud's small arm, reaching back at the body it grew from
+		var bsh: Vector3 = bud_org + bud_rot * ((_axis_at(bp, 0.64) - Vector3(0.0, V0_Y * body_h, 0.0)) * bud_k)
+		var b_wr: Vector3 = _axis_at(bp, 0.52) + Vector3(bud_side * 0.03, 0.0, -0.11)
+		var b_el: Vector3 = (bsh + b_wr) * 0.5 + Vector3(0.0, 0.10, -0.15)
+		for k in range(7):
+			var s: float = 0.08 + 0.92 * float(k) / 6.0
+			var q: Vector3 = _bez(bsh, b_el, b_wr, s)
+			var d: Vector3 = 2.0 * (1.0 - s) * (b_el - bsh) + 2.0 * s * (b_wr - b_el)
+			if d.length() < 0.0001:
+				d = Vector3.DOWN
+			var ra: float = lerpf(0.040, 0.022, s) * body_k
+			_ring(root, q, _basis_y_to(d.normalized()), ra, cord * 0.9, mats_main[k % mats_main.size()])
+		bloom_p.append(b_wr)
+		bloom_d.append((b_wr - b_el).normalized())
+		bloom_s.append(0.050)
+		# two cords running out of the parent's skin and into the bud
+		for c_i in range(2):
+			var pth := PackedVector3Array()
+			var th_c: float = rng.randf_range(0.0, TAU)
+			for k in range(18):
+				var s: float = float(k) / 17.0
+				var sm3: float = s * s * (3.0 - 2.0 * s)
+				var pa: Vector3 = _body_point(bp, lerpf(0.44, bud_v, s), th_c + 1.6 * s, 1.03 + 0.10 * sin(PI * s))
+				var pb: Vector3 = bud_org + bud_rot * ((_axis_at(bp, lerpf(0.06, 0.58, s)) - Vector3(0.0, V0_Y * body_h, 0.0)) * bud_k)
+				pth.append(pa.lerp(pb, sm3))
+			_tube(root, pth, cord * 0.80, mats_alt[c_i % mats_alt.size()], false)
+
+	# --- winding: skein — the body scattered into balls of its own cord ------
+	if winding == "skein":
+		var n_sw: int = rng.randi_range(44, 58)
+		for i in range(n_sw):
+			var vv: float = rng.randf_range(0.0, 1.0)
+			var th: float = rng.randf_range(0.0, TAU)
+			var okk: float = rng.randf_range(0.30, 1.30)
+			var p: Vector3 = _body_point(bp, vv, th, okk)
+			p.y += rng.randf_range(-0.03, 0.03)
+			var rr: float = rng.randf_range(0.016, 0.050) * body_k
+			var sm2: StandardMaterial3D = null
+			if rng.randf() < 0.34:
+				sm2 = mats_alt[rng.randi_range(0, mats_alt.size() - 1)]
+			else:
+				sm2 = mats_main[rng.randi_range(0, mats_main.size() - 1)]
+			_wound_ball(root, p, rr, cord * 0.75, sm2, rng)
+			if i % 6 == 4:
+				surf_sites.append(p + Vector3(0.0, rr, 0.0))
+		var n_low: int = rng.randi_range(12, 18)
+		for i in range(n_low):
+			var yy: float = rng.randf_range(0.02, 0.46) * body_h
+			var t2: float = clampf(yy / (0.46 * body_h), 0.0, 1.0)
+			var rad: float = lerpf(0.30, 0.09, t2) * rng.randf_range(0.25, 1.0)
+			var aa: float = rng.randf_range(0.0, TAU)
+			var rr2: float = rng.randf_range(0.020, 0.055) * body_k
+			var p2 := Vector3(cos(aa) * rad, maxf(yy, rr2 * 0.95), sin(aa) * rad)
+			var lm2: StandardMaterial3D = null
+			if rng.randf() < 0.5:
+				lm2 = mats_alt[rng.randi_range(0, mats_alt.size() - 1)]
+			else:
+				lm2 = mat_ball
+			_wound_ball(root, p2, rr2, cord * 0.80, lm2, rng)
+
+	# --- winding: unravelled — the skin become thread, spilling on the floor -
+	if winding == "unravelled":
+		var n_th: int = rng.randi_range(6, 8)
+		for i in range(n_th):
+			var turns2: float = rng.randf_range(2.5, 5.2)
+			var ph2: float = rng.randf_range(0.0, TAU)
+			var vtop: float = rng.randf_range(0.70, 0.99)
+			var pth := PackedVector3Array()
+			var nw: int = 54
+			for k in range(nw):
+				var s: float = float(k) / float(nw - 1)
+				var vv: float = lerpf(vtop, 0.02, s)
+				var th: float = ph2 + TAU * turns2 * s
+				var okk: float = 1.04 + 0.11 * sin(TAU * 2.0 * s + ph2)
+				pth.append(_body_point(bp, clampf(vv, 0.0, 1.0), th, okk))
+			var last: Vector3 = pth[pth.size() - 1]
+			var cx: float = rng.randf_range(-0.10, 0.10)
+			var cz: float = rng.randf_range(-0.05, 0.18)
+			var r0: float = rng.randf_range(0.10, 0.16)
+			var r1: float = rng.randf_range(0.22, 0.32)
+			var ph3: float = rng.randf_range(0.0, TAU)
+			var nf: int = 30
+			for k in range(nf):
+				var s: float = float(k) / float(nf - 1)
+				var rr3: float = lerpf(r0, r1, s)
+				var aa: float = ph3 + TAU * 1.7 * s
+				var yy: float = lerpf(last.y, cord * 1.4, pow(s, 0.55))
+				pth.append(Vector3(cx + cos(aa) * rr3, yy, cz + sin(aa) * rr3))
+			var um: StandardMaterial3D = null
+			if rng.randf() < 0.42:
+				um = mats_alt[rng.randi_range(0, mats_alt.size() - 1)]
+			else:
+				um = mats_main[rng.randi_range(0, mats_main.size() - 1)]
+			_tube(root, pth, cord * 0.90, um, false)
+			surf_sites.append(pth[18])
+
+	# --- winding: flooded — a solid pour drowns the lower half ---------------
+	if flooded:
+		var ax_c: Vector3 = _axis_at(bp, flood_v)
+		var r_top: float = maxf(_profile_at(flood_v) * body_k * 1.80, 0.20)
+		var r_base: float = r_top * rng.randf_range(1.45, 1.80)
+		var mat_pour: StandardMaterial3D = _cord2(strand, col_ball.darkened(0.16), tex_second, 3.0)
+		mat_pour.roughness = minf(mat_pour.roughness, 0.46)
+		mat_pour.uv1_scale = Vector3(2.0, 2.0, 2.0)
+		_pour(root, ax_c.x, ax_c.z, flood_y, r_top, r_base, mat_pour, rng)
+		for i in range(3):
+			var rip: float = r_top * (1.02 + 0.13 * float(i))
+			_ring(root, Vector3(ax_c.x, flood_y - 0.004 - 0.004 * float(i), ax_c.z), Basis(), rip, cord * 0.85, mats_alt[i % mats_alt.size()])
+
+	# --- strand: fossil — concretions grown on the bleached cage -------------
+	if strand == "fossil" and surf_sites.size() > 0:
+		var n_nod: int = rng.randi_range(14, 20)
+		for i in range(n_nod):
+			var si: int = rng.randi_range(0, surf_sites.size() - 1)
+			var p0: Vector3 = surf_sites[si]
+			var rr: float = rng.randf_range(0.016, 0.042) * body_k
+			var sph := SphereMesh.new()
+			sph.radius = rr
+			sph.height = rr * rng.randf_range(1.3, 2.6)
+			sph.radial_segments = 8
+			sph.rings = 5
+			var nm: StandardMaterial3D = mat_knot
+			if rng.randf() < 0.4:
+				nm = mats_main[rng.randi_range(0, mats_main.size() - 1)]
+			var mi: MeshInstance3D = _add(root, sph, nm)
+			mi.transform = Transform3D(Basis(Vector3.UP, rng.randf_range(0.0, TAU)), p0)
+
+	# --- strand: molten — the cord weeps bulbed threads ----------------------
+	if strand == "molten" and surf_sites.size() > 0:
+		for b in range(5):
+			var paths: Array = []
+			for d_i in range(9):
+				var si: int = rng.randi_range(0, surf_sites.size() - 1)
+				var p0: Vector3 = surf_sites[si]
+				var len_d: float = rng.randf_range(0.05, 0.26)
+				var swing: float = rng.randf_range(-0.040, 0.040)
+				var pth := PackedVector3Array()
+				for k in range(7):
+					var s: float = float(k) / 6.0
+					var yy: float = maxf(p0.y - len_d * s, 0.008)
+					pth.append(Vector3(p0.x + swing * s * s, yy, p0.z + swing * 0.6 * s * s))
+				paths.append(pth)
+			var stb := SurfaceTool.new()
+			stb.begin(Mesh.PRIMITIVE_TRIANGLES)
+			for q in paths:
+				var qq: PackedVector3Array = q
+				_tube_into(stb, qq, cord * 0.52, false)
+				_sphere_into(stb, qq[qq.size() - 1], cord * 1.45, 4)
+			stb.generate_normals()
+			var dmesh: ArrayMesh = stb.commit()
+			if dmesh != null and dmesh.get_surface_count() > 0:
+				var dm: StandardMaterial3D = mats_main[b % mats_main.size()]
+				if b % 4 == 3:
+					dm = mats_alt[b % mats_alt.size()]
+				var dmi: MeshInstance3D = _add(root, dmesh, dm)
+				dmi.transform = Transform3D(Basis(), Vector3.ZERO)
+
+	# --- strand: bloom — the cord flowers ------------------------------------
+	if strand == "bloom":
+		if surf_sites.size() > 0:
+			var n_bud: int = rng.randi_range(6, 9)
+			for i in range(n_bud):
+				var si: int = rng.randi_range(0, surf_sites.size() - 1)
+				var p0: Vector3 = surf_sites[si]
+				var d0 := Vector3(p0.x, 0.0, p0.z)
+				if d0.length() < 0.02:
+					d0 = Vector3(1.0, 0.0, 0.0)
+				d0 = d0.normalized()
+				d0.y = 0.30
+				bloom_p.append(p0)
+				bloom_d.append(d0.normalized())
+				bloom_s.append(rng.randf_range(0.028, 0.044))
+		var mat_pet: StandardMaterial3D = _cord2(strand, col_knot.lightened(0.26), tex_second, 4.5)
+		mat_pet.cull_mode = BaseMaterial3D.CULL_DISABLED
+		mat_pet.roughness = 0.60
+		var mat_core: StandardMaterial3D = _cord2(strand, col_alt.lightened(0.30), tex_main, 22.0)
+		for i in range(bloom_p.size()):
+			var pp: Vector3 = bloom_p[i]
+			var dd: Vector3 = bloom_d[i]
+			var ss: float = float(bloom_s[i]) * body_k
+			_flower(root, pp, dd, ss, mat_pet, mat_core, rng)
 
 	# --- settle: measure, fit the box, sit it on the floor, centre it --------
 	var box: AABB = _union_aabb(root)
@@ -394,6 +745,17 @@ static func _bez(a: Vector3, b: Vector3, c: Vector3, s: float) -> Vector3:
 	return a * (iv * iv) + b * (2.0 * iv * s) + c * (s * s)
 
 
+static func _pour_r(t: float, r_base: float, r_top: float) -> float:
+	var s: float = clampf(t, 0.0, 1.0)
+	var sm: float = s * s * (3.0 - 2.0 * s)
+	var base: float = lerpf(r_base, r_top, sm)
+	return base * (1.0 + 0.09 * sin(PI * s))
+
+
+static func _sph(phi: float, th: float) -> Vector3:
+	return Vector3(sin(phi) * cos(th), cos(phi), sin(phi) * sin(th))
+
+
 # ---------------------------------------------------------------------------
 # primitives
 
@@ -418,7 +780,7 @@ static func _ring(root: Node3D, ctr: Vector3, bs: Basis, r_maj: float, cord: flo
 	return mi
 
 
-static func _tube(root: Node3D, pts_in: PackedVector3Array, r: float, mat: StandardMaterial3D, closed: bool) -> void:
+static func _tube_into(st: SurfaceTool, pts_in: PackedVector3Array, r: float, closed: bool) -> void:
 	var pts: PackedVector3Array = pts_in.duplicate()
 	if closed and pts.size() > 2:
 		pts.append(pts_in[0])
@@ -451,8 +813,6 @@ static func _tube(root: Node3D, pts_in: PackedVector3Array, r: float, mat: Stand
 		nrm = pn.normalized()
 		fns.append(nrm)
 		fbs.append(t.cross(nrm).normalized())
-	var st := SurfaceTool.new()
-	st.begin(Mesh.PRIMITIVE_TRIANGLES)
 	for i in range(n - 1):
 		var c0: Vector3 = pts[i]
 		var c1: Vector3 = pts[i + 1]
@@ -469,8 +829,145 @@ static func _tube(root: Node3D, pts_in: PackedVector3Array, r: float, mat: Stand
 			var p10: Vector3 = c1 + (n1 * cos(a0) + b1 * sin(a0)) * r
 			var p11: Vector3 = c1 + (n1 * cos(a1) + b1 * sin(a1)) * r
 			_quad_out(st, p00, p10, p11, p01, mid)
+
+
+static func _tube(root: Node3D, pts_in: PackedVector3Array, r: float, mat: StandardMaterial3D, closed: bool) -> void:
+	var st := SurfaceTool.new()
+	st.begin(Mesh.PRIMITIVE_TRIANGLES)
+	_tube_into(st, pts_in, r, closed)
 	st.generate_normals()
 	var mesh: ArrayMesh = st.commit()
+	if mesh == null or mesh.get_surface_count() == 0:
+		return
+	var mi: MeshInstance3D = _add(root, mesh, mat)
+	mi.transform = Transform3D(Basis(), Vector3.ZERO)
+
+
+static func _sphere_into(st: SurfaceTool, ctr: Vector3, r: float, seg: int) -> void:
+	var rows: int = maxi(seg, 3)
+	var cols: int = maxi(seg * 2, 6)
+	for i in range(rows):
+		var p0: float = PI * float(i) / float(rows)
+		var p1: float = PI * float(i + 1) / float(rows)
+		for j in range(cols):
+			var a0: float = TAU * float(j) / float(cols)
+			var a1: float = TAU * float(j + 1) / float(cols)
+			var v00: Vector3 = ctr + _sph(p0, a0) * r
+			var v01: Vector3 = ctr + _sph(p0, a1) * r
+			var v10: Vector3 = ctr + _sph(p1, a0) * r
+			var v11: Vector3 = ctr + _sph(p1, a1) * r
+			_quad_out(st, v00, v10, v11, v01, ctr)
+
+
+static func _wound_ball(root: Node3D, ctr: Vector3, r: float, cord: float, mat: StandardMaterial3D, rng: RandomNumberGenerator) -> void:
+	var st := SurfaceTool.new()
+	st.begin(Mesh.PRIMITIVE_TRIANGLES)
+	for c_i in range(3):
+		var ax := Vector3(rng.randf_range(-1.0, 1.0), rng.randf_range(-1.0, 1.0), rng.randf_range(-1.0, 1.0))
+		if ax.length() < 0.02:
+			ax = Vector3.UP
+		var bs: Basis = _basis_y_to(ax.normalized())
+		var rr: float = r * (0.70 + 0.15 * float(c_i))
+		var path := PackedVector3Array()
+		for k in range(14):
+			var a: float = TAU * float(k) / 14.0
+			path.append(ctr + bs * Vector3(cos(a) * rr, 0.0, sin(a) * rr))
+		_tube_into(st, path, cord, true)
+	st.generate_normals()
+	var mesh: ArrayMesh = st.commit()
+	if mesh == null or mesh.get_surface_count() == 0:
+		return
+	var mi: MeshInstance3D = _add(root, mesh, mat)
+	mi.transform = Transform3D(Basis(), Vector3.ZERO)
+
+
+static func _flower(root: Node3D, pos: Vector3, dir_in: Vector3, size: float, mat_pet: StandardMaterial3D, mat_core: StandardMaterial3D, rng: RandomNumberGenerator) -> void:
+	var up: Vector3 = dir_in
+	if up.length() < 0.0001:
+		up = Vector3.UP
+	up = up.normalized()
+	var side: Vector3 = up.cross(Vector3.UP)
+	if side.length() < 0.001:
+		side = up.cross(Vector3.RIGHT)
+	side = side.normalized()
+	var side2: Vector3 = up.cross(side).normalized()
+	var np: int = rng.randi_range(6, 9)
+	var st := SurfaceTool.new()
+	st.begin(Mesh.PRIMITIVE_TRIANGLES)
+	for i in range(np):
+		var a: float = TAU * float(i) / float(np) + rng.randf_range(-0.12, 0.12)
+		var out_d: Vector3 = (side * cos(a) + side2 * sin(a)).normalized()
+		var curl: float = rng.randf_range(0.75, 1.40)
+		var tip: Vector3 = pos + out_d * (size * 1.35 * curl) + up * (size * rng.randf_range(-0.25, 0.55))
+		var mid: Vector3 = pos + out_d * (size * 0.50) + up * (size * 1.05)
+		var perp: Vector3 = out_d.cross(up).normalized()
+		var prev_l: Vector3 = pos
+		var prev_r: Vector3 = pos
+		for k in range(6):
+			var s: float = float(k) / 5.0
+			var p: Vector3 = _bez(pos, mid, tip, s)
+			var w: float = sin(PI * s) * size * 0.46
+			var pl: Vector3 = p + perp * w
+			var pr: Vector3 = p - perp * w
+			if k > 0:
+				_quad_out(st, prev_l, prev_r, pr, pl, pos - up * size)
+			prev_l = pl
+			prev_r = pr
+	st.generate_normals()
+	var mesh: ArrayMesh = st.commit()
+	if mesh != null and mesh.get_surface_count() > 0:
+		var mi: MeshInstance3D = _add(root, mesh, mat_pet)
+		mi.transform = Transform3D(Basis(), Vector3.ZERO)
+	var sph := SphereMesh.new()
+	sph.radius = size * 0.34
+	sph.height = size * 0.60
+	sph.radial_segments = 10
+	sph.rings = 6
+	var mc: MeshInstance3D = _add(root, sph, mat_core)
+	mc.transform = Transform3D(Basis(), pos + up * (size * 0.20))
+
+
+static func _pour(root: Node3D, cx: float, cz: float, top_y: float, r_top: float, r_base: float, mat: StandardMaterial3D, rng: RandomNumberGenerator) -> void:
+	var cols: int = 26
+	var rows: int = 10
+	var wob := PackedFloat32Array()
+	for j in range(cols):
+		wob.append(rng.randf_range(-0.030, 0.042))
+	var st := SurfaceTool.new()
+	st.begin(Mesh.PRIMITIVE_TRIANGLES)
+	for i in range(rows):
+		var t0: float = float(i) / float(rows)
+		var t1: float = float(i + 1) / float(rows)
+		var y0: float = top_y * t0
+		var y1: float = top_y * t1
+		var rr0: float = _pour_r(t0, r_base, r_top)
+		var rr1: float = _pour_r(t1, r_base, r_top)
+		for j in range(cols):
+			var j1: int = (j + 1) % cols
+			var a0: float = TAU * float(j) / float(cols)
+			var a1: float = TAU * float(j1) / float(cols)
+			var w00: float = rr0 + float(wob[j]) * (1.0 - t0)
+			var w01: float = rr0 + float(wob[j1]) * (1.0 - t0)
+			var w10: float = rr1 + float(wob[j]) * (1.0 - t1)
+			var w11: float = rr1 + float(wob[j1]) * (1.0 - t1)
+			var p00 := Vector3(cx + cos(a0) * w00, y0, cz + sin(a0) * w00)
+			var p01 := Vector3(cx + cos(a1) * w01, y0, cz + sin(a1) * w01)
+			var p10 := Vector3(cx + cos(a0) * w10, y1, cz + sin(a0) * w10)
+			var p11 := Vector3(cx + cos(a1) * w11, y1, cz + sin(a1) * w11)
+			_quad_out(st, p00, p10, p11, p01, Vector3(cx, (y0 + y1) * 0.5, cz))
+	var apex := Vector3(cx, top_y + 0.012, cz)
+	var rim: float = _pour_r(1.0, r_base, r_top)
+	for j in range(cols):
+		var j1: int = (j + 1) % cols
+		var a0: float = TAU * float(j) / float(cols)
+		var a1: float = TAU * float(j1) / float(cols)
+		var q0 := Vector3(cx + cos(a0) * rim, top_y, cz + sin(a0) * rim)
+		var q1 := Vector3(cx + cos(a1) * rim, top_y, cz + sin(a1) * rim)
+		_quad_out(st, apex, q0, q1, apex, Vector3(cx, top_y - 0.30, cz))
+	st.generate_normals()
+	var mesh: ArrayMesh = st.commit()
+	if mesh == null or mesh.get_surface_count() == 0:
+		return
 	var mi: MeshInstance3D = _add(root, mesh, mat)
 	mi.transform = Transform3D(Basis(), Vector3.ZERO)
 
@@ -517,6 +1014,15 @@ static func _c(scheme: Array, i: int) -> Color:
 	return Color(code)
 
 
+static func _bone(c: Color) -> Color:
+	var t := Color(0.88, 0.86, 0.79)
+	return Color(lerpf(c.r, t.r, 0.74), lerpf(c.g, t.g, 0.74), lerpf(c.b, t.b, 0.74))
+
+
+static func _wax(c: Color) -> Color:
+	return Color(clampf(c.r * 1.10 + 0.06, 0.0, 1.0), clampf(c.g * 0.88, 0.0, 1.0), clampf(c.b * 0.80, 0.0, 1.0))
+
+
 static func _cord(c: Color, tex: ImageTexture, uv: float) -> StandardMaterial3D:
 	var m := StandardMaterial3D.new()
 	m.albedo_color = c
@@ -525,6 +1031,18 @@ static func _cord(c: Color, tex: ImageTexture, uv: float) -> StandardMaterial3D:
 	m.metallic = 0.0
 	m.uv1_triplanar = true
 	m.uv1_scale = Vector3(uv, uv, uv)
+	return m
+
+
+static func _cord2(strand: String, c: Color, tex: ImageTexture, uv: float) -> StandardMaterial3D:
+	var m: StandardMaterial3D = _cord(c, tex, uv)
+	if strand == "fossil":
+		m.roughness = 1.0
+		m.uv1_scale = Vector3(uv * 0.55, uv * 0.55, uv * 0.55)
+	elif strand == "molten":
+		m.roughness = 0.16
+		m.metallic = 0.22
+		m.uv1_scale = Vector3(uv * 0.45, uv * 0.45, uv * 0.45)
 	return m
 
 
@@ -545,6 +1063,26 @@ static func _cord_texture(rng: RandomNumberGenerator, n1: int, n2: int, contrast
 			var r_v: float = clampf(val + fuzz, 0.0, 1.0)
 			var g_v: float = clampf(val + fuzz * 0.8, 0.0, 1.0)
 			var b_v: float = clampf(val + fuzz * 0.6, 0.0, 1.0)
+			img.set_pixel(x, y, Color(r_v, g_v, b_v))
+	return ImageTexture.create_from_image(img)
+
+
+static func _grain_texture(rng: RandomNumberGenerator, contrast: float) -> ImageTexture:
+	# chalk: mottled pitting, no twist — integer frequencies so the tile is seamless
+	var img: Image = Image.create(TEX_SIZE, TEX_SIZE, false, Image.FORMAT_RGB8)
+	var ph: float = rng.randf_range(0.0, TAU)
+	for y in range(TEX_SIZE):
+		for x in range(TEX_SIZE):
+			var fx: float = float(x) / float(TEX_SIZE)
+			var fy: float = float(y) / float(TEX_SIZE)
+			var a: float = sin(TAU * (fx * 3.0 + fy * 5.0) + ph) * sin(TAU * (fx * 7.0 - fy * 2.0) - ph)
+			var b: float = sin(TAU * (fx * 11.0 - fy * 9.0) + ph * 0.3)
+			var m: float = 0.5 + 0.36 * a + 0.14 * b
+			var val: float = 1.0 - contrast * clampf(1.0 - m, 0.0, 1.0)
+			var fuzz: float = rng.randf_range(-0.055, 0.055)
+			var r_v: float = clampf(val + fuzz, 0.0, 1.0)
+			var g_v: float = clampf(val + fuzz * 0.9, 0.0, 1.0)
+			var b_v: float = clampf(val + fuzz * 0.75, 0.0, 1.0)
 			img.set_pixel(x, y, Color(r_v, g_v, b_v))
 	return ImageTexture.create_from_image(img)
 

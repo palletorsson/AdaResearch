@@ -1,71 +1,24 @@
 {
   "lookup_name": "galton_board",
-  "footprint": [
-    1,
-    1,
-    1
-  ],
-  "rotations": [
-    "0",
-    "90",
-    "180",
-    "270"
-  ],
+  "footprint": [1.1, 0.265, 1.55],
+  "rotations": ["0"],
   "approach": "south",
-  "exit": "north",
-  "footing": {
-    "anchor": [
-      2,
-      2
-    ],
-    "tiles": [
-      [
-        1,
-        1,
-        1,
-        1,
-        1
-      ],
-      [
-        1,
-        2,
-        2,
-        2,
-        1
-      ],
-      [
-        1,
-        2,
-        2,
-        2,
-        1
-      ],
-      [
-        1,
-        2,
-        2,
-        2,
-        1
-      ],
-      [
-        1,
-        1,
-        1,
-        1,
-        1
-      ]
-    ]
-  },
+  "exit": "south",
+  "footing": {"anchor": [1, 2], "tiles": [[4,4,4,4,4],[1,1,1,1,1],[1,1,1,1,1],[1,1,1,1,1]]},
   "extras": [],
-  "artifact_offset": [
-    0.0,
-    0.0,
-    0.0
-  ],
-  "clearance": [
-    3,
-    3,
-    3
-  ],
-  "posture": "table"
+  "artifact_offset": [0.0, 0.0, -0.35],
+  "clearance": [5, 4, 3],
+  "posture": "wall_floor",
+  "show_info": false,
+  "show_dressing": false,
+  "placement_contract": {
+    "allowed_modes": ["against_wall"], "preferred_mode": "against_wall", "wall_side": "north",
+    "hard_zone_m": [2, 3, 3], "preferred_zone_m": [5, 4, 3],
+    "required_support": "floor", "interaction_faces": ["south"],
+    "rear_clearance_m": 0.0, "front_clearance_m": 2.0,
+    "circulation": "frontal", "circulation_behind": false,
+    "minimum_route_width_m": 0.9, "neighbor_policy": "no_artifacts_in_preferred_zone"
+  },
+  "production_grade": "test_candidate",
+  "placement_intent": "A self-supporting probability machine backed against the wall with a clear operating and viewing apron."
 }

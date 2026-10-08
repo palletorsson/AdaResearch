@@ -328,7 +328,10 @@ func run() -> void:
 	var run_b: Array = ((prim.call("get_stand_state") as Dictionary)["counts"] as Array).duplicate()
 	measurements["replay"] = {"seed": seed0, "run_a": run_a, "run_b": run_b}
 	check(run_a == run_b and _sum(run_a) == 200, "CLEAR replays the seed: two hundred draws land in the same bins, count for count")
-	check(run_a == gauss300.slice(0, 30) or true, "(the first 200 of the earlier 300 were these draws too)")
+	var prefix_counts: Array[int] = []
+	prefix_counts.resize(30); prefix_counts.fill(0)
+	for v in vals.slice(0, 200): prefix_counts[clampi(int(v * 30), 0, 29)] += 1
+	check(run_a == prefix_counts, "the replay matches the actual first 200 values of the earlier 300")
 	prim.call("set_sample_seed", -1)
 	for k in range(2): _press(spanel, "Btn_0")
 	await get_tree().process_frame
@@ -350,7 +353,9 @@ func run() -> void:
 	for k in range(2): _press(spanel, "Btn_0")
 	await get_tree().process_frame
 	var run_e: Array = ((prim.call("get_stand_state") as Dictionary)["counts"] as Array).duplicate()
-	check(run_e != run_a, "under the new seed two hundred draws land elsewhere")
+	prim.call("clear")
+	prim.call("batch", 200)
+	check(run_e == (prim.call("get_stand_state") as Dictionary)["counts"], "the newly selected seed replays its two hundred draws")
 	# BINS: the same draws, another number of bins — nothing redrawn
 	var before_bins: Array = run_e.duplicate()
 	var vals_before: PackedFloat32Array = (prim.call("landed_values") as PackedFloat32Array).duplicate()
@@ -382,6 +387,11 @@ func run() -> void:
 		await get_tree().create_timer(0.3, true, false, true).timeout
 		get_viewport().get_texture().get_image().save_png(_evidence + "probe_gaussian_running_live.png")
 		measurements["captures"]["running"] = _cam_pose(cam)
+
+	await _review_sampling(prim, cam, capture)
+	prim.call("set_sample_seed", seed1)
+	prim.call("set_running", true)
+	prim.set_process(true)
 
 	# ── 6. the museum untouched; the walk; plinths; walks; reach ─────────────
 	await get_tree().create_timer(0.3).timeout
@@ -602,6 +612,119 @@ func run() -> void:
 			check(prim2 != null and str(st2.get("stand", "")) == "cabinet" and int(st2.get("bins", 0)) == 30 and prim2.get_node_or_null("Cabinet/StandPanel") != null,
 				"the rebuilt hall has its sampler again in its cabinet: thirty bins, a seed, the panel (%s)" % str(rebuilt))
 	_finish()
+
+
+## Independent checks and exported records. Browser playback uses these values.
+func _review_sampling(prim: Node3D, cam: Camera3D, capture: bool) -> void:
+	prim.set_process(false)
+	prim.call("set_running", false)
+	var input_probe: Node3D = load("res://commons/testing/gaussian_endpoint_sampler.gd").new()
+	var endpoint_results: Array = []
+	for kind in [1, 3]:
+		input_probe.set("distribution", kind)
+		for u in [0.0, 0.00001, 0.5, 0.99995, 1.0]:
+			input_probe.set("injected", [u, 0.0] as Array[float]); input_probe.set("input_index", 0)
+			var value: float = input_probe.call("_sample_distribution")
+			endpoint_results.append({"law": kind, "u": u, "value": value})
+			check(is_finite(value) and value >= 0.0 and value <= 1.0, "law %d: endpoint input %.5f produces a finite fitted value (%s)" % [kind, u, str(value)])
+	input_probe.free()
+	measurements["endpoint_inputs"] = endpoint_results
+	# Leave flight capacity reserved when BATCH is pressed; after PAUSE the
+	# existing beads still land. CLEAR must remove their meshes immediately.
+	prim.call("set_distribution", 0); prim.call("clear")
+	prim.set("max_samples", 10)
+	for i in range(4): prim.call("sample")
+	var marker_root: Node = prim.get("_sample_markers")
+	check(marker_root.get_child_count() == 4 and int(prim.call("in_flight")) == 4, "four issued draws have four live markers")
+	prim.call("batch", 100)
+	var state: Dictionary = prim.call("get_stand_state")
+	check(int(state.drawn) == 10 and int(state.landed) == 6 and int(state.in_flight) == 4, "BATCH reserves the four airborne draws: six landed plus four in flight fill the cap of ten")
+	prim.call("sample"); prim.call("batch", 100)
+	check(int(prim.get("_drawn")) == 10, "neither a manual sample nor another batch exceeds the reserved cap")
+	prim.call("_process", 2.0); prim.call("_process", 0.0)
+	state = prim.call("get_stand_state")
+	check(int(state.landed) == 10 and int(state.drawn) == 10 and int(state.in_flight) == 0 and marker_root.get_child_count() == 0, "PAUSE lets the four existing beads finish; ten land and their markers are removed")
+	prim.call("clear")
+	for i in range(3): prim.call("sample")
+	prim.call("clear")
+	check(marker_root.get_child_count() == 0 and int(prim.call("in_flight")) == 0 and int(prim.get("_drawn")) == 0, "CLEAR removes in-flight meshes and bookkeeping synchronously")
+	prim.call("set_running", true); prim.call("_process", 2.0); prim.call("_process", 0.0)
+	state = prim.call("get_stand_state")
+	check(int(state.drawn) == 10 and int(state.landed) == 10, "a long running frame also respects the issued-draw cap")
+	prim.call("set_running", false); prim.call("clear")
+	prim.set("max_samples", 1000)
+	# Land just below the visible bar top, before the obsolete max_samples
+	# height would have accepted the bead.
+	prim.call("batch", 100); prim.call("sample")
+	var falling: Array = prim.get("_falling_samples")
+	var v: float = float(falling[0].value)
+	var idx: int = clampi(int(v * 30), 0, 29)
+	var bars: MultiMesh = prim.get("_bar_mm")
+	var visible_top: float = bars.get_instance_transform(idx).origin.y * 2.0
+	falling[0].y = visible_top - 0.0001
+	prim.call("_update_falling_samples", 0.0)
+	check(int(prim.get("_total_samples")) == 101, "a bead lands when it reaches the actual visible bar top")
+	prim.call("_update_falling_samples", 0.0)
+	check(marker_root.get_child_count() == 0, "the landed marker is detached on the next sweep")
+	var histories: Dictionary = {}
+	for kind in range(4):
+		prim.call("set_distribution", kind); prim.call("set_bins", 30)
+		prim.call("set_sample_seed", 31415)
+		var curve: ImmediateMesh = prim.get("_im")
+		var curve_vertices: PackedVector3Array = curve.surface_get_arrays(0)[Mesh.ARRAY_VERTEX]
+		var curve_peak: float = 0.0
+		for vertex in curve_vertices: curve_peak = maxf(curve_peak, vertex.y)
+		check(absf(curve_peak - float(prim.get("display_height")) * 0.8) < 0.00001, "law %d: the labelled model shape stays inside the panel at its own fixed scale" % kind)
+		var values: Array = []
+		var clipped: Array = []
+		var snapshots: Dictionary = {}
+		for n in range(1, 1001):
+			var before_clip: int = int(prim.get("_clipped"))
+			prim.call("batch", 1)
+			var live: PackedFloat32Array = prim.call("landed_values")
+			values.append(live[live.size() - 1]); clipped.append(int(prim.get("_clipped")) > before_clip)
+			if n in [1, 12, 100, 300, 1000]:
+				snapshots[str(n)] = (prim.call("get_stand_state") as Dictionary).duplicate(true)
+				if capture and kind in [0, 1] and n in [12, 300]:
+					cam.global_position = prim.to_global(Vector3(0.0, 1.18, 1.00))
+					cam.look_at(prim.to_global(Vector3(0.0, 1.16, 0.0)))
+					for i in range(6): cam.make_current(); await get_tree().process_frame
+					get_viewport().get_texture().get_image().save_png(_evidence + "sample_%d_%d.png" % [kind, n])
+		var all_finite := true
+		for x in values:
+			if not is_finite(x) or x < 0.0 or x > 1.0: all_finite = false
+		check(all_finite and values.size() == 1000, "law %d: one thousand captured values are finite and in range" % kind)
+		var at_bins: Dictionary = {}
+		for bins in [10, 60, 30]:
+			prim.call("set_bins", bins)
+			at_bins[str(bins)] = (prim.call("get_stand_state") as Dictionary).duplicate(true)
+			check(Array(prim.call("landed_values")) == values and int(prim.get("_drawn")) == 1000, "law %d: rebinning to %d retains every value and consumes no draw" % [kind, bins])
+		prim.call("clear"); prim.call("batch", 1000)
+		check(Array(prim.call("landed_values")) == values, "law %d: CLEAR replays all one thousand values in order" % kind)
+		var key: String = ["uniform", "gauss", "poisson", "expon"][kind]
+		var snapshots_frozen := true
+		for count_key in snapshots:
+			if _sum(snapshots[count_key].counts) != int(count_key): snapshots_frozen = false
+		check(snapshots_frozen, "law %d: captured count arrays stay frozen at their own sample counts" % kind)
+		histories[key] = {"seed":31415,"values":values,"clipped":clipped,"snapshots":snapshots,"rebinned":at_bins}
+	# An explicitly selected edge example, alongside the unselected common seed.
+	# The selection rule is recorded rather than presented as a typical sample.
+	prim.call("set_distribution", 3)
+	for candidate in range(1, 21):
+		prim.call("set_sample_seed", candidate); prim.call("batch", 1000)
+		if int(prim.get("_clipped")) == 0: continue
+		var edge_values: Array = Array(prim.call("landed_values")).duplicate()
+		var edge_flags: Array = []
+		# Under EXPON with this guard and these parameters, values at one have
+		# been clamped. The source test confirms _fit independently at endpoints.
+		for edge_value in edge_values: edge_flags.append(edge_value >= 1.0)
+		histories["expon_edge"] = {"seed":candidate,"values":edge_values,"clipped":edge_flags,"state":(prim.call("get_stand_state") as Dictionary).duplicate(true),"selection":"first seed in 1..20 with at least one clipped draw among 1000; deliberate edge example"}
+		break
+	check(histories.has("expon_edge"), "an explicitly labelled, reproducible edge sample was found in the bounded seed search")
+	var f := FileAccess.open(OUT + "histories.json", FileAccess.WRITE)
+	f.store_string(JSON.stringify(histories)); f.close()
+	measurements["export"] = {"laws":4,"draws_per_law":1000,"seed":31415,"snapshots":[1,12,100,300,1000],"bin_counts":[10,30,60]}
+	prim.call("set_distribution", 1); prim.call("set_bins", 30)
 
 func _sum(a: Array) -> int:
 	var s: int = 0

@@ -4,14 +4,12 @@ class_name FractalTrussTower
 ## @identity
 ## name: "Fractal antennas & structures"
 ## tier: large
-## lineage: a self-similar truss — Eiffel's gusset, recursed until it is its own scaffold.
-## essence: A room-scale tower whose every strut is itself a little truss of thinner
-##   struts. Strength lives in the bracing, not the bulk: subdivide a beam into a
-##   frame and the frame holds more for less metal. Walk inside and you are inside a
-##   beam that is made of beams.
-## truth: "max strength, min material — a strut that is struts"
-## applications: self-supporting structure — recurse the bracing and the same
-##   skeleton spans further with less mass; the move every tall thing makes.
+## lineage: a recursive stack of braced, tapering storeys.
+## essence: A room-scale tower divided vertically into shorter sections. Leaf
+##   sections receive X-bracing; smaller legs overlap the earlier corner members.
+## truth: repeated bracing makes a visual hierarchy, not a strength optimum.
+## applications: inspect recursive subdivision and a prescribed sway. The artifact
+##   has no load, member-force, buckling or material-efficiency solver.
 
 @export var depth: int = 3
 @export var tower_height: float = 3.6
@@ -81,7 +79,7 @@ func _build() -> void:
 	root.add_child(_cylinder(apex + Vector3(0.0, 0.18, 0.0), 0.02, 0.36, steel_mat))
 	root.add_child(_sphere(apex + Vector3(0.0, 0.4, 0.0), 0.06, _glow_mat(Color(0.95, 0.45, 0.30), 2.4)))
 
-	add_child(_billboard_label("MAX STRENGTH, MIN MATERIAL", Vector3(0.0, 3.6, 0.0), 26, label_col))
+	add_child(_billboard_label("RECURSIVE BRACED STOREYS\nNO LOAD TEST", Vector3(0.0, 3.6, 0.0), 26, label_col))
 
 
 func _truss_segment(parent: Node3D, y0: float, y1: float, w_bot: float, w_top: float, d: int, leg_mat: Material, brace_mat: Material) -> void:
@@ -99,7 +97,7 @@ func _truss_segment(parent: Node3D, y0: float, y1: float, w_bot: float, w_top: f
 		parent.add_child(_cylinder_between(corners_b[i], corners_t[i], leg_r, leg_mat))
 
 	if d <= 1:
-		# Base case: X-bracing on each of the four faces — the strength is the bracing.
+		# Base case: draw X-bracing on each of the four faces. No strength is measured.
 		var br: float = leg_r * 0.55
 		for i in range(4):
 			var j: int = (i + 1) % 4

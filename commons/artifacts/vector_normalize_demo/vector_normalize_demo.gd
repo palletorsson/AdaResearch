@@ -5,10 +5,10 @@
 # Shows: V̂ = V / |V| (unit vector in same direction)
 #
 # @identity
-# essence: Side-by-side display of a vector V and its normalized form V̂ = V/|V|, sharing direction but with unit length
+# essence: Side-by-side display of V and V/|V| above the 0.001 magnitude threshold; at or below it the companion is zero
 # desire: To make the difference between direction and magnitude visible — same arrow, two scales, one geometric purpose
-# critical_parameter: input vector magnitude — large input compresses to unit, tiny input expands; both arrive at length 1
-# triggers: Any direction reads, only magnitude is removed; zero vector is the singular case where normalization fails
+# critical_parameter: input magnitude — inputs above 0.001 arrive at unit length; the threshold neighbourhood returns zero
+# triggers: Above the threshold only magnitude is removed; at or below 0.001 this implementation reports no available direction
 # emerges: Direction as a separable property of vectors — a vector is a magnitude and a unit, and unit vectors compose direction-only spaces
 # needs: vector input controls [has], live normalization computation [has], unit-circle/sphere reference [has]
 # relationships: Companion to vector_magnitude_demo (already voiced) in forces/Combat_Arena. Foundation for aim and direction artifacts
@@ -238,7 +238,7 @@ func _update_info(vec: Vector3):
 	builder.append("")
 	builder.append("VÌ‚ = V / |V|")
 	builder.append("VÌ‚ = (%.2f, %.2f, %.2f)" % [unit.x, unit.y, unit.z])
-	builder.append("|VÌ‚| = 1.000")
+	builder.append("|VÌ‚| = %.3f" % unit.length())
 	info_label.text = "\n".join(builder)
 
 func _update_unit_label(vec: Vector3):

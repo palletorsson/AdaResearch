@@ -5,6 +5,7 @@ var kind: String = "one"
 var source: Node3D
 var show_rule := false
 var _elapsed := 0.0
+var _threshold_walk: Node3D
 const CHAIR_STAGES := ["CUBE", "CUT + LIFT", "FLATTEN SEAT", "EXTEND LEGS", "EXTEND BACK", "ADD ARMRESTS"]
 
 func _ready() -> void:
@@ -46,6 +47,10 @@ func _ready() -> void:
 	# A low boundary marks the study's footprint without blocking the visitor.
 	box(Vector3(0, 0.006, 0), Vector3(4.7, 0.012, 3.1), material("23323b"))
 	begin()
+	if kind == "one" and str(source.get_meta("config_room", "")) == "thresholds":
+		_threshold_walk = load("res://commons/artifacts/recursion_lesson/threshold_walk.gd").new()
+		_threshold_walk.name = "ThresholdWalk"
+		add_child(_threshold_walk)
 	if kind == "one": _use_hall_light.call_deferred()
 
 func _build_compact_console(ids: Array, title: String) -> void:
@@ -195,6 +200,7 @@ func _process(dt: float) -> void:
 		refresh()
 
 func refresh() -> void:
+	if is_instance_valid(_threshold_walk): _threshold_walk.refresh_terms()
 	if not is_instance_valid(readout): return
 	if show_rule:
 		readout.text = {

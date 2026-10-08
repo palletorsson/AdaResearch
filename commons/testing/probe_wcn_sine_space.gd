@@ -338,6 +338,73 @@ func run() -> void:
 	_dump_built_row(em)
 	check(cor.scale.is_equal_approx(Vector3.ONE), "the subject's scale is what the map asked (1)")
 
+	# ── 6. THE WALKABLE SINE FLOOR (restored 2026-09-13) ──────────────────────
+	# From 2025-08-20 to 2026-02-21 this hall's sine_space token loaded the walkgrid
+	# commons/context/walkgrids/sine_space.tscn, a height field with a trimesh collider; a new
+	# registry file then re-bound the token to the collider-less sphere field. The map asks for
+	# the floor again with #floor:walk, fitted to the basin (x 2..10, rows 13..30): 3 x 7
+	# half-waves, 7.854 x 18.326 m, phases chosen so the whole rim lies at deck height.
+	var zoff: float = vest - 6.0   # map row r spans local z [r + zoff, r + 1 + zoff]; col c spans x [c, c + 1]
+	var ss: Node3D = null
+	for record: Dictionary in em.get("_edit_records"):
+		var nd: Node = record.get("node")
+		if nd != null and seg.is_ancestor_of(nd) and nd.get_script() != null \
+				and str(nd.get_script().resource_path) == "res://algorithms/wavefunctions/sine_space/SineSpace.gd":
+			ss = nd; break
+	check(ss != null, "the sine space stands in the hall")
+	var wf: Node3D = ss.get("walk_floor") if ss != null else null
+	var wf_body: StaticBody3D = wf.get_node_or_null("StaticBody3D") if wf != null else null
+	check(ss != null and str(ss.get("floor_mode")) == "walk" and wf_body != null,
+		"it stands as the walkable sine floor (#floor:walk), not the sphere field")
+	if ss != null:
+		var ssl: Vector3 = seg.to_local(ss.global_position)
+		measurements["sine_space_local"] = [snappedf(ssl.x, 0.001), snappedf(ssl.y, 0.001), snappedf(ssl.z - zoff, 0.001)]
+		check(absf(ssl.x - 6.5) < 0.01 and absf(ssl.z - zoff - 22.5) < 0.01 and absf(ssl.y) < 0.01,
+			"where the map put it: the centre of cell (6,22) on the deck (x %.3f, row %.3f, y %.3f), not slid" % [ssl.x, ssl.z - zoff, ssl.y])
+	if wf_body != null:
+		var fmi: MeshInstance3D = wf_body.get_node_or_null("MeshInstance3D")
+		var fcs: CollisionShape3D = wf_body.get_node_or_null("CollisionShape3D")
+		var faces: int = (fcs.shape as ConcavePolygonShape3D).get_faces().size() / 3 if fcs != null and fcs.shape is ConcavePolygonShape3D else 0
+		var tris: int = (fmi.mesh.surface_get_arrays(0)[Mesh.ARRAY_INDEX] as PackedInt32Array).size() / 3 if fmi != null and fmi.mesh != null else 0
+		check(faces > 0 and faces == tris, "its collider is a trimesh of the drawn surface: %d faces for %d triangles" % [faces, tris])
+		check(ss.get_node_or_null("SineSurface") == null and not ss.is_processing(), "no sphere field and no per-frame update stand with it")
+		var fb: AABB = seg.global_transform.affine_inverse() * (fmi.global_transform * fmi.get_aabb())
+		measurements["walk_floor"] = {"x": [snappedf(fb.position.x, 0.001), snappedf(fb.end.x, 0.001)],
+			"rows": [snappedf(fb.position.z - zoff, 0.001), snappedf(fb.end.z - zoff, 0.001)],
+			"y": [snappedf(fb.position.y, 0.001), snappedf(fb.end.y, 0.001)],
+			"space_size": [snappedf((wf.get("space_size") as Vector2).x, 0.001), snappedf((wf.get("space_size") as Vector2).y, 0.001)],
+			"phase": [snappedf(float(wf.get("phase_x")), 0.0001), snappedf(float(wf.get("phase_z")), 0.0001)],
+			"wave": [wf.get("wave_frequency"), wf.get("wave_amplitude"), wf.get("height_scale"), wf.get("resolution")],
+			"faces": faces}
+		check(absf(fb.position.x - 2.073) < 0.02 and absf(fb.end.x - 9.927) < 0.02,
+			"it spans the basin's width: x %.3f..%.3f, between the west wall at 2 and the bridge at 10" % [fb.position.x, fb.end.x])
+		check(absf(fb.position.z - zoff - 12.837) < 0.02 and absf(fb.end.z - zoff - 31.163) < 0.02,
+			"and its length: rows %.3f..%.3f, into the walls of rows 12 and 31 by 0.16 m" % [fb.position.z - zoff, fb.end.z - zoff])
+		check(fb.position.y > -0.705 and fb.end.y < 0.705 and fb.end.y > 0.6,
+			"its relief is the walkgrid's own, within 0.70 m of the deck (y %.3f..%.3f)" % [fb.position.y, fb.end.y])
+		# the rim, read off the collider: flush with the bridge it is stepped onto from
+		var space6 := seg.get_world_3d().direct_space_state
+		var rim: Array = []
+		var rim_ok := true
+		for p in [Vector2(9.9, 14.0), Vector2(9.9, 17.5), Vector2(9.9, 21.0), Vector2(9.9, 24.5), Vector2(9.9, 28.0),
+				Vector2(2.1, 15.0), Vector2(2.1, 22.0), Vector2(2.1, 29.0)]:
+			var rq := PhysicsRayQueryParameters3D.create(seg.to_global(Vector3(p.x, 1.5, p.y + zoff)), seg.to_global(Vector3(p.x, -1.5, p.y + zoff)))
+			var hit: Dictionary = space6.intersect_ray(rq)
+			var hy: float = seg.to_local(hit.position).y if not hit.is_empty() else 99.0
+			rim.append(snappedf(hy, 0.001))
+			if hit.is_empty() or hit.collider != wf_body or absf(hy) > 0.03:
+				rim_ok = false
+		measurements["walk_floor"]["rim_heights"] = rim
+		check(rim_ok, "its rim meets the deck: heights along the bridge edge and the west wall %s, every one within 3 cm of 0" % str(rim))
+		# a body: from the bridge west over a trough and a crest, then back onto the bridge
+		var walk6: Dictionary = await _walk_body_on_floor(seg, wf_body, zoff)
+		measurements["walk_floor"]["body"] = walk6
+		note("walk floor " + JSON.stringify(measurements["walk_floor"]))
+		check(float(walk6.west_m) > 5.0 and int(walk6.floor_contacts_out) > 0,
+			"a capsule body steps off the bridge and walks the sine floor west %.2f m, %d floor contacts with it" % [float(walk6.west_m), int(walk6.floor_contacts_out)])
+		check(float(walk6.y_span_out) > 0.8, "and its feet follow the surface through a trough and over a crest (y %.2f..%.2f)" % [float(walk6.y_min), float(walk6.y_max)])
+		check(bool(walk6.back_on_bridge), "and walks back up onto the bridge (x %.2f, y %.2f)" % [float(walk6.end_x), float(walk6.end_y)])
+
 	# ── ACTUAL DESKTOP INPUT (live harness only: the desktop rig names autoloads) ──
 	# The rig stands at the west mouth, looks at FREEZE and left-clicks through the
 	# input pipeline; then walks the passage west to east on ui_up, on the floor slab.
@@ -464,6 +531,52 @@ func run() -> void:
 		for i in range(20): await process_frame
 		check(not is_equal_approx(hr3, _mesh_hash(cor.get_node_or_null("RightWall"))), "running again, the displayed wall changes over 20 frames")
 		check(_colliders(cor) == census0, "and the collider census is still what it was before anything was touched")
+		# THE WALKABLE SINE FLOOR, with the player's own body on ui_up: off the bridge, west over
+		# a trough and a crest, then turned round and back up onto the bridge
+		if wf_body != null:
+			rig.global_position = seg.to_global(Vector3(10.5, 0.05, 21.5 + zoff))
+			rig.velocity = Vector3.ZERO
+			await physics_frame
+			drv.call("aim_at", seg.to_global(Vector3(2.5, 1.5, 21.5 + zoff)))
+			var fstart: Vector3 = seg.to_local(rig.global_position)
+			var fl := {"floor_contacts": 0, "y_min": 99.0, "y_max": -99.0}
+			Input.action_press("ui_up")
+			for fr in range(150):
+				await physics_frame
+				for k in range(rig.get_slide_collision_count()):
+					if rig.get_slide_collision(k).get_collider() == wf_body:
+						fl.floor_contacts = int(fl.floor_contacts) + 1
+				var rpos: Vector3 = seg.to_local(rig.global_position)
+				fl.y_min = minf(float(fl.y_min), rpos.y); fl.y_max = maxf(float(fl.y_max), rpos.y)
+				if rpos.x < 4.0: break
+			Input.action_release("ui_up")
+			for i in range(5): await physics_frame
+			var fmid: Vector3 = seg.to_local(rig.global_position)
+			if "--capture" in OS.get_cmdline_user_args():
+				# standing on the floor, looking back along it to the bridge
+				drv.call("aim_at", seg.to_global(Vector3(10.5, 0.6, 26.0 + zoff)))
+				for i in range(15): await process_frame
+				await create_timer(0.3, true, false, true).timeout
+				root.get_texture().get_image().save_png(_evidence + "probe_sine_space_floor.png")
+			drv.call("aim_at", seg.to_global(Vector3(12.0, 1.5, 21.5 + zoff)))
+			Input.action_press("ui_up")
+			for fr in range(150):
+				await physics_frame
+				if seg.to_local(rig.global_position).x >= 10.45: break
+			Input.action_release("ui_up")
+			for i in range(10): await physics_frame
+			var fend: Vector3 = seg.to_local(rig.global_position)
+			fl["west_m"] = snappedf(fstart.x - fmid.x, 0.01)
+			fl["y_min"] = snappedf(float(fl.y_min), 0.01); fl["y_max"] = snappedf(float(fl.y_max), 0.01)
+			fl["end"] = [snappedf(fend.x, 0.01), snappedf(fend.y, 0.01), snappedf(fend.z - zoff, 0.01)]
+			fl["on_floor_at_end"] = rig.is_on_floor()
+			measurements["desktop_input"]["walk_sine_floor"] = fl
+			note("rig on the sine floor " + JSON.stringify(fl))
+			check(float(fl.west_m) > 5.0 and int(fl.floor_contacts) > 0,
+				"the player's own body walks off the bridge onto the sine floor on ui_up, %.2f m west with %d contacts on it" % [float(fl.west_m), int(fl.floor_contacts)])
+			check(float(fl.y_max) - float(fl.y_min) > 0.8, "its feet ride the surface through a trough and over a crest (y %.2f..%.2f)" % [float(fl.y_min), float(fl.y_max)])
+			check(fend.x >= 10.0 and fend.x <= 11.0 and absf(fend.y - fstart.y) < 0.15 and rig.is_on_floor(),
+				"and it walks back up onto the bridge (x %.2f, y %.2f)" % [fend.x, fend.y])
 		await drv.call("teardown")
 		measurements["desktop_input"]["log"] = drv.get("log")
 		measurements["desktop_input"]["walker_cam_guard_stopped"] = drv.get("walker_cam_guard_stopped")
@@ -512,6 +625,53 @@ func run() -> void:
 	check(not walk_inside.has("sine_wall_corridor"), "the museum sealed the passage's cells as the corridor's own ground (not WALK-INSIDE)")
 	check(sev_tokens.is_empty(), "no body in this hall severs the museum's route (severed: %s)" % str(sev_tokens))
 	_finish()
+
+## A plain CharacterBody3D (the rig's capsule size, Godot's default 45 degree floor) walked
+## from the bridge at row 21.5 west across the sine floor, then back east until it is on the
+## bridge again. Along that row the surface falls to a trough at x 8.62, rises to a crest at
+## x 6.0 and falls again to x 3.38: 0.58 m either way, 35 degrees at the steepest.
+func _walk_body_on_floor(seg: Node3D, floor_body: StaticBody3D, zoff: float) -> Dictionary:
+	var b := CharacterBody3D.new()
+	var cs := CollisionShape3D.new()
+	var cap := CapsuleShape3D.new(); cap.radius = 0.22; cap.height = 1.6
+	cs.shape = cap; cs.position.y = 0.8
+	b.add_child(cs)
+	seg.add_child(b)
+	b.global_transform = Transform3D(seg.global_transform.basis, seg.to_global(Vector3(10.5, 0.05, 21.5 + zoff)))
+	var west := seg.global_transform.basis * Vector3(-1, 0, 0)
+	var out := {"floor_contacts_out": 0, "floor_contacts_back": 0, "y_min": 99.0, "y_max": -99.0}
+	var g: float = float(ProjectSettings.get_setting("physics/3d/default_gravity", 9.8))
+	var dt: float = 1.0 / float(Engine.physics_ticks_per_second)
+	var start: Vector3 = seg.to_local(b.global_position)
+	for leg in [["out", west, 260], ["back", -west, 260]]:
+		for fr in range(int(leg[2])):
+			var v: Vector3 = (leg[1] as Vector3) * 2.5
+			v.y = b.velocity.y - g * dt if not b.is_on_floor() else -0.1
+			b.velocity = v
+			b.move_and_slide()
+			await physics_frame
+			for k in range(b.get_slide_collision_count()):
+				if b.get_slide_collision(k).get_collider() == floor_body:
+					out["floor_contacts_" + str(leg[0])] = int(out["floor_contacts_" + str(leg[0])]) + 1
+			var lp: Vector3 = seg.to_local(b.global_position)
+			if str(leg[0]) == "out":
+				out.y_min = minf(float(out.y_min), lp.y); out.y_max = maxf(float(out.y_max), lp.y)
+				if lp.x < 4.0: break
+			elif lp.x >= 10.45:
+				break
+		if str(leg[0]) == "out":
+			out["west_m"] = snappedf(start.x - seg.to_local(b.global_position).x, 0.01)
+	for i in range(10):
+		b.velocity = Vector3(0, b.velocity.y - g * dt, 0)
+		b.move_and_slide()
+		await physics_frame
+	var e: Vector3 = seg.to_local(b.global_position)
+	out["end_x"] = snappedf(e.x, 0.01); out["end_y"] = snappedf(e.y, 0.01)
+	out["back_on_bridge"] = e.x >= 10.0 and e.x <= 11.0 and absf(e.y) < 0.1 and b.is_on_floor()
+	out["y_span_out"] = snappedf(float(out.y_max) - float(out.y_min), 0.01)
+	out.y_min = snappedf(float(out.y_min), 0.01); out.y_max = snappedf(float(out.y_max), 0.01)
+	b.queue_free()
+	return out
 
 ## Which colliders stop a capsule at the point where its cast stopped.
 func _what_blocks(seg: Node3D, q: PhysicsShapeQueryParameters3D, frac: float) -> Array:
@@ -618,7 +778,7 @@ func _finish() -> void:
 	var report := {"map": MAP, "checks": checks, "failures": failures, "measurements": measurements,
 		"lanes": {"model_lane": "slider_moved and button_pressed emitted on the panel's own controls",
 			"pointer_lane_expected": _live(), "pointer_lane_ran": (measurements.get("desktop_input", {}) as Dictionary).has("drag_amp")},
-		"control_path": ("AMP and PHASE dragged and FREEZE and RESET pressed through the desktop pointer, the meshes and colliders read after each, and the player's own body walked through the passage at its narrowest; the model lane emits the same controls' signals"
+		"control_path": ("AMP and PHASE dragged and FREEZE and RESET pressed through the desktop pointer, the meshes and colliders read after each, the player's own body walked through the passage at its narrowest and over the walkable sine floor and back onto the bridge; the model lane emits the same controls' signals"
 			if (measurements.get("desktop_input", {}) as Dictionary).has("drag_amp")
 			else "model lane in this run: slider_moved and button_pressed emitted on the panel's own controls, no pointer; the live lane drags both sliders, presses both buttons and walks the player's body through the passage"),
 		"hand_file": "ada_run/necklace_hand.json (real)", "headset_verified": false,

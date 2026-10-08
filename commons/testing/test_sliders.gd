@@ -2,7 +2,7 @@ extends SceneTree
 ## Headless functional test of the canonical slider (slider_smooth) as mounted by
 ## ControlPanel.add_slider. Verifies the value math round-trips and — the part that
 ## had a real bug — that the grabbed handle can move in BOTH directions (the
-## one-way clamp fix in slider_smooth._enforce_handle_constraints).
+## constrained local joint and free hand now share the same movement).
 ##   godot --path . --xr-mode off --no-window --script res://commons/testing/test_sliders.gd
 ## Exit code 0 = all pass, 1 = a failure.
 
@@ -11,6 +11,13 @@ const ControlPanelScript = preload("res://commons/ui/control_panel.gd")
 var _pass := 0
 var _fail := 0
 
+
+class TestGrabber extends Node3D:
+	var picked_up_ranged := false
+	var held: Node3D
+	func drop_object() -> void:
+		if is_instance_valid(held): held.let_go(self,Vector3.ZERO,Vector3.ZERO)
+		held=null
 
 func _initialize() -> void:
 	_run.call_deferred()
@@ -48,27 +55,20 @@ func _run() -> void:
 		var g: float = float(s.call("get_normalized_value"))
 		_check("set %.2f -> get %.3f" % [v, g], _approx(g, v))
 
-	# 2. Bidirectional handle clamp — the one-way bug fix. At mid-position the
-	#    grabbed handle's legal local-x range is [min-pos, max-pos], i.e. it must
-	#    be allowed to go NEGATIVE (toward min). The old bug clamped to [0,max].
-	print("[slider-test] bidirectional handle clamp (the one-way fix):")
-	s.call("set_normalized_value", 0.5)
-	await process_frame
-	var handle: Node3D = s.get_node_or_null("SliderOrigin/InteractableSlider/HandleOrigin/InteractableHandle")
-	_check("handle node found", handle != null)
-	if handle and s.has_method("_enforce_handle_constraints"):
-		# toward MIN
-		handle.transform.origin = Vector3(-0.04, 0.0, 0.0)
-		s.call("_enforce_handle_constraints", 0.016, false)
-		var hx_min: float = handle.transform.origin.x
-		_check("handle moves toward MIN (x<0 allowed) — x=%.3f" % hx_min, hx_min < -0.001)
-		# toward MAX
-		handle.transform.origin = Vector3(0.04, 0.0, 0.0)
-		s.call("_enforce_handle_constraints", 0.016, false)
-		var hx_max: float = handle.transform.origin.x
-		_check("handle moves toward MAX (x>0 allowed) — x=%.3f" % hx_max, hx_max > 0.001)
-	else:
-		_check("_enforce_handle_constraints present", false)
+	# 2. Real pickup, in both directions, in the canonical mounted panel.
+	s.set_normalized_value(.5)
+	var joint:Node3D=s.get_node("SliderOrigin/InteractableSlider")
+	var handle:Node3D=joint.get_node("HandleOrigin/InteractableHandle")
+	var hand:=TestGrabber.new();root.add_child(hand)
+	hand.global_transform=handle.global_transform;hand.held=handle;handle.pick_up(hand)
+	var rest:Vector3=joint.to_local(handle.handle_origin.global_position)
+	for fraction in [.2,.8]:
+		var target:float=lerpf(joint.slider_limit_min,joint.slider_limit_max,fraction)
+		hand.global_position=joint.get_parent().to_global(rest+Vector3.RIGHT*target)
+		for i in 8:await process_frame;await physics_frame
+		_check("Native grab reaches %.1f in mounted mixer" % fraction,_approx(s.get_normalized_value(),fraction))
+	hand.drop_object();hand.queue_free()
+	_check("Driver idles when released",not joint.is_processing())
 
 	# 3. The physics control must NOT be scaled (the sticky-grab bug).
 	print("[slider-test] physics control scale:")

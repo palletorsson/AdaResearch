@@ -113,111 +113,111 @@
 			"qfep_connection": "A soliton wears its paradox as a shape: nonlinearity, which usually scatters waves, is exactly what holds this one together \u2014 E_flux locked into a form you can pick up. The code clamps its denominator at 0.0001, quietly stepping around the singularity the mathematics keeps offering."
 		},
 		"catenoid": {
-			"lookup_name": "catenoid",
-			"scene": "res://commons/primitives/parametric/catenoid.tscn",
-			"name": "Catenoid",
-			"description": "Minimal surface formed by rotating a catenary curve. The shape soap film makes between two rings \u2014 nature solving a variational calculus problem in real time.",
-			"category": "geometry",
-			"complexity": "intermediate",
-			"tags": [
-				"parametric",
-				"minimal_surface",
-				"catenary",
-				"soap_film",
-				"calculus_of_variations",
-				"pickable"
-			],
-			"include_in_map_data": true,
-			"map_ready": true,
-			"map_sequences": [],
-			"dev_themes": [
-				"curves",
-				"math",
-				"parametric",
-				"qfep"
-			],
-			"geometry_spec": {
-				"mesh_type": "parametric_surface",
-				"topology": "manifold_open",
-				"construction": {
-					"method": "uv_grid_triangulation",
-					"primitives": [],
-					"operations": [
-						"compute_vertices",
-						"generate_triangles",
-						"compute_normals"
-					]
-				},
-				"material": {
-					"type": "shader",
-					"shading_model": "wireframe",
-					"key_properties": [
-						"emission",
-						"grid_overlay",
-						"metallic",
-						"double_sided"
-					]
-				},
-				"animation": {
-					"type": "static",
-					"driven_by": null,
-					"affects": []
-				},
-				"instance_strategy": "array",
-				"vertex_estimate": "unknown"
-			},
-			"spatial_needs": {
-				"platform": "none",
-				"footprint_cells": 4,
-				"clearance": {
-					"front": 1,
-					"back": 1,
-					"left": 1,
-					"right": 1
-				},
-				"player_position": "front",
-				"wall_backing": false,
-				"orientation": "face_approach",
-				"isolation": 0,
-				"cluster_with": [],
-				"preferred_zone": "any",
-				"measured_footprint_cells": 4,
-				"footprint_source": "measured"
-			},
-			"measurements": {
-				"aabb_size": [
-					1.21,
-					0.36,
-					1.21
-				],
-				"aabb_center": [
-					0.0,
-					0.0,
-					0.0
-				],
-				"grid_cells": [
-					2.0,
-					2.0
-				],
-				"max_dimension_m": 1.21,
-				"measured_at": "2026-04-29T07:09:56.762620Z"
-			},
-			"footprint_measured": [
-				2.0,
-				1,
-				2.0
-			],
-			"spatial_profile": {
-				"dir_group": "plane",
-				"range": 4,
-				"density": "medium",
-				"min_clearance": 1,
-				"stack_priority": 0.5,
-				"approach_dir": "any",
-				"derived_at": "2026-04-29T09:39:46.169520Z",
-				"derived_from": "aabb_size + category"
-			},
-			"qfep_connection": "The soap film's answer between two rings: a catenary spun into a surface, and the least area that can bridge the gap. No one designs a catenoid \u2014 it is discovered by the film, which cannot help but minimize. The chapter's thesis made of soap: form is not drawn, it is the shape that costs the least, found by a physics too lazy to do otherwise."
+		  "lookup_name": "catenoid",
+		  "scene": "res://commons/primitives/parametric/catenoid.tscn",
+		  "name": "Catenoid",
+		  "description": "A sampled parametric catenoid generated from cosh and circular sections. A grabbable model of a minimal surface, not a live soap-film simulation or a guarantee of globally least area for arbitrary ring separation.",
+		  "category": "geometry",
+		  "complexity": "intermediate",
+		  "tags": [
+		    "parametric",
+		    "minimal_surface",
+		    "catenary",
+		    "soap_film",
+		    "calculus_of_variations",
+		    "pickable"
+		  ],
+		  "include_in_map_data": true,
+		  "map_ready": true,
+		  "map_sequences": [],
+		  "dev_themes": [
+		    "curves",
+		    "math",
+		    "parametric",
+		    "qfep"
+		  ],
+		  "geometry_spec": {
+		    "mesh_type": "parametric_surface",
+		    "topology": "manifold_open",
+		    "construction": {
+		      "method": "uv_grid_triangulation",
+		      "primitives": [],
+		      "operations": [
+		        "compute_vertices",
+		        "generate_triangles",
+		        "compute_normals"
+		      ]
+		    },
+		    "material": {
+		      "type": "shader",
+		      "shading_model": "wireframe",
+		      "key_properties": [
+		        "emission",
+		        "grid_overlay",
+		        "metallic",
+		        "double_sided"
+		      ]
+		    },
+		    "animation": {
+		      "type": "static",
+		      "driven_by": null,
+		      "affects": []
+		    },
+		    "instance_strategy": "array",
+		    "vertex_estimate": "unknown"
+		  },
+		  "spatial_needs": {
+		    "platform": "none",
+		    "footprint_cells": 4,
+		    "clearance": {
+		      "front": 1,
+		      "back": 1,
+		      "left": 1,
+		      "right": 1
+		    },
+		    "player_position": "front",
+		    "wall_backing": false,
+		    "orientation": "face_approach",
+		    "isolation": 0,
+		    "cluster_with": [],
+		    "preferred_zone": "any",
+		    "measured_footprint_cells": 4,
+		    "footprint_source": "measured"
+		  },
+		  "measurements": {
+		    "aabb_size": [
+		      1.21,
+		      0.36,
+		      1.21
+		    ],
+		    "aabb_center": [
+		      0.0,
+		      0.0,
+		      0.0
+		    ],
+		    "grid_cells": [
+		      2.0,
+		      2.0
+		    ],
+		    "max_dimension_m": 1.21,
+		    "measured_at": "2026-04-29T07:09:56.762620Z"
+		  },
+		  "footprint_measured": [
+		    2.0,
+		    1,
+		    2.0
+		  ],
+		  "spatial_profile": {
+		    "dir_group": "plane",
+		    "range": 4,
+		    "density": "medium",
+		    "min_clearance": 1,
+		    "stack_priority": 0.5,
+		    "approach_dir": "any",
+		    "derived_at": "2026-04-29T09:39:46.169520Z",
+		    "derived_from": "aabb_size + category"
+		  },
+		  "qfep_connection": "Compare a boundary-conditioned analytic construction with a drafted cable. An elegant form can make a model convincing; its formula and rendering do not establish that material has performed an optimization in this room."
 		},
 		"dini_surface": {
 			"lookup_name": "dini_surface",
@@ -642,109 +642,109 @@
 			"qfep_connection": "Amphichiral: tie it left- or right-handed and you hold the same knot \u2014 a form that shrugs at its own mirror image, rare among knots. Its tube frame is parallel-transported step by step because no global rule for which way is up survives a path this entangled."
 		},
 		"helicoid": {
-			"lookup_name": "helicoid",
-			"scene": "res://commons/primitives/parametric/helicoid.tscn",
-			"name": "Helicoid",
-			"description": "Ruled minimal surface \u2014 a plane rotating as it rises, like a spiral staircase with infinite steps. The only ruled minimal surface besides the plane, and continuously deformable into a catenoid.",
-			"category": "geometry",
-			"complexity": "intermediate",
-			"tags": [
-				"parametric",
-				"minimal_surface",
-				"ruled",
-				"helical",
-				"pickable"
-			],
-			"include_in_map_data": true,
-			"map_ready": true,
-			"map_sequences": [],
-			"dev_themes": [
-				"curves",
-				"math",
-				"parametric"
-			],
-			"geometry_spec": {
-				"mesh_type": "parametric_surface",
-				"topology": "manifold_open",
-				"construction": {
-					"method": "uv_grid_triangulation",
-					"primitives": [],
-					"operations": [
-						"compute_vertices",
-						"generate_triangles",
-						"compute_normals"
-					]
-				},
-				"material": {
-					"type": "shader",
-					"shading_model": "wireframe",
-					"key_properties": [
-						"emission",
-						"grid_overlay",
-						"metallic",
-						"double_sided"
-					]
-				},
-				"animation": {
-					"type": "static",
-					"driven_by": null,
-					"affects": []
-				},
-				"instance_strategy": "array",
-				"vertex_estimate": "unknown"
-			},
-			"spatial_needs": {
-				"platform": "none",
-				"footprint_cells": 1,
-				"clearance": {
-					"front": 1,
-					"back": 1,
-					"left": 1,
-					"right": 1
-				},
-				"player_position": "front",
-				"wall_backing": false,
-				"orientation": "face_approach",
-				"isolation": 0,
-				"cluster_with": [],
-				"preferred_zone": "any",
-				"measured_footprint_cells": 1,
-				"footprint_source": "probe_artifact_elements"
-			},
-			"measurements": {
-				"aabb_size": [
-					0.2,
-					0.38,
-					0.2
-				],
-				"aabb_center": [
-					0.0,
-					0.0,
-					0.0
-				],
-				"grid_cells": [
-					1,
-					1
-				],
-				"max_dimension_m": 0.38,
-				"measured_at": "2026-08-12T04:39:51.280397Z"
-			},
-			"footprint_measured": [
-				1,
-				1,
-				1
-			],
-			"spatial_profile": {
-				"dir_group": "omni",
-				"range": 1,
-				"density": "medium",
-				"min_clearance": 1,
-				"stack_priority": 0.5,
-				"approach_dir": "any",
-				"derived_at": "2026-04-29T09:39:46.169520Z",
-				"derived_from": "aabb_size + category"
-			},
-			"qfep_connection": "A minimal surface you could climb \u2014 a plane rotating as it rises, a spiral staircase with infinitely many steps. Ruled and yet minimal, it proves that the least-area shapes are not always the plainest: give the boundary a twist and the lazy surface answers with a helix. Beauty as the by-product of a constraint honestly solved."
+		  "lookup_name": "helicoid",
+		  "scene": "res://commons/primitives/parametric/helicoid.tscn",
+		  "name": "Helicoid",
+		  "description": "A sampled parametric helicoid with straight ruling lines and screw symmetry, presented as a grabbable model. Its mathematical relation to a catenoid can be discussed, but this artifact performs no continuous deformation between the two.",
+		  "category": "geometry",
+		  "complexity": "intermediate",
+		  "tags": [
+		    "parametric",
+		    "minimal_surface",
+		    "ruled",
+		    "helical",
+		    "pickable"
+		  ],
+		  "include_in_map_data": true,
+		  "map_ready": true,
+		  "map_sequences": [],
+		  "dev_themes": [
+		    "curves",
+		    "math",
+		    "parametric"
+		  ],
+		  "geometry_spec": {
+		    "mesh_type": "parametric_surface",
+		    "topology": "manifold_open",
+		    "construction": {
+		      "method": "uv_grid_triangulation",
+		      "primitives": [],
+		      "operations": [
+		        "compute_vertices",
+		        "generate_triangles",
+		        "compute_normals"
+		      ]
+		    },
+		    "material": {
+		      "type": "shader",
+		      "shading_model": "wireframe",
+		      "key_properties": [
+		        "emission",
+		        "grid_overlay",
+		        "metallic",
+		        "double_sided"
+		      ]
+		    },
+		    "animation": {
+		      "type": "static",
+		      "driven_by": null,
+		      "affects": []
+		    },
+		    "instance_strategy": "array",
+		    "vertex_estimate": "unknown"
+		  },
+		  "spatial_needs": {
+		    "platform": "none",
+		    "footprint_cells": 1,
+		    "clearance": {
+		      "front": 1,
+		      "back": 1,
+		      "left": 1,
+		      "right": 1
+		    },
+		    "player_position": "front",
+		    "wall_backing": false,
+		    "orientation": "face_approach",
+		    "isolation": 0,
+		    "cluster_with": [],
+		    "preferred_zone": "any",
+		    "measured_footprint_cells": 1,
+		    "footprint_source": "probe_artifact_elements"
+		  },
+		  "measurements": {
+		    "aabb_size": [
+		      0.2,
+		      0.38,
+		      0.2
+		    ],
+		    "aabb_center": [
+		      0.0,
+		      0.0,
+		      0.0
+		    ],
+		    "grid_cells": [
+		      1,
+		      1
+		    ],
+		    "max_dimension_m": 0.38,
+		    "measured_at": "2026-08-12T04:39:51.280397Z"
+		  },
+		  "footprint_measured": [
+		    1,
+		    1,
+		    1
+		  ],
+		  "spatial_profile": {
+		    "dir_group": "omni",
+		    "range": 1,
+		    "density": "medium",
+		    "min_clearance": 1,
+		    "stack_priority": 0.5,
+		    "approach_dir": "any",
+		    "derived_at": "2026-04-29T09:39:46.169520Z",
+		    "derived_from": "aabb_size + category"
+		  },
+		  "qfep_connection": "A different parameterization opens a different surface while keeping the construction inspectable. The small model is a comparison of forms, not a staircase for the visitor or a measured least-area experiment."
 		},
 		"klein_bottle": {
 			"lookup_name": "klein_bottle",

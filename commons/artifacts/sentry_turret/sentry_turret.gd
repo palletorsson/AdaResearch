@@ -573,11 +573,20 @@ func _apply_laser_damage(delta: float):
 
 	# Try to call take_damage() on the target if it has that method
 	if current_target.has_method("take_damage"):
-		current_target.take_damage(damage)
+		var receiver: Node3D = current_target
+		receiver.take_damage(damage)
+		if not is_instance_valid(receiver) or not receiver.visible:
+			current_target = null
+			is_laser_firing = false
+			emit_signal("target_lost")
+		else:
+			_apply_burn_effect(receiver)
+		return # A receiver owns its health; do not subtract the same hit twice.
 	else:
 		var rb = current_target.get_node_or_null("RigidBody3D")
 		if rb and rb.has_method("take_damage"):
 			rb.take_damage(damage)
+			return
 
 	# Manage health via metadata (fallback for non-player targets)
 	if not current_target.has_meta("health"):
@@ -629,7 +638,6 @@ func _destroy_target(target: Node3D):
 		return
 
 	var pos = _get_target_position(target)
-	var color = target.get_meta("ball_color") if target.has_meta("ball_color") else Color(1.0, 0.5, 0.2)
 
 
 	# Clear current target FIRST to prevent re-processing
@@ -638,19 +646,16 @@ func _destroy_target(target: Node3D):
 		current_target = null
 		is_laser_firing = false
 
-	# Spawn explosion effect
-	_spawn_explosion(pos, color)
-
-	# Notify dropper to recycle the ball
+	# Only the owning pool can recycle a ball and create its confetti burst.
 	var removed = false
 	for dropper in get_tree().get_nodes_in_group("ball_dropper"):
-		if dropper.has_method("remove_ball"):
-			dropper.remove_ball(target)
+		if dropper.has_method("destroy_ball") and dropper.destroy_ball(target):
 			removed = true
 			break
 
 	# If no dropper handled it, just hide/free it
 	if not removed:
+		preload("res://commons/artifacts/queer_confetti/queer_confetti.gd").burst(get_parent(), pos, 72, 1.25)
 		target.visible = false
 		target.queue_free()
 
@@ -757,7 +762,8 @@ func _spawn_explosion_light(pos: Vector3, color: Color):
 ## Spawn a bullet from the muzzle toward current target (uses MultiMesh pool)
 func _fire():
 	var muzzle_world = muzzle_pos.global_position
-	var direction = -barrel.global_transform.basis.z
+	# This turret's barrel and muzzle are built along +Z.
+	var direction = barrel.global_transform.basis.z.normalized()
 
 	emit_signal("fired", muzzle_world, direction)
 
@@ -816,7 +822,7 @@ func _update_bullets(delta: float):
 				continue
 
 		# Lifetime / range
-		if _bullet_age[i] > 2.0 or _bullet_pos[i].length() > detection_range * 2:
+		if _bullet_age[i] > 2.0 or _bullet_pos[i].distance_to(global_position) > detection_range * 2:
 			_deactivate_bullet(i)
 
 ## Check if bullet at slot i hit any ball; deactivates bullet and returns true on hit
@@ -840,11 +846,20 @@ func _deactivate_bullet(slot: int):
 func _on_hit(target: Node3D, pos: Vector3):
 	emit_signal("hit_target", target, pos)
 
-	# Apply damage if target has health
-	if target.has_meta("health"):
+	# Both projectiles and the laser use the ball's same damage receiver.
+	if target.has_method("take_damage"):
+		target.take_damage(20.0)
+	elif target.has_meta("health"):
 		var health = target.get_meta("health")
 		health -= 20.0
 		target.set_meta("health", health)
+		if health <= 0: _destroy_target(target)
+	if not is_instance_valid(target) or not target.visible or target.is_queued_for_deletion():
+		if current_target == target:
+			current_target = null
+			is_laser_firing = false
+			emit_signal("target_lost")
+		return
 
 	# Apply impulse if RigidBody
 	var rb = target.get_node_or_null("RigidBody3D")
@@ -940,6 +955,6 @@ func apply_grid_config(config_data: Dictionary) -> void:
 	if config_data.has("laser_damage_per_hit"):
 		laser_damage_per_hit = float(config_data["laser_damage_per_hit"])
 	if config_data.has("use_laser_damage"):
-		use_laser_damage = bool(config_data["use_laser_damage"])
+		use_laser_damage = str(config_data["use_laser_damage"]).to_lower() in ["true", "1", "yes", "on"]
 	if config_data.has("target"):
 		_apply_target_mode(str(config_data["target"]))

@@ -1,51 +1,31 @@
 {
-  "rotations": [
-    "0",
-    "90",
-    "180",
-    "270"
-  ],
+  "lookup_name": "floating_sphere_field",
+  "footprint": [7.0, 7.0, 4.0],
+  "measurement_basis": "declared_dynamic_envelope",
+  "rotations": ["0", "90", "180", "270"],
   "approach": "south",
   "exit": "north",
-  "footprint": [
-    1,
-    1,
-    1
-  ],
-  "clearance": [
-    3.0,
-    3.0,
-    3.0
-  ],
+  "footing": {"anchor": [4, 4], "tiles": [[1,1,1,1,1,1,1,1,1],[1,1,1,1,1,1,1,1,1],[1,1,1,1,1,1,1,1,1],[1,1,1,1,1,1,1,1,1],[1,1,1,1,1,1,1,1,1],[1,1,1,1,1,1,1,1,1],[1,1,1,1,1,1,1,1,1],[1,1,1,1,1,1,1,1,1],[1,1,1,1,1,1,1,1,1]]},
   "extras": [],
-  "lookup_name": "floating_sphere_field",
-  "posture": "float",
-  "footing": {
-    "anchor": [
-      1,
-      1
-    ],
-    "tiles": [
-      [
-        1,
-        1,
-        1
-      ],
-      [
-        1,
-        1,
-        1
-      ],
-      [
-        1,
-        1,
-        1
-      ]
-    ]
+  "artifact_offset": [0.0, 0.0, 0.0],
+  "artifact_config": {
+    "bounds": "3.3,1.8,3.3",
+    "volume_offset": "0.0,2.0,0.0",
+    "drift_speed": 0.0,
+    "turbulence": 0.0
   },
-  "artifact_offset": [
-    0.0,
-    1.5,
-    0.0
-  ]
+  "clearance": [9, 9, 4],
+  "posture": "immersive_field",
+  "show_info": false,
+  "show_dressing": false,
+  "placement_contract": {
+    "allowed_modes": ["freestanding"], "preferred_mode": "freestanding",
+    "hard_zone_m": [7, 7, 4], "preferred_zone_m": [9, 9, 4],
+    "required_support": "floor", "interaction_faces": ["south", "east", "north", "west"],
+    "rear_clearance_m": 1.0, "front_clearance_m": 1.0,
+    "circulation": "walkthrough_field", "circulation_behind": true,
+    "minimum_route_width_m": 1.0, "neighbor_policy": "no_artifacts_in_preferred_zone"
+  },
+  "production_grade": "test_candidate",
+  "placement_intent": "A bounded museum starfield whose declared 7 × 7 × 4 metre envelope, not its one-metre emitter mesh, governs the inhabitable room."
 }

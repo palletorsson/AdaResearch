@@ -2,6 +2,7 @@ extends Node3D
 ## Angle grows with row along +z; x/y/z and combined turns across four 2D bands.
 ## Cube centres stay fixed. No second floor underneath the array.
 const Parts = preload("res://commons/artifacts/rotation_studies/parts.gd")
+const Witness = preload("res://commons/artifacts/rotation_studies/cube_witness.gd")
 const SPACING := 2.0
 const EDGE := 2.04
 const BodyComparison = preload("res://commons/artifacts/rotation_studies/array_body_comparison.gd")
@@ -44,7 +45,10 @@ func _ready() -> void:
 		var edges := MeshInstance3D.new()
 		edges.name="CubeEdges"
 		band.add_child(edges)
-		bands.append({"id":spec[0],"node":band,"axis":spec[2],"sign":spec[3],"cubes":cubes,"label":heading,"row_labels":row_labels,"edges":edges,"title":spec[5]})
+		var witnesses := MeshInstance3D.new()
+		witnesses.name = "FaceWitnesses"
+		band.add_child(witnesses)
+		bands.append({"id":spec[0],"node":band,"axis":spec[2],"sign":spec[3],"cubes":cubes,"label":heading,"row_labels":row_labels,"edges":edges,"witnesses":witnesses,"title":spec[5]})
 	apply_gradient()
 	if show_body_comparison:
 		body_comparison = BodyComparison.new()
@@ -60,6 +64,11 @@ func apply_gradient() -> void:
 		for row in range(rows): band.row_labels[row].text="%02d / %.1f deg" % [row,row*row_angle_step]
 		band.label.text="%s / %d x %d CUBES\n%s\nWALK +Z / 0 TO %.1f DEGREES" % [band.id,columns,rows,band.title,(rows-1)*row_angle_step]
 		_draw_edges(band)
+		var poses: Array[Transform3D] = []
+		for cube: Node3D in band.cubes:
+			# These cubes sit in the floor: mark the top, since a side face is buried.
+			poses.append(cube.transform * Transform3D(Basis(Vector3.RIGHT, PI / 2.0), Vector3.ZERO))
+		band.witnesses.mesh = Witness.build(EDGE / 2.0, poses)
 
 func rotation_for_band(band: Dictionary, degrees: float) -> Basis:
 	var radians := deg_to_rad(degrees)

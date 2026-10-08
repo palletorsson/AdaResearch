@@ -1,5 +1,129 @@
 {
 	"artifacts": {
+		"head_trace_projection": {
+			"lookup_name": "head_trace_projection",
+			"name": "A line you did not hold",
+			"scene": "res://commons/artifacts/head_trace_projection/head_trace_projection.tscn",
+			"description": "Step into a floor square. Headset positions form a pink path in space; the same points projected onto the floor form a cyan path. Step aside to inspect, then return for a new record. Desktop camera motion is explicitly labelled; there is no generated demo.",
+			"category": "primitives",
+			"complexity": "beginner",
+			"map_sequences": [
+				"primitives"
+			],
+			"map_ready": true,
+			"include_in_map_data": true,
+			"footprint": [
+				3,
+				3,
+				3
+			],
+			"size_group": "environmental",
+			"tags": [
+				"trace",
+				"headset",
+				"projection",
+				"body",
+				"sampling"
+			],
+			"interactions": [
+				"Enter the square, lean or lower your head.",
+				"Step outside to compare the full path and floor projection.",
+				"Return after a short pause to begin a new drawing."
+			],
+			"qfep_connection": "A projection preserves a route while making height differences coincide. The encounter asks which differences a representation can hold; point count is not an entropy measure."
+		},
+		"trace_short_memory": {
+			"lookup_name": "trace_short_memory",
+			"name": "A line with a short memory",
+			"scene": "res://commons/artifacts/trace_short_memory/trace_short_memory.tscn",
+			"description": "An amber drawing point keeps the last 32 accepted positions. Continuing a gesture removes its beginning; holding still keeps the remaining line. The working draw_dot recorder is inherited unchanged.",
+			"category": "primitives",
+			"complexity": "beginner",
+			"dev_themes": [
+				"primitives",
+				"sampling",
+				"memory"
+			],
+			"map_sequences": [
+				"primitives"
+			],
+			"map_ready": true,
+			"include_in_map_data": true,
+			"footprint": [
+				1,
+				1,
+				1
+			],
+			"size_group": "compact",
+			"tags": [
+				"trace",
+				"memory",
+				"drawing",
+				"capacity"
+			],
+			"interactions": [
+				"Pick up the amber point and draw a loop.",
+				"Keep drawing and watch the beginning disappear.",
+				"Pause: the retained line waits.",
+				"Release to send only the surviving positions to Grid."
+			],
+			"qfep_connection": "A bounded record can become a moving tail. The encounter asks what a limit lets a body make; the point count is not an entropy measure."
+		},
+		"polyhedra_boundary_plate": {
+			"lookup_name": "polyhedra_boundary_plate",
+			"name": "An opening for the eye",
+			"scene": "res://commons/artifacts/polyhedra_boundary_plate/polyhedra_boundary_plate.tscn",
+			"description": "Native side-by-side schematic of grab_trihedron: its three rendered faces beside the closed convex hull of the same four positions. This scene also supplies the book figure.",
+			"category": "primitives",
+			"complexity": "beginner",
+			"map_sequences": [
+				"primitives"
+			],
+			"map_ready": true,
+			"include_in_map_data": true,
+			"footprint": [
+				5,
+				3,
+				2
+			],
+			"parameters": {
+				"show_mount": "Show the floor stand; book capture hides only the mount."
+			},
+			"interactions": [
+				"Walk up and compare the open surface with its closed collision hull."
+			],
+			"qfep_connection": "The same points enter different rules for visibility and passage. An opening in a rendering need not be an opening for a simulated body."
+		},
+		"triangle_construction_plate": {
+			"lookup_name": "triangle_construction_plate",
+			"name": "Triangle — points, boundary, face",
+			"scene": "res://commons/artifacts/triangle_construction_plate/triangle_construction_plate.tscn",
+			"description": "Native schematic reference plate: the same three positions shown alone, as three joined edges, and as a filled triangle. Real geometry and typography; its book figure is captured from this same scene. A quiet companion to the hands-on boundary puzzle.",
+			"category": "primitives",
+			"complexity": "beginner",
+			"dev_themes": [
+				"primitives",
+				"triangles",
+				"representation"
+			],
+			"map_sequences": [
+				"primitives"
+			],
+			"include_in_map_data": true,
+			"map_ready": true,
+			"footprint": [
+				5,
+				3,
+				1
+			],
+			"parameters": {
+				"show_mount": "Show the floor stand; book capture hides only the stand."
+			},
+			"interactions": [
+				"Walk up to read and compare the three constructions."
+			],
+			"qfep_connection": "The same positions support different constructions. Connectivity and surface rendering add capacities that coordinates alone do not specify."
+		},
 		"line_space_workshop": {
 			"category": "primitives",
 			"complexity": "beginner",
@@ -6116,7 +6240,7 @@
 			},
 			"category": "unknown",
 			"complexity": "beginner",
-			"description": "fan_triangulate(loop) → colored mesh face — closed point loops become surfaces",
+			"description": "fan_triangulate(loop) → colored mesh face — closed point loops become surfaces. With #carry:trace it opens already holding the visitor's own drawing from Point_Trace (via the TraceData autoload), reduced to carry_corners and flattened to one plane, as an unclosed path for them to close. #carry:none, the default, is the empty tool. #style:line adds pink segments, white points, a compact plinth and trigger placement with explicit Close Face, New Face and Undo controls. A triangle_live_twin shows its filled faces at larger scale.",
 			"dev_themes": [
 				"core",
 				"primitives"
@@ -9407,6 +9531,69 @@
 			},
 			"qfep_connection": "One sphere wearing both instruments at once — an emission tint declaring what it is, a coordinate label declaring where it is. The point as complete record: quality and address, color and number, carried in a single grip."
 		},
+		"drag_point_target": {
+			"category": "primitives",
+			"complexity": "beginner",
+			"description": "A red arrow over a marked spot that says DRAG POINT HERE. Any point in group ada_coordinate_point entering the catch sphere drops a fall of spheres out of the sky — the coordinate stops being a label and becomes a cause.",
+			"dev_themes": [
+				"core",
+				"primitives"
+			],
+			"footprint": [
+				1,
+				1,
+				1
+			],
+			"include_in_map_data": true,
+			"lookup_name": "drag_point_target",
+			"map_ready": true,
+			"map_sequences": [
+				"primitives"
+			],
+			"name": "drag_point_target",
+			"parameters": {
+				"text": "String",
+				"catch_radius": "float",
+				"catch_height": "float",
+				"balls": "int",
+				"drop_height": "float",
+				"spread": "float",
+				"ball_radius": "float",
+				"ball_life": "float",
+				"rearm": "bool",
+				"color": "Color",
+				"footprint": [
+					1,
+					1,
+					1
+				],
+				"size_group": "compact"
+			},
+			"scene": "res://commons/artifacts/drag_point_target/drag_point_target.tscn",
+			"size_group": "compact",
+			"tags": [
+				"primitive",
+				"interactive",
+				"instruction"
+			],
+			"spatial_needs": {
+				"platform": "floor",
+				"footprint_cells": 1,
+				"clearance": {
+					"front": 1,
+					"back": 1,
+					"left": 1,
+					"right": 1
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 0,
+				"preferred_zone": "middle",
+				"footprint_source": "designed"
+			},
+			"qfep_connection": "The frame tells you where things are; this tells you to put one somewhere. A coordinate you can reach is a different object from a coordinate you can read — and the fall is the room agreeing that you reached it."
+		},
 		"grab_sphere_point_snap": {
 			"dna": {
 				"axes": {
@@ -10347,6 +10534,42 @@
 				"boundary",
 				"transparency",
 				"time"
+			]
+		},
+		"health_cross": {
+			"category": "primitives",
+			"complexity": "beginner",
+			"description": "A red cross floating just above the floor that returns health when a VISITOR walks over it AND health has fallen below take_below of maximum (default 0.75) — otherwise it dims once in refusal and waits, unspent. Then it is spent until it comes back. The pick-up twin of wall_health_station — same provider, one you stand at and one you step on. Masks the museum walker's layer as well as the grid player's, and admits only the four visitor groups plus a body under an XROrigin3D, so hazard creatures cannot eat it.",
+			"dev_themes": [
+				"core",
+				"primitives"
+			],
+			"footprint": [
+				1,
+				1,
+				1
+			],
+			"include_in_map_data": true,
+			"lookup_name": "health_cross",
+			"map_ready": true,
+			"map_sequences": [
+				"primitives"
+			],
+			"name": "health_cross",
+			"parameters": {
+				"footprint": [
+					1,
+					1,
+					1
+				],
+				"size_group": "compact"
+			},
+			"scene": "res://commons/artifacts/health_cross/health_cross.tscn",
+			"size_group": "compact",
+			"tags": [
+				"primitive",
+				"pickup",
+				"health"
 			]
 		},
 		"hole_with_cones": {
@@ -15293,7 +15516,7 @@
 			"lookup_name": "prism",
 			"map_ready": true,
 			"map_sequences": [
-				"color"
+				"tiling"
 			],
 			"name": "prism",
 			"parameters": {
@@ -18929,6 +19152,43 @@
 			},
 			"qfep_connection": "Each vertex is nudged by a hash of its own coordinates, so the deformation is chaos you could regrow identically; the only genuine accident left is the tumble when the rigid body wakes. Reproducible irregularity, with contingency outsourced to gravity."
 		},
+		"sketch_monitor": {
+			"category": "primitives",
+			"complexity": "beginner",
+			"description": "A monitor standing in the room that runs a Processing-style 2D sketch — a SubViewport canvas on an unshaded screen, so the flat world and its own coordinate system stand inside the round one. First sketch: moving scan lines, a raster showing you what a raster is. A new example is a Sketch subclass and one line.",
+			"dev_themes": [
+				"core",
+				"primitives"
+			],
+			"footprint": [
+				1,
+				1,
+				1
+			],
+			"include_in_map_data": true,
+			"lookup_name": "sketch_monitor",
+			"map_ready": true,
+			"map_sequences": [
+				"primitives"
+			],
+			"name": "sketch_monitor",
+			"parameters": {
+				"footprint": [
+					1,
+					1,
+					1
+				],
+				"size_group": "compact"
+			},
+			"scene": "res://commons/artifacts/sketch_monitor/sketch_monitor.tscn",
+			"size_group": "compact",
+			"tags": [
+				"primitive",
+				"display",
+				"sketch",
+				"2d-in-3d"
+			]
+		},
 		"sliding_door": {
 			"category": "unknown",
 			"complexity": "beginner",
@@ -22518,7 +22778,7 @@
 		"triangle_line_puzzle": {
 			"category": "unknown",
 			"complexity": "beginner",
-			"description": "Interactive puzzle: drag 3 line endpoints to form an equilateral triangle.",
+			"description": "Three pink segments with six white endpoints share three corner targets. Release the endpoints at targets to close the triangle. #stock:ringed begins with short segments on the three edge axes; #discovery:1 provides separate face and reset controls.",
 			"dev_themes": [
 				"core",
 				"primitives"
@@ -23907,7 +24167,7 @@
 			},
 			"category": "primitives",
 			"complexity": "beginner",
-			"description": "A text decal on the floor - YOU ARE HERE lying flat underfoot, the wayfinding locator. A flat indexical inscription you stand ON. TextMesh. pride_gradient reclaims the corporate blue dot.",
+			"description": "A text decal on the floor - YOU ARE HERE lying flat underfoot, the wayfinding locator. A flat indexical inscription you stand ON. TextMesh. pride_gradient reclaims the corporate blue dot. With #peel:loose the struck first word rides a pickable body and can be carried off, leaving the remainder printed where it was; #peel:fixed, the default, is the shipped decal.",
 			"dev_themes": [
 				"commons",
 				"primitives",
@@ -24244,7 +24504,7 @@
 		"automatic_writing_desk": {
 			"category": "primitives",
 			"complexity": "beginner",
-			"description": "A desk with a sheet of paper that the headset writes by itself: a pen sweeps left-to-right and drops a row at the margin, filling the page top-to-bottom with asemic script whose jaggedness scales with HEAD speed (still = flat ruled line, moving = jagged handwriting). Surrealist automatic writing / the spiritualist planchette, with the head as the medium. Driven by XRCamera3D; demo head-drift fallback.",
+			"description": "A writing desk with two explicit modes. Default asemic handwriting is generated and modulated by head speed. Opt-in head_height records measured height against elapsed time, starting empty and leaving blank intervals when input is absent. Point_Trace selects the measured mode.",
 			"dev_themes": [
 				"commons",
 				"primitives",
@@ -24265,6 +24525,7 @@
 			],
 			"name": "Automatic Writing Desk",
 			"parameters": {
+				"recording": "asemic",
 				"rows": 11,
 				"letters_freq": 7,
 				"write_speed": 0.32,
@@ -24288,7 +24549,7 @@
 				"desk",
 				"didactic"
 			],
-			"qfep_connection": "The desk transcribes the one thing you never agreed to author: your attention. A head, sampled as it turns toward whatever it cannot help looking at, is a confession written in a hand you can't read - kept on the page after you walk away.",
+			"qfep_connection": "A constant measured height can give waiting a length, while a spatial movement gate omits its duration. What an instrument keeps shapes what can be read from its mark; neither mode measures attention or confession.",
 			"measurements": {
 				"aabb_size": [
 					0.9,
@@ -24565,7 +24826,7 @@
 		"tensegrity_triangle": {
 			"category": "primitives",
 			"complexity": "beginner",
-			"description": "A triangle of three struts and three joints holding its shape under a load that would fold any other polygon. Fuller: the triangle is the only rigid polygon. A compression pulse it visibly springs back from.",
+			"description": "Three rendered struts and joints with a prescribed sinusoidal scale pulse. It depicts a triangle but has no member-force, hinge or load solver and no tension cables; the legacy identifier does not make it a tensegrity demonstration.",
 			"dev_themes": [
 				"commons",
 				"primitives",
@@ -24606,7 +24867,7 @@
 				"rigid",
 				"didactic"
 			],
-			"qfep_connection": "The triangle as relation made rigid - the first structure that holds itself up. Nature stabilises with triangles because nothing else stays true under load.",
+			"qfep_connection": "A convincing pulse invites the question of what was actually tested. Compare the authored animation with the constraint needed to establish rigidity; the current sculpture poses that experiment rather than performing it.",
 			"measurements": {
 				"aabb_size": [
 					1.35,
@@ -26005,7 +26266,7 @@
 			"name": "Laundry Line Cathedral",
 			"class_name": "LaundryLineCathedral",
 			"scene": "res://commons/artifacts/laundry_line_cathedral/laundry_line_cathedral.tscn",
-			"description": "The Catenary hero (formfinding): three washing lines sagging as true cosh curves, towels pegged plumb - and above each line its mirrored ghost arch, because a hanging chain flipped is a standing vault. Gaudi's method as laundry. Category-heroes pass, 2026-08-27.",
+			"description": "Three sampled cosh washing lines with shirts and towels, supported by end crossbars, and mirrored ghost arches above. The analytic curves and inversion make a structural analogy visible; the artifact does not solve loaded ropes or masonry equilibrium.",
 			"category": "primitives",
 			"tags": [
 				"formfinding",
@@ -26016,13 +26277,16 @@
 			"spatial_needs": {
 				"footprint_cells": 4,
 				"clearance_m": 0.6
-			}
+			},
+			"lookup_name": "laundry_line_cathedral",
+			"map_ready": true,
+			"include_in_map_data": true
 		},
 		"impossible_end_table": {
 			"name": "Impossible End Table",
 			"class_name": "ImpossibleEndTable",
 			"scene": "res://commons/artifacts/impossible_end_table/impossible_end_table.tscn",
-			"description": "The Equilibrium hero (formfinding), elevating tensegrity_triangle to furniture: an end table whose top never touches its base - one cable hangs it, three stop the sway, a teacup sits unbothered. Islands of compression in a sea of tension. Category-heroes pass, 2026-08-27.",
+			"description": "An authored mesh arrangement of separated table parts, drawn cables and an unbothered teacup. No contact, cable-tension or rigid-body balance solver tests the pose. Its visual stillness is a question to investigate, not evidence that the displayed force system balances.",
 			"category": "primitives",
 			"tags": [
 				"formfinding",
@@ -26033,7 +26297,10 @@
 			"spatial_needs": {
 				"footprint_cells": 2,
 				"clearance_m": 0.6
-			}
+			},
+			"lookup_name": "impossible_end_table",
+			"map_ready": true,
+			"include_in_map_data": true
 		},
 		"cookie_press": {
 			"name": "Cookie Press",
@@ -26093,7 +26360,7 @@
 			"name": "Seven Words Choir",
 			"class_name": "SevenWordsChoir",
 			"scene": "res://commons/artifacts/seven_words_choir/seven_words_choir.tscn",
-			"description": "The engine's whole primitive vocabulary on choir risers - Plane, Box, Sphere, Cylinder, Capsule, Prism, Torus - breathing in turn. Seven words, infinite sentences. Primitives taxonomy, 2026-08-27.",
+			"description": "Seven familiar forms on choir risers - Plane, Box, Sphere, Cylinder, Capsule, Prism, Torus - breathing in turn. A selected vocabulary for composition, not an exhaustive list of Godot mesh types.",
 			"category": "primitives",
 			"tags": [
 				"primitives",
@@ -26104,7 +26371,13 @@
 			"spatial_needs": {
 				"footprint_cells": 3,
 				"clearance_m": 0.6
-			}
+			},
+			"map_ready": true,
+			"include_in_map_data": true,
+			"map_sequences": [
+				"primitives"
+			],
+			"lookup_name": "seven_words_choir"
 		},
 		"backface_curtain": {
 			"name": "Backface Curtain",
@@ -26142,7 +26415,13 @@
 			},
 			"parameters": {
 				"discovery": "Visitor-controlled counts and edges, initially hidden (#discovery:1). Counts read actual mesh entries and area-bearing triangles."
-			}
+			},
+			"map_ready": true,
+			"include_in_map_data": true,
+			"map_sequences": [
+				"primitives"
+			],
+			"lookup_name": "budget_of_smoothness"
 		},
 		"wireframe_threshold": {
 			"lookup_name": "wireframe_threshold",
@@ -26469,142 +26748,6 @@
 			},
 			"theoreticalGrounding": "Palle, 2026-09-01: 'I think 3d in 2d and 2d in 3d ... on the wall works panel where there now is text I also want abstract works.' The recursion is the system. The FRAME is 3D - real moulding with depth casting a real shadow. The WORK is 2D - a flat face, no depth, the oldest lie in painting. And one work is 3D AGAIN inside its own 2D: cube_isometric is a live camera on a cube that exists, just not in this room. A visitor walking past sees a picture; closer, sees that one of the pictures is a window; walking round, sees the cube is not there. That is 3d-in-2d and 2d-in-3d as one object rather than two, and the museum needs no new machinery to hang it. The orthographic camera matters: perspective would make it a photograph of a cube, orthographic makes it a DRAWING of one, which is the register the rest of the wall is in."
 		},
-		"drag_point_target": {
-			"category": "primitives",
-			"complexity": "beginner",
-			"description": "A red arrow over a marked spot that says DRAG POINT HERE. Any point in group ada_coordinate_point entering the catch sphere drops a fall of spheres out of the sky — the coordinate stops being a label and becomes a cause.",
-			"dev_themes": [
-				"core",
-				"primitives"
-			],
-			"footprint": [
-				1,
-				1,
-				1
-			],
-			"include_in_map_data": true,
-			"lookup_name": "drag_point_target",
-			"map_ready": true,
-			"map_sequences": [
-				"primitives"
-			],
-			"name": "drag_point_target",
-			"parameters": {
-				"text": "String",
-				"catch_radius": "float",
-				"catch_height": "float",
-				"balls": "int",
-				"drop_height": "float",
-				"spread": "float",
-				"ball_radius": "float",
-				"ball_life": "float",
-				"rearm": "bool",
-				"color": "Color",
-				"footprint": [
-					1,
-					1,
-					1
-				],
-				"size_group": "compact"
-			},
-			"scene": "res://commons/artifacts/drag_point_target/drag_point_target.tscn",
-			"size_group": "compact",
-			"tags": [
-				"primitive",
-				"interactive",
-				"instruction"
-			],
-			"spatial_needs": {
-				"platform": "floor",
-				"footprint_cells": 1,
-				"clearance": {
-					"front": 1,
-					"back": 1,
-					"left": 1,
-					"right": 1
-				},
-				"player_position": "front",
-				"wall_backing": false,
-				"orientation": "face_approach",
-				"isolation": 0,
-				"preferred_zone": "middle",
-				"footprint_source": "designed"
-			},
-			"qfep_connection": "The frame tells you where things are; this tells you to put one somewhere. A coordinate you can reach is a different object from a coordinate you can read — and the fall is the room agreeing that you reached it."
-		},
-		"health_cross": {
-			"category": "primitives",
-			"complexity": "beginner",
-			"description": "A red cross floating just above the floor that returns health when a VISITOR walks over it AND health has fallen below take_below of maximum (default 0.75) — otherwise it dims once in refusal and waits, unspent. Then it is spent until it comes back. The pick-up twin of wall_health_station — same provider, one you stand at and one you step on. Masks the museum walker's layer as well as the grid player's, and admits only the four visitor groups plus a body under an XROrigin3D, so hazard creatures cannot eat it.",
-			"dev_themes": [
-				"core",
-				"primitives"
-			],
-			"footprint": [
-				1,
-				1,
-				1
-			],
-			"include_in_map_data": true,
-			"lookup_name": "health_cross",
-			"map_ready": true,
-			"map_sequences": [
-				"primitives"
-			],
-			"name": "health_cross",
-			"parameters": {
-				"footprint": [
-					1,
-					1,
-					1
-				],
-				"size_group": "compact"
-			},
-			"scene": "res://commons/artifacts/health_cross/health_cross.tscn",
-			"size_group": "compact",
-			"tags": [
-				"primitive",
-				"pickup",
-				"health"
-			]
-		},
-		"sketch_monitor": {
-			"category": "primitives",
-			"complexity": "beginner",
-			"description": "A monitor standing in the room that runs a Processing-style 2D sketch — a SubViewport canvas on an unshaded screen, so the flat world and its own coordinate system stand inside the round one. First sketch: moving scan lines, a raster showing you what a raster is. A new example is a Sketch subclass and one line.",
-			"dev_themes": [
-				"core",
-				"primitives"
-			],
-			"footprint": [
-				1,
-				1,
-				1
-			],
-			"include_in_map_data": true,
-			"lookup_name": "sketch_monitor",
-			"map_ready": true,
-			"map_sequences": [
-				"primitives"
-			],
-			"name": "sketch_monitor",
-			"parameters": {
-				"footprint": [
-					1,
-					1,
-					1
-				],
-				"size_group": "compact"
-			},
-			"scene": "res://commons/artifacts/sketch_monitor/sketch_monitor.tscn",
-			"size_group": "compact",
-			"tags": [
-				"primitive",
-				"display",
-				"sketch",
-				"2d-in-3d"
-			]
-		},
 		"line_black_box": {
 			"lookup_name": "line_black_box",
 			"name": "Two points / one line",
@@ -26612,22 +26755,34 @@
 			"description": "A four by four metre dark entrance room. Two held endpoints change a luminous segment's length and direction; a wall readout measures the span. North entrance and east passage match Point_Lines.",
 			"category": "primitives",
 			"complexity": "beginner",
+			"map_sequences": ["primitives"],
+			"map_ready": true,
+			"include_in_map_data": true,
+			"footprint": [4, 3.24, 4],
+			"interactions": ["Grab either endpoint to change the line's length and direction.", "Release to leave the endpoint in place.", "Press the wall reset to return both unheld endpoints."],
+			"qfep_connection": "A connection persists while its endpoints change. Length follows the relation between positions; the visible rod gives that relation a body."
+		},
+		"cube_diagonal_plate": {
+			"lookup_name": "cube_diagonal_plate",
+			"name": "The diagonal was already there",
+			"scene": "res://commons/artifacts/cube_diagonal_plate/cube_diagonal_plate.tscn",
+			"description": "Two fixed moments from the editable cube: the same front-face triangle triples before and after moving corner 6. The native museum scene also supplies the book illustration.",
+			"category": "primitives",
+			"complexity": "beginner",
 			"map_sequences": [
 				"primitives"
 			],
 			"map_ready": true,
 			"include_in_map_data": true,
 			"footprint": [
-				4,
-				3.24,
-				4
+				5,
+				3,
+				1
 			],
 			"interactions": [
-				"Grab either endpoint to change the line's length and direction.",
-				"Release to leave the endpoint in place.",
-				"Press the wall reset to return both unheld endpoints."
+				"Compare the flat and creased face; test the numbered handles on the builders nearby."
 			],
-			"qfep_connection": "A connection persists while its endpoints change. Length follows the relation between positions; the visible rod gives that relation a body."
+			"qfep_connection": "A surface can keep its connections while a moved point reveals the triangulation chosen before the visitor arrived."
 		}
 	},
 	"registry_info": {

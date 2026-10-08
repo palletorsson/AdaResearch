@@ -39,6 +39,19 @@ extends RefCounted
 ## Given up: the rest of the row (only one peak is built), the painted black backdrop,
 ## the true hand of the pen (these are procedural contours, not drawn strokes), and
 ## the places where the reference lets one figure's pattern bleed into its neighbour.
+##
+## DNA axes — two, and they cut the silhouette, not the palette:
+##   congregation — how much of the row stands here. one (the single peak) · twinned
+##     (a second smaller peak growing sideways out of the first's hip, fused at the
+##     shoulder) · procession (a shoulder-to-shoulder line of four, the original
+##     tallest, the group squeezed down to fit) · swarm (everything above the knee
+##     gone, risen as ~46 miniature peaks in a plume the shape of the body it left).
+##   habit — what the cloak is doing to itself. standing · melted (sunk to under two
+##     thirds, the skirt bulged into a heap, drips hanging off its flanks, a lobed
+##     pour spread round its foot) · fossil (the cloth gone, only every third
+##     generator left as a rib and six hoops of the frame it was stretched over,
+##     open to the sky) · blooming (the top third everted into a wide lobed calyx,
+##     reflexed petals falling from the rim and a stamen crown standing in the mouth).
 
 const TEX: int = 128
 const TEX_WORLD: float = 0.27
@@ -50,7 +63,16 @@ static func describe() -> String:
 	return "A tall hooded cone like a standing cloak, leaning and twisting to a sharp tip, its whole surface a collage of black-and-white labyrinth squiggle, blue-and-red mosaic crazing, stone crackle and flame slashes, with folded flanges and cut-out shards leaning against it."
 
 
-static func build(root: Node3D, seed: int) -> void:
+static func axes() -> Dictionary:
+	return {
+		"congregation": ["one", "twinned", "procession", "swarm"],
+		"habit": ["standing", "melted", "fossil", "blooming"],
+	}
+
+
+static func build(root: Node3D, seed: int, opts: Dictionary = {}) -> void:
+	var congregation: String = String(opts.get("congregation", "one"))
+	var habit: String = String(opts.get("habit", "standing"))
 	var rng := RandomNumberGenerator.new()
 	rng.seed = seed
 
@@ -85,6 +107,41 @@ static func build(root: Node3D, seed: int) -> void:
 		"curl_x": cos(curl_dir) * curl_amt,
 		"curl_z": sin(curl_dir) * curl_amt,
 	}
+
+	# habit rewrites the profile itself, before a single patch is laid, so the
+	# folds, panels and shards all find the body in its new shape. No rng is
+	# drawn here, so "standing" leaves the seed's draw order untouched.
+	if habit != "standing":
+		var hk := PackedFloat32Array()
+		for i in range(keys.size()):
+			var ft: float = float(i) / float(maxi(keys.size() - 1, 1))
+			var kk: float = keys[i]
+			if habit == "melted":
+				kk *= 1.0 + 1.95 * pow(1.0 - ft, 2.5)
+			elif habit == "blooming":
+				var op: float = clampf((ft - 0.52) / 0.48, 0.0, 1.0)
+				kk = lerpf(kk, base_r * (0.40 + 0.96 * op), pow(op, 1.15))
+			hk.append(kk)
+		keys = hk
+		prm["keys"] = hk
+		if habit == "melted":
+			var lxm: float = prm["lean_x"]
+			var lzm: float = prm["lean_z"]
+			var cxm: float = prm["curl_x"]
+			var czm: float = prm["curl_z"]
+			var lam: float = prm["lobe_amp"]
+			height = height * 0.58
+			prm["height"] = height
+			prm["lean_x"] = lxm * 2.30
+			prm["lean_z"] = lzm * 2.30
+			prm["curl_x"] = cxm * 3.10
+			prm["curl_z"] = czm * 3.10
+			prm["lobe_amp"] = lam * 2.10
+		elif habit == "blooming":
+			var twb: float = prm["twist"]
+			var lab: float = prm["lobe_amp"]
+			prm["twist"] = twb * 1.55
+			prm["lobe_amp"] = lab * 1.45
 
 	var n_sides: int = rng.randi_range(10, 13)
 	var n_blocks: int = rng.randi_range(5, 6)
@@ -207,12 +264,23 @@ static func build(root: Node3D, seed: int) -> void:
 	# --- the hooded cone, patch by patch ---
 	var su: int = 3
 	var sv_steps: int = 4
+	var rib_only: bool = habit == "fossil"
+	var stump_only: bool = congregation == "swarm"
 	for si in range(n_sides):
+		if rib_only and (si % 3) != 0:
+			continue
 		for bj in range(n_blocks):
 			var a0: float = TAU * float(si) / float(n_sides)
 			var a1: float = TAU * float(si + 1) / float(n_sides)
 			var tb0: float = t_edges[bj]
 			var tb1: float = t_edges[bj + 1]
+			if stump_only and tb0 > 0.34:
+				continue
+			if rib_only:
+				var a_mid: float = (a0 + a1) * 0.5
+				var a_half: float = (a1 - a0) * 0.30
+				a0 = a_mid - a_half
+				a1 = a_mid + a_half
 			var ac: float = (a0 + a1) * 0.5
 			var tc: float = (tb0 + tb1) * 0.5
 			var sid: int = _region_skin(ac, tc, reg_a, reg_t, reg_skin)
@@ -242,23 +310,24 @@ static func build(root: Node3D, seed: int) -> void:
 
 	# --- underside cap, so the skirt reads solid from below ---
 	var ring_n: int = n_sides * su
-	var cap_pivot := Vector3.ZERO
-	for k in range(ring_n):
-		cap_pivot += _peak_point(0.0, TAU * float(k) / float(ring_n), prm)
-	cap_pivot = cap_pivot / float(ring_n)
-	var cap_st := SurfaceTool.new()
-	cap_st.begin(Mesh.PRIMITIVE_TRIANGLES)
-	var cap_ins := Vector3(0.0, 0.30, 0.0) - cap_pivot
-	var cap_hub: Vector3 = _axis(0.0, prm) - cap_pivot
-	for k in range(ring_n):
-		var a_a: float = TAU * float(k) / float(ring_n)
-		var a_b: float = TAU * float(k + 1) / float(ring_n)
-		var pa: Vector3 = _peak_point(0.0, a_a, prm) - cap_pivot
-		var pb: Vector3 = _peak_point(0.0, a_b, prm) - cap_pivot
-		_tri_uv(cap_st, cap_hub, Vector2(cap_hub.x / TEX_WORLD, cap_hub.z / TEX_WORLD), pa, Vector2(pa.x / TEX_WORLD, pa.z / TEX_WORLD), pb, Vector2(pb.x / TEX_WORLD, pb.z / TEX_WORLD), cap_ins)
-	cap_st.generate_normals()
-	var cap_mi: MeshInstance3D = _add(root, cap_st.commit(), _mat(mats, texs, rng, 6, 0))
-	cap_mi.transform = Transform3D(Basis(), cap_pivot)
+	if not rib_only:
+		var cap_pivot := Vector3.ZERO
+		for k in range(ring_n):
+			cap_pivot += _peak_point(0.0, TAU * float(k) / float(ring_n), prm)
+		cap_pivot = cap_pivot / float(ring_n)
+		var cap_st := SurfaceTool.new()
+		cap_st.begin(Mesh.PRIMITIVE_TRIANGLES)
+		var cap_ins := Vector3(0.0, 0.30, 0.0) - cap_pivot
+		var cap_hub: Vector3 = _axis(0.0, prm) - cap_pivot
+		for k in range(ring_n):
+			var a_a: float = TAU * float(k) / float(ring_n)
+			var a_b: float = TAU * float(k + 1) / float(ring_n)
+			var pa: Vector3 = _peak_point(0.0, a_a, prm) - cap_pivot
+			var pb: Vector3 = _peak_point(0.0, a_b, prm) - cap_pivot
+			_tri_uv(cap_st, cap_hub, Vector2(cap_hub.x / TEX_WORLD, cap_hub.z / TEX_WORLD), pa, Vector2(pa.x / TEX_WORLD, pa.z / TEX_WORLD), pb, Vector2(pb.x / TEX_WORLD, pb.z / TEX_WORLD), cap_ins)
+		cap_st.generate_normals()
+		var cap_mi: MeshInstance3D = _add(root, cap_st.commit(), _mat(mats, texs, rng, 6, 0))
+		cap_mi.transform = Transform3D(Basis(), cap_pivot)
 
 	# --- folded flanges: the overlapping cloak edges ---
 	for f in range(n_flange):
@@ -369,6 +438,202 @@ static func build(root: Node3D, seed: int) -> void:
 			mi_c3.transform = Transform3D(bz3, Vector3(cos(ang) * dist3, chh * 0.425 + 0.002, sin(ang) * dist3))
 
 	# ------------------------------------------------------------------ #
+	# PHASE C — the axes' own bodies. Nothing below runs for the default
+	# pair, so an old build(root, seed) call draws exactly what it drew.
+	# ------------------------------------------------------------------ #
+
+	# --- habit / fossil: the hoops the cloth was stretched over ---
+	if habit == "fossil":
+		var mat_hoop: StandardMaterial3D = _mat(mats, texs, rng, 4, 1)
+		var n_hoop: int = 6
+		for hp in range(n_hoop):
+			var t_h: float = lerpf(0.05, 0.93, float(hp) / float(n_hoop - 1))
+			var th_lo: float = maxf(t_h - 0.017, 0.0)
+			var th_hi: float = minf(t_h + 0.017, 1.0)
+			var hub_h: Vector3 = _axis(t_h, prm)
+			var ax_lo: Vector3 = _axis(th_lo, prm)
+			var ax_hi: Vector3 = _axis(th_hi, prm)
+			var v_h0: float = _v_of(th_lo, v_tab)
+			var v_h1: float = _v_of(th_hi, v_tab)
+			var st_h := SurfaceTool.new()
+			st_h.begin(Mesh.PRIMITIVE_TRIANGLES)
+			for kh in range(ring_n):
+				var ah0: float = TAU * float(kh) / float(ring_n)
+				var ah1: float = TAU * float(kh + 1) / float(ring_n)
+				var h00: Vector3 = _swell(_peak_point(th_lo, ah0, prm), ax_lo, 1.075) - hub_h
+				var h01: Vector3 = _swell(_peak_point(th_lo, ah1, prm), ax_lo, 1.075) - hub_h
+				var h11: Vector3 = _swell(_peak_point(th_hi, ah1, prm), ax_hi, 1.075) - hub_h
+				var h10: Vector3 = _swell(_peak_point(th_hi, ah0, prm), ax_hi, 1.075) - hub_h
+				var uh0: float = u_total * ah0 / TAU
+				var uh1: float = u_total * ah1 / TAU
+				_quad_uv(st_h, h00, Vector2(uh0, v_h0), h01, Vector2(uh1, v_h0), h11, Vector2(uh1, v_h1), h10, Vector2(uh0, v_h1), Vector3.ZERO)
+			st_h.generate_normals()
+			var mi_h: MeshInstance3D = _add(root, st_h.commit(), mat_hoop)
+			mi_h.transform = Transform3D(Basis(), hub_h)
+
+	# --- habit / melted: the pour it is sinking into, and what hangs off it ---
+	if habit == "melted":
+		var mat_pool: StandardMaterial3D = _mat(mats, texs, rng, int(reg_skin[0]), 1)
+		var pool_r: float = base_r * 2.30
+		var wob_n: float = float(rng.randi_range(3, 6))
+		var wob_ph: float = rng.randf_range(0.0, TAU)
+		var pool_seg: int = 40
+		var pool_hub := Vector3(0.0, 0.086, 0.0)
+		var pool_in := Vector3(0.0, -0.55, 0.0)
+		var st_pool := SurfaceTool.new()
+		st_pool.begin(Mesh.PRIMITIVE_TRIANGLES)
+		for kp in range(pool_seg):
+			var ap0: float = TAU * float(kp) / float(pool_seg)
+			var ap1: float = TAU * float(kp + 1) / float(pool_seg)
+			var rp0: float = pool_r * (1.0 + 0.24 * sin(wob_n * ap0 + wob_ph))
+			var rp1: float = pool_r * (1.0 + 0.24 * sin(wob_n * ap1 + wob_ph))
+			var o0 := Vector3(cos(ap0) * rp0, 0.004, sin(ap0) * rp0)
+			var o1 := Vector3(cos(ap1) * rp1, 0.004, sin(ap1) * rp1)
+			var i0 := Vector3(cos(ap0) * rp0 * 0.54, 0.060, sin(ap0) * rp0 * 0.54)
+			var i1 := Vector3(cos(ap1) * rp1 * 0.54, 0.060, sin(ap1) * rp1 * 0.54)
+			_quad_uv(st_pool,
+				o0, Vector2(o0.x / TEX_WORLD, o0.z / TEX_WORLD),
+				o1, Vector2(o1.x / TEX_WORLD, o1.z / TEX_WORLD),
+				i1, Vector2(i1.x / TEX_WORLD, i1.z / TEX_WORLD),
+				i0, Vector2(i0.x / TEX_WORLD, i0.z / TEX_WORLD),
+				pool_in)
+			_tri_uv(st_pool,
+				i0, Vector2(i0.x / TEX_WORLD, i0.z / TEX_WORLD),
+				i1, Vector2(i1.x / TEX_WORLD, i1.z / TEX_WORLD),
+				pool_hub, Vector2(pool_hub.x / TEX_WORLD, pool_hub.z / TEX_WORLD),
+				pool_in)
+		st_pool.generate_normals()
+		var mi_pool: MeshInstance3D = _add(root, st_pool.commit(), mat_pool)
+		mi_pool.transform = Transform3D()
+		var n_drip: int = 6
+		for kd in range(n_drip):
+			var ad: float = rng.randf_range(0.0, TAU)
+			var td: float = rng.randf_range(0.16, 0.74)
+			var ps_d: Vector3 = _peak_point(td, ad, prm)
+			var ax_d: Vector3 = _axis(td, prm)
+			var nd := Vector3(ps_d.x - ax_d.x, 0.0, ps_d.z - ax_d.z)
+			if nd.length() < 0.0001:
+				nd = Vector3(cos(ad), 0.0, sin(ad))
+			nd = nd.normalized()
+			var dr: float = rng.randf_range(0.052, 0.098)
+			var dh: float = maxf(rng.randf_range(0.16, 0.40), dr * 2.4)
+			var sph := SphereMesh.new()
+			sph.radius = dr
+			sph.height = dh
+			sph.radial_segments = 14
+			sph.rings = 8
+			var org_d: Vector3 = ps_d + nd * dr * 0.55
+			org_d.y = maxf(org_d.y - dh * 0.30, dh * 0.5 + 0.006)
+			var mi_dr: MeshInstance3D = _add(root, sph, _mat(mats, texs, rng, int(reg_skin[kd % n_reg]), 2))
+			mi_dr.transform = Transform3D(Basis(), org_d)
+
+	# --- habit / blooming: petals fall off the calyx rim, stamens stand in it ---
+	if habit == "blooming":
+		var mat_pet: StandardMaterial3D = _mat(mats, texs, rng, 5, 1)
+		var n_pet: int = rng.randi_range(6, 8)
+		for kb in range(n_pet):
+			var ab: float = TAU * float(kb) / float(n_pet) + rng.randf_range(-0.14, 0.14)
+			var rim: Vector3 = _peak_point(0.985, ab, prm)
+			var ax_b: Vector3 = _axis(0.985, prm)
+			var ob := Vector3(rim.x - ax_b.x, 0.0, rim.z - ax_b.z)
+			if ob.length() < 0.0001:
+				ob = Vector3(cos(ab), 0.0, sin(ab))
+			ob = ob.normalized()
+			var tg := Vector3(-ob.z, 0.0, ob.x)
+			var plen: float = rng.randf_range(0.32, 0.50)
+			var pwid: float = rng.randf_range(0.15, 0.25)
+			var nseg: int = 8
+			var pet_st := SurfaceTool.new()
+			pet_st.begin(Mesh.PRIMITIVE_TRIANGLES)
+			for sb in range(nseg):
+				var fb0: float = float(sb) / float(nseg)
+				var fb1: float = float(sb + 1) / float(nseg)
+				var y0: float = plen * (0.72 * fb0 - 2.55 * fb0 * fb0 + 1.48 * fb0 * fb0 * fb0)
+				var y1: float = plen * (0.72 * fb1 - 2.55 * fb1 * fb1 + 1.48 * fb1 * fb1 * fb1)
+				var c0: Vector3 = ob * (plen * fb0 * 0.88) + Vector3(0.0, y0, 0.0)
+				var c1: Vector3 = ob * (plen * fb1 * 0.88) + Vector3(0.0, y1, 0.0)
+				var w0: float = pwid * 0.5 * (0.30 + 0.92 * sin(PI * pow(fb0, 0.62))) * (1.0 - 0.72 * fb0 * fb0)
+				var w1: float = pwid * 0.5 * (0.30 + 0.92 * sin(PI * pow(fb1, 0.62))) * (1.0 - 0.72 * fb1 * fb1)
+				_quad_uv(pet_st,
+					c0 - tg * w0, Vector2(-w0 / TEX_WORLD, plen * fb0 / TEX_WORLD),
+					c0 + tg * w0, Vector2(w0 / TEX_WORLD, plen * fb0 / TEX_WORLD),
+					c1 + tg * w1, Vector2(w1 / TEX_WORLD, plen * fb1 / TEX_WORLD),
+					c1 - tg * w1, Vector2(-w1 / TEX_WORLD, plen * fb1 / TEX_WORLD),
+					Vector3(0.0, -0.45, 0.0))
+			pet_st.generate_normals()
+			var mi_pet: MeshInstance3D = _add(root, pet_st.commit(), mat_pet)
+			mi_pet.transform = Transform3D(Basis(), rim)
+		var crown: Vector3 = _axis(1.0, prm)
+		var mat_stalk: StandardMaterial3D = _mat(mats, texs, rng, 6, 2)
+		var mat_knob: StandardMaterial3D = _mat(mats, texs, rng, int(reg_skin[0]), 2)
+		var n_stam: int = 5
+		for ks in range(n_stam):
+			var as_a: float = TAU * float(ks) / float(n_stam) + 0.31
+			var srad: float = rng.randf_range(0.02, 0.10)
+			var slen: float = rng.randf_range(0.12, 0.28)
+			var stk := CylinderMesh.new()
+			stk.top_radius = 0.010
+			stk.bottom_radius = 0.017
+			stk.height = slen
+			stk.radial_segments = 7
+			stk.rings = 1
+			var foot_s: Vector3 = crown + Vector3(cos(as_a) * srad, 0.0, sin(as_a) * srad)
+			var mi_stk: MeshInstance3D = _add(root, stk, mat_stalk)
+			mi_stk.transform = Transform3D(Basis(), foot_s + Vector3(0.0, slen * 0.5, 0.0))
+			var kr: float = rng.randf_range(0.026, 0.048)
+			var knob := SphereMesh.new()
+			knob.radius = kr
+			knob.height = kr * 2.0
+			knob.radial_segments = 12
+			knob.rings = 7
+			var mi_knob: MeshInstance3D = _add(root, knob, mat_knob)
+			mi_knob.transform = Transform3D(Basis(), foot_s + Vector3(0.0, slen + kr * 0.7, 0.0))
+
+	# --- congregation: how much of the row stands here ---
+	if congregation == "twinned":
+		var prm_t: Dictionary = _sibling_prm(prm, rng, 0.72, 0.66)
+		var at: float = rng.randf_range(0.0, TAU)
+		var tilt_t: float = deg_to_rad(rng.randf_range(28.0, 48.0))
+		var seat: Vector3 = _peak_point(0.34, at, prm)
+		var xf_t := Transform3D(Basis(Vector3(-sin(at), 0.0, cos(at)), tilt_t), Vector3(seat.x * 0.78, maxf(seat.y, 0.24), seat.z * 0.78))
+		_cone_body(root, mats, texs, rng, prm_t, 9, 4, reg_a, reg_t, reg_skin, v_tab, u_total, xf_t)
+	elif congregation == "procession":
+		var row_a: float = rng.randf_range(0.0, TAU)
+		var row_d := Vector3(cos(row_a), 0.0, sin(row_a))
+		var row_p := Vector3(-sin(row_a), 0.0, cos(row_a))
+		var slots: Array = [-0.88, -0.42, 0.48]
+		for kc in range(slots.size()):
+			var sc: float = rng.randf_range(0.58, 0.86)
+			var prm_r: Dictionary = _sibling_prm(prm, rng, sc, rng.randf_range(0.56, 0.94))
+			var off: float = slots[kc]
+			var jit_p: float = rng.randf_range(-0.10, 0.10)
+			var spin: float = rng.randf_range(0.0, TAU)
+			var xf_r := Transform3D(Basis(Vector3(0.0, 1.0, 0.0), spin), row_d * off + row_p * jit_p)
+			_cone_body(root, mats, texs, rng, prm_r, 7, 3, reg_a, reg_t, reg_skin, v_tab, u_total, xf_r)
+	elif congregation == "swarm":
+		var n_mini: int = 46
+		for km in range(n_mini):
+			var am: float = rng.randf_range(0.0, TAU)
+			var rm: float = sqrt(rng.randf()) * 0.54
+			var mh: float = rng.randf_range(0.10, 0.30)
+			var mrad: float = mh * rng.randf_range(0.19, 0.33)
+			var lift: float = maxf(0.0, (0.60 - rm) * 2.15) * rng.randf_range(0.15, 1.0)
+			var rad_d := Vector3(cos(am), 0.0, sin(am))
+			var dir_m: Vector3 = (Vector3.UP + rad_d * rng.randf_range(0.05, 0.72)).normalized()
+			var cyl_m := CylinderMesh.new()
+			cyl_m.top_radius = 0.004
+			cyl_m.bottom_radius = mrad
+			cyl_m.height = mh
+			cyl_m.radial_segments = 7
+			cyl_m.rings = 1
+			var cth: float = maxf(dir_m.y, 0.05)
+			var sth: float = sqrt(maxf(0.0, 1.0 - cth * cth))
+			var oy: float = lift + mh * 0.5 * cth + mrad * sth + 0.004
+			var sk_m: int = int(reg_skin[rng.randi_range(0, n_reg - 1)])
+			var mi_m: MeshInstance3D = _add(root, cyl_m, _mat(mats, texs, rng, sk_m, 2))
+			mi_m.transform = Transform3D(_basis_y_to(dir_m), Vector3(rad_d.x * rm, oy, rad_d.z * rm))
+
+	# ------------------------------------------------------------------ #
 	# SETTLE — measured fit, centre on x/z, stand on the floor.
 	# ------------------------------------------------------------------ #
 	var box: AABB = _union_aabb(root)
@@ -472,6 +737,78 @@ static func _region_skin(a: float, t: float, reg_a: PackedFloat32Array, reg_t: P
 			best = k
 	var out_id: int = reg_skin[best]
 	return out_id
+
+
+static func _swell(p: Vector3, ax: Vector3, k: float) -> Vector3:
+	# push a surface point away from the axis without moving it up or down
+	return Vector3(ax.x + (p.x - ax.x) * k, p.y, ax.z + (p.z - ax.z) * k)
+
+
+# ---------------------------------------------------------------------------
+# congregation — a second, third, fourth peak out of the same cloth
+
+static func _sibling_prm(src: Dictionary, rng: RandomNumberGenerator, rscale: float, hscale: float) -> Dictionary:
+	var out: Dictionary = src.duplicate(true)
+	var ks: PackedFloat32Array = src["keys"]
+	var nk := PackedFloat32Array()
+	for i in range(ks.size()):
+		nk.append(ks[i] * rscale * rng.randf_range(0.90, 1.10))
+	out["keys"] = nk
+	var h0: float = src["height"]
+	out["height"] = h0 * hscale
+	out["twist"] = deg_to_rad(rng.randf_range(-70.0, 70.0))
+	out["lobes"] = float(rng.randi_range(3, 6))
+	out["lobe_amp"] = rng.randf_range(0.055, 0.155)
+	out["lobe_phase"] = rng.randf_range(0.0, TAU)
+	out["asym"] = rng.randf_range(0.045, 0.115)
+	out["asym_phase"] = rng.randf_range(0.0, TAU)
+	var d: float = rng.randf_range(0.0, TAU)
+	var amt: float = rng.randf_range(0.08, 0.22)
+	out["lean_x"] = cos(d) * amt
+	out["lean_z"] = sin(d) * amt
+	out["curl_x"] = cos(d + 1.1) * amt * 0.45
+	out["curl_z"] = sin(d + 1.1) * amt * 0.45
+	return out
+
+
+static func _cone_body(root: Node3D, mats: Dictionary, texs: Dictionary, rng: RandomNumberGenerator, prm: Dictionary, sides: int, blocks: int, reg_a: PackedFloat32Array, reg_t: PackedFloat32Array, reg_skin: Array, v_tab: PackedFloat32Array, u_total: float, xf: Transform3D) -> void:
+	var su: int = 3
+	var sv_steps: int = 3
+	var t_e := PackedFloat32Array()
+	for j in range(blocks + 1):
+		t_e.append(pow(float(j) / float(blocks), 1.25))
+	for si in range(sides):
+		for bj in range(blocks):
+			var a0: float = TAU * float(si) / float(sides)
+			var a1: float = TAU * float(si + 1) / float(sides)
+			var tb0: float = t_e[bj]
+			var tb1: float = t_e[bj + 1]
+			var ac: float = (a0 + a1) * 0.5
+			var tc: float = (tb0 + tb1) * 0.5
+			var sid: int = _region_skin(ac, tc, reg_a, reg_t, reg_skin)
+			var mat: StandardMaterial3D = _mat(mats, texs, rng, sid, 0)
+			var pivot: Vector3 = _peak_point(tc, ac, prm)
+			var st := SurfaceTool.new()
+			st.begin(Mesh.PRIMITIVE_TRIANGLES)
+			for gi in range(sv_steps):
+				var t_a: float = lerpf(tb0, tb1, float(gi) / float(sv_steps))
+				var t_b: float = lerpf(tb0, tb1, float(gi + 1) / float(sv_steps))
+				var ins: Vector3 = _axis((t_a + t_b) * 0.5, prm) - pivot
+				var v_a: float = _v_of(t_a, v_tab)
+				var v_b: float = _v_of(t_b, v_tab)
+				for gj in range(su):
+					var a_a: float = lerpf(a0, a1, float(gj) / float(su))
+					var a_b: float = lerpf(a0, a1, float(gj + 1) / float(su))
+					var p00: Vector3 = _peak_point(t_a, a_a, prm) - pivot
+					var p01: Vector3 = _peak_point(t_a, a_b, prm) - pivot
+					var p11: Vector3 = _peak_point(t_b, a_b, prm) - pivot
+					var p10: Vector3 = _peak_point(t_b, a_a, prm) - pivot
+					var u_a: float = u_total * a_a / TAU
+					var u_b: float = u_total * a_b / TAU
+					_quad_uv(st, p00, Vector2(u_a, v_a), p01, Vector2(u_b, v_a), p11, Vector2(u_b, v_b), p10, Vector2(u_a, v_b), ins)
+			st.generate_normals()
+			var mi: MeshInstance3D = _add(root, st.commit(), mat)
+			mi.transform = xf * Transform3D(Basis(), pivot)
 
 
 # ---------------------------------------------------------------------------
@@ -597,6 +934,16 @@ static func _basis_z_to(n: Vector3, roll: float) -> Basis:
 	var y: Vector3 = z.cross(x).normalized()
 	var b := Basis(x, y, z)
 	return b * Basis(Vector3(0.0, 0.0, 1.0), roll)
+
+
+static func _basis_y_to(n: Vector3) -> Basis:
+	var y: Vector3 = n.normalized()
+	var ref: Vector3 = Vector3.FORWARD
+	if absf(y.dot(ref)) > 0.985:
+		ref = Vector3.RIGHT
+	var x: Vector3 = ref.cross(y).normalized()
+	var z: Vector3 = x.cross(y).normalized()
+	return Basis(x, y, z)
 
 
 static func _union_aabb(root: Node3D) -> AABB:

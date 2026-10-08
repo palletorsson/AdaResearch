@@ -2,17 +2,12 @@ extends "res://commons/artifacts/_embodied/embodied_prop.gd"
 class_name ImpossibleEndTable
 
 ## @identity
-## lineage: the Equilibrium hero, elevating tensegrity_triangle to furniture — an end
-##   table whose top does not touch its base: two rigid Y-brackets that never meet,
-##   held apart by one central cable in pure tension and steadied by three perimeter
-##   cables. A teacup sits on top, entirely unbothered. The table is impossible only
-##   until you read the strings.
-## essence: tensegrity - islands of compression in a sea of tension. Nothing pushes
-##   the top up; the centre cable HANGS the upper bracket from its own overhang while
-##   the rim cables stop the swing. Equilibrium is not stacking; it is a conversation
-##   of pulls that happens to stand still.
-## truth: balance is a verb pretending to be a noun. Cut any one string and the
-##   sentence stops meaning.
+## lineage: a constructed end-table pose with two separated brackets, four cable meshes
+##   and an unbothered teacup. It refers to tension-supported furniture without solving it.
+## essence: positions and bars are drawn directly. No rigid bodies, joints, cable tensions,
+##   contacts or load test hold this upper assembly up; the scene never lets gravity try it.
+## truth: the teacup's stillness is authored geometry, not evidence that the pictured
+##   pulls can support its weight. A physical comparison would be a separate experiment.
 ##
 ## The 2026-08-27 category-heroes pass, formfinding.
 
@@ -62,10 +57,9 @@ func _build_brackets() -> void:
 
 func _build_cables() -> void:
 	var wire := _matte_mat(Color(0.75, 0.75, 0.78), 0.4, 0.8)
-	# THE CENTRE CABLE: from the lower arm's tip UP to the upper arm's tip — the one
-	# tension member the whole table hangs from
+	# The drawn central cable joins the lower and upper arm tips. No tension is solved.
 	_bar(Vector3(0.16, 0.34, 0.0), Vector3(-0.16, 0.34 + gap, 0.0), 0.006, wire)
-	# rim cables: three, from base rim up to top rim — they never push, only stop sway
+	# Three drawn rim cables connect the base and top; they apply no forces.
 	var top_y := 0.34 + gap + 0.34
 	for k in range(3):
 		var ang := TAU * float(k) / 3.0 + 0.5
@@ -138,5 +132,5 @@ func _build_plaque() -> void:
 	ts.rotation.y = deg_to_rad(35.0)
 	add_child(ts)
 	if ts.has_method("set_text"):
-		ts.set_text("IMPOSSIBLE END TABLE - tensegrity",
-			"The top never touches the base: one cable HANGS it from its own overhang,\nthree more stop the sway. Islands of compression in a sea of tension.\nCut any string and the sentence stops meaning. The teacup is unbothered.")
+		ts.set_text("IMPOSSIBLE END TABLE - a constructed pose",
+			"No forces are solved.\nThe teacup never meets gravity.")

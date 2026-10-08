@@ -6,14 +6,14 @@ extends Node3D
 class_name ConstructiveProof
 
 # @identity
-# essence: ∃x P(x) requires exhibiting x — no proof by contradiction allowed
+# essence: constructive existence calls for a witness x and a proof of P(x). Contradiction can still establish a negation; it does not supply every positive witness.
 # desire: grasp the difference between "something exists" and "here it is"
 # critical_parameter: the witness — without an explicit construction, the proof is rejected
 # triggers: static display; the box IS the witness, the arrow insists you must BUILD it
 # emerges: the gap between knowing something exists and being able to point at it
 # needs: VR controls [missing] — could add interactive construction vs contradiction examples
 # relationships: depends on excluded_middle_demo (rejecting LEM forces constructive proofs); contrasts godel_statement_plaque (true but unprovable)
-# truth: existence without construction is an article of faith, not a proof
+# truth: classical existential proofs may establish existence without specifying a witness; this static cube is an illustration, not itself a proof of an arbitrary property.
 
 # ── STAGE-2 DNA — ONE AXIS: `specimen` ───────────────────────────────────────
 #
@@ -93,7 +93,7 @@ func _create_label():
 	_label = Label3D.new()
 	_label.pixel_size = 0.001
 	_label.font_size = 11
-	_label.text = "CONSTRUCTIVE PROOF\n\nClassical: \"∃x such that P(x)\"\n(existence by contradiction)\n\nConstructive: \"Here is x\"\n(must exhibit the witness)"
+	_label.text = "CONSTRUCTIVE EXISTENCE\nGive x and show P(x).\n\nThe cube illustrates a witness;\nit does not prove an arbitrary P."
 	_label.position = Vector3(0, -0.35, 0)
 	add_child(_label)
 

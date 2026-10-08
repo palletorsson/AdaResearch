@@ -17,19 +17,41 @@ const RDSim = preload("res://commons/rd_grammar/rd_sim.gd")
 @export var vr_preview: bool = true
 
 var _current: MeshInstance3D = null
+var study_mode: bool = false
+var walk_seed: bool = false
 
 
 func _ready() -> void:
+	if study_mode:
+		_mount_study()
+		return
 	if config_path.strip_edges().is_empty(): return
 	_build()
 
 
 func apply_grid_config(cfg: Dictionary) -> void:
+	if str(cfg.get("study", "")) == "exchange":
+		study_mode = true
+		if cfg.has("seed"): walk_seed = str(cfg["seed"]) == "walk"
+		if is_node_ready(): _mount_study()
+		return
 	if cfg.has("config_path"): config_path = str(cfg["config_path"])
 	if cfg.has("world_size"):  world_size = float(cfg["world_size"])
 	if cfg.has("height_amp"):  height_amp_override = float(cfg["height_amp"])
 	_clear()
 	_build()
+
+
+func _mount_study() -> void:
+	if has_node("ExchangeStudy"):
+		get_node("ExchangeStudy").configure_walk_seed(walk_seed)
+		return
+	_clear()
+	var study := Node3D.new()
+	study.set_script(load("res://commons/artifacts/rd_artifact/exchange_study.gd"))
+	study.name = "ExchangeStudy"
+	study.set("walk_seed", walk_seed)
+	add_child(study)
 
 
 func _clear() -> void:

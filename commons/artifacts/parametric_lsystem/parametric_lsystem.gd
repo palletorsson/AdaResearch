@@ -1,21 +1,32 @@
 # parametric_lsystem.gd
-# L-system with continuous angle/length parameters for organic branching.
-# Unlike discrete rule-based L-systems, parameters decay smoothly per branch
-# depth, producing naturalistic trees and plants.
+# Symbol rewriting with a turtle whose saved state includes length and angle.
+# Parameters change on branch entry and return to their saved values on exit.
+# The opt-in Growth lesson exposes the actual interpreter trace in metres.
 #
 # @identity
 # essence: angle(depth) = base_angle * 0.95^depth + random(-var, +var) — parametric decay per branch level
-# desire: To show that continuous parameters make L-systems organic — the same grammar, softer and more alive
-# critical_parameter: length_decay — how quickly branches shorten with depth, controlling the tree's overall proportion
+# desire: Follow what a branch inherits, changes and returns to its parent
+# critical_parameter: length_decay — the branch length ratio; values above one lengthen
 # triggers: Preset switch → Bushy Tree, Willow, Fern Spray, Coral Branch — same engine, different character
 # emerges: Natural-looking trees from angle randomization and length decay — no biological model, just parameter gradients
-# needs: VR preset/parameter controls [missing], Label3D [has]
+# needs: Growth lesson STEP/RATIO/HOLD/TREE/RESET/RULE [has]; headset review [pending]
 # relationships: Feeds into LSystems_Growth. Extends lsystem_tree (fixed angle → parametric decay). Contrasts with AnimatedTree (time vs parameters).
-# truth: Randomness in the parameters, not the rules, is what makes grammar look like nature.
+# truth: A resemblance to a plant does not establish a biological growth model.
 
 extends Node3D
 
 class_name ParametricLSystem
+
+signal tree_changed
+var lesson_enabled := false
+var _built := false
+var _batching := false
+var _config_overrides: Dictionary = {}
+var tree_segments: Array = []
+var trace_frames: Array = []
+var effective_iterations := 0
+var budget_limited := false
+var max_symbols := 80000
 
 ## Display settings
 @export var display_size: float = 1.2
@@ -34,7 +45,7 @@ class_name ParametricLSystem
 @export_enum("Bushy Tree", "Willow", "Fern Spray", "Coral Branch") var preset: int = 0:
 	set(value):
 		preset = clampi(value, 0, 3)
-		_apply_preset()
+		if not _batching: _apply_preset()
 
 ## Preset definitions: [axiom, rules, base_angle, iterations, length_decay, angle_var, name]
 const PRESETS = {
@@ -58,7 +69,9 @@ func _ready() -> void:
 	_create_display()
 	_create_base()
 	_create_label()
+	_built = true
 	_apply_preset()
+	if lesson_enabled: _install_lesson()
 
 
 func _create_display() -> void:
@@ -117,33 +130,45 @@ func _apply_preset() -> void:
 	length_decay = p[4]
 	angle_variation = p[5]
 
+	for key in _config_overrides: set(key, _config_overrides[key])
 	_generate()
 
 
 func _generate() -> void:
-	# Rewrite axiom through iterations
+	if not _built: return
 	_current_string = axiom
-
-	for _i in range(iterations):
-		var next := ""
+	effective_iterations = 0
+	budget_limited = _current_string.length() > max_symbols
+	if budget_limited: _current_string = ""
+	for _i in range(clampi(iterations, 0, 6)):
+		if budget_limited: break
+		var next_size := 0
 		for c in _current_string:
-			if _rules.has(c):
-				next += _rules[c]
-			else:
-				next += c
-		_current_string = next
-		if _current_string.length() > 80000:
+			next_size += str(_rules.get(c, c)).length()
+			if next_size > max_symbols: break
+		if next_size > max_symbols:
+			budget_limited = true
 			break
+		var next := ""
+		for c in _current_string: next += str(_rules.get(c, c))
+		_current_string = next
+		effective_iterations += 1
+	reinterpret()
 
+func reinterpret() -> void:
+	if not _built: return
 	_rng.seed = 42
 	_draw_tree()
 	_update_label()
+	tree_changed.emit()
 
 
 func _draw_tree() -> void:
 	if not _immediate_mesh:
 		return
 	_immediate_mesh.clear_surfaces()
+	tree_segments.clear()
+	trace_frames.clear()
 	if _current_string.is_empty():
 		return
 
@@ -165,6 +190,8 @@ func _draw_tree() -> void:
 
 	var angle_rad: float = deg_to_rad(current_angle)
 
+	if lesson_enabled:
+		trace_frames.append({"symbol":"START", "pos":pos, "dir":dir, "length":current_length, "angle":current_angle, "depth":depth, "stack_depth":0, "segments":0})
 	for c in _current_string:
 		match c:
 			"F", "G":
@@ -221,6 +248,9 @@ func _draw_tree() -> void:
 			"X":
 				pass  # Placeholder symbol, no drawing
 
+		if lesson_enabled:
+			trace_frames.append({"symbol":c, "pos":pos, "dir":dir, "length":current_length, "angle":current_angle, "depth":depth, "stack_depth":stack.size(), "segments":segments.size()})
+	tree_segments = segments
 	if segments.is_empty():
 		return
 
@@ -282,22 +312,33 @@ func _update_label() -> void:
 	if preset >= 0 and preset < PRESETS.size():
 		name_str = PRESETS[preset][6]
 	_info_label.text = "%s\nIter: %d | Angle: %.1f° | Decay: %.2f" % [
-		name_str, iterations, base_angle, length_decay
+		name_str, effective_iterations, base_angle, length_decay
 	]
+	if effective_iterations != iterations:
+		_info_label.text += "\nRequested %d / retained complete generation %d" % [iterations, effective_iterations]
 
 
-## Grid system integration
+## Grid configuration is retained across readiness and preset resolution.
 func apply_grid_config(config_data: Dictionary) -> void:
-	if config_data.has("preset"):
-		preset = int(config_data["preset"])
-	if config_data.has("iterations"):
-		iterations = clampi(int(config_data["iterations"]), 1, 6)
-	if config_data.has("base_angle"):
-		base_angle = float(config_data["base_angle"])
-	if config_data.has("length_decay"):
-		length_decay = clampf(float(config_data["length_decay"]), 0.3, 0.95)
-	if config_data.has("angle_variation"):
-		angle_variation = float(config_data["angle_variation"])
-	if config_data.has("display_size"):
-		display_size = float(config_data["display_size"])
-	_apply_preset()
+	if str(config_data.get("lesson", "false")).to_lower() == "true":
+		lesson_enabled = true
+		max_symbols = 4096
+	_batching = true
+	if config_data.has("preset"): preset = int(config_data["preset"])
+	for key in config_data:
+		match str(key):
+			"iterations": _config_overrides[key] = clampi(int(config_data[key]), 0, 6)
+			"base_angle", "angle_variation": _config_overrides[key] = clampf(float(config_data[key]), 0.0, 180.0)
+			"length_decay": _config_overrides[key] = clampf(float(config_data[key]), 0.3, 1.2)
+			"base_length", "display_size": _config_overrides[key] = clampf(float(config_data[key]), 0.01, 12.0)
+	for key in _config_overrides: set(key, _config_overrides[key])
+	_batching = false
+	if _built:
+		_apply_preset()
+		if lesson_enabled: _install_lesson()
+
+func _install_lesson() -> void:
+	if has_node("GrowthLesson"): return
+	var lesson = load("res://commons/artifacts/growth_lesson/growth_lesson.gd").new()
+	lesson.name = "GrowthLesson"
+	add_child(lesson)

@@ -142,6 +142,14 @@ func _ready() -> void:
 
 
 func build_scene() -> void:
+	# A room-sized receiver for this map; ordinary board placements keep their controls.
+	if str(get_meta("config_lesson", "")) == "room_sum":
+		scale = Vector3.ONE
+		var room = preload("res://commons/artifacts/adder_board/room_sum.gd").new()
+		room.name = "RoomSum"
+		add_child(room)
+		set_process(false)
+		return
 	# Scaled exhibition presentation. base_scale() == 0.5 * scale_multiplier.
 	scale = base_scale()
 

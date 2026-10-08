@@ -100,6 +100,12 @@ const PRESET_COLORS := {
 ## Configuration
 @export_range(50.0, 2000.0, 1.0) var fundamental_freq: float = 220.0  # A3 — good audible fundamental
 @export_range(-40.0, 6.0, 0.5) var volume_db: float = -6.0
+## LOCAL ACTIVATION (2026-09-11, WaveFunctions_Effect_Sound): the tone runs continuously
+## from _ready. With `near_only` it sounds only while the listener — the viewport's current
+## camera — is within `near_radius`; a placement opts in with `#sound:near`. Default off:
+## every other placement hums as it always has.
+@export var near_only: bool = false
+@export var near_radius: float = 3.0
 @export_range(0.5, 20.0, 0.5) var morph_speed: float = 4.0  # How fast presets morph (higher = faster)
 
 ## AXIS — HOW MUCH APPARATUS THIS ADMITS EXISTS BEHIND THE HAND. Not which timbre, not the
@@ -437,6 +443,13 @@ func _sync_sliders_to_amplitudes() -> void:
 # ═══════════════════════════════════════════
 
 func _process(delta: float) -> void:
+	if near_only and _audio_player != null:
+		var cam: Camera3D = get_viewport().get_camera_3d()
+		var listener_near: bool = cam != null and cam.global_position.distance_to(global_position) <= near_radius
+		if listener_near and not _audio_player.playing:
+			_audio_player.play()
+		elif not listener_near and _audio_player.playing:
+			_audio_player.stop()
 	# Morph amplitudes toward target
 	if is_morphing:
 		var all_arrived = true
@@ -561,6 +574,9 @@ func apply_grid_config(config_data: Dictionary) -> void:
 	# Was a no-op stub, so a map token could never reach anything on this artifact. It now
 	# reads exactly one key. An absent or unknown "machinery" leaves the shipped value alone,
 	# which keeps every existing placement on the legacy path.
+	# Third axis, a word: "#sound:near" wakes the tone only for a listener within near_radius.
+	if config_data.has("sound"):
+		near_only = str(config_data["sound"]).strip_edges().to_lower() in ["near", "local", "nearby"]
 	if config_data.has("machinery"):
 		var want: String = str(config_data["machinery"]).strip_edges().to_lower()
 		if MACHINERIES.has(want) and want != machinery:

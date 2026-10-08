@@ -29,6 +29,7 @@ extends Node
 var checks := 0
 var failures: Array[String] = []
 var measurements: Dictionary = {}
+var exported_samples: Dictionary = {}
 const MAP := "Random_Entropy"
 const OUT := "res://ada_run/waves_chance_noise/Random_Entropy/"
 ## Screenshots and audio go to the evidence root, ada_encyclopedia/captures/ada-run/ (2026-09-14);
@@ -155,7 +156,7 @@ func run() -> void:
 			if not excerpt.multimesh.get_instance_color(i).is_equal_approx(ribbon.multimesh.get_instance_color(i)): same_colours = false
 		check(same_colours, "…in the ribbon's own colours, draw for draw")
 		var eb: BoxMesh = excerpt.multimesh.mesh
-		check(eb.size.y >= 0.075 and eb.size.x >= 0.024, "…at four times the tile's width, and taller (%.3f × %.3f)" % [eb.size.x, eb.size.y])
+		check(eb.size.y >= 0.075 and eb.size.x >= 0.024, "…enlarged to %.3f × %.3f m" % [eb.size.x, eb.size.y])
 		var rcase: Node3D = meter.get_node_or_null("Staging/ReadoutCase")
 		var ex_bottom: float = excerpt.position.y - eb.size.y * 0.5
 		var case_top: float = (rcase.position.y + 0.105) if rcase != null else 0.0
@@ -163,6 +164,18 @@ func run() -> void:
 		check(rcase != null and ex_bottom > case_top, "the whole row stands clear above the cased readout's plate (bottom %.3f, plate top %.3f)" % [ex_bottom, case_top])
 	var ecap: Label3D = meter.get_node_or_null("Staging/ExcerptCaption")
 	check(ecap != null and ecap.font_size >= 16 and ecap.text.contains("as drawn"), "…and labelled as the original-order excerpt at a readable size (font %d)" % (ecap.font_size if ecap != null else -1))
+	check(ecap != null and not ecap.text.contains("×4") and ecap.font_size >= 22, "the caption names the excerpt without claiming an inaccurate scale factor")
+	var lettered_unshaded: int = 0
+	var dark_unshaded: int = 0
+	for n in panel.find_children("*", "MeshInstance3D", true, false):
+		var mesh: MeshInstance3D = n
+		var material: StandardMaterial3D = mesh.material_override as StandardMaterial3D
+		if material == null or material.shading_mode != BaseMaterial3D.SHADING_MODE_UNSHADED:
+			continue
+		if material.albedo_texture != null: lettered_unshaded += 1
+		elif mesh.has_meta("ledger_dark_plate"): dark_unshaded += 1
+	check(lettered_unshaded >= 3 and dark_unshaded > 0, "all three lettered button tags and dark panel backing keep their contrast under room light")
+	measurements["local_panel_contrast"] = {"lettered_unshaded": lettered_unshaded, "dark_unshaded": dark_unshaded, "scale": panel.scale.x}
 
 	# ── 3. the measurement contract ───────────────────────────────────────────
 	var st: Dictionary = meter.call("get_ledger_state")
@@ -190,6 +203,8 @@ func run() -> void:
 	measurements["histogram_bar_diffs"] = {"bars": bars.size(), "max_count": max_count, "diffs": bar_diffs}
 	check(bars_ok, "the ten histogram bars stand in proportion to the counts, built once (%d bars, diffs %s)" % [bars.size(), str(bar_diffs)])
 	var seq: Array = meter.call("get_sequence")
+	exported_samples["uniform"] = _sample_record(meter)
+	_check_excerpt(meter, "arrival")
 	var strip: String = str(st["strip"])
 	var first40: Array = seq.slice(0, 40)
 	var strip_nums: Array = []
@@ -223,6 +238,7 @@ func run() -> void:
 	check(bool(st["sorted_view"]) and float(st["sort_t"]) > 0.99, "the ribbon is in its sorted layout (t %.2f)" % float(st["sort_t"]))
 	check((st["counts"] as Array) == counts and (st["sorted_counts"] as Array) == counts, "the sorted copy has exactly the same ten counts")
 	check(float(st["entropy"]) == h_before and float(st["sorted_entropy"]) == float(st["entropy"]), "the sorted copy's H equals the reading exactly (%.9f)" % float(st["sorted_entropy"]))
+	_check_excerpt(meter, "sorted")
 	var bars_after: Array = []
 	for i in range(mini(10, bars.size())): bars_after.append(snappedf(((bars[i] as MeshInstance3D).mesh as QuadMesh).size.y / 0.1, 0.001))
 	check(bars_after == bars_before, "the histogram did not move")
@@ -255,6 +271,8 @@ func run() -> void:
 	var sum2: int = 0
 	for c in c2: sum2 += int(c)
 	measurements["contrast"] = {"counts": c2.duplicate(), "sum": sum2, "entropy": st["entropy"], "seed": st["seed"], "source": st["source"], "strip": st["strip"]}
+	exported_samples["concentrated"] = _sample_record(meter)
+	_check_excerpt(meter, "contrast")
 	check(bool(st["contrast"]) and str(st["source"]) == "concentrated", "the concentrated sample is on the wall")
 	check(c2.size() == 10 and sum2 == 200, "…with the same alphabet and the same N (%s → %d)" % [str(c2), sum2])
 	check(int(c2[0]) > 80 and int(c2[0]) > int(c2[1]) and int(c2[1]) > int(c2[3]), "…symbol 0 near half the draws, then falling (%s)" % str(c2))
@@ -293,7 +311,7 @@ func run() -> void:
 	check(bool(meter.call("measure", ones)), "measure() accepts a sample of 200 draws")
 	await get_tree().process_frame
 	var h_one: float = float(meter.call("get_entropy"))
-	check(h_one == 0.0, "a single-symbol sample reads H = %.6f: nothing to learn" % h_one)
+	check(h_one == 0.0, "a single-symbol sample reads H = %.6f for this marginal measurement" % h_one)
 	var even: Array = []
 	for i in range(200): even.append(i % 10)
 	meter.call("measure", even)
@@ -510,6 +528,12 @@ func run() -> void:
 			measurements["desktop_input"]["front_capture_pose"] = drv.call("pose")
 		await drv.call("press", b0, stand)
 		await get_tree().create_timer(1.6).timeout
+		if capture:
+			drv.call("aim_at", meter.to_global(Vector3(0.0, 1.15, 0.2)))
+			for i in range(12): await get_tree().process_frame
+			await get_tree().create_timer(0.3, true, false, true).timeout
+			get_viewport().get_texture().get_image().save_png(_evidence + "probe_entropy_desktop_drawn_live.png")
+			measurements["desktop_input"]["drawn_capture_pose"] = drv.call("pose")
 		var b1: Node = panel.find_child("Btn_1", true, false)
 		var rec1: Dictionary = await drv.call("press", b1, stand) if b1 != null else {}
 		await get_tree().process_frame
@@ -517,6 +541,12 @@ func run() -> void:
 		st = meter.call("get_ledger_state")
 		measurements["desktop_input"]["press_contrast"] = rec1
 		check(bool(st["contrast"]), "CONTRAST pressed through the pointer puts the concentrated sample on the wall")
+		if capture:
+			drv.call("aim_at", meter.to_global(Vector3(0.0, 1.15, 0.2)))
+			for i in range(12): await get_tree().process_frame
+			await get_tree().create_timer(0.3, true, false, true).timeout
+			get_viewport().get_texture().get_image().save_png(_evidence + "probe_entropy_desktop_contrast_live.png")
+			measurements["desktop_input"]["contrast_capture_pose"] = drv.call("pose")
 		await drv.call("press", b1, stand)
 		await get_tree().process_frame
 		await get_tree().process_frame
@@ -637,7 +667,49 @@ func run() -> void:
 				"the rebuilt hall has its gauge again, staged, with desk and panel (%s)" % str(rebuilt))
 			if meter2 != null:
 				check((meter2.call("get_sequence") as Array) == seq and float(meter2.call("get_entropy")) == h_before, "the rebuilt gauge reads the same draws and the same H")
+	var sample_file := FileAccess.open(OUT + "samples.json", FileAccess.WRITE)
+	sample_file.store_string(JSON.stringify(exported_samples, "\t")); sample_file.close()
 	_finish()
+
+
+func _sample_record(meter: Node3D) -> Dictionary:
+	var state: Dictionary = meter.call("get_ledger_state")
+	state = state.duplicate(true)
+	state["sequence"] = meter.call("get_sequence")
+	state["sorted_sequence"] = meter.call("sorted_copy")
+	var colors: Array = []
+	for i in range(int(state["symbols"])):
+		var c: Color = meter.call("_symbol_color", i)
+		colors.append([c.r, c.g, c.b])
+	state["symbol_colors"] = colors
+	return state
+
+
+func _check_excerpt(meter: Node3D, state: String) -> void:
+	var excerpt: MultiMeshInstance3D = meter.get_node_or_null("Staging/Excerpt")
+	var sequence: Array = meter.call("get_sequence")
+	var matches: bool = excerpt != null and excerpt.multimesh.instance_count == mini(40, sequence.size())
+	var max_error: float = 0.0
+	var min_palette_gap: float = 1.0
+	var stored: Array = []
+	# Decode the stored colour back to a symbol; do not demand identical float
+	# precision from the source Color and the MultiMesh instance buffer.
+	for a in range(10):
+		for b in range(a + 1, 10):
+			var ca: Color = meter.call("_symbol_color", a)
+			var cb: Color = meter.call("_symbol_color", b)
+			min_palette_gap = minf(min_palette_gap, maxf(absf(ca.r - cb.r), maxf(absf(ca.g - cb.g), absf(ca.b - cb.b))))
+	if matches:
+		for i in range(excerpt.multimesh.instance_count):
+			var expected: Color = meter.call("_symbol_color", int(sequence[i]))
+			var actual: Color = excerpt.multimesh.get_instance_color(i)
+			stored.append([actual.r, actual.g, actual.b])
+			var error: float = maxf(absf(actual.r - expected.r), maxf(absf(actual.g - expected.g), absf(actual.b - expected.b)))
+			max_error = maxf(max_error, error)
+			matches = matches and error <= 1.0 / 255.0
+	matches = matches and min_palette_gap > 2.0 / 255.0
+	measurements.get_or_add("excerpt_precision", {})[state] = {"max_channel_error": max_error, "minimum_palette_gap": min_palette_gap, "stored_rgb": stored}
+	check(matches, "%s: all forty enlarged tiles retain the active sample's original draw order" % state)
 
 ## At `origin`: the ten ghost bars must be the ACTIVE law's expected counts, in value and in
 ## drawn height — p(k) normalised, expected = p(k)·N, height = clamp(expected / max count, 0, 1)·0.1.

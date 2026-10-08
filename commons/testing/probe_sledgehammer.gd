@@ -158,14 +158,13 @@ func _init() -> void:
 	if not b2.is_broken():
 		print("   FAIL the beam and the head do not reach the same target"); fails += 1
 
-	# ---- 7. NEGATIVE: the transform is OFF by default -------------------
-	var LineDemo := load("res://commons/primitives/snappoint/demos/line_demo.tscn")
-	var ld = LineDemo.instantiate()
-	print("7  line_demo becomes_hammer_after default = %.1f (must be 0.0)"
-		% ld.becomes_hammer_after)
-	if ld.becomes_hammer_after != 0.0:
-		print("   FAIL three other maps place this and would sprout hammers"); fails += 1
-	ld.free()
+	# ---- 7. WITHDRAWN, 2026-09-05 ---------------------------------------
+	# This checked that line_demo did not turn into a hammer by default. The
+	# line no longer turns into a hammer at all (Palle: "make the line_demo more
+	# simple again, remove the creation of the sledgehammer"), so the property
+	# it read is gone and the check would error rather than fail. The hammer is
+	# still a weapon you pick up; it is just no longer something a line becomes.
+	# What replaced the argument is probe_laser_burns.gd.
 
 	print("")
 	print("PROBE OK" if fails == 0 else "PROBE FAILED (%d)" % fails)

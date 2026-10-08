@@ -266,16 +266,16 @@ func _add_overlay(world_pos: Vector3, cube_size: float, material: ShaderMaterial
 	overlay.material_override = material
 
 	# Position at the cube's center, offset slightly on Z to avoid z-fighting
-	overlay.global_position = world_pos + Vector3(0, 0, cube_size * 0.51)
 	overlay.name = "PatternOverlay_%d_%d_%d" % [gp.x, gp.y, gp.z]
 	add_child(overlay)
+	overlay.global_position = world_pos + Vector3(0, 0, cube_size * 0.51)
 
 	# Also add overlay on opposite Z face
 	var overlay_back := MeshInstance3D.new()
 	overlay_back.mesh = box
 	overlay_back.material_override = material
-	overlay_back.global_position = world_pos - Vector3(0, 0, cube_size * 0.51)
 	add_child(overlay_back)
+	overlay_back.global_position = world_pos - Vector3(0, 0, cube_size * 0.51)
 
 	# Add overlays on X faces for side views
 	var box_x := BoxMesh.new()
@@ -284,14 +284,14 @@ func _add_overlay(world_pos: Vector3, cube_size: float, material: ShaderMaterial
 	var overlay_left := MeshInstance3D.new()
 	overlay_left.mesh = box_x
 	overlay_left.material_override = material
-	overlay_left.global_position = world_pos - Vector3(cube_size * 0.51, 0, 0)
 	add_child(overlay_left)
+	overlay_left.global_position = world_pos - Vector3(cube_size * 0.51, 0, 0)
 
 	var overlay_right := MeshInstance3D.new()
 	overlay_right.mesh = box_x
 	overlay_right.material_override = material
-	overlay_right.global_position = world_pos + Vector3(cube_size * 0.51, 0, 0)
 	add_child(overlay_right)
+	overlay_right.global_position = world_pos + Vector3(cube_size * 0.51, 0, 0)
 
 	# Top face
 	var box_y := BoxMesh.new()
@@ -300,8 +300,8 @@ func _add_overlay(world_pos: Vector3, cube_size: float, material: ShaderMaterial
 	var overlay_top := MeshInstance3D.new()
 	overlay_top.mesh = box_y
 	overlay_top.material_override = material
-	overlay_top.global_position = world_pos + Vector3(0, cube_size * 0.51, 0)
 	add_child(overlay_top)
+	overlay_top.global_position = world_pos + Vector3(0, cube_size * 0.51, 0)
 
 func _create_wallpaper_material(group_id: int, palette_id: int, seed_val: int) -> ShaderMaterial:
 	var mat := ShaderMaterial.new()
@@ -412,8 +412,8 @@ func _build_ceiling(grid_origin: Vector3, positions: Array, z_values: Array, z_g
 			box.size = Vector3(cs, cs, cs)
 			ceil_cube.mesh = box
 			ceil_cube.material_override = mat
-			ceil_cube.global_position = ceil_pos
 			add_child(ceil_cube)
+			ceil_cube.global_position = ceil_pos
 
 		# Floor pattern cubes in the walkway (void cells)
 		for x in range(x_min, x_max + 1):
@@ -425,8 +425,8 @@ func _build_ceiling(grid_origin: Vector3, positions: Array, z_values: Array, z_g
 			box.size = Vector3(cs, cs * 0.1, cs)
 			floor_cube.mesh = box
 			floor_cube.material_override = mat
-			floor_cube.global_position = floor_pos
 			add_child(floor_cube)
+			floor_cube.global_position = floor_pos
 
 		z_count += 1
 		if z_count >= cluster_size:

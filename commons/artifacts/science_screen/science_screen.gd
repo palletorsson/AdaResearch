@@ -314,7 +314,10 @@ func _ready() -> void:
 	_build_viewport()
 	_apply_viewport_to_screen()
 	# Start with point mode as visual default (white grid shown immediately)
-	_point_mode = true
+	if _explicit_mode != "":
+		_set_explicit_mode(_explicit_mode)
+	else:
+		_point_mode = true
 	# Load map text for info bar
 	call_deferred("_load_map_text")
 	# Deferred scan connects tracking nodes after artifacts are placed
@@ -431,6 +434,10 @@ func _set_explicit_mode(mode_str: String) -> void:
 			_generic_mode = true
 			_generic_mode_name = "wave"
 			_label_name = "WAVEFORM"
+		"voxel_slice":
+			_generic_mode = true
+			_generic_mode_name = "voxel_slice"
+			_label_name = "VOXEL SECTION"
 		"field", "noise":
 			_generic_mode = true
 			_generic_mode_name = "field"
@@ -1636,6 +1643,38 @@ func _deferred_rebuild() -> void:
 	# Do NOT scan for artifacts here — respect the locked mode
 	# The initial scan in _deferred_first_scan handles mode detection
 
+# Optional live section. Sources must belong to this screen's own museum hall.
+var _slice_cache: Dictionary = {}
+var _slice_key: String = ""
+
+func voxel_slice_data() -> Dictionary:
+	var hall: Node = get_parent()
+	while hall != null and not hall.has_meta("em_map"):
+		hall = hall.get_parent()
+	if hall == null: return {}
+	var source: Node = null
+	for candidate in get_tree().get_nodes_in_group("perlin_terrain_sculptors"):
+		if hall.is_ancestor_of(candidate) and candidate.get("stand") == "lattice":
+			source = candidate;break
+	if source == null: return {} # No invented data when the source is absent.
+	var cell: Vector3i=source.get("_cell")
+	var n: int=source.get("grid_size")
+	var field: FastNoiseLite=source.get("_noise")
+	var threshold_: float=source.get("threshold")
+	var key: String=str([source.get_instance_id(),field.seed,field.frequency,field.fractal_octaves,threshold_,cell,n])
+	if key==_slice_key:return _slice_cache
+	_slice_key=key
+	var rows: Array=[]
+	for z in range(n):
+		var row: Array=[]
+		for x in range(n):
+			var v: float=float(cell.y)/float(n-1)
+			var value: float=PerlinTerrainSculptor.contract_value(field,float(x)/float(n-1),v,float(z)/float(n-1))
+			row.append({"value":value,"score":value-PerlinTerrainSculptor.contract_bias(v),"occupied":source.get("_voxels")[x][cell.y][z]})
+		rows.append(row)
+	_slice_cache={"grid":n,"y":cell.y,"selected":[cell.x,cell.z],"threshold":threshold_,"seed":field.seed,"source":str(source.get_path()),"rows":rows}
+	return _slice_cache
+
 
 # ═══════════════════════════════════════════════════════════════════
 # 2D CANVAS (draws inside SubViewport)
@@ -1692,6 +1731,8 @@ class _ScreenCanvas extends Control:
 					_draw_net_tracker(vp_size, grid_top, grid_margin, grid_area, font)
 				"wave":
 					_draw_wave_tracker(vp_size, grid_top, grid_margin, grid_area, font)
+				"voxel_slice":
+					_draw_voxel_slice(vp_size, font)
 				"field":
 					_draw_field_tracker(vp_size, grid_top, grid_margin, grid_area, font)
 				"scatter":
@@ -1803,7 +1844,8 @@ class _ScreenCanvas extends Control:
 		draw_line(Vector2(0, 38), Vector2(vp_size.x, 38), I_PANEL_BORDER, 2.0)
 		draw_string(font, Vector2(14, 26), title, HORIZONTAL_ALIGNMENT_LEFT, -1, 16, I_TEXT)
 		draw_string(font, Vector2(vp_size.x * 0.4, 26), formula, HORIZONTAL_ALIGNMENT_LEFT, -1, 14, I_CYAN)
-		draw_string(font, Vector2(vp_size.x - 130, 26), "SCORE %03d" % score_val, HORIZONTAL_ALIGNMENT_LEFT, -1, 14, I_DIM)
+		if score_val >= 0:
+			draw_string(font, Vector2(vp_size.x - 130, 26), "SCORE %03d" % score_val, HORIZONTAL_ALIGNMENT_LEFT, -1, 14, I_DIM)
 
 	# Layout constants
 	const INFO_H := 64.0    # bottom info bar height
@@ -2506,6 +2548,33 @@ class _ScreenCanvas extends Control:
 	# ═══════════════════════════════════════════════════════════════
 	# FIELD — 2D noise/force intensity heatmap
 	# ═══════════════════════════════════════════════════════════════
+
+	func _draw_voxel_slice(vp: Vector2, font: Font) -> void:
+		draw_rect(Rect2(Vector2.ZERO,vp),I_BG)
+		var data: Dictionary=screen_ref.voxel_slice_data()
+		_draw_instrument_header(vp,font,"VOXEL SECTION","one horizontal layer / x and z",-1)
+		if data.is_empty():
+			draw_string(font,Vector2(40,180),"Waiting for this hall's lattice. No substitute field.",HORIZONTAL_ALIGNMENT_LEFT,-1,22,I_TEXT)
+			return
+		var side: float=minf((vp.x-100)*0.5,vp.y-180)
+		var step: float=side/float(data.grid)
+		for part in range(2):
+			var left: float=35+part*(side+30)
+			draw_string(font,Vector2(left,100),"FIELD - HEIGHT BIAS" if part==0 else "OCCUPIED / EMPTY",HORIZONTAL_ALIGNMENT_LEFT,-1,20,I_TEXT)
+			for z in range(data.grid):
+				for x in range(data.grid):
+					var sample_: Dictionary=data.rows[z][x]
+					var col: Color=Color(0.07,0.11,0.14)
+					if part==0:
+						col=Color(0.31,0.16,0.45).lerp(Color(0.2,0.87,0.67),clampf(sample_.score*0.5+0.5,0,1))
+					elif sample_.occupied:col=Color(0.45,0.9,0.7)
+					var rect:=Rect2(left+x*step,118+z*step,step-0.8,step-0.8)
+					draw_rect(rect,col)
+					if x==data.selected[0] and z==data.selected[1]:draw_rect(rect,Color(1,0.85,0.3),false,2)
+		var line: String="LIVE | y %d/%d | seed %d | score > %+.2f" % [data.y,data.grid-1,data.seed,data.threshold]
+		draw_string(font,Vector2(35,side+150),line,HORIZONTAL_ALIGNMENT_LEFT,-1,22,I_TEXT)
+		draw_string(font,Vector2(35,side+178),"CELL changes the section. Darkness is a decision, not missing data.",HORIZONTAL_ALIGNMENT_LEFT,-1,17,I_DIM)
+		_draw_scanlines(vp)
 
 	func _draw_field_tracker(vp_size: Vector2, grid_top: float, grid_margin: float, grid_area: Vector2, font: Font) -> void:
 		draw_rect(Rect2(Vector2.ZERO, vp_size), I_BG)

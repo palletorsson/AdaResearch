@@ -113,7 +113,7 @@
 				"derived_at": "2026-04-29T09:39:46.049800Z",
 				"derived_from": "aabb_size + category"
 			},
-			"qfep_connection": "Pattern-making as play: paint a small tile, watch it repeat across a carpet, adjust, repeat. Handmade meets computational \u2014 the room where the abstract truth (a pattern is a tiled array) becomes a thing your hands discover by doing, the carpet answering every edit instantly.",
+			"qfep_connection": "Pattern-making as play: paint a small tile, watch it repeat across a carpet, adjust, repeat. Handmade meets computational — the room where the abstract truth (a pattern is a tiled array) becomes a thing your hands discover by doing, the carpet answering every edit instantly.",
 			"dna": {
 				"promoted": "2026-08-03",
 				"stage": "2 - variation",
@@ -264,7 +264,7 @@
 				"derived_at": "2026-04-29T09:39:46.049800Z",
 				"derived_from": "aabb_size + category"
 			},
-			"qfep_connection": "The atom of pattern: a 4\u00d74 grid you paint, set to repeat. The smallest complete lesson in the chapter \u2014 a tile is a tiny 2D array, and tiling is that array copied across the plane, so a whole carpet is one small list of cells, addressed modulo its size."
+			"qfep_connection": "The atom of pattern: a 4×4 grid you paint, set to repeat. The smallest complete lesson in the chapter — a tile is a tiny 2D array, and tiling is that array copied across the plane, so a whole carpet is one small list of cells, addressed modulo its size."
 		},
 		"pattern_tile_mirror": {
 			"dna": {
@@ -393,7 +393,7 @@
 				"derived_at": "2026-04-29T09:39:46.049800Z",
 				"derived_from": "aabb_size + category"
 			},
-			"qfep_connection": "The 4\u00d74 tile under mirror symmetry \u2014 paint one quadrant and the kaleidoscope fills the rest. The array meeting the symmetry chapter: reflection is an index map, (n\u22121\u2212x), and applying it turns a quarter of decisions into a whole of pattern. Economy of authorship, wired into the grid."
+			"qfep_connection": "The 4×4 tile under mirror symmetry — paint one quadrant and the kaleidoscope fills the rest. The array meeting the symmetry chapter: reflection is an index map, (n−1−x), and applying it turns a quarter of decisions into a whole of pattern. Economy of authorship, wired into the grid."
 		},
 		"pattern_tile_8x8": {
 			"dna": {
@@ -518,7 +518,7 @@
 				"derived_at": "2026-04-29T09:39:46.049800Z",
 				"derived_from": "aabb_size + category"
 			},
-			"qfep_connection": "The same puzzle engine as the 4\u00d74 carpet, with tile_size raised to 8 and the symmetry left at SIMPLE: sixty-four authored cells instead of sixteen, so amplification falls exactly as authorship rises. The knob it turns is the ratio between what the hand decides and what the repeat rule multiplies \u2014 a bigger source tile is a weaker kaleidoscope."
+			"qfep_connection": "The same puzzle engine as the 4×4 carpet, with tile_size raised to 8 and the symmetry left at SIMPLE: sixty-four authored cells instead of sixteen, so amplification falls exactly as authorship rises. The knob it turns is the ratio between what the hand decides and what the repeat rule multiplies — a bigger source tile is a weaker kaleidoscope."
 		},
 		"pattern_tile_brick": {
 			"dna": {
@@ -647,7 +647,7 @@
 				"derived_at": "2026-04-29T09:39:46.049800Z",
 				"derived_from": "aabb_size + category"
 			},
-			"qfep_connection": "The 4\u00d74 tile with a half-drop offset \u2014 masonry's oldest trick, each row shifted so the seams don't line up. The array learning to lie about its own grid: an offset is just index arithmetic, (x + row\u00b7k) mod n, and out of that modular shift comes the whole visual strength of a brick wall."
+			"qfep_connection": "The 4×4 tile with a half-drop offset — masonry's oldest trick, each row shifted so the seams don't line up. The array learning to lie about its own grid: an offset is just index arithmetic, (x + row·k) mod n, and out of that modular shift comes the whole visual strength of a brick wall."
 		},
 		"pattern_tile_herringbone": {
 			"dna": {
@@ -775,7 +775,7 @@
 				"derived_at": "2026-04-29T09:39:46.049800Z",
 				"derived_from": "aabb_size + category"
 			},
-			"qfep_connection": "The tile woven into herringbone \u2014 rectangles turned at right angles, the zigzag that floors and fabrics have used for millennia. Pattern as a rule about orientation across indices: the same cell, rotated by its position's parity, and the weave appears from arithmetic no weaver needed to name."
+			"qfep_connection": "The tile woven into herringbone — rectangles turned at right angles, the zigzag that floors and fabrics have used for millennia. Pattern as a rule about orientation across indices: the same cell, rotated by its position's parity, and the weave appears from arithmetic no weaver needed to name."
 		},
 		"index_visualizer": {
 			"name": "Index Visualizer",
@@ -862,7 +862,7 @@
 				1,
 				1.0
 			],
-			"qfep_connection": "A yellow label trails 2.5 m overhead, rounding your continuous stride to [row, col] \u2014 you don't read the array, you are its index, discretized live without being asked. The script's own comments argue over which axis counts as the row: even the convention is a treaty, not a fact."
+			"qfep_connection": "A yellow label trails 2.5 m overhead, rounding your continuous stride to [row, col] — you don't read the array, you are its index, discretized live without being asked. The script's own comments argue over which axis counts as the row: even the convention is a treaty, not a fact."
 		},
 		"pattern_tile_cube": {
 			"dna": {
@@ -978,7 +978,7 @@
 				"derived_at": "2026-04-29T09:39:46.049800Z",
 				"derived_from": "aabb_size + category"
 			},
-			"qfep_connection": "The unit you place \u2014 a grabbable color cube dragged into a cell of the pattern grid. The atom of the whole chapter made literal: a pattern is built one placed color at a time, and the cube is the single decision the symmetry group will then multiply. Author one; the rule authors the rest."
+			"qfep_connection": "The unit you place — a grabbable color cube dragged into a cell of the pattern grid. The atom of the whole chapter made literal: a pattern is built one placed color at a time, and the cube is the single decision the symmetry group will then multiply. Author one; the rule authors the rest."
 		},
 		"step_sequencer": {
 			"name": "Step Sequencer",
@@ -1087,7 +1087,7 @@
 				"derived_at": "2026-04-29T09:39:46.049800Z",
 				"derived_from": "aabb_size + category"
 			},
-			"qfep_connection": "The array played as music: a click-to-toggle grid where a playhead sweeps the indices left to right and triggers sound where it finds a 1. Arrays as time \u2014 the same indexed row that held heights now holds beats, and you hear that reading a list in order is exactly what a rhythm is."
+			"qfep_connection": "The array played as music: a click-to-toggle grid where a playhead sweeps the indices left to right and triggers sound where it finds a 1. Arrays as time — the same indexed row that held heights now holds beats, and you hear that reading a list in order is exactly what a rhythm is."
 		},
 		"step_sequencer_trap": {
 			"name": "Trap Sequencer",
@@ -1199,7 +1199,7 @@
 				"derived_at": "2026-04-29T09:39:46.049800Z",
 				"derived_from": "aabb_size + category"
 			},
-			"qfep_connection": "The signature lives in row three: hi-hats that alternate for half the bar, then collapse into [1,1,1,1,1,1,1,1]. A genre recognizable purely as a change in ones-per-column density \u2014 style as subdivision rate."
+			"qfep_connection": "The signature lives in row three: hi-hats that alternate for half the bar, then collapse into [1,1,1,1,1,1,1,1]. A genre recognizable purely as a change in ones-per-column density — style as subdivision rate."
 		},
 		"step_sequencer_synth": {
 			"name": "Synth Sequencer",
@@ -1308,7 +1308,7 @@
 				"derived_at": "2026-04-29T09:39:46.049800Z",
 				"derived_from": "aabb_size + category"
 			},
-			"qfep_connection": "TB303, Moog lead, DX7 piano, PPG pad: a pocket history of synthesis loaded onto four tracks. Melody enters the drum machine and finds it indifferent \u2014 to the column pointer, a bass note and a kick drum are the same boolean."
+			"qfep_connection": "TB303, Moog lead, DX7 piano, PPG pad: a pocket history of synthesis loaded onto four tracks. Melody enters the drum machine and finds it indifferent — to the column pointer, a bass note and a kick drum are the same boolean."
 		},
 		"step_sequencer_house": {
 			"name": "90s House Sequencer",
@@ -1421,7 +1421,7 @@
 				"derived_at": "2026-04-29T09:39:46.049800Z",
 				"derived_from": "aabb_size + category"
 			},
-			"qfep_connection": "The 909 kick, the M1 piano stab, the 303 bass: the Gypsy Woman recipe stored as four track assignments and a 122 BPM constant. Cultural memory shipped as config \u2014 swap the dictionary entry and Baltimore becomes D\u00fcsseldorf."
+			"qfep_connection": "The 909 kick, the M1 piano stab, the 303 bass: the Gypsy Woman recipe stored as four track assignments and a 122 BPM constant. Cultural memory shipped as config — swap the dictionary entry and Baltimore becomes Düsseldorf."
 		},
 		"step_sequencer_pads": {
 			"name": "Juno Pads Sequencer",
@@ -1644,7 +1644,7 @@
 				"derived_at": "2026-04-29T09:39:46.049800Z",
 				"derived_from": "aabb_size + category"
 			},
-			"qfep_connection": "The sequencer plays a sample of the Moog sequencer pulse that taught machines to keep time \u2014 origin myth folded into its own config. Robotic precision was never inhuman; it was four Germans in D\u00fcsseldorf deciding which cells to set."
+			"qfep_connection": "The sequencer plays a sample of the Moog sequencer pulse that taught machines to keep time — origin myth folded into its own config. Robotic precision was never inhuman; it was four Germans in Düsseldorf deciding which cells to set."
 		},
 		"step_sequencer_disco": {
 			"name": "Disco Sequencer",
@@ -1753,7 +1753,7 @@
 				"derived_at": "2026-04-29T09:39:46.049800Z",
 				"derived_from": "aabb_size + category"
 			},
-			"qfep_connection": "Four-on-the-floor written out literally as [1,0,0,0] four times \u2014 the lowest-entropy row in the pattern bank \u2014 while the liberation happens in the offbeat hi-hat ones squeezed between the kicks and the Synare tom. The groove is the deviation the anchor makes audible."
+			"qfep_connection": "Four-on-the-floor written out literally as [1,0,0,0] four times — the lowest-entropy row in the pattern bank — while the liberation happens in the offbeat hi-hat ones squeezed between the kicks and the Synare tom. The groove is the deviation the anchor makes audible."
 		},
 		"step_sequencer_ambient": {
 			"name": "Ambient Works Sequencer",
@@ -1866,7 +1866,7 @@
 				"derived_at": "2026-04-29T09:39:46.049800Z",
 				"derived_from": "aabb_size + category"
 			},
-			"qfep_connection": "Eight steps and mostly zeros: the Aphex-style preset teaches that the array's silence is also data. Modular textures and ghost drones hang in what the loop declines to trigger \u2014 E_flux carried by the empty cells."
+			"qfep_connection": "Eight steps and mostly zeros: the Aphex-style preset teaches that the array's silence is also data. Modular textures and ghost drones hang in what the loop declines to trigger — E_flux carried by the empty cells."
 		},
 		"step_sequencer_jazz": {
 			"name": "Jazz Fusion Sequencer",
@@ -1979,7 +1979,7 @@
 				"derived_at": "2026-04-29T09:39:46.049800Z",
 				"derived_from": "aabb_size + category"
 			},
-			"qfep_connection": "Herbie's Moog fusion and DX7 piano will only ever sound where a boolean says so: improvisation's genre held to a 16-cell schedule. What plays is jazz's residue after quantization \u2014 the grid stages exactly what a step machine forecloses."
+			"qfep_connection": "Herbie's Moog fusion and DX7 piano will only ever sound where a boolean says so: improvisation's genre held to a 16-cell schedule. What plays is jazz's residue after quantization — the grid stages exactly what a step machine forecloses."
 		},
 		"step_sequencer_chiptune": {
 			"name": "Chiptune Sequencer",
@@ -2088,7 +2088,7 @@
 				"derived_at": "2026-04-29T09:39:46.049800Z",
 				"derived_from": "aabb_size + category"
 			},
-			"qfep_connection": "Four sounds salvaged from dead consoles \u2014 SID lead, Amiga sample, a jump, a pickup \u2014 wired into sixteen steps. The 1980s hardware ceiling replayed as grammar: constraint not as lack but as the compositional engine itself."
+			"qfep_connection": "Four sounds salvaged from dead consoles — SID lead, Amiga sample, a jump, a pickup — wired into sixteen steps. The 1980s hardware ceiling replayed as grammar: constraint not as lack but as the compositional engine itself."
 		},
 		"step_sequencer_scifi": {
 			"name": "Sci-Fi Lab Sequencer",
@@ -2196,7 +2196,7 @@
 				"derived_at": "2026-04-29T09:39:46.049800Z",
 				"derived_from": "aabb_size + category"
 			},
-			"qfep_connection": "No drums at all \u2014 lab hum, data chirps, electromagnetic interference, ventilation \u2014 sequencing the atmosphere of the laboratory the player is already standing in. The room's ambience unmasked as one more 4\u00d78 boolean schedule."
+			"qfep_connection": "No drums at all — lab hum, data chirps, electromagnetic interference, ventilation — sequencing the atmosphere of the laboratory the player is already standing in. The room's ambience unmasked as one more 4×8 boolean schedule."
 		},
 		"step_sequencer_cinematic": {
 			"name": "Cinematic Sequencer",
@@ -2412,7 +2412,7 @@
 				"derived_at": "2026-04-29T09:39:46.049800Z",
 				"derived_from": "aabb_size + category"
 			},
-			"qfep_connection": "Jungle enters the matrix as displacement: the same 4\u00d716 booleans as house, but the kicks land off the strong columns and a chopped-sample track does the cutting. Syncopation is the pattern refusing the grid it runs on."
+			"qfep_connection": "Jungle enters the matrix as displacement: the same 4×16 booleans as house, but the kicks land off the strong columns and a chopped-sample track does the cutting. Syncopation is the pattern refusing the grid it runs on."
 		},
 		"step_sequencer_cosmic": {
 			"name": "Cosmic Sequencer",
@@ -2520,7 +2520,7 @@
 				"derived_at": "2026-04-29T09:39:46.049800Z",
 				"derived_from": "aabb_size + category"
 			},
-			"qfep_connection": "Space is a sound preset: ARP 2600 lead, teleport drone, cosmic FX poured into the ordinary column-by-column traversal. The cosmos here is entirely timbral \u2014 underneath, the orbit is the same for-loop as the disco next door."
+			"qfep_connection": "Space is a sound preset: ARP 2600 lead, teleport drone, cosmic FX poured into the ordinary column-by-column traversal. The cosmos here is entirely timbral — underneath, the orbit is the same for-loop as the disco next door."
 		},
 		"step_sequencer_lofi": {
 			"name": "Lo-Fi Sequencer",
@@ -2731,7 +2731,7 @@
 				"derived_at": "2026-04-29T09:39:46.049800Z",
 				"derived_from": "aabb_size + category"
 			},
-			"qfep_connection": "Digits on a translucent panel, each cell with its address printed in the margin: the confession behind every prettier visualization in the room. Nothing animates \u2014 it stages the flat truth that state is values at indices, and everything else is costume."
+			"qfep_connection": "Digits on a translucent panel, each cell with its address printed in the margin: the confession behind every prettier visualization in the room. Nothing animates — it stages the flat truth that state is values at indices, and everything else is costume."
 		},
 		"pulsar_glass_tubes": {
 			"name": "Pulsar Glass Tubes",
@@ -2853,7 +2853,8 @@
 			"include_in_map_data": true,
 			"map_ready": true,
 			"map_sequences": [
-				"array_tutorial"
+				"array_tutorial",
+				"tiling"
 			],
 			"sequence": "array_tutorial",
 			"parameters": {
@@ -3192,7 +3193,7 @@
 		"tiling_demo": {
 			"name": "Tiling System Demo",
 			"lookup_name": "tiling_demo",
-			"description": "Italian tiling motifs gallery. 17 wallpaper groups, multi-layer composition. Checkerboard to cosmatesque \u2014 field study preparation.",
+			"description": "Italian tiling motifs gallery. 17 wallpaper groups, multi-layer composition. Checkerboard to cosmatesque — field study preparation.",
 			"scene": "res://commons/primitives/arrays/tiling_demo.tscn",
 			"category": "primitives",
 			"tags": [
@@ -3298,7 +3299,7 @@
 				"derived_at": "2026-04-29T09:39:46.049800Z",
 				"derived_from": "aabb_size + category"
 			},
-			"qfep_connection": "The gallery of Italian tiling motifs \u2014 seventeen wallpaper groups, multi-layer compositions, from plain checkerboard to intricate cosmatesque inlay. The historical proof that this chapter's mathematics is old: the array tiled under symmetry is what medieval floors already were, computed by hand centuries before the grid was a data type."
+			"qfep_connection": "The gallery of Italian tiling motifs — seventeen wallpaper groups, multi-layer compositions, from plain checkerboard to intricate cosmatesque inlay. The historical proof that this chapter's mathematics is old: the array tiled under symmetry is what medieval floors already were, computed by hand centuries before the grid was a data type."
 		},
 		"gallery_marker_facade": {
 			"dna": {
@@ -3311,7 +3312,7 @@
 					]
 				}
 			},
-			"name": "Gallery Marker \u2014 Facade",
+			"name": "Gallery Marker — Facade",
 			"lookup_name": "gallery_marker_facade",
 			"description": "Bronze pedestal + glowing stake + Label3D reading FACADE. Single-cell sub-gallery anchor used 20+ times across facade maps. Shared scene at commons/artifacts/gallery_marker; the lookup_name fixes the label per gallery_marker_<sequence> alias pattern.",
 			"scene": "res://commons/artifacts/gallery_marker/gallery_marker.tscn",
@@ -3474,7 +3475,7 @@
 				"derived_at": "2026-04-29T09:39:46.049800Z",
 				"derived_from": "aabb_size + category"
 			},
-			"qfep_connection": "Architecture as array: Italian facades \u2014 Villa San Michele, the Certosa \u2014 read as grids of repeating elements, windows and columns indexed across a wall. The chapter's reach into the built world, arguing that a building's rhythm is a data structure, a facade a 2D array of ornament that a grammar fills."
+			"qfep_connection": "Architecture as array: Italian facades — Villa San Michele, the Certosa — read as grids of repeating elements, windows and columns indexed across a wall. The chapter's reach into the built world, arguing that a building's rhythm is a data structure, a facade a 2D array of ornament that a grammar fills."
 		},
 		"vr_tile_editor": {
 			"dna": {
@@ -3592,7 +3593,7 @@
 				"derived_at": "2026-04-29T09:39:46.049800Z",
 				"derived_from": "aabb_size + category"
 			},
-			"qfep_connection": "The pattern workshop at body scale \u2014 edit a tile grid at desk height and watch it tile across the floor around you. The chapter's truth made inhabitable: you design the fundamental domain in your hands and stand inside its repetition, seeing at once that the rule you performed on one tile has performed itself across a room."
+			"qfep_connection": "The pattern workshop at body scale — edit a tile grid at desk height and watch it tile across the floor around you. The chapter's truth made inhabitable: you design the fundamental domain in your hands and stand inside its repetition, seeing at once that the rule you performed on one tile has performed itself across a room."
 		},
 		"vr_tile_editor_mirror": {
 			"dna": {
@@ -3718,7 +3719,7 @@
 				"derived_at": "2026-04-29T09:39:46.049800Z",
 				"derived_from": "aabb_size + category"
 			},
-			"qfep_connection": "The tile editor entered in VR, kaleidoscope mode on \u2014 you design a symmetric pattern and watch it tile across a surface around you at body scale. The array's repetition made inhabitable: not a pattern seen on a plate but one you stand inside, the carpet wrapping the room as you paint its seed."
+			"qfep_connection": "The tile editor entered in VR, kaleidoscope mode on — you design a symmetric pattern and watch it tile across a surface around you at body scale. The array's repetition made inhabitable: not a pattern seen on a plate but one you stand inside, the carpet wrapping the room as you paint its seed."
 		},
 		"array_carpet": {
 			"name": "Array Carpet",
@@ -3828,7 +3829,7 @@
 		"wfc_tile_mosaic": {
 			"name": "WFC Tile Mosaic",
 			"lookup_name": "wfc_tile_mosaic",
-			"description": "Floor panel showing a pre-generated Wave Function Collapse output \u2014 a grid of tiles where each cell respects adjacency constraints. Constraint propagation made visible.",
+			"description": "Floor panel showing a pre-generated Wave Function Collapse output — a grid of tiles where each cell respects adjacency constraints. Constraint propagation made visible.",
 			"scene": "res://commons/artifacts/wfc_tile_mosaic/wfc_tile_mosaic.tscn",
 			"category": "showcase",
 			"tags": [
@@ -3967,7 +3968,7 @@
 			},
 			"name": "Pattern Maker Station",
 			"lookup_name": "pattern_maker_station",
-			"description": "Interactive wallpaper group station \u2014 paint a domain grid on an upright panel, choose from 17 symmetry groups, and watch the tiled result unfold on a large floor carpet in real time.",
+			"description": "Interactive wallpaper group station — paint a domain grid on an upright panel, choose from 17 symmetry groups, and watch the tiled result unfold on a large floor carpet in real time.",
 			"scene": "res://commons/artifacts/pattern_maker_station/pattern_maker_station.tscn",
 			"category": "interactive",
 			"tags": [
@@ -4085,7 +4086,7 @@
 		"grid_editor_board": {
 			"name": "Grid Editor Board",
 			"lookup_name": "grid_editor_board",
-			"description": "Interactive grid layout editor \u2014 Godot VR mirror of the web grid-editor. Control Board subset with 34 elements across 9 categories, 4 presets (Mission Control, Server Rack, Comms Station). Place and arrange control panel components on a 24x14 grid.",
+			"description": "Interactive grid layout editor — Godot VR mirror of the web grid-editor. Control Board subset with 34 elements across 9 categories, 4 presets (Mission Control, Server Rack, Comms Station). Place and arrange control panel components on a 24x14 grid.",
 			"scene": "res://commons/artifacts/grid_editor_board/grid_editor_board.tscn",
 			"category": "interactive",
 			"tags": [
@@ -4196,7 +4197,7 @@
 		"grid_editor_board_3d": {
 			"name": "Grid Editor Board (3D)",
 			"lookup_name": "grid_editor_board_3d",
-			"description": "3D interactive version of the grid editor board. Same layout data as the shadow board but with real 3D elements \u2014 CRT monitors with phosphor flicker, VU meters with bouncing needles, interactive push buttons, slider faders, rotary knobs, toggle switches, speakers, and blinking LEDs.",
+			"description": "3D interactive version of the grid editor board. Same layout data as the shadow board but with real 3D elements — CRT monitors with phosphor flicker, VU meters with bouncing needles, interactive push buttons, slider faders, rotary knobs, toggle switches, speakers, and blinking LEDs.",
 			"scene": "res://commons/artifacts/grid_editor_board/grid_editor_board_3d.tscn",
 			"category": "interactive",
 			"tags": [
@@ -4302,7 +4303,7 @@
 				"derived_at": "2026-04-29T09:39:46.049800Z",
 				"derived_from": "aabb_size + category"
 			},
-			"qfep_connection": "A control panel that is itself a grid map: CRTs, VU meters, and knobs claim cells through the same occupancy logic that lays out rooms, and it accepts the web editor's layouts verbatim. Mission control turns out to be another floor plan \u2014 instruments are furniture that claims to be in charge."
+			"qfep_connection": "A control panel that is itself a grid map: CRTs, VU meters, and knobs claim cells through the same occupancy logic that lays out rooms, and it accepts the web editor's layouts verbatim. Mission control turns out to be another floor plan — instruments are furniture that claims to be in charge."
 		},
 		"grid_3d_capture": {
 			"dna": {
@@ -4321,7 +4322,7 @@
 			},
 			"name": "Grid Editor 3D Capture",
 			"lookup_name": "grid_3d_capture",
-			"description": "Procedural 3D builder for all grid editor subsets \u2014 chemical models, sticky notes, periodic table, glass racks, big pipes. Accepts subset and preset via config.",
+			"description": "Procedural 3D builder for all grid editor subsets — chemical models, sticky notes, periodic table, glass racks, big pipes. Accepts subset and preset via config.",
 			"scene": "res://commons/artifacts/grid_3d_capture/grid_3d_capture.tscn",
 			"category": "interactive",
 			"tags": [
@@ -4404,7 +4405,7 @@
 				1,
 				1.0
 			],
-			"qfep_connection": "Six subsets share one loader: the identical placement list rises as glassware, a playable synth rack, sticky notes, or a periodic table depending on a single subset string. The grid never learns what it carries \u2014 meaning lives entirely in the key, F_order as convention laid over indifferent cells."
+			"qfep_connection": "Six subsets share one loader: the identical placement list rises as glassware, a playable synth rack, sticky notes, or a periodic table depending on a single subset string. The grid never learns what it carries — meaning lives entirely in the key, F_order as convention laid over indifferent cells."
 		},
 		"facade_builder": {
 			"dna": {
@@ -4534,7 +4535,8 @@
 			"include_in_map_data": true,
 			"map_ready": true,
 			"map_sequences": [
-				"array_tutorial"
+				"array_tutorial",
+				"tiling"
 			],
 			"footprint": [
 				4,
@@ -4620,7 +4622,8 @@
 			"include_in_map_data": true,
 			"map_ready": true,
 			"map_sequences": [
-				"array_tutorial"
+				"array_tutorial",
+				"tiling"
 			],
 			"footprint": [
 				1,
@@ -4742,7 +4745,8 @@
 			"include_in_map_data": true,
 			"map_ready": true,
 			"map_sequences": [
-				"array_tutorial"
+				"array_tutorial",
+				"tiling"
 			],
 			"footprint": [
 				4,
@@ -4829,7 +4833,8 @@
 			"include_in_map_data": true,
 			"map_ready": true,
 			"map_sequences": [
-				"array_tutorial"
+				"array_tutorial",
+				"tiling"
 			],
 			"footprint": [
 				4,
@@ -4973,7 +4978,7 @@
 				"max_dimension_m": 0.0,
 				"measured_at": "2026-04-29T07:09:56.762620Z"
 			},
-			"qfep_connection": "Every frame it lerps your actual position toward the nearest integer coordinate \u2014 the grid reaching back through the XR origin to discipline the body that walks it. smooth_snap makes the coercion feel like magnetism, which is how discipline prefers to feel."
+			"qfep_connection": "Every frame it lerps your actual position toward the nearest integer coordinate — the grid reaching back through the XR origin to discipline the body that walks it. smooth_snap makes the coercion feel like magnetism, which is how discipline prefers to feel."
 		},
 		"mondrian_run": {
 			"lookup_name": "mondrian_run",
@@ -5052,7 +5057,7 @@
 				"derived_at": "2026-04-29T09:39:46.049800Z",
 				"derived_from": "aabb_size + category"
 			},
-			"qfep_connection": "Mondrian's primaries return as absences: seeded recursive subdivision keeps the black lattice as walkable floor and cuts the red, yellow, and blue out as holes. Composition becomes hazard map \u2014 where the painting had colour, the ground has none."
+			"qfep_connection": "Mondrian's primaries return as absences: seeded recursive subdivision keeps the black lattice as walkable floor and cuts the red, yellow, and blue out as holes. Composition becomes hazard map — where the painting had colour, the ground has none."
 		},
 		"grid_editor_main": {
 			"lookup_name": "grid_editor_main",
@@ -5131,7 +5136,7 @@
 				"derived_at": "2026-04-29T09:39:46.049800Z",
 				"derived_from": "aabb_size + category"
 			},
-			"qfep_connection": "The architect's maquette made an exchange rate: a 12.5 cm cell floated to wrist height commands a one-metre twin snapped to integer world coordinates on the floor. Editing happens at the scale where the hand is strong and lands at the scale where the body must walk \u2014 power over space is the coupling between two grids."
+			"qfep_connection": "The architect's maquette made an exchange rate: a 12.5 cm cell floated to wrist height commands a one-metre twin snapped to integer world coordinates on the floor. Editing happens at the scale where the hand is strong and lands at the scale where the body must walk — power over space is the coupling between two grids."
 		},
 		"IndexVisualizer": {
 			"lookup_name": "IndexVisualizer",
@@ -5226,7 +5231,7 @@
 				"max_dimension_m": 0.0,
 				"measured_at": "2026-04-29T07:09:56.762620Z"
 			},
-			"qfep_connection": "The floor confesses it was an array all along: round your position, receive an index, wear it overhead as a halo. The script's own comments still argue whether the pair reads [row, col] or [z, x] \u2014 the address is certain, the convention never was."
+			"qfep_connection": "The floor confesses it was an array all along: round your position, receive an index, wear it overhead as a halo. The script's own comments still argue whether the pair reads [row, col] or [z, x] — the address is certain, the convention never was."
 		},
 		"pompeii_mosaic_floor": {
 			"name": "Pompeii Mosaic Floor",
@@ -5346,7 +5351,7 @@
 		"octagon_square_floor": {
 			"name": "Octagon & Square Floor",
 			"lookup_name": "octagon_square_floor",
-			"description": "Procedural Pompeii mosaic floor with octagon-and-square tessellation \u2014 terracotta diamonds inside light octagons with dark interstitial squares.",
+			"description": "Procedural Pompeii mosaic floor with octagon-and-square tessellation — terracotta diamonds inside light octagons with dark interstitial squares.",
 			"scene": "res://commons/artifacts/pompeii_mosaic_floor/octagon_square_floor.tscn",
 			"category": "primitives",
 			"include_in_map_data": true,
@@ -5464,7 +5469,7 @@
 		"tumbling_blocks_floor": {
 			"name": "Tumbling Blocks Floor",
 			"lookup_name": "tumbling_blocks_floor",
-			"description": "Procedural Pompeii mosaic floor with tumbling blocks pattern \u2014 three rhombus shades create a 3D cube illusion on a hexagonal grid.",
+			"description": "Procedural Pompeii mosaic floor with tumbling blocks pattern — three rhombus shades create a 3D cube illusion on a hexagonal grid.",
 			"scene": "res://commons/artifacts/pompeii_mosaic_floor/tumbling_blocks_floor.tscn",
 			"category": "primitives",
 			"include_in_map_data": true,
@@ -5581,7 +5586,7 @@
 		"perspective_cubes_floor": {
 			"name": "Perspective Cubes Floor",
 			"lookup_name": "perspective_cubes_floor",
-			"description": "Procedural Pompeii mosaic floor with perspective cubes pattern \u2014 three rhombus shades on a regular rectangular grid create a strong 3D stacked-cube illusion.",
+			"description": "Procedural Pompeii mosaic floor with perspective cubes pattern — three rhombus shades on a regular rectangular grid create a strong 3D stacked-cube illusion.",
 			"scene": "res://commons/artifacts/pompeii_mosaic_floor/perspective_cubes_floor.tscn",
 			"category": "primitives",
 			"include_in_map_data": true,
@@ -6048,7 +6053,7 @@
 		"solomons_knot_floor": {
 			"name": "Solomon's Knot Floor",
 			"lookup_name": "solomons_knot_floor",
-			"description": "Pompeii mosaic floor with Solomon's Knot (nodo di Salomone) \u2014 two interlocked loops forming an infinite knot, a classic Roman/Byzantine decorative motif with over-under weave in three colors.",
+			"description": "Pompeii mosaic floor with Solomon's Knot (nodo di Salomone) — two interlocked loops forming an infinite knot, a classic Roman/Byzantine decorative motif with over-under weave in three colors.",
 			"scene": "res://commons/artifacts/pompeii_mosaic_floor/solomons_knot_floor.tscn",
 			"category": "primitives",
 			"include_in_map_data": true,
@@ -6166,7 +6171,7 @@
 		"stepped_zigzag_floor": {
 			"name": "Stepped Zigzag Floor",
 			"lookup_name": "stepped_zigzag_floor",
-			"description": "Pompeii mosaic floor with stepped zigzag pattern \u2014 interlocking L-shaped steps in three tones create a 3D staircase illusion reminiscent of Escher's impossible staircases.",
+			"description": "Pompeii mosaic floor with stepped zigzag pattern — interlocking L-shaped steps in three tones create a 3D staircase illusion reminiscent of Escher's impossible staircases.",
 			"scene": "res://commons/artifacts/pompeii_mosaic_floor/stepped_zigzag_floor.tscn",
 			"category": "primitives",
 			"include_in_map_data": true,
@@ -6284,7 +6289,7 @@
 		"flower_of_life_floor": {
 			"name": "Flower of Life Floor",
 			"lookup_name": "flower_of_life_floor",
-			"description": "Procedural Pompeii mosaic floor with Flower of Life sacred geometry pattern \u2014 overlapping circles on a hexagonal grid creating petal shapes at intersections. Dark circle outlines on light background with terracotta accent petals.",
+			"description": "Procedural Pompeii mosaic floor with Flower of Life sacred geometry pattern — overlapping circles on a hexagonal grid creating petal shapes at intersections. Dark circle outlines on light background with terracotta accent petals.",
 			"scene": "res://commons/artifacts/pompeii_mosaic_floor/flower_of_life_floor.tscn",
 			"category": "primitives",
 			"include_in_map_data": true,
@@ -6638,7 +6643,7 @@
 		"pompeii_meander_floor": {
 			"name": "Pompeii Meander Floor",
 			"lookup_name": "pompeii_meander_floor",
-			"description": "Greek key meander border drawn as actual geometry \u2014 thick rectangular quads for each line segment rather than bitmap pixels. Crisp, thick, properly proportioned meander lines at any scale with dark polka-dot interior field.",
+			"description": "Greek key meander border drawn as actual geometry — thick rectangular quads for each line segment rather than bitmap pixels. Crisp, thick, properly proportioned meander lines at any scale with dark polka-dot interior field.",
 			"scene": "res://commons/artifacts/pompeii_mosaic_floor/pompeii_meander_floor.tscn",
 			"category": "primitives",
 			"include_in_map_data": true,
@@ -6956,7 +6961,7 @@
 		"free_meander_floor": {
 			"name": "Free Meander Floor",
 			"lookup_name": "free_meander_floor",
-			"description": "Rule-based Greek key meander \u2014 no tiles, no turtle, no bitmap. Each cell decides its own color from ONE modular arithmetic rule applied to its global position. The entire pattern is: territory = ((pos_along + ring * band_width) % period) < half_period. Dark field interior with polka dots.",
+			"description": "Rule-based Greek key meander — no tiles, no turtle, no bitmap. Each cell decides its own color from ONE modular arithmetic rule applied to its global position. The entire pattern is: territory = ((pos_along + ring * band_width) % period) < half_period. Dark field interior with polka dots.",
 			"scene": "res://commons/artifacts/pompeii_mosaic_floor/free_meander_floor.tscn",
 			"category": "primitives",
 			"include_in_map_data": true,
@@ -7431,7 +7436,7 @@
 		"floor_plan_space": {
 			"name": "Floor Plan Space",
 			"lookup_name": "floor_plan_space",
-			"description": "Standalone 3D space builder that loads a floor_plan.json and constructs rooms with facade walls and mosaic floors, independent of the grid system. DNA: solidity decides whether the plan is a drawing you pass through (diagram) or a building that stops you (built \u2014 walls get colliders and the JSON's doorways become the only openings); bay_span is the facade module in metres, the rhythm of columns and openings on every wall. Token: floor_plan_space#solidity:built#bay_span:4.5.",
+			"description": "Standalone 3D space builder that loads a floor_plan.json and constructs rooms with facade walls and mosaic floors, independent of the grid system. DNA: solidity decides whether the plan is a drawing you pass through (diagram) or a building that stops you (built — walls get colliders and the JSON's doorways become the only openings); bay_span is the facade module in metres, the rhythm of columns and openings on every wall. Token: floor_plan_space#solidity:built#bay_span:4.5.",
 			"scene": "res://commons/artifacts/floor_plan_space/floor_plan_space.tscn",
 			"dna": {
 				"promoted": "2026-07-29",
@@ -8034,7 +8039,7 @@
 		"multi_zone_carpet_floor": {
 			"name": "Multi-Zone Carpet Floor",
 			"lookup_name": "multi_zone_carpet_floor",
-			"description": "Pompeii mosaic floor demonstrating carpet composition \u2014 nested rectangular bands of distinct motifs (dark border, sawtooth chevrons, scallop semicircles) surrounding a central checkerboard field. Demonstrates the Roman principle of hierarchical spatial framing.",
+			"description": "Pompeii mosaic floor demonstrating carpet composition — nested rectangular bands of distinct motifs (dark border, sawtooth chevrons, scallop semicircles) surrounding a central checkerboard field. Demonstrates the Roman principle of hierarchical spatial framing.",
 			"scene": "res://commons/artifacts/pompeii_mosaic_floor/multi_zone_carpet_floor.tscn",
 			"category": "primitives",
 			"include_in_map_data": true,
@@ -8152,7 +8157,7 @@
 		"wave_scale_floor": {
 			"name": "Wave Scale Floor",
 			"lookup_name": "wave_scale_floor",
-			"description": "Roman imbrication (fish-scale) mosaic floor \u2014 overlapping semicircles arranged in offset rows creating a wave/scale effect. Common in Roman baths and fountains. Alternating dark, light, and terracotta rows with grout arc outlines.",
+			"description": "Roman imbrication (fish-scale) mosaic floor — overlapping semicircles arranged in offset rows creating a wave/scale effect. Common in Roman baths and fountains. Alternating dark, light, and terracotta rows with grout arc outlines.",
 			"scene": "res://commons/artifacts/pompeii_mosaic_floor/wave_scale_floor.tscn",
 			"category": "primitives",
 			"include_in_map_data": true,
@@ -8271,7 +8276,7 @@
 		"pelta_shield_floor": {
 			"name": "Pelta Shield Floor",
 			"lookup_name": "pelta_shield_floor",
-			"description": "Roman pelta (Amazon shield) mosaic floor \u2014 interlocking crescent shapes with concave bites arranged in offset rows. A classic Roman border and field pattern where paired crescents face opposite directions, creating a rhythmic shield motif.",
+			"description": "Roman pelta (Amazon shield) mosaic floor — interlocking crescent shapes with concave bites arranged in offset rows. A classic Roman border and field pattern where paired crescents face opposite directions, creating a rhythmic shield motif.",
 			"scene": "res://commons/artifacts/pompeii_mosaic_floor/pelta_shield_floor.tscn",
 			"category": "primitives",
 			"include_in_map_data": true,
@@ -8626,7 +8631,7 @@
 		"labyrinth_floor": {
 			"name": "Labyrinth Floor",
 			"lookup_name": "labyrinth_floor",
-			"description": "Pompeii mosaic floor with classical 7-circuit labyrinth pattern. A single unbroken path spirals inward from the entrance to the center \u2014 not a maze but a meditation in stone. Based on Roman house labyrinths found across the Mediterranean.",
+			"description": "Pompeii mosaic floor with classical 7-circuit labyrinth pattern. A single unbroken path spirals inward from the entrance to the center — not a maze but a meditation in stone. Based on Roman house labyrinths found across the Mediterranean.",
 			"scene": "res://commons/artifacts/pompeii_mosaic_floor/labyrinth_floor.tscn",
 			"category": "primitives",
 			"include_in_map_data": true,
@@ -9091,7 +9096,7 @@
 		"opus_sectile_floor": {
 			"name": "Opus Sectile Floor",
 			"lookup_name": "opus_sectile_floor",
-			"description": "Opus sectile marble floor \ufffd large cut stone pieces forming bold geometric patterns. Grid of circles inscribed in squares with triangular corner fills in 4+ marble colors (basalt, terracotta, serpentine green, porphyry red). Cosmatesque / Pantheon style.",
+			"description": "Opus sectile marble floor � large cut stone pieces forming bold geometric patterns. Grid of circles inscribed in squares with triangular corner fills in 4+ marble colors (basalt, terracotta, serpentine green, porphyry red). Cosmatesque / Pantheon style.",
 			"scene": "res://commons/artifacts/pompeii_mosaic_floor/opus_sectile_floor.tscn",
 			"category": "primitives",
 			"include_in_map_data": true,
@@ -9447,7 +9452,7 @@
 		"compass_rose_floor": {
 			"name": "Compass Rose Floor",
 			"lookup_name": "compass_rose_floor",
-			"description": "Procedural compass rose mosaic floor \ufffd 16-pointed mariner's star with alternating dark/light triangular wedges radiating from a terracotta center disc. Inner ring of 8 narrow intercardinal points, outer ring of 8 cardinal points, surrounded by concentric border bands.",
+			"description": "Procedural compass rose mosaic floor � 16-pointed mariner's star with alternating dark/light triangular wedges radiating from a terracotta center disc. Inner ring of 8 narrow intercardinal points, outer ring of 8 cardinal points, surrounded by concentric border bands.",
 			"scene": "res://commons/artifacts/pompeii_mosaic_floor/compass_rose_floor.tscn",
 			"category": "primitives",
 			"include_in_map_data": true,
@@ -9565,7 +9570,7 @@
 		"windmill_floor": {
 			"name": "Windmill Floor",
 			"lookup_name": "windmill_floor",
-			"description": "Pompeii mosaic floor with windmill/pinwheel pattern. Each unit has a small terracotta center square surrounded by 4 L-shaped blades \u2014 two dark, two light opposite \u2014 creating a spinning windmill effect. Adjacent units rotate 90 degrees for continuous flow.",
+			"description": "Pompeii mosaic floor with windmill/pinwheel pattern. Each unit has a small terracotta center square surrounded by 4 L-shaped blades — two dark, two light opposite — creating a spinning windmill effect. Adjacent units rotate 90 degrees for continuous flow.",
 			"scene": "res://commons/artifacts/pompeii_mosaic_floor/windmill_floor.tscn",
 			"category": "primitives",
 			"include_in_map_data": true,
@@ -10287,7 +10292,7 @@
 		"rainbow_checker_floor": {
 			"name": "Rainbow Checkerboard Floor",
 			"lookup_name": "rainbow_checker_floor",
-			"description": "Procedural pixel art floor with rainbow checkerboard pattern. Each row uses a different spectrum color paired with black: red, orange, yellow, green, blue, purple \u2014 then repeats.",
+			"description": "Procedural pixel art floor with rainbow checkerboard pattern. Each row uses a different spectrum color paired with black: red, orange, yellow, green, blue, purple — then repeats.",
 			"scene": "res://commons/artifacts/pompeii_mosaic_floor/rainbow_checker_floor.tscn",
 			"category": "primitives",
 			"include_in_map_data": true,
@@ -10529,7 +10534,7 @@
 		"turtle_meander_floor": {
 			"name": "Turtle Meander Floor",
 			"lookup_name": "turtle_meander_floor",
-			"description": "Procedural mosaic floor whose Greek key border is traced by a turtle graphics engine. The same turtle machine generates the ancient meander, the Hilbert curve, and the Peano curve \u2014 different programs, same machine.",
+			"description": "Procedural mosaic floor whose Greek key border is traced by a turtle graphics engine. The same turtle machine generates the ancient meander, the Hilbert curve, and the Peano curve — different programs, same machine.",
 			"scene": "res://commons/artifacts/pompeii_mosaic_floor/turtle_meander_floor.tscn",
 			"category": "primitives",
 			"include_in_map_data": true,
@@ -10649,7 +10654,7 @@
 		"space_filling_floor": {
 			"name": "Space-Filling Floor",
 			"lookup_name": "space_filling_floor",
-			"description": "Procedural mosaic floor demonstrating the connection between ancient meanders and modern space-filling curves. Four modes \u2014 Greek key, Hilbert, Peano, Penrose \u2014 each answer: how do you fill a bounded area with a path?",
+			"description": "Procedural mosaic floor demonstrating the connection between ancient meanders and modern space-filling curves. Four modes — Greek key, Hilbert, Peano, Penrose — each answer: how do you fill a bounded area with a path?",
 			"scene": "res://commons/artifacts/pompeii_mosaic_floor/space_filling_floor.tscn",
 			"category": "primitives",
 			"include_in_map_data": true,
@@ -10771,7 +10776,7 @@
 		"grid_model": {
 			"name": "Grid Model",
 			"lookup_name": "grid_model",
-			"description": "Miniature interactive model of the map grid \u2014 grab cubes to reshape terrain. Teaches layout_data[z][x] = height as a physical 2D array.",
+			"description": "Miniature interactive model of the map grid — grab cubes to reshape terrain. Teaches layout_data[z][x] = height as a physical 2D array.",
 			"scene": "res://algorithms/arrays/grid_model/grid_model.tscn",
 			"category": "interactive",
 			"include_in_map_data": true,
@@ -10937,7 +10942,7 @@
 				"derived_at": "2026-04-29T09:39:46.050807Z",
 				"derived_from": "aabb_size + category"
 			},
-			"qfep_connection": "A Dieter Rams-styled studio: paint a 4\u00d74 grid, see it tile through the seventeen wallpaper symmetries into a carpet. The chapter's most complete pattern instrument \u2014 the array's repetition crossed with the plane's exactly seventeen ways of repeating, design reduced to choosing a tile and a group."
+			"qfep_connection": "A Dieter Rams-styled studio: paint a 4×4 grid, see it tile through the seventeen wallpaper symmetries into a carpet. The chapter's most complete pattern instrument — the array's repetition crossed with the plane's exactly seventeen ways of repeating, design reduced to choosing a tile and a group."
 		},
 		"pattern_studio_plate": {
 			"name": "Pattern Studio Plate",
@@ -11019,7 +11024,7 @@
 				"derived_at": "2026-04-29T09:39:46.050807Z",
 				"derived_from": "aabb_size + category"
 			},
-			"qfep_connection": "The full pattern studio, ported from PatternMaker3D \u2014 a cream plate with paint grids and symmetry controls, the array-as-pattern given a proper workbench. Where the single tiles teach one move each, this gathers them: paint, symmetrize, tile, all in one hand, the chapter's craft consolidated."
+			"qfep_connection": "The full pattern studio, ported from PatternMaker3D — a cream plate with paint grids and symmetry controls, the array-as-pattern given a proper workbench. Where the single tiles teach one move each, this gathers them: paint, symmetrize, tile, all in one hand, the chapter's craft consolidated."
 		},
 		"sorting_algorithm_race": {
 			"name": "Sorting Algorithm Race",
@@ -11029,7 +11034,9 @@
 			"category": "primitives",
 			"include_in_map_data": true,
 			"map_ready": true,
-			"map_sequences": [],
+			"map_sequences": [
+				"tiling"
+			],
 			"sequence": "array_tutorial",
 			"complexity": "intermediate",
 			"tags": [
@@ -11182,7 +11189,7 @@
 			]
 		},
 		"gallery_marker_pattern": {
-			"name": "Gallery Marker \u2014 Pattern",
+			"name": "Gallery Marker — Pattern",
 			"lookup_name": "gallery_marker_pattern",
 			"description": "Bronze pedestal + glowing stake + Label3D reading PATTERN. Single-cell sub-gallery anchor for the Pattern_pt01..pt10 wallpaper-group maps. Shared scene at commons/artifacts/gallery_marker; the lookup_name fixes the label per gallery_marker_<sequence> alias pattern.",
 			"scene": "res://commons/artifacts/gallery_marker/gallery_marker.tscn",
@@ -11209,7 +11216,7 @@
 				},
 				"default": "mode=stake - the shipped code path, so existing placements are unchanged",
 				"was": "the gallery_marker family shares request_note's attachment axis: how a sign meets the world it points at. It was billboarding in mid-air",
-				"note": "declared by hand 2026-07-29 \u2014 the axis was already in the script and the registry had never been told, so the sweep could not reach it"
+				"note": "declared by hand 2026-07-29 — the axis was already in the script and the registry had never been told, so the sweep could not reach it"
 			},
 			"measurements": {
 				"aabb_size": [

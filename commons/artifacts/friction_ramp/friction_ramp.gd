@@ -151,6 +151,10 @@ func _ready() -> void:
 	_reset_block()
 	_update_physics_state()
 	_built = true
+	if str(get_meta("config_table",""))=="1":
+		var stand=preload("res://commons/artifacts/timing_machines/machine_stage.gd").new()
+		stand.name="RoomStand";add_child(stand)
+		stand.box(Vector3(0,-0.55,0),Vector3(1.0,1.1,0.8),stand.material("263a44"),true)
 
 
 ## The angle this incline asks for. `slope` SHORT-CIRCUITS to the shipped

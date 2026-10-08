@@ -1,6 +1,13 @@
 extends Node3D
 class_name GeneticTreeSculptor
 
+signal rebuilt
+signal dna_exported(snapshot: CritterDNA)
+@export var lesson: bool = false
+var lesson_node: Node3D
+var preview_position := Vector3(0, 0.05, 0)
+var render_seed: int = -1
+
 # @identity
 # essence: 8 sliders → CritterDNA → TreeMorphology.build() — design a tree's genome, watch it grow live
 # desire: To sculpt a tree by tweaking its DNA — depth, forks, angle, taper, leaves, tropism, twist, arrangement
@@ -9,7 +16,7 @@ class_name GeneticTreeSculptor
 # emerges: The player becomes a breeder — intuition about which genes produce which forms develops through play
 # needs: VR sliders [has, 8 sliders], push buttons [has, Random + Plant], Label3D [has via slider labels]
 # relationships: Central to LSystems_Living. Uses CritterDNA and TreeMorphology systems. Bridges to evolution concepts.
-# truth: A tree is eight numbers — change them and you are doing what evolution does, but with intention.
+# truth: Eight exposed genes enter an authored interpreter; the remaining DNA, renderer and limits also shape the body.
 
 ## Interactive DNA-to-tree workbench. Eight sliders control tree genes,
 ## live preview regenerates via TreeMorphology. The designed DNA is stored
@@ -111,6 +118,7 @@ func _ready() -> void:
 	_sync_sliders_from_dna()
 	_rebuild_tree()
 	_ready_done = true
+	if lesson: _enable_lesson()
 
 func _process(delta: float) -> void:
 	if _rebuild_queued:
@@ -250,25 +258,19 @@ func _on_slider_moved(_value: float, gene_name: String) -> void:
 	_rebuild_timer = REBUILD_COOLDOWN
 
 func _apply_slider_to_dna(gene_name: String) -> void:
-	var slider: Node3D = _sliders[gene_name]
-	var n: float = slider.get_normalized_value()
-	match gene_name:
-		"segments":
-			_dna.segments = lerpf(2.0, 10.0, n)
-		"symmetry":
-			_dna.symmetry = lerpf(1.0, 8.0, n)
-		"branch_angle":
-			_dna.branch_angle = lerpf(15.0, 90.0, n)
-		"branch_decay":
-			_dna.branch_decay = lerpf(0.3, 0.9, n)
-		"leaf_density":
-			_dna.leaf_density = n
-		"part_curve":
-			_dna.part_curve = n
-		"part_twist":
-			_dna.part_twist = lerpf(-45.0, 45.0, n)
-		"phyllotaxis":
-			_dna.phyllotaxis = n
+	set_gene_normalized(gene_name, _sliders[gene_name].get_normalized_value())
+
+func set_gene_normalized(gene_name: String, n: float) -> void:
+	if not GENE_RANGE.has(gene_name): return
+	var span: Array = GENE_RANGE[gene_name]
+	_dna.set(gene_name, lerpf(float(span[0]), float(span[1]), clampf(n, 0.0, 1.0)))
+	_rebuild_queued = true
+	_rebuild_timer = REBUILD_COOLDOWN
+
+func flush_preview() -> void:
+	if _rebuild_queued:
+		_rebuild_queued = false
+		_rebuild_tree()
 
 func _sync_sliders_from_dna() -> void:
 	for gene_name in _sliders:
@@ -296,15 +298,18 @@ func _sync_sliders_from_dna() -> void:
 # ── Tree building ────────────────────────────────────────────────
 
 func _rebuild_tree() -> void:
+	_rebuild_queued = false
 	if _tree_root:
+		remove_child(_tree_root)
 		_tree_root.queue_free()
 		_tree_root = null
 
 	_tree_root = Node3D.new()
 	add_child(_tree_root)
-	_tree_root.position = Vector3(0.0, 0.05, 0.0)
+	_tree_root.position = preview_position
 
-	TreeMorphology.build(_dna, _tree_root, _mapper, 2)
+	TreeMorphology.build(_dna, _tree_root, _mapper, 2, render_seed)
+	rebuilt.emit()
 
 # ── Actions ──────────────────────────────────────────────────────
 
@@ -315,13 +320,30 @@ func _on_randomize() -> void:
 	_rebuild_tree()
 
 func _on_export_dna() -> void:
-	# Store designed DNA globally so the branching catalyst can read it
-	Engine.set_meta("sculptor_tree_dna", _dna)
-	# Visual feedback: brief flash
-	if _tree_root:
+	# Export the design at the press, including any edit waiting for debounce.
+	flush_preview()
+	var snapshot := _dna.duplicate(true) as CritterDNA
+	Engine.set_meta("sculptor_tree_dna", snapshot)
+	# Keep the exported resource across hall unloads, but release its script
+	# before engine shutdown. Engine metadata otherwise outlives GDScript teardown.
+	var cleanup: Callable = GeneticTreeSculptor._clear_export_on_shutdown
+	if not get_tree().root.tree_exiting.is_connected(cleanup):
+		get_tree().root.tree_exiting.connect(cleanup)
+	dna_exported.emit(snapshot.duplicate(true) as CritterDNA)
+	if _tree_root and not lesson:
 		var tween := create_tween()
-		tween.tween_property(_tree_root, "scale", Vector3(1.1, 1.1, 1.1), 0.15)
+		tween.tween_property(_tree_root, "scale", Vector3.ONE * 1.1, 0.15)
 		tween.tween_property(_tree_root, "scale", Vector3.ONE, 0.15)
+
+static func _clear_export_on_shutdown() -> void:
+	if Engine.has_meta("sculptor_tree_dna"):
+		Engine.remove_meta("sculptor_tree_dna")
+
+func _enable_lesson() -> void:
+	if lesson_node != null: return
+	lesson_node = load("res://commons/artifacts/genetic_tree_sculptor/living_lesson.gd").new()
+	lesson_node.name = "LivingLesson"
+	add_child(lesson_node)
 
 # ── Grid system integration ──────────────────────────────────────
 #
@@ -331,6 +353,9 @@ func _on_export_dna() -> void:
 # (LSystems_Living, Corridor_LSystems_Living, Curation_Bay_lsystems_2 and the two
 # AutoGenTest maps) are bare tokens that pass none of these keys.
 func apply_grid_config(config_data: Dictionary) -> void:
+	if config_data.has("lesson"):
+		lesson = str(config_data.lesson).to_lower() in ["true", "1"]
+		if lesson and _ready_done: _enable_lesson()
 	var regrow: bool = false
 
 	if config_data.has("dna_seed"):

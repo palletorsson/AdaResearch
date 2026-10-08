@@ -115,6 +115,7 @@ var _palette_indicators: Array[MeshInstance3D] = []
 var _edit_grid_container: Node3D
 var _touch_area: Area3D
 var _last_painted_cell: Vector2i = Vector2i(-1, -1)
+var fixed_motif_lesson: Node3D
 
 # ═══════════════════════════════════════════════════════════════════
 # LIFECYCLE
@@ -151,6 +152,10 @@ func _process(_delta: float) -> void:
 	_check_touch_paint()
 
 func apply_grid_config(config_data: Dictionary) -> void:
+	if config_data.get("lesson", "") == "fixed_motif" and fixed_motif_lesson == null:
+		fixed_motif_lesson = load("res://commons/artifacts/pattern_maker_station/fixed_motif_lesson.gd").new()
+		fixed_motif_lesson.name = "FixedMotifLesson"
+		add_child(fixed_motif_lesson)
 	if config_data.has("tile_size"):
 		tile_size = clampi(int(config_data["tile_size"]), 2, 8)
 	if config_data.has("carpet_size"):

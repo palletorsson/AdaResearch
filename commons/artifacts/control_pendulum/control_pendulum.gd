@@ -1,7 +1,7 @@
 # control_pendulum.gd
 # Grabbable pendulum that controls oscillation parameters
 # When grabbed: oscillation stops. When released: resumes from current position.
-# Swing harder = faster oscillation. Higher amplitude = bigger movements.
+# The release supplies angle and tangent speed; wider swings need not have a shorter period.
 # Uses XR Tools grabbable sphere for VR interaction.
 
 extends Node3D
@@ -12,12 +12,12 @@ class_name ControlPendulum
 # @identity
 # essence: alpha = -(g/L)*sin(theta) + drive, omega += alpha*dt, theta += omega*dt, decayed by the regime's damping
 # desire: Grab a pendulum bob in VR and feel gravity convert your release into oscillation
-# critical_parameter: pendulum_length — determines the natural frequency via sqrt(g/L)
+# critical_parameter: pendulum_length — with gravity fixed, sqrt(g/L) gives the small-angle natural frequency
 # triggers: grab() freezes physics; release() converts hand position to initial angle and starts oscillation
-# emerges: harmonic motion from the simplest possible setup — mass, string, gravity
+# emerges: a returning swing from an integrated nonlinear restoring rule, with damping and optional drive
 # needs: VR grab on bob [has], oscillation_updated signal output [has], a picture of what the damping is doing [has, under evidence]
 # relationships: depends on gravity simulation; drives oscillation_controlled_cube via signal; contrasts with spring_demo (gravity vs spring restoring force) and harmonic_motion_demo, with which it shares the `regime` word
-# truth: A pendulum is gravity's metronome — length alone determines the tempo.
+# truth: In the small-angle undamped approximation, length and gravity set the period; this simulated swing also has amplitude, damping and optional drive.
 
 ## ── the regime axis ───────────────────────────────────────────────────────────────────
 ## WHICH NAMED CASE OF THE DAMPED OSCILLATOR THIS PENDULUM IS IN. Family word; the first

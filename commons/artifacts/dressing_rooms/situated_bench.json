@@ -1,51 +1,24 @@
 {
-  "rotations": [
-    "0",
-    "90",
-    "180",
-    "270"
-  ],
+  "lookup_name": "situated_bench",
+  "footprint": [1.65, 1.65, 2.325],
+  "rotations": ["0", "90", "180", "270"],
   "approach": "south",
   "exit": "north",
-  "footprint": [
-    1,
-    1,
-    1
-  ],
-  "clearance": [
-    3.0,
-    3.0,
-    3.0
-  ],
+  "footing": {"anchor": [2, 2], "tiles": [[1,1,1,1,1],[1,1,1,1,1],[1,1,1,1,1],[1,1,1,1,1],[1,1,1,1,1]]},
   "extras": [],
-  "lookup_name": "situated_bench",
-  "posture": "pedestal",
-  "footing": {
-    "anchor": [
-      1,
-      1
-    ],
-    "tiles": [
-      [
-        1,
-        1,
-        1
-      ],
-      [
-        1,
-        3,
-        1
-      ],
-      [
-        1,
-        1,
-        1
-      ]
-    ]
+  "artifact_offset": [0.0, 0.0, 0.0],
+  "clearance": [5, 5, 4],
+  "posture": "floor",
+  "show_info": false,
+  "show_dressing": false,
+  "placement_contract": {
+    "allowed_modes": ["freestanding"], "preferred_mode": "freestanding",
+    "hard_zone_m": [3, 3, 4], "preferred_zone_m": [5, 5, 4],
+    "required_support": "floor", "interaction_faces": ["south", "east", "north", "west"],
+    "rear_clearance_m": 1.0, "front_clearance_m": 1.0,
+    "circulation": "full_orbit", "circulation_behind": true,
+    "minimum_route_width_m": 0.9, "neighbor_policy": "no_artifacts_in_preferred_zone"
   },
-  "artifact_offset": [
-    0.0,
-    0.0,
-    0.0
-  ]
+  "production_grade": "test_candidate",
+  "placement_intent": "A body-scale standpoint installation placed on the floor so visitors can compare its multiple reading positions."
 }

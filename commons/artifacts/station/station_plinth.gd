@@ -3,6 +3,8 @@ class_name StationPlinth
 
 const HangarKit := preload("res://commons/artifacts/_hangar/hangar_kit.gd")
 
+# Museum presentation is the shared default: one matte off-white block.
+# Industrial presentation retains the workshop variants documented below.
 # @identity
 # essence: the GRID-MODULAR display plinth one curated artifact stands ON — a width_cells × depth_cells (1 m per cell) painted-metal block with a tray cap, per-cell panels, and an ID stencil. ANY footprint snaps to the grid: 1×1 and 1×2/1×3 podiums for held things, 2×2/3×3/4×4 plinths for big ones. Origin at the floor centre; the cap top sits at top_height.
 # desire: to give one thing its own measured patch of ground at the right size and the right height — a tall narrow podium for a small precious thing, a low broad plinth for a large one — so the lift always says "this one, here, by itself".
@@ -47,8 +49,10 @@ const HangarKit := preload("res://commons/artifacts/_hangar/hangar_kit.gd")
 @export_group("Dimensions")
 ## Cap-top height — where the artifact's base sits (reach height ≈ 1.0 m for small; lower for big plinths).
 @export var top_height: float = 1.0
-## Cap inset from the footprint edge (so the block reads narrower than its cells).
-@export var cap_inset: float = 0.16
+## Cap inset from the footprint edge. The 0.03 m default pairs with the
+## 0.06 m foot overhang below, so a 1-cell plinth has an exact 1 × 1 m
+## visible footprint while retaining a slight construction reveal.
+@export var cap_inset: float = 0.03
 ## If > 0, overrides the cell footprint with a true sub-grid metric width — a MICRO-PEDESTAL that
 ## still snaps to one grid cell but reads narrower than 1 m, for genuinely sub-1 m precious things
 ## (a held instrument, a thin readout). 0 = use width_cells × depth_cells (the normal plinth).
@@ -59,6 +63,8 @@ const HangarKit := preload("res://commons/artifacts/_hangar/hangar_kit.gd")
 @export var cap_meters: float = 0.0
 
 @export_group("Style")
+## Shared museum default; industrial retains the earlier workshop furniture.
+@export_enum("museum", "industrial") var presentation: String = "museum"
 ## "tray" (rimmed dish) | "flat" | "grate" cap.
 @export var top_style: String = "tray"
 ## A REAL light integrated into the plinth: a warm OmniLight3D rising from the
@@ -138,6 +144,7 @@ func apply_grid_config(config_data: Dictionary) -> void:
 
 
 func _read_metadata_overrides() -> void:
+	if has_meta("config_presentation"): presentation = str(get_meta("config_presentation"))
 	# footprint_cells (legacy / convenience) = square; width_cells/depth_cells override per axis.
 	if has_meta("config_footprint_cells"):
 		var fc := int(str(get_meta("config_footprint_cells")))
@@ -178,6 +185,9 @@ func _read_metadata_overrides() -> void:
 
 func _build() -> void:
 	_built = true
+	if presentation == "museum":
+		_build_museum()
+		return
 	var wcells: int = maxi(width_cells, 1)
 	var dcells: int = maxi(depth_cells, 1)
 	var wc: float = float(wcells) * CELL
@@ -569,3 +579,39 @@ func _upkeep_scrap(body_w: float, body_d: float, body_bottom: float, body_h: flo
 		4, 0.018, HangarKit.worn_metal(panel_color.darkened(0.36)))
 	loose.rotation_degrees = Vector3(-90, 0, 0)
 	add_child(loose)
+
+
+func _build_museum() -> void:
+	# One matte block. Keep the support height, footprint and collision contract.
+	var w := float(maxi(width_cells, 1)) - cap_inset * 2.0
+	var d := float(maxi(depth_cells, 1)) - cap_inset * 2.0
+	if base_meters > 0.0:
+		w = clampf(base_meters, 0.2, 1.0) - cap_inset * 2.0
+		d = w
+	if cap_meters > 0.0:
+		w = maxf(cap_meters, 0.2)
+		d = w
+	w = maxf(w, 0.12); d = maxf(d, 0.12)
+	var h := maxf(top_height, 0.02)
+	var mat := StandardMaterial3D.new()
+	mat.albedo_color = Color(0.88, 0.865, 0.82)
+	mat.roughness = 0.88
+	var block := _box(Vector3(0,h*0.5,0), Vector3(w,h,d), mat)
+	block.name = "MuseumBlock"
+	add_child(block)
+	add_child(HangarKit.box_collider(Vector3(w,h,d), Vector3(0,h*0.5,0)))
+	# Preserve meaningful captions and data as plain typography on the surface.
+	var words := caption_text.strip_edges()
+	if not info_lines.is_empty():
+		if not words.is_empty(): words += "\n"
+		words += info_header
+		for line in info_lines: words += "\n" + str(line)
+	if words.is_empty(): words = stencil_text
+	if not words.is_empty():
+		var text := Label3D.new(); text.name = "MuseumCaption"
+		text.text = words; text.font_size = 32; text.outline_size = 0
+		text.modulate = Color(0.075,0.072,0.07)
+		text.pixel_size = minf(0.0015, minf(w/(32.0*36.0), h/(float(words.split("\n").size())*44.0)))
+		text.width = 1100; text.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
+		text.position = Vector3(0,h*0.5,d*0.5+0.003)
+		add_child(text)

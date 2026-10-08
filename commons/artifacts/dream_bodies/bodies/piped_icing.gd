@@ -46,6 +46,19 @@ extends RefCounted
 ## neighbouring bodies, the smooth fishnet-textured pink torso at the left, the
 ## brain-coral surface of the pale lobe (plain ribs stand in), and subsurface
 ## translucency in the pale icing.
+##
+## AXES (see axes()):
+##   piping  — what the nozzle did to the icing: "coil" the standing arch of
+##             stacked turns, "melted" the whole body slumped down and spread
+##             into a solid pour at its foot, "swarm" the coil dissolved into a
+##             hundred loose droplets riding the same helix, "wire" the icing
+##             gone and only its thread-and-hoop cage left in chalk, "burst" the
+##             turns hovering apart along their own radius and down the spine.
+##   budding — what grows out of it: "limbs" the balloon arms with trumpet
+##             mouths, "bloom" every limb opening into a six-petal flower,
+##             "twinned" a second smaller body arching backwards out of its
+##             flank, "crowned" the single tip split into three heads under a
+##             ring of icing spikes.
 
 const TEX_SIZE: int = 128
 
@@ -67,7 +80,43 @@ static func describe() -> String:
 	return "An arching confectionery body coiled out of dense pink-and-white piped icing ribs, with fat yellow balloon limbs, one cyan limb, a knobbly grey bubble patch and cream ruffles at every end."
 
 
-static func build(root: Node3D, seed: int) -> void:
+static func axes() -> Dictionary:
+	return {
+		"piping": ["coil", "melted", "swarm", "wire", "burst"],
+		"budding": ["limbs", "bloom", "twinned", "crowned"],
+	}
+
+
+static func build(root: Node3D, seed: int, opts: Dictionary = {}) -> void:
+	var piping: String = String(opts.get("piping", "coil"))
+	var budding: String = String(opts.get("budding", "limbs"))
+	var melted: bool = piping == "melted"
+	var swarmed: bool = piping == "swarm"
+	var wired: bool = piping == "wire"
+	var burst: bool = piping == "burst"
+	var bloom: bool = budding == "bloom"
+	var twinned: bool = budding == "twinned"
+	var crowned: bool = budding == "crowned"
+
+	# per-variant budget so every combination stays inside the mesh ceiling
+	var core_n: int = 22
+	var lobe_core_n: int = 10
+	var core_k: float = 0.90
+	if wired:
+		core_k = 0.24
+	elif swarmed:
+		core_n = 16
+		lobe_core_n = 8
+		core_k = 0.62
+	var frill_add: int = 0
+	var frill_k: float = 1.0
+	if bloom:
+		frill_add = 3
+		frill_k = 1.45
+	var frill_cap: int = 99
+	if swarmed:
+		frill_cap = 4
+
 	var rng := RandomNumberGenerator.new()
 	rng.seed = seed
 
@@ -125,6 +174,20 @@ static func build(root: Node3D, seed: int) -> void:
 	var mat_frill_b: StandardMaterial3D = _sheet(c_white)
 	var mat_frill_c: StandardMaterial3D = _sheet(c_lobe_b)
 
+	if wired:
+		# the sugar has gone; what is left is chalk over a wire cage
+		var all_mats: Array = [
+			mat_core, mat_lobe_core, mat_yellow, mat_yellow_j, mat_cyan, mat_cyan_j,
+			mat_bub_a, mat_bub_b, mat_bub_c, mat_bub_core,
+			mat_frill_a, mat_frill_b, mat_frill_c,
+		]
+		for i in range(rib_mats.size()):
+			all_mats.append(rib_mats[i])
+		for i in range(lobe_mats.size()):
+			all_mats.append(lobe_mats[i])
+		for i in range(all_mats.size()):
+			_fossilise(all_mats[i])
+
 	# --- gesture ------------------------------------------------------------
 	var side: float = 1.0 if rng.randf() < 0.5 else -1.0
 	var lean: float = rng.randf_range(-0.085, 0.085)
@@ -159,7 +222,7 @@ static func build(root: Node3D, seed: int) -> void:
 	var len_main: float = _spine_length(st_main)
 
 	# --- main body: hidden core, then the coil of ribs -----------------------
-	_core_chain(root, st_main, 22, 0.90, mat_core)
+	_core_chain(root, st_main, core_n, core_k, mat_core)
 
 	var n_rib: int = rng.randi_range(24, 32)
 	var t0: float = 0.02
@@ -170,14 +233,17 @@ static func build(root: Node3D, seed: int) -> void:
 	var phase0: float = rng.randf_range(0.0, TAU)
 	var pat: Array = PATTERNS[rng.randi_range(0, PATTERNS.size() - 1)]
 	var pat_off: int = rng.randi_range(0, 7)
-	for k in range(n_rib):
-		var a0: float = lerpf(t0, t1, float(k) / float(n_rib))
-		var a1: float = lerpf(t0, t1, float(k + 1) / float(n_rib))
-		var ph: float = phase0 + float(k) * overrun
-		var mesh: ArrayMesh = _ribbon(st_main, a0, a1, ph, 34, tube_r, overrun, bulge, bulge_phase)
-		var pick: int = int(pat[posmod(k + pat_off, pat.size())])
-		var mi: MeshInstance3D = _add(root, mesh, rib_mats[pick])
-		mi.transform = Transform3D()
+	var turns: int = n_rib
+	if wired:
+		turns = n_rib + 6
+		tube_r *= 0.26
+	elif melted:
+		tube_r *= 1.14
+	elif swarmed:
+		turns = 16
+	if twinned:
+		turns = maxi(int(round(float(turns) * 0.80)), 8)
+	_coil_body(root, st_main, turns, t0, t1, 34, tube_r, overrun, phase0, bulge, bulge_phase, rib_mats, pat, pat_off, piping, 6, rng)
 
 	# --- the pale ribbed lobe ------------------------------------------------
 	var lob_t: float = rng.randf_range(0.26, 0.40)
@@ -203,24 +269,30 @@ static func build(root: Node3D, seed: int) -> void:
 	]
 	var st_lobe: Array = _stations(lctrl, 120, lr_keys, squash * 0.7, twist * 0.6)
 	var len_lobe: float = _spine_length(st_lobe)
-	_core_chain(root, st_lobe, 10, 0.90, mat_lobe_core)
+	_core_chain(root, st_lobe, lobe_core_n, core_k, mat_lobe_core)
 
 	var n_rib2: int = rng.randi_range(9, 13)
 	var pitch2: float = len_lobe * 0.94 / float(n_rib2)
 	var tube_r2: float = pitch2 * rng.randf_range(0.50, 0.57)
 	var phase2: float = rng.randf_range(0.0, TAU)
 	var pat2: Array = PATTERNS[rng.randi_range(0, PATTERNS.size() - 1)]
-	for k in range(n_rib2):
-		var b0: float = lerpf(0.03, 0.97, float(k) / float(n_rib2))
-		var b1: float = lerpf(0.03, 0.97, float(k + 1) / float(n_rib2))
-		var ph2: float = phase2 + float(k) * overrun
-		var mesh2: ArrayMesh = _ribbon(st_lobe, b0, b1, ph2, 28, tube_r2, overrun, bulge * 0.7, bulge_phase)
-		var pick2: int = int(pat2[posmod(k, pat2.size())])
-		var mi2: MeshInstance3D = _add(root, mesh2, lobe_mats[pick2])
-		mi2.transform = Transform3D()
+	var turns2: int = n_rib2
+	if wired:
+		turns2 = n_rib2 + 4
+		tube_r2 *= 0.26
+	elif melted:
+		tube_r2 *= 1.14
+	elif swarmed:
+		turns2 = 6
+	_coil_body(root, st_lobe, turns2, 0.03, 0.97, 28, tube_r2, overrun, phase2, bulge * 0.7, bulge_phase, lobe_mats, pat2, 0, piping, 3, rng)
 
 	# --- balloon limbs -------------------------------------------------------
 	var n_limb: int = rng.randi_range(3, 4)
+	if swarmed:
+		n_limb = 2
+	var tip_mode: String = "mouth"
+	if bloom:
+		tip_mode = "bloom"
 	var cyan_i: int = rng.randi_range(0, n_limb - 1)
 	for li in range(n_limb):
 		var f: float = float(li) / float(maxi(n_limb - 1, 1))
@@ -238,9 +310,9 @@ static func build(root: Node3D, seed: int) -> void:
 		var bend: float = rng.randf_range(0.20, 0.42) * (1.0 if rng.randf() < 0.5 else -1.0)
 		var segs: int = rng.randi_range(4, 6)
 		if li == cyan_i:
-			_balloon(root, org, d0, bax, segs, rng.randf_range(0.037, 0.047), bend, mat_cyan, mat_cyan_j, rng)
+			_balloon(root, org, d0, bax, segs, rng.randf_range(0.037, 0.047), bend, mat_cyan, mat_cyan_j, rng, wired, tip_mode, mat_frill_b)
 		else:
-			_balloon(root, org, d0, bax, segs, rng.randf_range(0.050, 0.063), bend, mat_yellow, mat_yellow_j, rng)
+			_balloon(root, org, d0, bax, segs, rng.randf_range(0.050, 0.063), bend, mat_yellow, mat_yellow_j, rng, wired, tip_mode, mat_frill_a)
 
 	# --- the grey bubble patch ----------------------------------------------
 	var bt: float = rng.randf_range(0.38, 0.54)
@@ -253,6 +325,8 @@ static func build(root: Node3D, seed: int) -> void:
 	var b_axis: Vector3 = _perp(b_dir).rotated(b_dir, rng.randf_range(0.0, TAU))
 	var b_bend: float = rng.randf_range(-0.26, 0.26)
 	var b_steps: int = rng.randi_range(6, 8)
+	if swarmed:
+		b_steps = 6
 	var b_step: float = rng.randf_range(0.048, 0.060)
 	var bpath: Array = []
 	var bpp: Vector3 = bp0 + b_dir * (bra * 0.55)
@@ -267,6 +341,8 @@ static func build(root: Node3D, seed: int) -> void:
 		var cr: float = lerpf(0.058, 0.040, float(i) / float(maxi(b_steps - 2, 1)))
 		_bulb(root, ca, cb, cr, mat_bub_core)
 	var per_ring: int = rng.randi_range(4, 5)
+	if swarmed:
+		per_ring = 3
 	for i in range(b_steps):
 		var fr: float = float(i) / float(maxi(b_steps - 1, 1))
 		var cr2: float = lerpf(0.058, 0.038, fr)
@@ -278,11 +354,6 @@ static func build(root: Node3D, seed: int) -> void:
 			var br: float = rng.randf_range(0.026, 0.043)
 			var rd: Vector3 = (e1 * cos(a2) + e2 * sin(a2)).normalized()
 			var wob: Vector3 = bdd * rng.randf_range(-0.016, 0.016)
-			var sph := SphereMesh.new()
-			sph.radius = br
-			sph.height = br * 2.0
-			sph.radial_segments = 14
-			sph.rings = 8
 			var pickm: StandardMaterial3D = mat_bub_a
 			var roll2: float = rng.randf()
 			if roll2 > 0.94:
@@ -290,8 +361,25 @@ static func build(root: Node3D, seed: int) -> void:
 			elif roll2 > 0.5:
 				pickm = mat_bub_b
 			var seat: Vector3 = bpath[i]
-			var bm: MeshInstance3D = _add(root, sph, pickm)
-			bm.transform = Transform3D(Basis(), seat + rd * (cr2 * 0.72 + br * 0.42) + wob)
+			var sit: Vector3 = seat + rd * (cr2 * 0.72 + br * 0.42) + wob
+			var bm: MeshInstance3D
+			if wired:
+				# every grape has lost its flesh: a bare hoop where the bubble was
+				var ring := TorusMesh.new()
+				ring.inner_radius = br * 0.70
+				ring.outer_radius = br * 1.00
+				ring.rings = 6
+				ring.ring_segments = 12
+				bm = _add(root, ring, pickm)
+				bm.transform = Transform3D(_basis_y_to(rd), sit)
+			else:
+				var sph := SphereMesh.new()
+				sph.radius = br
+				sph.height = br * 2.0
+				sph.radial_segments = 14
+				sph.rings = 8
+				bm = _add(root, sph, pickm)
+				bm.transform = Transform3D(Basis(), sit)
 
 	# --- frills where the ribbons stop --------------------------------------
 	var f_foot: Array = _sample(st_main, 0.015)
@@ -300,21 +388,128 @@ static func build(root: Node3D, seed: int) -> void:
 	var foot_p2: Vector3 = f_foot2[0]
 	var foot_r: float = float(f_foot[3])
 	var foot_dir: Vector3 = (foot_p2 - foot_p).normalized()
-	_frill(root, foot_p - foot_dir * (foot_r * 0.20), -foot_dir, rng.randi_range(5, 7), 0.115, 0.085, mat_frill_a, rng)
+	_frill(root, foot_p - foot_dir * (foot_r * 0.20), -foot_dir, mini(rng.randi_range(5, 7) + frill_add, frill_cap), 0.115 * frill_k, 0.085 * frill_k, mat_frill_a, rng)
 
 	var f_tip: Array = _sample(st_main, 0.99)
 	var f_tip2: Array = _sample(st_main, 0.93)
 	var tip_p: Vector3 = f_tip[0]
 	var tip_p2: Vector3 = f_tip2[0]
 	var tip_dir: Vector3 = (tip_p - tip_p2).normalized()
-	_frill(root, tip_p + tip_dir * 0.015, tip_dir, rng.randi_range(4, 6), 0.100, 0.072, mat_frill_b, rng)
+	if not crowned:
+		_frill(root, tip_p + tip_dir * 0.015, tip_dir, mini(rng.randi_range(4, 6) + frill_add, frill_cap), 0.100 * frill_k, 0.072 * frill_k, mat_frill_b, rng)
 
 	var f_lob: Array = _sample(st_lobe, 0.985)
 	var f_lob2: Array = _sample(st_lobe, 0.90)
 	var lt_p: Vector3 = f_lob[0]
 	var lt_p2: Vector3 = f_lob2[0]
 	var lt_dir: Vector3 = (lt_p - lt_p2).normalized()
-	_frill(root, lt_p + lt_dir * 0.012, lt_dir, rng.randi_range(4, 6), 0.082, 0.060, mat_frill_c, rng)
+	_frill(root, lt_p + lt_dir * 0.012, lt_dir, mini(rng.randi_range(4, 6) + frill_add, frill_cap), 0.082 * frill_k, 0.060 * frill_k, mat_frill_c, rng)
+
+	# --- twinned: a second, smaller body arching backwards out of the flank ---
+	if twinned:
+		var tw_t: float = rng.randf_range(0.28, 0.42)
+		var tws: Array = _sample(st_main, tw_t)
+		var twp: Vector3 = tws[0]
+		var twu: Vector3 = tws[1]
+		var twv: Vector3 = tws[2]
+		var twr: float = float(tws[3])
+		var tw_ang: float = rng.randf_range(0.0, TAU)
+		var tw_rad: Vector3 = (twu * cos(tw_ang) + twv * sin(tw_ang)).normalized()
+		var tw_base: Vector3 = twp + tw_rad * (twr * 0.85)
+		var tw_k: float = 0.58
+		var c_root: Vector3 = ctrl[0]
+		var twctrl: Array = []
+		for i in range(ctrl.size()):
+			var cc: Vector3 = ctrl[i]
+			var dv: Vector3 = cc - c_root
+			twctrl.append(tw_base + Vector3(-dv.x, dv.y, -dv.z) * tw_k + tw_rad * (float(i) * 0.012))
+		var twkeys: Array = []
+		for i in range(r_keys.size()):
+			twkeys.append(float(r_keys[i]) * tw_k)
+		var st_tw: Array = _stations(twctrl, 150, twkeys, squash, -twist)
+		var len_tw: float = _spine_length(st_tw)
+		_core_chain(root, st_tw, 8, core_k, mat_core)
+		var tw_turns: int = 14
+		if wired:
+			tw_turns = 18
+		elif swarmed:
+			tw_turns = 5
+		var tw_pitch: float = len_tw * 0.955 / float(tw_turns)
+		var tw_tube: float = tw_pitch * 0.54
+		if wired:
+			tw_tube *= 0.26
+		elif melted:
+			tw_tube *= 1.14
+		_coil_body(root, st_tw, tw_turns, 0.02, 0.985, 30, tw_tube, overrun, rng.randf_range(0.0, TAU), bulge, bulge_phase, lobe_mats, pat, pat_off + 2, piping, 3, rng)
+		var tw_e: Array = _sample(st_tw, 0.99)
+		var tw_e2: Array = _sample(st_tw, 0.92)
+		var twe_p: Vector3 = tw_e[0]
+		var twe_p2: Vector3 = tw_e2[0]
+		var twe_d: Vector3 = (twe_p - twe_p2).normalized()
+		_frill(root, twe_p + twe_d * 0.010, twe_d, mini(4, frill_cap), 0.070 * frill_k, 0.052 * frill_k, mat_frill_a, rng)
+
+	# --- crowned: the one tip splits into three heads under a ring of spikes --
+	if crowned:
+		var hs: Array = _sample(st_main, 0.84)
+		var hp: Vector3 = hs[0]
+		var hu: Vector3 = hs[1]
+		var hv: Vector3 = hs[2]
+		var hr: float = float(hs[3])
+		var htg: Vector3 = hu.cross(hv).normalized()
+		var head_turns: int = 5
+		if swarmed:
+			head_turns = 4
+		var h_off: float = rng.randf_range(0.0, TAU)
+		for hi in range(3):
+			var ha: float = h_off + TAU * float(hi) / 3.0
+			var h_rad: Vector3 = (hu * cos(ha) + hv * sin(ha)).normalized()
+			var hd: Vector3 = (h_rad * 0.62 + htg * 0.55 + Vector3(0.0, 0.75, 0.0)).normalized()
+			var hup: Vector3 = Vector3.UP - hd * Vector3.UP.dot(hd)
+			if hup.length() < 0.001:
+				hup = _perp(hd)
+			hup = hup.normalized()
+			var hk: float = rng.randf_range(0.86, 1.14)
+			var hctrl: Array = [
+				hp + h_rad * (hr * 0.55),
+				hp + h_rad * (hr * 0.75) + hd * (0.10 * hk),
+				hp + h_rad * (hr * 0.85) + hd * (0.19 * hk) + hup * (0.045 * hk),
+				hp + h_rad * (hr * 0.90) + hd * (0.25 * hk) + hup * (0.115 * hk),
+			]
+			var hkeys: Array = [
+				0.072 * body_k * hk, 0.064 * body_k * hk, 0.046 * body_k * hk, 0.024 * body_k * hk,
+			]
+			var st_head: Array = _stations(hctrl, 70, hkeys, squash * 0.6, twist * 0.5)
+			var hlen: float = _spine_length(st_head)
+			var hpitch: float = hlen * 0.94 / float(head_turns)
+			var htube: float = hpitch * 0.54
+			if wired:
+				htube *= 0.30
+			elif melted:
+				htube *= 1.14
+			_coil_body(root, st_head, head_turns, 0.03, 0.97, 22, htube, overrun, rng.randf_range(0.0, TAU), bulge * 0.6, bulge_phase, rib_mats, pat, hi, piping, 2, rng)
+		var top_s: Array = _sample(st_main, 0.965)
+		var tp: Vector3 = top_s[0]
+		var tu: Vector3 = top_s[1]
+		var tv: Vector3 = top_s[2]
+		var tr: float = float(top_s[3])
+		for ci in range(8):
+			var ca2: float = h_off + TAU * float(ci) / 8.0
+			var cd: Vector3 = (tu * cos(ca2) + tv * sin(ca2)).normalized()
+			var spike := CylinderMesh.new()
+			spike.top_radius = 0.0035
+			spike.bottom_radius = 0.020 * body_k
+			spike.height = 0.085 * body_k * rng.randf_range(0.78, 1.30)
+			spike.radial_segments = 12
+			var sd2: Vector3 = (cd * 0.62 + Vector3(0.0, 0.80, 0.0)).normalized()
+			var sm: MeshInstance3D = _add(root, spike, mat_yellow)
+			sm.transform = Transform3D(_basis_y_to(sd2), tp + cd * (tr * 1.05) + sd2 * (spike.height * 0.5))
+
+	# --- what happened to the icing after it was piped -----------------------
+	if melted:
+		_melt_pass(root)
+		_puddle(root, _icing(c_pink2, 0.07), _icing(c_white, 0.08), rng)
+	elif burst:
+		_burst_pass(root, st_main, 0.10, 0.30)
 
 	# --- settle: fit the box, centre on x/z, sit on the floor ----------------
 	_settle(root)
@@ -369,7 +564,98 @@ static func _ribbon(st_arr: Array, a0: float, a1: float, phase: float, steps: in
 	return _tube_mesh(path, radii, 7)
 
 
-static func _balloon(root: Node3D, org: Vector3, dir0: Vector3, axis: Vector3, n_seg: int, r0: float, bend: float, mat_a: StandardMaterial3D, mat_b: StandardMaterial3D, rng: RandomNumberGenerator) -> void:
+static func _coil_body(root: Node3D, st_arr: Array, turns: int, t0: float, t1: float, steps: int, tube_r: float, overrun: float, phase0: float, bulge: float, bulge_phase: float, mats: Array, pat: Array, pat_off: int, mode: String, extra_n: int, rng: RandomNumberGenerator) -> void:
+	# The nozzle runs the length of the spine, laying `turns` full sweeps of the
+	# cross-section and advancing exactly one pitch per sweep. WHAT each sweep is
+	# made of is the piping axis: a solid rope of icing, a line of loose droplets
+	# riding the same helix, or nothing but the hoop the rope used to follow.
+	var n: int = maxi(turns, 1)
+	var dt: float = (t1 - t0) / float(n)
+	var np: int = maxi(pat.size(), 1)
+	var nm: int = maxi(mats.size(), 1)
+	for i in range(n):
+		var a0: float = t0 + dt * float(i)
+		var a1: float = a0 + dt
+		var ph: float = phase0 + float(i) * 0.21 + rng.randf_range(-0.05, 0.05)
+		var mat: StandardMaterial3D = mats[posmod(int(pat[posmod(i + pat_off, np)]), nm)]
+		if mode == "swarm":
+			_coil_drops(root, st_arr, a0, a1, ph, tube_r, overrun, bulge, bulge_phase, maxi(extra_n, 2), mat, rng)
+		else:
+			var mesh: ArrayMesh = _ribbon(st_arr, a0, a1, ph, steps, tube_r, overrun, bulge, bulge_phase)
+			var mi: MeshInstance3D = _add(root, mesh, mat)
+			mi.transform = Transform3D()
+	if mode == "wire":
+		# the hoops are there but nothing ties them; run the threads
+		_cage_rods(root, st_arr, t0, t1, extra_n, tube_r, phase0, bulge, bulge_phase, mats, rng)
+
+
+static func _coil_drops(root: Node3D, st_arr: Array, a0: float, a1: float, phase: float, tube_r: float, overrun: float, bulge: float, bulge_phase: float, count: int, mat: StandardMaterial3D, rng: RandomNumberGenerator) -> void:
+	# one turn of the coil, broken: the rope is gone and what is left is the
+	# droplets it was made of, still on its helix but hovering off the surface
+	var sweep: float = TAU + overrun
+	var n: int = maxi(count, 1)
+	for k in range(n):
+		var f: float = (float(k) + rng.randf_range(0.15, 0.85)) / float(n)
+		var th: float = phase + f * sweep
+		var tt: float = a0 + (a1 - a0) * (f * sweep / TAU)
+		var s: Array = _sample(st_arr, tt)
+		var p: Vector3 = s[0]
+		var u_v: Vector3 = s[1]
+		var v_v: Vector3 = s[2]
+		var tg: Vector3 = u_v.cross(v_v).normalized()
+		var swell: float = 1.0 + bulge * cos(th - bulge_phase)
+		var ra: float = float(s[3]) * swell
+		var rb: float = float(s[4]) * swell
+		var seat: Vector3 = p + u_v * (cos(th) * ra) + v_v * (sin(th) * rb)
+		var outw: Vector3 = (u_v * cos(th) + v_v * sin(th)).normalized()
+		var fly: float = tube_r * rng.randf_range(0.15, 2.70)
+		var drift: Vector3 = tg * (tube_r * rng.randf_range(-1.35, 1.35)) + u_v * (tube_r * rng.randf_range(-0.65, 0.65)) + v_v * (tube_r * rng.randf_range(-0.65, 0.65))
+		var dr: float = tube_r * rng.randf_range(0.40, 1.05)
+		var drop := SphereMesh.new()
+		drop.radius = dr
+		drop.height = dr * 2.0
+		drop.radial_segments = 12
+		drop.rings = 7
+		var rot: Basis = _basis_y_to(outw)
+		var pinch: float = rng.randf_range(0.78, 0.96)
+		var stretch: float = rng.randf_range(1.05, 1.42)
+		var mi: MeshInstance3D = _add(root, drop, mat)
+		mi.transform = Transform3D(Basis(rot.x * pinch, rot.y * stretch, rot.z * pinch), seat + outw * fly + drift)
+
+
+static func _cage_rods(root: Node3D, st_arr: Array, t0: float, t1: float, extra_n: int, tube_r: float, phase0: float, bulge: float, bulge_phase: float, mats: Array, rng: RandomNumberGenerator) -> void:
+	# the longitudinal threads of the cage: each runs the whole spine at a fixed
+	# angle in the twisting frame, so it spirals gently and ties the hoops
+	var rods: int = clampi(extra_n - 2, 2, 5)
+	var nm: int = maxi(mats.size(), 1)
+	var steps: int = 30
+	for k in range(rods):
+		var ang: float = phase0 + TAU * float(k) / float(rods) + rng.randf_range(-0.10, 0.10)
+		var path: Array = []
+		var radii: Array = []
+		for j in range(steps + 1):
+			var f: float = float(j) / float(steps)
+			var tt: float = lerpf(t0, t1, f)
+			var s: Array = _sample(st_arr, tt)
+			var p: Vector3 = s[0]
+			var u_v: Vector3 = s[1]
+			var v_v: Vector3 = s[2]
+			var swell: float = 1.0 + bulge * cos(ang - bulge_phase)
+			var ra: float = float(s[3]) * swell
+			var rb: float = float(s[4]) * swell
+			path.append(p + u_v * (cos(ang) * ra) + v_v * (sin(ang) * rb))
+			var taper: float = 1.0
+			if f < 0.05:
+				taper = 0.45 + 0.55 * (f / 0.05)
+			elif f > 0.95:
+				taper = 0.45 + 0.55 * ((1.0 - f) / 0.05)
+			radii.append(tube_r * 1.15 * taper)
+		var mesh: ArrayMesh = _tube_mesh(path, radii, 5)
+		var mi: MeshInstance3D = _add(root, mesh, mats[posmod(k, nm)])
+		mi.transform = Transform3D()
+
+
+static func _balloon(root: Node3D, org: Vector3, dir0: Vector3, axis: Vector3, n_seg: int, r0: float, bend: float, mat_a: StandardMaterial3D, mat_b: StandardMaterial3D, rng: RandomNumberGenerator, wired: bool, tip_mode: String, mat_tip: StandardMaterial3D) -> void:
 	var p: Vector3 = org
 	var d: Vector3 = dir0.normalized()
 	var r: float = r0
@@ -378,32 +664,90 @@ static func _balloon(root: Node3D, org: Vector3, dir0: Vector3, axis: Vector3, n
 		r = r0 * lerpf(1.0, 0.55, f) * rng.randf_range(0.94, 1.06)
 		var ln: float = r * rng.randf_range(2.2, 2.9)
 		var q: Vector3 = p + d * ln
-		_bulb(root, p, q, r, mat_a)
 		var rn: float = r * 0.50
-		var kn := SphereMesh.new()
-		kn.radius = rn
-		kn.height = rn * 2.0
-		kn.radial_segments = 14
-		kn.rings = 8
-		var km: MeshInstance3D = _add(root, kn, mat_b)
-		km.transform = Transform3D(Basis(), q + d * (rn * 0.35))
+		if wired:
+			# the balloon has lost its skin: a rod down its length, a hoop at its girth
+			_bulb(root, p, q, maxf(r * 0.15, 0.0035), mat_a)
+			var hoop := TorusMesh.new()
+			hoop.inner_radius = r * 0.86
+			hoop.outer_radius = r * 1.04
+			hoop.rings = 8
+			hoop.ring_segments = 16
+			var hm: MeshInstance3D = _add(root, hoop, mat_b)
+			hm.transform = Transform3D(_basis_y_to(d), (p + q) * 0.5)
+		else:
+			_bulb(root, p, q, r, mat_a)
+			var kn := SphereMesh.new()
+			kn.radius = rn
+			kn.height = rn * 2.0
+			kn.radial_segments = 14
+			kn.rings = 8
+			var km: MeshInstance3D = _add(root, kn, mat_b)
+			km.transform = Transform3D(Basis(), q + d * (rn * 0.35))
 		p = q + d * (rn * 0.70)
 		d = d.rotated(axis, bend + rng.randf_range(-0.09, 0.09)).normalized()
-	var mouth_r: float = r * 1.55
-	var bell := CylinderMesh.new()
-	bell.bottom_radius = r * 0.72
-	bell.top_radius = mouth_r
-	bell.height = r * 1.75
-	bell.radial_segments = 18
-	var bm: MeshInstance3D = _add(root, bell, mat_a)
-	bm.transform = Transform3D(_basis_y_to(d), p + d * (r * 0.88))
-	var lip := TorusMesh.new()
-	lip.inner_radius = mouth_r * 0.84
-	lip.outer_radius = mouth_r * 1.06
-	lip.rings = 10
-	lip.ring_segments = 20
-	var lm: MeshInstance3D = _add(root, lip, mat_b)
-	lm.transform = Transform3D(_basis_y_to(d), p + d * (r * 1.74))
+	if tip_mode == "bloom":
+		_flower(root, p + d * (r * 0.55), d, r * 0.92, mat_tip, mat_b, rng)
+	elif wired:
+		var mouth_rw: float = r * 1.55
+		var throat := TorusMesh.new()
+		throat.inner_radius = r * 0.58
+		throat.outer_radius = r * 0.76
+		throat.rings = 8
+		throat.ring_segments = 16
+		var tm: MeshInstance3D = _add(root, throat, mat_a)
+		tm.transform = Transform3D(_basis_y_to(d), p + d * (r * 0.32))
+		var rim := TorusMesh.new()
+		rim.inner_radius = mouth_rw * 0.84
+		rim.outer_radius = mouth_rw * 1.00
+		rim.rings = 8
+		rim.ring_segments = 18
+		var rm: MeshInstance3D = _add(root, rim, mat_b)
+		rm.transform = Transform3D(_basis_y_to(d), p + d * (r * 1.74))
+	else:
+		var mouth_r: float = r * 1.55
+		var bell := CylinderMesh.new()
+		bell.bottom_radius = r * 0.72
+		bell.top_radius = mouth_r
+		bell.height = r * 1.75
+		bell.radial_segments = 18
+		var bm: MeshInstance3D = _add(root, bell, mat_a)
+		bm.transform = Transform3D(_basis_y_to(d), p + d * (r * 0.88))
+		var lip := TorusMesh.new()
+		lip.inner_radius = mouth_r * 0.84
+		lip.outer_radius = mouth_r * 1.06
+		lip.rings = 10
+		lip.ring_segments = 20
+		var lm: MeshInstance3D = _add(root, lip, mat_b)
+		lm.transform = Transform3D(_basis_y_to(d), p + d * (r * 1.74))
+
+
+static func _flower(root: Node3D, org: Vector3, dir_v: Vector3, r: float, mat_petal: StandardMaterial3D, mat_bud: StandardMaterial3D, rng: RandomNumberGenerator) -> void:
+	# the trumpet mouth has opened: six petals curling back off a squashed bud
+	var a: Vector3 = dir_v.normalized()
+	var e1: Vector3 = _perp(a)
+	var e2: Vector3 = a.cross(e1).normalized()
+	var off: float = rng.randf_range(0.0, TAU)
+	for k in range(6):
+		var ang: float = off + TAU * float(k) / 6.0 + rng.randf_range(-0.11, 0.11)
+		var radial: Vector3 = (e1 * cos(ang) + e2 * sin(ang)).normalized()
+		var tilt: float = rng.randf_range(0.52, 1.02)
+		var fwd: Vector3 = (radial * cos(tilt) + a * sin(tilt)).normalized()
+		var sd: Vector3 = a.cross(radial).normalized()
+		var up_v: Vector3 = sd.cross(fwd).normalized()
+		var ln: float = r * rng.randf_range(2.4, 3.4)
+		var wd: float = r * rng.randf_range(1.5, 2.2)
+		var curl: float = rng.randf_range(-2.30, -1.15)
+		var mesh: ArrayMesh = _ruffle(org + radial * (r * 0.50) + a * (r * 0.10), fwd, up_v, sd, ln, wd, curl, 2.0, wd * 0.15)
+		var mi: MeshInstance3D = _add(root, mesh, mat_petal)
+		mi.transform = Transform3D()
+	var bud := SphereMesh.new()
+	bud.radius = r * 0.95
+	bud.height = r * 1.50
+	bud.radial_segments = 16
+	bud.rings = 9
+	var bm2: MeshInstance3D = _add(root, bud, mat_bud)
+	bm2.transform = Transform3D(_basis_y_to(a), org + a * (r * 0.28))
 
 
 static func _frill(root: Node3D, org: Vector3, axis: Vector3, n: int, length: float, width: float, mat: StandardMaterial3D, rng: RandomNumberGenerator) -> void:
@@ -722,6 +1066,27 @@ static func _sheet(c: Color) -> StandardMaterial3D:
 	return m
 
 
+static func _fossilise(m: StandardMaterial3D) -> void:
+	# sugar to chalk: the confectionery gloss is the whole reading of this body,
+	# so the wire cage has to lose it — no clearcoat, no painted stripe, and the
+	# candy hue bleached to a bone that keeps only a memory of which part it was
+	var c: Color = m.albedo_color
+	var lum: float = clampf(c.r * 0.30 + c.g * 0.59 + c.b * 0.11, 0.0, 1.0)
+	var chalk := Color(
+		clampf(0.62 + lum * 0.32, 0.0, 1.0),
+		clampf(0.60 + lum * 0.32, 0.0, 1.0),
+		clampf(0.55 + lum * 0.30, 0.0, 1.0),
+		1.0
+	)
+	m.albedo_color = chalk.lerp(c, 0.12)
+	m.albedo_texture = null
+	m.uv1_triplanar = false
+	m.metallic = 0.0
+	m.roughness = 0.88
+	m.clearcoat_enabled = false
+	m.clearcoat = 0.0
+
+
 static func _stripe_texture(rng: RandomNumberGenerator, bands: int) -> ImageTexture:
 	# fine ribbed banding, near white so albedo_color tints it; seamless in v
 	var img: Image = Image.create(TEX_SIZE, TEX_SIZE, false, Image.FORMAT_RGB8)
@@ -761,6 +1126,143 @@ static func _dot_texture(rng: RandomNumberGenerator, cells: int) -> ImageTexture
 			var v: float = clampf(shade * tint, 0.0, 1.0)
 			img.set_pixel(x, y, Color(v, v, v * 0.99))
 	return ImageTexture.create_from_image(img)
+
+
+# ---------------------------------------------------------------------------
+# what happened to the icing after it was piped
+#
+# These run over the finished body, so they reach every part of it — coil, lobe,
+# limbs, bubbles, frills, and whatever budding added. Half the meshes here are
+# ArrayMeshes whose vertices are already in world space under an identity
+# transform, so a pass cannot just move an origin: it takes each mesh's own
+# world AABB centre as its handle and composes the deformation onto whatever
+# transform the mesh already has.
+
+static func _mesh_centre(cm: MeshInstance3D) -> Vector3:
+	var wb: AABB = cm.transform * cm.mesh.get_aabb()
+	return wb.position + wb.size * 0.5
+
+
+static func _melt_pass(root: Node3D) -> void:
+	# the whole body slumps: the higher a part stood the further it falls, and
+	# what falls spreads sideways as it goes, so the arch closes down onto its own
+	# haunch and every rope of icing flattens from round to oval on the way
+	var box: AABB = _union_aabb(root)
+	var y0: float = box.position.y
+	var span: float = maxf(box.size.y, 0.0001)
+	var cx: float = box.position.x + box.size.x * 0.5
+	var cz: float = box.position.z + box.size.z * 0.5
+	for ch in root.get_children():
+		if not (ch is MeshInstance3D):
+			continue
+		var cm: MeshInstance3D = ch
+		if cm.mesh == null:
+			continue
+		var ctr: Vector3 = _mesh_centre(cm)
+		var h: float = clampf((ctr.y - y0) / span, 0.0, 1.0)
+		var sunk: float = pow(h, 1.45) * 0.52
+		var spread: float = 1.0 + (h - sunk) * 0.45
+		var flat: float = lerpf(0.88, 0.32, h)
+		var wide: float = lerpf(1.10, 1.38, h)
+		var nx: float = cx + (ctr.x - cx) * spread
+		var nz: float = cz + (ctr.z - cz) * spread
+		var ny: float = y0 + span * sunk
+		var target: Vector3 = Vector3(nx, ny, nz)
+		var sq: Basis = Basis().scaled(Vector3(wide, flat, wide))
+		var warp: Transform3D = Transform3D(sq, target - sq * ctr)
+		cm.transform = warp * cm.transform
+
+
+static func _puddle(root: Node3D, mat_a: StandardMaterial3D, mat_b: StandardMaterial3D, rng: RandomNumberGenerator) -> void:
+	# and what ran off it set on the floor: one broad pool with lobes where the
+	# pour reached furthest, and a rising skirt that drowns the slumped foot, so
+	# the body has no ankle left — it just becomes the floor
+	var box: AABB = _union_aabb(root)
+	var cx: float = box.position.x + box.size.x * 0.5
+	var cz: float = box.position.z + box.size.z * 0.5
+	var y0: float = box.position.y
+	var hgt: float = maxf(box.size.y, 0.02)
+	var rad: float = maxf(maxf(box.size.x, box.size.z) * 0.5, 0.05)
+	var pool_h: float = maxf(hgt * 0.085, 0.016)
+
+	var pool := SphereMesh.new()
+	pool.radius = 1.0
+	pool.height = 2.0
+	pool.radial_segments = 26
+	pool.rings = 10
+	var pm: MeshInstance3D = _add(root, pool, mat_a)
+	pm.transform = Transform3D(Basis().scaled(Vector3(rad * 1.05, pool_h, rad * 1.05)), Vector3(cx, y0 + pool_h * 0.55, cz))
+
+	var lobes: int = rng.randi_range(6, 8)
+	var off: float = rng.randf_range(0.0, TAU)
+	for i in range(lobes):
+		var a: float = off + TAU * float(i) / float(lobes) + rng.randf_range(-0.26, 0.26)
+		var dd: float = rad * rng.randf_range(0.35, 0.78)
+		var rr: float = rad * rng.randf_range(0.20, 0.36)
+		var th: float = pool_h * rng.randf_range(0.50, 1.00)
+		var blob := SphereMesh.new()
+		blob.radius = 1.0
+		blob.height = 2.0
+		blob.radial_segments = 20
+		blob.rings = 8
+		var mm: StandardMaterial3D = mat_a if posmod(i, 2) == 0 else mat_b
+		var mi: MeshInstance3D = _add(root, blob, mm)
+		mi.transform = Transform3D(Basis().scaled(Vector3(rr, th, rr)), Vector3(cx + cos(a) * dd, y0 + th * 0.52, cz + sin(a) * dd))
+
+	var climbs: int = rng.randi_range(4, 5)
+	for i in range(climbs):
+		var f: float = (float(i) + 0.5) / float(climbs)
+		var a2: float = off * 1.7 + TAU * float(i) * 0.618 + rng.randf_range(-0.20, 0.20)
+		var yy: float = y0 + hgt * lerpf(0.05, 0.36, f)
+		var dd2: float = rad * lerpf(0.72, 0.28, f) * rng.randf_range(0.86, 1.10)
+		var rr2: float = rad * lerpf(0.46, 0.24, f)
+		var th2: float = pool_h * rng.randf_range(1.15, 1.95)
+		var skirt := SphereMesh.new()
+		skirt.radius = 1.0
+		skirt.height = 2.0
+		skirt.radial_segments = 18
+		skirt.rings = 8
+		var mm2: StandardMaterial3D = mat_b if posmod(i, 2) == 0 else mat_a
+		var mi2: MeshInstance3D = _add(root, skirt, mm2)
+		mi2.transform = Transform3D(Basis().scaled(Vector3(rr2, th2, rr2)), Vector3(cx + cos(a2) * dd2, yy, cz + sin(a2) * dd2))
+
+
+static func _burst_pass(root: Node3D, st_arr: Array, out_amt: float, along_amt: float) -> void:
+	# the coil comes apart without losing its order: every part backs off along
+	# the radius it was piped on and slides along the spine, so the stack opens
+	# into an exploded view of itself and the gesture is still legible through it
+	var ns: int = st_arr.size()
+	if ns < 2:
+		return
+	for ch in root.get_children():
+		if not (ch is MeshInstance3D):
+			continue
+		var cm: MeshInstance3D = ch
+		if cm.mesh == null:
+			continue
+		var ctr: Vector3 = _mesh_centre(cm)
+		var best: int = 0
+		var best_d: float = 1.0e20
+		for i in range(ns):
+			var row: Array = st_arr[i]
+			var pp: Vector3 = row[0]
+			var dd: float = ctr.distance_squared_to(pp)
+			if dd < best_d:
+				best_d = dd
+				best = i
+		var st_row: Array = st_arr[best]
+		var sp: Vector3 = st_row[0]
+		var su: Vector3 = st_row[1]
+		var sv: Vector3 = st_row[2]
+		var tg: Vector3 = su.cross(sv).normalized()
+		var t: float = float(best) / float(maxi(ns - 1, 1))
+		var rvec: Vector3 = ctr - sp
+		var flat_r: Vector3 = rvec - tg * rvec.dot(tg)
+		var rdir: Vector3 = su
+		if flat_r.length() > 0.0005:
+			rdir = flat_r.normalized()
+		var push: Vector3 = rdir * (out_amt * (0.45 + 0.85 * t)) + tg * (along_amt * (t - 0.42))
+		cm.transform = Transform3D(cm.transform.basis, cm.transform.origin + push)
 
 
 # ---------------------------------------------------------------------------

@@ -309,10 +309,15 @@ func run() -> void:
 		if absf(float(p[0])) > 0.25 + 1e-6 or absf(float(p[2])) > 0.25 + 1e-6 or float(p[1]) < -1e-6 or float(p[1]) > 0.4 + 1e-6: inside = false
 	check(inside, "LEVY: after 300 steps with long jumps every walker is still inside the glass (one reflection suffices: cap 0.15 < half the box)")
 	# the catch-up cap: a two-second frame yields five steps, not sixty
+	var clock_before: float = float(terr.get("_run_clock"))
 	var before_catch: int = int(terr.get("_total_steps"))
 	terr.call("_process", 2.0)
 	var caught: int = int(terr.get("_total_steps")) - before_catch
 	measurements["catchup_steps_for_2s_frame"] = caught
+	measurements["clock_cap"] = {"frame_seconds": float(terr.get("_run_clock")) - clock_before, "simulation_seconds": float(caught) / 30.0}
+	check(absf(float(terr.get("_run_clock")) - clock_before - 2.0) < 1e-6, "the frame clock advances two seconds while the walk accepts only five steps")
+	terr.call("_process", 0.0)
+	check(int(terr.get("_total_steps")) == before_catch + caught, "discarded catch-up time does not become a backlog for the next frame")
 	check(caught == 5, "a two-second frame is caught up by at most MAX_CATCHUP_STEPS = 5 steps (%d)" % caught)
 	terr.call("_update_stats")
 	st = terr.call("get_logbook_state")
@@ -386,7 +391,9 @@ func run() -> void:
 	check(seed1 != seed0 and seed1 >= 10000 and seed1 <= 99999 and int(terr.get("_total_steps")) == 0, "a new five-digit seed is named (%d) and the walk restarted" % seed1)
 	for k in range(60): terr.call("_step_all_walkers")
 	var p5: Array = terr.call("walker_positions")
-	check(not _same_positions(p5, p1) and not _same_positions(p5, p2), "under the new seed sixty steps land elsewhere")
+	terr.call("_reset_walkers")
+	for k in range(60): terr.call("_step_all_walkers")
+	check(_same_positions(p5, terr.call("walker_positions")), "the newly selected seed replays at equal step counts")
 	st = terr.call("get_logbook_state")
 	check(str((st["lines"] as Array)[4]) == "seed %d · RESET replays it" % seed1, "the readout names the new seed (%s)" % str((st["lines"] as Array)[4]))
 	check(_press(lpanel, "Btn_1"), "ALL pressed")
@@ -407,6 +414,11 @@ func run() -> void:
 		await create_timer(0.3, true, false, true).timeout
 		root.get_texture().get_image().save_png(_evidence + "probe_walk_running.png")
 		measurements["captures"]["running"] = _cam_pose(cam)
+
+	terr.set_process(false)
+	await _export_walks(terr, cam, capture, seg)
+	terr.call("set_walk_seed", seed1)
+	terr.set_process(true)
 
 	# ── 8. the museum untouched; the walk; plinths; walks; reach ─────────────
 	var museum_bodies: int = _count_outside(seg, terr)
@@ -635,6 +647,76 @@ func run() -> void:
 			check(terr2 != null and str(st2.get("stand", "")) == "logbook" and int(st2.get("num_walkers", 0)) == 5 and terr2.get_node_or_null("Logbook/LogPanel") != null,
 				"the rebuilt hall has its terrarium again with the wing: five walkers, a seed, the panel (%s)" % str(rebuilt))
 	_finish()
+
+
+## Export the production walk, not a second implementation. For walker zero only,
+## peek at the real step generator then restore its exact state before the batch.
+## A full replay without peeking verifies that observation has not consumed draws.
+func _export_walks(terr: Node3D, cam: Camera3D, capture: bool, seg: Node3D) -> void:
+	var histories: Dictionary = {}
+	for mode in range(3):
+		terr.call("set_mode", mode)
+		terr.call("set_walk_seed", 31415)
+		terr.call("set_follow_one", true)
+		var frames: Array = [terr.call("walker_positions")]
+		var proposed: Array = []
+		for k in range(300):
+			var rng: RandomNumberGenerator = terr.get("_rng")
+			var saved_state: int = rng.state
+			var step: Vector3 = terr.call("_generate_step")
+			rng.state = saved_state
+			proposed.append([step.x, step.y, step.z])
+			terr.call("_step_all_walkers")
+			frames.append(terr.call("walker_positions"))
+		var trails: Array = terr.get("_walker_trails")
+		var matches := true
+		for i in range(5):
+			for k in range(200):
+				var v: Vector3 = trails[i][k]
+				var a: Array = frames[100 + k][i]
+				if v != Vector3(a[0], a[1], a[2]): matches = false
+		check(matches, "mode %d: the trail at step 300 is positions 100 through 299; the bead is position 300" % mode)
+		terr.call("_update_trails"); terr.call("_update_stats"); terr.call("_update_logbook")
+		var key: String = ["2d", "3d", "levy"][mode]
+		histories[key] = {"seed": 31415, "mode": key, "frames": frames, "proposed_steps_walker_0": proposed, "trail_length": 200}
+		if capture:
+			cam.global_position = terr.to_global(Vector3(0.0, 1.30, 0.95))
+			cam.look_at(terr.to_global(Vector3(0.0, 1.12, 0.0)))
+			for j in range(6): cam.make_current(); await process_frame
+			await create_timer(0.2, true, false, true).timeout
+			root.get_texture().get_image().save_png(_evidence + "walk_" + key + "_300.png")
+			measurements.get_or_add("history_cameras", {})[key] = _cam_pose(cam)
+		# Replay all positions while discarding the past trail at step 60 and
+		# changing ONE to ALL. Neither is an input to the stepping rule.
+		terr.call("_reset_walkers")
+		var replay_matches := true
+		for k in range(300):
+			if k == 60:
+				var live_trails: Array = terr.get("_walker_trails")
+				for i in range(5): live_trails[i].clear()
+				check((terr.get("_walker_trails")[0] as PackedVector3Array).is_empty(), "mode %d: the stored trail really is empty before replay continues" % mode)
+				terr.call("set_follow_one", false)
+			terr.call("_step_all_walkers")
+			if not _same_positions(frames[k + 1], terr.call("walker_positions")): replay_matches = false
+		check(replay_matches, "mode %d: all 300 five-walker frames replay after deleting trail memory and selecting ALL; peeking consumed no draws" % mode)
+	var f := FileAccess.open(OUT + "histories.json", FileAccess.WRITE)
+	f.store_string(JSON.stringify(histories)); f.close()
+	measurements["captured_histories"] = {"seed": 31415, "modes": 3, "steps_per_mode": 300, "walkers": 5, "replay_every_frame": true, "trail_clear_step": 60}
+	terr.call("set_follow_one", true)
+	# The actual room token arrives as a string. Verify both values using the
+	# same metadata reader, including the setting immediately after the boolean.
+	var lab: Node3D
+	for n in seg.find_children("*", "Node3D", true, false):
+		if n.get_script() != null and str(n.get_script().resource_path).ends_with("lab_room.gd"): lab = n; break
+	check(lab != null, "the sampling pavilion exists beside the terrarium")
+	if lab != null:
+		check(bool(lab.get("show_observation_window")) and str(lab.get("window_wall")) == "east", "the actual map's string true enables its east observation window")
+		lab.set_meta("config_show_observation_window", "false")
+		lab.call("_read_metadata_overrides")
+		check(not bool(lab.get("show_observation_window")), "the same metadata reader accepts string false")
+		lab.set_meta("config_show_observation_window", "true")
+		lab.call("_read_metadata_overrides")
+		check(bool(lab.get("show_observation_window")), "the original true setting is restored after the check")
 
 ## The beads by colour: their own (walker_colors) or the dimmed grey, by nearest.
 func _walker_colours(mmi: MultiMeshInstance3D, terr: Node3D) -> Dictionary:

@@ -5,14 +5,14 @@ extends Node3D
 class_name SuperpositionDisplay
 
 # @identity
-# essence: |ψ⟩ = α|0⟩ + β|1⟩; α oscillates as sin(t·speed), β = 1 - α; both states simultaneously present
-# desire: see two basis states |0⟩ and |1⟩ breathe in and out of opacity while the superposition sphere pulses between them
-# critical_parameter: remainder — where the display puts the part of the state it cannot draw (core | twin | seam | haze | witness); vantage — whether the argument is an object in front of you or a room around you (specimen | stele | chamber). _speed is tempo, not stance: it sets how fast the amplitudes trade.
-# triggers: VR slider adjusts oscillation speed; opacity of |0⟩ and |1⟩ spheres anti-correlate continuously; apply_grid_config({remainder, vantage})
-# emerges: the visual proof that superposition is not flickering between states — it is occupying both simultaneously
-# needs: VR horizontal slider for speed [has]
-# relationships: paired with schrodinger_box (abstract vs physical superposition) — the two share ONE `remainder`/`vantage` vocabulary, read through schrodinger_box.gd's own normalisers; contrasts florensky_sphere (quantum vs paraconsistent logic)
-# truth: superposition is not uncertainty about which state the system is in — it is the system genuinely being in both
+# essence: three forms and a quantum-state expression; two opacities cycle in opposite phase. A visual toy, not a state-vector simulator.
+# desire: see the animation and inspect what its resemblance to superposition leaves out.
+# critical_parameter: remainder and vantage choose visual presentation; speed sets the opacity cycle.
+# triggers: XR slider changes pace. No measurement/collapse operation is implemented.
+# emerges: a useful comparison whose visual form is not a proof of its caption.
+# needs: existing horizontal speed slider.
+# relationships: shares remainder/vantage vocabulary with schrodinger_box; distinguish their quantum references from logical contradiction.
+# truth: complementary opacities are not normalized quantum amplitudes; the display performs no measurement.
 
 # ─────────────────────────────────────────────────────────────────────────────
 # STAGE-2 DNA PROMOTION (2026-07-31). A CONVERGENCE, not a new axis.
@@ -340,7 +340,7 @@ func _create_label():
 	_label = Label3D.new()
 	_label.pixel_size = 0.001
 	_label.font_size = 12
-	_label.text = "SUPERPOSITION\n|ψ⟩ = α|0⟩ + β|1⟩\n\nBoth states at once\nuntil measurement"
+	_label.text = "SUPERPOSITION — VISUAL TOY\n|ψ⟩ = α|0⟩ + β|1⟩\n\nOpacity is not a quantum amplitude.\nThis display performs no measurement."
 	_label.position = Vector3(0, -0.25, 0)
 	_body.add_child(_label)
 

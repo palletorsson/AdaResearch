@@ -134,13 +134,17 @@ var _rebuild_at: float = 0.0
 var _branch_now: int = 1          # current branching factor (1..max_branch)
 var _leaf_count: int = 1          # number of leaf futures currently drawn
 var _max_futures: int = 1         # branch^levels — what an unpruned tree would hold
-var _stump_count: int = 0         # futures closed off (pruned only)
+var _stump_count: int = 0         # branch closures, not removed leaf outcomes
 
 var _built: bool = false
 var _pinned: bool = false         # branch factor latched — _process must not recompute it
 var _prune: bool = false
 var _prune_parent: int = 0        # deterministic which-child-survives rotation
 var _owned: Array[Node] = []      # ONLY the nodes this script created
+@export var visitor_control: bool = false
+const InterfacePresets = preload("res://commons/ui/interface_presets.gd")
+var _console: Node3D
+var _buttons: Array[Node3D] = []
 
 
 func _ready() -> void:
@@ -148,6 +152,7 @@ func _ready() -> void:
 	prospect = _pick_axis(prospect, PROSPECTS, "breath")
 	_build_all()
 	_built = true
+	_sync_controls()
 	set_process(not Engine.is_editor_hint())
 
 
@@ -157,6 +162,9 @@ func _ready() -> void:
 
 func apply_grid_config(config_data: Dictionary) -> void:
 	var before_prospect: String = prospect
+	var before_control: bool = visitor_control
+	if config_data.has("visitor_control"):
+		visitor_control = str(config_data["visitor_control"]).to_lower() in ["on", "true", "1"]
 	if config_data.has("prospect"):
 		prospect = _pick_axis(str(config_data["prospect"]), PROSPECTS, prospect)
 
@@ -171,9 +179,50 @@ func apply_grid_config(config_data: Dictionary) -> void:
 
 	if not _built:
 		return
-	if prospect == before_prospect:
+	if prospect == before_prospect and visitor_control == before_control:
 		return
 	_rebuild_now()
+	_sync_controls()
+
+
+func _sync_controls() -> void:
+	if not visitor_control:
+		if is_instance_valid(_console):
+			remove_child(_console)
+			_console.queue_free()
+		_console = null
+		_buttons.clear()
+		return
+	if is_instance_valid(_console):
+		return
+	# Outside _owned: rebuilding the fan must not free the button emitting pressed.
+	_console = InterfacePresets.build("machine", "Which endings remain?", 0.95)
+	_console.name = "VisitorControls"
+	_console.position = Vector3(0.0, 0.95, 0.90)
+	add_child(_console)
+	var labels := ["CYCLE", "ONE", "OPEN", "PRUNE"]
+	var states := ["breath", "thread", "fan", "pruned"]
+	for i in states.size():
+		var button: Node3D = _console.add_button(labels[i])
+		button.pressed.connect(_choose_prospect.bind(states[i]))
+		_buttons.append(button)
+
+
+func _choose_prospect(value: String) -> void:
+	if value == "breath":
+		_t = 0.0
+		_rebuild_at = 0.0
+	apply_grid_config({"prospect": value})
+
+
+func possibility_reading() -> Dictionary:
+	return {"prospect": prospect, "leaves": _leaf_count, "uncut_leaves": _max_futures,
+		"closures": _stump_count, "removed_leaves": _max_futures - _leaf_count,
+		"entropy_nats": log(float(maxi(_leaf_count, 1))), "equal_weights": true}
+
+
+func _study_lift() -> float:
+	return 0.49 if visitor_control else 0.0
 
 
 ## Accept an axis value only if it names something we actually build.
@@ -212,16 +261,19 @@ func _build_all() -> void:
 	# --- floor base (y ~ 0) ---
 	_own(_cylinder(Vector3(0.0, 0.04, 0.0), 0.4, 0.08, _steel_mat(Color(0.16, 0.18, 0.28))))
 	_own(_cylinder(Vector3(0.0, 0.1, 0.0), 0.32, 0.05, _matte_mat(Color(0.2, 0.24, 0.36), 0.6, 0.3)))
+	if visitor_control:
+		_own(_cylinder(Vector3(0.0, 0.375, 0.0), 0.10, 0.50, _steel_mat(Color(0.16, 0.18, 0.28))))
+		_own(_cylinder(Vector3(0.0, 0.625, 0.0), 0.32, 0.05, _matte_mat(Color(0.2, 0.24, 0.36), 0.6, 0.3)))
 
 	# --- the fan container (rebuilt as branching factor changes) ---
 	_fan_root = Node3D.new()
 	_fan_root.name = "Fan"
-	_fan_root.position = Vector3(0.0, 0.16, 0.0)
+	_fan_root.position = Vector3(0.0, 0.16 + _study_lift(), 0.0)
 	_own(_fan_root)
 	_rebuild_fan(_start_branch())
 
 	# --- title (hangs above the crown; the framer's plate lands at y 1.395–1.605) ---
-	_title = _billboard_label("ENTROPY FAN", Vector3(0.0, 1.5, 0.0), 28, leaf_color)
+	_title = _billboard_label("ENTROPY FAN", Vector3(0.0, 1.5 + _study_lift(), 0.0), 28, leaf_color)
 	_own(_title)
 
 	# --- readout on a real board, beside the tree ---
@@ -255,6 +307,8 @@ func _start_branch() -> int:
 ## decoration: 0.70 m buys clearance for the turning canopy, and only `thread`
 ## has no canopy to clear. breath / fan / pruned all keep the shipped 0.70.
 func _board_x() -> float:
+	if visitor_control:
+		return 1.0
 	return BOARD_X_THREAD if prospect == "thread" else BOARD_X
 
 
@@ -264,7 +318,7 @@ func _build_readout_screen() -> void:
 	var ts := TextScreenScript.new()
 	ts.name = "ProspectReadout"
 	ts.mode = 0                       # Mode.SCREEN — a framed panel, no post
-	ts.width_m = 0.52                 # board 0.556 x 0.358 m with its bezel
+	ts.width_m = 0.72 if visitor_control else 0.52
 	ts.title_color = leaf_color
 	# Stood clear of the canopy's sweep, not merely beside it. At x 0.62 the board's
 	# inner edge fell at 0.342 while the level-2 nodes orbit to radius 0.352 with a
@@ -272,7 +326,7 @@ func _build_readout_screen() -> void:
 	# _fan_root spins) the nodes passed THROUGH the readout on every turn. Two solid
 	# things cannot occupy one place, and a still catches it at an arbitrary phase, so
 	# it read as a glitch rather than as an instrument beside a tree.
-	ts.position = Vector3(_board_x(), 0.86, 0.02)
+	ts.position = Vector3(_board_x(), 0.86 + _study_lift(), 0.02)
 	_screen = ts
 	_own(ts)
 
@@ -289,29 +343,15 @@ func _build_readout_screen() -> void:
 
 
 func _update_readout() -> void:
-	# S = log(number of futures). Show the count and its log; name the regime.
 	var futures: int = maxi(_leaf_count, 1)
-	var s_val: float = log(float(futures))
-	var regime: String = "ONE THIN PATH — low entropy (ordered)"
+	var head: String = "LEAVES: %d" % futures
+	var detail: String = "%d levels; %d per branch" % [levels, _branch_now]
 	if _prune:
-		regime = "%d FUTURES CLOSED — the fan was cut back" % [_stump_count]
-	elif _branch_now >= max_branch and max_branch > 1:
-		regime = "WIDE FAN — high entropy (many futures)"
-	elif _branch_now > 1:
-		regime = "FAN OPENING — possibility multiplying"
-
-	# `thread` asserts its count; breath merely happens to be at 1 as the cosine
-	# passes through. Same number, different claim, so it must not be the same
-	# sentence. Guarded on the value so breath's board is byte-identical.
-	if prospect == "thread":
-		regime = "LATCHED — one path, no future opens"
-
-	var head: String = "FUTURES = %d   (branch %d)" % [futures, _branch_now]
-	if prospect == "thread":
-		head = "FUTURES = 1   (branch 1, latched)"
-	if _prune:
-		head = "FUTURES = %d of %d   (branch %d)" % [futures, _max_futures, _branch_now]
-	var body: String = "S = log(futures) = %.2f\n%s" % [s_val, regime]
+		head = "LEAVES: %d / %d" % [futures, _max_futures]
+		detail = "%d closures; %d leaves removed" % [_stump_count, _max_futures - futures]
+	elif prospect == "thread":
+		detail = "One continuous path"
+	var body: String = "H = ln(%d) = %.2f nats\nEqual leaf weights\n%s" % [futures, log(float(futures)), detail]
 
 	if _readout != null:
 		_readout.text = "%s\n%s" % [head, body]
@@ -387,7 +427,7 @@ func _rebuild_fan(branch: int) -> void:
 	if prospect == "thread":
 		_grow_thread(root_pos)
 	else:
-		_grow_branch(root_pos, 0, branch, 0.0, fan_spread)
+		_grow_branch(root_pos, 0, branch, 0.0, 0.72 if visitor_control else fan_spread)
 	_leaf_count = maxi(_leaf_count, 1)
 
 	# what an unpruned tree of this branch factor would have held: branch^levels
@@ -446,13 +486,17 @@ func _grow_branch(from_pos: Vector3, level: int, branch: int, center_x: float, s
 		# branch tube
 		var tube_mat: StandardMaterial3D = _glow_mat(path_color, 1.6)
 		var radius: float = lerpf(0.018, 0.008, float(level) / float(maxf(levels - 1, 1)))
+		if visitor_control:
+			radius = 0.012 / pow(float(n), float(level) * 0.65)
 		_fan_root.add_child(_cylinder_between(from_pos, to_pos, radius, tube_mat))
 
 		if cutting and i != keep_i:
 			# A CLOSED FUTURE. The branch arrives and stops: a flat amber cap where
 			# the node sphere would be, and no recursion beyond it. The stump stays
 			# standing so the subtree that did not happen is still counted for.
-			_fan_root.add_child(_cylinder(to_pos, CAP_RADIUS, CAP_THICKNESS, _glow_mat(CAP_COLOR, 1.5)))
+			var cap := _cylinder(to_pos, 0.012 if visitor_control else CAP_RADIUS, CAP_THICKNESS, _glow_mat(CAP_COLOR, 1.5))
+			cap.set_meta("is_closure", true)
+			_fan_root.add_child(cap)
 			_stump_count += 1
 			i += 1
 			continue
@@ -460,6 +504,8 @@ func _grow_branch(from_pos: Vector3, level: int, branch: int, center_x: float, s
 		# node sphere at the branch point / future
 		var node_col: Color = leaf_color if is_leaf_level else path_color
 		var node_r: float = 0.03 if is_leaf_level else 0.022
+		if visitor_control:
+			node_r = 0.02 / pow(float(n), float(level) * 0.55)
 		var node_mat: StandardMaterial3D = _glow_mat(node_col, 2.0)
 		var node: MeshInstance3D = _sphere(to_pos, node_r, node_mat)
 		if is_leaf_level:
@@ -468,7 +514,10 @@ func _grow_branch(from_pos: Vector3, level: int, branch: int, center_x: float, s
 		_fan_root.add_child(node)
 
 		# recurse — children spread tighter the deeper we go
-		_grow_branch(to_pos, level + 1, branch, child_x, spread * 0.55)
+		# Each child's next span fits within its share of the current span.
+		# The older 0.55 reduction crossed descendants and merged the leaf markers.
+		var next_spread: float = spread / float(n) if visitor_control else spread * 0.55
+		_grow_branch(to_pos, level + 1, branch, child_x, next_spread)
 		i += 1
 
 

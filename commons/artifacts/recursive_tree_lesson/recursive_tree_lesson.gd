@@ -3,6 +3,9 @@ extends "res://commons/artifacts/timing_machines/machine_stage.gd"
 var kind := "growth"
 var source: Node3D
 var show_rule := false
+var _canopy: Node3D
+var hand_fork: Node3D
+var tree_readings: Node3D
 func _ready() -> void:
 	source = get_parent()
 	scale = Vector3.ONE / source.scale
@@ -14,6 +17,16 @@ func _ready() -> void:
 	lamp.omni_range = 7
 	add_child(lamp)
 	begin()
+	if kind == "growth" and str(source.get_meta("config_room", "")) == "canopy":
+		_canopy = load("res://commons/artifacts/recursive_tree_lesson/branch_canopy.gd").new()
+		_canopy.name = "BranchCanopy"
+		add_child(_canopy)
+		hand_fork = load("res://commons/artifacts/recursive_tree_lesson/hand_fork.gd").new()
+		hand_fork.name = "HandFork"
+		add_child(hand_fork)
+		tree_readings = load("res://commons/artifacts/recursive_tree_lesson/tree_readings.gd").new()
+		tree_readings.name = "TreeReadings"
+		add_child(tree_readings)
 	_use_hall_light.call_deferred()
 
 func _use_hall_light() -> void:
@@ -34,6 +47,7 @@ func _use_hall_light() -> void:
 			lights.add_child(lamp)
 
 func begin() -> void:
+	if is_instance_valid(hand_fork) and hand_fork.held(): return
 	show_rule = false
 	if kind == "growth":
 		source.auto_start = false
@@ -51,6 +65,9 @@ func begin() -> void:
 	refresh()
 
 func act(id: String) -> void:
+	if is_instance_valid(hand_fork) and hand_fork.held() and id != "RULE":
+		readout.text = "Release the point before changing the whole rule."
+		return
 	if id == "RESET": begin(); return
 	if id == "RULE": show_rule = not show_rule
 	else:
@@ -73,6 +90,8 @@ func act(id: String) -> void:
 	refresh()
 
 func refresh() -> void:
+	if is_instance_valid(_canopy): _canopy.refresh_geometry()
+	if is_instance_valid(hand_fork): hand_fork.refresh_geometry()
 	if kind == "growth":
 		readout.text = "branch(end, turned_dir, length * ratio)\nstop after 4 generations; at most 121 segments" if show_rule else "generation %d / 4 | %d segments\nturn %d deg | length x %.2f | %d forks" % [mini(source.current_depth,4),source.segment_count,source.branch_angle_min,source.length_reduction,source.branch_count]
 	else:

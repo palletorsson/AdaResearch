@@ -78,6 +78,8 @@ var _rules: Dictionary = {
 # not run _ready yet frees geometry that does not exist and leaves the artifact
 # blank in every map that placed it.
 var _built: bool = false
+var lesson_enabled := false
+var original_model: Node3D
 
 # Geometry containers
 var _dungeon_root: Node3D
@@ -93,6 +95,7 @@ func _ready() -> void:
 	_create_labels()
 	_generate_dungeon()
 	_built = true
+	if lesson_enabled: _install_lesson()
 
 ## Load `grammar`'s productions into _axiom / _rules.
 ## grammar = "warren" restores exactly the pair this file used to hard-code.
@@ -136,7 +139,8 @@ func _generate_dungeon() -> void:
 
 	_dungeon_root = Node3D.new()
 	_dungeon_root.name = "DungeonGeometry"
-	add_child(_dungeon_root)
+	if is_instance_valid(original_model): original_model.add_child(_dungeon_root)
+	else: add_child(_dungeon_root)
 
 	# Productions first — everything below reads _axiom / _rules.
 	_resolve_grammar()
@@ -273,21 +277,26 @@ func _generate_dungeon() -> void:
 	_update_label()
 
 func _produce_string() -> String:
-	var current = _axiom
+	return produce_string(grammar, depth)
 
-	for _i in range(depth):
-		var next = ""
+## Both the original model and the room lesson use these actual productions.
+func produce_string(grammar_name: String, passes: int) -> String:
+	var production: Dictionary = GRAMMARS.get(grammar_name, GRAMMARS["warren"])
+	var current: String = production.axiom
+	for _i in range(clampi(passes, 0, 5)):
+		var next := ""
 		for c in current:
-			if _rules.has(c):
-				next += _rules[c]
-			else:
-				next += c
+			next += str(production.get(c, c))
 		current = next
-		# Safety limit
-		if current.length() > 50000:
-			break
-
+		if current.length() > 50000: break
 	return current
+
+func plan_records(grammar_name: String, passes: int) -> Dictionary:
+	var sentence := produce_string(grammar_name, passes)
+	var segments: Array = []
+	var rooms: Array = []
+	_interpret_turtle(sentence, segments, rooms)
+	return {"sentence": sentence, "segments": segments, "rooms": rooms}
 
 func _interpret_turtle(lstring: String, segments: Array, rooms: Array) -> void:
 	var pos = Vector3.ZERO
@@ -332,6 +341,7 @@ func _update_label() -> void:
 ## once _ready has built the dungeon. A bare token like `lsystem_dungeon` sends
 ## nothing, changes nothing, and rebuilds nothing.
 func apply_grid_config(config_data: Dictionary) -> void:
+	if str(config_data.get("lesson", "false")).to_lower() == "true": lesson_enabled = true
 	var changed: bool = false
 
 	if config_data.has("grammar"):
@@ -355,3 +365,14 @@ func apply_grid_config(config_data: Dictionary) -> void:
 
 	if changed and _built:
 		_generate_dungeon()
+
+	if _built and lesson_enabled: _install_lesson()
+
+func _install_lesson() -> void:
+	if has_node("ArchitectureLesson"): return
+	original_model = Node3D.new(); original_model.name = "OriginalModel"
+	var children := get_children(); add_child(original_model)
+	for child in children: child.reparent(original_model)
+	original_model.position = Vector3(0, 0.95, -23)
+	var lesson = load("res://commons/artifacts/architecture_lesson/architecture_lesson.gd").new()
+	lesson.name = "ArchitectureLesson"; add_child(lesson)

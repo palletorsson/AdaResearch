@@ -43,6 +43,19 @@ extends RefCounted
 ## texture plus a trace of emission stand in for it), the rest of the row, the
 ## trees and sky behind it, and the paper-thin torn edges — every sheet here is a
 ## 2-3 cm slab, because a zero-thickness one cannot carry a window rim.
+##
+## DNA — two axes, read from opts, defaults reproduce the statue above exactly:
+##   sheet   — what the metal IS: crumple (leaning folded panels) · melt (the
+##             sheets sag and curl over into a wide low pool of poured chrome) ·
+##             swarm (the body breaks into ~80 palm-sized crumples in a cloud) ·
+##             fossil (faces eaten away, only a lattice cage and doubled ribs
+##             with hoops left, the window core gone) · unravel (every sheet
+##             drawn out into a long thin twisting ribbon, a tangle of thread).
+##   gesture — how the body stands: lean (one crumple over a boxy core) · mirror
+##             (a second crumple grows tip-to-tip out of the first, hourglass) ·
+##             burst (every part hovers apart along its own outward normal) ·
+##             crown (the mass narrows to a column and blooms into a splayed
+##             ring of blades and finials at the top).
 
 const TEX: int = 128
 
@@ -63,9 +76,23 @@ static func describe() -> String:
 	return "A standing crumple of mirror-polished sheet metal — silver, bronze-gold and hot magenta panels leaning and twisting past each other, some perforated with small square windows, over a boxy window-gridded core."
 
 
-static func build(root: Node3D, seed: int) -> void:
+static func axes() -> Dictionary:
+	return {
+		"sheet": ["crumple", "melt", "swarm", "fossil", "unravel"],
+		"gesture": ["lean", "mirror", "burst", "crown"],
+	}
+
+
+static func build(root: Node3D, seed: int, opts: Dictionary = {}) -> void:
+	var sheet: String = String(opts.get("sheet", "crumple"))
+	var gesture: String = String(opts.get("gesture", "lean"))
+
 	var rng := RandomNumberGenerator.new()
 	rng.seed = seed
+	# a second stream, drawn on ONLY by the non-default axis values, so that
+	# build(root, seed) still deals exactly the individual it dealt before
+	var rex := RandomNumberGenerator.new()
+	rex.seed = seed * 7919 + 104729
 
 	var brushed: ImageTexture = _brushed_texture(rng)
 	var windows: ImageTexture = _window_texture(rng)
@@ -95,6 +122,132 @@ static func build(root: Node3D, seed: int) -> void:
 	var n_top: int = rng.randi_range(3, 6)
 	var n_hole_left: int = rng.randi_range(2, 6)
 
+	# --- the two axes --------------------------------------------------------
+	# every multiplier below is a no-op at its default, so "crumple" + "lean"
+	# is the statue this family shipped with, transform for transform
+	var size_mul: float = 1.0      # both panel dimensions
+	var slim_mul: float = 1.0      # panel width only
+	var tall_mul: float = 1.0      # panel height only
+	var cell_mul: float = 1.0      # tessellation coarseness
+	var count_mul: float = 1.0     # how many big sheets
+	var thick_mul: float = 1.0
+	var wild_mul: float = 1.0      # bow / S-bend amplitude
+	var twist_mul: float = 1.0
+	var tip_bias: float = 0.0
+	var sag: float = 0.0           # the melt: sheets droop and curl over
+	var y_mul: float = 1.0
+	var rad_mul: float = 1.0
+	var lean_mul: float = 1.0
+	var core_mul: float = 1.0
+	var core_w_mul: float = 1.0
+	var core_h_mul: float = 1.0
+	var rib_mul: float = 1.0
+	var shard_mul: float = 1.0
+	var chip_mul: float = 1.0
+	var cage: bool = false
+	var n_puddle: int = 0
+	var n_hoop: int = 0
+	var n_crown: int = 0
+	var burst: float = 0.0
+	var twin: bool = false
+	var aim_lo: float = 1.36
+	var aim_hi: float = 1.60
+	var aim_to: float = top_h
+	var aim_wide: float = 1.16
+
+	match sheet:
+		"melt":
+			slim_mul = 1.25
+			tall_mul = 0.62
+			cell_mul = 0.90
+			thick_mul = 1.55
+			wild_mul = 1.95
+			twist_mul = 0.45
+			tip_bias = 0.42
+			sag = 0.34
+			y_mul = 0.46
+			rad_mul = 1.00
+			lean_mul = 0.35
+			core_mul = 0.60
+			core_w_mul = 1.35
+			core_h_mul = 0.40
+			rib_mul = 0.55
+			shard_mul = 1.20
+			n_puddle = 9
+			aim_lo = 0.70
+			aim_hi = 0.98
+			aim_to = 0.86
+			aim_wide = 1.18
+		"swarm":
+			count_mul = 4.0
+			size_mul = 0.30
+			cell_mul = 0.45
+			thick_mul = 0.70
+			twist_mul = 1.70
+			wild_mul = 1.40
+			rad_mul = 2.10
+			core_mul = 0.28
+			core_w_mul = 0.45
+			core_h_mul = 0.45
+			rib_mul = 0.35
+			shard_mul = 1.90
+			chip_mul = 1.80
+			aim_wide = 1.18
+		"fossil":
+			cage = true
+			size_mul = 1.16
+			cell_mul = 1.70
+			thick_mul = 0.45
+			wild_mul = 1.30
+			core_mul = 0.0
+			chip_mul = 0.0
+			rib_mul = 2.10
+			n_hoop = 6
+		"unravel":
+			count_mul = 2.40
+			slim_mul = 0.13
+			tall_mul = 1.95
+			cell_mul = 0.35
+			thick_mul = 0.28
+			twist_mul = 3.40
+			wild_mul = 2.20
+			rad_mul = 1.35
+			core_mul = 0.45
+			core_w_mul = 0.55
+			shard_mul = 1.50
+			chip_mul = 1.40
+
+	match gesture:
+		"mirror":
+			twin = true
+			count_mul *= 0.55
+			core_mul *= 0.50
+			rib_mul *= 0.50
+			shard_mul *= 0.50
+			chip_mul *= 0.50
+			aim_lo = 0.86
+			aim_hi = 1.02
+			aim_to = 0.95
+			aim_wide = 0.74
+		"burst":
+			burst = 0.30
+			aim_wide = 1.18
+		"crown":
+			n_crown = 12
+			rad_mul *= 0.52
+			slim_mul *= 0.82
+			y_mul *= 1.08
+			chip_mul *= 0.60
+			aim_lo = 1.46
+			aim_hi = 1.66
+			aim_to = 1.62
+			aim_wide = 0.90
+
+	n_base = clampi(int(round(float(n_base) * count_mul)), 1, 32)
+	n_mid = clampi(int(round(float(n_mid) * count_mul)), 1, 32)
+	n_top = clampi(int(round(float(n_top) * count_mul)), 1, 32)
+	lean_amt = lean_amt * lean_mul
+
 	var tiers: Array = [
 		{"n": n_base, "ylo": 0.02, "yhi": 0.15, "hlo": 0.58, "hhi": 0.92, "rlo": 0.13, "rhi": 0.30, "wlo": 0.34, "whi": 0.60, "tw": 0.55, "hole": 0.26, "cell": 0.050},
 		{"n": n_mid, "ylo": 0.40, "yhi": 0.66, "hlo": 0.44, "hhi": 0.74, "rlo": 0.09, "rhi": 0.26, "wlo": 0.28, "whi": 0.52, "tw": 0.85, "hole": 0.36, "cell": 0.046},
@@ -103,12 +256,13 @@ static func build(root: Node3D, seed: int) -> void:
 
 	# --- the boxy window mass inside the crumple -----------------------------
 	var n_core: int = rng.randi_range(14, 24)
+	n_core = clampi(int(round(float(n_core) * core_mul)), 0, 30)
 	for i in range(n_core):
-		var by: float = rng.randf_range(0.03, 1.02)
-		var bh: float = rng.randf_range(0.10, 0.30)
-		var bw: float = rng.randf_range(0.10, 0.24)
-		var bd: float = rng.randf_range(0.10, 0.24)
-		var br: float = rng.randf_range(0.0, 0.13)
+		var by: float = rng.randf_range(0.03, 1.02) * y_mul
+		var bh: float = rng.randf_range(0.10, 0.30) * core_h_mul
+		var bw: float = rng.randf_range(0.10, 0.24) * core_w_mul
+		var bd: float = rng.randf_range(0.10, 0.24) * core_w_mul
+		var br: float = rng.randf_range(0.0, 0.13) * rad_mul
 		var ba: float = rng.randf_range(0.0, TAU)
 		var bx: float = cos(ba) * br
 		var bz: float = sin(ba) * br
@@ -125,10 +279,11 @@ static func build(root: Node3D, seed: int) -> void:
 
 	# --- armature ribs -------------------------------------------------------
 	var n_rib: int = rng.randi_range(9, 15)
+	n_rib = clampi(int(round(float(n_rib) * rib_mul)), 0, 34)
 	for i in range(n_rib):
 		var ra: float = rng.randf_range(0.0, TAU)
-		var rr: float = rng.randf_range(0.05, 0.18)
-		var rh: float = rng.randf_range(0.45, 1.25)
+		var rr: float = rng.randf_range(0.05, 0.18) * rad_mul
+		var rh: float = rng.randf_range(0.45, 1.25) * y_mul
 		var rx: float = cos(ra) * rr
 		var rz: float = sin(ra) * rr
 		var lf: float = _lean_factor(rh)
@@ -148,21 +303,26 @@ static func build(root: Node3D, seed: int) -> void:
 			var h_hi: float = spec["hhi"]
 			var y0: float = rng.randf_range(y_lo, y_hi)
 			var ph: float = rng.randf_range(h_lo, h_hi)
-			if ti == 2 and k == 0:
+			var hero: bool = ti == 2 and k == 0
+			if hero:
 				# the hero sheet — placed so its tip lands the statue's height
 				ph = rng.randf_range(0.46, 0.58)
-				y0 = top_h - ph * 0.94
+			ph = ph * tall_mul * size_mul
+			if hero:
+				y0 = top_h * y_mul - ph * 0.94
+			else:
+				y0 = y0 * y_mul
 			var w_lo: float = spec["wlo"]
 			var w_hi: float = spec["whi"]
-			var pw: float = rng.randf_range(w_lo, w_hi)
+			var pw: float = rng.randf_range(w_lo, w_hi) * slim_mul * size_mul
 			var r_lo: float = spec["rlo"]
 			var r_hi: float = spec["rhi"]
-			var r0: float = rng.randf_range(r_lo, r_hi)
+			var r0: float = rng.randf_range(r_lo, r_hi) * rad_mul
 			var fk: float = float(k) / float(maxi(n - 1, 1))
 			var phi: float = phi0 + TAU * fk * spin + float(ti) * 1.31 + rng.randf_range(-0.25, 0.25)
 			var tw_max: float = spec["tw"]
 			var twist: float = rng.randf_range(-tw_max, tw_max)
-			var tip: float = rng.randf_range(-0.26, 0.30)
+			var tip: float = rng.randf_range(-0.26, 0.30) + tip_bias
 			var roll: float = rng.randf_range(-0.42, 0.42)
 			if ti == 2:
 				twist = curl * rng.randf_range(0.50, 1.0) * tw_max
@@ -172,9 +332,14 @@ static func build(root: Node3D, seed: int) -> void:
 			if n_hole_left > 0 and rng.randf() < hole_p:
 				holes = true
 				n_hole_left -= 1
-			var cell: float = spec["cell"]
-			var p: Dictionary = _params(rng, pw, ph, cell, holes, 1.0)
-			p["twist"] = twist
+			if cage:
+				holes = true
+			var cell: float = float(spec["cell"]) * cell_mul
+			var p: Dictionary = _params(rng, pw, ph, cell, holes, 1.0 * wild_mul)
+			p["twist"] = twist * twist_mul
+			p["thick"] = float(p["thick"]) * thick_mul
+			p["sag"] = sag
+			p["cage"] = cage
 
 			var col: Color = _deal_colour(rng, deal)
 			var rough: float = rng.randf_range(0.10, 0.25)
@@ -188,14 +353,17 @@ static func build(root: Node3D, seed: int) -> void:
 
 	# --- offcuts: small twisted shards between the sheets --------------------
 	var n_shard: int = rng.randi_range(8, 16)
+	n_shard = clampi(int(round(float(n_shard) * shard_mul)), 0, 34)
 	for i in range(n_shard):
-		var sw: float = rng.randf_range(0.10, 0.24)
-		var sh: float = rng.randf_range(0.09, 0.26)
-		var sy: float = rng.randf_range(0.08, 1.22)
-		var sr: float = rng.randf_range(0.10, 0.32)
+		var sw: float = rng.randf_range(0.10, 0.24) * slim_mul * size_mul
+		var sh: float = rng.randf_range(0.09, 0.26) * tall_mul * size_mul
+		var sy: float = rng.randf_range(0.08, 1.22) * y_mul
+		var sr: float = rng.randf_range(0.10, 0.32) * rad_mul
 		var sa: float = rng.randf_range(0.0, TAU)
-		var sp: Dictionary = _params(rng, sw, sh, 0.038, false, 1.6)
-		sp["twist"] = rng.randf_range(-1.5, 1.5)
+		var sp: Dictionary = _params(rng, sw, sh, 0.038 * cell_mul, false, 1.6 * wild_mul)
+		sp["twist"] = rng.randf_range(-1.5, 1.5) * twist_mul
+		sp["thick"] = float(sp["thick"]) * thick_mul
+		sp["sag"] = sag
 		var col: Color = _deal_colour(rng, deal)
 		var rough: float = rng.randf_range(0.10, 0.22)
 		var mat: StandardMaterial3D = _metal(col, rough, brushed, 0.14, rng.randf_range(1.6, 3.0))
@@ -206,6 +374,7 @@ static func build(root: Node3D, seed: int) -> void:
 
 	# --- glitter chips clinging to the sheets --------------------------------
 	var n_chip: int = rng.randi_range(12, 22)
+	n_chip = clampi(int(round(float(n_chip) * chip_mul)), 0, 44)
 	for i in range(n_chip):
 		var a_i: int = rng.randi_range(0, maxi(anchors.size() - 1, 0))
 		var anchor: Vector3 = anchors[a_i]
@@ -219,6 +388,80 @@ static func build(root: Node3D, seed: int) -> void:
 		var bas: Basis = Basis(Vector3.UP, rng.randf_range(0.0, TAU)) * Basis(Vector3.RIGHT, rng.randf_range(-1.4, 1.4))
 		mi.transform = Transform3D(bas, anchor + off)
 
+	# --- MELT: what ran off the sheets, pooled and setting on the floor ------
+	for i in range(n_puddle):
+		var pr: float = rex.randf_range(0.16, 0.44)
+		var pa: float = rex.randf_range(0.0, TAU)
+		var pd: float = rex.randf_range(0.0, 0.26)
+		var col_p: Color = _deal_colour(rex, deal)
+		var mat_p: StandardMaterial3D = _metal(col_p, rex.randf_range(0.08, 0.18), brushed, 0.10, rex.randf_range(0.8, 1.6))
+		if i % 3 == 2:
+			# a drip still hanging, caught halfway down
+			var blob := SphereMesh.new()
+			blob.radius = rex.randf_range(0.05, 0.12)
+			blob.height = blob.radius * 2.0
+			blob.radial_segments = 12
+			blob.rings = 8
+			var mb: MeshInstance3D = _add(root, blob, mat_p)
+			var sq: float = rex.randf_range(1.3, 2.6)
+			var bas_b: Basis = Basis().scaled(Vector3(sq, 1.0 / sq, sq))
+			mb.transform = Transform3D(bas_b, Vector3(cos(pa) * pd, rex.randf_range(0.03, 0.30), sin(pa) * pd))
+		else:
+			var disc := CylinderMesh.new()
+			disc.top_radius = pr
+			disc.bottom_radius = pr * rex.randf_range(0.92, 1.14)
+			disc.height = rex.randf_range(0.018, 0.070)
+			disc.radial_segments = 16
+			var md: MeshInstance3D = _add(root, disc, mat_p)
+			md.transform = Transform3D(Basis(), Vector3(cos(pa) * pd, float(disc.height) * 0.5 + 0.004, sin(pa) * pd))
+
+	# --- FOSSIL: hoops through the cage, where the flesh used to hang --------
+	for i in range(n_hoop):
+		var fh: float = float(i) / float(maxi(n_hoop - 1, 1))
+		var hr: float = lerpf(0.30, 0.13, fh) * rex.randf_range(0.85, 1.20)
+		var hy: float = lerpf(0.10, 1.24, fh) * y_mul
+		var hoop := TorusMesh.new()
+		hoop.inner_radius = maxf(hr - 0.014, 0.02)
+		hoop.outer_radius = hr
+		hoop.rings = 24
+		hoop.ring_segments = 6
+		var mh: MeshInstance3D = _add(root, hoop, mat_rib)
+		var lf_h: float = _lean_factor(hy)
+		var bas_h: Basis = Basis(Vector3.RIGHT, rex.randf_range(-0.30, 0.30)) * Basis(Vector3.BACK, rex.randf_range(-0.30, 0.30))
+		mh.transform = Transform3D(bas_h, Vector3(lax * lean_amt * lf_h, hy, laz * lean_amt * lf_h))
+
+	# --- CROWN: the column blooms into a splayed ring of blades --------------
+	if n_crown > 0:
+		var cbox: AABB = _union_aabb(root)
+		var crown_y: float = cbox.position.y + cbox.size.y * 0.84
+		var crown_r: float = 0.12
+		for i in range(n_crown):
+			var ca: float = TAU * float(i) / float(n_crown) + rex.randf_range(-0.08, 0.08)
+			var bh_c: float = rex.randf_range(0.26, 0.54)
+			var bw_c: float = rex.randf_range(0.045, 0.115)
+			var cp: Dictionary = _params(rex, bw_c, bh_c, 0.038, false, 1.5)
+			cp["twist"] = rex.randf_range(-1.9, 1.9)
+			cp["thick"] = 0.013
+			cp["flare"] = rex.randf_range(0.30, 1.10)
+			var col_c: Color = _deal_colour(rex, deal)
+			var mat_c: StandardMaterial3D = _metal(col_c, rex.randf_range(0.09, 0.20), brushed, 0.20, rex.randf_range(1.8, 3.2))
+			var rr_c: float = crown_r * rex.randf_range(0.7, 1.5)
+			var pos_c := Vector3(cos(ca) * rr_c, crown_y, sin(ca) * rr_c)
+			var bas_c: Basis = Basis(Vector3.UP, PI * 0.5 - ca) * Basis(Vector3.RIGHT, rex.randf_range(-0.20, 0.20)) * Basis(Vector3.BACK, -0.50 - rex.randf_range(0.0, 0.45))
+			_panel(root, mat_c, Transform3D(bas_c, pos_c), cp, rex)
+		for i in range(6):
+			var fa: float = TAU * float(i) / 6.0 + 0.3
+			var orb := SphereMesh.new()
+			orb.radius = rex.randf_range(0.022, 0.046)
+			orb.height = orb.radius * 2.0
+			orb.radial_segments = 12
+			orb.rings = 7
+			var col_o: Color = _deal_colour(rex, deal)
+			var mat_o: StandardMaterial3D = _metal(col_o.lightened(0.12), 0.09, brushed, 0.26, 3.5)
+			var mo: MeshInstance3D = _add(root, orb, mat_o)
+			var ro: float = crown_r * rex.randf_range(1.1, 2.0)
+			mo.transform = Transform3D(Basis(), Vector3(cos(fa) * ro, crown_y + rex.randf_range(0.10, 0.40), sin(fa) * ro))
+
 	# --- centre on the axis --------------------------------------------------
 	var box: AABB = _union_aabb(root)
 	var mid_x: float = box.position.x + box.size.x * 0.5
@@ -229,13 +472,67 @@ static func build(root: Node3D, seed: int) -> void:
 	# --- aim: this body wants to stand 1.40..1.66 m off the floor ------------
 	# (the two-step base adds ~48 mm under the crumple, so aim a little low)
 	var kaim: float = 1.0
-	if box.size.y < 1.36 or box.size.y > 1.60:
-		kaim = top_h / maxf(box.size.y, 0.05)
+	if box.size.y < aim_lo or box.size.y > aim_hi:
+		kaim = aim_to / maxf(box.size.y, 0.05)
 	var widest: float = maxf(box.size.x, box.size.z)
-	if widest * kaim > 1.16:
-		kaim = 1.16 / maxf(widest, 0.01)
+	if widest * kaim > aim_wide:
+		kaim = aim_wide / maxf(widest, 0.01)
 	if absf(kaim - 1.0) > 0.005:
 		_scale_all(root, kaim)
+		box = _union_aabb(root)
+
+	# --- BURST: every part hovers out along its own outward normal -----------
+	if burst > 0.0:
+		var ctr := Vector3(box.position.x + box.size.x * 0.5, box.position.y + box.size.y * 0.5, box.position.z + box.size.z * 0.5)
+		for ch in root.get_children():
+			if not (ch is MeshInstance3D):
+				continue
+			var cm: MeshInstance3D = ch
+			if cm.mesh == null:
+				continue
+			var lb: AABB = cm.mesh.get_aabb()
+			var wc: Vector3 = cm.transform * (lb.position + lb.size * 0.5)
+			var d: Vector3 = wc - ctr
+			var flat := Vector3(d.x, 0.0, d.z)
+			var dir: Vector3 = Vector3.RIGHT
+			if flat.length() > 0.0005:
+				dir = flat.normalized()
+			var push: float = burst * (0.30 + 0.90 * rex.randf())
+			var lift: float = d.y * 0.42 + burst * rex.randf_range(-0.20, 0.40)
+			var ax_b: Vector3 = dir.cross(Vector3.UP).normalized()
+			var spin_b: Basis = Basis(ax_b, rex.randf_range(-0.40, 0.40))
+			cm.transform = Transform3D(spin_b * cm.transform.basis, cm.transform.origin + dir * push + Vector3(0.0, lift, 0.0))
+		box = _union_aabb(root)
+		var mxb: float = box.position.x + box.size.x * 0.5
+		var mzb: float = box.position.z + box.size.z * 0.5
+		_shift_all(root, Vector3(-mxb, 0.0, -mzb))
+		box = _union_aabb(root)
+
+	# --- MIRROR: a second crumple grows tip-to-tip out of the first ----------
+	if twin:
+		var span_t: float = box.position.y + box.size.y
+		var lift_t: float = span_t * 1.78
+		var kt: float = 0.88
+		var tw_basis: Basis = Basis(Vector3.UP, rex.randf_range(0.5, 2.5)) * Basis(Vector3.BACK, PI)
+		var outer := Transform3D(tw_basis, Vector3(0.0, lift_t, 0.0))
+		var kids: Array = []
+		for ch in root.get_children():
+			if ch is MeshInstance3D:
+				kids.append(ch)
+		for kid in kids:
+			var cm2: MeshInstance3D = kid
+			if cm2.mesh == null:
+				continue
+			var mi2 := MeshInstance3D.new()
+			mi2.mesh = cm2.mesh
+			mi2.material_override = cm2.material_override
+			root.add_child(mi2)
+			var inner := Transform3D(cm2.transform.basis.scaled(Vector3(kt, kt, kt)), cm2.transform.origin * kt)
+			mi2.transform = outer * inner
+		box = _union_aabb(root)
+		var mx2: float = box.position.x + box.size.x * 0.5
+		var mz2: float = box.position.z + box.size.z * 0.5
+		_shift_all(root, Vector3(-mx2, 0.0, -mz2))
 		box = _union_aabb(root)
 
 	# --- a shallow two-step base, sized to the footprint ---------------------
@@ -297,6 +594,8 @@ static func _params(rng: RandomNumberGenerator, pw: float, ph: float, cell: floa
 		"cph2": rng.randf_range(0.0, TAU),
 		"flare": rng.randf_range(-0.25, 0.45),
 		"twist": 0.0,
+		"sag": 0.0,
+		"cage": false,
 		"lean_x": rng.randf_range(-0.10, 0.10),
 		"lean_z": rng.randf_range(-0.06, 0.15),
 		"thick": rng.randf_range(0.020, 0.034),
@@ -327,10 +626,13 @@ static func _pt(p: Dictionary, u: float, v: float) -> Vector3:
 	var twist: float = p["twist"]
 	var lean_x: float = p["lean_x"]
 	var lean_z: float = p["lean_z"]
+	var sag: float = float(p.get("sag", 0.0))
 
 	var x: float = u * pw * (1.0 + flare * v)
 	var y: float = v * ph
+	y -= sag * v * (0.62 + 0.38 * cos(TAU * u))
 	var z: float = bow * (1.0 - 4.0 * u * u)
+	z += sag * 0.55 * v * v
 	z += sbend * sin(PI * (v * wave + phase))
 	z += crum * sin(TAU * (u * ku + v * kv) + cph)
 	y += crumy * sin(TAU * u * ku2 + cph2) * v
@@ -386,12 +688,17 @@ static func _panel(root: Node3D, mat: StandardMaterial3D, xf: Transform3D, p: Di
 	var hp: int = p["hp"]
 	var hq: int = p["hq"]
 	var hstep: int = p["hstep"]
+	var cage_on: bool = bool(p.get("cage", false))
 	var keep: Array = []
 	for i in range(nu):
 		var row: Array = []
 		for j in range(nv):
 			var k: bool = true
-			if holes and i >= 1 and i <= nu - 2 and j >= 1 and j <= nv - 2:
+			if cage_on:
+				# the fossil: only the lattice ribs survive, edges eaten too
+				if posmod(i + hp, hstep) != 0 and posmod(j + hq, hstep) != 0:
+					k = false
+			elif holes and i >= 1 and i <= nu - 2 and j >= 1 and j <= nv - 2:
 				if posmod(i + hp, hstep) == 0 and posmod(j + hq, hstep) == 0:
 					k = false
 					if rng.randf() < 0.14:

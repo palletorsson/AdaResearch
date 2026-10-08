@@ -2,30 +2,19 @@ extends Node3D
 class_name QFEPBalanceWorkbench
 
 # @identity
-# essence: a four-knob console for the QFEP formula — F, E(S), λ, φ sliders side-by-side on a tilted plate. As you turn them, QFE = F − λ·E(S) + φ·ΔE(S,t) recomputes live; a four-axis radar chart re-draws the knob quadrilateral; the dominant timeline phase is detected and its canonical color tints the readout panel, the radar fill, and an emissive halo behind the whole instrument. The project's organizing frame made into a console you operate.
-# desire: learner reads the QFEP formula not as theory but as a balance — the four knobs are not parameters of "a system," they are the four parameters of "the project's own thinking-shape," and the seven phases are the seven characteristic ways those knobs can settle
-# critical_parameter: the (F, E, λ, φ) tuple — drives QFE numerically, picks the dominant phase by Manhattan distance against the gallery's 7 phase signatures, swaps the accent color, repaints the radar
-# triggers: _ready() builds plate + 4 sliders + radar + readout + halo + phase bar; _process polls all four sliders each frame, recomputes QFE, rebuilds the radar polygon, retints panels to the current phase color
-# emerges: the four-knob radar makes the formula's STATE legible at a glance — F top, E right, λ bottom, φ left, polygon shape tells you which phase the system is in before you read the readout; QFE sign tells you whether order or entropy wins; the halo color says where on the spine you are
-# needs: slider_horizontal × 4 [present]; Label3D for readouts [present]; ImmediateMesh for radar [present]; the seven PHASE_COLORS dict from timeline page.tsx [hard-coded here]; the gallery's 7 knob signatures from capture_qfep_balance_gallery.gd [hard-coded here]
-# relationships: paired with /qfep-balance-gallery (web cells of this instrument frozen at the 7 phases); sibling to shannon_workbench (one knob → 2D hill) and riemann_sum_workbench (one knob → polygon-chasing-curve); contrast: this is a CONSOLE not a slider-with-plot. The console framing matters — there's no single "the answer is QFE = X" reading; the knobs sit BETWEEN regions, never inside one of them. You operate the formula
-# truth: the QFEP formula is not a description of a system; it is a navigable balance. F − λ·E(S) + φ·ΔE has seven characteristic settlings (phases). The console makes those settlings hand-cranked.
+# essence: Four normalised controls evaluate F - lambda*E + phi*0.3.
+# desire: Compare different arrangements that return the same scalar total.
+# critical_parameter: F, E, lambda and phi, all in [0,1]; delta E is a configured constant.
+# triggers: The console polls controls and refreshes arithmetic and its four-axis diagram.
+# emerges: A total can hide compensation between contributions. At lambda=0, E drops out.
+# needs: Headset reach and reading checks. No entropy sensor or physical phase detector is implemented.
+# relationships: Returns the Crisis_Synthesis proposal as arithmetic; leads to shannon_workbench.
+# truth: Nearest project reference means Manhattan distance to one of seven authored tuples.
 
-## A four-knob console for the QFEP formula QFE = F − λ·E(S) + φ·ΔE(S,t).
-##
-## Four sliders drive (F, E(S), λ, φ) ∈ [0, 1]⁴. As you move them:
-##   • the numeric QFE = F − λ·E(S) + φ·ΔE is recomputed (ΔE held at a small
-##     constant 0.3 — the rate term is what φ scales, not a thing the player
-##     directly turns; the φ knob IS the queer signature)
-##   • a four-axis radar polygon (F up, E right, λ down, φ left) re-draws
-##     in the dominant phase's color
-##   • the dominant phase is detected by Manhattan distance against the
-##     gallery's 7 canonical knob signatures (F_order, oscillation,
-##     E_entropy, lambda_edge, integration, relation, synthesis)
-##   • the readout panel, the phase bar, and a backdrop halo all retint to
-##     that phase's color
-##
-## The frame the project organizes itself around becomes a console you operate.
+## comparison:on adds KEEP and a retained outline/total. The pale shape records the
+## tuple as it stood when pressed; the coloured shape continues to follow the rails.
+## The legacy settling axis selects initial examples, not physical phases.
+## Phi stays normalised [0,1] on this instrument, unlike the separate signed rail.
 
 # ── Configuration ─────────────────────────────────────────────────────
 
@@ -67,10 +56,17 @@ class_name QFEPBalanceWorkbench
 @export var default_lambda: float = 0.4
 @export var default_phi: float = 0.35
 ## The ΔE(S, t) constant the φ knob multiplies. Holding this fixed is honest:
-## the player doesn't independently scrub a rate; the rate exists, and φ tunes
-## how sensitive the formula is to it. ΔE = 0.3 sits in the middle of the
-## "things are changing, moderately" band.
+## the player does not turn this input. It is a supplied change value, not
+## a measured entropy change or rate.
 @export var rate_delta_e: float = 0.30
+
+## Optional retained reading for the introduction's equal-total experiment.
+@export var comparison: bool = false
+var _kept: Array = []
+var _kept_qfe: float = 0.0
+var _kept_outline: MeshInstance3D
+var _keep_button: Node3D
+var _readout_lines: Array = []
 
 # ── Stage-2 DNA axis ──────────────────────────────────────────────────
 
@@ -288,6 +284,7 @@ func _build_all() -> void:
 	_build_radar()
 	_build_readout_panel()
 	_build_phase_bar()
+	_build_comparison()
 	_refresh_all()
 
 
@@ -404,7 +401,7 @@ func _compute_qfe() -> float:
 
 
 func _detect_phase() -> int:
-	# Manhattan distance against the 7 phase signatures. Smallest wins.
+	# Manhattan distance to seven authored references. This does not detect a physical phase.
 	var best_idx: int = 0
 	var best_d: float = 1.0e9
 	for i in range(PHASE_DATA.size()):
@@ -448,7 +445,8 @@ func _build_plate_and_sliders() -> void:
 	# (F · E · λ · φ) as a slider row + a summary readout. The radar / phase bar /
 	# detail readout stay as world-space viz. Replaces the hand-built plate + jumpy
 	# slider_horizontal with the canonical slider_smooth row.
-	_plate_root = InterfacePresets.build("workbench", "QFEP Balance", plate_height)
+	# Keep the four rails and optional KEEP comparison at their authored size.
+	_plate_root = InterfacePresets.build("workbench", "QFEP Balance", plate_height, "braun", "instrument")
 	_plate_root.position = Vector3(0.0, plate_height, plate_offset_z)
 	add_child(_plate_root)
 	_owned.append(_plate_root)
@@ -462,6 +460,9 @@ func _build_plate_and_sliders() -> void:
 	for i in range(4):
 		var s = _plate_root.add_slider(KNOB_NAMES[i], KNOB_NAMES[i])
 		_sliders.append(s)
+	if comparison:
+		_keep_button = _plate_root.add_button("KEEP")
+		_keep_button.pressed.connect(_keep_reading)
 	# Seat the faders on the settled tuple — see _seat_sliders.
 	_seat_sliders()
 
@@ -536,6 +537,7 @@ func _build_radar() -> void:
 	_radar_outline_mesh_inst.cast_shadow = GeometryInstance3D.SHADOW_CASTING_SETTING_OFF
 	_radar_outline_material = StandardMaterial3D.new()
 	_radar_outline_material.shading_mode = BaseMaterial3D.SHADING_MODE_UNSHADED
+	_radar_outline_material.cull_mode = BaseMaterial3D.CULL_DISABLED
 	_radar_outline_material.emission_enabled = true
 	_radar_outline_material.emission = Color(0.902, 0.224, 0.275)
 	_radar_outline_material.emission_energy_multiplier = 1.8
@@ -625,12 +627,13 @@ func _refresh_radar() -> void:
 
 	# Polygon outline as 4 quads (thick lines)
 	_radar_outline_mesh.clear_surfaces()
-	_radar_outline_mesh.surface_begin(Mesh.PRIMITIVE_TRIANGLES)
-	_append_thick_line(_radar_outline_mesh, top, right, outline_z, 0.008)
-	_append_thick_line(_radar_outline_mesh, right, bottom, outline_z, 0.008)
-	_append_thick_line(_radar_outline_mesh, bottom, left, outline_z, 0.008)
-	_append_thick_line(_radar_outline_mesh, left, top, outline_z, 0.008)
-	_radar_outline_mesh.surface_end()
+	if maxf(maxf(_F,_E),maxf(_lambda,_phi))*radar_max >= 0.0001:
+		_radar_outline_mesh.surface_begin(Mesh.PRIMITIVE_TRIANGLES)
+		_append_thick_line(_radar_outline_mesh, top, right, outline_z, 0.008)
+		_append_thick_line(_radar_outline_mesh, right, bottom, outline_z, 0.008)
+		_append_thick_line(_radar_outline_mesh, bottom, left, outline_z, 0.008)
+		_append_thick_line(_radar_outline_mesh, left, top, outline_z, 0.008)
+		_radar_outline_mesh.surface_end()
 
 	# Move knob dots to the vertices
 	if _radar_knob_dots.size() == 4:
@@ -711,25 +714,28 @@ func _refresh_readout() -> void:
 	# Numeric expansion of the whole formula, on ONE panel:
 	#   QFE = F − λ·E(S) + φ·ΔE
 	#   = 0.55 − 0.40·0.58 + 0.35·0.30 = 0.42
-	#   dominant phase: lambda_edge   color: #E63946
-	#   Q = the recursive maker-modifier / the formula recognizing itself
+	#   Nearest project reference: lambda_edge
+	#   The ranges and fixed delta are shown beside the arithmetic.
 	var sign_str: String = "" if _qfe >= 0.0 else "−"
 	var lines: Array = [
 		"QFE = F − λ·E(S) + φ·ΔE",
 		"= %.2f − %.2f·%.2f + %.2f·%.2f = %s%.2f" % [
 			_F, _lambda, _E, _phi, rate_delta_e, sign_str, abs(_qfe)],
-		"dominant phase: %s" % phase.id,
-		"color: %s" % _color_to_hex(phase_color),
-		"Q = the recursive maker-modifier",
-		"the formula recognizing itself",
+		"All four controls: 0 to 1",
+		"Delta E = %.2f (fixed, not measured)" % rate_delta_e,
+		"Nearest project reference:",
+		str(phase.id),
 	]
+	if comparison:
+		lines.append("KEEP a reading, then change the knobs" if _kept.is_empty() else "Kept %+.3f / difference %+.3f" % [_kept_qfe, _qfe-_kept_qfe])
+	_readout_lines = lines.duplicate()
 
 	# Rebuild the consolidated board in the phase color. Rebuild-on-change is
 	# fine — _refresh_readout only runs on the throttled viz tick, not per frame.
 	if _readout_block != null and is_instance_valid(_readout_block):
 		_readout_block.queue_free()
 	_readout_block = BakedText.make_text_block(
-		lines, phase_color, READOUT_LINE_H, READOUT_BLOCK_WIDTH, READOUT_LINE_H * 0.35, true)
+		lines, Color(0.93,0.95,1.0), READOUT_LINE_H, READOUT_BLOCK_WIDTH, READOUT_LINE_H * 0.35, true)
 	if _readout_block != null:
 		_readout_block.name = "ReadoutBlock"
 		_readout_block.position = Vector3(0.0, 0.0, 0.002)
@@ -824,11 +830,11 @@ func _refresh_phase_bar() -> void:
 	# The phase name is a TextScreen now — same live readout, on a real board.
 	# The hidden Label3D keeps carrying the same string for anything reading .text.
 	if _phase_bar_label_top != null and is_instance_valid(_phase_bar_label_top):
-		_phase_bar_label_top.text = str(phase.display)
+		_phase_bar_label_top.text = "PROJECT REFERENCE\n" + str(phase.display)
 		_phase_bar_label_top.modulate = c
 	if _phase_screen != null and is_instance_valid(_phase_screen):
 		_phase_screen.title_color = c
-		_phase_screen.set_text(str(phase.display), "")
+		_phase_screen.set_text("PROJECT REFERENCE", str(phase.display))
 	_phase_bar_label_letter.text = str(phase.letter)
 	# Pure white phase (synthesis): use a darker letter for legibility
 	if phase.id == "synthesis":
@@ -892,8 +898,9 @@ func _refresh_all() -> void:
 	_qfe = _compute_qfe()
 	_phase_index = _detect_phase()
 	if _plate_readout:
-		var pid: String = str(PHASE_DATA[_phase_index].get("id", "")) if _phase_index < PHASE_DATA.size() else ""
-		_plate_readout.text = "%s\nQFE = %+.2f" % [pid, _qfe]
+		_plate_readout.text = "QFE %+.3f / controls 0..1" % _qfe
+		if comparison:
+			_plate_readout.text += "\nKEEP a reading" if _kept.is_empty() else "\nKept %+.3f / diff %+.3f" % [_kept_qfe, _qfe-_kept_qfe]
 	_refresh_radar()
 	_refresh_radar_tint()
 	_refresh_readout()
@@ -976,6 +983,9 @@ func _pick_axis(raw: String, allowed: PackedStringArray, fallback: String) -> St
 
 
 func apply_grid_config(config_data: Dictionary) -> void:
+	var before_comparison: bool = comparison
+	if config_data.has("comparison"):
+		comparison = str(config_data.comparison).to_lower() in ["on", "true", "1"]
 	var before_settling: String = settling
 	var before_F: float = _F
 	var before_E: float = _E
@@ -1008,6 +1018,9 @@ func apply_grid_config(config_data: Dictionary) -> void:
 		_knob_override["phi"] = clampf(float(config_data["initial_phi"]), 0.0, 1.0)
 
 	if not _built:
+		return
+	if comparison != before_comparison:
+		_rebuild_now()
 		return
 
 	# The knobs are state, not geometry — reseat them without tearing anything
@@ -1062,6 +1075,8 @@ func _rebuild_now() -> void:
 	_readout_card_material = null
 	_readout_border_material = null
 	_readout_block = null
+	_kept_outline = null
+	_keep_button = null
 	_phase_bar_root = null
 	_phase_bar_material = null
 	_phase_screen = null
@@ -1075,3 +1090,41 @@ func _rebuild_now() -> void:
 	# call still sitting in the queue from _ready a no-op instead of a second mount.
 	_mount_scheduled = false
 	_mount_now()
+
+func _build_comparison() -> void:
+	if not comparison: return
+	_kept_outline = MeshInstance3D.new()
+	_kept_outline.name = "KeptReading"
+	_kept_outline.mesh = ImmediateMesh.new()
+	var mat := StandardMaterial3D.new()
+	mat.shading_mode = BaseMaterial3D.SHADING_MODE_UNSHADED
+	mat.albedo_color = Color(1.0, 0.95, 0.70)
+	mat.cull_mode = BaseMaterial3D.CULL_DISABLED
+	_kept_outline.material_override = mat
+	_radar_root.add_child(_kept_outline)
+	_refresh_kept_outline()
+
+func _keep_reading() -> void:
+	# Read the controls now, including a change made since the last render tick.
+	_F = _read_slider(0, _F)
+	_E = _read_slider(1, _E)
+	_lambda = _read_slider(2, _lambda)
+	_phi = _read_slider(3, _phi)
+	_kept = [_F, _E, _lambda, _phi]
+	_kept_qfe = _compute_qfe()
+	_refresh_kept_outline()
+	_refresh_all()
+
+func _refresh_kept_outline() -> void:
+	if not is_instance_valid(_kept_outline): return
+	_kept_outline.visible = not _kept.is_empty()
+	var mesh: ImmediateMesh = _kept_outline.mesh
+	mesh.clear_surfaces()
+	if _kept.is_empty() or float(_kept.max())*radar_max < 0.0001: return
+	var points: Array[Vector2] = [
+		Vector2(0,radar_max*_kept[0]),Vector2(radar_max*_kept[1],0),
+		Vector2(0,-radar_max*_kept[2]),Vector2(-radar_max*_kept[3],0)]
+	mesh.surface_begin(Mesh.PRIMITIVE_TRIANGLES)
+	for i in 4:
+		_append_thick_line(mesh,points[i],points[(i+1)%4],0.04,0.010)
+	mesh.surface_end()

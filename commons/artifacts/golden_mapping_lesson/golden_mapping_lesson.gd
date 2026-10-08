@@ -11,6 +11,7 @@ var show_arc := false
 var show_measure := false
 var sum_view: Node3D
 var height_values: Array[float] = []
+var hand_sum: Node3D
 
 func _ready() -> void:
 	source=get_parent()
@@ -21,6 +22,8 @@ func _ready() -> void:
 		_retain_examples()
 		sum_view=Node3D.new();sum_view.name="UnitSum";source.add_child(sum_view)
 		_numbers()
+		hand_sum=load("res://commons/artifacts/golden_mapping_lesson/hand_sum.gd").new()
+		hand_sum.name="HandSum";add_child(hand_sum)
 	else:
 		source.extrusion_height=0.01
 		_rectangle()
@@ -107,6 +110,7 @@ func act(id: String) -> void:
 			"RESET":cut=0;show_arc=false;show_measure=false;show_rule=false;_rectangle()
 			"RULE":show_rule=not show_rule
 	refresh()
+	if is_instance_valid(hand_sum):hand_sum.sync()
 
 func refresh() -> void:
 	if kind=="numbers":

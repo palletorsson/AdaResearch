@@ -167,7 +167,7 @@ func _billboard_label(text: String, pos: Vector3, font: int, color: Color) -> La
 	l.modulate = color
 	l.outline_size = 10
 	l.billboard = BaseMaterial3D.BILLBOARD_ENABLED
-	l.no_depth_test = true
+	l.no_depth_test = str(get_meta("config_label_depth", "")) != "scene"
 	l.position = pos
 	return l
 

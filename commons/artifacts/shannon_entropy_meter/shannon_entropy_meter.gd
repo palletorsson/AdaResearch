@@ -8,13 +8,13 @@ const BakedText = preload("res://commons/utils/baked_text_albedo.gd")
 
 # @identity
 # essence: a wall gauge that turns a random sequence into a number — the average information per symbol, in bits
-# desire: to make the abstract "amount of randomness" a thing on a wall the player can read like a thermometer
+# desire: to make a sample’s symbol-frequency entropy inspectable beside the ordered record it does not measure
 # critical_parameter: num_symbols — sets the maximum possible entropy log₂(N), the ceiling against which the actual is measured; disclosure — how much of the measurement the gauge shows behind the number (oracle | tally | ledger | works | origin)
-# triggers: continuous re-sampling of a random stream, frequency histogram bars updating, entropy bar climbing toward log₂(N)
-# emerges: the visual fact that uniform distributions have HIGHER entropy than skewed ones — randomness IS evenness; at disclosure:oracle the same H arrives with the histogram gone, and the gauge asks to be believed instead of read
+# triggers: a seeded sample is measured at build; ledger controls sort its display, compare a second sample and disclose the measurement
+# emerges: equal symbol shares maximize this categorical entropy; sorting leaves it unchanged, while disclosure:oracle withholds the histogram behind the same reading
 # needs: num_symbols[has] sequence_length[has] entropy_label[has] frequency_bars[has] vr_distribution_picker[missing]
 # relationships: the measurement instrument for the randomness sequence — pairs with distribution_sampler and entropy_jar; shares the `disclosure` ladder word for word with [[prng_crank_machine]], [[coin_toss]] and [[monte_carlo_dartboard]]
-# truth: information IS uncertainty resolved — H = -Σ p(x) log₂ p(x) is the formula for "how surprised should you be?"
+# truth: This H averages surprise from the observed symbol shares; it does not inspect neighbours, spatial disorder or thermodynamic entropy.
 
 # ─────────────────────────────────────────────────────────────────────────────
 # DNA PROMOTION (2026-08-02) — disclosure

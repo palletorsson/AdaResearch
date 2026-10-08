@@ -1,50 +1,25 @@
 {
-	"approach": "south",
-	"artifact_offset": [
-		0.0,
-		0.0,
-		0.0
-	],
-	"clearance": [
-		3.0,
-		3.0,
-		3.0
-	],
-	"exit": "north",
-	"extras": [],
-	"footing": {
-		"anchor": [
-			1.0,
-			1.0
-		],
-		"tiles": [
-			[
-				1.0,
-				1.0,
-				1.0
-			],
-			[
-				2,
-				3.0,
-				2
-			],
-			[
-				1.0,
-				1.0,
-				1.0
-			]
-		]
-	},
-	"footprint": [
-		1.0,
-		1.0,
-		1.0
-	],
-	"lookup_name": "newton_cradle",
-	"rotations": [
-		"0",
-		"90",
-		"180",
-		"270"
-	]
+  "lookup_name": "newton_cradle",
+  "footprint": [1.737, 0.624, 1.296],
+  "rotations": ["0", "180"],
+  "approach": "south",
+  "exit": "north",
+  "footing": {"anchor": [1, 2], "tiles": [[1,1,1,1,1],[1,2,2,2,1],[1,1,1,1,1]]},
+  "extras": [],
+  "artifact_offset": [0.0, 0.03, 0.0],
+  "clearance": [5, 3, 3],
+  "posture": "table",
+  "show_info": false,
+  "show_dressing": false,
+  "placement_contract": {
+    "allowed_modes": ["host_mounted"], "preferred_mode": "host_mounted",
+    "hard_zone_m": [2, 2, 3], "preferred_zone_m": [5, 3, 3],
+    "required_support": "table", "support_surface_height_m": [0.9, 1.1],
+    "interaction_faces": ["south", "north"],
+    "rear_clearance_m": 1.0, "front_clearance_m": 1.0,
+    "circulation": "two_sided", "circulation_behind": true,
+    "minimum_route_width_m": 0.9, "neighbor_policy": "protect_motion_sweep"
+  },
+  "production_grade": "test_candidate",
+  "placement_intent": "A wide kinetic desktop instrument on a three-metre table with its pendulum sweep kept clear."
 }

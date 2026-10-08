@@ -1,51 +1,24 @@
 {
-  "rotations": [
-    "0",
-    "90",
-    "180",
-    "270"
-  ],
-  "approach": "south",
-  "exit": "north",
-  "footprint": [
-    1,
-    1,
-    1
-  ],
-  "clearance": [
-    3.0,
-    3.0,
-    3.0
-  ],
-  "extras": [],
   "lookup_name": "fire_extinguisher",
-  "posture": "pedestal",
-  "footing": {
-    "anchor": [
-      1,
-      1
-    ],
-    "tiles": [
-      [
-        1,
-        1,
-        1
-      ],
-      [
-        1,
-        3,
-        1
-      ],
-      [
-        1,
-        1,
-        1
-      ]
-    ]
+  "footprint": [0.23, 0.187, 0.827],
+  "rotations": ["0"],
+  "approach": "south",
+  "exit": "south",
+  "footing": {"anchor": [1, 1], "tiles": [[4,4,4],[1,1,1],[1,1,1]]},
+  "extras": [],
+  "artifact_offset": [0.0, 0.55, -0.45],
+  "clearance": [3, 3, 3],
+  "posture": "wall",
+  "show_info": false,
+  "show_dressing": false,
+  "placement_contract": {
+    "allowed_modes": ["against_wall"], "preferred_mode": "against_wall", "wall_side": "north",
+    "hard_zone_m": [1, 3, 3], "preferred_zone_m": [3, 3, 3],
+    "required_support": "wall", "interaction_faces": ["south"],
+    "rear_clearance_m": 0.0, "front_clearance_m": 1.0,
+    "circulation": "frontal", "circulation_behind": false,
+    "minimum_route_width_m": 0.9, "neighbor_policy": "keep_emergency_reach_clear"
   },
-  "artifact_offset": [
-    0.0,
-    0.0,
-    0.0
-  ]
+  "production_grade": "test_candidate",
+  "placement_intent": "A low wall-mounted safety prop with one metre of immediately reachable clear floor."
 }

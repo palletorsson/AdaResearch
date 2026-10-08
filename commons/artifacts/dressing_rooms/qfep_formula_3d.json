@@ -1,27 +1,25 @@
 {
-	"approach": "south",
-	"artifact_offset": [0.0, 0.25, 0.0],
-	"clearance": [3.0, 3.0, 5.0],
-	"exit": "north",
-	"extras": [
-		{ "offset": [-1.0, 0.0, 0.0], "text": "QFE = F − λE(S) + φΔE(S,t)", "type": "3t" },
-		{ "offset": [0.0, 0.0, 0.0], "params": "3:1", "type": "el" }
-	],
-	"footing": {
-		"anchor": [1.0, 1.0],
-		"tiles": [[1.0, 1.0, 1.0], [1.0, 2.0, 1.0], [1.0, 1.0, 1.0]]
-	},
-	"footprint": [3.0, 3.0, 3.0],
-	"lookup_name": "qfep_formula_3d",
-	"rotations": ["0"],
-
-	"vitrine_grammar": {
-		"select_from": "sequence:qfeplaboratory",
-		"where":       { "name_contains": "slider" },
-		"limit":       4,
-		"layout":      "ring",
-		"radius":      0.42,
-		"scale":       0.35,
-		"exclude_self": true
-	}
+  "lookup_name": "qfep_formula_3d",
+  "footprint": [1.64, 0.02, 0.13],
+  "rotations": ["0"],
+  "approach": "south",
+  "exit": "south",
+  "footing": {"anchor": [1, 1], "tiles": [[4,4,4],[1,1,1],[1,1,1]]},
+  "extras": [],
+  "artifact_offset": [0.0, 1.45, -0.45],
+  "clearance": [3, 3, 3],
+  "posture": "wall",
+  "show_info": false,
+  "show_light": true,
+  "show_dressing": false,
+  "placement_contract": {
+    "allowed_modes": ["against_wall"], "preferred_mode": "against_wall", "wall_side": "north",
+    "hard_zone_m": [2, 3, 3], "preferred_zone_m": [3, 3, 3],
+    "required_support": "wall", "interaction_faces": ["south"],
+    "rear_clearance_m": 0.0, "front_clearance_m": 2.0,
+    "circulation": "frontal", "circulation_behind": false,
+    "minimum_route_width_m": 0.9, "neighbor_policy": "no_artifacts_in_preferred_zone"
+  },
+  "production_grade": "test_candidate",
+  "placement_intent": "The formula is a wall text, not a floor installation: one focused reading bay, no sibling ring, and eye-level mounting."
 }

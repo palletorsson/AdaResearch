@@ -40,6 +40,19 @@ extends RefCounted
 ## Given up: the wood and the other seven dancers, the blonde figure's hair and
 ## headdress, skin translucency and the wet sheen of real body paint, fingernails,
 ## and the dark outline the reference's veins gain where they cross a fold.
+##
+## DNA — two axes:
+##   rite  — what the dance does to the flesh: mid_step (the reference, one dancer
+##           caught turning), twinned (a second dancer grows backward out of the
+##           chest — two heads, four arms, one pelvis), melted (every limb sags and
+##           spreads until the figure pools on the floor), swarmed (bones dissolve
+##           into flung strings of beads and the torso comes apart), flooded (the
+##           lower body swallowed to the hip by a poured black resin mound).
+##   shell — what the mask is: eared (the pale shell as painted), antlered (twelve
+##           bent horns rise off its rim into a crown), shoal (the one mask breaks
+##           into eighteen small masks circling the bare face), cage (three nested
+##           lattices — the shell fossilised to bars you see the face through),
+##           bloom (temples and crown open into nine-petalled flowers).
 
 const TEX: int = 128
 
@@ -59,9 +72,28 @@ static func describe() -> String:
 	return "A dancer painted head to foot in one pattern — green diamond lattice, dark veins, leopard or rose — twisting mid-step with one arm swept out, face hidden behind a pale eared shell mask with a painted blue lid."
 
 
-static func build(root: Node3D, seed: int) -> void:
+static func axes() -> Dictionary:
+	return {
+		"rite": ["mid_step", "twinned", "melted", "swarmed", "flooded"],
+		"shell": ["eared", "antlered", "shoal", "cage", "bloom"],
+	}
+
+
+static func build(root: Node3D, seed: int, opts: Dictionary = {}) -> void:
 	var rng := RandomNumberGenerator.new()
 	rng.seed = seed
+
+	# ---- the two axes ------------------------------------------------------
+	var rite: String = String(opts.get("rite", "mid_step"))
+	var shell_mode: String = String(opts.get("shell", "eared"))
+	var twinned: bool = rite == "twinned"
+	var melted: bool = rite == "melted"
+	var swarmed: bool = rite == "swarmed"
+	var flooded: bool = rite == "flooded"
+	# a side stream, so the pose is bit-identical across every rite
+	var srng := RandomNumberGenerator.new()
+	srng.seed = seed ^ 0x5A17
+	var beads: RandomNumberGenerator = srng if swarmed else null
 
 	# ---- the paint ---------------------------------------------------------
 	var kind: int = rng.randi_range(0, 3)
@@ -172,6 +204,8 @@ static func build(root: Node3D, seed: int) -> void:
 		var mi: MeshInstance3D = _add(root, sph, mat_skin)
 		var sy: float = 0.062 * body_k / 0.10
 		mi.transform = Transform3D(Basis(rb.x * (half_w / 0.10), rb.y * sy, rb.z * (half_d / 0.10)), q)
+		if swarmed:
+			_scatter(mi, srng, 0.56, 0.092 * body_k)
 
 	var p_hip: Vector3 = pts[0]
 	var p_top: Vector3 = pts[n_spine - 1]
@@ -191,6 +225,8 @@ static func build(root: Node3D, seed: int) -> void:
 		var pm: MeshInstance3D = _add(root, pec, mat_skin)
 		var pp: Vector3 = p_chest + b_chest * Vector3(sd * 0.062 * body_k, 0.004, -0.062 * body_k)
 		pm.transform = Transform3D(Basis(b_chest.x * 1.18, b_chest.y * 0.72, b_chest.z * 0.62), pp)
+		if swarmed:
+			_scatter(pm, srng, 0.60, 0.080 * body_k)
 
 	# seat and hip pads
 	for sgn in [-1.0, 1.0]:
@@ -208,14 +244,17 @@ static func build(root: Node3D, seed: int) -> void:
 		var dm: MeshInstance3D = _add(root, pad, mat_skin)
 		var dp: Vector3 = p_hip + b_hip * Vector3(sd * 0.082 * body_k, -0.052, 0.0)
 		dm.transform = Transform3D(Basis(b_hip.x * 0.95, b_hip.y * 0.95, b_hip.z * 1.0), dp)
+		if swarmed:
+			_scatter(gm, srng, 0.62, 0.074 * body_k)
+			_scatter(dm, srng, 0.62, 0.074 * body_k)
 
 	# ---- neck and head -----------------------------------------------------
 	var neck_dir: Vector3 = (Vector3(sin(head_yaw) * 0.12, 1.0, -0.10 - sin(head_tilt) * 0.2)).normalized()
 	var neck_a: Vector3 = p_top + Vector3(0.0, 0.015, 0.0)
 	var neck_b: Vector3 = neck_a + neck_dir * (0.085 * body_k)
-	_bone(root, neck_a, neck_b, 0.049 * body_k, 0.044 * body_k, mat_skin)
+	_bone(root, neck_a, neck_b, 0.049 * body_k, 0.044 * body_k, mat_skin, beads)
 	var neck_c: Vector3 = neck_b + neck_dir * (0.030 * body_k)
-	_bone(root, neck_b, neck_c, 0.044 * body_k, 0.041 * body_k, mat_skin)
+	_bone(root, neck_b, neck_c, 0.044 * body_k, 0.041 * body_k, mat_skin, beads)
 
 	var hb: Basis = Basis(Vector3.UP, twist + head_yaw) * Basis(Vector3.RIGHT, head_tilt)
 	var head_c: Vector3 = neck_c + hb * Vector3(0.0, 0.072 * body_k, -0.012)
@@ -267,6 +306,7 @@ static func build(root: Node3D, seed: int) -> void:
 	# ---- legs --------------------------------------------------------------
 	var thigh_l: float = 0.405 * body_k
 	var shin_l: float = 0.392 * body_k
+	var feet_mid: Vector3 = Vector3.ZERO
 	for side_i in range(2):
 		var sd: float = -1.0 if side_i == 0 else 1.0
 		var weight: bool = absf(sd - stand) < 0.5
@@ -284,10 +324,11 @@ static func build(root: Node3D, seed: int) -> void:
 			d_shin = Vector3(sd * 0.03, -0.86, rng.randf_range(0.36, 0.52)).normalized()
 		var knee: Vector3 = hip_j + d_thigh * thigh_l
 		var ankle: Vector3 = knee + d_shin * shin_l
+		feet_mid += ankle * 0.5
 
 		var mid_t: Vector3 = (hip_j + knee) * 0.5 + Vector3(sd * 0.012, 0.0, -0.012)
-		_bone(root, hip_j, mid_t, 0.085 * body_k, 0.072 * body_k, mat_skin)
-		_bone(root, mid_t, knee, 0.072 * body_k, 0.055 * body_k, mat_skin)
+		_bone(root, hip_j, mid_t, 0.085 * body_k, 0.072 * body_k, mat_skin, beads)
+		_bone(root, mid_t, knee, 0.072 * body_k, 0.055 * body_k, mat_skin, beads)
 		var kn := SphereMesh.new()
 		kn.radius = 0.056 * body_k
 		kn.height = 0.112 * body_k
@@ -295,8 +336,8 @@ static func build(root: Node3D, seed: int) -> void:
 		knm.transform = Transform3D(Basis(), knee)
 
 		var mid_s: Vector3 = (knee + ankle) * 0.5 + Vector3(0.0, 0.0, 0.016)
-		_bone(root, knee, mid_s, 0.055 * body_k, 0.049 * body_k, mat_skin)
-		_bone(root, mid_s, ankle, 0.049 * body_k, 0.033 * body_k, mat_skin)
+		_bone(root, knee, mid_s, 0.055 * body_k, 0.049 * body_k, mat_skin, beads)
+		_bone(root, mid_s, ankle, 0.049 * body_k, 0.033 * body_k, mat_skin, beads)
 		var an := SphereMesh.new()
 		an.radius = 0.036 * body_k
 		an.height = 0.072 * body_k
@@ -366,8 +407,8 @@ static func build(root: Node3D, seed: int) -> void:
 
 		var bow_v: Vector3 = Vector3(0.0, 0.014, -0.010) * (1.0 if sw else -1.0)
 		var mid_u: Vector3 = (sh_pt + elbow) * 0.5 + bow_v
-		_bone(root, sh_pt, mid_u, 0.055 * body_k, 0.048 * body_k, mat_skin)
-		_bone(root, mid_u, elbow, 0.048 * body_k, 0.039 * body_k, mat_skin)
+		_bone(root, sh_pt, mid_u, 0.055 * body_k, 0.048 * body_k, mat_skin, beads)
+		_bone(root, mid_u, elbow, 0.048 * body_k, 0.039 * body_k, mat_skin, beads)
 		var el := SphereMesh.new()
 		el.radius = 0.040 * body_k
 		el.height = 0.080 * body_k
@@ -375,8 +416,8 @@ static func build(root: Node3D, seed: int) -> void:
 		elm.transform = Transform3D(Basis(), elbow)
 
 		var mid_f: Vector3 = (elbow + wrist) * 0.5 + bow_v * 0.6
-		_bone(root, elbow, mid_f, 0.042 * body_k, 0.037 * body_k, mat_skin)
-		_bone(root, mid_f, wrist, 0.037 * body_k, 0.026 * body_k, mat_skin)
+		_bone(root, elbow, mid_f, 0.042 * body_k, 0.037 * body_k, mat_skin, beads)
+		_bone(root, mid_f, wrist, 0.037 * body_k, 0.026 * body_k, mat_skin, beads)
 		var wr := SphereMesh.new()
 		wr.radius = 0.028 * body_k
 		wr.height = 0.056 * body_k
@@ -384,6 +425,14 @@ static func build(root: Node3D, seed: int) -> void:
 		wrm.transform = Transform3D(Basis(), wrist)
 
 		_hand(root, wrist, d_fo, sd, curl, body_k, mat_skin)
+
+	# ---- rite: the second dancer growing out of the back -------------------
+	# every draw from here on is off the SIDE stream, and lands after the last
+	# bead was flung, so the swarm is bit-identical whatever the shell is.
+	var twin_tf := Transform3D()
+	if twinned:
+		var twin_root: Vector3 = p_chest + b_chest * Vector3(0.0, 0.020, 0.072 * body_k)
+		twin_tf = _twin_body(root, twin_root, yaw_chest, body_k, srng, mat_skin, mat_eye, mat_lip)
 
 	# ---- the mask ----------------------------------------------------------
 	var mask_tf := Transform3D(hb, head_c)
@@ -435,8 +484,18 @@ static func build(root: Node3D, seed: int) -> void:
 		solid.append(rows)
 
 	var mask_mesh: ArrayMesh = _shell(fr, bk, solid, MASK_NU, MASK_NV)
-	var mm: MeshInstance3D = _add(root, mask_mesh, mat_mask)
-	mm.transform = mask_tf
+	if shell_mode == "shoal":
+		# the one shell broken into a school of small ones, the face left bare
+		_shoal(root, mask_mesh, mask_tf, mat_mask, srng, body_k)
+	elif shell_mode == "cage":
+		# fossilised: the flesh of the shell stripped to hoops and ribs
+		_cage(root, mask_tf, mat_mask, m_hw, m_ht, m_hb, m_dep, m_arc, body_k)
+	else:
+		var mm: MeshInstance3D = _add(root, mask_mesh, mat_mask)
+		mm.transform = mask_tf
+	if twinned:
+		var tmm: MeshInstance3D = _add(root, mask_mesh, mat_mask)
+		tmm.transform = twin_tf
 
 	# painted blue lid, a strip riding the arc above each eye hole
 	for sgn in [-1.0, 1.0]:
@@ -470,7 +529,10 @@ static func build(root: Node3D, seed: int) -> void:
 		lidm.transform = mask_tf
 
 	# ---- ears, or a beak ---------------------------------------------------
-	if beaked:
+	# shoal and cage have no shell left to carry them; bloom opens the temples
+	# into flowers instead, so only the two horned/eared shells wear these.
+	var wear_ears: bool = shell_mode == "eared" or shell_mode == "antlered"
+	if beaked and wear_ears:
 		var beak_l: float = rng.randf_range(0.075, 0.115) * body_k
 		var beak := CylinderMesh.new()
 		beak.bottom_radius = 0.034 * body_k
@@ -489,7 +551,7 @@ static func build(root: Node3D, seed: int) -> void:
 			var nm: MeshInstance3D = _add(root, nub, mat_mask)
 			var np: Vector3 = _mask_pt(sd * 0.86, 0.74, m_hw, m_ht, m_hb, m_dep, m_arc, 0.006)
 			nm.transform = mask_tf * Transform3D(Basis(), np)
-	else:
+	elif wear_ears:
 		var ear_len: float = rng.randf_range(0.098, 0.152) * body_k
 		var ear_hw: float = rng.randf_range(0.034, 0.050) * body_k
 		var ear_cup: float = rng.randf_range(0.10, 0.26)
@@ -548,6 +610,29 @@ static func build(root: Node3D, seed: int) -> void:
 			var pad_mesh: ArrayMesh = _shell(pf, pb, esolid, nu, nv)
 			var padm: MeshInstance3D = _add(root, pad_mesh, mat_inner)
 			padm.transform = mask_tf
+
+	if shell_mode == "antlered":
+		_antlers(root, mask_tf, mat_mask, srng, m_hw, m_ht, m_hb, m_dep, m_arc, body_k)
+	elif shell_mode == "bloom":
+		_bloom(root, mask_tf, m_hw, m_ht, m_hb, m_dep, m_arc, body_k, srng, mat_inner, mat_lid)
+
+	# ---- rite: the pour, and the sag --------------------------------------
+	if flooded:
+		var mat_resin := StandardMaterial3D.new()
+		mat_resin.albedo_color = Color("#0D0B11")
+		mat_resin.roughness = 0.10
+		mat_resin.metallic = 0.0
+		mat_resin.clearcoat_enabled = true
+		mat_resin.clearcoat = 0.92
+		mat_resin.clearcoat_roughness = 0.06
+		var pre: AABB = _union_aabb(root)
+		var pour_x: float = (p_hip.x + feet_mid.x) * 0.5
+		var pour_z: float = (p_hip.z + feet_mid.z) * 0.5
+		var pour_top: float = p_hip.y + 0.045 * body_k
+		_pour(root, mat_resin, srng, pour_x, pour_z, pre.position.y, pour_top, 0.290 * body_k, 0.150 * body_k)
+	if melted:
+		_melt(root, 0.82)
+		_pool(root, mat_skin, srng, 0.30 * body_k)
 
 	# ---- settle: fit, centre, floor ---------------------------------------
 	var box: AABB = _union_aabb(root)
@@ -637,7 +722,11 @@ static func _hand(root: Node3D, wrist: Vector3, fdir: Vector3, sd: float, curl: 
 	tm.transform = Transform3D(_basis_y_to(td), (ta + tb) * 0.5)
 
 
-static func _bone(root: Node3D, a: Vector3, b: Vector3, r0: float, r1: float, mat: StandardMaterial3D) -> MeshInstance3D:
+static func _bone(root: Node3D, a: Vector3, b: Vector3, r0: float, r1: float, mat: StandardMaterial3D, beads: RandomNumberGenerator = null) -> MeshInstance3D:
+	# hand a stream in and the bone does not hold: it comes apart into a flung
+	# string of beads that keeps the limb's line but not its solidity.
+	if beads != null:
+		return _bead_string(root, a, b, r0, r1, mat, beads)
 	var d: Vector3 = b - a
 	var ln: float = maxf(d.length(), 0.004)
 	var cyl := CylinderMesh.new()
@@ -696,6 +785,12 @@ static func _mask_nrm(fu: float, fv: float, arc: float) -> Vector3:
 static func _shell(fr: Array, bk: Array, solid: Array, nu: int, nv: int) -> ArrayMesh:
 	var st := SurfaceTool.new()
 	st.begin(Mesh.PRIMITIVE_TRIANGLES)
+	_shell_into(st, fr, bk, solid, nu, nv)
+	st.generate_normals()
+	return st.commit()
+
+
+static func _shell_into(st: SurfaceTool, fr: Array, bk: Array, solid: Array, nu: int, nv: int) -> void:
 	for i in range(nu):
 		for j in range(nv):
 			if not _solid_at(solid, nu, nv, i, j):
@@ -722,8 +817,6 @@ static func _shell(fr: Array, bk: Array, solid: Array, nu: int, nv: int) -> Arra
 				_rim(st, f00, f10, b10, b00, mid)
 			if not _solid_at(solid, nu, nv, i, j + 1):
 				_rim(st, f01, f11, b11, b01, mid)
-	st.generate_normals()
-	return st.commit()
 
 
 static func _grid(g: Array, i: int, j: int) -> Vector3:
@@ -905,3 +998,485 @@ static func _union_aabb(root: Node3D) -> AABB:
 		else:
 			box = box.merge(wb)
 	return box
+
+
+# ---------------------------------------------------------------------------
+# rite — what the dance does to the flesh
+
+## swarmed: one solid part becomes a small cloud. The original is kept but
+## shrunk and nudged off its seat, and two more beads are flung along a dealt
+## direction, so a part reads as flesh that has just let go of itself.
+static func _scatter(mi: MeshInstance3D, rng: RandomNumberGenerator, amount: float, radius: float) -> void:
+	var host: Node3D = mi.get_parent() as Node3D
+	if host == null:
+		return
+	var mat: StandardMaterial3D = mi.material_override as StandardMaterial3D
+	var tf: Transform3D = mi.transform
+	var fling: Vector3 = Vector3(rng.randf_range(-1.0, 1.0), rng.randf_range(-0.55, 0.90), rng.randf_range(-1.0, 1.0)).normalized()
+	var keep: float = 1.0 - 0.44 * amount
+	mi.transform = Transform3D(tf.basis.scaled(Vector3(keep, keep, keep)), tf.origin + fling * (radius * amount * 0.34))
+	for k in range(2):
+		var fk: float = float(k) + 1.0
+		var br: float = radius * (0.42 - 0.11 * float(k)) * rng.randf_range(0.72, 1.24)
+		var bead := SphereMesh.new()
+		bead.radius = br
+		bead.height = br * 2.0
+		bead.radial_segments = 10
+		bead.rings = 6
+		var bm: MeshInstance3D = _add(host, bead, mat)
+		var off: Vector3 = fling * (radius * amount * (0.62 + 0.70 * fk))
+		off += Vector3(rng.randf_range(-1.0, 1.0), rng.randf_range(-1.0, 1.0), rng.randf_range(-1.0, 1.0)) * (radius * 0.34)
+		var bb: Basis = Basis().scaled(Vector3(1.0, 0.84, 1.0))
+		bm.transform = Transform3D(bb, tf.origin + off)
+
+
+## swarmed: a bone with no bone in it. Four beads walk the line a-to-b,
+## swinging further off it the further along they go, and the last overshoots
+## the joint — the limb keeps its gesture and loses its solidity.
+static func _bead_string(root: Node3D, a: Vector3, b: Vector3, r0: float, r1: float, mat: StandardMaterial3D, rng: RandomNumberGenerator) -> MeshInstance3D:
+	var d: Vector3 = b - a
+	var ln: float = maxf(d.length(), 0.004)
+	var axis: Vector3 = d / ln
+	var side: Vector3 = axis.cross(Vector3.UP)
+	if side.length() < 0.001:
+		side = axis.cross(Vector3.FORWARD)
+	side = side.normalized()
+	var other: Vector3 = axis.cross(side).normalized()
+	var throw_k: float = rng.randf_range(0.55, 1.05)
+	var phase: float = rng.randf_range(0.0, TAU)
+	var n: int = 4
+	var head: MeshInstance3D = null
+	for k in range(n):
+		var fk: float = (float(k) + 0.5) / float(n)
+		var swell: float = 0.84 + 0.36 * sin(fk * PI)
+		var rr: float = lerpf(r0, r1, fk) * swell
+		var bead := SphereMesh.new()
+		bead.radius = rr
+		bead.height = rr * 2.0
+		bead.radial_segments = 10
+		bead.rings = 6
+		var bm: MeshInstance3D = _add(root, bead, mat)
+		var drift: float = throw_k * ln * 0.32 * fk
+		var swing: Vector3 = side * (sin(fk * 4.2 + phase) * drift) + other * (cos(fk * 3.1 + phase * 1.7) * drift * 0.72)
+		var along: float = lerpf(0.05, 1.12, fk)
+		var bb: Basis = Basis().scaled(Vector3(1.0, 0.88, 1.0))
+		bm.transform = Transform3D(bb, a + axis * (ln * along) + swing)
+		if head == null:
+			head = bm
+	return head
+
+
+## twinned: a second dancer grown backward out of the chest. Its own spine
+## arcs up and behind the first, carrying a head that faces the other way and
+## two more arms — two heads, four arms, one pelvis.
+static func _twin_body(root: Node3D, chest: Vector3, yaw: float, body_k: float, rng: RandomNumberGenerator, mat_skin: StandardMaterial3D, mat_eye: StandardMaterial3D, mat_lip: StandardMaterial3D) -> Transform3D:
+	var tk: float = body_k * 0.80
+	var rise: float = rng.randf_range(0.55, 0.78)
+	var up_d: Vector3 = Vector3(sin(yaw) * 0.20, rise, 1.0).normalized()
+	var side_d: Vector3 = Vector3(cos(yaw), 0.0, -sin(yaw)).normalized()
+	var spine_l: float = 0.300 * tk
+	var n: int = 8
+	for k in range(n):
+		var fk: float = float(k) / float(n - 1)
+		var w: float = _torso_w(0.22 + 0.70 * fk) * tk * 0.88
+		var dp: float = _torso_d(0.22 + 0.70 * fk) * tk * 0.88
+		var q: Vector3 = chest + up_d * (spine_l * fk) + side_d * (sin(fk * PI) * 0.026 * tk)
+		var sph := SphereMesh.new()
+		sph.radius = 0.10
+		sph.height = 0.20
+		sph.radial_segments = 18
+		sph.rings = 10
+		var rb := Basis(Vector3.UP, yaw + fk * 0.42)
+		var mi: MeshInstance3D = _add(root, sph, mat_skin)
+		var sy: float = 0.058 * tk / 0.10
+		mi.transform = Transform3D(Basis(rb.x * (w / 0.10), rb.y * sy, rb.z * (dp / 0.10)), q)
+
+	var top_pt: Vector3 = chest + up_d * spine_l
+	var neck_b: Vector3 = top_pt + up_d * (0.058 * tk)
+	_bone(root, top_pt, neck_b, 0.044 * tk, 0.040 * tk, mat_skin)
+	var neck_c: Vector3 = neck_b + up_d * (0.028 * tk)
+	_bone(root, neck_b, neck_c, 0.040 * tk, 0.037 * tk, mat_skin)
+
+	var thb: Basis = Basis(Vector3.UP, yaw + PI + rng.randf_range(-0.32, 0.32)) * Basis(Vector3.RIGHT, rng.randf_range(-0.24, 0.08))
+	var head_c: Vector3 = neck_c + Vector3(0.0, 0.068 * tk, 0.0) + thb * Vector3(0.0, 0.0, -0.014 * tk)
+
+	var skull := SphereMesh.new()
+	skull.radius = 0.096 * tk
+	skull.height = 0.192 * tk
+	skull.radial_segments = 20
+	skull.rings = 12
+	var skm: MeshInstance3D = _add(root, skull, mat_skin)
+	skm.transform = Transform3D(Basis(thb.x * 0.92, thb.y * 1.08, thb.z * 0.99), head_c)
+
+	var jaw := SphereMesh.new()
+	jaw.radius = 0.068 * tk
+	jaw.height = 0.136 * tk
+	var jm: MeshInstance3D = _add(root, jaw, mat_skin)
+	jm.transform = Transform3D(Basis(thb.x * 0.90, thb.y * 0.80, thb.z * 1.00), head_c + thb * Vector3(0.0, -0.054 * tk, -0.020 * tk))
+
+	for sgn in [-1.0, 1.0]:
+		var sd: float = sgn
+		var eye := SphereMesh.new()
+		eye.radius = 0.018 * tk
+		eye.height = 0.036 * tk
+		var em: MeshInstance3D = _add(root, eye, mat_eye)
+		em.transform = Transform3D(thb, head_c + thb * Vector3(sd * 0.039 * tk, 0.008 * tk, -0.080 * tk))
+
+	for sgn in [-1.0, 1.0]:
+		var sd: float = sgn
+		var lip := SphereMesh.new()
+		lip.radius = 0.016 * tk
+		lip.height = 0.032 * tk
+		var lm: MeshInstance3D = _add(root, lip, mat_lip)
+		var ly: float = -0.066 * tk + sd * 0.010 * tk
+		lm.transform = Transform3D(Basis(thb.x * 1.35, thb.y * 0.55, thb.z * 0.65), head_c + thb * Vector3(0.0, ly, -0.076 * tk))
+
+	var sh_ring: Vector3 = top_pt - up_d * (0.030 * tk)
+	var upper_l: float = 0.246 * tk
+	var fore_l: float = 0.228 * tk
+	for side_i in range(2):
+		var sd: float = -1.0 if side_i == 0 else 1.0
+		var out_d: Vector3 = side_d * sd
+		var sh_pt: Vector3 = sh_ring + out_d * (0.135 * tk)
+		var d_up: Vector3 = (out_d * rng.randf_range(0.55, 0.86) + Vector3.UP * rng.randf_range(-0.22, 0.44) + Vector3(0.0, 0.0, 0.40)).normalized()
+		var d_fo: Vector3 = (out_d * rng.randf_range(0.18, 0.58) + Vector3.UP * rng.randf_range(-0.92, -0.28) + Vector3(0.0, 0.0, 0.30)).normalized()
+		var elbow: Vector3 = sh_pt + d_up * upper_l
+		var wrist: Vector3 = elbow + d_fo * fore_l
+
+		var delt := SphereMesh.new()
+		delt.radius = 0.058 * tk
+		delt.height = 0.116 * tk
+		var dlm: MeshInstance3D = _add(root, delt, mat_skin)
+		dlm.transform = Transform3D(Basis(), sh_pt)
+
+		var mid_u: Vector3 = (sh_pt + elbow) * 0.5 + Vector3(0.0, 0.012 * tk, 0.010 * tk)
+		_bone(root, sh_pt, mid_u, 0.052 * tk, 0.046 * tk, mat_skin)
+		_bone(root, mid_u, elbow, 0.046 * tk, 0.038 * tk, mat_skin)
+		var el := SphereMesh.new()
+		el.radius = 0.038 * tk
+		el.height = 0.076 * tk
+		var elm: MeshInstance3D = _add(root, el, mat_skin)
+		elm.transform = Transform3D(Basis(), elbow)
+
+		var mid_f: Vector3 = (elbow + wrist) * 0.5 + Vector3(0.0, 0.008 * tk, 0.008 * tk)
+		_bone(root, elbow, mid_f, 0.040 * tk, 0.035 * tk, mat_skin)
+		_bone(root, mid_f, wrist, 0.035 * tk, 0.025 * tk, mat_skin)
+		var wr := SphereMesh.new()
+		wr.radius = 0.027 * tk
+		wr.height = 0.054 * tk
+		var wrm: MeshInstance3D = _add(root, wr, mat_skin)
+		wrm.transform = Transform3D(Basis(), wrist)
+
+		_hand(root, wrist, d_fo, sd, rng.randf_range(-0.22, 0.52), tk, mat_skin)
+
+	return Transform3D(thb, head_c)
+
+
+## melted: everything sags. Height is remapped through a power curve so the
+## whole figure settles toward the floor, and the lower a part ends up the
+## wider it spreads and the flatter it is squashed — the legs go first, the
+## hips follow, and the pose survives only as a smear of itself.
+static func _melt(root: Node3D, amount: float) -> void:
+	var box: AABB = _union_aabb(root)
+	var top: float = maxf(box.size.y, 0.05)
+	var foot: float = box.position.y
+	var cx: float = box.position.x + box.size.x * 0.5
+	var cz: float = box.position.z + box.size.z * 0.5
+	# the power curve alone eats the legs and leaves the head standing at 87%
+	# of its height, which is a figure with melted legs and not a melted
+	# figure — so the whole remap is squashed on top of it.
+	var squash: float = lerpf(1.0, 0.62, amount)
+	for ch in root.get_children():
+		if not (ch is MeshInstance3D):
+			continue
+		var cm: MeshInstance3D = ch
+		var tf: Transform3D = cm.transform
+		var h: float = clampf((tf.origin.y - foot) / top, 0.0, 1.0)
+		var curve: float = pow(h, 2.35)
+		var sag: float = lerpf(h, curve, amount) * squash
+		var low: float = (1.0 - sag) * (1.0 - sag)
+		var push: float = 1.0 + amount * 0.95 * low
+		var flat: float = lerpf(1.0, 0.34, amount * low)
+		var wide: float = lerpf(1.0, 1.42, amount * low)
+		var ny: float = foot + sag * top
+		var nx: float = cx + (tf.origin.x - cx) * push
+		var nz: float = cz + (tf.origin.z - cz) * push
+		cm.transform = Transform3D(tf.basis.scaled(Vector3(wide, flat, wide)), Vector3(nx, ny, nz))
+
+
+## melted: what has already run off the body — a flat disc under the sag with
+## seven lobes creeping out of it.
+static func _pool(root: Node3D, mat: StandardMaterial3D, rng: RandomNumberGenerator, radius: float) -> void:
+	var box: AABB = _union_aabb(root)
+	var cx: float = box.position.x + box.size.x * 0.5
+	var cz: float = box.position.z + box.size.z * 0.5
+	var fy: float = box.position.y
+	var disc := SphereMesh.new()
+	disc.radius = radius
+	disc.height = radius * 2.0
+	disc.radial_segments = 24
+	disc.rings = 10
+	var dm: MeshInstance3D = _add(root, disc, mat)
+	dm.transform = Transform3D(Basis().scaled(Vector3(1.26, 0.13, 1.10)), Vector3(cx, fy + radius * 0.10, cz))
+	var n: int = 7
+	for k in range(n):
+		var fk: float = float(k) / float(n)
+		var ang: float = fk * TAU + rng.randf_range(-0.30, 0.30)
+		var rr: float = radius * rng.randf_range(0.55, 1.05)
+		var lr: float = radius * rng.randf_range(0.26, 0.50)
+		var lobe := SphereMesh.new()
+		lobe.radius = lr
+		lobe.height = lr * 2.0
+		lobe.radial_segments = 16
+		lobe.rings = 8
+		var lm: MeshInstance3D = _add(root, lobe, mat)
+		lm.transform = Transform3D(Basis().scaled(Vector3(1.0, 0.15, 1.0)), Vector3(cx + cos(ang) * rr, fy + lr * 0.11, cz + sin(ang) * rr))
+
+
+## flooded: a black resin mound poured around the legs, widest where it meets
+## the floor and closing on the body at the hip. Twelve stacked slabs, a lip
+## where it laps the waist, tongues spreading on the ground and drips down the
+## outside — the lower body is inside it, and none of it shows.
+static func _pour(root: Node3D, mat: StandardMaterial3D, rng: RandomNumberGenerator, cx: float, cz: float, floor_y: float, top_y: float, base_r: float, top_r: float) -> void:
+	var span: float = maxf(top_y - floor_y, 0.06)
+	var wobble: float = rng.randf_range(0.010, 0.024)
+	var lean: float = rng.randf_range(-1.0, 1.0)
+	var n: int = 12
+	for k in range(n):
+		var f0: float = float(k) / float(n)
+		var f1: float = float(k + 1) / float(n)
+		var r0: float = top_r + (base_r - top_r) * pow(1.0 - f0, 0.72)
+		var r1: float = top_r + (base_r - top_r) * pow(1.0 - f1, 0.72)
+		var slab := CylinderMesh.new()
+		slab.bottom_radius = r0
+		slab.top_radius = r1
+		slab.height = span / float(n) + 0.004
+		slab.radial_segments = 20
+		var sm: MeshInstance3D = _add(root, slab, mat)
+		var yy: float = floor_y + span * (f0 + f1) * 0.5
+		var dx: float = lean * wobble * sin(f0 * 5.0)
+		var dz: float = wobble * cos(f0 * 4.0 + 1.2)
+		sm.transform = Transform3D(Basis().scaled(Vector3(1.0, 1.0, 1.28)), Vector3(cx + dx, yy, cz + dz))
+
+	var lip := TorusMesh.new()
+	lip.inner_radius = top_r * 1.00
+	lip.outer_radius = top_r * 1.34
+	lip.rings = 24
+	lip.ring_segments = 10
+	var lipm: MeshInstance3D = _add(root, lip, mat)
+	lipm.transform = Transform3D(Basis().scaled(Vector3(1.0, 1.0, 1.28)), Vector3(cx, top_y - top_r * 0.10, cz))
+
+	var nt: int = 5
+	for k in range(nt):
+		var fk: float = float(k) / float(nt)
+		var ang: float = fk * TAU + rng.randf_range(-0.35, 0.35)
+		var reach: float = base_r * rng.randf_range(0.85, 1.42)
+		var lr: float = base_r * rng.randf_range(0.26, 0.44)
+		var lobe := SphereMesh.new()
+		lobe.radius = lr
+		lobe.height = lr * 2.0
+		lobe.radial_segments = 14
+		lobe.rings = 7
+		var tm: MeshInstance3D = _add(root, lobe, mat)
+		tm.transform = Transform3D(Basis().scaled(Vector3(1.0, 0.22, 1.0)), Vector3(cx + cos(ang) * reach, floor_y + lr * 0.16, cz + sin(ang) * reach))
+
+	var nd: int = 3
+	for k in range(nd):
+		var fk: float = float(k) / float(nd)
+		var ang: float = fk * TAU + rng.randf_range(0.0, 1.40)
+		var hh: float = span * rng.randf_range(0.30, 0.58)
+		var dy: float = floor_y + span * rng.randf_range(0.22, 0.46)
+		var at: float = clampf((dy - floor_y) / span, 0.0, 1.0)
+		var rr: float = top_r + (base_r - top_r) * pow(1.0 - at, 0.72)
+		var drip := CapsuleMesh.new()
+		drip.radius = base_r * rng.randf_range(0.06, 0.11)
+		drip.height = hh
+		drip.radial_segments = 10
+		drip.rings = 4
+		var dpm: MeshInstance3D = _add(root, drip, mat)
+		dpm.transform = Transform3D(Basis(), Vector3(cx + cos(ang) * rr * 1.02, dy, cz + sin(ang) * rr * 1.02))
+
+
+# ---------------------------------------------------------------------------
+# shell — what the mask is
+
+## antlered: twelve horns off the shell's rim, tallest over the crown, each
+## three tapering segments that bend backward over the head as they rise.
+static func _antlers(root: Node3D, mask_tf: Transform3D, mat: StandardMaterial3D, rng: RandomNumberGenerator, hw: float, ht: float, hb: float, dep: float, arc: float, body_k: float) -> void:
+	var n: int = 12
+	for k in range(n):
+		var fk: float = float(k) / float(n - 1)
+		var wave: float = sin(PI * fk)
+		var fu: float = -0.94 + 1.88 * fk
+		var fv: float = 0.58 + 0.36 * wave
+		var anchor: Vector3 = _mask_pt(fu, fv, hw, ht, hb, dep, arc, 0.0)
+		var nrm: Vector3 = _mask_nrm(fu, fv, arc)
+		var d: Vector3 = (nrm * 0.42 + Vector3.UP * (0.90 + 0.30 * wave) + Vector3(fu * 0.62, 0.0, 0.0)).normalized()
+		var seg_l: float = (0.038 + 0.022 * wave) * body_k * rng.randf_range(0.86, 1.14)
+		var r_at: float = (0.0150 - 0.0030 * absf(fu)) * body_k
+		var a: Vector3 = anchor
+		for s in range(3):
+			var b: Vector3 = a + d * seg_l
+			var r_top: float = r_at * 0.60
+			var horn := CylinderMesh.new()
+			horn.bottom_radius = r_at
+			horn.top_radius = r_top
+			horn.height = maxf(seg_l, 0.004)
+			horn.radial_segments = 10
+			var hm: MeshInstance3D = _add(root, horn, mat)
+			hm.transform = mask_tf * Transform3D(_basis_y_to(b - a), (a + b) * 0.5)
+			a = b
+			r_at = r_top
+			seg_l *= 0.84
+			var bend: Vector3 = Vector3(fu * 0.34, -0.30, 0.42 + rng.randf_range(-0.10, 0.18))
+			d = (d + bend).normalized()
+
+
+## shoal: the one shell gone to eighteen small ones, circling a bare face on
+## three staggered rings, each rolled to face along its orbit.
+static func _shoal(root: Node3D, mesh: ArrayMesh, mask_tf: Transform3D, mat: StandardMaterial3D, rng: RandomNumberGenerator, body_k: float) -> void:
+	var n: int = 18
+	var roll: float = rng.randf_range(0.0, TAU)
+	for k in range(n):
+		var fk: float = float(k) / float(n)
+		var ang: float = roll + fk * TAU + rng.randf_range(-0.09, 0.09)
+		var band: float = float(k % 3)
+		var rr: float = (0.130 + 0.030 * band) * body_k * rng.randf_range(0.94, 1.10)
+		var sk: float = (0.30 - 0.055 * band) * rng.randf_range(0.86, 1.14)
+		var zz: float = (-0.022 - 0.048 * band) * body_k
+		var q: Vector3 = Vector3(cos(ang) * rr * 1.22, sin(ang) * rr * 0.94 - 0.012 * body_k, zz)
+		var bb: Basis = Basis(Vector3(0.0, 0.0, 1.0), ang + PI * 0.5) * Basis(Vector3.UP, rng.randf_range(-0.55, 0.55)) * Basis(Vector3.RIGHT, rng.randf_range(-0.40, 0.40))
+		var mi: MeshInstance3D = _add(root, mesh, mat)
+		mi.transform = mask_tf * Transform3D(bb.scaled(Vector3(sk, sk, sk)), q)
+
+
+## cage: the shell fossilised. Three nested lattices, each the same surface
+## stripped to four hoops and five ribs and grown a little larger than the
+## last, so the face is behind bars and still readable through them.
+static func _cage(root: Node3D, mask_tf: Transform3D, mat: StandardMaterial3D, hw: float, ht: float, hb: float, dep: float, arc: float, body_k: float) -> void:
+	var grows: Array = [1.00, 1.15, 1.32]
+	var thicks: Array = [0.0060, 0.0068, 0.0078]
+	var shifts: Array = [0.0, 0.11, -0.09]
+	for k in range(3):
+		var grow: float = grows[k]
+		var th_k: float = thicks[k]
+		var sh: float = shifts[k]
+		var th: float = th_k * body_k
+		var st := SurfaceTool.new()
+		st.begin(Mesh.PRIMITIVE_TRIANGLES)
+		var n_hoop: int = 4
+		for h in range(n_hoop):
+			var fh: float = float(h) / float(n_hoop - 1)
+			var fv0: float = lerpf(-0.80, 0.92, fh) + sh * 0.10
+			_band(st, true, fv0, 0.050, -1.0, 1.0, 16, hw, ht, hb, dep, arc, th, grow)
+		var n_rib: int = 5
+		for r in range(n_rib):
+			var frr: float = float(r) / float(n_rib - 1)
+			var fu0: float = lerpf(-0.88, 0.88, frr) + sh * 0.08
+			_band(st, false, fu0, 0.055, -0.86, 0.96, 12, hw, ht, hb, dep, arc, th, grow)
+		st.generate_normals()
+		var bars: ArrayMesh = st.commit()
+		var bm: MeshInstance3D = _add(root, bars, mat)
+		bm.transform = mask_tf
+
+
+## one bar of a lattice, laid on the mask surface and appended to a shared
+## SurfaceTool: a strip one cell wide, front and back and stitched at the rim,
+## running along fu (a hoop) or along fv (a rib).
+static func _band(st: SurfaceTool, along_u: bool, c: float, halfw: float, a0: float, a1: float, segs: int, hw: float, ht: float, hb: float, dep: float, arc: float, th: float, grow: float) -> void:
+	var fr: Array = []
+	var bk: Array = []
+	for i in range(segs + 1):
+		var rowf: Array = []
+		var rowb: Array = []
+		for j in range(2):
+			var fi: float = float(i) / float(segs)
+			var fj: float = float(j)
+			var av: float = lerpf(a0, a1, fi)
+			var cv: float = c - halfw + 2.0 * halfw * fj
+			var fu: float = av if along_u else cv
+			var fv: float = cv if along_u else av
+			rowf.append(_mask_pt(fu, fv, hw * grow, ht * grow, hb * grow, dep * grow, arc, th))
+			rowb.append(_mask_pt(fu, fv, hw * grow, ht * grow, hb * grow, dep * grow, arc, -th))
+		fr.append(rowf)
+		bk.append(rowb)
+	var solid: Array = []
+	for i in range(segs):
+		var rows: Array = [true]
+		solid.append(rows)
+	_shell_into(st, fr, bk, solid, segs, 1)
+
+
+## bloom: the shell opens. Both temples and the crown carry a nine-petalled
+## flower, each petal a cupped leaf tilted off the surface normal.
+static func _bloom(root: Node3D, mask_tf: Transform3D, hw: float, ht: float, hb: float, dep: float, arc: float, body_k: float, rng: RandomNumberGenerator, mat_petal: StandardMaterial3D, mat_core: StandardMaterial3D) -> void:
+	var rad: float = 0.082 * body_k
+	var petal: ArrayMesh = _petal_mesh(rad * 1.18, rad * 0.36, 0.42)
+	var spots: Array = [Vector2(-0.80, 0.62), Vector2(0.80, 0.62), Vector2(0.0, 0.99)]
+	for k in range(3):
+		var sp: Vector2 = spots[k]
+		var centre: Vector3 = _mask_pt(sp.x, sp.y, hw, ht, hb, dep, arc, 0.004)
+		var nrm: Vector3 = _mask_nrm(sp.x, sp.y, arc)
+		var up_k: float = 2.20 if k == 2 else 0.55
+		var face: Vector3 = (nrm + Vector3.UP * up_k).normalized()
+		_flower(root, mask_tf, centre, face, petal, mat_petal, mat_core, rng, rad)
+
+
+static func _flower(root: Node3D, tf: Transform3D, centre: Vector3, nrm: Vector3, petal: ArrayMesh, mat_petal: StandardMaterial3D, mat_core: StandardMaterial3D, rng: RandomNumberGenerator, rad: float) -> void:
+	var ref_v: Vector3 = Vector3.UP if absf(nrm.dot(Vector3.UP)) < 0.90 else Vector3.FORWARD
+	var ey: Vector3 = (ref_v - nrm * ref_v.dot(nrm)).normalized()
+	var ex: Vector3 = ey.cross(nrm).normalized()
+	var n: int = 9
+	var roll: float = rng.randf_range(0.0, TAU)
+	for k in range(n):
+		var fk: float = float(k) / float(n)
+		var ang: float = roll + fk * TAU
+		var out_d: Vector3 = (ex * cos(ang) + ey * sin(ang)).normalized()
+		var tilt: float = rng.randf_range(0.72, 1.06)
+		var grow: Vector3 = (out_d * sin(tilt) + nrm * cos(tilt)).normalized()
+		var px: Vector3 = grow.cross(nrm)
+		if px.length() < 0.001:
+			px = ex
+		px = px.normalized()
+		var pz: Vector3 = px.cross(grow).normalized()
+		var pm: MeshInstance3D = _add(root, petal, mat_petal)
+		pm.transform = tf * Transform3D(Basis(px, grow, pz), centre + nrm * (rad * 0.10) + out_d * (rad * 0.12))
+	var core := SphereMesh.new()
+	core.radius = rad * 0.30
+	core.height = rad * 0.60
+	core.radial_segments = 14
+	core.rings = 8
+	var cm: MeshInstance3D = _add(root, core, mat_core)
+	cm.transform = tf * Transform3D(Basis().scaled(Vector3(1.0, 1.0, 0.55)), centre + nrm * (rad * 0.16))
+
+
+## one petal, built once per flower and worn by all nine: a cupped leaf that
+## swells past its base and closes to a blunt point, through the same two-layer
+## shell builder as the mask itself.
+static func _petal_mesh(petal_l: float, petal_w: float, cup: float) -> ArrayMesh:
+	var nu: int = 6
+	var nv: int = 7
+	var th: float = petal_w * 0.10
+	var fr: Array = []
+	var bk: Array = []
+	for i in range(nu + 1):
+		var rowf: Array = []
+		var rowb: Array = []
+		for j in range(nv + 1):
+			var fu: float = -1.0 + 2.0 * float(i) / float(nu)
+			var fv: float = float(j) / float(nv)
+			var swell: float = sin(PI * pow(fv, 0.55))
+			var wid: float = petal_w * (0.16 + 0.92 * swell) * (1.0 - 0.55 * fv * fv)
+			var zz: float = cup * petal_w * fu * fu + 0.22 * petal_w * sin(PI * fv)
+			var lp := Vector3(fu * wid, fv * petal_l, zz)
+			rowf.append(lp + Vector3(0.0, 0.0, th))
+			rowb.append(lp - Vector3(0.0, 0.0, th))
+		fr.append(rowf)
+		bk.append(rowb)
+	var solid: Array = []
+	for i in range(nu):
+		var rows: Array = []
+		for j in range(nv):
+			rows.append(true)
+		solid.append(rows)
+	return _shell(fr, bk, solid, nu, nv)

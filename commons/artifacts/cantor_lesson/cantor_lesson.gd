@@ -4,16 +4,23 @@ var kind := "intervals"
 var source: Node3D
 var show_rule := false
 var history := true
+var hand_cut: Node3D
 
 func _ready() -> void:
 	source = get_parent()
 	_build_compact_console(["NEXT","BACK","HISTORY","GHOST","RESET","RULE"] if kind == "intervals" else ["CUT","LESS","DEPTH","LATEST","RESET","RULE"], "01 / MORE PIECES, LESS?" if kind == "intervals" else "02 / A GAP FOR WHOM?")
 	begin()
+	if kind == "intervals":
+		hand_cut = load("res://commons/artifacts/cantor_lesson/hand_cut.gd").new()
+		hand_cut.name = "HandCut"
+		hand_cut.position = Vector3(1.65, 0, 1.3)
+		add_child(hand_cut)
 	_use_hall_light.call_deferred()
 
 func begin() -> void:
+	if is_instance_valid(hand_cut) and hand_cut.held(): return
 	show_rule = false
-	history = true
+	history = kind != "intervals"
 	if kind == "intervals":
 		source.lesson_enabled = true
 		source.auto_start = false
@@ -32,6 +39,7 @@ func begin() -> void:
 		set_stage(1)
 
 func set_stage(level: int) -> void:
+	if is_instance_valid(hand_cut) and hand_cut.held(): return
 	if kind == "intervals":
 		source.reset()
 		for i in range(clampi(level,0,5)): source.step()
@@ -54,6 +62,8 @@ func apply_visibility() -> void:
 			piece.collision_mask = 1 if included else 0
 
 func act(id: String) -> void:
+	# A held control must never be reset or invalidated beneath the hand.
+	if is_instance_valid(hand_cut) and hand_cut.held(): return
 	if id == "RESET": begin(); return
 	if id == "RULE": show_rule = not show_rule; refresh(); return
 	show_rule = false
@@ -75,6 +85,7 @@ func refresh() -> void:
 		var kept := 0.0
 		for bar in source.current_bars: kept += source.get_bar_length(bar)
 		readout.text = "third = length / 3; keep left + right\nEach press removes a third of what remains." if show_rule else "cut %d / 5 | %d pieces | %.3f m kept\nhistory %s | removed %s" % [source.current_iteration,source.current_bars.size(),kept,"on" if history else "off",source.removal]
+		if is_instance_valid(hand_cut): hand_cut.refresh()
 	else:
 		var info: Dictionary = source.get_level_info(source.max_depth)
 		readout.text = "interval -> box(width, height, depth)\nA visible gap still has to admit this body." if show_rule else "cut %d / 3 | %d lower blocks | %.3f m kept\n%.1f m deep | %s" % [source.max_depth,info.block_count,info.total_width,source.block_thickness,"history above" if history else "latest only"]
