@@ -46,6 +46,8 @@ color = mix(ground_color, prev_color, pow(dissipation, step_scale));
 
 Here the ground is white. It enters the work again as the direction of forgetting in this particular simulation. We could ask for another ground, another rate of fading, another way for two colours to meet. None is the natural behaviour of code. Here we can point to the line that makes the decision.
 
+The automatic brush advances by elapsed time. The wet surface updates with rendered frames. Even their clocks differ.
+
 Look along the edge of a light pass. Separate specks reach beyond the thick centre. The software fills between nearby samples of the moving nozzle, but it cannot keep every possible position of your hand. Even this soft edge has a resolution.
 
 <!-- @albers_wall_gallery -->

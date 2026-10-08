@@ -47,6 +47,8 @@ The next four stacks loosen the proportions. A large red sphere meets a small re
 
 Further across, slabs turn and pieces leave the centre. It is still a stack, but being above no longer means sharing an axis. In the fourth construction, pink, teal, yellow and blue accompany wedges, discs, a block and round beads. Colour is now chosen piece by piece. What might the same forms become in another palette?
 
+There is no new primitive hidden in these columns. Width, height, position, turn, colour: the things we have learned to name are becoming things we can compose.
+
 The vocabulary is familiar. The combinations are beginning to exceed what we first asked it to do.
 
 <!-- @color_dna_stack -->

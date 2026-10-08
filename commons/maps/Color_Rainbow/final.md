@@ -43,6 +43,8 @@ A name can promise continuity while an implementation offers enough small divisi
 
 Look for a colour you chose in the salon, first in the arch and then among the striped banners and mushrooms. There are pinks, pale blues, whites and dark colours that this sweep through saturated hues does not offer. They already share the room, even when the arch has no place for them. What would you have to change in the list, or in the rule that builds it, to give another colour a place in the arch?[^colour-boundaries]
 
+The answer is not that every difference is already included. This control gives four choices, made in advance. It lets you discover that the arrangement can be otherwise, and also where its available otherwise stops.
+
 After the fourth arrangement, RE-DIVIDE returns to the first. You can stay with a version you like. Or you might want a fifth: a pale band, a colour given more room, a border that wanders away from the curve. The next change would reach beyond this button, into the list or the rule that makes it.
 
 Before leaving, choose the version you want to stand beneath. Let the confetti return. At the far end of the walk, two slender poles hold a rainbow banner above your head. You can pass beneath it whether you collected every cube or left them all. The same programmed event can be a reward for obedience or an invitation that asks nothing of you; here you can repeat the confetti without passing a test.

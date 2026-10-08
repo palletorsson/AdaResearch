@@ -16,7 +16,7 @@ A desk waits to one side. Two more places to work are scattered among the partit
 
 At the entrance, press **FILTER / OPAQUE**. The view closes into coloured surfaces. Take the same route again. The next opening is harder to see, although it has not become narrower.
 
-Press once more. A chair returns through a pane. The pane still stops your body.
+Press once more. A chair returns through a pane. The pane still stops your body. Your view took a route your body could not. An invitation to look is not yet an invitation to enter.
 
 In filter mode, the surface lets the view behind it contribute to the colour:
 
@@ -88,5 +88,7 @@ On the wall, twenty-four coloured rails stand at equal intervals. Widen the spac
 Beside them, pull the vertical members of a crossing forward. Its drawing acquires depth and a second, shadowed grid. Further along, one rail can be omitted from an open composition and restored. These responses to Gillick keep a small vocabulary available for rearrangement. The clarity of the parts can suggest a comprehensible system. It does not disclose who made it, who maintains it, or who gets to change the plan.
 
 <!-- @ -->
+
+A view through glass, a position in a colour model, a calculated passage: similar appearances can conceal different operations.
 
 Ahead, the disco floor returns in colour. Keep its arrangement and change its palette. Does the same pattern still invite the same movement?
