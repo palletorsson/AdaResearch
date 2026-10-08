@@ -1,116 +1,47 @@
-# PG Caves Mazes
+# A route needs room — encounter
 
-Carve spaces. Two methods. Cave via CA; maze via spanning tree.
+**Learning elements — proposed focus**
 
-Generate a CA-based cave.
+_The labels below set the revision focus; the existing lesson still needs alignment._
 
-```gdscript
-func generate_cave(size: Vector2i, fill_prob: float = 0.45, iterations: int = 5) -> Array:
-    var grid: Array = []
-    for y in size.y:
-        var row: Array = []
-        for x in size.x:
-            row.append(randf() < fill_prob)
-        grid.append(row)
-    for _i in iterations:
-        grid = smooth_step(grid, size)
-    return grid
-```
+- Carving footprints
+- Headroom
+- Path and empty volume
 
-Start with random fill; smooth via cellular automaton rules.
+<!-- @caverandomwalk -->
 
-Smooth one step.
+A connected line has no width. Your shoulders do. Stand at the cave opening and look for the space that would have to remain empty if you entered. Then turn on TRACE. Small gold dots mark positions where the carving operation was applied. Some positions were visited more than once.
+
+The walker does not leave a solid trail. It removes cells around its position. The array begins filled; `_set_air` changes selected entries to zero. In this program, zero has a job: it records absence inside the generated volume. The museum's floor beneath the experiment is another object with another responsibility.
+
+The cave is guided more deliberately than its name might suggest. Walkers begin at four sides and are biased towards the centre. They then wander at a prescribed low level and climb through further levels. Around each carving centre, the operation clears a small lateral footprint and two cells of headroom. This is not an unconstrained random walk discovering a cave without prior decisions.
 
 ```gdscript
-func smooth_step(grid: Array, size: Vector2i) -> Array:
-    var new_grid: Array = []
-    for y in size.y:
-        var row: Array = []
-        for x in size.x:
-            var neighbour_count: int = count_wall_neighbours(grid, x, y, size)
-            if neighbour_count >= 5:
-                row.append(true)
-            elif neighbour_count <= 3:
-                row.append(false)
-            else:
-                row.append(grid[y][x])
-        new_grid.append(row)
-    return new_grid
+_carve_ball(p)
+p = _biased_step_towards(p, to_center, 0.7)
 ```
 
-Classic 5-4 rule. Cells with 5+ wall neighbours become walls; cells with 3 or fewer become open.
+CAVE SEED makes another run while retaining that construction. Find an opening that moved and one restriction that did not. TRACE marks carving centres; it does not join separate walkers into a fictitious continuous trajectory. The dots help us read where the work occurred, including work that the final void no longer distinguishes.
 
-Count neighbours.
+At full display scale the cells are one metre wide. The stated two-cell headroom is a construction parameter, not a guarantee that every turn and climbing region admits the player. An interior can exist geometrically while refusing a particular body. That refusal becomes something we can locate and revise.
+
+
+
+<!-- @maze_generation -->
+
+Across the court, another grid offers another way to make room. Press MAZE STEP. The program moves to an unvisited cell and removes the wall between it and the previous cell. It also keeps the previous position on a stack.
 
 ```gdscript
-func count_wall_neighbours(grid: Array, x: int, y: int, size: Vector2i) -> int:
-    var count: int = 0
-    for dy in [-1, 0, 1]:
-        for dx in [-1, 0, 1]:
-            if dx == 0 and dy == 0: continue
-            var nx: int = x + dx
-            var ny: int = y + dy
-            if nx < 0 or nx >= size.x or ny < 0 or ny >= size.y:
-                count += 1  # treat out-of-bounds as wall
-            elif grid[ny][nx]:
-                count += 1
-    return count
+generation_stack.push_back(current_cell)
+current_cell = next_cell
 ```
 
-Eight neighbours. Boundary conditions treat off-grid as wall (so caves don't open at the edges).
+Continue until the current cell has no unvisited neighbour. Now the stored path matters: the program pops a position from the stack and tries again from there. Backtracking is not an error to disguise. It is how this construction keeps unfinished alternatives available.
 
-Recursive backtracker maze.
+FINISH completes the small nine-by-nine study. RESET restores its construction so that you can step through it again. Its cells are 1.5 metres across. Compare the deliberate openings at the boundary with the cave's carved mouths, then compare their internal turns. The maze stores walls and visitation; the cave stores solid and empty volume. Both have random choices and authored restrictions.
 
-```gdscript
-func generate_maze(size: Vector2i) -> Array:
-    var visited: Array = []
-    for y in size.y:
-        var row: Array = []
-        for x in size.x: row.append(false)
-        visited.append(row)
-    var walls_carved: Array = []
-    var stack: Array = [Vector2i(0, 0)]
-    visited[0][0] = true
-    while not stack.is_empty():
-        var current: Vector2i = stack[-1]
-        var neighbours := unvisited_neighbours(current, visited, size)
-        if neighbours.is_empty():
-            stack.pop_back()
-        else:
-            var next: Vector2i = neighbours[randi() % neighbours.size()]
-            walls_carved.append([current, next])
-            visited[next.y][next.x] = true
-            stack.append(next)
-    return walls_carved
-```
+The nearby binary-space-partitioning work remains another comparison: divide a region before deciding how its parts communicate. We need not erase it because today's first argument concerns two generators.
 
-Stack-based DFS. Carves a spanning tree; result is always a perfectly connected maze.
+The desktop check follows open maze cells from entrance to exit. That proves a route in its array. Human VR clearance through every generated interior remains a separate review. The independent museum aisle lets us continue while keeping that distinction honest.
 
-Render walls.
-
-```gdscript
-func render_walls(walls_carved: Array, size: Vector2i, scale: float = 1.0) -> void:
-    for y in size.y:
-        for x in size.x:
-            for direction in [Vector2i(1, 0), Vector2i(0, 1)]:
-                var neighbour := Vector2i(x, y) + direction
-                if neighbour.x >= size.x or neighbour.y >= size.y: continue
-                if not [Vector2i(x, y), neighbour] in walls_carved and not [neighbour, Vector2i(x, y)] in walls_carved:
-                    spawn_wall_between(Vector2i(x, y), neighbour, scale)
-```
-
-Walls are edges not carved. Each uncarved edge becomes a visual wall.
-
-Braid a maze.
-
-```gdscript
-func braid(walls_carved: Array, cells_with_few_connections: Array, probability: float = 0.3) -> void:
-    for cell in cells_with_few_connections:
-        if randf() < probability:
-            var new_carve := pick_random_uncarved_neighbour(cell)
-            if new_carve: walls_carved.append([cell, new_carve])
-```
-
-Removes some dead ends. Creates loops. Less punishing navigation.
-
-You can now generate a CA-based cave, a spanning-tree maze, render walls, and braid the maze for loops. PG_Sculpted_Forms extends into additive architectural generation.
+In Sculpted Forms, we will reverse the direction of this encounter. Instead of asking a rule to carve space for a body, we will let bodies fall and ask another rule what surface it can record from them.

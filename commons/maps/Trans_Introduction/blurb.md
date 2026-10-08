@@ -1,9 +1,5 @@
-Three cubes. Three ways to close a gap.
+The far bank is already there. What has to change for it to become somewhere you can go?
 
-The cyan cube **translates** — it moves, carrying you through space. Position changes. The gap is bridged by going somewhere else.
+Ride a translating cube. Cross a growing surface when it meets the floor. Wait for a plank to turn towards the other bank.
 
-The orange cube **rotates** — it turns, revealing new faces. A floor becomes a ramp. The gap is bridged by changing alignment, not position.
-
-The green cube **scales** — it grows, claiming space through presence. The gap doesn't get crossed. It gets filled.
-
-Each transformation answers the same question differently: *How do we close a gap?*
+Three operations make different relations between a body and a gap. Watch what stays in place, what travels, and how long each opening lasts.

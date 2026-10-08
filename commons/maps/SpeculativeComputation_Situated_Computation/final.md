@@ -41,4 +41,16 @@ The creature is still hunting. Keep the two encounters distinguishable: an assig
 
 <!-- @ -->
 
+<!-- study-spine:museum_witnesses -->
+
+<!-- @museum_witnesses -->
+
+The room you just crossed returns on five monitors. Pink cameras A and B wait beside its readouts. Pick one up and turn it. A third camera stays fixed. A fourth screen receives the first camera's image late. On the fifth, HOLD keeps a frame while the museum continues.
+
+Compare the times beneath them. The earlier image can look as immediate as the present one. Keep it. Aim camera A somewhere else and release it; the camera stays where you leave it. The held frame now belongs to somewhere you are no longer looking, but its address stays with it.
+
+Gilligan's distributed moving images offer a way to keep these partial accounts beside one another. Here every view comes from this museum. Sharing an image does not give us the position from which it was seen. Before agreeing about what happened, we may need to agree about which moment we are seeing.
+
+<!-- @ -->
+
 Collective knowledge asks how contributions from different positions can become a common object without losing the evidence and disagreement that make it revisable.

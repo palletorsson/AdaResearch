@@ -14,3 +14,10 @@ The first court gives a twelve-second pause for a climb or boarding a level end-
 
 
 The last court keeps a floor under your feet while the tunnel's frames turn around the passage. Beside it, the carousels distribute different rates through equal layer heights. The same code can be read as a constraint to cross, a rhythm to follow or an enclosure to inhabit. These possibilities need their specific operations named: subtraction makes a hole; a turn orients it; repetition supplies neighbours; time lets their relations move.
+
+
+<!-- study-spine:hinge_release -->
+
+## Installed application: A pose left
+
+The fixed support and stored angles make this an Ada response to Lygia Clark's articulated works. They give us a way to ask what an invitation permits. A joint can be available to your hand while the rule after release quietly takes the last word. Switch on TRACE and watch one corner: two journeys can arrive at the same pose without leaving the same line.

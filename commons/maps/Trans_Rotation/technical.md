@@ -52,3 +52,27 @@ On the compact gradient, the straight-walking probe stops after 6.90 m in X, 4.6
 The earlier 4 by 10 array measurements remain historical evidence in `ada_run/rotation_studies_checks.json`; their coordinates and distances do not describe this compact layout. The before source is preserved in `doc/space/transformation-refresh-2026-09-16/before`.
 
 `probe_rotation_turn_direction.gd` remains applicable to the unchanged blade artifact: each centre stays fixed, X/Z raised ends descend after the hold, Y swings in the reversed sense, and a half-turn restores the same crossing bounds.
+
+## A turn's occupied space — placement added 21 September
+
+`axial_sweep` now stands at source cell (14,39), after the array and before the tunnel, with no automatic plinth and its own 1.7 m viewing plate. Since the order workbench returned on 23 September, the sweep is the fourth primary encounter. The existing artifacts, source floor and wall cells remain in place.
+
+The 0.60 m cube turns about its centred Y axis at 18 degrees per second. The full-turn union has a cylindrical outer boundary of radius `sqrt(2) * 0.30` and height 0.60 m. The alternative triangular profile has vertices `(0,-0.35,0)`, `(0.45,-0.35,0)`, `(0,0.35,0)` and sweeps a cone of radius 0.45 m and height 0.70 m. The outline starts hidden. SHAPE, PLAY/PAUSE and BOUNDARY operate the existing artifact; no new controls were built.
+
+The pedestal is physical, while the turning body and computed contour are visual studies. The contour collects the boundary of occupied positions over a full revolution; it is not a new solid or a demonstrated persistence-of-vision effect. The four-carrier drum study remains in `commons/testing/transformation_sampling_lab.tscn` for a later comparison. [Earlier study and controlled geometry evidence](../../../doc/space/zoetrope-encounter-2026-09-17/README.md). [Current museum placement and comparison](../../../doc/book/iterations/2026-09-21-transformation-return/SUMMARY.md).
+
+
+## Shared book illustrations — 23 September
+
+The chapter uses native captures of the existing `axial_sweep` in the actual isolated museum: cube at 0 and 90 degrees with one fixed camera, then the cube and triangle with their analytical boundaries shown. The latter pair pauses each body at 45 degrees. These are selected poses of the same working artifact, not a new scene or an optical motion-blur effect. `tools/probes/rotation_book_illustrations.gd` supplies poses and exercises the existing pointer buttons; the book labels each image accordingly. No map placement, geometry, controls or runtime source changed in this pass.
+
+[Full chapter comparison, images and evidence](../../../doc/book/iterations/2026-09-23-rotation-return-and-sweep/index.html).
+
+
+<!-- study-spine:hinge_release -->
+
+## Installed application: A pose left
+
+`hinge_release` occupies a new adjoining bay, after the existing encounters. Cell [19, 66], rotation 180°, museum adapter `res://commons/artifacts/spine_studies/hinge.tscn`. Original response to Lygia Clark; no claim of exact reconstruction.
+
+Change the return speed while keeping the reference pose. Reuses loop, transform, trace; adds no prerequisite node. The display and main-player controls are supplied.

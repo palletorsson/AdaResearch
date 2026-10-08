@@ -1,5 +1,14 @@
 # F Term
 
+**Learning elements — proposed focus**
+
+*The labels below set the revision focus; the existing lesson still needs alignment.*
+
+- Constant predictors
+- Mistake counts
+- Expected error
+- Source uncertainty
+
 F is free energy — the prediction error that every adaptive system tries to minimize. Build a room where minimizing F is both the task and the trap.
 
 Declare the F meter.

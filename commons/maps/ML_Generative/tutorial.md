@@ -1,5 +1,14 @@
 # ML Generative
 
+**Learning elements — proposed focus**
+
+*The labels below set the revision focus; the existing lesson still needs alignment.*
+
+- Candidate generation
+- Reference samples
+- Critic scores
+- Learning updates
+
 Generate new data from a learned distribution. GAN, VAE, diffusion.
 
 Build a GAN generator.

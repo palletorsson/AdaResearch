@@ -1,3 +1,5 @@
+> Historical snapshot. The current 13 September review and source-grounded chapter supersede the claims below; see final.md and doc/space/wall-review-2026-09-13/README.md. Retained as a record of the earlier work.
+
 # Eye shot — Noise_6_Wall
 
 > one pass: ride (gaze), move (place --only-improve), gate (pathfinder), voice (qfep). Field note, not a ruling.

@@ -1,7 +1,7 @@
-Concept: The derivative as the most concrete form of change — the slope of a curve at a single point. A tangent line slides along a curve and reads out its instantaneous rate. Before the word "derivative" arrives, the learner has already seen the thing it names.
-Sequence role: Opens the Change sequence, the calculus substrate that forces, wavefunctions, randomness, and noise all draw on without naming. No prior calculus assumed; prerequisite is only Color. Establishes the vocabulary — rate, slope, instantaneous — that every later map in the sequence extends.
-Technical angle: Sampling a function, computing the limit of (f(x+h) − f(x))/h as h shrinks, drawing the tangent at the contact point, and rendering slope as a readout. The derivative-as-function plot shows that taking a slope at every point produces a new curve.
-Critical angle: Change made local. The derivative refuses the global view — it reports only what is happening exactly here, exactly now. It is the first move in the sequence's argument that accumulation (the integral, two maps later) is the inverse act: stitching all the local rates back into a whole.
-Key artifacts: slope_tangent_demo carries the curve and the sliding tangent; derivative_pair stacks f and f' to show the slope is itself a function; code_display gives the symbolic form; science_screen mirrors the readout in 2D.
+# Change — how far a reading reaches
 
-Gap: Artifacts slope_tangent_demo and derivative_pair are scaffolded names — scenes not yet built. This doc is the spec they should satisfy.
+Begin with a visible disagreement: the line between two samples falls while the curve is rising at the first. Shortening the interval changes the question and its answer. Then keep the same curve and let one height represent a whole interval in a sum. HOLD supplies a second picture so earlier choices remain available. Finally, the arch's signed rates recover a zero endpoint difference without making its rise and fall disappear.
+
+The three encounters have distinct work: local reach, a chosen representative, and the meaning of a net result. Preserve the mathematical distinctions between value and rate, position and time, finite estimate and limit, positive area and signed net change. Let those distinctions arrive through the objects before their names. Flow_Field next lets an update choose the address of the next sample.
+
+Current reading: final.md, revised 24 September 2026. Detailed controls, finite counts, numerical comparisons and proposed bodily extensions are in tutorial.md. The four-rectangle comparison and bridge remain existing encounters; this reading pass changes no artifacts or placements.

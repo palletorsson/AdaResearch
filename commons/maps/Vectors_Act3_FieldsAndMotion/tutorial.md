@@ -1,93 +1,73 @@
-# Fields and Motion
+# Ask the field where you are
 
-A vector at every point, and a vector the world keeps editing. Before either, addition and scaling must already be ordinary.
+**Learning elements**
 
-Write the field as a function from place to push.
+- A field of vectors
+- Sampling by position
+- Acceleration and force
+- Local and world directions
 
-```gdscript
-func field_at(p: Vector3) -> Vector3:
-    var swirl := Vector3(-p.z, 0.0, p.x) * SWIRL_GAIN
-    var radial := p * RADIAL_GAIN
-    return (swirl - radial).limit_length(2.5)
-```
+Follow one point through the vortex arrows. At each place it meets a different direction. Watch it turn before switching ONE / MANY to bring back the circulating cargo.
 
-Two terms subtracted: one that circles the origin, one that runs at it. Nothing is stored — the field is evaluated wherever it is asked, and the arrows on the floor are only samples of it.
+## Make the small study
 
-Let a particle read its local instruction and go.
+Keep the moving point. Replace the fixed push with `sample()`, a function that reads its position and returns an acceleration. Combine an inward pull with a sideways turn.
 
-```gdscript
-func advect(pos: Vector3, vel: Vector3, delta: float) -> Array:
-    var sample := field_at(pos)
-    vel = vel.lerp(sample, 0.08) * 0.98
-    return [pos + vel * delta, vel]
-```
+**The hall adds:** The hall adds visible arrows, damping and several bodies that can collide. Your study isolates the acceleration rule, with a caption showing position and acceleration.
 
-The particle has no memory and no plan. It leans toward the vector under its feet and moves. The damping is what stops it outrunning the field it is reading.
+Save `04_field.gd` beside your shared files and use it on `PointStudy`. [Setup and complete shared code](../../../doc/book/course/forces-shared-code.md).
 
-Let two fields act on the same particle at once.
+## Complete code — 04_field.gd
+
+<!-- student-code:04_field.gd -->
 
 ```gdscript
-func rain_acceleration(wind: Vector3, gravity_strength: float) -> Vector3:
-    var down := Vector3(0.0, -gravity_strength * 9.8, 0.0)
-    var across := Vector3(wind.x, 0.0, wind.z) * 3.0
-    return down + across
-```
+extends "study.gd"
+var point = Point.new()
+var reading: Label3D
 
-Rain is a particle advected through gravity and wind together. Nothing decides the slant of the storm — the addition does, and the ratio between the two terms is the angle.
+func _ready() -> void:
+    add_child(point)
+    point.position = Vector3(2, 1.2, 0)
+    point.linear_velocity = global_basis * Vector3(0, 0, 1.8)
+    reading = caption("")
 
-Drive every instrument from the one sum.
+func sample(p: Vector3) -> Vector3:
+    var flat := Vector3(p.x, 0, p.z)
+    if flat.length() < 0.05:
+        return Vector3.ZERO
+    var tangent := Vector3(-flat.z, 0, flat.x).normalized()
+    return -flat * 0.65 + tangent * 2.8 # m/s²
 
-```gdscript
-func drive_storm(a: Vector3, b: Vector3) -> void:
-    var sum := a + b
-    _rain_material.gravity = rain_acceleration(sum, gravity_strength)
-    _windsock.rotation.y = atan2(sum.x, sum.z)
-    _anemometer_speed = sum.length()
-```
-
-A dial is not a measurement of the storm. It is one projection of the storm's single vector into whatever that dial can show — a yaw, a speed, a slant.
-
-Drive a body from the top of the chain.
-
-```gdscript
 func _physics_process(_delta: float) -> void:
-    ball.apply_central_force(acceleration * ball.mass)
-    var velocity := ball.linear_velocity
-    var position := ball.global_position
-    _aim(velocity_arrow, velocity)
-    _aim(position_arrow, position)
+    var acceleration := global_basis * sample(point.position)
+    if not point.is_picked_up():
+        point.apply_central_force(point.mass * acceleration)
+    reading.text = "at %s m\nacceleration %s m/s²" % [point.position, acceleration]
 ```
 
-Only acceleration is driven. Velocity is its running sum and position is velocity's, so the arrows below are read back rather than set. Position, velocity and acceleration are one quantity seen at three depths of change.
+## Read the change
 
-Split a launch into the part that carries and the part that fights.
+`flat` is the point’s position in the study’s horizontal X–Z plane. Multiplying it by a negative number gives an inward vector toward the centre.
 
-```gdscript
-func launch_components(v0: float, theta: float) -> Vector2:
-    return Vector2(v0 * cos(theta), v0 * sin(theta))
-```
+`Vector3(-flat.z, 0, flat.x)` turns that vector sideways by a quarter-turn. Normalizing gives it unit length; multiplying by 2.8 sets the sideways acceleration. Add this to the inward part to make the swirl.
 
-vx carries you sideways and never changes. vy fights gravity and loses. The angle is the whole negotiation between them.
+Each physics update samples again at the point’s new position. `global_basis` turns the local result into world axes. Then `point.mass * acceleration` supplies the force needed for that acceleration. The point keeps its existing velocity as this new contribution acts.
 
-Let gravity write the rest.
+## Change one thing
 
-```gdscript
-func height_at(vy: float, t: float, gravity: float = 9.8) -> float:
-    return vy * t - 0.5 * gravity * t * t
-```
+Change the point’s mass to 4 kg. With the same start and no contact, predict the same path: the requested force grows with mass. Restart, then set the sideways coefficient from 2.8 to zero. Watch what remains of the motion.
 
-You only ever launch a straight vector. The curve is the world's answer, and it costs exactly one squared term.
+## Return to the hall
 
-Read the arc's two landmarks off the components.
+Return to the hall and choose MANY. Follow one body until it meets another. The field still samples position; contact has now changed the velocity with which the body reaches its next position.
 
-```gdscript
-func apex_and_range(v0: float, theta: float, gravity: float = 9.8) -> Vector2:
-    var vx := v0 * cos(theta)
-    var vy := v0 * sin(theta)
-    var t_land := 2.0 * vy / gravity
-    return Vector2(vy * vy / (2.0 * gravity), vx * t_land)
-```
+## Model notes
 
-Both numbers follow from vx and vy and nothing else. Range peaks at 45°, where the two components are equal and neither is wasted on the other.
+The rule returns zero within 0.05 m of the centre, where this sideways direction is undefined. The caption’s position is local and its acceleration is in world axes. This study omits the museum vortex’s damping. The nearby flow display makes a separate choice: using a vector as velocity directly gives different motion from using it as acceleration.
 
-You can now sample a field at any point, advect a body through it, superpose two fields into one push, run the acceleration-velocity-position chain, and decompose a launch into the components that set its arc. A field is force spread over space; motion is force spread over time. Act IV names the forces doing the spreading.
+## Into the next room
+
+This force reads position. The next one reads how fast, and in which direction, the point is moving.
+
+[Reflective text](final.md).

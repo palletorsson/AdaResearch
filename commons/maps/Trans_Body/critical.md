@@ -8,6 +8,6 @@ The lattice makes a different record. It is low enough for a standing visitor to
 
 What survives the encounter is also smaller than a person. The program reads a collision shape, expands its reach by a tolerance, and removes whole cells. Its record includes that tolerance and the lattice resolution. Hair, posture, clothing and the visitor's own account of being there need not enter it. A digital trace can be precise about its operations while partial about the body it stands for.
 
-The slats and scaling blocks settle back when the visitor leaves their reach. The cut remains while the room stays loaded. This is a local, implemented memory, with a lifetime; it does not become permanent simply because the cells do not regrow on a timer.
+The slats and scaling blocks settle back when the visitor leaves their reach. This hall also enables `#leak:keep`: removed cells are recorded when the lattice unloads and restored on a later visit while that record remains in the session. The in-memory store is bounded and can be cleared; it is not a permanent disk save. This is an implemented memory with a lifetime, beyond the absence of a regrowth timer.
 
 A second visitor can test the opening left by the first. Who fits it, who has to widen it, who can see above it? The room gives those questions dimensions. It does not establish one correct body in advance, even when its collision settings quietly begin with one.

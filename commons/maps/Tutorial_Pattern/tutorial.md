@@ -1,101 +1,22 @@
-# Patterns
+# One source, two rules
 
-Rules turn arrays into rhyming data. A small grid tiles into a surface.
+**Learning elements**
 
-Define a rule as a function.
+- Reflected lookup
+- Source mutation
+- Asymmetric motifs
+- Translation period
 
-```gdscript
-func checkerboard(x: int, y: int) -> int:
-    return (x + y) % 2
-```
+Begin at the Pattern Maker in the side bay. Find the red bend in the sixteen source cells, then follow it across the two panels. What stays the same? What changes its facing?
 
-Returns 0 or 1 based on cell coordinates. The classic two-colour pattern.
+1. Press PM, then P1. Inspect the floor and source after each press. The reference panels keep their rules.
+2. Press FLIP X. This time watch the source cells. Press it again to return.
+3. Follow the blue corner through four ROTATE presses.
+4. Choose a paint colour, then press a source cell. Find its copies in both fields.
+5. Use UNDO to reverse an operation. RESET returns the starting motif and P1 floor; UNDO can reverse that reset too.
 
-Populate a grid from a rule.
+Make the floor-rule comparison and the source reflection visible before explaining either address operation. The shader splits a position into a tile index and a local address. Translation keeps that address. This reflection rule reverses x on alternate columns. The source-reflection button instead rebuilds each source row in reverse order. The technical chapter contains the corresponding implementation excerpts.
 
-```gdscript
-func populate_grid(size: Vector2i, rule: Callable) -> Array:
-    var grid: Array = []
-    for y in size.y:
-        var row: Array = []
-        for x in size.x:
-            row.append(rule.call(x, y))
-        grid.append(row)
-    return grid
-```
+Each displayed tile spans 40 cm, whether on a panel or the floor. A reflected pair spans two tile columns. Make a source symmetrical enough to conceal a reversal, then break its symmetry with one mark and compare again.
 
-The rule runs at every cell. The result is a 2D array of palette indices.
-
-Render the grid as a texture.
-
-```gdscript
-func grid_to_texture(grid: Array, palette: Array) -> ImageTexture:
-    var h := grid.size()
-    var w := grid[0].size()
-    var image := Image.create(w, h, false, Image.FORMAT_RGBA8)
-    for y in h:
-        for x in w:
-            image.set_pixel(x, y, palette[grid[y][x]])
-    return ImageTexture.create_from_image(image)
-```
-
-Each cell becomes one pixel. The image can then be applied as a material.
-
-Define a wave rule.
-
-```gdscript
-func wave_rule(x: int, y: int) -> int:
-    var v: float = sin(x * 0.3) + cos(y * 0.3)
-    return int((v + 2.0) * 2) % 4  # maps to palette index 0-3
-```
-
-Two sinusoids combine. The result reads as a flowing pattern rather than a discrete grid.
-
-Make a spiral.
-
-```gdscript
-func spiral_rule(x: int, y: int, size: Vector2i) -> int:
-    var cx = size.x / 2.0; var cy = size.y / 2.0
-    var angle: float = atan2(y - cy, x - cx)
-    return int((angle + PI) / TAU * 4) % 4
-```
-
-The angle from the centre determines the palette index. Four sectors, four colours.
-
-Let the user edit cells directly.
-
-```gdscript
-func paint_cell(grid: Array, x: int, y: int, palette_index: int) -> void:
-    grid[y][x] = palette_index
-```
-
-Direct write. The user's edits override the rule's output.
-
-Tile the grid across a larger surface.
-
-```gdscript
-func tiled_color(grid: Array, px: int, py: int, palette: Array) -> Color:
-    var h := grid.size()
-    var w := grid[0].size()
-    return palette[grid[py % h][px % w]]
-```
-
-Modulo wraps the coordinate back into the tile. The same 8×8 grid fills an arbitrarily large surface.
-
-You can now write a rule, populate a grid from it, render it as a texture, accept user edits, and tile it across any surface. Array_Patterns extends this with full wallpaper-group symmetries.
-
-Cache the texture for reuse.
-
-```gdscript
-var texture_cache: Dictionary = {}
-
-func get_cached_texture(rule_name: String, palette: Array) -> ImageTexture:
-    var key: String = rule_name + str(palette)
-    if key in texture_cache:
-        return texture_cache[key]
-    var texture := grid_to_texture(populate_grid(Vector2i(8, 8), rules[rule_name]), palette)
-    texture_cache[key] = texture
-    return texture
-```
-
-Repeated renders of the same rule pull from cache. Useful for tiles that appear in many scenes.
+Array_Patterns next asks how these repeated relations meet an environment. Headset and continuous gesture work remain deferred; these controls also accept the desktop pointer.

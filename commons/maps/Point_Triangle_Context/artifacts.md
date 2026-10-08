@@ -1,25 +1,19 @@
-# Point_Triangle_Context — what each artifact does here
+# Triangle — current encounters
 
-Two primary artifacts carry [the book](final.md). Twelve secondary artifacts remain placed for [return visits](detours.md), alongside one text marker. Coordinates below are zero-based `(column, row)` in the current 13-by-30 map, not world metres. This is an inventory of placed tokens, not of every child mesh or handle.
+Nine placements. Coordinates are zero-based source-grid (column, row).
 
-| Role | Artifact | Grid position | Work in this room |
-| --- | --- | --- | --- |
-| Primary 1 | `triangle_line_puzzle` | (8, 2) | Close three edges before asking for a visible face. |
-| Primary 2 | `draw_triangle_faces` | (6, 13) | Draw a closed outline, inspect its fan, compare starting corners. |
-| Secondary | `folded_strip` | (2, 7) | Watch the installed hinge study, interrupt with a corner edit, replay. |
-| Secondary | `triangleprofiles` | (6, 7) | Follow shared corners through an editable pleated profile. |
-| Secondary | `pink_triangle` | (11, 7) | A symbol whose cultural meaning requires more than its geometry. |
-| Secondary | `triangle` | (11, 12) | Deform a face and distinguish collinearity from an edge-on view. |
-| Secondary | `pythagorean_triangle_angles` | (10, 15) | Compare squares on sides and identify the right-angle condition. |
-| Secondary | `interactivetriangle` | (2, 16) | Edit vertex positions; do not mistake the editor for fixed-length rods. |
-| Secondary | `science_screen` | (2, 17) | Investigate what a nearby-data display selects and projects. |
-| Secondary | `quad` | (2, 20) | Lift a corner and inspect two triangles meeting at a diagonal. |
-| Secondary | `wireframe_threshold` | (6, 20) | Change the viewport's rendering mode by entering its standing area. |
-| Secondary | `silhouette_gate` | (10, 20) | Compare a checkpoint-based shape task with constructing a filled loop. |
-| Secondary | `fetish_portal` | (6, 22) | Meet a coarse triangular ring as a finished, dressed object. |
-| Secondary | `quad_line_puzzle` | (10, 26) | Compare a four-edge target with the three-edge puzzle. |
-| Decoration | `3t` | (6, 24) | Existing “everything triangle” text; read as a room provocation, not a universal renderer specification. |
+| Artifact | Position | Work |
+| --- | --- | --- |
+| `triangle_line_puzzle` | (7, 2) | Three short pink edges with white endpoints; release at the corner targets to close. Fill remains a separate action. |
+| `triangle_construction_plate` | (9, 5) | The book and room share one points/boundary/face illustration. |
+| `folded_strip` | (2, 7) | A return to shared edges and folding. |
+| `draw_triangle_faces` | (6, 12) | Compact boundary on a plinth. Move a corner, or hold the drawing point and trigger to place corners. Close, start another face, undo, hide fill, shift start and restore from the sloped side console on its own support; the front of the drawing plinth stays clear. |
+| `triangle_live_twin` | (6, 15) | The same drawing enlarged 3.3 times, with pink faces and matching pink edges/white corners. Both scales follow a held corner. |
+| `triangle_reveal_monitor` | (1, 16) | Existing positions/boundary/face comparison monitor. |
+| `quad` | (2, 20) | Two triangular faces, one shared diagonal. |
+| `pink_triangle` | (11, 25) | A historical sign whose meanings cannot be deduced from geometry. |
+| `quad_line_puzzle` | (10, 26) | Four connected edges without a face. |
 
-The two primary placements already enable `#discovery:1`, which supplies their instruments. The folded strip enables `#study:1`. This editorial pass changes neither their configurations nor the floor. The stale placement count in metadata is corrected from 17 to 15.
+The hall retains its 13 × 30 footprint. Widened openings give access to both sides of the central face. The former portal basin is continuous floor. Authored placements override old necklace stamps; the obsolete museum grid has been brought into agreement with the structure.
 
-`lab_room`, `parasol_triangle`, `dark_sphere` and `floating_sphere_field` appeared in an older inventory but are not placed tokens in the current map. That inventory is preserved in the [dated source archive](../../../doc/space/point-triangle-focus-2026-09-16/previous/artifacts.md).
+Nine parked placements, their positions and reasons remain in [the research record](../../../doc/book/iterations/2026-10-01-lines-triangle-research/parked-placements.json). Their source artifacts are not deleted. The old inventory is preserved in the same bundle.

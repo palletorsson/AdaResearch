@@ -1,139 +1,25 @@
-# PG Caves Mazes — Technical
+# A route needs room — implementation
 
-The map stages two subtractive strategies side by side. A cellular automaton carves caves; a spanning-tree algorithm builds mazes. Both hollow space from a solid block, but the character of each is opposite.
+Sources: caverandomwalk.gd::_carve_cave, _carve_ball; maze_generator_vr.gd::_generation_step, _remove_wall.
 
-```gdscript
-class_name CaveGenerator extends Node3D
+The opt-in `pg_workshop_console` binds the named artifacts within its own museum hall; controls are implemented in commons/artifacts/timing_machines/pg_workshop.gd. Six push buttons occupy one compact 3×2 desk with an inclined translucent readout. RULE reveals the implementation card. Actions are guarded while a rebuild is in progress.
 
-@export var size: Vector2i = Vector2i(64, 64)
-@export var fill_probability: float = 0.45
-@export var smooth_iterations: int = 5
+Compare biased carving centres with explicit maze backtracking and interior dimensions.
 
-var cells: Array = []  # true = wall, false = floor
+A connected line has no width. Your shoulders do. Stand at the cave opening and look for the space that would have to remain empty if you entered. Then turn on TRACE. Small gold dots mark positions where the carving operation was applied. Some positions were visited more than once.
 
-func generate() -> void:
-    cells = []
-    for y in range(size.y):
-        var row: Array = []
-        for x in range(size.x):
-            row.append(randf() < fill_probability)
-        cells.append(row)
-    for _i in range(smooth_iterations):
-        smooth_step()
+The walker does not leave a solid trail. It removes cells around its position. The array begins filled; `_set_air` changes selected entries to zero. In this program, zero has a job: it records absence inside the generated volume. The museum's floor beneath the experiment is another object with another responsibility.
 
-func smooth_step() -> void:
-    var new_cells: Array = []
-    for y in range(size.y):
-        var row: Array = []
-        for x in range(size.x):
-            var neighbours := count_wall_neighbours(x, y)
-            if neighbours >= 5:
-                row.append(true)
-            elif neighbours <= 3:
-                row.append(false)
-            else:
-                row.append(cells[y][x])
-        new_cells.append(row)
-    cells = new_cells
-```
+At full display scale the cells are one metre wide. The stated two-cell headroom is a construction parameter, not a guarantee that every turn and climbing region admits the player. An interior can exist geometrically while refusing a particular body. That refusal becomes something we can locate and revise.
 
-## The Cellular Automaton Rule
+Across the court, another grid offers another way to make room. Press MAZE STEP. The program moves to an unvisited cell and removes the wall between it and the previous cell. It also keeps the previous position on a stack.
 
-The "5-4 rule" — become a wall if 5 or more neighbours are walls, become floor if 4 or fewer — is a common choice for cave generation. It produces organic-looking cavities with connected passages. Different rules produce different cave characters: the "4-5 rule" makes more open spaces; the "6-3 rule" produces claustrophobic tunnels.
+Continue until the current cell has no unvisited neighbour. Now the stored path matters: the program pops a position from the stack and tries again from there. Backtracking is not an error to disguise. It is how this construction keeps unfinished alternatives available.
 
-## Maze Generation
+FINISH completes the small nine-by-nine study. RESET restores its construction so that you can step through it again. Its cells are 1.5 metres across. Compare the deliberate openings at the boundary with the cave's carved mouths, then compare their internal turns. The maze stores walls and visitation; the cave stores solid and empty volume. Both have random choices and authored restrictions.
 
-Mazes use a different approach: partition the space into a grid, then carve walls to form a spanning tree. Recursive backtracking is the simplest algorithm.
+In Sculpted Forms, we will reverse the direction of this encounter. Instead of asking a rule to carve space for a body, we will let bodies fall and ask another rule what surface it can record from them.
 
-```gdscript
-class_name RecursiveBacktracker extends Node
+Space: the inherited structure is retained in a larger surround; relocated objects have an independent museum aisle. Source zeros remain present and receive explicitly listed museum.floor_cells covers. The floor audit records offsets and covers. Raised historic cells are retained witnesses, not universally certified decks.
 
-var visited: Dictionary = {}
-var walls_carved: Array = []
-
-func generate(start: Vector2i) -> void:
-    var stack: Array = [start]
-    visited[start] = true
-    while not stack.is_empty():
-        var current = stack[-1]
-        var unvisited_neighbours := get_unvisited_neighbours(current)
-        if unvisited_neighbours.is_empty():
-            stack.pop_back()
-        else:
-            var next = unvisited_neighbours[randi() % unvisited_neighbours.size()]
-            walls_carved.append([current, next])
-            visited[next] = true
-            stack.append(next)
-```
-
-The output is always a connected maze with exactly one path between any two cells, because a spanning tree has this property by definition.
-
-## Kruskal's Maze
-
-Kruskal's algorithm produces different maze textures — more uniform, less snake-like. It shuffles all walls, then removes walls whose two sides belong to different connected components, merging the components in the process. The algorithm is O((WH) · α(WH)) where α is the inverse Ackermann function (effectively constant).
-
-## Comparison
-
-Caves feel natural because the generator has no plan — the walker staggers and the cave forms around the walker's path. Mazes feel engineered because the generator has exactly one plan — connect everything once and no more. The map displays both outcomes on either side of a central wall and lets the learner walk through each to feel the difference.
-
-Within the sequence, Caves_Mazes is the subtractive chapter. PG_Sculpted_Forms will next return to additive strategies through stacking rather than branching.
-
-## CA Rule Exploration
-
-The cellular automaton cave generator is parameterised by two numbers: the birth threshold (how many neighbours cause an empty cell to become wall) and the survival threshold (how many neighbours keep a wall cell as wall). Different thresholds produce different cave characters.
-
-```gdscript
-class_name CAParameters extends Resource
-
-@export var birth_threshold: int = 5
-@export var survival_threshold: int = 4
-@export var initial_fill: float = 0.45
-@export var iterations: int = 5
-
-func rule_name() -> String:
-    return "B%d/S%d" % [birth_threshold, survival_threshold]
-```
-
-The rule "B5/S4" (born at 5+, survives at 4+) is the map's default. "B678/S345678" produces more spherical caves; "B5678/S45678" is another common choice.
-
-## Maze Algorithm Variants
-
-Beyond recursive backtracking and Kruskal's, several other maze algorithms produce distinct textures.
-
-```gdscript
-# Prim's-based maze: grows from a single seed
-func prims_maze(start: Vector2i) -> void:
-    var frontier: Array = [start]
-    visited[start] = true
-    while not frontier.is_empty():
-        var cell = frontier[randi() % frontier.size()]
-        frontier.erase(cell)
-        var unvisited_neighbours = get_unvisited_neighbours(cell)
-        if unvisited_neighbours.is_empty():
-            continue
-        var next = unvisited_neighbours[randi() % unvisited_neighbours.size()]
-        carve_wall_between(cell, next)
-        visited[next] = true
-        frontier.append(next)
-```
-
-Prim's produces mazes with many short passages. Wilson's algorithm produces uniformly random spanning trees — mazes that look more random than recursive backtracking's characteristic zigzag. Eller's algorithm generates mazes row by row in O(W) space, useful for very large mazes where the full grid cannot fit in memory.
-
-## Postprocessing
-
-Raw CA caves often have small disconnected regions. A post-processing pass finds the largest connected region and fills in the others, guaranteeing a navigable space. Mazes often benefit from "braiding" — removing some dead ends to create loops, making the maze feel less punitive to navigate.
-
-```gdscript
-func braid(maze: Array, loop_probability: float = 0.3) -> Array:
-    var dead_ends := find_dead_ends(maze)
-    for cell in dead_ends:
-        if randf() < loop_probability:
-            var wall_to_remove := random_wall_around(cell)
-            if wall_to_remove:
-                maze[wall_to_remove.y][wall_to_remove.x] = false
-    return maze
-```
-
-## Hybrid Approaches
-
-Combining strategies produces interesting hybrid spaces. A CA cave with a maze embedded in one region combines organic and engineered aesthetics. The map's two sides share a central wall to stage the contrast cleanly, but production applications often blend them spatially.
+Validation: see doc/space/pg-sequence-2026-09-15 and ada_run/pg-review-2026-09-15. Report actual runtime checks separately from outstanding human headset/clearance review.

@@ -1,3 +1,5 @@
+> Historical snapshot. The current 13 September coordinate study and source-grounded chapter supersede the claims below; see final.md and doc/space/inside-review-2026-09-13/README.md. Retained as a record of earlier work.
+
 # Noise_Inside_Noise — walked
 
 > ghost-drafted from the working map (critical slot, noise thread); Palle rules the voice.

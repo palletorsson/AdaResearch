@@ -1,41 +1,7 @@
-# CA GameOfLife — Artifacts
-*Cellular Automata: Local Rules, Global Patterns · lambda_edge · 5 artifacts*
+# A history you can inhabit — retained collection
 
-> Conway's Game of Life. Birth: three neighbors. Survival: two or three neighbors. Death: otherwise. From these rules: gliders that walk, oscillators that pulse, still lifes that persist. The most famous cellular automaton — a universe of complexity from almost nothing.
+The hall contains five artifacts. The primary `ca_bridge` is configured with `study:history`: its desk, stepping tiles and lattice are three views of one stored Rule 30 history, with six controls on the desk and an upright housed readout. The map also opts into `follow:walk`: the visitor selects a retained row by walking beside it, and the same gold witness moves across all three views without altering the history or support.
 
-The map, read through what it holds — its artifacts in the order you meet them:
+The rear gallery retains `lab_room` with its mounted `turing_apparatus`, `ca_columns:0:-0.5:0.2`, `mirrored_cellular_automata:0:-0.5` and the decorative `dark_sphere`. The first three remain secondary, the orb remains decoration. Their existing work is available for further comparisons and needs separate interaction review. Neither a mirrored image nor a machine-like enclosure establishes a particular automaton law by itself.
 
-## Lab Room
-![Lab Room](/scene-catalog/lab_room.png)
-
-Procedurally-generated Half-Life-style modern test chamber that frames a workbench. White tile floor, observation glass, accent-colored strip naming the QFEP phase, signage like 'TEST CHAMBER λ-S'. Takes a mounted_artifact_scene path and instantiates that workbench at the central plinth. The room IS the staging — same script, different DNA = different chamber.
-
-`lab_room`
-
-## Dark Sphere
-![Dark Sphere](/scene-catalog/dark_sphere.png)
-
-USE a neutral sphere as a reference for scale, silhouette, and atmospheric change.
-
-`dark_sphere`
-
-## CA Columns
-![CA Columns](/scene-catalog/ca_columns.png)
-
-Cellular Automata Columns Sculpture.
-
-`ca_columns`
-
-## Mirrored Cellular Automata
-![Mirrored Cellular Automata](/scene-catalog/mirrored_cellular_automata.png)
-
-Symmetric cellular automata pattern generator.
-
-`mirrored_cellular_automata`
-
-## CA Bridge
-![CA Bridge](/scene-catalog/ca_bridge.png)
-
-Cellular Automata Bridge.
-
-`ca_bridge`
+The book's primary anchor is `ca_bridge`. No decorative or secondary work is silently promoted by being listed here.

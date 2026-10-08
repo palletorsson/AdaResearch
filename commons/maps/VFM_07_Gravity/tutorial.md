@@ -1,72 +1,79 @@
-# Gravity Lab
+# Let both points answer
 
-Attraction at a distance. Newton's law of universal gravitation, then what happens when more than two things believe in it.
+**Learning elements**
 
-Write the attraction.
+- Mutual attraction
+- Equal and opposite forces
+- Adding pair forces
+- Initial conditions
+- Softening at close range
 
-```gdscript
-func attract(a: Body, b: Body, G: float) -> Vector3:
-    var arm := a.position - b.position
-    var d := clamp(arm.length(), 1.0, 25.0)
-    var strength := G * a.mass * b.mass / (d * d)
-    return arm.normalized() * strength
-```
+Begin with PAIR. Follow both spheres: each turns toward a source that is itself moving. Neither one is fixed. Save PAIR / FIVE until you have watched the pair.
 
-NoC example 2.8's heart: force along the line between them, divided by distance squared. The clamp is honest engineering — without it, close encounters explode.
+## Make the small study
 
-Check the magnitude curve.
+Return to two physical points. Give them opposite starting velocities. Calculate the attraction between them once, apply it to one body, and apply its negative to the other.
 
-```gdscript
-# d=1 → strength = G·m·m
-# d=2 → a quarter of that
-# d=4 → a sixteenth
-```
+**The hall adds:** The hall can add three more spheres and make the visitor another source. Your first reconstruction keeps the pair isolated, with collisions and ordinary downward gravity off.
 
-Exercise 1.8 made walkable: the attraction magnitude station plots the inverse square. Double the distance costs you three quarters of the force.
+Save `08_attraction.gd` beside your shared files and use it on `PointStudy`. [Setup and complete shared code](../../../doc/book/course/forces-shared-code.md).
 
-Orbit the pair.
+## Complete code — 08_attraction.gd
+
+<!-- student-code:08_attraction.gd -->
 
 ```gdscript
-# a stable orbit: sideways velocity exactly countering the fall
-body.velocity = tangent * sqrt(G * central_mass / radius)
+extends "study.gd"
+var a = Point.new()
+var b = Point.new()
+var strength := 4.0 # m³ / (kg s²), an authored model value
+var softening := 1.2 # metres
+
+func _ready() -> void:
+    add_child(a)
+    add_child(b)
+    a.position = Vector3(-1.5, 1.2, 0)
+    b.position = Vector3(1.5, 1.2, 0)
+    a.linear_velocity = global_basis * Vector3(0, 0, 0.6)
+    b.linear_velocity = -a.linear_velocity
+    for point in [a, b]:
+        point.mass = 2.0
+        point.collision_layer = 0
+        point.collision_mask = 0
+    caption("Two sources. Neither is fixed.")
+
+func pair_force(displacement: Vector3) -> Vector3:
+    var denominator := pow(displacement.length_squared() + softening * softening, 1.5)
+    return displacement * strength * a.mass * b.mass / denominator
+
+func _physics_process(_delta: float) -> void:
+    var force := pair_force(b.global_position - a.global_position)
+    a.apply_central_force(force)
+    b.apply_central_force(-force)
 ```
 
-The orbit pair shows the trick of every moon: it falls forever and forever misses. The orbital mechanics demo lets you set the sideways speed yourself — too slow spirals in, too fast escapes.
+## Read the change
 
-Add a third body.
+Subtract the two world positions to get a displacement from a to b. The force follows that displacement. Both masses multiply its strength.
 
-```gdscript
-for i in bodies.size():
-    for j in bodies.size():
-        if i != j:
-            bodies[i].acceleration += attract_accel(bodies[j], bodies[i])
-```
+The denominator makes attraction weaker with separation. Read `softening` as a chosen length that changes the calculation when the points get close. It keeps the force finite even when their positions coincide.
 
-NoC example 2.9: every body attracts every body. With two, the futures are circles and ellipses. With three — stand at the three-body problem and watch prediction die. No formula exists; only simulation.
+The two calls apply `force` and `-force`. The engine then uses each body’s mass to find its acceleration. Both velocities change, so the next update begins with two new source positions.
 
-Fall into the gravity well.
+## Change one thing
 
-```gdscript
-func well_depth(pos: Vector3, center: Vector3) -> float:
-    return -G_well / max((pos - center).length(), 0.5)
-```
+Double only `a.mass` and keep the starting velocities. Predict both responses: the shared force doubles; a’s acceleration stays the same because its mass also doubled; b’s acceleration doubles. Restart to compare.
 
-The well renders potential as geometry: depth is energy you'd need to climb out.
+## Return to the hall
 
-Let gravity lay out a graph.
+Choose PAIR / FIVE in the hall, then enter the field. Your presence adds another attraction. Track one sphere and notice when a new encounter makes its earlier path a poor guide to what happens next.
 
-```gdscript
-# force-directed layout: edges are springs, nodes repel like masses
-for pair in node_pairs:
-    apply(repulsion(pair))   # gravity's mirror
-for edge in edges:
-    apply(spring(edge))      # last room's force law
-```
+## Model notes
 
-The force-directed structures are this sequence eating its own tail: attraction and springs, repurposed from physics into layout. Graph theory, eleven sequences ahead, starts here.
+This softened attraction is an authored model. Far from the softening length it approaches an inverse-square force. It does not guarantee a circular orbit. Equal and opposite forces preserve the isolated pair’s total momentum within numerical tolerance; the simulation does not conserve energy exactly. Once the visitor joins, the spheres alone are no longer an isolated system.
 
-> Try: at the three-body problem, restart it three times. Same law, same code — find what was different. (Initial conditions are the third body's secret.)
+## Into the next room
 
-> Try: at the orbital demo, find the escape velocity by increments. The orbit that never returns has a number.
+These points attract while passing through each other. Bring back collision to ask what lets one body support another.
 
-Next: the Arena — everything in this sequence, armed and colliding.
+[Reflective text](final.md).

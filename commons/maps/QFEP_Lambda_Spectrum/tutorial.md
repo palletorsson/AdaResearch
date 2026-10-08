@@ -1,5 +1,13 @@
 # Lambda Spectrum
 
+**Learning elements — proposed focus**
+
+*The labels below set the revision focus; the existing lesson still needs alignment.*
+
+- Spatial recommendations
+- Parameter mappings
+- Available routes
+
 Your position is the λ value. Walk from crystal at λ=0 to dissolution at λ=1, through the edge of chaos in between.
 
 Declare the lambda reader.

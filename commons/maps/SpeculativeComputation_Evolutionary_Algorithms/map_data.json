@@ -2,7 +2,7 @@
   "map_info": {
     "name": "Evolutionary Algorithms",
     "lookup_name": "SpeculativeComputation_Evolutionary_Algorithms",
-    "description": "Explore evolutionary algorithms as speculative design tools. Scaffold map — awaiting content.",
+    "description": "Explore evolutionary algorithms as speculative design tools. A population of candidate forms is evaluated, selected, and mutated so the learner can watch a criterion become a world.",
     "version": "1.0",
     "format": "json",
     "dimensions": {
@@ -33,11 +33,11 @@
       }
     }
   },
-  "documentation": {
-    "summary": "SpeculativeComputation_Evolutionary_Algorithms - Scaffold map for evolutionary algorithms content",
-    "layout": "Simple 10x10 room with spawn and teleporter",
-    "objective": "Placeholder — build out evolutionary algorithms artifacts and interactions.",
-    "key_elements": []
+    "documentation": {
+    "summary": "SpeculativeComputation_Evolutionary_Algorithms - population, selection, mutation, and speculative fitness",
+    "layout": "Simple 10x10 room with a central evolutionary workbench, spawn, and teleporter",
+    "objective": "Change a fitness criterion and observe which forms survive, while keeping the selection rule visible.",
+    "key_elements": ["evolutionary_algorithms workbench - population and selection loop"]
   },
   "lighting": {
     "ambient_color": [0.3,0.3,0.4],
@@ -86,7 +86,7 @@
     ],
     "interactables": [
       [" "," "," "," "," "," "," "," "," "," "],
-      [" "," "," "," "," "," "," "," "," "," "],
+      [" "," "," "," ","evolutionary_algorithms"," "," "," "," "," "],
       [" "," "," "," "," "," "," "," "," "," "],
       [" "," "," "," "," "," "," "," "," "," "],
       [" "," "," "," "," "," "," "," "," "," "],

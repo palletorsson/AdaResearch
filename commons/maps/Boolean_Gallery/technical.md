@@ -7,3 +7,7 @@ Placement tokens use the museum's axis syntax, for example `csg_union_demo:0:0#f
 Artifact roles deliberately narrow the book focus: `csg_difference_demo` and `removal_room` are primary; the other four families are secondary comparison material. This keeps the room's thesis legible while retaining the full six-family audit. The role map is stored in `commons/data/artifact_roles.json`.
 
 The pass checks dimensions, six equal bands, four values per family, token resolution, role alignment, and presence of all four registers. It does not reorder the authored variants; that order is itself evidence.
+
+## Reading revision, 24 September 2026
+
+The complete pre-revision final.md and all companion drafts are preserved under doc/book/iterations/2026-09-24-boolean-room-for-a-body/before/commons/maps/Boolean_Gallery/. They retain the earlier forensic detail, line counts and source commentary as dated material, not newly verified facts. The current final.md follows the encounter and keeps the technical distinctions necessary to understand it. See that iteration's DECISIONS.md for source checks, factual corrections and unresolved artifact work.

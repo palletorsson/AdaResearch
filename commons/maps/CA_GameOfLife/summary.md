@@ -1,9 +1,12 @@
-# CA Game Of Life — Summary
+# A history you can inhabit
 
-CA_GameOfLife is the second map in the Cellular Automata sequence. It introduces Conway's Game of Life as the canonical example of a cellular automaton and treats the biological vocabulary attached to it — birth, survival, death — as load-bearing rather than decorative.
+CA_GameOfLife retains its historical map ID, but its primary implements elementary Rule 30. A bounded history becomes a desk record, occupied support tiles and an ornamental lattice. The museum surrounds this experiment with a walking margin; a shallow basin collects the gaps and ramps return to floor level.
 
-The rules are posted at the entrance. A cell is born when it has exactly three live neighbours. A live cell survives when it has two or three live neighbours. Every other configuration produces death. That is the entire specification. The rest of the map is consequence.
+The 15×37 map adds nineteen rows before the retained gallery and an eastern aisle that keeps the lab at full size. All five artifacts remain: ca_bridge is primary; lab_room, ca_columns and mirrored_cellular_automata remain secondary; dark_sphere remains decoration. Two cells open an east passage through the old front partition; a third opening joins the added aisle to the rear exit terrace. The active sequence order is unchanged in this pass.
 
-Six stations around the floor run different initial configurations of Life and let the same rule set unfold into different dynamics. One station stages an avalanche — a small seed that cascades across the grid. Another grows a dendrite that reaches outward in branches. A third demonstrates a stable oscillator, a fourth a slow crack, a fifth a percolation pattern, a sixth a short-lived ecosystem of gliders and glider guns. The same rule produces each, depending on what was there to start with.
+The primary offers STEP, RUN, REPLAY, SEED, FLIP X9 and ROW. It arrives held at generation 11 and records at most generation 23. Each mapping reads the same history. The tutorial asks the visitor to distinguish a spatial neighbour from another generation and to compare an ornamental gap with a gap in physical support.
 
-Within the sequence, Game Of Life is where state transitions acquire the names living things carry. CA_ElementaryRules will next strip the biology back out and ask what happens in one dimension.
+Book text and supporting documents now describe the installed experiment. The earlier Conway Life discussion and six-station claims are archived with the before state; the actual Life encounter is in CA_BeyondBinary. Runtime evidence and remaining review tasks are under doc/space/ca-history-review-2026-09-13.
+
+
+The current encounter also lets walking select a stored row. All three gold witnesses follow the visitor in the recorded bay; the data, tiles and collision stay unchanged. The floor witness reaches the margin so the visitor can compare without entering the generated crossing. Thirty-seven native desktop checks pass, including seven mouse-ray control events and forward/backward walking. A supplied body covers the XR player-group convention; tracked headset, Quest and whole-gallery acceptance remain pending. See encounter-notes.md and the 25 September walking-history review.

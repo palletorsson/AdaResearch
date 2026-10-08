@@ -1,5 +1,14 @@
 # ML Neural Networks
 
+**Learning elements — proposed focus**
+
+*The labels below set the revision focus; the existing lesson still needs alignment.*
+
+- Weighted sums
+- Function composition
+- Activations and weights
+- Prediction error
+
 Layers stacked. Each transforms its input.
 
 Build a feedforward network.

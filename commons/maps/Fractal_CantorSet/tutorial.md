@@ -1,108 +1,197 @@
-# Cantor Set
+# Cantor Set — keep the two ends
 
-Remove the middle third. Recurse. Fractal dimension 0.631.
+**Learning elements**
 
-Generate Cantor intervals.
+- An interval recorded as a start and a length
+- Replacing each entry with two entries
+- Separate current and next arrays
+- Retained length and generation history
 
+Take the rose point above the small bar. Pull its middle towards you, past the rose mark, and release. The large bar becomes two. Repeat: every interval loses its own middle third. Your hand makes one gesture; the rule applies it across the current row.
+
+The small bar is **one interval enlarged**, not the whole row in miniature. Its apparent size stays useful for your hand while the represented length falls. NEXT beside it performs the same cut. BACK and RESET return to earlier states. HISTORY shows the saved rows; GHOST marks removals without giving them collision.
+
+## What continues
+
+Keep the museum workspace and the small `PointBody` from Recursive Trees. There it turned a branch; here it carries the middle third. We already know arrays from Trace and loops from Arrays. Now a loop constructs a new array from an old one.
+
+Save `cantor.gd` beside the unchanged `point_body.gd`. Replace the script on your empty, unit-scale `PointStudy` node with `cantor.gd`; keep the earlier tree script. Place the study where you can stand in front of its positive Z side. The existing museum supplies the camera, light, player and XR pickup functions. The script creates all its own objects and looks up no scene nodes.
+
+This small reconstruction makes the interval rows and the hand control. The production artifact adds the plinth, comparison buttons, ghosts and full-size bars. The pagoda remains a second encounter with the same rule; rebuilding its architecture is not another assignment here.
+
+## A record for one span
+
+`Vector2(0, 6)` stores **start = 0, length = 6 metres** along a local horizontal line. These two numbers are data, not an XY position. The interval ends at `start + length`.
+
+For its first cut, `kept` is 2. The new records are `(0, 2)` and `(4, 2)`. They cover 0–2 and 4–6. We never construct a solid for 2–4. On the next cut, use each record's own start and length.
+
+The new function reads `intervals` and fills a separate `next` array. Only when that loop finishes does `advance()` replace `current`. Appending children to the array we are still reading would mix generations. `original.duplicate()` preserves the starting record; another copy records each completed row in `history`. `Vector2` entries are values, so these array copies are sufficient here.
+
+## cantor.gd
+
+Read `replace_intervals()` first. The rest connects that operation to the point you already hold and gives the numbers a visible form.
+
+<!-- student-code:cantor.gd -->
 ```gdscript
-func cantor_intervals(start: float, end: float, depth: int) -> Array:
-    if depth == 0:
-        return [[start, end]]
-    var third_length: float = (end - start) / 3.0
-    var left_intervals: Array = cantor_intervals(start, start + third_length, depth - 1)
-    var right_intervals: Array = cantor_intervals(end - third_length, end, depth - 1)
-    return left_intervals + right_intervals
-```
+extends Node3D
 
-Recursive: split into thirds, keep outer thirds. 2^n intervals at depth n.
+const PointBody = preload("point_body.gd")
+const HOME := Vector3(0, 1.27, 0.45)
+const VIEW_SCALE := 0.2
+@export var show_history := false
+var original: Array[Vector2] = [Vector2(0, 6)]
+var current: Array[Vector2] = []
+var history: Array = []
+var rows: Node3D
+var point: XRToolsPickable
+var readout: Label3D
+var was_held := false
 
-Render intervals as cylinders.
+func _ready() -> void:
+    current = original.duplicate()
+    history.append(current.duplicate())
+    rows = Node3D.new()
+    add_child(rows)
+    point = PointBody.new()
+    point.tint = Color("e99db8")
+    add_child(point)
+    for x in [-0.4, 0.4]:
+        bar(self, Vector3(x, 1.15, 0.45), 0.4, Color("28252c"))
+    bar(point, Vector3(0, -0.12, 0), 0.4, Color("e99db8"))
+    readout = Label3D.new()
+    readout.position = Vector3(0, 1.98, 0)
+    readout.font_size = 24
+    readout.pixel_size = 0.001
+    add_child(readout)
+    park()
+    redraw()
 
-```gdscript
-func render_cantor(intervals: Array, y: float, length: float) -> void:
+func replace_intervals(intervals: Array[Vector2], fraction: float = 1.0 / 3.0) -> Array[Vector2]:
+    assert(fraction > 0.0 and fraction < 0.5)
+    var next: Array[Vector2] = []
     for interval in intervals:
-        var segment := MeshInstance3D.new()
-        var cylinder := CylinderMesh.new()
-        cylinder.top_radius = 0.02
-        cylinder.bottom_radius = 0.02
-        cylinder.height = interval[1] - interval[0]
-        segment.mesh = cylinder
-        segment.position = Vector3((interval[0] + interval[1]) / 2, y, 0)
-        segment.rotate_object_local(Vector3.RIGHT, PI / 2)
-        add_child(segment)
+        var start := interval.x
+        var length := interval.y
+        var kept := length * fraction
+        next.append(Vector2(start, kept))
+        next.append(Vector2(start + length - kept, kept))
+    return next
+
+func advance() -> void:
+    if point.held() or history.size() >= 6:
+        return
+    current = replace_intervals(current)
+    history.append(current.duplicate())
+    redraw()
+
+func kept_length(intervals: Array[Vector2]) -> float:
+    var total := 0.0
+    for interval in intervals:
+        total += interval.y
+    return total
+
+func _physics_process(_delta: float) -> void:
+    var holding: bool = point.held()
+    if was_held and not holding:
+        var release := to_local(point.global_position)
+        if release.z - HOME.z >= 0.30:
+            advance()
+    if not holding:
+        park()
+    was_held = holding
+
+func park() -> void:
+    point.global_transform = global_transform * Transform3D(Basis.IDENTITY, HOME)
+
+func redraw() -> void:
+    for child in rows.get_children():
+        rows.remove_child(child)
+        child.queue_free()
+    var first := 0 if show_history else history.size() - 1
+    for generation in range(first, history.size()):
+        for interval: Vector2 in history[generation]:
+            var centre := (interval.x + interval.y / 2.0 - 3.0) * VIEW_SCALE
+            var at := Vector3(centre, 1.8 - generation * 0.16, 0)
+            bar(rows, at, interval.y * VIEW_SCALE, Color("28252c"))
+    readout.text = "cut %d / 5 | %d pieces | %.3f m kept\nPull the middle towards you 30 cm, then release" % [history.size() - 1, current.size(), kept_length(current)]
+
+func bar(host: Node3D, at: Vector3, width: float, colour: Color) -> void:
+    var surface := MeshInstance3D.new()
+    var shape := BoxMesh.new()
+    shape.size = Vector3(width, 0.05, 0.06)
+    surface.mesh = shape
+    var finish := StandardMaterial3D.new()
+    finish.albedo_color = colour
+    surface.material_override = finish
+    surface.position = at
+    host.add_child(surface)
 ```
 
-Each interval is a short cylinder. The pattern is a horizontal line of shrinking bars.
+The transition from held to released triggers one cut. Crossing the threshold while still holding changes nothing. Return the point before releasing to cancel. `to_local()` measures the withdrawal in the study's frame, even if you turn the whole station. `park()` returns the control after release. Five cuts is our deliberate limit.
 
-Stack generations vertically.
+`bar()` reuses the box mesh we already know. `VIEW_SCALE` fits six represented metres into a 1.2-metre drawing. The counts and lengths use the interval data, not that display scale. These small bars have no collision: they are a drawing of intervals. The point still has its pickup shape.
 
+The two recursive child calls in Trees and the two appends here share a branching pattern. This script uses a loop to make one complete generation per gesture. It does not call itself; the hand decides when the next generation begins.
+
+## Predict, then cut
+
+After two releases you should have four records, each 2/3 metre long, with 8/3 metres retained in total. After five: 32 pieces, each 6/243 metre, retaining 64/81 metre. More entries, less material.
+
+Enable `show_history` in the Inspector and run again. Make the same cuts. The drawing now includes the old rows, but the latest count and retained length must stay the same. At five cuts there are 63 drawn bars across the history and 32 current intervals. `original` is still `[(0, 6)]`.
+
+For an independent variation, change the call to `replace_intervals(current, 0.25)`. Predict the two records after one cut before running: `(0, 1.5)` and `(4.5, 1.5)`. This keeps the outer quarters and removes the middle half. It is a different rule from the middle-third Cantor construction. The small hand model still depicts thirds; resize its three parts before presenting your variant as a matching exhibit. A legal fraction here is greater than zero and less than one half.
+
+## Bring the question to the pagoda
+
+Walk up the existing ramp and try its broad opening. Two presses of CUT add smaller openings alongside it. The same interval rule has been given height, depth and collision. A positive gap width does not guarantee a passage for the player's collision body.
+
+What travels onward is the replacement function and the distinction between a current result and its record. These arrays live for the study's lifetime; this lesson does not save them across halls. Koch will replace each segment with a detour and increase length instead. Before changing the rule, keep this version so you can compare what each replacement preserves.
+
+## The carried point file
+
+This is the same `point_body.gd` as in Recursive Trees, included so the two-file example is complete. Its XR pickup and desktop hooks are existing knowledge; they are not new steps in the interval algorithm.
+
+<!-- student-code:point_body.gd -->
 ```gdscript
-func render_generations(max_depth: int) -> void:
-    for depth in max_depth + 1:
-        var intervals: Array = cantor_intervals(0.0, 10.0, depth)
-        render_cantor(intervals, -depth * 0.3, 0.0)
+extends XRToolsPickable
+## Point Lines' frozen point construction, made smaller for the hand model.
+var tint := Color("25212a")
+var desktop_pointer: WeakRef
+
+func _init() -> void:
+	freeze = true
+	freeze_mode = RigidBody3D.FREEZE_MODE_KINEMATIC
+	release_mode = XRToolsPickable.ReleaseMode.FROZEN
+	ranged_grab_method = XRToolsPickable.RangedMethod.NONE
+	collision_layer = 4
+	collision_mask = 0
+	var surface := MeshInstance3D.new()
+	var sphere := SphereMesh.new()
+	sphere.radius = 0.085
+	sphere.height = 0.17
+	sphere.radial_segments = 24
+	sphere.rings = 12
+	surface.mesh = sphere
+	add_child(surface)
+	var boundary := CollisionShape3D.new()
+	var shape := SphereShape3D.new()
+	shape.radius = 0.085
+	boundary.shape = shape
+	add_child(boundary)
+
+func _ready() -> void:
+	super._ready()
+	var finish := StandardMaterial3D.new()
+	finish.albedo_color = tint
+	finish.roughness = 0.24
+	get_child(0).material_override = finish
+
+func held() -> bool:
+	return is_picked_up() or (desktop_pointer != null and desktop_pointer.get_ref() != null)
+
+func on_desktop_grab(pointer: Node) -> void:
+	desktop_pointer = weakref(pointer)
+
+func on_desktop_drop(_pointer: Node) -> void:
+	desktop_pointer = null
 ```
-
-Each row shows one generation. The pattern tree develops downward.
-
-Compute the set's measure.
-
-```gdscript
-func measure(depth: int, total_length: float) -> float:
-    var remaining: float = pow(2.0 / 3.0, depth) * total_length
-    return remaining
-```
-
-Each generation multiplies the total length by 2/3. Converges to zero as depth grows.
-
-Compute fractal dimension.
-
-```gdscript
-func cantor_dimension() -> float:
-    return log(2) / log(3)
-```
-
-Two pieces at 1/3 scale. D = log(2)/log(3) ≈ 0.631. Between 0 and 1 — fractal rather than linear.
-
-Cantor dust (2D variant).
-
-```gdscript
-func cantor_dust(depth: int, size: float) -> Array:
-    if depth == 0:
-        return [Vector2.ZERO]
-    var points: Array = []
-    var sub_points: Array = cantor_dust(depth - 1, size / 3)
-    for dx in [0, 2]:
-        for dy in [0, 2]:
-            for sub in sub_points:
-                points.append(sub + Vector2(dx * size / 3, dy * size / 3))
-    return points
-```
-
-Four corners at each scale. 4^n points at depth n.
-
-Visualise dimension.
-
-```gdscript
-func animate_dimension_comparison() -> void:
-    var cantor_d: float = cantor_dimension()
-    var sierpinski_d: float = log(3) / log(2)
-    var menger_d: float = log(20) / log(3)
-    display_dimension_graph([cantor_d, sierpinski_d, menger_d], ["Cantor", "Sierpinski", "Menger"])
-```
-
-Three fractals, three dimensions. The comparison shows fractal dimension lives between integers.
-
-You can now generate Cantor intervals, render them as cylinders, compute the fractal dimension, and extend to Cantor dust in 2D. Fractal_KochSierpinski extends into additive and multiplicative 2D fractals.
-
-Convert iteration to pixel coordinates.
-
-```gdscript
-func complex_to_pixel(c: Vector2, bounds: Rect2, resolution: Vector2i) -> Vector2i:
-    return Vector2i(
-        int((c.x - bounds.position.x) / bounds.size.x * resolution.x),
-        int((c.y - bounds.position.y) / bounds.size.y * resolution.y)
-    )
-```
-
-Maps math-space to image-space. Inverse of pixel-to-complex used in rendering.

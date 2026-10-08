@@ -234,3 +234,25 @@ MeshInstance3D, hidden or not. It is built at the moment of the crossing now,
 so the cube seals its one cell; the registry's measured footprint (17) is stale
 by the same amount. The Spectacle's twelve stood exactly where placed, because
 its rows are thirteen wide.
+
+
+## 2026-09-09 — Drink Me room
+
+Rebuilt at the user's request around scale_me and the exact blooming/service-tower food table and spire/leaning crystal suit variants. The earlier map and texts are preserved in doc/space/scale-drink-me-2026-09-09/before.
+
+One primary encounter owns the bottle, room and seeded sculptures. Taking the bottle changes the room by 10x, holds the body and museum constant, and teleports the visitor onto the top serving plate. The former 18 x 24 cm doorway becomes 1.8 x 2.4 m. Thirteen visible porcelain plates, present at both scales, were added as a walkable descent. The first spacing test stalled on overlapping upper plates; widening their angular spacing to 0.65 radians resolved it. The room's explicit visibility bounds prevent museum culling at its distant exit.
+
+Actual museum probe: 23 checks, zero failures, including crosshair pickup eligibility, consumption/released hand, exact scale boundary, body clearance on arrival, blocked/open doorway comparison, descent using the museum CharacterBody3D, and walking from the last plate through the exit. Content tests: 27 passed. No new script errors in the successful runtime probe; the existing UID/certificate/DebugLogger warnings remain unrelated. Screenshots inspected at small scale and on the enlarged tower. VR pickup is wired through XRToolsPlayerBody; headset comfort and learner discovery have not yet been verified.
+
+The new final.md moves from the unusable doorway through the bottle encounter to the code and the retained body reference. It distinguishes proportional similarity from bodily access. Inventory, book tags, sequence, core encounter hashes and this map's cached museum row are synchronized.
+
+
+## 2026-09-17 — Align the cut, the doorway and the route
+
+The current compact encounter is fourfold: a 4 x 4 m room becomes 16 x 16 m inside a 21 x 22 cell hall. The scale assignment is instantaneous, followed after a physics frame by body relocation onto the table. The book and tutorial now explicitly name these two operations; the tutorial's stale factor of ten is corrected. Earlier notes above describe previous configurations.
+
+A fixed structure-4 wall across source row 2 leaves cells 9–11 open at the small room entrance. It makes the room the forward route while preserving retreat. The enlarged room exit and unchanged witness frame lead to the museum exit beyond them. Benches and automatic dream sculpture dressing are excluded from this deliberate encounter. The standalone spawn uses s with rotation 180 in its utility properties.
+
+The first actual-museum run found that the automatic reach repair slid the entire room (-1,+1), breaking its alignment with the fixed wall. A narrowly scoped museum seal exception for scale_me configured as drink_me preserves the authored anchor and retains physical collision. The static walk graph is not proof of this changing route; the current probe tests the physical body instead.
+
+Fresh probe: 40 checks, zero failures, including entry, both exterior bypasses blocked before/after scaling, blocked/open doorway, actual desktop bottle pickup, all thirteen serving-step landings, physical descent, the route to the hall exit and no museum furniture collision inside the enlarged room. Headset comfort remains untested. Evidence and before-snapshots: doc/space/transformation-alignment-2026-09-17/scale/. The runtime also recorded an ambient crab bite; that separate museum system is reported for follow-up.

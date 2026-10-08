@@ -1,5 +1,13 @@
 # Random Pheromone
 
+**Learning elements — proposed focus**
+
+_The labels below set the revision focus; the existing lesson still needs alignment._
+
+- Signal fields
+- Deposition and decay
+- Feedback
+
 Each ant walks randomly; the trail it leaves biases the next. Build stigmergy from a floor-grid of pheromone values.
 
 Declare the pheromone grid.

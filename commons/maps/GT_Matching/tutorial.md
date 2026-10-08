@@ -1,5 +1,14 @@
 # GT Matching
 
+**Learning elements — proposed focus**
+
+*The labels below set the revision focus; the existing lesson still needs alignment.*
+
+- Pairing constraints
+- Greedy order
+- Augmenting paths
+- Validity and optimality
+
 Pair nodes. Each node claimed by at most one edge. Hungarian algorithm for bipartite weighted matching.
 
 Build a bipartite graph.

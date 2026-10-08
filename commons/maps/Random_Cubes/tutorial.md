@@ -1,5 +1,13 @@
 # Random Cubes
 
+**Learning elements — proposed focus**
+
+_The labels below set the revision focus; the existing lesson still needs alignment._
+
+- Event accumulators
+- Stopping conditions
+- Outcome histories
+
 Each cube remembers its coin flips. Build the arena where form encodes chance.
 
 Declare the random cube.

@@ -1,125 +1,47 @@
-# Color_Pillar - Technical Tutorial
+# A three-coordinate colour field
 
-## Additive Color Mixing
+Current implementation: 28 September 2026, ceiling revision. `pillarcolorcollection` retains its default named-palette layout; the museum's existing `#layout:spatial_gradient` placement opts into this field. No map geometry or placement was changed.
 
-### Light Adds to Light
+The 5 × 7 columns retain their 3.2 m spacing and 4.6 m height. Each column receives the hue `clampf(x/12.8,0,1)*0.85` and saturation `lerpf(0.25,1,clampf(z/19.2,0,1))`. Value is evaluated vertically from 0 at field-local y=0.46 to 1 at y=4.6. The coloured mesh has local vertex y=-1.8..1.8 and is scaled by the existing 1.15 prefab transform. The reference column at (-1.8,0,0) uses saturation zero, giving black-to-white independently of hue. It is separate from the thirty-five coloured samples.
 
-```gdscript
-# Additive mixing: overlapping lights combine
-func additive_mix(colors: Array[Color]) -> Color:
-    var result = Color.BLACK
+`hsv_field.gdshader` draws fixed samples, vertical ranges and a V=1 ceiling using one HSV conversion. All are unshaded. The shader uses encoded RGB directly for Compatibility and decodes sRGB before writing ALBEDO for Mobile/Forward+. These choices preserve the coordinate comparison; they do not claim calibrated display output or uniform perceived lightness. The old floor and columns previously differed in lighting response; that comparison is superseded by the current shared display shader.
 
-    for color in colors:
-        result.r = min(result.r + color.r, 1.0)
-        result.g = min(result.g + color.g, 1.0)
-        result.b = min(result.b + color.b, 1.0)
+`field_sampler.tscn` inherits the existing grab-paper scene and pickup system. Its subclass disables grid snapping, retains XR/direct and ranged pickup, and freezes on release. Horizontal position samples the field directly; hand y=0.65..1.85 maps to V=0..1 and hence field y=0.46..4.6. The marker and FIELD Y readout make the represented coordinate explicit. RGB and HSV are updated from the same sample. Bounds clamp; horizontal clamping displays EDGE. This is a hand-scale controller for the taller field, not a claim that the marker is at the hand's physical height.
 
-    return result
+The sampler keeps the source H/S coordinates even at V=0. It does not round-trip them from RGB black. The existing wall swatches retain their colour and label when carried, offering the contrasting action of moving a stored value.
 
-# Red + Green = Yellow (not brown like paint!)
-var yellow = additive_mix([Color.RED, Color.GREEN])
-# Result: Color(1, 1, 0)
+The ceiling is a two-sided PlaneMesh, 15.2 × 21.6 m, centred at (6.4,4.6,9.6). Its mesh-space x/z plus the explicit (6.4,9.6) offset recover the same field coordinates as the pillars. Colour clamps beyond the 12.8 × 19.2 m sample span. The overhang therefore covers the outer columns without rescaling their colours. It is a visual canopy with no added overhead collision or light source.
 
-# Red + Green + Blue = White
-var white = additive_mix([Color.RED, Color.GREEN, Color.BLUE])
-# Result: Color(1, 1, 1)
-```
+A 16.7 × 21.6 m near-black (#080a0e) plane at y=0.026 replaces the bright floor overlay, extending to include the separate grey reference. Its roughness is 1 and shading is unlit; existing floor collision continues to support walking. No map layout or artifact placement was changed.
 
-### Visual Color Mixing Implementation
+Focused native checks cover all 35 ceiling-to-pillar coordinate/colour matches, full height, near-black ground, actual sampler pickup and release, RGB/HSV agreement, named swatches and ordinary-controller walks. The run report and native interior images are in `doc/book/iterations/2026-09-28-pillar-colour-ceiling/`. Compatibility rendering is exercised. Tracked-hand reach, headset comfort, display calibration and other rendering paths remain unverified.
 
-### Flashlight Demo: Revealing Color
+---
+
+## Historical record — the flat samples before this extension
+
+The following record describes the previous fixed-value, lit-column implementation. Its dates and claims remain as historical evidence, not the current vertical encounter.
+
+# A field of colour samples — implementation
+
+The museum placement opts in with `#layout:spatial_gradient`. In `algorithms/color/pillarcolorcollection/pillarcolorcollection.gd`, both the pillar samples and the floor shader evaluate the same HSV field:
 
 ```gdscript
-extends SpotLight3D
-
-@export var demo_colors: Array[Color] = [
-    Color.RED, Color.GREEN, Color.BLUE, Color.WHITE
-]
-var current_index: int = 0
-
-func _on_trigger_pressed():
-    # Cycle through colors
-    current_index = (current_index + 1) % demo_colors.size()
-    light_color = demo_colors[current_index]
-
-# The flashlight shows:
-# - White light reveals all surface colors
-# - Red light makes red objects visible, blue objects dark
-# - Object color = which wavelengths the surface reflects
+var u := clampf(p.x / 12.8, 0.0, 1.0)
+var v := clampf(p.z / 19.2, 0.0, 1.0)
+return Color.from_hsv(u * 0.85, lerpf(0.25,1.0,v),0.95)
 ```
 
-### Why Colored Light Changes Object Appearance
+The floor evaluates between the discrete samples. This is a coordinate field, not additive light mixing. The prefab's 4 m height is multiplied by 1.15. Its material receives the colour sampled at the pillar's local position. Labels identify the grid address and colour code.
 
-### Grabbable Color Collection
+`color_sets_overview` uses `#mount:wall` to arrange twelve existing sets in six columns and two rows. Swatches retain the existing grab interaction. The named palette construction remains separate from the spatial HSV field. Other placements retain the default layouts.
 
-```gdscript
-extends XRToolsPickable
+The former tutorial is archived under `doc/space/color-recovery-2026-09-09/before/commons/maps/Color_Pillar`.
 
-@export var collection_color: Color = Color.RED
+## Native comparison and carrying, 23 September 2026
 
-signal color_collected(color: Color)
+The shared book figure pairs an elevated museum view with the view from the ordinary walker's reached position plus 1.65 metres. Both show the actual placed field. No geometry, controls or placement changed. The floor remains unshaded; columns receive lighting, so equal assigned values do not require equal rendered pixels.
 
-func _ready():
-    # Visual representation
-    $MeshInstance3D.material_override.albedo_color = collection_color
-    $MeshInstance3D.material_override.emission = collection_color
-    $MeshInstance3D.material_override.emission_energy_multiplier = 1.5
+32 focused assertions pass in the isolated production museum: all 35 material samples and labels match the coordinate function, floor UV corners agree with its directions, saturation/hue comparisons hold, twelve named wall sets are present, and a real wall swatch follows the production pickable mechanism through pickup, supplied movement and release. The swatch is returned to its original placement. Its label uses an 8-bit hexadecimal RGB code and the nearest entry in the artifact's small name list, selected by squared RGB distance; it does not establish a culturally universal name or perceptual distance.
 
-func _on_picked_up(pickable):
-    emit_signal("color_collected", collection_color)
-
-func get_color() -> Color:
-    return collection_color
-```
-
-### Pillar Color Collection
-
-### Spectrum Visualizer
-
-```gdscript
-extends Node3D
-
-@export var bar_count: int = 32
-@export var bar_height: float = 2.0
-@export var bar_width: float = 0.2
-
-func _ready():
-    create_spectrum_bars()
-
-func create_spectrum_bars():
-    for i in range(bar_count):
-        var bar = MeshInstance3D.new()
-        var mesh = BoxMesh.new()
-        mesh.size = Vector3(bar_width, bar_height, bar_width)
-        bar.mesh = mesh
-
-        # Position across X axis
-        bar.position.x = i * bar_width * 1.2
-
-        # Color from spectrum position
-        var t = float(i) / bar_count
-        var color = Color.from_hsv(t * 0.8, 1.0, 1.0)  # 0.8 to avoid magenta
-
-        var mat = StandardMaterial3D.new()
-        mat.albedo_color = color
-        mat.emission_enabled = true
-        mat.emission = color
-        mat.emission_energy_multiplier = 0.5
-        bar.material_override = mat
-
-        add_child(bar)
-```
-
-## Key Takeaway
-
-Color_Pillar teaches **additive color mixing** - how light combines. Red + Green = Yellow (surprising if you learned paint mixing). The flashlight demo reveals that object color depends on both surface properties AND illumination. Colored light can make objects appear to change color, disappear into darkness, or reveal hidden patterns.
-
-## Implementation Notes and Complexity
-
-The pillar artifact renders a vertical stack of coloured cylinders, each tinted by a distinct material. The stack's height maps to a palette dimension, and the pillar as a whole reads as a legible sample of the palette's gradient. Constructing the pillar requires N MeshInstance3D nodes for a stack of height N, and N material instances because each cylinder's albedo is unique. The per-instance cost is O(1); the full pillar setup is O(N).
-
-Rendering the pillar at runtime is dominated by the draw-call count. Godot batches instances of the same mesh with the same material automatically; the pillar defeats this optimisation because every cylinder has a unique material. A pillar of height 32 produces 32 draw calls. Modern hardware handles this comfortably at 60 frames per second, but dense scenes with many pillars can become CPU-bound on draw submission. The conventional optimisation is to bake the pillar's colour variation into a single texture and render the pillar as a single cylinder with that texture, collapsing 32 draw calls to one.
-
-The pillar's material properties extend beyond albedo. Each cylinder can carry its own metallic, roughness, and emission values, and the stack can be used as a live material sampler: a learner picks a height and the corresponding cylinder's full material assignment becomes the active paint. The sampler is not free — reading the material properties requires a node lookup — but the cost is O(1) per sample and runs at interactive rates.
-
-Within the sequence, Color_Pillar is the vertical counterpart to the horizontal palette. The stack's height dimension gives the palette a third axis of legibility: the learner can see the whole gradient at once, from eye level down, rather than having to scan a horizontal strip. The pillar's architecture makes the palette a standing object rather than a tablet, and the embodied vertical reading is the map's small contribution to the colour vocabulary the sequence is building.
+Supplied key input drives the ordinary museum controller along a gap between columns, across a gap between rows and back toward the pale edge. These selected paths retain ground support. Figures and the run record are in `doc/book/iterations/2026-09-23-pillar-colour-between/`. No tracked-controller reach, headset comfort, colour calibration, learner or performance claim.

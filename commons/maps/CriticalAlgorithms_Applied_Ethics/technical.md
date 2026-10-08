@@ -1,138 +1,26 @@
-# Applied Ethics — Technical
+# Arrange — choose a plan, then examine its terms
 
-Three case-study stations run live classifiers on anonymised decision tasks. Each station exposes a simple classifier, a feature set, and a decision output, plus intervention controls that let the learner adjust the classifier's behaviour and see the downstream effects.
+The previous hall moved word positions. Here an array gives possible participants positions. The source is [room_shape_demonstrator.gd](../../../algorithms/postfoundationscrisis/room_shape_demonstrator.gd).
 
-```gdscript
-class_name ClassifierStation extends Node3D
-
-@export var case_data: Array = []  # list of {features: Array, true_label: int}
-@export var threshold: float = 0.5
-@export var feature_weights: Array = []  # float per feature
-
-var predictions: Array = []  # predicted labels for the cases
-
-func classify_all() -> void:
-    predictions.clear()
-    for case in case_data:
-        var score: float = 0.0
-        for i in range(case.features.size()):
-            score += case.features[i] * feature_weights[i]
-        score = sigmoid(score)
-        predictions.append(1 if score > threshold else 0)
-
-func sigmoid(x: float) -> float:
-    return 1.0 / (1.0 + exp(-x))
-```
-
-## Calibration Slider
-
-The threshold slider adjusts where the classifier commits to a positive prediction. Moving it changes the false-positive and false-negative rates across the case set.
+This map opts into interactive=true, plan=head and palette=neutral. HEAD and CIRCLE show one miniature at 1.5 times the paired model scale. PAIR returns to the original side-by-side comparison. WATCH selects the existing panopticon plan: the long-table model beside a ring of eight outward-facing backed seats and a taller central block. VACANT removes the furniture from both rectangular rooms. These remain miniature studies, not full-size occupied meeting rooms.
 
 ```gdscript
-func _on_threshold_changed(new_threshold: float) -> void:
-    threshold = new_threshold
-    classify_all()
-    update_consequence_readout()
+for i in 6:
+    var a: float = TAU * float(i) / 6.0
+    var chair := _make_chair(chair_color_distributed)
+    chair.scale = Vector3(s, s, s)
+    chair.position = origin + Vector3(cos(a) * 0.4 * s, floor_y + 0.1 * s, sin(a) * 0.4 * s)
+    _add_part(chair)
 ```
 
-## Feature Re-Weighting
+Six iterations divide a full turn, TAU, into equal angles. cos and sin place each chair on a ring around origin. The little circle carries the arrays, transformations and waves we have already learned. Equal spacing is what this loop guarantees. Equal opportunity to speak would require another kind of evidence.
 
-Each feature has its own weight slider. Zeroing a feature removes its contribution from the prediction, which simulates removing that data source from the classifier.
+The long-table model contains seven chairs: one at scale s and six at 0.6*s. The circle contains six at scale s. The WATCH pair contains seven plus nine; VACANT contains none. Chair count, scale and geometry therefore vary across the plans. The console presents choices, not an isolated test of table shape.
 
-```gdscript
-func _on_feature_weight_changed(feature_index: int, new_weight: float) -> void:
-    feature_weights[feature_index] = new_weight
-    classify_all()
-    update_consequence_readout()
-```
+NEUTRAL and COLOUR are separate from PLAN. The palette applies a shared material colour or restores the original red/tan/green scheme without changing any chair transform. Neutral colour does not make the arrangement itself neutral. The unconfigured scene retains plan=pair, palette=authored and no visitor console, preserving other placements.
 
-## Downstream Consequence
+The compact panel remains outside the rebuild list. Only the model's own parts are replaced, so the controls and externally attached labels survive. Interactive pedestals have box collisions. The panopticon wall segments now follow the circle's tangent; their former radial orientation left a ring of fins.
 
-The consequence readout tracks how many cases in each demographic group receive positive versus negative outcomes. This exposes disparate impact: if the classifier systematically disadvantages a group, the readout shows it.
+The hall retains its six artifact families. The primary moves to (6,5), faces the entry and reserves space for both model widths. The arrival gate stays at the boundary; a local clear rectangle keeps a decorative plinth off the exit approach. The authored structure layer is preserved.
 
-```gdscript
-func compute_group_outcomes() -> Dictionary:
-    var outcomes: Dictionary = {}
-    for i in range(case_data.size()):
-        var group: String = case_data[i].group
-        var pred: int = predictions[i]
-        outcomes[group] = outcomes.get(group, {"positive": 0, "negative": 0})
-        if pred == 1:
-            outcomes[group].positive += 1
-        else:
-            outcomes[group].negative += 1
-    return outcomes
-```
-
-## Confusion Matrix
-
-A standard evaluation tool for classifiers. Four counts: true positives, false positives, true negatives, false negatives. Derived metrics (precision, recall, F1) are computed from these.
-
-```gdscript
-func confusion_matrix() -> Dictionary:
-    var tp := 0; var fp := 0; var tn := 0; var fn := 0
-    for i in range(case_data.size()):
-        var pred: int = predictions[i]
-        var truth: int = case_data[i].true_label
-        if pred == 1 and truth == 1: tp += 1
-        elif pred == 1 and truth == 0: fp += 1
-        elif pred == 0 and truth == 0: tn += 1
-        elif pred == 0 and truth == 1: fn += 1
-    return {"tp": tp, "fp": fp, "tn": tn, "fn": fn}
-
-func precision_recall_f1(cm: Dictionary) -> Dictionary:
-    var precision: float = 0.0 if cm.tp + cm.fp == 0 else float(cm.tp) / (cm.tp + cm.fp)
-    var recall: float = 0.0 if cm.tp + cm.fn == 0 else float(cm.tp) / (cm.tp + cm.fn)
-    var f1: float = 0.0 if precision + recall == 0 else 2 * precision * recall / (precision + recall)
-    return {"precision": precision, "recall": recall, "f1": f1}
-```
-
-## Annotated Excerpts
-
-A small library of practitioner excerpts is displayed on a wall. Each excerpt is a short paragraph with a named attribution and a link to a deeper reading.
-
-```gdscript
-class_name ExcerptDisplay extends Node3D
-
-var excerpts: Array = [
-    {"title": "On disparate impact", "author": "Barocas & Selbst", "text": "A facially neutral classifier can still produce disparate impact..."},
-    {"title": "On refusal", "author": "Simone Browne", "text": "The refusal to participate is a form of epistemic labor..."},
-    {"title": "On audit", "author": "Ajunwa", "text": "Algorithmic audit requires access to the model and its training data..."},
-]
-
-func cycle_excerpt() -> void:
-    current_index = (current_index + 1) % excerpts.size()
-    update_display()
-```
-
-## Complexity
-
-Classification is O(N·F) per re-classify for N cases and F features. The map uses fewer than 100 cases per station, so the full reclassification runs in milliseconds even at interactive slider rates.
-
-Within the sequence, Applied_Ethics operationalises the bias visualiser's diagnosis. SpeculativeComputation_Paraconsistent_Engineering will next take the contradiction-tolerance approach further.
-
-## ROC and PR Curves
-
-A receiver operating characteristic (ROC) curve plots true positive rate against false positive rate across every possible threshold. A precision-recall curve does the same for precision and recall. The area under the ROC curve (AUC) is a threshold-independent measure of classifier quality; AUC of 0.5 is random guessing, 1.0 is perfect classification.
-
-```gdscript
-func compute_roc_curve(scores: Array, labels: Array) -> Array:
-    var points: Array = []
-    for threshold in range(0, 101):
-        var t: float = threshold / 100.0
-        var tp: int = 0; var fp: int = 0; var fn: int = 0; var tn: int = 0
-        for i in range(scores.size()):
-            var pred: int = 1 if scores[i] > t else 0
-            if pred == 1 and labels[i] == 1: tp += 1
-            elif pred == 1 and labels[i] == 0: fp += 1
-            elif pred == 0 and labels[i] == 1: fn += 1
-            else: tn += 1
-        var tpr: float = float(tp) / max(1, tp + fn)
-        var fpr: float = float(fp) / max(1, fp + tn)
-        points.append(Vector2(fpr, tpr))
-    return points
-```
-
-## Refusal Protocol
-
-Refusal is not a passive state. A refusing practitioner documents their reasoning, identifies the values that motivate the refusal, and proposes alternatives where possible. The map's refusal panel prompts the learner through a structured refusal workflow.
+Compare actual sightlines and turn-taking with people in a later experiment. These models contain neither a speaking process nor measured accessibility. The next hall keeps conflicting requirements visible after participants have found a place.

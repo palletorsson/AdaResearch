@@ -4,9 +4,11 @@
 
 One bar is waiting. Where could it go if we let it become two?
 
-Press NEXT. The new pair appears beneath it. Their outside ends reach as far as the first bar, but the middle is missing. Press again. Look for the new gaps before counting the pieces. Each piece has lost its own middle; the first large gap has not been divided or repaired.
+Take the rose point above the small bar. Pull its middle towards you, past the mark, and release. The large bar gives way to two. Their outside ends reach as far as the first bar, but the middle is missing. Pull again. Look for the new gaps before counting the pieces. Each piece has lost its own middle; the first large gap has not been divided or repaired. NEXT beside your hand makes the same cut.
 
-The trees sent another branch into space. Here another generation leaves less behind. At the fifth cut, thirty-two pieces share less than a metre of the six metres we began with. The desk counts the latest row. Above it, the old bars are still present. The whole display has become busier while the thing it is recording has become smaller in total length.
+The little bar stays large enough to hold. It represents one interval, enlarged; it is not the whole row. The interface keeps a familiar span between your fingers while the thing it stands for becomes smaller. One movement of your hand is being repeated in places you did not touch.
+
+The trees sent another branch into space. Here another generation leaves less behind. At the fifth cut, thirty-two pieces share less than a metre of the six metres we began with. The desk counts the latest row. Turn HISTORY on. The old bars appear above it. The whole display has become busier while the thing it is recording has become smaller in total length.
 
 Turn HISTORY off. There is much less to look at. The kept length does not change. The earlier rows were a record we added so we could follow the operation. They were never extra members of the latest generation.
 

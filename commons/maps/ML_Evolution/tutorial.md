@@ -1,5 +1,13 @@
 # ML Evolution
 
+**Learning elements — proposed focus**
+
+*The labels below set the revision focus; the existing lesson still needs alignment.*
+
+- Heritable parameters
+- Variation and selection
+- Evaluation criteria
+
 A genetic algorithm. Population, selection, mutation.
 
 Define a creature genome.

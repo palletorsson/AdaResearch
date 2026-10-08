@@ -17,3 +17,19 @@ The `rhizomatic_structure` artifact is the map's internal dissent. Its identity 
 Ranciere's politics of aesthetics — the disruption of the sensible order by those who were not counted within it — finds expression in this placement. The rhizomatic structure is the artifact that does not belong on the hub. It models networks without centers, without hierarchies, without the privileged positions that the hub-and-spoke topology enshrines. Its presence on the central platform is a political act within the map's own logic: the thing that argues against centrality placed at the center, visible only because it occupies the position it rejects.
 
 The four arms over void are the map's honesty. Every connection to the hub is a single-cell walkway over nothing. Remove one walkway and a quarter of the network is severed. The hub is central but the arms are fragile, and the fragility is the cost of centralization. A decentralized network — a mesh, a rhizome — would not have this vulnerability. The hub-and-spoke is efficient, legible, and catastrophically brittle, and the map forces you to walk the brittleness every time you cross an arm. Your body knows what the centrality metrics do not say: that the center holds only as long as every arm does, and the arms are one cell wide.
+
+
+<!-- study-spine:evidence_network -->
+
+## Installed application: A relation needs a record
+
+Lombardi's drawings make the labour behind a connection matter. This small archive is openly fictional. Each line can be traced to one authored record; none can stand as evidence about an actual person. A convincing network can still be a poor account.
+
+
+<!-- study-reference:evidence_network -->
+
+### Reference and scope
+
+Lombardi assembled narrative structures from researched relations. Our invented institutional records make provenance inspectable without pretending to reconstruct his historical investigations.
+
+[Whitney Museum: Mark Lombardi](https://whitney.org/artists/7340).

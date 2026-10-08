@@ -1,9 +1,7 @@
-# CA Introduction — Summary
+# CA Introduction
 
-CA_Introduction opens the Cellular Automata sequence. A grid of discrete cells covers a wide floor. Each cell has a small, identical neighbourhood and a single rule that updates its state by looking at that neighbourhood. The grid ticks in discrete steps, and everything updates at once. Nothing in the space moves continuously.
+The first hall follows the Noise chapter's question of what forms remain beyond the familiar organic filter. The rule explorer begins with a held row and lets the visitor inspect three inputs before advancing a generation. A second seed, wrapped boundary and bounded history make the experiment more specific. Beyond the desk, those same stored rows hang in a body-sized ring: 31 stands beside 0, and earlier generations rise above the current row.
 
-The central feature is a Persian-rug pattern produced by a simple 1D rule running top to bottom along a wall. Each row is the successor of the row above, computed in parallel from triplets of cells. Local symmetry propagates outward and produces the woven ornament across the whole surface. The rug makes the claim of the sequence visible at the entry: complex pattern can come from a local rule applied uniformly.
+The rug is a two-dimensional multistate automaton with separate frame/interior rules and an explicitly repeated mirror operation. The line network grows occupied positions and draws selected neighbour connections. Three primary passages compare these mechanisms. Eight placements remain. The unused substrate runner has been removed from this hall; its source and registry entry remain available. The low synthesis stand retains a supporting orb.
 
-Across the floor, small architectural artifacts extend the point. A short column is assembled cell by cell from a rule that adds a supporting cell whenever two neighbours are filled. A bridge spans a gap using a similar rule with different neighbour thresholds. The structures are incidental — the sequence is not about making bridges — but they show that discrete local decisions can pile up into structure.
-
-Within the sequence, Introduction is the grammar lesson. CA_GameOfLife and CA_ElementaryRules will take these ingredients — discrete cells, discrete time, local rules — and raise the consequences.
+The explorer sits one cell clear of the museum entrance. Native museum checks and photographs are recorded in the current encounter notes; tracked headset and Quest acceptance remain pending. The earlier illustrated web exercise remains separate from Godot.

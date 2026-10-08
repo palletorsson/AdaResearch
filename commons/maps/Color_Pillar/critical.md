@@ -1,3 +1,25 @@
+# The colours that get a column
+
+The field does not stop at its thirty-five samples. Its rule supplies colours between them, but only selected positions have been given a column. Sampling makes some values stand before the visitor while others continue across the ceiling. The gaps also let a body pass. A less sparse selection would change more than the number of colours on display: it would change the available room.
+
+All the columns have the same dimensions. Their colour differences acquire equal architectural weight, although the regular spacing is itself a choice. This is a particular collection of the field, not a complete inventory of its possibilities. The ceiling now carries the full-value slice where each column ends. Between those columns, colour makes a continuous roof above the dark walk. The visitor occupies the interval between the sampled colours, beneath the surface that gathers them. Moving a palette from floor to ceiling changes how it belongs to the room: it is overhead, reached by looking, while the sampling card keeps a way of handling it within reach.
+
+The framed wall makes another kind of collection. Its palette titles invoke moods, artists and movements; the shipped colour lists are authored interpretations, not evidence that a history has one correct palette. Their membership comes from those lists, not from the coordinate rule of the field. Preserve the difference between an attribution and a claim to represent everything it names.
+
+A swatch can leave that company. Its material and label travel with it. The hexadecimal RGB code records a colour value; the word beneath it is selected by proximity to a short list of named RGB values. One name can receive many distinct values. Naming makes a colour available to conversation while also gathering differences under a common word.
+
+The room lets the visitor compare these choices through movement: enter the gaps, read an address, take a swatch away from its group. None of those actions is a colour-comprehension test. The critical question is how a field becomes a collection, and how a collection gives particular colours a body, a name and neighbours.
+
+The vertical extension gives this selection another limit. At zero value, different hue and saturation coordinates produce the same RGB black. The address can retain differences that its appearance cannot disclose. The sampler makes a second decision explicit: a short hand movement is scaled to the full height of the columns. The reachable gesture and the represented position are related by a chosen mapping, shown by the marker rather than treated as natural equivalence.
+
+A wall swatch carries an assigned colour away from its group; the sampler acquires another colour as it moves. One keeps a value, the other evaluates a position. The same act of carrying can therefore preserve or change the colour, depending on which object the hand has taken.
+
+---
+
+## Historical companion — earlier gauntlet layout
+
+The earlier draft below is retained as development material. It describes a previous route and contains claims about collection counters, compulsory engagement, flashlight behaviour and a terminal spectrum that are not verified descriptions of the current field-and-wall encounter. It should not govern the current chapter; secondary artifacts remain available for future encounters.
+
 # Color_Pillar - Critical Reflection
 
 ## Additive vs. Subtractive: Two Worlds of Color

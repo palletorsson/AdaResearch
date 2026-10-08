@@ -1,45 +1,17 @@
-# Rectangles All the Way Down
+# Accumulation: one height represents an interval
 
-The smooth area was a limit. These are the rectangles it is the limit *of*.
+Continue from Change_Intro with the same function, `0.5 + 0.4*sin(2*x) + 0.15*cos(5*x)`, on [0,5]. The earlier bench compared local rates; this bench adds height-times-width contributions. Its axis is position, not elapsed time.
 
-```gdscript
-func riemann_sum(a: float, b: float, n: int) -> float:
-    var dx := (b - a) / n
-    var total := 0.0
-    for i in n:
-        total += f(a + i * dx) * dx     # left-hand rule
-    return total
-```
+1. Begin with four midpoint rectangles. Use CELL +/- to follow the selected sample and read its height, width and contribution.
+2. HOLD the current picture and total. RULE cycles MID, RIGHT, LEFT. Compare equal counts before changing resolution.
+3. Return to MID and move the existing count slider through 4, 8, 16, 32, 64, 128. The held panel remains unchanged until another HOLD or RESET.
+4. Reveal REFERENCE after predicting which total is closer. It is a separate 4096-midpoint computation. Toggle it off to recover the contribution readout.
+5. RESET restores four midpoint rectangles, hides the reference and clears the held comparison.
 
-`n` rectangles, each `dx` wide, each as tall as the curve at its left edge. Crude at `n = 4`, honest at `n = 400`. The error is visible as the staircase poking above and below the curve.
+The calculation is `width=(b-a)/n`, `x=a+(i+fraction)*width`, `total+=f(x)*width`. The sample fractions are 0, 0.5 and 1. Selected samples, rectangle heights and total all use the same rule. The curve drawing stays fixed at 200 intervals. Held geometry copies vertex arrays so later live rebuilds cannot alter it.
 
-Build the staircase so the argument is walkable:
+At N=4, MID is about 2.23665, RIGHT about 3.26367 and LEFT about 3.53733. The reference is about 2.86384. RIGHT is closer than MID here, disproving the old claim that midpoint always wins. For this smooth function, fine partitions converge toward the integral; six finite slider stops are an experiment, not the limit itself.
 
-```gdscript
-func build_rectangles(a: float, b: float, n: int) -> void:
-    var dx := (b - a) / n
-    for i in n:
-        var x := a + i * dx
-        var bar := MeshInstance3D.new()
-        var box := BoxMesh.new()
-        box.size = Vector3(dx * 0.95, f(x), 0.3)
-        bar.mesh = box
-        bar.position = Vector3(x + dx * 0.5, f(x) * 0.5, 0)
-        add_child(bar)
-```
+The difference bar saturates at 0.05. Its numeric readout retains the signed difference. The function is positive throughout this encounter; signed cancellation and total distance are later experiments, not demonstrations already present here. The rectangles are a mounted plot, not walkable steps.
 
-One box per sliver, height sampled from the curve. Crank `n` with the pump and the staircase melts toward the smooth region from the previous map.
-
-The pump can compute π, which is the map's party trick — a quarter circle of radius 1 has area π/4:
-
-```gdscript
-func quarter_circle(x: float) -> float:
-    return sqrt(max(0.0, 1.0 - x * x))
-
-func pi_estimate(n: int) -> float:
-    return 4.0 * riemann_sum_of(quarter_circle, 0.0, 1.0, n)
-```
-
-`n = 10` gives 3.30; `n = 1000` gives 3.143. π emerges from nothing but rectangles and patience — an irrational number assembled by finite honest labor, never finished, always approaching.
-
-Try: compare left-rule, right-rule, and midpoint at the same `n`. Midpoint wins every time; ask the rectangles why.
+The next hall, Flow_Field, introduces trajectories whose sampling addresses depend on prior movement. Verify the actual field and update rule there before connecting it to forces.

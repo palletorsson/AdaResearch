@@ -1,27 +1,11 @@
 # Primitives Ignorance — map summary
 
-## The encounter
+The hall gives two different meanings of geometric form room to meet. Five regular solids retain their defining faces. Cylinders and spheres retain their names while their finite constructions change. The enlarged five-segment capsule is placed at the centre of attention; the next room shows what the engine itself supplies as primitive forms.
 
-The title turns the association of Plato, geometry and knowledge toward the limits of an implemented model. Recognise a sphere, inspect finer-to-coarser paired meshes, then choose a use before revealing its count. Then meet the five-segment capsule, whose opposite sides interrupt a familiar symmetry shortcut. Ask what a finite construction omits, and what it makes available beyond our expectation.
+The retained rooms are 19 cells wide; the side alcove extends the total footprint to 27 × 43 cells. Spawn is (9,0), exit (9,42). After moving the mesh library and choir to Godot, 26 artifact placements remain: eleven primary placements and fifteen secondary/decorative placements. The old library floor remains part of the route, without another compulsory lesson.
 
-## Current room
+The sphere pairs keep their geometry and overlays: high at (13,18)/(16,18), middle at (13,21)/(16,21), low at (13,24)/(16,24). The atlas is at (3,21), capsule at (9,22), and counter at (9,26). The courtyard is centred at (9,6). The entrance inscription is part of that installation.
 
-- Dimensions: 13 × 20 grid cells; maximum structure height value 3.
-- Twenty-six artifact placements; 21 distinct placed artifact types.
-- Ordinary sphere at (3,1); regular-solids collection at (6,4).
-- Academy-motto text at (4,9); interactive smoothness counter at (5,9), facing the earlier rows.
-- High pair at (3,11)/(5,11), middle at (3,13)/(5,13), low at (3,15)/(5,15).
-- Five-segment capsule at (0,16), on its existing 0.90-metre plinth, now primary.
-- Spawn at (5,0); exit at (5,19).
+After Point_Animatedcube, before Primitives_Godot. The generated-mesh library now has its own room, followed by Columns and Borrowed Outlines. Portals develops a finite approach toward a limit after those investigations.
 
-Coordinates are grid indices. All placements and structure are retained. The main walk explicitly returns to the counter after the paired comparisons. Physical reach and the full headset route remain to be reviewed.
-
-## Aligned primary sequence
-
-Six types, nine placements: ordinary sphere → high pair → middle pair → low pair → counter → capsule. The title of the sphere comparison group is "What the polygons cannot hold." Geometric changes between resolutions and presentation changes within each pair are kept separate.
-
-The remaining solids, further symmetry questions and other instruments remain in the room and in the optional tutorial studies. The complete inventory is in artifacts.md; detailed measured counts and their scope are in technical.md.
-
-## Spine context
-
-Eighth of ten maps in primitives. Follows Point_Animatedcube's distinction between connectivity, geometry and naming. Leads to Primitives_Portals and its finite approach toward a limit.
+Earlier native desktop checks cover pickup/release, geometry, support dimensions and body-width passages in the prior arrangement. They do not certify the revised route. Headset reach, comfort, label legibility and Quest performance remain unverified. See the current review for images and the report.

@@ -1,6 +1,6 @@
 # What chance may change
 
-Four works have returned to the gallery. Walk toward the painting on the floor, then take either side around its frame. The dartboard waits to the right, the pipes farther along to the left, and a changing particle study near the rear. Each gives chance a different job. The estimation the last room promised is the dartboard's job.
+Four works share the gallery. Walk toward the painting on the floor, then take either side around its frame. The dartboard waits to the right, the pipes farther along to the left, and a changing particle study near the rear. Each gives chance a different job. The estimation the last room promised is the dartboard's job.
 
 <!-- @pollock_painting_in_3d -->
 

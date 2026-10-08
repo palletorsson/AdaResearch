@@ -2,7 +2,7 @@
   "map_info": {
     "name": "Queer Morphological Systems",
     "lookup_name": "SpeculativeComputation_Queer_Morphological_Systems",
-    "description": "Explore morphological systems that challenge normative structures. Scaffold map — awaiting content.",
+    "description": "A morphogenesis bench where local rules reshape a body over time. The form is an event, not a preset.",
     "version": "1.0",
     "format": "json",
     "dimensions": {
@@ -34,10 +34,10 @@
     }
   },
   "documentation": {
-    "summary": "SpeculativeComputation_Queer_Morphological_Systems - Scaffold map for queer morphological systems content",
-    "layout": "Simple 10x10 room with spawn and teleporter",
-    "objective": "Placeholder — build out queer morphological systems artifacts and interactions.",
-    "key_elements": []
+    "summary": "SpeculativeComputation_Queer_Morphological_Systems - local rules and changing form",
+    "layout": "Simple 10x10 room with a central morphogenesis bench, spawn, and teleporter",
+    "objective": "Change a local rule and observe how a body’s morphology becomes a history.",
+    "key_elements": ["morphogenesis_bench - local rule to changing form"]
   },
   "lighting": {
     "ambient_color": [0.3,0.3,0.4],
@@ -85,7 +85,7 @@
       [" "," "," "," "," "," "," "," "," "," "]
     ],
     "interactables": [
-      [" "," "," "," "," "," "," "," "," "," "],
+      [" "," "," "," ","morphogenesis_bench"," "," "," "," "," "],
       [" "," "," "," "," "," "," "," "," "," "],
       [" "," "," "," "," "," "," "," "," "," "],
       [" "," "," "," "," "," "," "," "," "," "],

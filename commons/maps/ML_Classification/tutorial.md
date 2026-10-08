@@ -1,5 +1,11 @@
 # ML Classification
 
+**Learning elements**
+
+- Nearest centre assignment
+- Centroid updates
+- Clustering
+
 Separate classes in feature space. K-means, SVM, neural network.
 
 Label a dataset.

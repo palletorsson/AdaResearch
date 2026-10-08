@@ -16,7 +16,19 @@ Your edge count is therefore a useful small piece of evidence. It can be compare
 
 The pathfinding room showed how losing an option can alter a route. Extend that thought here: imagine removing your chosen vertex. Which neighbours would still reach one another? Which connection would you need to check before answering? This is a prediction for a future removal experiment, not a claim that the present display performs one.
 
-A stronger version of the room would calculate a named measure and let you inspect its supporting paths. It should also let another measure disagree, so a single visual ranking does not become the definition of value.
+Beyond these moving vertices, another drawing gives us a named measure and the records it counts. Follow one connection into the next part of the room.
+
+<!-- @ -->
+
+<!-- study-spine:evidence_network -->
+
+<!-- @evidence_network -->
+
+A fine curve joins the Studio to the Builder. It seems easy to follow. Select RECORD. A date and a payment appear beneath it. The arrow says which way the payment went; it says nothing about whether the work was done.
+
+Move the arrangement. The Archive travels towards the centre without receiving another report. Its incoming count stays the same. Choose only PAYMENTS and several connections disappear. The people have not ceased to know one another. We have narrowed the question.
+
+Lombardi's drawings make the labour behind a connection matter. This small archive is openly fictional. Each line can be traced to one authored record; none can stand as evidence about an actual person. A convincing network can still be a poor account.
 
 <!-- @ -->
 

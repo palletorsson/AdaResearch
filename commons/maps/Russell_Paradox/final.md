@@ -1,84 +1,78 @@
 # The Self-Containing Set
 
-Four objects arranged as a cross, with a box at the centre, and every one of them is the same sentence said in a different material.
+A rule stands at the entrance, with two buttons beneath it. IN. OUT. It looks like enough choice.
 
-The last two rooms were about a choice: an axiom is a decision, and the decision has a dial. Both crises were survivable, because in both cases you could pick a value and carry on. This room is where that stops working. Nothing here is waiting for you to choose. The trouble is in the shape of the rule itself, and no setting fixes it.
+The last room changed the space in which a triangle was measured. Here we try to make a collection. The trouble arrives when the collection asks to be counted among its own contents.
 
-## The box at the centre
+## Try both doors
+
+<!-- @russell_paradox_workbench -->
+
+The workbench begins at cell 5. Its rule reads: collect all sets that are not members of themselves. Call the result R. Does R belong to R?
+
+Choose IN. Follow what the readout requires. Now choose OUT.
+
+Neither button is broken. Each answer contradicts the rule that was supposed to make the collection. If R belongs to itself, it fails its own entrance condition. If it does not, it satisfies that condition and must belong. The arrows turn around the same disc. Your hand has somewhere to go; the proposed set does not.
+
+The small computation behind this test is almost bare:
+
+```gdscript
+var required: bool = not assumed_in
+var agrees: bool = assumed_in == required
+```
+
+Try the two possible values. More processing time will not produce a third Boolean. This is the contradiction in unrestricted comprehension: assuming that every condition, applied without a restricted domain, defines a set.
+
+Move the slider one step further, to cell 6. The new rule begins with a collection that already exists: U. Filter its members rather than collecting from everything whatsoever. Try OUT again.
+
+This time it holds. The workbench uses four small sets, named 0, 1, 2 and 3. Each contains the earlier numbers: 0 contains nothing, 1 contains 0, 2 contains 0 and 1, and so on. None contains itself, so all four survive the filter. The result is U again. But U is not one of those four members. The collection and a member of the collection are different things.
+
+One phrase has changed what can be built: *within U*. The rule still uses “not”. A condition can still be applied to the result. What has gone is the permission to take everything as one set. This is the move made by separation in ZF set theory.[^1]
+
+## What the boxes give us
 
 <!-- @russell_set_box -->
 
-```gdscript
-# russell_set_box.gd:20
-# essence: S = { x | x ∉ x }; S ∈ S ↔ S ∉ S — Russell's paradox as infinite regress
-```
+The original box remains deeper in the hall. Its nested boxes give the eye an inward journey: an inside with another inside. The script draws a finite number of layers and then marks the continuation.
 
-Take the set of all sets that are not members of themselves. Ask whether it contains itself.
-
-If it does, then by its own definition it must not. If it does not, then by its own definition it must. There is no third option and no order of operations that gets you out; the two branches feed each other exactly. Russell sent this to Frege in 1902, while the second volume of Frege's *Grundgesetze* was at the printer, and Frege added an appendix beginning with the observation that a foundation had given way under the finished building.
-
-The artifact makes it a box you open, and inside is another box, and inside that another. Its critical parameter is `max_visible_depth` — how many nestings to draw before giving up and showing the regress indicator. That is an honest piece of engineering: the object cannot be built, so the artifact builds as much of it as fits and then admits, in a label, that the remainder is not a rendering budget but the thing itself.
-
-## The same shape, three more times
-
-<!-- @barber_paradox -->
-
-```gdscript
-# barber_paradox.gd:11
-## truth: he belongs in neither bin; the rule eats itself. If the barber shaves
-##   himself he is shaved-by-the-barber (forbidden); if he does not, the rule
-##   says the barber must shave him — contradiction either way.
-```
-
-Two labelled bins — SHAVES SELF, SHAVED BY BARBER — and one token that will not go in either. The barber shaves exactly those who do not shave themselves. Put him anywhere and the rule immediately requires him somewhere else.
-
-Russell offered this himself, as the version you can tell at dinner, and it is worth noticing that it is not a simplification. The bins are the point: a classification that is exhaustive and exclusive, with one element that the classification generates and cannot place.
-
-<!-- @liar_loop -->
-
-```gdscript
-# liar_loop.gd:11
-## truth: if it's true it's false, if it's false it's true. There is no stable
-##   assignment — the value loops forever.
-```
-
-A chalk sign reading THIS STATEMENT IS FALSE, with a lamp above it that cannot settle. The oldest of the four — Epimenides, then Eubulides, twenty-four centuries before set theory — and mechanically identical to the box. A predicate applied to the sentence containing it. The lamp does not flicker because the artifact is animating an effect; it flickers because there is no value to hold.
+That limit belongs to the drawing. Rendering a thousand more boxes would not settle the membership question, and reaching the last visible box does not prove a contradiction. The workbench supplies the two-case argument; the box gives it a place to linger. An enclosing wall can be drawn even when the collection its label promises cannot exist as a set.
 
 <!-- @self_membership_set -->
 
-```gdscript
-# self_membership_set.gd:12
-## truth: a set that is a member of itself, all the way down — and the set of
-##   all sets that are NOT members of themselves cannot consistently exist.
-```
+The nested braces nearby ask another question. Does drawing a set inside a set show a set belonging to *itself*? The second brace could enclose a different set. The picture alone cannot decide.
 
-The fourth arm, and the one that draws the distinction the other three leave implicit. A set that *does* contain itself is perfectly consistent — this artifact builds one, a brace inside a brace inside a brace, and nothing goes wrong. Self-reference on its own is not the fault. The catch is self-reference plus negation: the moment the rule is *not* a member of itself, the loop closes on a contradiction rather than on a regress.
+In standard ZF with Foundation, no set belongs to itself. Other choices of axioms require their own examination. “Self-reference is bad” would teach us too little: a program can name itself without collapsing, and a recursive call can have a perfectly good stopping condition. We need to find the particular demand that cannot be met.
 
-That distinction is what saves mathematics later. The repairs — Zermelo–Fraenkel's axiom of separation, Russell's own type theory — do not ban self-reference. They ban unrestricted comprehension: the assumption that any property whatsoever carves out a set. You may still describe; you may no longer assume the description has an extension.
+## A barber, a lamp, a guest
 
-## The one that settles
+<!-- @barber_paradox -->
+
+Two labelled bins — SHAVES SELF, SHAVED BY BARBER — and a token that keeps moving between them. Suppose a barber shaves exactly those people in a group who do not shave themselves, and the barber belongs to that group. Who shaves the barber?
+
+Follow both assignments as you did at the buttons. There is no barber satisfying all those conditions. We can change the story: place the barber outside the group, for instance. But then notice what we have changed. An exception is a new arrangement, not a hidden answer to the old one.
+
+<!-- @liar_loop -->
+
+A chalk sign reads THIS STATEMENT IS FALSE. Its lamp alternates. The animation gives a rhythm to the difficulty of assigning the sentence an ordinary true-or-false value. A timer makes the lamp flicker; logic does not force an electronic light to oscillate.
+
+Here the rule concerns truth rather than membership. The family resemblance is useful, but the repairs cannot simply be carried from one material to another. Even in this small hall, the same-looking loop can ask for different work.
 
 <!-- @hilbert_hotel -->
 
-```gdscript
-# hilbert_hotel.gd:7
-# critical_parameter: the shift map n ↦ n+1 — the bijection that proves |ℕ| = |ℕ + 1|
-```
+Then the hotel. Full, infinitely, every room occupied. A guest arrives. Everyone moves up one, and room 1 becomes free.
 
-Two cells off the cross stands something that does not belong to the argument, and it is worth a sentence rather than a shrug, because it teaches the opposite lesson and it is standing close enough to be mistaken for a fifth arm.
+This one settles. The assignment is explicit: the guest in room n goes to room n + 1. Nobody loses a room and two guests never receive the same one. The finite display can suggest that assignment; the rule tells us how it continues.
 
-Hilbert's hotel is full, infinitely, every room occupied. A guest arrives. Everyone moves up one, and there is a room. That looks like a paradox and behaves like one for about ten seconds, and then it resolves completely: the shift map is a bijection, the answer is *yes, there is room*, and the offended intuition was a finite intuition applied outside its range.
-
-That is the difference this room needs you to hold. The hotel is a **surprise**, and it settles. The box, the barber, the liar and the brace are **contradictions**, and they do not. One of them is your intuition being wrong about infinity; the other four are a formal system being unable to say what it just said. Standing beside each other, they mark the line the rest of the chapter walks along.
+Keep this surprise close to the contradiction. An offended expectation is not yet an inconsistency. Sometimes the answer requires a construction we had not imagined. Sometimes the requested construction cannot satisfy its own terms.
 
 <!-- @euclid_postulates_plaque -->
 
-The plaque near the entrance is the fifth postulate again, brought forward from the first room. Nothing in this room explains why it is here, so take it as the chapter keeping its own receipt: two rooms ago the crisis was that a foundational statement could not be *proved*. Here it is that a foundational statement cannot be *stated*. The plaque is the earlier, milder version of the trouble, standing where you can see how much worse it got.
+The returning postulates plaque keeps the earlier question in view. Changing the parallel postulate led to other geometries. Russell asks us to withdraw a different permission: we cannot assume that every description calls a set into being. We can still state the question. Indeed, stating it carefully is how we learn why the unrestricted set cannot exist.
 
-## Where the wall is
+<!-- @ -->
 
-Something has changed in the kind of problem. The parallel postulate was independent — you could go either way and both ways were consistent. Russell's set is not independent. There is no consistent system in which the question has an answer, and the repair is not to choose a value but to forbid the question from being asked.
+The room's walls have let us pass. Its rule has not let every imagined object follow. Which restriction makes further work possible, and what does that restriction leave outside?
 
-That is what a formal system's boundary is, and it is the last quiet moment in this sequence. Two rooms from now the same argument returns with a much harder result attached: not that a system must fence off certain sentences to stay consistent, but that any system strong enough to be interesting will contain a sentence that is true and that it cannot reach — and that fencing will not help, because the sentence is about arithmetic and arithmetic is what the system is for.
+Gödel is next. There, even a sound, effectively specified theory with enough arithmetic cannot prove every arithmetic truth. We will need to distinguish a construction that contradicts itself from a truth a particular proof system cannot reach.
 
-Every formal system draws a boundary — and the boundary is where the system meets what it cannot hold.
+[^1]: For separation, the construction of finite numbers from sets, and the difference between describing a collection and assuming it is a set, see [John D. Norton's set-theory lectures](https://sites.pitt.edu/~jdnorton/teaching/paradox/chapters/sets/sets.html). The workbench evaluates a finite example, not arbitrary set-theoretic formulas. Foundation and the other ZF axioms are treated in [C. McMullen's Math 101 notes](https://people.math.harvard.edu/~ctm/home/text/class/harvard/101/16/html/home/course/course.pdf).

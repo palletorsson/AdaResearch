@@ -1,5 +1,15 @@
 # Form-Finding: Relaxation
 
+**Learning elements — proposed focus**
+
+*The labels below set the revision focus; the existing lesson still needs alignment.*
+
+- Position history
+- Rest lengths
+- Constraint corrections
+- Pinned endpoints
+- Iteration budgets
+
 A mesh released settles into a shape nobody specified. Before it, particles that remember where they were and springs that know their rest length.
 
 Store the previous position, not the velocity.

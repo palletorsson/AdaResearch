@@ -1,76 +1,18 @@
-# Fractal RecursiveTrees — Artifacts
-*Fractals: Infinite Within Finite · lambda_edge · 10 artifacts*
+# Recursive Trees — the installed collection
 
-> Trees grow without blueprints. The recursive tree encodes growth without memory—just a rule: divide, reduce, repeat. The stochastic tree introduces randomness into recursion, same grammar, different outcomes. Trees grow down as well as up—roots and canopy mirror each other. Walk through a computed wilderness where every trunk branches by the same rule.
+Twelve authored placements remain. The growing tree and the red block tree are the two primary encounters. The larger canopy is attached to the growing specimen and uses its actual geometry; it is not a thirteenth solver or an independently generated tree.
 
-The map, read through what it holds — its artifacts in the order you meet them:
+| Work | Grid cell (x, z) | Contribution |
+| --- | --- | --- |
+| `recursive_tree_2` | (4, 5) | Primary. Deterministic generation queue; change inherited angle, length and fork count. The compact specimen and enlarged solid canopy share the same branches. |
+| `recursive_tree` | (12, 5) | Primary. Seeded red block tree. FORM, STRATA, REACH and ENDS expose the existing construction without replacing it. |
+| `living_paper` | (7, 11) | Secondary. Configured with Mandelbrot; a separate investigation, not a trace of this tree. |
+| `fractal_lsystem_tree` | (11, 11) | Supporting comparison. String rewriting and interpretation anticipate the later grammar chapter. |
+| `small_subdivision_cube` | (2, 14), (3, 14) | Two retained supporting placements. Return to subdivision from the preceding hall. |
+| `inverted_tree_cloud` | (3, 15), (13, 17) | Two retained inverted trees; frozen cloud phase, one with strata. Other orientations of growth remain available. |
+| `dark_sphere` | (8, 16) | Secondary remnant, not the organizing work. |
+| `cube_desk` | (2, 17) | Retained furniture construction. |
+| `fractal_scene` | (5, 20) | Retained mesh-fractal comparison. |
+| `mobius_world` | (3, 22) | A small surface specimen here; its presence does not establish topological recursion. |
 
-## Living Paper
-![Living Paper](/scene-catalog/living_paper.png)
-
-Universal grabbable 2D canvas. Grab to run the algorithm, drop to pause. Defaults to simple random walk. Use #algorithm:<name> config to select cartridge.
-
-`living_paper`
-
-## L-System Tree
-![L-System Tree](/scene-catalog/fractal_lsystem_tree.png)
-
-L-System tree generation with formal grammar rules
-
-`fractal_lsystem_tree`
-
-## recursive_tree_2
-![recursive_tree_2](/scene-catalog/recursive_tree_2.png)
-
-recursive_tree_2
-
-`recursive_tree_2`
-
-## small_subdivision_cube
-![small_subdivision_cube](/scene-catalog/small_subdivision_cube.png)
-
-small_subdivision_cube
-
-`small_subdivision_cube`
-
-## inverted_tree_cloud
-![inverted_tree_cloud](/scene-catalog/inverted_tree_cloud.png)
-
-tree(depth) = trunk_down + branches_down(random_angle, shrink) + cube_cloud(orbit, fade_timeline)
-
-`inverted_tree_cloud`
-
-## recursive_tree
-![recursive_tree](/scene-catalog/recursive_tree.png)
-
-branch(pos, dir, len, depth) = cylinder(tapered) + branch_count * branch(end, rotated_dir, len * 0.7, depth+1)
-
-`recursive_tree`
-
-## Dark Sphere
-![Dark Sphere](/scene-catalog/dark_sphere.png)
-
-USE a neutral sphere as a reference for scale, silhouette, and atmospheric change.
-
-`dark_sphere`
-
-## Cube Desk
-![Cube Desk](/scene-catalog/cube_desk.png)
-
-Modern desk with drawer unit created through cube subdivision
-
-`cube_desk`
-
-## fractal_scene
-![fractal_scene](/scene-catalog/fractal_scene.png)
-
-fractal_scene
-
-`fractal_scene`
-
-## MÃ¶bius World
-![MÃ¶bius World](/scene-catalog/mobius_world.png)
-
-Walkable MÃ¶bius strip - non-orientable surface. Requires MovementWallWalk on player (collision layer 4).
-
-`mobius_world`
+The canopy root is (8.5, 0, 7.5) in hall-relative metres. The original growing-tree placement remains. Its desk controls both receivers. The old stepped enclosure, transport cube, ordinary floor and rear collection are retained. The earlier inventory, including its different descriptions, is preserved in the tree-canopy review folder.

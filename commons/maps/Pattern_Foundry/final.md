@@ -1,6 +1,12 @@
-How many places can one small decision change?
+# A mark in the room
 
-The colour rooms separated a chosen value from the rule that relates it to other values. Here a small arrangement supplies a much larger field. Make one decision where you can see exactly where it began.
+In the disco, a choice of colour reached every square carrying the same value. Here you can make the little arrangement that a larger pattern will repeat. One mark, then its many appearances. How far can a decision made within reach travel?
+
+<!-- @pattern_architecture -->
+
+There is already pattern underfoot. It climbs the walls. The loom, kaleidoscope, stamp press and pattern mill can each supply their output to these surfaces. At DRESS THE ARCHITECTURE, choosing another SOURCE changes what the hall wears.
+
+Find a piece of the loom's carpet in the larger field. The carpet keeps a short history of bands; those earlier decisions have reached the wall with it. A room can repeat a record as readily as a single motif. Its floor still supports you, and its walls still stop you. For now, leave this larger image running and go to the small tile. It has its own preview, where the beginning of a pattern is easier to follow.
 
 <!-- @pattern_tile_4x4 -->
 
@@ -16,7 +22,7 @@ Make a recognisably asymmetric mark at the mirror station. A mark away from the 
 
 The simple repetition keeps the tile's orientation. The mirror rule reverses selected copies along its directions. The source motif and the transformation applied to its copies do different work: changing either can change the field.
 
-Now try to make the mark appear only once while the rest of the field stays unchanged. Editing the shared source makes it recur. The difficulty is evidence about the way this instrument stores authorship, rather than a failure to choose the right colour.
+Now try to make the mark appear only once while the rest of the field stays unchanged. Editing the shared source makes it recur. The instrument makes it easier to change every appearance than to keep just one different. A single stored cell holds all these places together.
 
 <!-- @pattern_machine_a -->
 
@@ -38,7 +44,25 @@ The rule returns a colour index. The palette supplies its colour. The receiving 
 
 With CURVE selected on the display, press LINK / HOLD. Now press MARK again. The flat sample follows; the curve keeps what it had. There is a difference between them, and the loom has continued running. Holding this sample means declining the next image. It does not stop time or let you edit just one of its repeated marks.
 
-Link them again. Press SAVE, change a peg or the group, then RESTORE. The saved card and palette return, along with the carpet's short history of bands and its saved animation phase. The carpet moves on from there. The two upright samples show only the current rule; the carpet carries earlier decisions as well. Saving the source does not save the curve's temporary held image.
+Link the curve again, then take the passage into the runway annex and follow the side aisle into the curved room. The studio stands inside it. Its small source already supplies the pattern around the wall and beneath your feet.
+
+Choose a colour on the studio and paint one source cell. Look away from the little grid. Your mark has arrived in places you could not reach from here. It returns along the curve, then across the floor. The studio supplies these two surfaces; the larger hall still follows its selected machine.
+
+Walk towards one of the marks, then turn to find another. An arrangement held in a small square has become large enough to surround you. You can recognise its repeats without seeing the whole field at once. The floor carries them beneath your body; the curved wall brings them back into view.
+
+On the smaller surface console, choose ROOM FLOOR and press HOLD. Change the source cell again. The wall follows; the ground keeps its earlier image. You are standing between two moments of the same pattern. The opening still lets you leave, and the supports have stayed where they were. Yet wall and floor no longer agree about the room's present.
+
+![The curved room before and after a source edit with its floor held.](/book-review/doc/book/iterations/2026-09-28-foundry-a-mark-in-the-room/room-pair.png)
+
+*The same view from inside the museum. On the right, the wall accepts another source edit while the floor keeps the earlier image.*
+
+APPLY LIVE lets the floor catch up. The difference can be kept or given up. It belongs to this connection between a source and a surface; it need not become a permanent division of the room.
+
+## On a return visit
+
+The first visit follows one edit into its copies, then lets one surface keep a difference. These further experiments ask what a saved source remembers, which surfaces follow it, and how much room each repeat receives.
+
+At the loom, link the specimens again. Press SAVE, change a peg or the group, then RESTORE. The saved card and palette return, along with the carpet's short history of bands and its saved animation phase. The carpet moves on from there. The two upright samples show only the current rule; the carpet carries earlier decisions as well. Saving the source does not save the curve's temporary held image.
 
 Turn towards the low wall behind you. The pattern has arrived there too. Follow a pair of marks along it: the wall has more repetitions, rather than a larger version of the image. Under the starting translation rule, one card occupies thirty centimetres on every surface. The wall remains solid. Its new appearance has supplied no new passage.
 
@@ -65,13 +89,11 @@ Select ARCHITECTURE. This names three wall faces, leaving the two specimens outs
 EAST can also be selected alone. Hold it, then return to ARCHITECTURE: the display now reports MIXED. One part of the background has separated from the others. ALL FIVE includes the three wall faces and both specimens. Neither name includes the whole museum. These names describe memberships we have made, and can revise.
 
 
-Take the passage into the runway annex, then follow its side aisle into the curved room. The studio stands inside it. A small source has become something you can stand within. On its smaller surface console, choose WALL and press APPLY LIVE. Edit a cell in the studio. The wall follows it now; the loom's other surfaces continue their own account. Nothing in the wall's geometry had to move for this allegiance to change.
+The studio can also supply a different source to a selected specimen or inner wall. WALL on its surface console means the low wall by the loom, not the curved wall around the studio. Select it and press APPLY LIVE, edit a cell, then return to the loom bay to see which surface followed. HOLD keeps the selected image. UNDO LINK restores the previous connection and held image; LOOM explicitly returns the selected surface to the loom. Here the name of a source tells you whose next decision will reach that part of the room.
 
-Press HOLD, then edit again. The wall keeps its image. UNDO LINK restores the preceding connection, including whose pattern it followed. LOOM explicitly returns the selected surface to the loom. A surface can share a source, keep a memory of it, or begin following another one. Watch the owner named on the display: the same instruction to change a cell now has different consequences depending on who is listening.
+At DRESS THE ARCHITECTURE, TARGET selects ROOM, WALLS or FLOOR for subsequent updates. The surfaces left out keep the image they last received. REPEAT SIZE changes how much surface one complete output image occupies: two, four or eight metres. TINT multiplies the colours of that output by a pale colour or white. It does not rewrite the machine's own palette. To change the source design, use that machine's controls, then look back at the architectural surfaces receiving it.
 
-Choose ROOM and press APPLY LIVE. The same decision reaches the curved wall and the floor beneath you. Turn your head, walk towards a mark, then step back. The pattern changes its appearance across your view while the stored cells stay put.
-
-Choose ROOM FLOOR and press HOLD. Change a source cell. The wall follows; the ground keeps its earlier image. The room has separated into two different moments. Its curvature has not changed, and the opening still admits your body. What changed in your sense of the space, even though its supports stayed where they were?
+Press LIVE / HOLD. Both architectural receivers keep an independent image of what they were carrying. The machines continue their work. RESET reconnects the whole room to the loom, with white tint and a four-metre repeat. The smaller specimen controls beside the machines remain available for more precise comparisons; this console addresses the architectural skin.
 
 <!-- @ -->
 

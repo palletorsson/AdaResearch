@@ -1,9 +1,7 @@
-# CA Edge Of Chaos — Summary
+# How far does one difference go?
 
-CA_EdgeOfChaos is the eleventh map in the Cellular Automata sequence. It names the classification Wolfram used to organise the behaviour of cellular automata and stages the four classes as rooms the learner can walk between.
+CA_EdgeOfChaos closes the active cellular-automata walk after CA_SoftRules and before Fractal_Recursion. A 19 × 30 m hall carries the paired self_organization_ca study at map cell (9,5), with a reachable console, two complete volumes, three spatial slice cases and a shared difference floor. The central study passage and eastern aisle have fixed support.
 
-The first room holds Class I rules: rules that collapse to a uniform state. Everything dies, or everything stabilises at a single value. Nothing moves. The second room holds Class II: rules that settle into periodic structures — stripes, oscillators, still lifes. The third room holds Class III: rules that produce apparent randomness, with long-range structure that the eye cannot predict. The fourth room holds Class IV, the edge of chaos: rules that support moving localised structures within an otherwise stable background. These are the rules that can, in principle, compute.
+The primary is unchanged. All five authored works remain: self_organization_ca, ca_screen, disease_spread_ca, volumetric_fog_ca and crackpropagation_ca. Four secondary displays occupy the rear gallery. The former compact grid is archived with the pre-edit text and museum rows in doc/space/ca-edge-review-2026-09-14/before.
 
-Three working demonstrations sit inside the Class IV room. A disease-spread model shows a front of infection propagating through a susceptible population. A self-organisation demo shows a pattern assembling itself from noise. A volumetric fog uses a Class IV rule to sustain thick, drifting cloud without collapsing or dissolving.
-
-Within the sequence, Edge_Of_Chaos is the theoretical consolidation. It names where computation happens in rule space and prepares the learner for the sandbox that CA_AgentsCircuits provides.
+The discovery compares one changed address under identical forcing, separates coupling from disturbance, and compares integer with fractional storage. It measures extent and amplitude separately and exposes visual gain. It does not classify a universal edge of chaos.

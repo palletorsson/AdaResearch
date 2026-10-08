@@ -1,5 +1,13 @@
 # Particle Swarm Optimization
 
+**Learning elements — proposed focus**
+
+*The labels below set the revision focus; the existing lesson still needs alignment.*
+
+- Objective functions
+- Personal and shared memory
+- Weighted search motion
+
 Particles search the space. Each remembers its best; all share the global best.
 
 Define a particle.

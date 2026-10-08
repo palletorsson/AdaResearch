@@ -1,6 +1,6 @@
 # One rule, two surfaces
 
-This is the opening Patterns hall, after Colour. Its three book encounters are `pattern_tile_4x4`, `pattern_tile_mirror` and `pattern_machine_a`. The remaining machines and dressing exhibits stay as supporting material.
+This is the second Patterns hall, following Pattern_Disco and leading to Tutorial_Pattern. Its four book encounters are `pattern_architecture`, `pattern_tile_4x4`, `pattern_tile_mirror` and `pattern_machine_a`. The remaining machines and dressing exhibits stay as supporting material.
 
 The first two encounters separate a finite source motif from its repeated and reflected results. The loom then separates that source from the shape receiving it. Its optional `#lesson:shared_recipe` configuration starts with a deterministic 5 × 5 card under p1 and adds the specimen bench. Other loom placements retain their existing configuration.
 
@@ -14,7 +14,7 @@ The reachable console offers MARK, SAVE, RESTORE, LINK / HOLD, TARGET, UNDO LINK
 
 A 4.8 by 0.9 metre material skin sits 1 cm in front of the existing inner wall at grid x=4.5, centred at z=20.1. It adds no collider and changes no shared grid material. The 480 by 90 pixel field is sampled directly from the same rule as the specimen images. At the initial 30 cm setting under p1 it contains sixteen by three card periods. The larger field is not a stretched thumbnail. The sampling density also stays fixed for other groups; their operation may change the visual period.
 
-The receiver dictionary explicitly registers five owned meshes, metre dimensions and link states. Unregistered meshes, labels, carpet and other artifacts receive no material changes. A source update renders each required image size once and delivers it only to linked receivers. No textures rebuild merely because selection changes or time passes.
+The loom study initially registers five owned meshes, metre dimensions and link states. The opt-in curved room adds ROOM WALL and ROOM FLOOR; ALL FIVE keeps its original membership. Unregistered meshes, labels, carpet and other artifacts receive no material changes. A source update renders each required image size once and delivers it only to linked receivers. No textures rebuild merely because selection changes or time passes.
 
 LINK / HOLD holds a fully live selection; a held or mixed selection becomes live. Re-linking catches up to the current source. UNDO LINK keeps up to sixteen receiver transactions: restored held links recover their old image; restored live links receive the current source. Undo does not rewind source edits or museum time. The held receiver state and undo history remain local to this visit and are not part of the saved loom recipe.
 
@@ -48,7 +48,7 @@ SAVE writes full-precision JSON to `user://pattern_recipes/foundry.json`; RESTOR
 
 `commons/testing/probe_pattern_recipe.gd` runs the actual museum, exercises a pointer press and release, checks source and historical carpet pixels after restoration, validates malformed-input rejection, compares UVs and metre dimensions, and verifies unchanged supporting geometry and an independent loom. Its file target is a test-only path under `ada_run`.
 
-The next input experiment is explicit held-hand control of the verified bounded offset. The architectural scope currently comprises these three inner-wall faces. Whole-hall control, gesture ownership, garment-region transfer and shader teaching remain planned upgrades. The existing mirror/catwalk do not yet receive this recipe. Reach and performance still need a headset walkthrough.
+The next input experiment is explicit held-hand control of the verified bounded offset. The architectural scope currently comprises these three inner-wall faces. The separate whole-hall controller is implemented (below). Gesture ownership, garment-region transfer and the later shader teaching encounter remain further work. The existing mirror/catwalk do not yet receive this recipe. Reach and performance still need a headset walkthrough.
 
 
 ### Supporting workshop: Pattern Studio
@@ -64,4 +64,10 @@ The room is opt-in through `pattern_studio_plate:0:0#room:curved`. It extends th
 
 ROOM WALL and ROOM FLOOR are two additional registered receivers. ROOM selects both. ALL FIVE retains exactly its original five members, and ARCHITECTURE retains its original three wall faces. The studio begins with two card repeats across its 1.2 m reference square, giving a 60 cm card span on the room. Wall U follows arc length and V follows height; floor UVs use planar x/z coordinates. This preserves repeat size while making no claim of seamless alignment where floor and wall meet. The studio shader operates on these surfaces without rebuilding geometry. Returning the room to the loom uses a bounded 30 pixels/metre CPU image instead of the small specimens' 100 pixels/metre.
 
-The studio remains the editable source; its controls, held images and undo work in the room. Avatar clothing and the rest of the museum remain separate receivers to develop later.
+The studio remains the editable source. Both room receivers start live, with ROOM selected on the studio surface console; no APPLY LIVE step is required to establish the initial connection. Its controls, held images and undo work in the room. Avatar clothing and the rest of the museum remain separate receivers to develop later.
+
+### Whole-hall print and the local floor
+
+`pattern_architecture.gd` builds two material skins from the authored grid: floor cells and exposed vertical wall faces. SOURCE selects the loom, kaleidoscope, stamp press or pattern mill output texture. The loom output includes its short carpet history. TARGET limits subsequent refreshes to ROOM, WALLS or FLOOR; excluded surfaces keep their last image. LIVE / HOLD snapshots both skins. Repeat size is 2, 4 or 8 metres per full output texture. TINT multiplies output colour; it does not edit the machine palette. RESET returns to loom/room/live/4 m/white. These meshes add no collision. The studio's two room receivers and the smaller tile previews remain separate connections.
+
+When the museum raises the control stand, skin vertices subtract its complete grid-local position, including height, so the print remains on the architecture. Previously only x/z were subtracted: the floor print floated at y=0.286 m in the measured run, obscuring the curved room's own y=0.022 m floor. The whole-hall print is now y=0.026 m above the museum floor, while the curved room print is y=0.04 m. This is visual layering only; neither print supplies physical support. A native rendered comparison confirms that editing the studio changes visible ground pixels, and holding ROOM FLOOR keeps those pixels while the source and wall change.

@@ -4,6 +4,8 @@ Primary reading: black-box measure → connection / barrier → stripe / trace �
 
 Coordinates are source-map cells (x, z). Repeated instances remain individually listed; secondary placement does not require a passage in final.md.
 
+The gallery's **FOLLOW THIS LINE** now starts in its open centre. A dark mark climbs a solid 2 m column, crosses the top and descends to the floor on the far side. The visitor must step away from the mark to go around. This replaces the former wall-bound ending; the seven leaning planks remain at the wall.
+
 | Cell | Artifact |
 |---|---|
 | 6, 1 | `player_trace:0:0#plinth:0#pin:1` |

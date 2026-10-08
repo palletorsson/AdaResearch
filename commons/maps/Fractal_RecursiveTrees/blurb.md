@@ -1,1 +1,1 @@
-Trees grow without blueprints. The recursive tree encodes growth without memory—just a rule: divide, reduce, repeat. The stochastic tree introduces randomness into recursion, same grammar, different outcomes. Trees grow down as well as up—roots and canopy mirror each other. Walk through a computed wilderness where every trunk branches by the same rule.
+A trunk waits for its first fork. Turn its descendants, shorten what they inherit, or give each tip another way to continue. Which change moves a body, and which changes its connections?

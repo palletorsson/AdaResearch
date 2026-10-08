@@ -1,13 +1,13 @@
 {
   "sequences": {
 	"fractals": {
-	  "name": "Fractals: Infinite Within Finite",
-	  "truth": "Infinite complexity from finite rules. Dimensions between integers. D = log(N)/log(S). Self-similarity across scales.",
+	  "name": "Fractals: Rules, Scale and Room to Move",
+	  "truth": "A finite construction lets us investigate repeated rules, scale, removal and the cost of further detail.",
 	  "qfep_term": "E(S) + F",
-	  "qfep_connection": "Fractals embody the QFEP tension directly: F (deterministic recursive rule) + \u00ce\u00bbE(S) (random variation in stochastic fractals) creates forms at the edge of chaos. The Mandelbrot boundary is where order meets chaos\u00e2\u20ac\u201dinfinitely complex yet bounded. Fractals are queer geometry: dimensionally non-normative, nowhere smooth, computationally irreducible.",
-	  "formula": "D = log(N)/log(S), z_{n+1} = z_n\u00c2\u00b2 + c",
-	  "demonstration": "Walk inside the Menger sponge. Watch the stochastic tree grow with random variation. Zoom into the Mandelbrot boundary and see infinite detail.",
-	  "description": "Self-similarity across scales, infinite complexity from finite rules. Fractals refuse integer dimensions\u00e2\u20ac\u201dthey exist between 1D and 2D, between line and plane. The Mandelbrot boundary is infinitely complex yet bounded; the Sierpinski triangle has zero area yet infinite structure. This is queer geometry: dimensionally non-normative, nowhere smooth, computationally irreducible.",
+	  "qfep_connection": "Ask which differences a chosen rule and computational budget preserve, and what bodily possibilities follow. Geometry, connectivity, cost and measured uncertainty require separate observations; this sequence does not identify recursion depth with entropy or a universal critical threshold.",
+	  "formula": "For equal-scale separated self-similar copies: D = log(N) / log(S), where S is the inverse scale factor.",
+	  "demonstration": "Compare a single call with branching, inspect retained and removed parts, follow openings through a finite Menger specimen, and distinguish a numerical recurrence from its spatial display.",
+	  "description": "From recursive calls and branching to repeated removal, measured detail and a porous volume; then numerical recurrence and a comparison that prepares symbolic rewriting in L-systems.",
 	  "layer": "lambda_edge",
 	  "prerequisites": [
 		"primitives",
@@ -20,23 +20,21 @@
 	  "difficulty": "intermediate",
 	  "estimated_time": "30-40 minutes",
 	  "learning_objectives": [
-		"Self-similarity: the whole contains copies of itself",
-		"Fractal dimension: D = log(N)/log(S) \u00e2\u20ac\u201d between integers",
-		"Recursion as emergence: simple rules, infinite complexity",
-		"Edge of chaos: Mandelbrot boundary, Julia variations",
-        "Natural fractals: trees, coastlines, romanesco"
+		"Distinguish a recursive procedure, a numerical recurrence and fractal structure.",
+		"Predict one generation before observing the next; locate the stopping condition.",
+		"Compare branching, replacement and removal at fixed outer scale.",
+		"Relate retained parts and sample resolution to computation and visible detail.",
+		"Distinguish geometrical openings, collision support and passages a particular body can traverse.",
+        "Translate a familiar construction into the rule and interpretation stages of an L-system."
 	  ],
 	  "content": [
-		"Fractal_Recursion: Recursion Calls Itself \u2014 the function that calls itself",
-		"Fractal_RecursiveTrees: Branching Without Blueprints \u2014 deterministic vs stochastic trees, inverted roots, fractal forests",
-		"Fractal_CantorSet: Existence Without Extension \u2014 infinite subdivision, zero measure infinite set",
-		"Fractal_KochSierpinski: Infinite Perimeter, Fractal Dimension \u2014 Koch curve D\u22481.26, Sierpinski triangle D\u22481.585",
-		"Fractal_MengerSponge: Walkable Three-Dimensional Fractal \u2014 D\u22482.727, infinite surface zero volume",
-		"Fractal_GoldenSpiral: Fibonacci and Phyllotaxis \u2014 golden ratio, 137.5\u00b0, romanesco",
-		"Fractal_JuliaSet: Parameter Space Exploration \u2014 connected vs disconnected, complex iteration",
-		"Fractal_MandelbrotSet: The Master Fractal \u2014 infinite boundary, edge of chaos",
-		"Fractal_Synthesis: Edge of Chaos Gallery \u2014 all fractals converge, QFEP complete",
-        "Fractal_CrossSequence: Fractals Meet Evolution \u2014 stochastic fractals, evolutionary algorithms, cellular automata"
+		"Fractal_Recursion: Recursion Calls Itself — the function that calls itself",
+		"Fractal_RecursiveTrees: Branching Without Blueprints — deterministic vs stochastic trees, inverted roots, fractal forests",
+		"Fractal_CantorSet: Existence Without Extension — infinite subdivision, zero measure infinite set",
+		"Fractal_KochSierpinski: Infinite Perimeter, Fractal Dimension — Koch curve D≈1.26, Sierpinski triangle D≈1.585",
+		"Fractal_MengerSponge: Walkable Three-Dimensional Fractal — D≈2.727, infinite surface zero volume",
+		"Fractal_GoldenSpiral: Fibonacci and Phyllotaxis — golden ratio, 137.5°, romanesco",
+        "Fractal_Synthesis: What exactly is repeated? — compare procedures and prepare symbolic rewriting"
 	  ],
 	  "maps": [
 		"Fractal_Recursion",
@@ -45,16 +43,19 @@
 		"Fractal_KochSierpinski",
 		"Fractal_MengerSponge",
 		"Fractal_GoldenSpiral",
-		"Fractal_JuliaSet",
-		"Fractal_MandelbrotSet",
-		"Fractal_Synthesis",
-        "Fractal_CrossSequence"
+        "Fractal_Synthesis"
 	  ],
 	  "deferred_maps": [
-	  	"Chamber_Fractals"
+		"Chamber_Fractals",
+		"Fractal_JuliaSet",
+		"Fractal_MandelbrotSet",
+        "Fractal_CrossSequence"
 	  ],
 	  "deferred_reason": {
-	  	"Chamber_Fractals": "chambers removed from the spine (Palle, 2026-09-02): the catalyst chambers leave the walk; the map stays on disk"
+		"Chamber_Fractals": "chambers removed from the spine (Palle, 2026-09-02): the catalyst chambers leave the walk; the map stays on disk",
+		"Fractal_JuliaSet": "Available extension retained on disk; outside the agreed seven-hall museum route. Review and connect its book transitions before adding it to the walk.",
+		"Fractal_MandelbrotSet": "Available extension retained on disk; outside the agreed seven-hall museum route. Review and connect its book transitions before adding it to the walk.",
+		"Fractal_CrossSequence": "Available extension retained on disk; outside the agreed seven-hall museum route. Review and connect its book transitions before adding it to the walk."
 	  },
 	  "axiom_files": [
 		"res://commons/context/clipboard/tutorial_text/fractals_axioms.md",
@@ -228,7 +229,8 @@
 		  "size_budget": "compact_only",
 		  "rationale": "Cross-sequence synthesis: stochastic fractals meet evolution and CA"
 		}
-	  ]
+	  ],
+	  "learning_arc": "res://doc/research/possible-bodies/fractal-learning-arc.json"
 	}
   },
   "artifact_groups": [

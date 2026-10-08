@@ -1,117 +1,18 @@
-# PG Space Colonization
+# Teach one decision, then change eligibility
 
-Trees reach for attractors. Branches extend where sunlight is.
+**Learning elements — proposed focus**
 
-Scatter attractors.
+_The labels below set the revision focus; the existing lesson still needs alignment._
 
-```gdscript
-func scatter_attractors(count: int, bounds: AABB) -> Array:
-    var attractors: Array = []
-    for _i in count:
-        var p := Vector3(
-            randf_range(bounds.position.x, bounds.end.x),
-            randf_range(bounds.position.y, bounds.end.y),
-            randf_range(bounds.position.z, bounds.end.z)
-        )
-        attractors.append(p)
-    return attractors
-```
+- Direction accumulation
+- Growth eligibility
+- Branch records
 
-Points in a volume. Each attractor is a consumable target.
+1. Begin at the compact console in PG_Space_Colonization. Read the three pink positions from the root. Predict the first half-metre segment before pressing STEP. Side components cancel and upward components add.
+2. Explain subtraction, normalization, unit-direction accumulation and normalization of the sum using the actual SpaceColonizationAlgorithm.gd lines in final.md. Gold previews the next decision; it is not a reconstruction of the last one.
+3. FIELD opens the fixed eight-point array and restarts growth. STEP repeatedly under TIPS. Follow the active end and small/dark reached witnesses. One successor per replaced leaf makes a strand from this root.
+4. HOLD a specimen, then POLICY to restart the same field under NETWORK. Step until an earlier site has two children. Compare an actual fork with the held strand at its labelled .45 display scale. Each site still makes at most one child per generation; the new permission is to answer again later.
+5. FIELD opens the 96-point asymmetric canopy. The same rule operates at a larger scale; sine offsets are authored input. Remaining requests and stop reasons matter. Do not equate a budget with completion. RULE exposes the decision; RESET restores the opening and keeps the witness.
+6. Walk the side ramp onto the retained rear deck and take the eastern route to the exit. Distinguish parent connectivity, visible segments and the collision that carries the visitor.
 
-Seed a tree.
-
-```gdscript
-class_name SpaceColonizationTree extends Node3D
-
-var nodes: Array = [Vector3.ZERO]  # node positions
-var parents: Array = [-1]  # index of parent node, -1 for root
-var attractors: Array = []
-```
-
-Starts with one node (the root). Grows by adding nodes influenced by attractors.
-
-Find the closest node to each attractor.
-
-```gdscript
-func closest_node(attractor: Vector3) -> int:
-    var best: int = -1
-    var best_dist: float = INF
-    for i in nodes.size():
-        var d: float = nodes[i].distance_to(attractor)
-        if d < best_dist:
-            best_dist = d; best = i
-    return best
-```
-
-Each attractor influences one node — the nearest. Per-attractor cost is O(N).
-
-Grow one step.
-
-```gdscript
-@export var influence_radius: float = 2.0
-@export var kill_radius: float = 0.3
-@export var step_length: float = 0.3
-
-func grow_step() -> bool:
-    var influences: Dictionary = {}  # node_index -> average direction
-    var kept_attractors: Array = []
-    for a in attractors:
-        var closest := closest_node(a)
-        if closest < 0 or nodes[closest].distance_to(a) > influence_radius:
-            kept_attractors.append(a)
-            continue
-        if nodes[closest].distance_to(a) < kill_radius:
-            continue  # consumed
-        influences.get_or_add(closest, Vector3.ZERO)
-        influences[closest] += (a - nodes[closest]).normalized()
-        kept_attractors.append(a)
-    attractors = kept_attractors
-    if influences.is_empty(): return false
-    for node_index in influences:
-        var direction: Vector3 = influences[node_index].normalized()
-        nodes.append(nodes[node_index] + direction * step_length)
-        parents.append(node_index)
-    return true
-```
-
-Sum influences per node; add a child in the averaged direction. Attractors within kill_radius are consumed.
-
-Render the tree.
-
-```gdscript
-func render_tree() -> void:
-    for i in nodes.size():
-        if parents[i] < 0: continue
-        spawn_cylinder_between(nodes[parents[i]], nodes[i])
-```
-
-One cylinder per edge. Cheap to render; tree-like structure emerges.
-
-Render with tapered radius.
-
-```gdscript
-func node_subtree_size(i: int) -> int:
-    var count: int = 1
-    for j in parents.size():
-        if parents[j] == i:
-            count += node_subtree_size(j)
-    return count
-```
-
-Larger subtree means thicker trunk. Used as an input to the cylinder's radius.
-
-You can now scatter attractors, grow a tree toward them, consume reached attractors, and render the result with tapered branches. PG_Percolation_Network extends into random connectivity.
-
-Reset the tree.
-
-```gdscript
-func reset() -> void:
-    nodes.clear()
-    parents.clear()
-    attractors.clear()
-    nodes.append(Vector3.ZERO)
-    parents.append(-1)
-```
-
-Start fresh. Useful when scatter conditions change.
+Continue directly to PG_Branching_Growth: compare a nearest-target decision with the accumulated direction just learned. Keep its existing organic_space comparison available. This first traverse does not impose a one-artifact quota on later rooms.

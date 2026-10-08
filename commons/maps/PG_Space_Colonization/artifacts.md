@@ -1,13 +1,5 @@
 # PG Space Colonization — Artifacts
-*Procedural Generation: Rules Build Worlds · lambda_edge · 1 artifacts*
 
-> Scatter points in space. Call them attractors. Drop a seed. The nearest branch segment reaches toward the nearest attractor. When it gets close enough, the attractor dies. New segments sprout. The tree grows not from a blueprint but from hunger — each branch extending toward whatever nourishment remains.
+## space_colonization_algorithm — primary
 
-The map, read through what it holds — its artifacts in the order you meet them:
-
-## space_colonization_algorithm
-![space_colonization_algorithm](/scene-catalog/space_colonization_algorithm.png)
-
-Growth algorithm that builds branching structures by attracting tips toward a cloud of auxin-like markers — Runions-style space colonisation producing tree/coral/blood-vessel topologies.
-
-`space_colonization_algorithm`
+The existing scene now offers a museum lesson through `space_colonization_algorithm:180#lesson:true`: one root, fixed attraction fields, manual steps and an explicit eligibility comparison. TIPS retains the old single-strand behavior; NETWORK allows older sites to produce later children. HOLD preserves geometry at a labelled .45 display scale. The ordinary artifact keeps its original UI and default tip policy. See final.md for the anchored book passage and technical.md for the precise contract.

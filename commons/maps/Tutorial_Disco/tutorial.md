@@ -1,5 +1,14 @@
 # Disco
 
+**Learning elements — proposed focus**
+
+*The labels below set the revision focus; the existing lesson still needs alignment.*
+
+- Boolean scores
+- Playhead indices
+- Tempo
+- Cyclic reads
+
 A 17×17 dance floor. Each tile triggers when stepped on. A step sequencer loops the pattern.
 
 Build the floor.

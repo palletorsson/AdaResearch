@@ -1,121 +1,44 @@
-# Random Noise Types
+# Carry, compare, then read the procedure
 
-Points proposed at random, and a rule that admits or refuses each one. Every line below is from `algorithms/randomness/randompoints/randompoints.gd`, the artifact the map places as `randompoints`.
+**Learning elements — proposed focus**
 
-Route every draw through one call.
+_The labels below set the revision focus; the existing lesson still needs alignment._
 
-```gdscript
-func _rf(a: float, b: float) -> float:
-	return _rng.randf_range(a, b) if _rng != null else randf_range(a, b)
-```
+- Rejection sampling
+- Minimum spacing
+- Attempt budgets
 
-With no seed `_rng` is null and the call falls through to the global stream — the same call in the same order as before, so an unseeded placement draws exactly what it always drew. Under a named seed every draw in the file comes from one generator, which is what makes a cloud repeatable.
+1. At **randompoint**, carry the point within its metal frame, then out of its plane. Release it. Compare local x/y with local z. Release does not draw a replacement position.
+2. At **randompoints**, compare the two framed slabs, each 0.90 × 0.90 × 0.12 m. Move your viewpoint before treating projected overlaps as close spatial pairs.
+3. Use REDRAW, then NEW SEED. A repeated construction requires the same settings and generator call order as well as the seed.
+4. LOAD alternates the initial request and four times that request: 24 / 96 in this map. Dimensions and minimum distance stay fixed. Read filled/unfilled separately from kept/refused candidates.
+5. RULE alternates minimum-distance rejection and the clamped Gaussian. Red shells in the latter are comparisons with a reference spacing, not breaches of a promise the Gaussian made.
+6. Return to spacing, carry a point into another shell, release, then RESTORE. Separate a constraint at construction from the first artifact's continuously applied coordinate clipping.
 
-Propose a point anywhere in the volume.
+Read these actual source passages after the encounters.
 
-```gdscript
-func _generate_uniform(count: int, extents: Vector3) -> Array:
-	var pts = []
-	for i in range(count):
-		var pos = Vector3(
-			_rf(-extents.x, extents.x),
-			_rf(-extents.y, extents.y),
-			_rf(-extents.z, extents.z)
-		)
-		pts.append(pos)
-	return pts
-```
-
-Count in, count out. Nothing can refuse anything here, which is why the left-hand plate on the bench keeps every candidate it is offered.
-
-Now ask one question before letting a candidate land.
+The single point clips coordinates on each process frame:
 
 ```gdscript
-			var min_dist = INF
-			if pts.is_empty():
-				min_dist = INF
-			else:
-				for existing in pts:
-					var d = candidate.distance_to(existing)
-					if d < min_dist:
-						min_dist = d
-
-			# Enforce minimum distance
-			if min_dist >= blue_noise_min_dist:
-				pts.append(candidate)
-				placed = true
-				break
+if clamped != pos:
+	point_node.position = clamped
+_update_label(point_node)
 ```
 
-Dart throwing: the candidate is compared with every point already admitted, and the nearest of those decides. This is the whole of the rule. Note what it is not — nothing is moved, nudged, relaxed or optimised, and no point already admitted is ever reconsidered.
-
-Keep the refusals.
+The bench counts neighbours; this branch changes no position:
 
 ```gdscript
-			if _rejected.size() < GHOST_CAP:
-				_rejected.append(candidate)
+if a.position.distance_to(b.position) < blue_noise_min_dist - 0.001:
+	touching += 1
+	bad[i] = true
+	bad[j] = true
 ```
 
-A refusal is a candidate that fell inside somebody's excluded neighbourhood. The bench draws them where they fell, as grey specks, because a rule whose cost is invisible looks free.
+Try a three-point overlap. Three coincident centres contain three close pairs, even though only three points change colour. The observer reports pairs, not half the number of coloured shells.
 
-And say what happens when the rule cannot be satisfied.
+## The galleries extend the route
 
-```gdscript
-		if not placed:
-			# Relax constraint slightly if we fail?
-			# For now, just don't place the point (returns fewer points than requested)
-			# This is characteristic of Blue Noise (packing limit)
-			pass
-```
-
-That comment is the shipped code's own, and the answer it settled on is the honest one: the point is not placed, and the population comes back short. The readout says so in words when it happens. A system that had answered the question in the comment the other way — relaxing the distance to make the number — would report a full count and no longer be doing what it claims.
-
-Set the rule's distance from the density, not by hand.
-
-```gdscript
-	if not _dist_asked:
-		var mean_gap: float = pow(max(0.001, area_size.x * area_size.y * area_size.z) / float(max(1, num_points)), 1.0 / 3.0)
-		blue_noise_min_dist = snappedf(0.8 * mean_gap, 0.005)
-```
-
-Eight tenths of the mean spacing the requested population implies in the volume given. Fixing it against the density rather than in metres keeps the packing limit in view at any count.
-
-Draw the excluded neighbourhood.
-
-```gdscript
-	var s := SphereMesh.new()
-	s.radius = blue_noise_min_dist * 0.5
-```
-
-Half the distance, and that is the exact geometry: if no two centres are closer than d, shells of radius d/2 can touch and never overlap. So the shells in the admitted plate kiss, and the ones in the proposed plate pass through each other.
-
-Look, but do not enforce.
-
-```gdscript
-			if a.global_position.distance_to(b.global_position) < blue_noise_min_dist - 0.001:
-				bad[i] = true
-				bad[j] = true
-```
-
-Four times a second, over the admitted cloud only. It colours shells and counts pairs; it moves nothing. A point carried into a neighbour's shell stays there, because the distance was a condition of admission and never a force.
-
-Put it back.
-
-```gdscript
-			if p is RigidBody3D:
-				var rb: RigidBody3D = p
-				rb.freeze = true
-				rb.linear_velocity = Vector3.ZERO
-				rb.angular_velocity = Vector3.ZERO
-			(p as Node3D).position = (p as Node3D).get_meta("home")
-```
-
-Each point remembers the position it was generated at. A point that has been carried is a live body again, so it is frozen before it is placed, or physics puts it back where physics wants it.
-
-Stage it in a map.
-
-```
-randompoints:180#stand:compare#count:24#size:0.9
-```
-
-`stand:compare` builds the bench: two matched volumes, the shells, the ghosts, the cased readout and REDRAW · NEW SEED · RULE · RESTORE. `count` is the requested population, `size` the square side of the sampled slab, `seed` pins the name, `radius` overrides the rule's distance, `mode` picks the shipped distribution. The `180` turns the bench's front toward the hall's north door, which is where the visitor arrives. Without the token the artifact is what it always was: one cloud of thirty points in a one-metre cube, on the global stream.
+7. At **WhiteNoiseGallery**, follow a row of the existing 100 × 100 field. Compare height with colour. Both use the same uniform draw; adjacent heights do not constrain one another.
+8. Try its WHITE, PINK, BROWN, BLUE and VIOLET controls, then STOP. Compare sound while watching the image remain fixed. These are separate generators. Reading the field into sound is a proposed extension, not an implemented control.
+9. At **NoiseColors3D**, compare the five illustrated rows, then audition the sounds. Examine the tall plateaus: display clamping makes different powers share one height. The bars are not a measured audio spectrum.
+10. Read the BROWN accumulation and VIOLET difference passages in final.md after listening. What does each retain from its previous step? Carry several discoveries out of the room; every work need not answer the first question in the same way.

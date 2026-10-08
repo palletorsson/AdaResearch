@@ -1,45 +1,44 @@
-# Sculpting the Field, Not the Mesh
+# Add a contribution
 
-You never touch the surface. You edit the numbers behind it, and the surface follows.
+**Learning elements**
 
-Store the field explicitly this time — a 3D grid of floats you can wound and heal:
+- Spatial contributions
+- Operation history
+- Ordered subtraction
 
-```gdscript
-var field: PackedFloat32Array
-var N := 48
+<!-- @mc_sculpt_vr -->
 
-func idx(x: int, y: int, z: int) -> int:
-    return x + y * N + z * N * N
+When two rounded deposits meet, where does their seam go?
 
-func init_field() -> void:
-    field.resize(N * N * N)
-    field.fill(-1.0)          # empty space everywhere
+Begin with the two deposits inside the framed volume. Their centres are 0.90 metres apart and each radius is 0.30 metres. There is room between them. Press PAIR to bring their centres to 0.65 metres apart, then 0.45. Before each change, predict whether a neck will appear. The deposits keep their radii; the relation between them changes.
+
+HOLD keeps the current surface beside the live volume. Now press ADD. A gold point marks where the desk places its quarter-metre brush contribution. Inspect the join from another angle before adding again. A short, located edit gives you something you can explain; repeated deposits combine before their effects become easy to separate.
+
+In VR, move a controller into the framed volume and hold its trigger briefly. The active ADD or ERASE mode also applies to this hand gesture. The desk offers a repeatable location for comparison; the controller supplies your own. Move outside the volume and the brush no longer deposits. That frame is a limit of this instrument, not the edge of space.
+
+The brush does not push a particular triangle into a new position. Its location is translated into the generator's coordinates and stored as a contribution with a centre and radius. The field combines sphere-like distance descriptions with a smooth blending operation, then extracts the surface again.
+
+The changed join is therefore a result of several decisions: where you deposited, how wide the contribution is, how contributions are blended and how finely the field is sampled. Your gesture participates in the form without directly specifying every point of its boundary.
+
+The gyroid changed a repeating spatial expression. This sculptor adds local descriptions to a collection. Both approaches return to the same task of finding a visible boundary from values, but they distribute authorship differently across the volume.
+
+Press ERASE. It uses the same marked centre and nominal radius as ADD. Look for the new inward-facing boundary, then compare with your held surface. The earlier implementation accidentally turned erasure into another addition by discarding a negative sign. Here that sign survives into the field calculation.
+
+At the lesson's selected level of zero, the distinction can be written as two operations. The brush field is distance from its centre minus its radius:
+
+```glsl
+// deposit
+field = smooth_union(field, brush, blend);
+// cut
+field = max(field, -brush);
 ```
 
-The brush is addition. Sculpting is arithmetic on a neighborhood:
+The cut is a new contribution to the recorded history. It does not remove a record of the earlier gesture. ADD after ERASE can fill some of the cut again; ERASE after ADD leaves the cut. Order has become part of the form. Subtraction also has a sharper junction here than the smooth addition. They are different operations, not perfect opposites or an undo command.
 
-```gdscript
-func brush(center: Vector3, radius: float, strength: float) -> void:
-    for x in range(max(0, center.x - radius), min(N, center.x + radius + 1)):
-        for y in range(max(0, center.y - radius), min(N, center.y + radius + 1)):
-            for z in range(max(0, center.z - radius), min(N, center.z + radius + 1)):
-                var d := Vector3(x, y, z).distance_to(center)
-                if d < radius:
-                    var falloff := 1.0 - d / radius
-                    field[idx(x, y, z)] += strength * falloff * falloff
-```
+PAIR replaces the live history with the next pair of deposits. RESET returns the wide pair and ADD mode; both keep the held surface. The display records how many contributions remain. Two different histories can leave a similar-looking boundary, and the same number of records can describe quite different bodies.
 
-Positive `strength` deposits matter (the fountain rising); negative carves it away. The falloff makes the brush soft — density blooms around the center instead of stamping a hard ball.
+The extractor still samples 64 points per axis. Your hand moves between samples and between recorded strokes. The brush cannot promise to keep every distinction in the gesture. There is also a less visible limit: after five hundred contributions the generator drops the oldest. A cut may remain in the history after the deposit it once cut has been forgotten. This instrument's memory helps make the body, and also decides what it can cease to remember.
 
-After each stroke, re-march only the cells the brush touched:
+<!-- @ -->
 
-```gdscript
-func _on_trigger(hand_pos: Vector3, grow: bool) -> void:
-    var c := world_to_grid(hand_pos)
-    brush(c, 4.0, 0.8 if grow else -0.8)
-    remarch_region(c - Vector3.ONE * 5, c + Vector3.ONE * 5)
-```
-
-This is the whole live-sculpting trick: the field is cheap to edit and the extraction is local. Your hand writes density; marching cubes translates continuously.
-
-Try: carve a tunnel straight through a mound you just raised. No mesh operation happened — no cutting, no stitching. You lowered some numbers below the threshold, and the surface reorganized around the fact. Matter here is an *opinion the field holds*, revisable by hand.
+The next room scales the same field-making idea towards terrain. Ask what additional relations a volume can describe beyond the single upper height of a conventional landscape.

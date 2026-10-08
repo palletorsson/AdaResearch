@@ -2,7 +2,7 @@
   "map_info": {
     "name": "Ontological Uncertainty",
     "lookup_name": "SpeculativeComputation_Ontological_Uncertainty",
-    "description": "Explore ontological uncertainty in computation and its philosophical implications. Scaffold map — awaiting content.",
+    "description": "A possibility field where several readings of a body remain active. The uncertainty is staged as a condition to inspect.",
     "version": "1.0",
     "format": "json",
     "dimensions": {
@@ -34,10 +34,10 @@
     }
   },
   "documentation": {
-    "summary": "SpeculativeComputation_Ontological_Uncertainty - Scaffold map for ontological uncertainty content",
-    "layout": "Simple 10x10 room with spawn and teleporter",
-    "objective": "Placeholder — build out ontological uncertainty artifacts and interactions.",
-    "key_elements": []
+    "summary": "SpeculativeComputation_Ontological_Uncertainty - a field of unresolved possibilities",
+    "layout": "Simple 10x10 room with a central possibility cloud, spawn, and teleporter",
+    "objective": "Compare competing readings without collapsing them into one premature identity.",
+    "key_elements": ["possibility_space_cloud - unresolved state field"]
   },
   "lighting": {
     "ambient_color": [0.3,0.3,0.4],
@@ -85,7 +85,7 @@
       [" "," "," "," "," "," "," "," "," "," "]
     ],
     "interactables": [
-      [" "," "," "," "," "," "," "," "," "," "],
+      [" "," "," "," ","possibility_space_cloud"," "," "," "," "," "],
       [" "," "," "," "," "," "," "," "," "," "],
       [" "," "," "," "," "," "," "," "," "," "],
       [" "," "," "," "," "," "," "," "," "," "],

@@ -1,126 +1,23 @@
-# Noise Space 10
+# Test a route, then change its height
 
-Ten parameters. The space of all possible noise.
+**Learning elements — proposed focus**
 
-Define the parameter space.
+_The labels below set the revision focus; the existing lesson still needs alignment._
 
-```gdscript
-class_name NoiseParameters
+- Terrain sections
+- Proposed routes
+- Recorded passage
 
-var position: Vector3 = Vector3.ZERO
-var time: float = 0.0
-var octaves: int = 4
-var persistence: float = 0.5
-var lacunarity: float = 2.0
-var frequency: float = 1.0
-var amplitude: float = 1.0
-var seed: int = 12345
-```
+1. Take the entry ramp onto the raised margin. Choose the far pair of posts as the destination and inspect route A before crossing.
+2. Try the terrain at HEIGHT .25. Return to the margin and compare the same route at .90. Look back at the automatic pink trace from the margin. It records this body's supported movement, while the gold line remains a proposal; stopping is not proof that every route is blocked. Entry starts a new trail, leaving holds it, and accepted HEIGHT/RESET clears it.
+3. RESET from the margin returns .25, route A and sample 1. HEIGHT and RESET refuse while a detected player body remains on the patch. A refused press preserves both ground and trail; it is not queued.
+4. Read ground_at in final.md: the fixed noise value becomes 1 + height_scale × edge_weight × value. HEIGHT zero gives a level surface while preserving the field's settings.
+5. Follow the .75 m transition towards the margin. The edge envelope makes the noise contribution zero at the boundary. This is an authored access condition.
+6. Select ROUTE B. Compare its section length and steepest sampled segment with A. The ground, collider and pink trail do not change. A longer proposed path may still be steeper.
+7. SAMPLE selects five positions along the chosen section. Match the yellow marker on the plot with the marker on the actual ground. The readout distinguishes the raw field, edge weight and mesh height.
+8. Read the mesh/collision passage. Each triangle is shared between visibility and collision; between vertices, the finite triangle can differ from a newly queried noise value.
+9. From the margin, enter SMALLER. Walk on the unchanged surface at one-eighth size; look for its sampled triangles and compare a ripple with your new eye height. Find the small pink RETURN doorway beneath its beacon to regain the previous size on the margin.
+10. Look for an overhang, then move to another view. One height per x/z cannot represent both a cave floor and roof there. Recall Noise Voxel's occupied volume.
+11. Watch the retained orb when resetting terrain. Its independent pulse continues. Carry this distinction to the generator comparison in Noise_Perlin_Simplex.
 
-Eight scalar parameters plus position (3D) and time. All controls exposed.
-
-Configure a noise generator.
-
-```gdscript
-func apply_to(noise: FastNoiseLite, params: NoiseParameters) -> void:
-    noise.seed = params.seed
-    noise.fractal_octaves = params.octaves
-    noise.fractal_gain = params.persistence
-    noise.fractal_lacunarity = params.lacunarity
-    noise.frequency = params.frequency
-```
-
-Map the parameter bag onto FastNoiseLite's fields. The generator's behaviour fully determined by these.
-
-Sample at a position.
-
-```gdscript
-func sample(noise: FastNoiseLite, params: NoiseParameters) -> float:
-    apply_to(noise, params)
-    return noise.get_noise_3dv(params.position) * params.amplitude
-```
-
-One function; ten-dimensional input; scalar output.
-
-Walk through parameter space.
-
-```gdscript
-var trajectory: Array = []
-
-func step_through_space(param_name: String, target: float, duration: float) -> void:
-    var start: float = current.get(param_name)
-    var tween := create_tween()
-    tween.tween_method(
-        func(t): current.set(param_name, lerp(start, target, t)); record_trajectory(current); rerender()
-    , 0.0, 1.0, duration)
-```
-
-Animate any single parameter while others stay fixed. The trajectory is a line in the 10D space.
-
-Record a trajectory.
-
-```gdscript
-func record_trajectory(params: NoiseParameters) -> void:
-    trajectory.append({
-        "position": params.position,
-        "octaves": params.octaves,
-        "persistence": params.persistence,
-        # ... other params
-    })
-```
-
-Stores a snapshot of each step. Lets the learner replay the traversal.
-
-Save preset.
-
-```gdscript
-func save_preset(name: String, params: NoiseParameters) -> void:
-    var preset_data: Dictionary = {
-        "octaves": params.octaves,
-        "persistence": params.persistence,
-        "lacunarity": params.lacunarity,
-        "frequency": params.frequency,
-        "amplitude": params.amplitude,
-        "seed": params.seed,
-    }
-    presets[name] = preset_data
-```
-
-Named configurations. The learner builds a library of interesting points in the space.
-
-Load preset.
-
-```gdscript
-func load_preset(name: String) -> NoiseParameters:
-    var data := presets.get(name, {})
-    var params := NoiseParameters.new()
-    for key in data:
-        params.set(key, data[key])
-    return params
-```
-
-Reverse of save. The learner can jump to any saved point.
-
-You can now define a noise parameter bag, apply it to a generator, walk through parameter space with tweens, record trajectories, and save/load presets. Noise_Perlin_Simplex extends into algorithm comparison.
-
-Clamp to valid range.
-
-```gdscript
-func clamp_noise(value: float, low: float = -1.0, high: float = 1.0) -> float:
-    return clamp(value, low, high)
-```
-
-Guarantees output stays in the expected range. Useful before writing to textures.
-
-Log state each frame for later replay.
-
-```gdscript
-var state_log: Array = []
-
-func log_state() -> void:
-    state_log.append(current_snapshot())
-    if state_log.size() > 600:
-        state_log.pop_front()
-```
-
-Ring buffer of ten seconds at 60 Hz. Useful for replay or debugging.
+The desktop input tests use the real DesktopPlayer rig with synthetic events. Headset movement, comfort, controller reach and Quest performance remain for the later headset session.

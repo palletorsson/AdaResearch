@@ -5,3 +5,12 @@ Critical angle: The crisis is not resolved — it is inhabited. Gödel proved co
 Key artifacts: qfep_formula_3d presents the complete formula; godel_statement_plaque, russell_set_box, florensky_sphere, and escher_staircase represent the four crisis insights; bifurcation_diagram shows qualitative transition; lambda_slider and phi_slider provide interactive parameter control.
 
 Gap: No gap identified.
+
+
+<!-- study-spine:sentence_authority -->
+
+## Installed application: Permission at three scales
+
+`sentence_authority` occupies a new adjoining bay, after the existing encounters. Cell [11, 34], rotation 180°, museum adapter `res://commons/artifacts/spine_studies/sentence.tscn`. Original response to Jenny Holzer; no claim of exact reconstruction.
+
+Change one sentence once; follow the same words across label, strip and wall. Reuses loop, array, inscription, limit; adds no prerequisite node. The display and main-player controls are supplied.

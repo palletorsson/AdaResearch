@@ -1,1 +1,1 @@
-Frames flicker, render passes. Point Zero marks the beginning of all the things that were already there, the infrastructure. With time there was light and somewhere to stand. In the beginning, there was the void, darkness was on the faces of the depths of a simulation.
+You fall into a room that has already begun. A number keeps moving; behind the window, frames fold into frames. We find somewhere to count from without finding the first beginning.

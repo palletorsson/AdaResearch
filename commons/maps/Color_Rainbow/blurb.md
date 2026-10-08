@@ -1,1 +1,3 @@
-Walk through light itself. Rainbow emitters line the corridor, cycling through the spectrum in slow waves. Red fades to orange fades to yellow - the continuous gradient made temporal. Newton's prism stretched into architecture, the spectrum become a path you traverse rather than observe from outside.
+# Every Body / More Colour
+
+Pearl-collared mushrooms, candy steps and a rainbow wide enough to walk beneath. Enter the centre path and let the confetti welcome you. Then re-divide the arch: its familiar shape can hold another arrangement of colour. There is no correct one to earn before celebrating.

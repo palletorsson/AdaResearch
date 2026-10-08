@@ -1,6 +1,6 @@
 # Return visits in Point_Triangle_Context
 
-The [first passage](final.md) follows `triangle_line_puzzle` and `draw_triangle_faces`. The following works remain in the room. Choose a question to return with; these are extensions of the encounter, not prerequisites for reaching the next hall. Grid positions and roles are in [artifacts.md](artifacts.md).
+The [first passage](final.md) follows `triangle_line_puzzle` and `draw_triangle_faces`. The folded strip, quad, quad puzzle and pink triangle remain in the room. The other entries below document parked studies whose sources remain available; consult the current inventory before looking for them in the hall. Choose a question to return with; these are extensions of the encounter, not prerequisites for reaching the next hall. Grid positions and roles are in [artifacts.md](artifacts.md).
 
 ## triangle
 

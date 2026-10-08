@@ -2,13 +2,19 @@
 
 <!-- @game_of_life_petri -->
 
-Five green cells wait in the dish. A larger version lies in the floor beyond it. Three lamps stand along its edge. They are dark.
+Five green cells wait in the dish. A larger version spreads across the floor beyond it. Three lamps stand along its edge. They are dark.
 
 Press STEP four times. The arrangement has changed at every step; now something about it has returned. Compare its position with one of the gold squares. What has travelled?
 
 REPLAY brings the five cells back. This time keep your attention on the square marked A, at address (10,10). Step towards it. A cell becomes occupied; a lamp lights. Step again. Follow the square for a while, even when the more recognisable figure tempts your eye away. The address keeps its place. The pattern is already elsewhere.
 
 You can cross the large display. Its empty cells still support your feet. In the previous room, occupancy became a stepping tile over a lower basin. Here it becomes colour on an ordinary floor. We have carried the array forward and given it another job. A zero does not contain an instruction to make a hole.
+
+Stay beside one of the gold squares as its value changes. The pattern visits; the place continues to hold you. A lamp answers the cell, while your weight makes no difference to its next state. Sharing an address with the calculation has not made you one of its conditions.
+
+![The Life floor fills the front bay, with fixed gold addresses connected to three lamps.](images/life-floor.png)
+
+*The same present has room around it now. An empty square remains somewhere to stand.*
 
 Try BLINKER. Three cells lie in a line. One step turns the line; another brings it back. Watch A, the middle cell. The surroundings alternate while this address remains occupied. Its lamp stays lit. Returning, travelling and staying can belong to different parts of the same small event. The names for these, now that you have watched them, are still life, oscillator and spaceship: the block the glider will meet is the first, the blinker the second, the glider the third.
 
@@ -44,7 +50,7 @@ RUN advances this local experiment slowly and holds it at generation 48. The mus
 
 <!-- @ -->
 
-Further in, past the mould network and the dark sphere, a hexagonal field changes the second choice only: six neighbours instead of eight, a birth on two, and its generations stacked upward into a terrain. The same procedure, a different world.
+Further in, past the mould network and the dark sphere, a table holds a hexagonal field. Here the neighbourhood and the birth condition both change: six neighbours instead of eight, birth on two. The Random Flip control allows occasional reversals of the rule’s answer. Generations stack upward into a terrain. Time has acquired thickness again, through another agreement.
 
 So far the visitor has chosen a beginning and watched an output. In the next room, approaching a surface enters the calculation. What happens when the body doing the observing becomes one of the conditions?
 

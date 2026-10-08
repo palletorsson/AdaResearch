@@ -1,159 +1,51 @@
-# Collective Knowledge — Technical
+# Contribute, preserve a source, revise a piece
 
-Four reasoning agents run side-by-side, each with its own inference engine. A mediation station collects their outputs and computes a shared-commons report.
+This hall follows Situated Computation's four separate claims and leads to Rhizome Network's changing connections. Its primary is `peer_production_tool`; the [scene](../../../commons/artifacts/peer_production_tool/peer_production_tool.tscn) and [source](../../../commons/artifacts/peer_production_tool/peer_production_tool.gd) implement the encounter.
 
-```gdscript
-class_name ClassicalAgent extends Node
+## First comparison
 
-func reason(claim: String, kb: KnowledgeBase) -> String:
-    # Classical two-valued logic, crashes on contradiction
-    if has_contradiction(kb): return "INCONSISTENT"
-    var value: bool = evaluate_classical(claim, kb)
-    return "TRUE" if value else "FALSE"
+The hall uses twelve generated sources, sixty-piece capacity and a 0.7-second interval between packet launches. A packet advances with `delta * 4` and retains its sender index when it lands. The program chooses senders; they are not people choosing to participate. Piece positions follow an authored helix.
 
-class_name ParaconsistentAgent extends Node
+FLOW holds or resumes both packet motion and new launches. PIECE also holds flow and selects the next landed piece. A connecting line and P1–P12 identifiers let the visitor recover the selected source without relying on colour alone. COLOUR switches between the original purple-to-teal arrival-order gradient and source colours without changing geometry. Each landed record retains its source in either view.
 
-func reason(claim: String, kb: KnowledgeBase) -> String:
-    # Four-valued Belnap logic, tolerates contradiction
-    var value: int = evaluate_paraconsistent(claim, kb)
-    return ["NEITHER", "TRUE", "FALSE", "BOTH"][value]
-
-class_name ProbabilisticAgent extends Node
-
-func reason(claim: String, evidence: Array) -> String:
-    var prior: float = 0.5
-    var posterior: float = bayesian_update(prior, evidence)
-    if posterior > 0.9: return "LIKELY_TRUE"
-    elif posterior < 0.1: return "LIKELY_FALSE"
-    else: return "UNCERTAIN"
-
-class_name ConstraintAgent extends Node
-
-func reason(claim: String, constraints: Array) -> String:
-    var solution := constraint_solver(constraints)
-    if solution == null: return "UNSATISFIABLE"
-    return "CONSISTENT_WITH_SOLUTION"
-```
-
-## Mediation
-
-The central mediator collects the agents' outputs and combines them without requiring consensus.
+## What the counts count
 
 ```gdscript
-class_name Mediator extends Node
-
-@export var agents: Array  # list of agent nodes
-
-func query_all(claim: String) -> Dictionary:
-    var responses: Dictionary = {}
-    for agent in agents:
-        responses[agent.name] = agent.reason(claim, shared_kb)
-    return responses
-
-func commons_support(claim: String) -> String:
-    var responses := query_all(claim)
-    var positive_count := 0
-    var negative_count := 0
-    for agent_name in responses:
-        var r: String = responses[agent_name]
-        if r in ["TRUE", "LIKELY_TRUE", "CONSISTENT_WITH_SOLUTION"]:
-            positive_count += 1
-        elif r in ["FALSE", "LIKELY_FALSE", "UNSATISFIABLE"]:
-            negative_count += 1
-    if positive_count > negative_count and positive_count > 0:
-        return "COMMONS_SUPPORTS"
-    elif negative_count > positive_count and negative_count > 0:
-        return "COMMONS_REJECTS"
-    else:
-        return "COMMONS_DIVIDED"
+_placed += 1
+_edits += 1
+# count distinct contributors this version
+if peer_idx >= 0 and peer_idx < _seen_peers.size() and not bool(_seen_peers[peer_idx]):
+    _seen_peers[peer_idx] = true
+    _contributors += 1
 ```
 
-## Agreement and Disagreement
+The historic `_contributors` counter remains cumulative source-version participation. It is labelled PARTICIPATIONS, correcting the earlier CONTRIBUTORS display without discarding its history. PIECES is the current form's occupancy; ADDITIONS is the lifetime arrival count. SOURCES counts distinct sources in this version; EVER counts distinct sources since this artifact's last rebuild. REVISIONS counts visitor revision operations separately. None counts unique humans.
 
-The display shows per-claim agreement patterns. Some claims are unanimous; others split the agents. The splits are the interesting data — they identify where the different logics produce genuinely different answers.
+VERSION retains one previous version in memory, clears the current records, pending packets and per-version flags, and waits for FLOW. Lifetime counts persist. At capacity, interactive placements hold the form; passive placements retain their automatic release behaviour. Configuration rebuild starts a fresh session, so these are not persistent saved totals.
 
-```gdscript
-func find_informative_claims(claim_set: Array) -> Array:
-    var informative: Array = []
-    for claim in claim_set:
-        var responses := query_all(claim)
-        var unique_values := {}
-        for r in responses.values():
-            unique_values[r] = true
-        if unique_values.size() > 1:
-            informative.append({"claim": claim, "responses": responses})
-    return informative
-```
+## Dispute and revision
 
-## Coverage Measurement
+DISPUTE toggles a red outline on the selected existing record. REVISE rotates that piece another thirty degrees and alternates its height between original and 1.5 times original. Its source, location, addition count and current piece count do not change. Original and immediately previous transforms remain available in the record; `revised_by` records VISITOR and a revision number increments. Revision does not clear the dispute. This is a geometric editing demonstration, without semantic validation, agreement or a full history browser.
 
-A coverage panel tracks which claims each agent can settle and which the commons can settle. Claims unreachable by any single agent but reachable by the commons are highlighted as additive gains.
+The central form uses a MultiMesh. Selection/dispute outlines share another MultiMesh so marking many pieces does not create twelve draw calls per outline. Source tracing is one cylinder. Dynamic counters use depth-tested Label3D text instead of caching an unbounded set of baked counter textures. Source records, packets, current geometry and retained previous version are bounded by the configured capacities. Rebuilding frees only owned children, preserving the museum's attached nodes.
 
-```gdscript
-func compute_coverage(claim_set: Array) -> Dictionary:
-    var coverage: Dictionary = {}
-    for claim in claim_set:
-        var settled_by: Array = []
-        for agent in agents:
-            if agent.reason(claim, shared_kb) not in ["UNKNOWN", "NEITHER", "UNCERTAIN"]:
-                settled_by.append(agent.name)
-        coverage[claim] = settled_by
-    return coverage
-```
+## Placement and evidence
 
-## Complexity
+The full-size workbench remains at (6,5), now facing arrival. Two central pier cells become floor so that its front controls and central form can be reached and seen; four side piers remain. An explicit spawn at (6,1) and local dressing exclusions support approach. The other three authored tokens remain exactly placed.
 
-Each agent's cost is specific to its inference method. Classical logic: O(|kb|) to check consistency, O(|claim|) to evaluate. Paraconsistent: same. Probabilistic: O(|evidence|) for Bayesian update. Constraint: depends on the solver, typically O(exp(variables)) worst case but practical instances run in milliseconds.
+The controlled museum probe tests actual button signals, repeated-source counting across versions, packet sender identity, held motion, colour-independent geometry, disputed revisions, capacity, safe empty operations, rebuild ownership, legacy behaviour and selected walks. Rendered desktop views are evidence of these selected states, not headset comfort, Quest performance or learning. See the [pass report](../../../doc/book/iterations/2026-09-20-collective-review/SUMMARY.md).
 
-The mediator's cost is the sum of its agents' costs plus O(agents) for aggregation.
+The existing wiki fragment and two other supporting tokens remain an ecology to develop. A single NORTH fragment still points to an absent EAST panel; this pass does not claim to complete that separate reading circuit. The earlier theoretical/design material remains in the [preserved proposal](../../../doc/space/postcrisis-pass-2026-09-15/before/commons/maps/SpeculativeComputation_Collective_Knowledge/technical.md).
 
-Within the sequence, Collective_Knowledge implements the commons-of-incomplete-systems argument. PostCrisis_Synthesis will next close the sequence with a handoff.
 
-## Agent Communication
+## Restored commons table and four gates — 21 September
 
-Agents in the commons do not communicate directly; the mediator is the only interface. Each agent receives the same query, runs its own inference, and returns a response. This keeps the agents' logics truly independent.
+Both registry entries now carry `map_ready:true`, the museum's actual liveness condition, as well as explicit lookup names. The scenes already existed. The earlier missing-name warning was not the cause of their absence. No global loader change is needed.
 
-```gdscript
-func mediator_broadcast(claim: String) -> Dictionary:
-    var responses: Dictionary = {}
-    for agent in agents:
-        responses[agent.name] = agent.reason(claim, shared_kb)
-    return responses
-```
+The peer workbench remains at (6,5). The four gates move to (2,5), rotated 90 degrees, at full scale along the west wall. The ring table moves from (9,10) to (9,9), also at full scale. The two west piers and southeast pier are opened for the restored footprints and circulation; the northeast pier remains. All four artifact families are retained. The workbench and commons table are the two ordered primaries. The gate comparison and original wiki fragment remain secondary.
 
-## Consensus Algorithms
+The table reuses its six existing studies. Classification stores the three bin counts and OTHER from the seeded specimens. The labels report these counts without claiming OTHER must always be largest. Height ordering is authored with `heights.sort()`. The opposed pointers, model camera and defaults are illustrative models, not live measurement or camera feeds. Seven brief instrument cards face outward around the rim; a separate caption asks who sets the rules. Configuration rebuilds only an owned content root and preserves museum attachments. The ring's tangential segments have collision and retain the central opening.
 
-If a commons does need to reach consensus — for downstream decision-making — a separate aggregation step can apply. Majority rule, weighted voting, and iterative deliberation are common options.
+The gates also rebuild only their owned content. Frames, threshold and solid leaves have collision; the three transparent ghost leaves remain visual comparisons. The fourth gate's `glass`, `brass`, `open` and `gone` variants remain authoring configurations, not visitor controls. A door's collider does not establish the mathematical claims represented by its imagery.
 
-```gdscript
-func weighted_majority(responses: Dictionary, weights: Dictionary) -> String:
-    var vote_totals: Dictionary = {}
-    for agent_name in responses:
-        var weight: float = weights.get(agent_name, 1.0)
-        var response: String = responses[agent_name]
-        vote_totals[response] = vote_totals.get(response, 0.0) + weight
-    var best: String = ""
-    var best_total: float = -INF
-    for response in vote_totals:
-        if vote_totals[response] > best_total:
-            best_total = vote_totals[response]
-            best = response
-    return best
-```
-
-## Disagreement as Signal
-
-When agents disagree systematically on a class of claims, the disagreement pattern itself is informative. A claim that is TRUE under classical logic, UNCERTAIN under probability, and UNSATISFIABLE under constraints reveals something about the claim's structure that no single agent could have identified.
-
-## Aggregation Beyond Voting
-
-Simple voting flattens disagreement. More sophisticated aggregation preserves it — for instance, probabilistic aggregation that combines the agents' posterior distributions rather than their point estimates.
-
-```gdscript
-func probabilistic_aggregation(responses: Dictionary) -> Dictionary:
-    var combined := {"TRUE": 0.0, "FALSE": 0.0, "UNCERTAIN": 0.0}
-    for agent_name in responses:
-        var r: String = responses[agent_name]
-        combined[r] = combined.get(r, 0.0) + 1.0 / responses.size()
-    return combined
-```
+[Restoration, actual museum views and focused checks](../../../doc/book/iterations/2026-09-21-commons-restoration/index.html). The single wiki fragment's absent cross-reference remains a separate reading-circuit task; this restoration does not claim that circuit is complete. Headset and learner observations remain pending.

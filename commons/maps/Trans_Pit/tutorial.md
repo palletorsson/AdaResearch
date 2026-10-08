@@ -1,126 +1,88 @@
-# Trans Pit
+# The Moving Boundary — read the timed study
 
-Three rooms, three transformations, three hazards. The pit does not care which move sent you into it.
+**Learning elements — proposed focus**
 
-Build a pusher block.
+*The labels below set the revision focus; the existing lesson still needs alignment.*
 
-```gdscript
-class_name PusherBlock extends StaticBody3D
+- Shared control values
+- Coordinated transforms
+- Occupancy conditions
+- Reset sequences
 
-@export var axis: Vector3 = Vector3.RIGHT
-@export var distance: float = 4.0
-@export var speed: float = 2.0
+The three zones use position, rotation and size as timed obstacles. The floor remains level, and a bypass remains available. Watch a complete cycle from beside the lane before choosing to enter it. The source artifacts are `pusher_block.gd`, `rotation_cube.gd` and `grower_block.gd`; the middle zone also retains four `free_ball_launcher` instances.
 
-var start_position: Vector3
-var phase: float = 0.0
+## Translate between endpoints, with a pause
 
-func _ready() -> void:
-    start_position = global_position
-
-func _physics_process(delta: float) -> void:
-    phase = fmod(phase + delta * speed / distance, 2.0)
-    var t: float = phase if phase < 1.0 else 2.0 - phase  # triangle wave
-    global_position = start_position + axis * distance * t
-```
-
-The phase cycles between 0 and 2; the t value produces a triangle wave for smooth back-and-forth motion.
-
-Build a revolving wall.
+The pusher caches a world-space start and endpoint:
 
 ```gdscript
-class_name RevolvingWall extends StaticBody3D
-
-@export var angular_velocity: float = 1.0
-
-func _physics_process(delta: float) -> void:
-    rotate_y(angular_velocity * delta)
+_end_pos = _start_pos + push_axis.normalized() * push_distance
 ```
 
-Constant rotation around the Y axis. The wall sweeps in a circle around its pivot.
+A late grid configuration refreshes this cached endpoint and its direction arrow. Without that refresh, a block configured for Z could keep the default path along X.
 
-Build a grower block.
+During the moving part of its physics update:
 
 ```gdscript
-class_name GrowerBlock extends StaticBody3D
-
-@export var scale_rate: float = 0.2
-@export var max_scale: float = 3.0
-
-var current: float = 1.0
-
-func _physics_process(delta: float) -> void:
-    current = min(max_scale, current + scale_rate * delta)
-    scale = Vector3.ONE * current
+var speed_normalized: float = push_speed / push_distance
+_t += _direction * speed_normalized * delta
+_t = clampf(_t, 0.0, 1.0)
+var target_pos: Vector3 = _start_pos.lerp(_end_pos, _t)
+_body.global_position = target_pos
 ```
 
-Grows until max_scale. The learner's safe footprint shrinks as the block expands.
+At `_t = 0` or `_t = 1`, the block waits for `pause_time`, then reverses `_direction`. The moving surface is an `AnimatableBody3D`.
 
-Place fire pits around the hazards.
+| Placement (x,z) | Direction | Travel | Speed | One-way time | Pause at each end |
+|---|---|---|---|---|---|
+| (3,3) | +Z | 2 m | 1.5 m/s | about 1.33 s | 1.5 s |
+| (7,3) | +Z | 2 m | 2 m/s | 1 s | 1 s |
+| (5,5) | −Z | 2 m | 1.8 m/s | about 1.11 s | 1.2 s |
+
+Each token places the block centre 0.49 m above the floor, half its 0.98 m side. Its cached endpoints therefore keep the whole block above the deck. The three paths are separate and stop before the solid transverse walls. The eastern route avoids these lanes. Compare travel and waiting by choosing a lane, rather than treating progress through the room as proof that its timing was learned.
+
+## Rotate a wall profile
+
+The middle zone places `rc:90:y:4:-0.6` and `rc:90:y:3:-0.6`. These are step-and-pause rotation cubes, not continuous revolving walls. Their box profile is 2.2 × 2.2 × 1 metre; the authored vertical offset sinks part of that profile below the deck.
 
 ```gdscript
-func place_fire_pits(rectangle: Rect2) -> void:
-    for i in rectangle.size.x:
-        for j in rectangle.size.y:
-            var pit := FIRE_PIT_SCENE.instantiate()
-            pit.position = Vector3(rectangle.position.x + i, 0, rectangle.position.y + j)
-            add_child(pit)
+mesh_instance.rotation_degrees = rotation_axis * current_angle
+static_body.transform = mesh_instance.transform
 ```
 
-The pits are the constant across the three rooms. Their positions vary with the room's layout.
+The angle moves between zero and ninety degrees around Y at 45 degrees per second. Each turn takes two seconds; pauses are four and three seconds respectively. Measure the available width beside a slab at both orientations. Its own dimensions are fixed while its projection across the route changes.
 
-Handle fire pit contact.
+## Grow from the floor on a clock
+
+All three map tokens specify `min:0.3`, `max:3.5`, `speed:0.15`, `anchor:floor`, and `plinth:0`. Configuration reaches the live artifact.
 
 ```gdscript
-func _on_fire_pit_body_entered(body: Node) -> void:
-    if body.is_in_group("learner"):
-        DeathEffect.trigger(body, "fire")
+_time += delta * grow_speed * TAU
 ```
 
-The DeathEffect autoload handles the death sequence: flash, freeze, haptic, reload.
-
-Trigger map reload.
+For floor anchoring, the interpolation value is:
 
 ```gdscript
-func reload_map() -> void:
-    get_tree().reload_current_scene()
+var t: float = (1.0 - cos(_time)) * 0.5
+var current_scale: float = lerpf(min_scale, max_scale, t)
 ```
 
-The scene reloads from scratch. All hazards reset to their starting positions.
+All three growers share this rate and small starting configuration. The cosine starts this configuration small. A complete cycle takes `1.0 / grow_speed`, about 6.67 seconds. No visitor distance is read.
 
-You can now build pusher blocks, revolving walls, grower blocks, and fire pits, and trigger the death-and-reload sequence on contact. Chamber_Transformation converts transformation into a creature encounter.
-
-Check identity.
+The artifact sets the same side length on its mesh and collision box. It keeps their centres half that length above the root's floor position:
 
 ```gdscript
-func is_identity(t: Transform3D) -> bool:
-    return t.is_equal_approx(Transform3D.IDENTITY)
+var centre_y: float = s * 0.5 if anchor == "floor" else 0.0
+_col_shape.position.y = centre_y
+_mesh.position.y = centre_y
 ```
 
-Identity preserves the input. Useful as a test for whether a chain of transforms cancels out.
+The `AnimatableBody3D` origin remains fixed. Updating the child geometry avoids its physics synchronization restoring an old body position while the collision shape has already changed size. Existing placements without `anchor:floor` retain their centre-anchored sine cycle.
 
-Invert a transform.
+## What to compare
 
-```gdscript
-func invert(t: Transform3D) -> Transform3D:
-    return t.affine_inverse()
-```
+Ask what stays invariant in the object, then ask what happens to the visitor's available space. Translation preserves the object's dimensions; rotation preserves its internal distances; this positive uniform scaling preserves proportions. Nonuniform scaling would change those proportions.
 
-Undo the transform. Composing t with t.affine_inverse() produces identity.
+The legacy fire utilities have been removed, so their flames no longer occupy the observation floor. This is a ground-level study without an enforced failure consequence. A clear route around a lane is part of the current design; do not describe it as a lethal pit or a compulsory timing gate.
 
-Compose with multiplication.
-
-```gdscript
-func combine(a: Transform3D, b: Transform3D) -> Transform3D:
-    return a * b
-```
-
-Right-to-left application order. a * b applies b first, then a.
-
-Extract the origin.
-
-```gdscript
-func get_origin(t: Transform3D) -> Vector3:
-    return t.origin
-```
-
-The origin is the translation part of the transform. Ignore the basis to get just the position.
+Compare clearances for particular bodies. A capsule test checks one radius and height. It does not stand in for all player sizes, locomotion choices or comfort needs.

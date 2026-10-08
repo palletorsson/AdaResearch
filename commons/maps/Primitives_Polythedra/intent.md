@@ -16,4 +16,8 @@ The five former additional primaries remain placed and become return visits: `py
 
 Critical opening: a visually open form may retain a closed collision model; a sign can influence movement without imposing collision. A useful barrier need not be oppressive and an open route need not be beneficial. Ask whose action a proposed change would allow. The map does not currently let visitors rearrange the fixed barriers or signs.
 
-The current inventory has 34 placements and four utility wedges. The whole-room walk and headset reach remain review tasks. Existing component checks cover barrier stamping and blocking, a museum wedge ascent with a supplied capsule, and the sign's lack of collision. They do not establish that a tracked hand is stopped by the trihedron or that all floor joins are traversable. See the dated iteration record for current evidence.
+The current inventory has 35 placements and four utility wedges. The whole-room walk and headset reach remain review tasks. Existing component checks cover barrier stamping and blocking, a museum wedge ascent with a supplied capsule, and the sign's lack of collision. They do not establish that a tracked hand is stopped by the trihedron or that all floor joins are traversable. See the dated iteration record for current evidence.
+
+## Shared book illustration, 23 September
+
+`polyhedra_boundary_plate` supports the first two encounters in their existing primary group. It depicts the default open trihedron and the convex hull of the same four points, viewed from the opening. The amber base exposes where the hull closes the missing mesh face. This static native scene supplies both the wall work and the book render. The original figures remain grabbable; the plate adds no controls. Nine authored pink corner fills remain intact.

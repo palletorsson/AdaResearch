@@ -1,27 +1,7 @@
-# Noise One — Artifacts
-*Noise: Entropy with Memory · E_entropy · 3 artifacts*
+# Primary works
 
-> Before Perlin, noise was static — random values with no memory, no structure. Then came coherent noise: smooth, continuous, organic. Sample adjacent points and get adjacent values. The noise function remembers its neighbors. Chaos with correlation. Randomness that flows.
+1. **noisetorus** — paired field readings, with FREEZE, SAMPLE, AMPLITUDE, FREQUENCY and REMAP. Map (5,4), facing north.
+2. **noiselayers** — the existing three-resource terrain, staged as a compact basin with SUM, LOW, MIDDLE and HIGH. Map (5,7); controls face south. Original generator, source settings and coordinate planes retained.
+3. **dark_sphere** — independent periodic brightness and rotation. Map (8,10), near the exit; no new interaction is claimed.
 
-The map, read through what it holds — its artifacts in the order you meet them:
-
-## noisetorus
-![noisetorus](/scene-catalog/noisetorus.png)
-
-Shader-driven torus whose surface ripples with animated noise and hue shifting.
-
-`noisetorus`
-
-## Noise Layers
-![Noise Layers](/scene-catalog/noiselayers.png)
-
-Demonstrates octave layering (fractal Brownian motion) by stacking multiple noise frequencies. Shows how combining scales creates natural complexity.
-
-`noiselayers`
-
-## Dark Sphere
-![Dark Sphere](/scene-catalog/dark_sphere.png)
-
-USE a neutral sphere as a reference for scale, silhouette, and atmospheric change.
-
-`dark_sphere`
+The map's recovered structure and utilities remain intact. Optional automatically dealt museum sculpture is not counted as one of these authored works. Previous texts and map are archived under `doc/space/torus-review-2026-09-13/before/`.

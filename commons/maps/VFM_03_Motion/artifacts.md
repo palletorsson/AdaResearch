@@ -1,9 +1,16 @@
 # VFM 03 Motion — Artifacts
-*Vectors & Forces: From Direction to Dynamics · oscillation · 15 artifacts*
+*Vectors & Forces: From Direction to Dynamics · oscillation · 17 artifacts*
 
 > Velocity, acceleration, and what forces do over time.
 
 The map, read through what it holds — its artifacts in the order you meet them:
+
+## Book primaries
+
+1. `VectorMotion` — the map opts into the full-scale motion chamber, with central force controls and measured state.
+2. `friction_ramp` — angle and friction threshold on a standing-height plinth.
+
+The following catalogue preserves the supporting exhibits; catalogue membership does not imply book primacy.
 
 ## Bouncing Ball
 ![Bouncing Ball](/scene-catalog/bouncing_ball.png)

@@ -1,47 +1,29 @@
-# Returning differently
+# The cube comes back
 
-The ring marks a place the bob keeps leaving.
+The cube rises. It slows near the top, turns and passes the place where we first saw it. Then it goes lower.
 
-<!-- @control_pendulum -->
+<!-- @y_oscillation_cube -->
 
-A thin line hangs from the pivot towards it. Take the bob to one side and release it. Watch the first crossing of the ring, then the next. Something has returned. Before looking at the numbers, try to say what has not.
+Wait for another return. The same faces are still there. In Transformation we changed where the cube was, how it faced us and how much space it occupied. Here a movement has acquired a rhythm. We can begin to expect its next arrival.
 
-The counter may already be above zero. Taking hold of the bob gives us a beginning inside a swing that began earlier. Those crossings remain in the count.
+Find the middle of the movement. The cube passes it on the way up and again on the way down. A photograph taken there could conceal the difference. Stay a little longer and the direction becomes apparent. Returning to a place need not mean returning to the same moment in a movement.
 
-At the ring the angle is close to zero on both passes. The velocity reading carries a different sign. One zero is on the way out; the other is on the way back. A position that looked sufficient a moment ago needs another number before we can say what happens next.
+The cube does not remember the height it just left. Its rule reads the clock and assigns another height. Nothing needs to push it back at the top. The return was already available in the function.
 
-Follow the bob towards an end of its swing. It slows, seems to wait, and turns. The speed has reached zero there too, but the angle has not. The body can be still for an instant without having finished moving.
+We might recognise a breath or a bounce in this movement. That resemblance arrives before we inspect what made it. There is no lung here, and no floor collision has reversed its direction. A familiar rhythm can lend a body an explanation the program does not contain.
 
-We have met position, velocity and force in earlier rooms. Here they take turns making the return. These are the state updates in the pendulum's physics step, with the optional driving force omitted:
-
-```gdscript
-var angular_acceleration: float = -(gravity / pendulum_length) * sin(_angle)
-_angular_velocity += angular_acceleration * delta
-_angular_velocity *= _damping_multiplier(delta)
-_angle += _angular_velocity * delta
-```
-
-The angle supplies a restoring acceleration. Acceleration changes velocity; damping reduces it; velocity changes the angle. The damping line is the trick every textbook sketch uses: multiply the velocity by a number just under one, once a tick. It is not air. It is a decision about how long this room wants a swing to last, and a headset ticks ninety times a second where a desk ticks sixty, so the same release dies sooner there: measured, a swing keeps about half its width after six seconds at a desk and under a third at the headset's rate. At the next step, the new angle enters the first line. Read down, then return to the top. The repetition in the code makes a return in the room without listing the positions the bob must visit.
-
-Now release it from the other side. Try giving it a small movement as you let go, then releasing it as nearly still as you can. The hand can supply speed as well as a starting position. But how much of the hand gets through?
-
-The release code takes a velocity averaged from recent positions and projects it onto the direction of the swing:
-
-```gdscript
-var tangent_velocity = avg_velocity.dot(tangent_direction)
-_angular_velocity = tangent_velocity / pendulum_length
-```
-
-The dot product keeps the part along that tangent. A sideways flourish can occupy your hand and contribute little to this number. The constraint makes the pendulum manageable: one angle, one angular velocity. It also gives you something to play against. Try two different gestures that leave a similar swing. Their resemblance belongs to what this body accepts from them.
-
-Behind the bob, a curve predicts six seconds from a standard starting angle. Make a larger release and compare it with that curve. The prediction did not watch your hand. It began with another condition. A wide swing also presses against the small-angle approximation in which length, with gravity fixed, sets the period. The actual restoring rule still contains `sin(_angle)`. The approximation replaces the sine by the angle itself, so that the pull grows in step with the displacement. That simpler rule has a name, Hooke's, and it is the one the lattice three rooms on will run in every sphere. Give several complete swings time to pass before deciding how their rhythm differs.
-
-There are several beginnings here: the engine's, the counter's, the prediction's, the moment you let go. They do not have to coincide for the experiment to work.
+Watch a few more cycles. How soon does the next one begin to feel inevitable? Repetition gives us a foothold: enough regularity to notice a different height, a faster return, a body that starts just out of step. A small change becomes legible because something else has been kept.
 
 <!-- @ -->
 
-The nearby cubes return by other means. A clock prescribes one cube's bobbing; a steady rotation brings another back to its orientation; a third listens to this pendulum's signal. Similar repetitions can be made by different arrangements of state and time.
+The nearby cubes turn or combine several changes. From the doorway their movements may seem to belong together. Standing beside one, we can separate a change of place from a change of orientation, and the size of a movement from how often it returns. The same cube allows these differences to remain the subject.
 
-Give the bob a push and look at the cubes. The one that listens changes with your hand; the clocked one does not, because nothing you do enters its rule: it has a time, not a state. Two returns that look alike from the doorway answer a push differently.
+<!-- @control_pendulum -->
 
-Our counter can tell us that the bob crossed the middle. It cannot show the gesture that started this particular swing. We leave with a number that has kept something, and a reason to want more than a number. In the next room the past takes up space.
+Further in, take the pendulum bob aside and release it. Your hand enters this movement. Its angle and angular velocity help determine what happens next. The cube keeps reading its clock.
+
+Both bodies return. One repeats a prescribed relation; the other responds to the state your gesture leaves behind. We can watch them together without asking them to be the same kind of thing.
+
+<!-- @ -->
+
+For now, the return disappears as it happens. We have to wait again to compare it. In the next hall, a movement will leave a record we can walk beside.

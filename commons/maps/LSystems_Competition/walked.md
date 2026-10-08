@@ -1,15 +1,7 @@
-# LSystems_Competition — walked
+# Competition — route to test
 
-> ghost-drafted from the working map (turn slot, lsystems thread); Palle rules the voice.
+Enter beside the compact front desk. Step the pair, reverse the schedule and hold winter. Approach the shared floor field to inspect its root markers and sampling squares; the separated branching displays are explicitly enlarged views.
 
-## The cast
+Continue down an outer aisle to the original forest and coral, then return to the central exit. The two old void addresses have flush support covers; the old teleporter hole is filled. The outer museum plan now includes this hall between Architecture and Living.
 
-ForestCompetition · branching_coral · dark_sphere
-
-## The walk
-
-The sentences meet each other. The ForestCompetition runs many grammar-grown trees in one soil — canopies shading rivals, light as the contested resource, growth rules suddenly playing against growth rules. Beside it the branching_coral grows the same struggle at reef tempo, branches racing for current and light in slow motion.
-
-## The turn
-
-The turn is from derivation to ecology. Every earlier room grew its organism alone, on white paper, where a grammar's only judge was its author. Put two derivations in one world and a new force appears that no rule wrote: *scarcity*. The forest's final shape is authored by neither tree — it is the negotiation between their grammars, settled by light. This is the chapter's pivot toward honesty about generativity: a sentence can become a forest, but a forest is never one sentence — it is many, interrupting each other, and the interruptions are where the realism comes from.
+Desktop evidence and photographs are in the Competition review. Headset reach, readability, comfort and performance need a later human visit.

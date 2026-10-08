@@ -1,5 +1,14 @@
 # E Term
 
+**Learning elements — proposed focus**
+
+*The labels below set the revision focus; the existing lesson still needs alignment.*
+
+- Branching choices
+- Leaf counts
+- Equal probability assumptions
+- Retained exclusions
+
 E(S) is the size of the possibility space. Build a room where freedom is felt as cubes refusing to stay still.
 
 Declare the entropy meter.

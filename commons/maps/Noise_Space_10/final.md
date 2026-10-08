@@ -8,11 +8,19 @@ The previous sphere surrounded us with a changing field while its floor stayed s
 
 At HEIGHT 0.25, try walking between the posts. A small dip can disappear from the far view and return under your feet. The colour gathers into contours, but your body meets a surface. Keep those two ways of reading it in play.
 
+Look back from the margin. A pink line keeps the walk you have just made. Move a little sideways on the next attempt and compare it with the gold proposal. The gold line was here before you. The pink one had to wait.
+
+The trail holds when you leave the patch; entering again begins another attempt. Changing HEIGHT or using RESET clears it too. We keep a short memory of movement on this ground, rather than asking an old crossing to describe a new surface. The line is made from sampled positions, joined and laid on the mesh. It remembers a passage without keeping a whole body.
+
+![A pink record of a walk beside the gold proposed route](/book-review/doc/book/figures/Noise_Space_10/walked-route.png)
+
+*The gold line proposes a crossing. The pink line keeps the body’s sampled passage, including its sidestep.*
+
 Return to the margin. Press HEIGHT until it reads 0.90 and look for the feature you just crossed. The posts have not moved. The field has not been drawn again from another seed. Try the same approach.
 
-In the recorded desktop walk, the first crossing reached the far margin. At 0.90, the same forward input, held for the same time, left the body partway across. That is an observation about one body, one approach and two settings. It leaves other ways through the terrain to be found. A line drawn across the ground has made a proposal; it has not given the body permission to follow it.
+In one recorded walk, the first crossing reached the far margin. At 0.90, the same forward input, held for the same time, left the body partway across. That is an observation about one body, one approach and two settings. It leaves other ways through the terrain to be found. A line drawn across the ground has made a proposal; it has not given the body permission to follow it.
 
-Press RESET from the margin. The lower terrain returns, with route A and the first sample selected. HEIGHT and RESET refuse while a player body is still on the patch: the press is dropped, not saved, and the readout asks you to return to the margin. We make the alteration from a place that remains steady enough to compare what changed.
+Press RESET from the margin. The lower terrain returns, with route A and the first sample selected. HEIGHT and RESET refuse while your body is still on the patch: the press is dropped, not saved, and the readout asks you to return to the margin. We make the alteration from a place that remains steady enough to compare what changed.
 
 The current height rule is short:
 
@@ -36,11 +44,11 @@ func edge_weight(p: Vector2) -> float:
 
 The last three-quarters of a metre gradually withhold the noise's contribution. At the edge, that contribution is zero. The margin did not emerge from the field. We made it, so a body could enter and so the place from which we compare would remain available. The transition is part of the landscape's construction.
 
-Now choose ROUTE B. A gold line takes a longer way through the same patch. Nothing in the ground moves when the line changes. Follow it to the instrument, where the proposed route has become a section: distance across the plan runs horizontally, ground height vertically. SAMPLE moves a yellow witness along both the section and the terrain.
+Now choose ROUTE B. A gold line takes a longer way through the same patch. Nothing in the ground moves when the line changes. The pink trail keeps the walk you have already made while the gold line chooses another way. Follow it to the instrument, where the proposed route has become a section: distance across the plan runs horizontally, ground height vertically. SAMPLE moves a yellow witness along both the section and the terrain.
 
 The display gives the length and steepest sampled stretch of whichever proposed route is selected. At the lower setting, B is longer and includes a slightly steeper stretch. The detour has changed what the body would meet. It has not promised an easier passage.
 
-The section follows a line; your body has width. It can meet a slope beside the line, and its controller brings rules of its own. The recorded desktop body accepted floor angles up to forty-five degrees. Increasing HEIGHT took the steepest sampled stretch of route A from below that limit to above it.[^walk-measurements] That stretch is a descent, and the body got past it; the walk ended at the foot of the climb out of the hollow it leads into, where several sampled stretches also exceed the limit. That helps us ask why this walk fell short. It does not tell us that no body could pass.
+The section follows a line; your body has width. It can meet a slope beside the line, and its controller brings rules of its own. The controller in that walk accepted floor angles up to forty-five degrees. Increasing HEIGHT took the steepest sampled stretch of route A from below that limit to above it.[^walk-measurements] That stretch is a descent, and the body got past it; the walk ended at the foot of the climb out of the hollow it leads into, where several sampled stretches also exceed the limit. That helps us ask why this walk fell short. It does not tell us that no body could pass.
 
 Look down at the yellow witness. Its printed height belongs to the triangle under that point. The terrain is made from 81 by 81 sampled positions, spaced ten centimetres apart. Between those positions, triangles supply a surface. Sampling the noise again between the vertices can give a slightly different answer: the collider is the constructed mesh, not an infinitely detailed function.
 
@@ -51,6 +59,16 @@ create_collision_from_mesh(mesh)
 ```
 
 The same mesh is sent to sight and collision. This is the extra connection the small relief spheres did not have. A displayed height can now catch a foot.
+
+There is another way to change this comparison. Return to the margin and walk through the turquoise frame marked SMALLER. You arrive on the green ground at one-eighth of your former size. The instrument towers above you. A ripple that fitted under your foot can now take several steps. We have kept the landscape and changed the body that asks it for passage.
+
+Look closely at a ridge. Becoming small has not added any detail to the noise. The ten-centimetre spacing between its sampled vertices remains; you have come close enough for those triangles to make themselves felt. A slope keeps its angle, but your eye height, your reach and the width you need between things have changed. Which of these differences makes this ground another place?
+
+The little pink frame beneath the RETURN beacon is your way back. Walk through it to regain your previous size on the steady margin. We can return and compare. The small body does not have to become a permanent condition of finding out.
+
+![The same noise terrain seen from the miniature visitor's eye height](/book-review/doc/book/figures/Noise_Space_10/small-surface.png)
+
+*One field, another body. Enter through SMALLER; the small pink RETURN doorway restores your size.*
 
 Find a place where the ground seems to fold over itself. Move sideways and look again. Every horizontal position in this heightfield receives one ground height. A cave would need a floor and a roof at some of the same positions. We would have to give the representation something else to hold. Carry the occupied volume from Noise Voxel back into this question.
 

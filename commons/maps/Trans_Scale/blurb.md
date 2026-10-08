@@ -1,1 +1,1 @@
-Scale me. The object invites manipulation, asks to be made larger, smaller, other than it is. Prism blocks establish proportion while the scalable object waits for your gesture. Size is not fixed but negotiable. The world resizes at your hands, and with it, all relationships of containment, dominance, and fit.
+The door is visible. Your body cannot follow it. Take the bottle, and the table becomes a place to stand: the proportions survive, while an exit becomes possible.

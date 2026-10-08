@@ -1,7 +1,11 @@
-Concept: The Riemann sum — discrete accumulation approaching the continuous integral. The player raises the partition count and watches rectangles converge to the smooth area, making the limit concrete rather than asserted.
-Sequence role: Fifth map of Change, accumulation cluster. The "how" behind the previous map's "what": it reveals the integral as the limit of a sum. Reuses integral_area for the continuous target and riemann_pi from the QFEP lab as a finite worked example.
-Technical angle: Partitioning [a,b] into n rectangles, summing their areas, and animating convergence as n increases. The gap between the stepped sum and the continuous integral shrinks as the partition refines — the visible form of the limit definition.
-Critical angle: The discrete-continuous threshold made interactive. This is the sequence's quiet ontological move: continuity is not given but approached, a limit the learner drives by hand. It rhymes with the larger Ada question of discrete tiles versus continuous space, here in the safe register of arithmetic.
-Key artifacts: riemann_pump adds and thins the rectangles; integral_area supplies the continuous target curve; riemann_pi (from QFEP) shows π emerging from a finite sum.
+Concept: a Riemann sum replaces variation across each interval with one representative height, then adds the resulting areas.
 
-Gap: riemann_pump is a scaffolded name; riemann_pi exists in the QFEP lab and should be reused. integral_area shared with Accumulation_Area.
+Sequence role: Change_Intro -> Accumulation_Riemann -> Flow_Field. Keep the previous curve while changing the question from local rate to accumulation. Carry the finite update loop forward without treating a spatial axis as time.
+
+Primary: riemann_sum_workbench, configured with comparison:true. Four midpoint rectangles start the encounter. A held result makes sampling rule and partition count independently comparable. Reveal the finite numerical reference after observation.
+
+Spatial arrangement: a floor-standing cabinet with the live plot above and the held plot beside it. The primary now stands at grid (7,2), rotation 270, so both panels are visible from the approach. Existing walls and three secondary placements remain.
+
+Critical opening: a sample stands for an interval; a total forgets the addresses of its contributions. Inspect that reduction through the controls, including the display's finite reference and capped difference bar.
+
+Evidence: actual-museum desktop probe tests arithmetic, pointer controls, immutable held geometry, reset, reference independence, reach band and sight lines. Headset reading and tracked-hand use remain deferred. Signed functions, movable interval bounds and editable source functions are possible extensions.

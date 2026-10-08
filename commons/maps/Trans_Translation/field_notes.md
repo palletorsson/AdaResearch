@@ -3,6 +3,14 @@
 > Field notes hold what the wall text cannot carry. `final.md` is for the
 > visitor. This is for us.
 
+## 23 September — the record follows the handle
+
+The current nineteen artifact placements and seven rides are listed in `artifacts.md`. Earlier notes below concern earlier arrangements; the five-pickup gate account is historical and does not describe today’s course.
+
+The new trace follows the accepted knob position after the door’s projection/clamp. A proposed diagonal can therefore leave a vertical record. This makes the earlier trace question particular: what body was sampled, and what had already been done to its movement? The book keeps the existing vector/projection excerpts and reduces runtime-plumbing language around pickup contact. The return journey is enough to disclose that a collected cube has not returned.
+
+Fifty-three focused native museum checks pass with supplied knob positions and pickup/drop signals; this does not substitute for a hand/controller trial. The existing seven-ride tests were not repeated because no carrier, landing, pickup or floor geometry changed. Native images inspected. The book’s three-panel figure uses the live trace on the same production artifact, in three separate trials.
+
 ## Exactness decisions
 
 - **The gate counts the GameManager score, not this hall's cubes.**
@@ -249,3 +257,32 @@ east pool margin (x15-16 over 33 rows), laid beyond the five void columns the
 tile was padded with to meet the wider neighbour; nothing reaches them and
 nothing needs to. An embedded grid is a flat floor to the walk map: its walls
 and holes are unknown, which is why the count is a shape, not a route.
+
+# 2026-09-09: Translation and AxisDecomposition combined
+
+Author request: one longer, imaginative transport course across x, y and z, collecting pick_up_cubes during travel; no rotation yet. The current source maps and text were snapshotted before the merge.
+
+Seven tc rides, thirteen pickups, three axis markers. Carrier centres sit half a metre below their departure decks. The new optional #deck utility parameter declares a lift's start level explicitly, because a socket may neighbour both upper and lower banks. This parameter is applied before _ready caches the journey endpoints.
+
+Pickups use #motion:still#hold:collect. GridSystem reserves cells containing a utility at height one before stamping interactables; the two lift pickups account for this additional half-metre origin difference. Their actual positions and body contact are tested.
+
+Evidence: commons/testing/probe_translation_course.gd, ada_run/translation_course_checks.json, and ada_run/Trans_Translation_build_up.png. The probe uses the real transport update and Area3D contacts, then walks a capsule off each ferry onto its landing. This is runtime evidence, not a learner review.
+
+
+### 2026-09-09: Down and forward from (3,35)
+
+The former vertical descent now travels by (0,-3,2), from standing deck (3,3,35) to (3,0,37). The low platform begins at z=38 and leads to the next carrier at z=39. The earlier ground cells at rows 36 and 37 were cleared to make room for the sloping journey. The nearby pickup moved to (3,36), on the journey, with scene origin y=2.5. Other author edits to pickups and terrain were preserved.
+
+The carrier stays level: this is simultaneous y/z translation, without rotation. The focused actual-grid check passes all 12 checks, including rider detection, carried movement, pickup collection and stepping onto the new landing. Evidence: ada_run/translation_y_descent_checks.json and ada_run/translation_escalator.log. This run does not revalidate unrelated author edits elsewhere in the course.
+
+
+### 2026-09-09: Fire at the basin floor
+
+Enabled museum.simulation.fire for the combined hall. Fixed the staged museum path, which previously forced fire off regardless of the map declaration. Staged fire occupies only the bottom 0.6 m of the basin (y=-2.5 to -1.9 here), below the rides and decks. It uses the museum existing animated fire material and fall-contact reset behaviour. Other staged halls retain their own fire setting.
+
+Actual museum verification: ada_run/translation_fire_capture.log reports one packed fire/contact volume at the basin base; capture_build_up_museum.gd --map=Trans_Translation --expect-fire checks its presence and vertical bounds. Updated image: ada_run/Trans_Translation_build_up.png.
+
+
+### 2026-09-09: Pickups rise and fall
+
+All thirteen pickup placements in the combined hall now use #motion:slide#hold:collect: vertical bob only, no spin or scale pulse. Existing placement coordinates and transport routes were preserved. The book description and compiler recipe were updated to match. This supersedes the stationary-pickup choice recorded above.

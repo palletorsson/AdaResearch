@@ -5,3 +5,12 @@ Critical angle: Centrality is political. Who is central depends on what you meas
 Key artifacts: network_analysis computes and visualizes multiple centrality measures; networkflow3d demonstrates flow constraints and bottlenecks — capacity as a distinct structural property from connectivity.
 
 Gap: networkflow3d needs slider_horizontal, push_button, Label3D; rhizomatic_structure needs slider_horizontal, push_button, Label3D.
+
+
+<!-- study-spine:evidence_network -->
+
+## Installed application: A relation needs a record
+
+`evidence_network` occupies a new adjoining bay, after the existing encounters. Cell [11, 23], rotation 180°, museum adapter `res://commons/artifacts/spine_studies/network.tscn`. Original response to Mark Lombardi; no claim of exact reconstruction.
+
+Remove one recorded relation; compare incoming and outgoing counts before moving the layout. Reuses graph, line, array; adds no prerequisite node. The display and main-player controls are supplied.

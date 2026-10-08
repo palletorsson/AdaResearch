@@ -1,7 +1,13 @@
-Concept: The array as dance floor — a 17×17 grid large enough to get lost in, where every tile is an address (row, column, state) and stepping activates response. The step sequencer makes the grid temporal.
-Sequence role: Seventh and final map in Array Tutorial; the capstone that synthesizes navigation, addressing, and pattern into a single playful space. The 17×17 grid is dramatically larger than the 4×4 grids — scale changes the experience from comprehensible to immersive. The step sequencer adds time to the spatial array, connecting forward to Wavefunctions where temporal patterns dominate. This is the gate map — completing it means array literacy; follows Tutorial_Pattern.
-Technical angle: Large 2D array navigation, interactive tile state (step → toggle), the standalone_disco artifact as a responsive floor surface, the step_sequencer as a 2D temporal pattern editor. The combination of spatial addressing and temporal sequencing anticipates the Wavefunctions sequence's time-domain emphasis.
-Critical angle: Scale matters. A 4×4 grid is a puzzle; a 17×17 grid is an environment. Getting lost in a data structure is the experiential proof that arrays are spaces, not just containers. The disco metaphor is precise: a dance floor is a grid where bodies and time and position intersect. The step sequencer adds the crucial dimension — not just where but when, turning the array from spatial to spatiotemporal.
-Key artifacts: standalone_disco#width is the responsive floor surface at full scale; step_sequencer provides the temporal pattern editor; dark_sphere anchors the space.
+Concept: A fixed monochrome grid gains a clock. The score, visual pattern and moving body can keep different rhythms.
 
-Gap: No gap identified.
+Sequence: array_tutorial, after the wall tiling encounter and before Color. Current order is declared in commons/maps/sequences/array_tutorial.json. Coloured floor control returns later in tiling.
+
+Encounter: disco_controls drives the 12 by 12 standalone_disco floor with five spatial patterns, hold, single-step and three speeds. The four-track, sixteen-step sequencer retains its own musical clock and briefly brightens floor columns. The stored score can change, repeat or fall silent while its addresses remain. There is no footstep recording.
+
+Critical question: What does the score retain, what is folded together when a sound reaches the floor, and what can a moving body do beyond either account?
+
+23 September pass: Preserve the mature score/clock/body comparison and its closing invitation to keep an unexpected beat. Refine the opening through standing still; add native before/after checker views. The companion texts now describe this actual encounter. Their earlier movement-as-score proposal is retained in the iteration baseline as a possible later artifact, not removed from the project.
+
+Evidence and reading: doc/book/iterations/2026-09-23-disco-separate-clocks/. First-pass layout history remains in doc/space/regularity-split-2026-09-17/. Supplied desktop controls and selected routes are distinct from headset experience and listening quality.
+
+Author-requested extension: SUPER TRIANGLE returns the half-square motif from floor tiling, now continuously turning and grouping it across the same receiver. HOLD can retain an intermediate arrangement; ONE STEP reaches a discrete pose. Its larger figures put visual grouping beside the fixed array addresses. Existing controls, score and physical floor remain. The shared colour controller also supplies its palette to this mode. Current implementation, native images and focused checks: doc/book/iterations/2026-09-23-disco-super-triangle/.

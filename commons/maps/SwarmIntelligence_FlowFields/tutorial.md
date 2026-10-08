@@ -1,5 +1,11 @@
 # Flow Fields
 
+**Learning elements**
+
+- Vector fields
+- Grid lookup
+- Field following
+
 Precompute directions across a grid. Agents follow the field.
 
 Build a 2D vector field.

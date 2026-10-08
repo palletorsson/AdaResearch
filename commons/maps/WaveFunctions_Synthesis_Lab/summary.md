@@ -1,9 +1,7 @@
-# WaveFunctions Synthesis Lab — Summary
+# The sum on the bench
 
-Fourier's theorem claims that any periodic signal, however jagged, is a sum of sine waves. This map is the room where that claim is a bench you can work at. Against the north wall a five-slider instrument stands on a bench: a pale sum drawn on a dark board, and beneath it a ladder of five coloured rows, one sine per harmonic, each drawn at the amount its slider admits. The room is placed with the sawtooth already assembled: five amplitudes of 1, 1/2, 1/3, 1/4 and 1/5.
+A sawtooth-like curve waits above five colored rows. HOLD pauses its drift. Five sliders change the rows' amounts; H1 ALONE removes the upper harmonics, and BASELINE restores the arrival recipe. At the amber mark, predict each contribution before comparing the readout with the sum.
 
-The bench offers three buttons wired to the same coefficients the sliders set. BASELINE restores the five arrival amplitudes on every slider. H1 ALONE keeps the first harmonic and zeroes the rest, the route from the assembled shape to one component. HOLD stops the display's drift so one place on the board can be read on every row and on the sum. A plate on the bench prints the five coefficients, the arrival five, each row's value at an amber marker, the sum of the drawn rows against the drawn total, and which coefficients differ from the arrival.
+The primary `additive_wave_demo` is a visual construction from five nonnegative sine coefficients sharing one phase. Its labels describe nearby recipes. Moving a slider is continuous; changing a shape's name crosses a threshold. A row can also disappear below the display threshold while still contributing to the total.
 
-Around the bench, the laboratory keeps its specimens of oscillation: the Chladni plate sorting sand into nodal lines, Lissajous curves closing on integer ratios, a spring obeying Hooke's law, DNA turning in its jar, worms tracing sines across a petri dish, a seismograph, a multimeter, six vials pulsing in sequence. They show oscillation in other domains; the bench shows the one operation, and its limit: five harmonics can suggest a corner and cannot make one.
-
-Within the sequence, Synthesis Lab is the synthesis in more than one sense. Every earlier concept is used here: sine as shape, circle as source, propagation as distance, sound as one sinusoid under one decay. The sequence ends by handing the learner the operation that takes a shape apart and puts it back, and the fact that putting it back is repeatable — which is where Random_Definition begins.
+Claude's bench, clear approaches and laboratory staging remain, with 25 placed artifacts. The book follows this one primary. The next hall is Random_Definition: what state must be kept for a result to return?

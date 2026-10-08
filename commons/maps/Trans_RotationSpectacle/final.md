@@ -1,65 +1,52 @@
-One angular rule, repeated, is a building if you repeat it in space and a spectacle if you repeat it in time.
+The ground is still here. After the tilted arrays and the turning blades, a continuous museum floor lets you change your pace.
 
-The last hall taught that order matters. This one teaches that a speed compounds. It is a long hall, a procession, with a corridor along one wall and a carousel at the far end, and everything in it is one rule applied again and again until the rule has become architecture.
-
-```gdscript
-func tunnel_angle(i: int) -> float:
-    return i * rotation_per_segment        # ten degrees, added
-
-func layer_speed(i: int) -> float:
-    return base_rotation_speed * pow(1.2, i)   # a fifth, multiplied
-```
-
-Two rules and one counter. The corridor adds ten degrees for every segment you pass; the cake multiplies its speed by a fifth for every layer you look up. That is the whole machinery of this hall: an index, and something that reads it.
-
-## What you can trust
-
-<!-- @righttriangle -->
-
-A right triangle, on its own by the entrance, with no moving part anywhere in it. Move it, turn it, and the ninety degrees between its two short sides is still ninety. It is here as a diagnostic: with everything in this hall turning, you need one thing whose angle you can trust.
-
-<!-- @dark_sphere -->
-
-The dark sphere, which is not still either. It turns once in about forty seconds, slowly enough that you have to look away and back to catch it doing anything. In this hall even the witness is spinning, and the only thing that is not is the triangle.
-
-<!-- @ -->
-
-## The rule, accrued
+The tunnel runs through the middle of the hall. Three stacks turn on either side. Begin with the opening.
 
 <!-- @boolean_tunnel -->
 
-Along the east wall, a corridor of eighteen hollowed cubes set end to end, each three metres deep, each rolled ten degrees further about the corridor's own axis than the one before. Ten degrees is nothing. Seventeen of them is a hundred and seventy, and the corridor spends fifty-one metres rolling that far about the line you walk along. The ground stays flat. Everything round it does not. Nobody designed the twist: a local rule about one segment and its neighbour was repeated, and the repetition became a building.
+Look into the first hollow cube, then through it towards the next. The openings do not keep the same orientation. Walk forward and follow a corner as it shifts around the passage.
 
-<!-- @baggage_grammar -->
+Fourteen cubes make this tunnel. Each segment is three metres deep. The first receives no additional turn; the second receives ten degrees, the third twenty. By the last segment, the added angle is a hundred and thirty degrees.
 
-A baggage carousel, and one suitcase going round it forever. On the straights it translates. At the corners it rotates. Through the customs arch it is scaled down, and on the far side it is restored, nothing to declare. Twelve seconds a lap. All three rigid motions, one after another, on one object, in a loop: the grammar of the chapter, spoken by a suitcase.
+```gdscript
+angle_deg = i * rotation_per_segment
+```
+
+The tunnel holds these orientations still. Your movement brings you from one value to another, as it did in the previous hall's array. Here the repeated object surrounds a hollow. Its turned edges frame your passage.
+
+Look back through the openings. A rule small enough to fit on one line has acquired length. You need time to walk what the program has already assembled.
+
+The hole comes from subtracting an inner box from an outer box. The turn arranges those hollowed segments. Subtraction and rotation do different work: one opens the volume; the other changes the orientation of the opening along the run.
 
 <!-- @ -->
 
-## The hole is the way
-
-Between the suitcase and the cakes the floor is cut five times, and each cut is the shape of one turn. Three square holes with planks in them: a quarter turn about the vertical, a quarter about the axis you walk along, so that it tips, and a half turn. Three holes with the floor left round them, where cubes turn without pausing: a turntable at forty degrees a second, and two rolling about the two floor axes. Three slots the width of a turning cube, crossed carried: a quarter, the other way, a full circle. Two more slots, one crossed turned half round while the space grows a fifth around you, one with the space growing by a third and nothing turning. Then a staircase of single holes cut on the diagonal, a lift beside the wall that takes you up two metres and once around and back, the square of empty floor a cube needs to grow into, and a last cut of three ways: a turntable at ten degrees a second that you cross while it turns, a plank that pauses open at forty-five, and a bridge, which is translation made still. Every empty cell in the procession is the sweep of one rotation, and the rotation is the only way through it.
-
-<!-- @mario_cube -->
-
-Twelve yellow cubes, one at the far side of every crossing. Walk into one and a rainbow of seven bands stands up three metres over it. The first one you reach does something more: the dark sphere shrinks to nothing in little more than a second and is gone. From then on the only thing in the hall you can trust is the triangle.
-
-<!-- @two_cakes -->
-
-Two cakes of three tiers each, assembled from the same tiers. One was turned and then slid, the other slid and then turned, and the candles stand at two different addresses. It is the last hall's lesson baked: the product changes when the factors change sides.
-
-<!-- @pick_up_cube -->
-
-A cube near the end, bobbing and turning once every three seconds on its own axis, which makes it the fastest thing turning in this hall: quicker than the carousel's top layer, and the only turn here you can end. Walk into it and it is gone.
+Step out onto the gallery floor. You can walk around the next objects, pause between them, or return to a profile that looked different from the other side.
 
 <!-- @carousel_cake -->
 
-At the end, the carousel itself, and it is bigger than it sounds: three thin plates at your ankles, a three-metre column above them, then four slabs widening to a brim ten metres across, six metres up, spanning most of the hall. Eight layers, one rule, each turning a fifth faster than the one below. The bottom takes twelve seconds to come round. The top takes three and a half. Between them the layers slide past each other in patterns that repeat and interfere and repeat. The rule is the same at every level; only the multiplier compounds, and it compounds until the object reads as rhythm rather than as a spin. Stand close, and forget which way you were going.
+Find the stack labelled CAKE. Follow a stripe on a low layer, then a stripe near the top. Can you keep both in view through one revolution?
+
+The upper layers turn faster. Each has a constant angular speed, but that speed is calculated from its place in the stack:
+
+```gdscript
+var layer_speed: float = base_rotation_speed * pow(rotation_speed_multiplier, float(i))
+var angle: float = _rotation_angle * layer_speed
+```
+
+The base speed is half a radian per second. Each successive layer receives 1.2 times the speed of the one below. The bottom takes about twelve and a half seconds to turn once; the eighth layer takes about three and a half.
+
+Now find COLUMN. The radii are equal all the way up. Follow the layers again. Has the speed rule changed, or has the shape changed what you notice?
+
+Five profiles share the same eight layer heights and the same angular speeds. CAKE narrows and opens into a brim. ZIGGURAT becomes smaller towards the top. COLUMN keeps the radius constant. SPINDLE repeatedly widens and pinches. FLARE grows wider as you look up.
+
+The fastest layer can therefore be small, broad, or the same radius as its neighbours. A point on a wider rim travels a longer distance in one turn. Equal angular speed does not mean equal distance travelled per second.
+
+Stay with one stack until two layers seem to line up, then separate. Try another profile. The rule remains available in the code, but a description of the rule does not exhaust what its repetition looks like.
 
 <!-- @ -->
 
-## Perpetual return
+The tunnel distributes angles along a path. The cakes distribute speeds through a stack and let time carry the differences past your eye. In one encounter you move through an arrangement already made; in the other you can stand still while relations continue to change.
 
-Translation goes somewhere and stops. Rotation goes round and comes back, and if you let it run it never has to stop, which is why a carousel is a spectacle and a walkway is not. What this hall adds to the chapter is time. One is added and one is multiplied: ten degrees per segment down the corridor, a fifth per layer up the cake. The difference between a building and a performance is only whether the repetition has finished.
+Which part did your attention follow? Which layers went on turning while you watched something else?
 
-Next: the last of the three moves, and the one that changes what everything else is worth.
+The next hall takes up scale. These five silhouettes have already given us a reason to ask what a change in size does to the same movement.

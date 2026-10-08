@@ -1,98 +1,35 @@
-# PG Branching Growth
+# One nearest invitation — encounter
 
-Two branching strategies. Rules versus noise.
+**Learning elements — proposed focus**
 
-Rule-based recursive branching.
+_The labels below set the revision focus; the existing lesson still needs alignment._
 
-```gdscript
-func recursive_branch(start: Vector3, direction: Vector3, length: float, depth: int) -> void:
-    if depth <= 0: return
-    var end := start + direction * length
-    spawn_cylinder_between(start, end)
-    var axis: Vector3 = direction.cross(Vector3.UP).normalized()
-    var left: Vector3 = direction.rotated(axis, deg_to_rad(25))
-    var right: Vector3 = direction.rotated(axis, deg_to_rad(-25))
-    recursive_branch(end, left, length * 0.7, depth - 1)
-    recursive_branch(end, right, length * 0.7, depth - 1)
-```
+- Nearest-target search
+- Parent records
+- Coincident positions
 
-Classic binary branching. Each call spawns two children at fixed angles.
+<!-- @branching_growth_algorithm -->
 
-Noise-driven growth.
+Eight points wait. You have met their arrangement in Space Colonization. There, several requests could contribute to a direction. Before pressing STEP here, find the nearest point to the root. Does the branch listen to the others?
+
+The first segment leans left. In local coordinates the nearest target is (-2, 1.5, 0), two and a half metres away. Normalizing its direction and taking a half-metre step gives (-0.4, 0.3, 0). We can predict this small displacement before we have a tree to admire.
+
+The running program searches unreached attractors inside `attraction_distance`. Each active branch site chooses the nearest one. Its construction begins with:
 
 ```gdscript
-var noise := FastNoiseLite.new()
-
-func noise_grow_step(position: Vector3, step: float = 0.1) -> Vector3:
-    var h: float = 0.01
-    var dx: float = noise.get_noise_3dv(position + Vector3(h, 0, 0)) - noise.get_noise_3dv(position - Vector3(h, 0, 0))
-    var dy: float = noise.get_noise_3dv(position + Vector3(0, h, 0)) - noise.get_noise_3dv(position - Vector3(0, h, 0))
-    var dz: float = noise.get_noise_3dv(position + Vector3(0, 0, h)) - noise.get_noise_3dv(position - Vector3(0, 0, h))
-    return position + Vector3(dx, dy, dz).normalized() * step
+var direction = (attractor.position - branch.position).normalized()
 ```
 
-Gradient of a noise field. The path follows the local gradient direction.
+That direction receives optional jitter. A pulsing multiplier can change the segment length. The opening suppresses both so that we can distinguish the choice of target from these additional variations. Press TEN STEPS. It performs ten calls to the same growth operation, without making you hold a button for every generation.
 
-Grow a noise path.
+Now compare the readout's records with its distinct positions. They need not agree. Older active sites can produce another child; with no variation, an old site can choose the same target and put that child where it put the last one. Several records may occupy one place. A count of parents with multiple children therefore tells us about the stored tree, not necessarily about visibly separate branches.
 
-```gdscript
-func grow_noise_path(start: Vector3, steps: int) -> Array:
-    var path: Array = [start]
-    var current := start
-    for _i in steps:
-        current = noise_grow_step(current)
-        path.append(current)
-    return path
-```
+This is a useful failure of our first description. We said a branch had appeared; the database agreed. The space may have acquired nothing new. The remainder is not always an extravagant shape. Sometimes it is redundant work concealed by a familiar outline.
 
-Each step advances along the gradient. The path is organic-looking.
+Press HOLD to keep a separate mesh witness, displayed at 0.4 scale beside the desk. Then press VARIATION. The root and eight targets return, with jitter and pulsing enabled. Advance again. These settings can separate previously coincident paths, but their presence does not make a biological explanation. They are explicit additions to a directional rule. RESET removes those variations and starts the comparison again; the witness remains.
 
-Render a path as cylinders.
+The museum study caps the record count at 192. The counter includes coincident children. That limit tells us something about what this program spends, not how mature its tree has become. RULE reveals the operation after you have had a chance to follow it.
 
-```gdscript
-func render_path(path: Array) -> void:
-    for i in range(path.size() - 1):
-        spawn_cylinder_between(path[i], path[i + 1])
-```
+Keep the nearby organic_space in view. It obtains an organic appearance through a different construction: geometric shells, tunnels and detail. A resemblance does not establish a common method. We are learning to ask what a form did to become available, rather than treating its appearance as its explanation.
 
-One cylinder per segment. The path becomes a single connected curve.
-
-Branch from a path.
-
-```gdscript
-func branch_from_path(path: Array, branches_per_node: int = 2, branch_length: int = 20) -> void:
-    for i in range(0, path.size(), 4):  # every 4 nodes
-        for _b in branches_per_node:
-            var branch_direction := Vector3(randfn(0, 1), randfn(0, 1), randfn(0, 1)).normalized()
-            var branch := grow_noise_path(path[i], branch_length)
-            render_path(branch)
-```
-
-Every four nodes spawn additional branches. Creates a tree-like structure from noise-driven growth.
-
-Compare side by side.
-
-```gdscript
-func compare_methods() -> void:
-    recursive_branch(Vector3(-3, 0, 0), Vector3.UP, 1.0, 6)
-    var noise_path := grow_noise_path(Vector3(3, 0, 0), 100)
-    render_path(noise_path)
-    branch_from_path(noise_path)
-```
-
-Rule-based on the left, noise-driven on the right. The visual difference is striking.
-
-You can now recursive-branch, noise-gradient-step, grow organic paths, branch from a path, and compare the two strategies side by side. PG_Caves_Mazes extends into subtractive generation.
-
-Reset the tree.
-
-```gdscript
-func reset() -> void:
-    nodes.clear()
-    parents.clear()
-    attractors.clear()
-    nodes.append(Vector3.ZERO)
-    parents.append(-1)
-```
-
-Start fresh. Useful when scatter conditions change.
+Neither a parent record nor a drawn line has yet made a passage for us. In Percolation, next, we ask a narrower question first: under a stated rule of contact, what can reach what?

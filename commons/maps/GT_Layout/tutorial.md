@@ -1,5 +1,11 @@
 # GT Layout
 
+**Learning elements**
+
+- Connectivity and position
+- Spring layouts
+- Damped motion
+
 Force-directed layout. Nodes repel; edges pull.
 
 Track vertex positions and velocities.

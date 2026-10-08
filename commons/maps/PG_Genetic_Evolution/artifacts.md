@@ -1,20 +1,7 @@
-# PG Genetic Evolution — Artifacts
-*Procedural Generation: Rules Build Worlds · lambda_edge · 2 artifacts*
+# Genetic Evolution — two authored works
 
-> No one designs the creatures. A population spawns in the arena below — random geometries, meaningless limbs, bodies that can't even crawl. Then selection hits. The ones that move further survive. The ones that don't, vanish. Next generation inherits what worked, mutates what didn't. Repeat.
+GeneticProgramming is the primary and sole book anchor. The front lesson uses its actual primitive builder and evolutionary operations, six controlled opening boxes, one held witness, per-candidate score cases and six physical controls. Its original scene remains the registered artifact; the map opts into the lesson with #lesson:true.
 
-The map, read through what it holds — its artifacts in the order you meet them:
+science_screen remains secondary, with its original grid-mode configuration and source. It is not yet a monitor of genetic candidates. Both works are retained exactly once. Roles remain unchanged; book hero, annotation and Necklace primary identify GeneticProgramming.
 
-## Science Screen
-![Science Screen](/scene-catalog/science_screen.png)
-
-COMPARE a 3D artifact with its 2D abstraction and see what structure survives projection.
-
-`science_screen`
-
-## GeneticProgramming
-![GeneticProgramming](/scene-catalog/GeneticProgramming.png)
-
-WATCH evolution accumulate accidents that happen to survive — design without a designer
-
-`GeneticProgramming`
+The old layout and all previous room texts are archived under doc/space/genetic-evolution-2026-09-14/before. The old creature-locomotion tutorial is historical proposed material, not a description of what the present artifact implements.

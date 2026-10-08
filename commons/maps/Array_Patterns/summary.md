@@ -1,69 +1,9 @@
-# Array_Patterns - Tile-Based Pattern Creation
+# Array_Patterns — an address becomes a passage
 
-## Overview
+After Tutorial_Pattern, the same initial asymmetric motif appears as a fixed source in a six-metre walkable tunnel. A side console exposes surface and source addresses, floor/right-wall selection, 40/60cm cell spacing, drawn-grid visibility and undo.
 
-This map explores **arrays as pattern generators**. Small tile grids become carpets, floor tiles, and textiles. The connection between handmade craft traditions and computational pattern-making.
+The primary tunnel now occupies a connected east bay. The brick station remains the second primary comparison: staggered rows within a field versus independently mapped faces at a corner. Other artifacts remain supporting experiments.
 
-## Layout
+The book asks where counting begins, how a cell acquires a physical size and direction, and why hiding a drawn seam does not remove a physical support. 50 desktop checks pass; headset and gesture work are deferred. Next: Symmetry_Seventeen and the assumptions behind classifying ideal repeating fields.
 
-- **11×11 platform** with gallery of pattern stations
-- Four pattern editors at different complexity levels
-- Central dark sphere for ambient lighting
-- Teleporter to continue the sequence
-
-## Key Elements
-
-| Element | Purpose |
-|---------|---------|
-| `pattern_tile_4x4` | Basic 4×4 tile, simple XY repeat |
-| `pattern_tile_mirror` | 4×4 with kaleidoscope symmetry |
-| `pattern_tile_brick` | Half-offset rows (brick/masonry) |
-| `pattern_tile_herringbone` | Alternating diagonal weave |
-
-## Interaction
-
-### Editing
-1. **Click** cells in the small grid to paint with selected color
-2. **Click** palette balls to select colors
-3. Press **Tab** or VR button to cycle repeat modes
-4. Press **1-8** to quick-select palette colors
-
-### Preview
-- The large rectangle shows how your tile repeats
-- Different modes create different symmetries
-- Pixel-art aesthetic (nearest-neighbor filtering)
-
-### Spawning
-- Some stations can spawn a physical carpet object
-- The carpet has your pattern applied as texture
-
-## Repeat Modes
-
-| Mode | Description |
-|------|-------------|
-| Simple | Basic XY tiling |
-| Mirror X | Horizontal reflection |
-| Mirror Y | Vertical reflection |
-| Mirror XY | Kaleidoscope (both axes) |
-| Rotate 90° | Quarter-turn symmetry |
-| Rotate 180° | Half-turn symmetry |
-| Brick X | Half-offset rows |
-| Brick Y | Half-offset columns |
-| Herringbone | Diagonal weave |
-| Diamond | 45° rotated tiling |
-
-## Learning Objectives
-
-- 2D array indexing (`grid[y][x]`)
-- Pattern repetition and tiling
-- Symmetry operations (reflection, rotation)
-- The mathematics of wallpaper groups
-- Pixel/tile-based design thinking
-
-## Design Philosophy
-
-> "Every carpet is an algorithm. Every algorithm can be a carpet."
-
-The traditions of textile craft—kilim, ikat, jacquard—encode algorithms in thread. This map makes that encoding visible and interactive. The same operations that generate a Persian rug generate pixel art, cellular automata, and shader patterns.
-
-The 17 wallpaper groups (discovered in the 19th century) are ALL possible ways to tile a 2D plane. This map provides a hands-on exploration of that mathematical truth.
+The corridor now stands on a one-metre platform, reached by a broad wp ramp and exited down another. Side walls make the crossing pass through the tunnel; the inspector remains on the lower approach.

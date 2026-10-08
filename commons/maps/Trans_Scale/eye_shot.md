@@ -1,3 +1,5 @@
+> Historical record of the previous layout. Trans_Scale was rebuilt as the Drink Me encounter on 2026-09-09; this is not acceptance evidence for the new room.
+
 # Eye shot — Trans_Scale
 
 > one pass: ride (gaze), move (place --only-improve), gate (pathfinder), voice (qfep). Field note, not a ruling.

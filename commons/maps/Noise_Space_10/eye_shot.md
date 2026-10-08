@@ -1,3 +1,5 @@
+> Historical note: this predates the 13 September 2026 walking study. See field_notes.md and final.md for the current configuration and tested claims.
+
 # Eye shot — Noise_Space_10
 
 > one pass: ride (gaze), move (place --only-improve), gate (pathfinder), voice (qfep). Field note, not a ruling.

@@ -1,9 +1,7 @@
-# CA Elementary Rules — Summary
+# A cell with a past
 
-CA_ElementaryRules is the third map in the Cellular Automata sequence. It drops the grid from two dimensions to one in order to expose the minimum conditions under which cellular automata behave in interesting ways. Each cell has exactly two states, sees its left neighbour and its right neighbour, and applies one of 256 possible rules indexed 0 through 255.
+CA_ElementaryRules keeps the existing structure-growth volume and dark orb. The primary volume uses 26 neighbours and three states: empty, active and fading. A held console exposes individual steps, repeatable replay, state/height colours and an extendable twenty-step observation budget. The original floor relief remains inside an added walled circulation floor. The map is restored between CA_Introduction and CA_GameOfLife in the active museum route.
 
-The map is laid out as a gallery. Wolfram's 256 elementary rules are plotted on the walls, each shown as a scrolling one-dimensional automaton whose successive rows are stacked vertically. A scroll bar moves the learner through the rule space. Some rules die immediately; some produce clean nested triangles; some generate apparent chaos; a small number support moving structures.
+An enlarged view of one actual 27-position neighbourhood makes the active → fading → empty transition approachable. Its golden central address persists when the cell disappears; the seven-neighbour example now occurs in the seeded installation.
 
-Two rules are pulled out for closer study. Rule 30 produces output indistinguishable from random noise despite being fully deterministic. Rule 110 has been proven Turing-complete — a three-cell-wide, two-state automaton that can be compiled to run arbitrary computation. A side panel sketches the proof at a high level.
-
-Within the sequence, this map is the argument for minimalism. The previous map showed Conway's Game of Life in two dimensions; this one shows that two dimensions are not required. The spectrum from triviality to universal computation fits inside the smallest possible substrate.
+The lesson distinguishes active cells, occupied cells, rendered cells and a fixed point. The historical map ID is retained; a survey of all 256 elementary one-dimensional rules is not present. Source, remote review and actual Godot captures are available. The current native desktop checks cover all 27 copied states, shared colour mapping, eight real pointer events, replay, the budget and a supplied walking body through the open gaps. The full update still takes roughly 150 ms. Whole-route traversal, tracked-headset acceptance and Quest performance remain open. See encounter-notes.md for the bounded evidence.

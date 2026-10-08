@@ -51,10 +51,10 @@ The free choice sequence challenges the classical picture where all mathematical
 
 ## Map Architecture: Stepping Stones
 
-The Brouwer_Intuitionism map is an 11x14 grid, max height 2. Its structure is radically fragmented: disconnected platforms floating over void, connected by bridges. Nothing is given in advance. The map uses `auto_reveal_on_entry: true` and `initial_tile_visibility: "hidden_except_start"` — platforms appear only as the player approaches, constructing the space in real time.
+The Brouwer_Intuitionism map is a 13x16 grid, max height 3. Its structure is radically fragmented: disconnected platforms floating over void, connected by bridges. Nothing is given in advance. The map uses `auto_reveal_on_entry: true` and `initial_tile_visibility: "hidden_except_start"` — platforms appear only as the player approaches, constructing the space in real time.
 
 The structure layer:
-- **Start row (row 0) and end row (row 13)**: Full-width floor at height 1, providing entry and exit.
+- **Start row (row 0) and end row (row 15)**: Full-width floor at height 1, providing entry and exit.
 - **Mid-section**: Scattered islands of height 1, separated by void (0). Small 2x2 or 1x1 platforms at rows 1, 3-5, 6-8, 10-12, connected by single-cell stepping stones.
 - **Bridges**: Utility layer contains bridge markers (`br:z:3`, `br:-x:2`, `br:x:2`) that create physical connections between platforms. Without these, several platforms would be unreachable.
 

@@ -1,5 +1,13 @@
 # Florensky Paraconsistent
 
+**Learning elements — proposed focus**
+
+*The labels below set the revision focus; the existing lesson still needs alignment.*
+
+- Independent reports
+- Contradictory information
+- Consequence rules
+
 Classical logic collapses from one contradiction. Florensky's supralogic holds both. Build a Schrödinger box where A and not-A coexist.
 
 Declare the dual state.

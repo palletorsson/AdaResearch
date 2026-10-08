@@ -1,85 +1,24 @@
-# Noise One
+# Noise One: follow the receiving operation
 
-One field, read twice. Every line below is from `algorithms/randomness/noisetorus/noisetorus.gd` and `commons/resourses/shaders/noiseTorus.gdshader`, the artifact and shader the map places as `noisetorus`.
+**Learning elements — proposed focus**
 
-Sample the field once, in the vertex stage.
+_The labels below set the revision focus; the existing lesson still needs alignment._
 
-```glsl
-    vec2 noise_input = vec2(object_pos.x * noise_scale, object_pos.z * noise_scale);
-    float wrapped_time = mod(TIME, 3600.0);
-    float time_offset = wrapped_time * noise_speed;
-    noise_input += vec2(time_offset, time_offset);
+- Signed-value mappings
+- Position offsets
+- Colour ranges
 
-    float noise_value = noise(noise_input);
-    vec3 displacement = NORMAL * noise_value * height_multiplier * show_relief;
-```
+Book route: **noisetorus → noiselayers → dark_sphere**. All three are primary. Teach from their actual controls; leave explanations until after the comparison.
 
-And again, in the fragment stage, from the same expression.
+1. Watch the two rings, then FREEZE at the current moment. SAMPLE moves matching coordinate probes. Find a negative value and compare inward relief with black colour.
+2. REMAP changes negative-to-black clipping into a mapping of the full signed range. The field and relief stay fixed. Return to CLIP to compare.
+3. While held, compare AMPLITUDE with FREQUENCY. The former changes displacement gain; the latter changes the coordinates consulted. Resume FREEZE and watch the local time continue.
+4. Walk to the basin's south-facing panel. Inspect SUM before LOW, MIDDLE and HIGH. These isolate three supplied noise resources, each followed by the same slope-lowering pass; do not describe them as isolated octave bands.
+5. Return to SUM. The terrain restores its complete generated vertex array and matching collision mesh. Compare this collider with the rings' shader-only relief.
+6. Leave the rings frozen and observe the orb's continued pulse. Compare sources and recipients without calling every animation noise.
 
-```glsl
-    vec2 noise_input = vec2(object_pos.x * noise_scale, object_pos.z * noise_scale) + vec2(time_offset, time_offset);
-    float noise_value = noise(noise_input);
-    ALBEDO = mix(plain_albedo, rainbow_color * noise_value, show_colour);
-```
+The book's code blocks are excerpts from the actual GDScript. The torus field has a pair-only integer lattice hash and cubic interpolation; the legacy single-ring mode keeps its original floating hash. Two shader stages consult the same field expression at different sampling locations: mesh vertices versus interpolated fragment positions. A marker names a probe coordinate, not an exact fragment-pixel measurement.
 
-Two stages, one coordinate, one value. That is why the two rings on the bench can be called readings of the same field rather than two fields that happen to resemble each other.
+The terrain's material is violet. Generated vertex colours are not enabled as its albedo. All three authored grids remain, with lower line density and opacity in this compact staging. The inherited large-scale terrain still exists outside `stand:basin`.
 
-Notice what the second one cannot do. `noise()` returns minus one to plus one; `ALBEDO` cannot be negative. Where the value is below zero the multiplication drives the colour to black and the pipeline clamps it there, so the colour reading keeps the positive half of the field and throws the rest away. The displacement above keeps both halves, pushing inward for one of them.
-
-Read the field on the processor too, for the plate.
-
-```gdscript
-func _hash2(p: Vector2) -> float:
-	var q: Vector2 = (p * 0.3183099 + Vector2(0.71, 0.113))
-	q = Vector2(q.x - floor(q.x), q.y - floor(q.y)) * 50.0
-	var v: float = q.x * q.y * (q.x + q.y)
-	return -1.0 + 2.0 * (v - floor(v))
-```
-
-The same hash the shader uses, ported line for line, so the plate can say what the field IS at a coordinate rather than what it looks like. The graphics card computes this in 32-bit arithmetic and this runs in 64-bit, so the last digits of a very chaotic hash differ; what the plate claims is a definition, not a screenshot.
-
-Spend the value two ways.
-
-```gdscript
-func relief_of(value: float) -> float:
-	return value * float(PAIR_AMPS[_amp_i])
-
-
-func colour_of(value: float) -> float:
-	return maxf(value, 0.0)
-```
-
-One line each, and the difference between them is the room.
-
-Stop every clock, not just the visible one.
-
-```gdscript
-		mat.set_shader_parameter("noise_speed", 0.0 if _pair_frozen else noise_speed)
-		mat.set_shader_parameter("hue_shift_speed", 0.0 if _pair_frozen else hue_shift_speed)
-```
-
-The shader has two: one slides the coordinate the field is sampled at, the other rotates the hue. Zeroing the second alone would leave a ring whose colours had stopped while its sample kept moving — a still picture of a moving thing. Every `TIME` in that file reaches an output through one of these two, which is what makes this a freeze.
-
-Tell a reading from the field.
-
-```gdscript
-func cycle_amplitude() -> void:
-	_amp_i = (_amp_i + 1) % PAIR_AMPS.size()
-	_last_touched = "AMPLITUDE (a reading: the field did not move)"
-```
-
-```gdscript
-func cycle_frequency() -> void:
-	_freq_i = (_freq_i + 1) % PAIR_FREQS.size()
-	_last_touched = "FREQUENCY (the field itself: another value is here now)"
-```
-
-Amplitude scales what the surface does with a value; frequency changes which value is at the coordinate. The plate prints whichever was touched last, in those words, because the two buttons look alike and are not alike at all.
-
-Stage it in a map.
-
-```
-noisetorus:180#stand:pair
-```
-
-`stand:pair` builds the bench, the two rings, the markers, the plate and FREEZE, SAMPLE, AMPLITUDE and FREQUENCY. The `180` turns the bench toward the hall's door. Without the token the artifact is the single ring it always was, spending the field as relief and colour at once, with the `readout` axis (relief, plate, none) that an earlier pass gave it.
+Do not promise a brush, octave slider, torus collider, hydraulic erosion, procedural audio, or a walkable 200-metre mountain inside this hall. Headset reach and comfort are still pending. The next question is the occupancy threshold in Noise_Voxel.

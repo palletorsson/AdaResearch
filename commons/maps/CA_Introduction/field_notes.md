@@ -1,3 +1,9 @@
+# 25 September — a row around the body
+
+The current map moves the explorer one cell inward to clear the museum entrance wall and opts into a 32-cell overhead ring. It reads the explorer’s existing bounded history; the state update remains untouched. Native images, pointer and body checks, earlier fixture errors and source snapshots are recorded at `doc/book/iterations/2026-09-25-ca-neighbour-ring/index.html`. See [encounter notes](encounter-notes.md) for dimensions and current scope. Earlier placement/test claims below describe their dated passes.
+
+---
+
 # CA Introduction — the next row and the blob-culture transition
 
 13 September 2026. The user asked to continue into Cellular Automata after clarifying that the easy noise filter can become a mental algorithmic wall. Its organic or queer gesture remains valuable; learning further capabilities keeps other forms possible.

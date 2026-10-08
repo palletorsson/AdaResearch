@@ -1,6 +1,6 @@
-Concept: Pattern-making through arrays — small tiles repeated by symmetry operations produce carpets, mosaics, and wallpaper groups. The loom as first computer; textiles as algorithms.
-Sequence role: First map in Array Tutorial; establishes that arrays are not just data containers but pattern generators. The 17 wallpaper groups appear as the complete set of planar symmetries. Connects back to Color_Grid_Pallet's grid-as-canvas, but now the grid has mathematical structure (symmetry operations, not just color assignment); leads to Tutorial_Single.
-Technical angle: 2D array indexing as tile addressing, symmetry operations (rotation, reflection, glide reflection) applied to tile contents, tiling mathematics. The tile artifacts (4x4, brick, herringbone, mirror) demonstrate different symmetry groups; vr_tile_editor_mirror lets the learner paint and see immediate symmetric replication.
-Critical angle: Every carpet is an algorithm. The loom encoded patterns before punch cards encoded computation — Jacquard's loom is computing's material ancestor. Pattern repetition reveals that arrays are not neutral storage but impose structure: regular spacing, integer indexing, discrete sampling. The handmade-to-computational bridge is the sequence's thesis.
-Key artifacts: pattern_tile_4x4/brick/herringbone/mirror demonstrate four tiling approaches; vr_tile_editor_mirror makes symmetry interactive; tiling_demo generates the complete pattern; facade_grammar_demo extends tiling to architectural grammar; dark_sphere anchors the space.
-Gap: A wallpaper_group_explorer showing all 17 groups from a single user-painted tile would make the mathematical completeness tangible.
+Concept: An array address acquires physical size and direction through a surface mapping.
+Sequence role: Fourth room of tiling; after Tutorial_Pattern, before Symmetry_Seventeen.
+Primary: pattern_tunnel_machine and pattern_tile_brick.
+Encounter: Fixed source, P1 tunnel, source/surface inspector, 40/60cm cells, independently mapped faces, grid visibility and unchanged physical passage.
+Critical question: Which relation repeats, where does counting restart, and which remainder can be seen but not selected?
+Deferred: continuous gestures, headset comfort, transferable visitor source, seam alignment controls, portable timed reveal.

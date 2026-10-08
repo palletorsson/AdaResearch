@@ -1,67 +1,68 @@
 {
- "map_info": {
-  "name": "Chamber_Swarm",
-  "lookup_name": "Chamber_Swarm",
-  "description": "Your eight boids meet their swarm. Two flocks in one space. The same rules on both sides. The miura dances with you.\n\n[Placement applied hybrid engine — constraint 0.946→0.932, walkability 0.734→0.792]",
-  "dimensions": {
-   "width": 13,
-   "depth": 9,
-   "max_height": 3
+  "map_info": {
+    "name": "Chamber_Swarm",
+    "lookup_name": "Chamber_Swarm",
+    "description": "Your eight boids meet their swarm. Two flocks in one space. The same rules on both sides. The miura dances with you.\n\n[Placement applied hybrid engine — constraint 0.946→0.932, walkability 0.734→0.792]",
+    "dimensions": {
+      "width": 13,
+      "depth": 9,
+      "max_height": 3
+    },
+    "title": "Chamber_Swarm",
+    "version": "placed-hybrid",
+    "eye_shot_adopted": "Trial_eye_Chamber_Swarm",
+    "metadata": {}
   },
-  "title": "Chamber_Swarm",
-  "version": "placed-hybrid",
-  "eye_shot_adopted": "Trial_eye_Chamber_Swarm"
- },
- "settings": {
-  "cube_size": 1.0,
-  "gutter": 0.0,
-  "show_grid": true,
-  "enable_physics": true,
-  "enter_type": "I"
- },
- "utility_definitions": {
-  "t": {
-   "type": "teleporter",
-   "name": "Return to Lab",
-   "description": "Sequence complete",
-   "properties": {
-    "action": "next_in_sequence"
-   }
+  "settings": {
+    "cube_size": 1.0,
+    "gutter": 0.0,
+    "show_grid": true,
+    "enable_physics": true,
+    "enter_type": "I"
+  },
+  "utility_definitions": {
+    "t": {
+      "type": "teleporter",
+      "name": "Return to Lab",
+      "description": "Sequence complete",
+      "properties": {
+        "action": "next_in_sequence"
+      }
+    }
+  },
+  "layers": {
+    "structure": [
+      ["w", "w", "w", "w", "w", "1", "1", "1", "w", "w", "w", "w", "w"],
+      ["w", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "w"],
+      ["w", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "w"],
+      ["w", "1", "1", "1", "1", "1", "w", "1", "1", "1", "1", "1", "w"],
+      ["w", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "w"],
+      ["w", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "w"],
+      ["w", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "w"],
+      ["w", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "0", "w"],
+      ["w", "w", "w", "w", "w", "1", "1", "1", "w", "w", "w", "w", "w"]
+    ],
+    "utilities": [
+      ["", "", "", "", "", "", "", "", "", "", "", "", ""],
+      ["", "sp", "", "", "", "", "", "", "", "", "", "", ""],
+      ["", "", "", "", "", "", "", "", "", "", "", "", ""],
+      ["", "", "", "", "", "", "", "", "", "", "", "", ""],
+      ["", "", "", "e:2:5:5:swarm", "", "", "", "", "", "e:2:5:5:swarm", "", "", ""],
+      ["", "", "", "", "", "", "", "", "", "", "", "", ""],
+      ["", "", "", "", "", "", "", "", "", "", "", "", ""],
+      ["", "", "", "", "", "", "", "", "", "", "", "t", ""],
+      ["", "", "", "", "", "", "", "", "", "", "", "", ""]
+    ],
+    "interactables": [
+      ["", "", "", "", "", "", "", "", "", "", "", "", ""],
+      ["", "", "synthesis_stand#subject:catalyst_target#mode:hero", "", "", "", "", "", "", "", "", "", ""],
+      ["", "", "", "", "", "", "", "", "", "", "proximity_spawner#type:swarm_hive", "", ""],
+      ["", "", "catalyst_target", "", "", "", "", "", "", "", "", "", ""],
+      ["", "", "", "", "", "", "", "", "becoming_catalyst#start_mode:swarm", "", "", "", ""],
+      ["", "", "", "", "", "", "", "", "", "", "", "", ""],
+      ["", "", "", "", "science_screen:180:1.5#mode:scatter", "", "", "", "", "", "", "", ""],
+      ["", "", "", "", "", "", "", "", "", "", "", "", ""],
+      ["", "", "", "", "", "", "", "", "", "", "", "", ""]
+    ]
   }
- },
- "layers": {
-  "structure": [
-   [ "w", "w", "w", "w", "w", "1", "1", "1", "w", "w", "w", "w", "w" ],
-   [ "w", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "w" ],
-   [ "w", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "w" ],
-   [ "w", "1", "1", "1", "1", "1", "w", "1", "1", "1", "1", "1", "w" ],
-   [ "w", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "w" ],
-   [ "w", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "w" ],
-   [ "w", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "w" ],
-   [ "w", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "0", "w" ],
-   [ "w", "w", "w", "w", "w", "1", "1", "1", "w", "w", "w", "w", "w" ]
-  ],
-  "utilities": [
-   [ "", "", "", "", "", "", "", "", "", "", "", "", "" ],
-   [ "", "sp", "", "", "", "", "", "", "", "", "", "", "" ],
-   [ "", "", "", "", "", "", "", "", "", "", "", "", "" ],
-   [ "", "", "", "", "", "", "", "", "", "", "", "", "" ],
-   [ "", "", "", "e:2:5:5:swarm", "", "", "", "", "", "e:2:5:5:swarm", "", "", "" ],
-   [ "", "", "", "", "", "", "", "", "", "", "", "", "" ],
-   [ "", "", "", "", "", "", "", "", "", "", "", "", "" ],
-   [ "", "", "", "", "", "", "", "", "", "", "", "t", "" ],
-   [ "", "", "", "", "", "", "", "", "", "", "", "", "" ]
-  ],
-  "interactables": [
-   [ "", "", "", "", "", "", "", "", "", "", "", "", "" ],
-   [ "", "", "synthesis_stand#subject:catalyst_target#mode:hero", "", "", "", "", "", "", "", "", "", "" ],
-   [ "", "", "", "", "", "", "", "", "", "", "proximity_spawner#type:swarm_hive", "", "" ],
-   [ "", "", "catalyst_target", "", "", "", "", "", "", "", "", "", "" ],
-   [ "", "", "", "", "", "", "", "", "becoming_catalyst#start_mode:swarm", "", "", "", "" ],
-   [ "", "", "", "", "", "", "", "", "", "", "", "", "" ],
-   [ "", "", "", "", "science_screen:180:1.5#mode:scatter", "", "", "", "", "", "", "", "" ],
-   [ "", "", "", "", "", "", "", "", "", "", "", "", "" ],
-   [ "", "", "", "", "", "", "", "", "", "", "", "", "" ]
-  ]
- }
 }

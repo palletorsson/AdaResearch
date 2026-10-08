@@ -1,9 +1,9 @@
 # Trans Introduction — Summary
 
-Trans_Introduction is the opening map of the Transformation sequence. It puts the three fundamental spatial transformations — translation, rotation, and scaling — next to each other as parallel physical demonstrations so the learner can compare them before the rest of the sequence layers them together.
+After Trans_Pre introduces a cube that can rise, turn and grow, this hall makes those changes consequential: three gaps follow one another along the route.
 
-The room is arranged as three lanes running side by side, each separated from the next by a void gap. Each lane carries one transformation cube, and each cube demonstrates how its particular transformation can close the gap and let the learner continue forward.
+A transport cube travels two metres along z and shares its displacement with a supported rider. A green cube grows from 0.5 to 3 metres per side until its upper surface meets the floor. A thin three-metre plank turns about its fixed centre, aligning with the banks for four-second pauses. The player's body is not scaled or deliberately rotated by these demonstrations.
 
-The first lane holds a cyan transport cube. Activating it translates the learner three units along the lane, closing the gap as additive displacement: the cube treats the learner as a point and moves that point across space. The second lane holds an orange rotation cube. Activating it rotates the learner ninety degrees around a central axis, reorienting without translating; the cube treats the learner as a solid with faces, so the relationship with the far side changes by angle rather than position. The third lane holds a green scale cube. Activating it doubles the learner's reach; the cube treats the learner as a volume, so the gap is closed by growing rather than by moving or turning.
+After the third crossing, MOVE THE BANK lets the visitor translate the far landing up to one metre while leaving the plank unchanged. A compact slider and reset make the comparison repeatable. The readout distinguishes meeting edges from separation; physical passage also depends on the body and movement rule. Permanent side aisles connect both sides.
 
-Within the sequence, Trans_Introduction is the vocabulary map. The learner leaves the room having felt three different relationships to the same spatial problem. Later maps will combine the transformations and ask when each one is the right tool.
+Four primary encounters give the book its path: transport, scale, rotation, then changing the landing. The nearby matrix, composition and gimbal artifacts remain secondary invitations to examine the implementation more closely.

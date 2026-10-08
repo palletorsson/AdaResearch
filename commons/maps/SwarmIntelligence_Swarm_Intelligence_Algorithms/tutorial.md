@@ -1,5 +1,13 @@
 # Swarm Intelligence Algorithms
 
+**Learning elements — proposed focus**
+
+*The labels below set the revision focus; the existing lesson still needs alignment.*
+
+- Event provenance
+- Population accounting
+- External support
+
 A gallery of swarm methods. Common agent interface.
 
 Define the common interface.

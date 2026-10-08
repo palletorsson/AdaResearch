@@ -2,11 +2,11 @@
   "sequences": {
     "shaders": {
       "name": "Shaders: What a Surface Answers To",
-      "truth": "A shader is a rule run for every pixel at once. It keeps no memory and has no body; what it answers to is light, position and time. The passage, the pillar hall and the basin are where the museum lets that show.",
+      "truth": "A familiar form can be evaluated as a surface rule. Coordinates, material, light and viewpoint affect its appearance; mesh geometry, collision and retained state remain distinct constructions.",
       "qfep_term": "λE(S)",
-      "qfep_connection": "The field of the noise sequence becomes a surface. Every pixel is computed from the same rule with different inputs, and nothing is kept between frames until a buffer gives the rule a past; the hall after this one gives the cell one. What a surface can answer to, and what carries the body that looks at it, are two constructions the sequence keeps apart.",
-      "formula": "colour = f(position, light, time), for every pixel, at once",
-      "description": "Six halls assembled from the Book of Shaders rooms and introduced through the architecture between rooms: a long passage where a rule runs for every pixel at once, a pillar hall where five materials answer light, a basin whose glass lid carries you over moving water, the floor of the tiling sequence returned as a per-pixel rule, five materials pushed past their intended range, and a rule given a memory through a buffer, which is where cellular automata begin.",
+      "qfep_connection": "Earlier coordinates, forms, arrays and fields return as choices inside a material. The learner locates where each choice changes an appearance, a body or a record. Re-evaluating from coordinates and a clock differs from updating from retained state; the final hall makes that missing connection explicit before Cellular Automata.",
+      "formula": "surface sample → form rule → material response; retained state requires a connected input",
+      "description": "Six existing halls move from wall images to staged bodies and rooms: graph functions, coordinate patterns, material responses on primitives, layered fields and a glass-covered basin, pink compositions, then a panel whose previous-state input is missing. The proposed tutorial carries a small form rule through these encounters, drawing on earlier sequences and The Book of Shaders.",
       "layer": "E_entropy",
       "prerequisites": [
         "noise",
@@ -18,20 +18,20 @@
       "difficulty": "intermediate",
       "estimated_time": "30-40 minutes",
       "learning_objectives": [
-        "Say what a fragment shader receives (position, light, time) and what it cannot keep (a memory) or be (a body)",
-        "Read a shaping function as a policy for where value goes, and a gradient as never neutral",
-        "Distinguish a material that answers light (leather, latex, oil slick) from a mesh that merely has a colour",
-        "Stand on a basin lid over moving water and tell the surface you look at from the construction that carries you",
-        "Recognise the tiling sequence’s floor as a per-pixel fold of space rather than a set of copies",
-        "Explain why a buffer turns a rule for every pixel into a rule with a past, and carry that into cellular automata"
+        "Reuse point distance and colour mapping to construct a mask, keeping its visible boundary distinct from the panel mesh",
+        "Transform a sampling coordinate and separate tile address from local position to vary one repeated form",
+        "Compare one material on different primitive bodies and distinguish normal/view response from received light",
+        "Use a finite layered field to change appearance while identifying the separate construction that supports the visitor",
+        "Compose known material operations and explain an alternate appearance without adding a compulsory new technique",
+        "Distinguish clock-driven re-evaluation from retained-state feedback and identify the missing previous input before Cellular Automata"
       ],
       "content": [
-        "Shader_01_Shaping: Why does the wave jump? - arrive from the noise halls; four graphs that hold still and one that moves by itself; the exit crossing is declared fourteen rows deep",
-        "Shader_05_Patterns: Where are the seams? - fract() folds space; tiles, Truchet arcs, bricks, Wang tiles and Voronoi from one fold",
-        "Shader_11_QueerRubber: What does a surface answer to? - five materials rotating under three coloured lamps, in the one hall of the sequence that keeps the museum's pier colonnade",
-        "Shader_09_FBM: What carries you over the water? - a 7 x 3 pool under a glass lid in front of the four noise displays; the water on it is recomputed from the clock on every frame, and written so the clock's wrap is invisible",
-        "Shader_12_PinkExtravaganza: Which of these is the lamp? - five self-lit materials under three pink lamps and a water plane on the floor; no slider is set, the excess is in the defaults",
-        "Shader_10_ReactionDiffusion: Where is the last frame? - a reaction-diffusion rule that asks for its previous frame and is never handed one, beside a DLA that only looks grown; the seam into cellular automata"
+        "Shader_01_Shaping: existing graph panels; proposed return to point, distance and boundary as a small surface mask",
+        "Shader_05_Patterns: existing coordinate tilings and world-projected garden; proposed transforms and address-selected variation of the retained form",
+        "Shader_11_QueerRubber: existing staged primitive bodies; proposed comparison of a shared material and its view-dependent rim",
+        "Shader_09_FBM: existing layered fields and basin under glass; proposed finite field applied to the retained form",
+        "Shader_12_PinkExtravaganza: existing pink materials and plural body; proposed composition with known operations and a declared receiver",
+        "Shader_10_ReactionDiffusion: previous-state texture is unbound and frost retains no growth; reflective handoff to Cellular Automata"
       ],
       "maps": [
         "Shader_01_Shaping",
@@ -52,8 +52,8 @@
       ],
       "deferred_reason": {
         "Shader_02_Colors": "colour is sequence four’s; the hall stays on disk for the pattern-generation walk",
-        "Shader_03_Shapes": "kept for the pattern-generation walk; the six spine halls carry the argument",
-        "Shader_04_Matrices": "transformation is sequence two’s",
+        "Shader_03_Shapes": "Reuse selected mask functions inside Shaping; keep the full gallery deferred.",
+        "Shader_04_Matrices": "Return to earlier transforms through sampling coordinates inside Patterns; keep the full gallery deferred.",
         "Shader_06_Random": "randomness is sequence ten’s",
         "Shader_07_Noise": "noise is sequence eleven’s; FBM carries the field here",
         "Shader_08_CellularNoise": "Voronoi appears inside the patterns hall",
@@ -90,10 +90,14 @@
           "artifacts": [
             "dark_sphere",
             "library_rack",
-            "shader_05_patterns"
+            "shader_05_patterns",
+            "reference_pattern_garden"
           ],
           "size_budget": "compact_only",
-          "rationale": "Where are the seams? Placed from the map (artifact_placement map); the museum block gives the hall its liminal form."
+          "rationale": "Where are the seams? Placed from the map (artifact_placement map); the museum block gives the hall its liminal form.",
+          "application_studies": {
+            "reference_pattern_garden": "Change pattern phase while retaining every flower position."
+          }
         },
         {
           "map": "Shader_11_QueerRubber",
@@ -124,10 +128,14 @@
           "artifacts": [
             "dark_sphere",
             "library_rack",
-            "shader_12_pinkextravaganza"
+            "shader_12_pinkextravaganza",
+            "reference_plural_body"
           ],
           "size_budget": "compact_only",
-          "rationale": "Which of these is the lamp? Placed from the map (artifact_placement map); the museum block gives the hall its liminal form."
+          "rationale": "Which of these is the lamp? Placed from the map (artifact_placement map); the museum block gives the hall its liminal form.",
+          "application_studies": {
+            "reference_plural_body": "Change the unfolding parameter; retain six limbs and three heads."
+          }
         },
         {
           "map": "Shader_10_ReactionDiffusion",
@@ -151,8 +159,16 @@
           "date": "2026-09-25",
           "by": "claude-edges-pilot",
           "note": "Palle: 'the first examples can go as images on the walls I think and then stages large spheres and cubes then spaces'. Reordered: images (01 shaping, 05 patterns) -> bodies on stages (11) -> spaces (09 basin, 12 pink) -> the seam (10). The picture racks of 01 and 05 stand against the north wall; 11 and 12 take scale/shapes/stage tokens."
+        },
+        {
+          "date": "2026-10-04",
+          "scope": "Form-based tutorial summaries and references",
+          "decision": "Keep six halls and images → bodies → rooms. Carry a familiar form through masks, transforms, repetition, materials and fields. Read The Book of Shaders as a reference, adapting explicitly to Godot.",
+          "guide": "doc/book/course/storyboards/SHADERS.md",
+          "status": "Teaching proposal updated; museum logic, map order and full manuscripts unchanged."
         }
-      ]
+      ],
+      "learning_objectives_status": "Proposed tutorial progression; learner adapters and cross-hall transfer are not yet verified."
     }
   },
   "world_phase": "transition",

@@ -1,137 +1,23 @@
-# Fractals_3 - Technical Tutorial
+# Finite intervals, their history and an extruded passage
 
-## Recursive Circles
+Two primaries: `cantor_set`, then `example_8_4_cantor_pagoda_vr`. All eight existing placements, including three stochastic trees, remain. Explicit map placement restores the cloud omitted by the previous museum arrangement. The original 19 × 23 enclosure, 13 × 9 raised deck and two approach wedges remain; museum floor coverage closes legacy exit voids.
 
-### Basic Circle Recursion
-Place smaller circles around a parent circle's circumference:
+## Bar instrument
 
-```gdscript
-func recursive_circles(center: Vector2, radius: float, depth: int):
-    if depth <= 0:
-        return
+`lesson:true` installs `commons/artifacts/cantor_lesson/cantor_lesson.gd`. The ordinary falling/instant modes remain available elsewhere. This lesson uses frozen bars, L=6 m, thickness 0.12 m, vertical row spacing 0.45 m and a 0.35 m base offset. It starts at n=0 and admits n=0..5. NEXT/BACK rebuild deterministic generations with the same middle-third code. RESET restores n=0, history on and removal gone.
 
-    # Draw current circle
-    draw_circle(center, radius)
+HISTORY hides earlier rows and disables their collision layers/masks. It does not modify the latest interval set. GHOST shows only the middle thirds newly removed at each displayed generation, as MeshInstance3D without collision. Earlier gaps remain empty; a row of ghosts is not a solid reconstruction of the original interval. RULE reveals a short summary on the desk. Exact GDScript excerpts in final.md are from `cantor_set.gd::perform_iteration` and the pagoda's `_create_block`; the three equations are mathematical notation, not executable GDScript.
 
-    # Parameters for child circles
-    var child_radius = radius * 0.4  # Each child is 40% of parent
-    var num_children = 6              # 6 children around circumference
-    var placement_radius = radius - child_radius  # Place inside parent
+The latest row has 2^n pieces, each L/3^n long, total L*(2/3)^n. The desk sums actual current BoxShape widths. At n=5 this gives 32 pieces, 0.790123 m kept and 63 solid bars across the full history. Finite bars have positive total length and thickness. Zero measure and uncountability refer to the mathematical limiting set, not the displayed mesh. Counts are not entropy or performance measurements.
 
-    for i in range(num_children):
-        var angle = TAU * i / num_children
-        var child_center = center + Vector2(cos(angle), sin(angle)) * placement_radius
+## Pagoda instrument
 
-        # Recursive call
-        recursive_circles(child_center, child_radius, depth - 1)
-```
+The lesson sets base width 9 m, block height 2.2 m and n=1..3. CUT/LESS change the number of cuts. The latest generation is the bottom storey; older generations are stacked above it. DEPTH cycles extrusion through 2, 4, 1 m; this changes neither X intervals nor their count. LATEST hides earlier storeys and disables their collisions. RESET returns to n=1, extrusion 2 m and visible history. Rebuilds replace only generated blocks and preserve controls. Maximum lesson allocation is 15 blocks.
 
-### Apollonian Gasket
-A classical circular fractal where circles pack to fill space:
+At n=3 the lowest storey has 8 blocks totalling 2.666667 m of the 9 m width. Gaps include 3 m, 1 m and 1/3 m. This is an extrusion of finite 1D Cantor generations, not a three-dimensional Cantor dust and not a claim that its polygon mesh has fractal dimension. A fixed collision proxy makes different gaps traversable. The pagoda's `get_level_info` now reports summed kept width separately from one interval's width, and uses the inverted physical storey height. Depth zero in the underlying sculpture also avoids a division by zero in its colour calculation.
 
-### 3D Recursive Circles
-For the VR visualization, circles become 3D toruses or rings:
+## Museum placement and controls
 
-```gdscript
-func recursive_circles_3d(center: Vector3, radius: float, normal: Vector3, depth: int):
-    if depth <= 0:
-        return
+The authored deck provides a 1 m support height, applied once by the museum. The pagoda desk sits on the lower museum floor before the deck. The bar desk sits beside the approach. Both use full-size touch buttons in a 3 × 2 layout and a 1.18 × 0.36 m transparent screen. The secondary Nature of Code artifact is a linear Cantor display, configured to five cuts; the former references to radial circles were incorrect and are archived.
 
-    # Create torus mesh at this level
-    var torus = create_torus(center, radius, normal, tube_radius)
-    add_child(torus)
-
-    # Calculate child positions on the circle
-    var child_radius = radius * 0.35
-    var num_children = 5
-    var placement_radius = radius * 0.7
-
-    # Get perpendicular vectors to normal
-    var tangent = normal.cross(Vector3.UP).normalized()
-    if tangent.length() < 0.1:
-        tangent = normal.cross(Vector3.RIGHT).normalized()
-    var bitangent = normal.cross(tangent)
-
-    for i in range(num_children):
-        var angle = TAU * i / num_children
-        var offset = tangent * cos(angle) + bitangent * sin(angle)
-        var child_center = center + offset * placement_radius
-
-        # Child circles can have tilted normals for visual interest
-        var child_normal = (normal + offset * 0.3).normalized()
-
-        recursive_circles_3d(child_center, child_radius, child_normal, depth - 1)
-```
-
-### Inward Spiraling
-Circles that spiral toward center:
-
-### Fractal Dimension of Circle Packings
-The Apollonian gasket has dimension ≈ 1.3057:
-
-```gdscript
-func estimate_apollonian_dimension(max_depth: int) -> float:
-    # Count circles at each scale
-    var counts = []
-    var scales = []
-
-    for depth in range(1, max_depth + 1):
-        var count = count_circles_at_depth(depth)
-        var avg_radius = average_radius_at_depth(depth)
-
-        counts.append(count)
-        scales.append(1.0 / avg_radius)
-
-    # Linear regression of log(count) vs log(scale)
-    # Slope approximates fractal dimension
-    return linear_regression_slope(
-        scales.map(func(s): return log(s)),
-        counts.map(func(c): return log(c))
-    )
-```
-
-## Implementation Notes
-
-### Depth vs. Iterations
-The map uses 40 iterations, which produces fine detail:
-
-### Performance: Instance Rendering
-Many small circles can use GPU instancing:
-
-```gdscript
-var circle_transforms: Array[Transform3D] = []
-
-func collect_circles(center: Vector3, radius: float, depth: int):
-    if depth <= 0:
-        return
-
-    # Store transform instead of creating mesh
-    var transform = Transform3D().scaled(Vector3.ONE * radius).translated(center)
-    circle_transforms.append(transform)
-
-    # ... recurse
-
-func render_all_circles():
-    var multimesh = MultiMesh.new()
-    multimesh.instance_count = circle_transforms.size()
-
-    for i in range(circle_transforms.size()):
-        multimesh.set_instance_transform(i, circle_transforms[i])
-
-    # Single draw call for all circles
-```
-
-## Key Takeaway
-Circular recursion demonstrates that self-similarity operates in any geometry. The key insight: **different recursion topologies produce different aesthetics** (branching trees vs. spiraling mandalas) while sharing the same mathematical foundation (self-application of rules).
-
-## Implementation Notes and Complexity
-
-The Cantor set is constructed by repeated middle-third removal. Starting from the unit interval, each step removes the open middle third of every remaining interval. After N steps, the remaining structure consists of 2 to the N intervals, each of length 3 to the minus N. The total length tends to zero; the total number of endpoints tends to infinity; the fractal dimension is log(2) over log(3), approximately 0.631.
-
-The recursive construction has straightforward time and space complexity. Each step multiplies the interval count by 2, so generating N steps requires O(2 to the N) storage for the interval list. Naive implementations allocate a new list at each step; a more efficient implementation stores only the endpoints and reconstructs intervals on demand, giving O(N) memory for the recursion depth plus O(2 to the N) time to enumerate the intervals.
-
-Rendering the Cantor set is limited by what can actually be displayed. At eight iterations the structure has 256 intervals, each too narrow to be distinct on a normal display. Beyond ten iterations the visualisation collapses visually, even though the mathematical construction continues. The map caps visible depth at a threshold that produces legible geometry, and a side panel tracks the mathematical depth separately.
-
-The Cantor dust — the 2D analogue — is constructed similarly but with 8 of 9 squares retained instead of 2 of 3 intervals. The fractal dimension is log(8) over log(3), approximately 1.893. The Cantor carpet uses 8 of 9 squares as well but colours them differently; Sierpinski's carpet removes the centre of each square instead, producing dimension log(8) over log(3), the same value.
-
-Within the sequence, Cantor is the one-dimensional entry point to the fractals sequence. Sierpinski, Koch, and Menger all generalise Cantor's subtractive logic to higher dimensions, and the dimensional ladder from Cantor to Menger runs through this map's construction.
+Runtime evidence and input limitations are recorded on the illustrated Cantor review page. Physical headset reach, comfort and Quest performance remain to test.

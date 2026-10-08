@@ -1,5 +1,13 @@
 # Gödel Incompleteness
 
+**Learning elements — proposed focus**
+
+*The labels below set the revision focus; the existing lesson still needs alignment.*
+
+- Proof checking
+- Bounded search
+- Unprovability claims
+
 Encode statements as numbers. Build a statement that refers to its own unprovability and watch the system refuse to prove or disprove it.
 
 Declare a Gödel encoding.

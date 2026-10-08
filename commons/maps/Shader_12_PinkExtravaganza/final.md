@@ -36,6 +36,16 @@ The dark sphere, pulsing purple, in a room where everything pulses pink. It is t
 
 <!-- @ -->
 
+<!-- study-spine:reference_plural_body -->
+
+<!-- @reference_plural_body -->
+
+Six limbs unfold around three heads. The pose opens without becoming another inventory. A pink edge catches the light; a silver loop holds a space beside the body.
+
+The Peaches and Pussykrew reference brings bodily excess into this return to familiar primitives and shaders. Our assembly makes an attachment changeable. That is a technical permission, with limits: a larger menu of parts cannot by itself promise a freer life. Let the pose remain unresolved. The body does not owe the room a single final outline.
+
+<!-- @ -->
+
 One hall left, and it is quiet. Take the emission with you: a surface that lights itself is answering to nothing but its own rule and your eye.
 
 [^scene]: `shader_12_pinkextravaganza.gd` with the map's token `#bodies:1.5#shapes:sphere,torus,cube,plane,sphere_big#stage:0.35#water:12`: melted candy, a sphere of radius 1.17 m on a 0.35 m stage at x -4.5, turning at 0.25 rad/s; crushed pearl, a torus 2.3 m across at x -1.5; oil slick latex, a cube 1.8 m on a side at x 1.5; queer water, a plane 12 m square on the floor, centred on the hall's anchor, not turning; drag extravaganza, a sphere of radius 1.6 m at (0, 4, -2), neither scaled nor staged, turning at 0.3 rad/s. The script's own defaults, without the token, are smaller bodies at fixed heights, a capsule instead of the cube, and an 8 m water. Lamps: (1.0, 0.0, 0.5) at (-5, 5, 3), energy 8; (0.5, 0.0, 1.0) at (5, 5, 3), energy 8; (1.0, 0.1, 0.8) at (0, 6, -2), energy 6; range 10; no shadows. The title reads P I N K   E X T R A V A G A N Z A between two stars.

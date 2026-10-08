@@ -1,27 +1,29 @@
 # The motion that travels
 
-How can a disturbance travel while its parts stay near their places?
-
 <!-- @coupled_oscillator_lattice -->
 
-Choose one sphere near the centre of the lattice. Follow that sphere alone for several movements. Then widen your attention to its neighbours. Their movement can be much smaller. Compare when they rise together and when their displacements differ, without abandoning your first sphere as a reference. The panel begins with COUPLED and SINE. RESET returns the same still lattice and starts its drive again.
+Choose one sphere near the centre of the lattice. Follow that sphere alone. It rises and returns, keeping its place in the grid. Now widen your attention. Something has travelled beyond the place you were watching.
 
-The spheres remain at their horizontal grid positions. Their movement is vertical. The pattern spreading across them can therefore travel without any one sphere crossing the whole display. This is the distinction to establish before naming the result a wave.
+Press SINE; the button now reads PULSE. After half a second, the centre receives one push. Look for the first neighbour to respond. Its movement may be small. The readout keeps the largest displacement reached by one immediate neighbour since the reset, in millimetres. It can help you notice a response without deciding what that response means.
 
-Select two neighbouring spheres and look for a moment when their heights differ. Follow the pair through several movements, describing their separation rather than only the larger pattern. Now choose two spheres farther apart and make the same comparison. Similar heights at one instant do not establish that the two places are always moving together; watch which way each moves next. If you find a repeating relationship, check whether it persists through another cycle. This is a way to investigate coordination without assuming every visible crest is a travelling object. The pattern needs more than one instant to reveal what is changing and what remains related.
+Press COUPLED. It becomes INDEPENDENT, the drawn links disappear, and the same push begins from the same still lattice. The centre still moves. The places around it no longer receive the disturbance.
 
-Press SINE; the button now reads PULSE. After a short wait, the centre receives one push. Follow what happens beyond it. Press COUPLED; it becomes INDEPENDENT, and the same push begins from the same still lattice. What has stopped travelling? Press INDEPENDENT to restore COUPLED before explaining the difference. Every button restarts the comparison; it does not cut a moving wave midway.
+Restore COUPLED and repeat. Each button restarts the comparison. You are changing the conditions of a beginning; you have not severed a moving wave halfway through its journey.
 
-Each oscillator has its own restoring influence towards an equilibrium and a damping term that resists its velocity. Coupling adds another influence: a neighbour displaced differently contributes a force. Both influences follow one law: a force in proportion to how far something has been moved from where it rests, Robert Hooke's "as the extension, so the force" of 1660.[^hooke] The program gathers those forces and then updates the oscillators' velocities and displacements. SINE keeps driving the centre; PULSE adds a single initial velocity after half a second. The same source can now be tried with and without the links.
+The sphere you chose has not visited its neighbours. Its changing relation to them has become consequential. Follow the pattern for a moment, then return to that one body. How much of what you called its movement belonged to what surrounded it?
 
-The readout reports the largest displacement reached by one immediate neighbour since the reset, in millimetres. Under SINE it may be easy to miss that small response among the larger centre movements. PULSE makes a different comparison visible without changing the spring, mass or damping settings. A measurement can help you notice a motion; it does not replace watching which sphere moves next.
+Look at the boundary. An interior point has eight neighbours here, including the diagonals. A corner has three. Each point has the same kind of rule, yet its position in the arrangement gives that rule different relationships to work with. The edge participates in the movement. It is not simply where we stopped drawing.
 
-Look at an edge and then at the interior. An edge cell has fewer neighbours. A boundary is therefore part of the mechanism, not merely where the picture happens to stop. The finite arrangement cannot behave exactly like an unlimited medium, and these simplified links do not claim to reproduce every material that carries waves.
+The rods make those relationships visible. They have no collision and are not physical springs. A body can pass through the drawing; the stored relation still acts. Conversely, two spheres passing through similar heights would not by itself prove that one had affected the other. The switch gives us a comparison that resemblance alone cannot supply.
 
-Try describing the display twice: first as a collection of individual moving spheres, then as a pattern moving through their relationships. Each account makes something visible and leaves something out. Neither requires the spheres to agree consciously or to know the pattern they collectively form.
+<!-- @wave_propagation_3d -->
+
+Walk to the broad field of tiles. Rings spread across it. Here each tile receives its height from a rule using distance and time. It does not ask a neighbouring tile what happened there. The visual resemblance survives this difference in construction.
+
+We might want the image of a wave, or we might want a world in which removing a connection changes what follows. Those desires can produce similar surfaces and different possibilities. Which one did you assume when the first crest arrived?
 
 <!-- @ -->
 
-The switch disconnects all the links at once. Removing only selected neighbours remains a further experiment: a different boundary inside the same lattice. The next room turns to sound, where one oscillation can modify another and a relationship between simple sources can change what you hear.
+Return to one sphere. The centre was chosen as the source before you entered; the switch can disconnect every link at once. Choosing a different source, or removing just one relation, would make other experiments possible. The present controls give us a particular way to ask what travels.
 
-[^hooke]: Robert Hooke announced the law as an anagram in 1660 and spelled it out in *Lectures de Potentia Restitutiva* (1678): *ut tensio, sic vis*. The pendulum's small-angle approximation in the first hall turns its rule into this one. A spring alone, with a knob for how it dies, stands on a bench in the Synthesis Lab.
+The next room turns to sound. One oscillation will enter another's phase. Keep the distinction we found here: looking or sounding alike is a beginning for comparison, not yet an account of how something came to happen.

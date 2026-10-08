@@ -1,5 +1,14 @@
 # Form-Finding: Catenary
 
+**Learning elements — proposed focus**
+
+*The labels below set the revision focus; the existing lesson still needs alignment.*
+
+- Boundary conditions
+- Drafted curves
+- Evaluated curves
+- Physical constraints
+
 Two of the oldest solved minimisations, side by side. Before them, a boundary must be fixed — two anchors for the chain, two rings for the film.
 
 Fix the anchors.

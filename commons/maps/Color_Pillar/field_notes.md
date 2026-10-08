@@ -14,3 +14,34 @@ Source layouts and prior manuscripts are archived in `doc/space/color-recovery-2
 ## 2026-09-10 - Pattern machines removed
 
 Removed secondary placements: `loom_drum_persian_p6`. Colour primaries and final.md anchors remain unchanged. Before-state preserved in `doc/space/color-pattern-removal-2026-09-10/before/`. Placement and content checked; no new runtime or headset validation claimed.
+
+## 2026-09-23 — The colour between the pillars
+
+Kept the working field and named collection wall, all secondary works, source, placement and primary order. Canonical final.md replaces one prediction prompt with the return walk, connects unsampled gaps to passage, and follows the carried label while its neighbours remain on the wall. Added a shared native overview/interior figure; the code, dimensions, opening and next-hall link remain.
+
+The current critical companion now addresses sampling, architectural weight, authored palette titles and the nearest-name lookup. The complete older gauntlet draft is preserved below it, explicitly labelled historical rather than treated as current runtime evidence.
+
+32 focused isolated-museum checks pass, including actual swatch pickup/movement/release and three selected ordinary-controller walks. Initial wall photography looked through an intervening pillar; only the capture camera was moved closer. Native/composed figures inspected. No production repair, live museum restart, live save/bake replacement, commit or frozen book/audio rebuild. No headset, learner or performance claim. Review: `doc/book/iterations/2026-09-23-pillar-colour-between/index.html`. Next: Color_Grid_Pallet.
+
+
+## 2026-09-28 — a colour and the room between
+
+A small reading pass after Rainbow. Retained the opening walk, coordinate rule and explanation, native figure, dimensions, artifact order and Grid handoff. Four passages now connect an added column with the standing room it occupies; compare the lit column and unshaded floor at its foot; make the named collection's authorship explicit; and follow a swatch beyond the company named by its label. Tutorial comparison aligned. The existing critical companion already develops these relations and remains unchanged.
+
+The relevant map, pillar script/scene, palette-wall script and pickup dependencies match their recorded 23 September versions. Reused dated native interior and carried-swatch photographs and the earlier 32-check report. No new runtime test or artifact changes were needed for these prose changes; this is not a claim that the entire museum runtime is unchanged. Publication checks, current eight-hall Colour capture and catalogue reference refreshed. Review: `doc/book/iterations/2026-09-28-pillar-room-between/`. Next: Color_Grid_Pallet.
+
+
+## 28 September 2026 — Height becomes value
+
+The existing spatial field now uses its vertical axis: each of the thirty-five columns holds its x/z hue and saturation while value rises from black at y=0.46 m to full value at y=4.6 m. A separate neutral reference reaches white. The floor stays a bright V=0.95 reference slice. Shared unshaded shader materials distinguish assigned value from illumination.
+
+A pickable sampling card maps hand height 0.65–1.85 m to the full vertical range; a marker and FIELD Y make that rescaling visible. It displays RGB and HSV for the same sample, keeps source H/S at black, clamps outside the field, and stays placed on release. The older palette swatches keep their colour when carried, making another relationship between address and colour available for comparison.
+
+The existing 41 × 38 map, placement and other exhibits are unchanged. Default named-palette instances retain their uniform materials. The native report, interior captures and exact text difference are in `doc/book/iterations/2026-09-28-pillar-height-and-value/`. Supplied input checks do not establish tracked-hand reach or headset comfort.
+
+
+## 28 September 2026 — Colour becomes the ceiling
+
+At the author's request, the bright floor palette is now overhead at y=4.6, V=1, matching every pillar's top at its address. The canopy extends 1.2 m beyond the sample span on each side; mesh-space position preserves the coordinates and clamps the overhang to the edge colour. A near-black matte overlay replaces the coloured ground and also covers the neutral reference's footprint. Existing floor collision, hall layout, sampler and named swatches remain. The ceiling is visual, without an overhead collider or added light source.
+
+Current chapter and companion accounts describe looking up, the matched top boundary and the dark ground. Earlier bright-floor entries above are historical. Native evidence: `doc/book/iterations/2026-09-28-pillar-colour-ceiling/`.

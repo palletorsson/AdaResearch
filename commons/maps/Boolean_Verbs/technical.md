@@ -7,3 +7,7 @@ Each primary scene builds a `CSGCombiner3D` and assigns `operation` to `OPERATIO
 The first primary sits at row 4, column 7; the second at row 12, column 7; the third at row 19, column 7. The closing argument sits at row 22, column 4. Utilities retain spawn, text, and the `Boolean_Gallery` exit link. `commons/data/artifact_roles.json` marks the three verbs `primary` and the closing argument `secondary`, matching the tutorial's order.
 
 The technical check for this pass resolves every map token against the registry, confirms the three primary roles, and checks that the authored map dimensions and token coordinates remain unchanged while the register files are added.
+
+## Reading revision, 24 September 2026
+
+The complete pre-revision final.md and all companion drafts are preserved under doc/book/iterations/2026-09-24-boolean-room-for-a-body/before/commons/maps/Boolean_Verbs/. They retain the earlier forensic detail, line counts and source commentary as dated material, not newly verified facts. The current final.md follows the encounter and keeps the technical distinctions necessary to understand it. See that iteration's DECISIONS.md for source checks, factual corrections and unresolved artifact work.

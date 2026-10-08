@@ -1,5 +1,14 @@
 # Form-Finding: Equilibrium
 
+**Learning elements — proposed focus**
+
+*The labels below set the revision focus; the existing lesson still needs alignment.*
+
+- Lever balance
+- Mass-distance products
+- Solved arm lengths
+- Model assumptions
+
 Where forces cancel, form holds still. Before it, weights that are real numbers and distances you are free to choose.
 
 Weigh a leaf from its own geometry.

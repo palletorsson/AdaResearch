@@ -1,5 +1,3 @@
-A laboratory where sound is spatial. Notes trigger not from keys pressed but from positions occupied — walk through the room and the room plays. Brian Eno's phasing loops drift through an FM piano, each voice cycling at its own rate, harmony emerging from temporal misalignment. Steve Reich meets three-dimensional space.
+Strike a bar and lift the stick away. The contact has ended; the note keeps going. Strike the same bar again, then another. What gets restarted, and what is allowed to continue?
 
-Metal bars ring at pitches set by their length — shorter bars vibrate faster, wavelength made audible. Glass condensers spiral on lab tables. Industrial pipes run the south wall, frozen infrastructure for channeling flow. A drone synthesizer traces lissajous figures: two oscillations plotted against each other, phase made visible.
-
-Air is the medium. Movement is the instrument. The oscillation was always here — waiting for a body to pass through it.
+Eight bars, separate voices, one short window of their sum. Listen through their overlap before deciding where one body ends and another begins.

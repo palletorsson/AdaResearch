@@ -1,190 +1,70 @@
-# Tutorial Disco — Technical
+# Tutorial Disco — a fixed grid with changing values
 
-A 17×17 dance floor of Area3D tiles, each triggering an audio and visual response when stepped on. A step sequencer captures activations into a loop that plays back at a configurable tempo.
+The preceding floor and wall halls repeat an image in space. Tutorial_Disco keeps the receiving tiles fixed and changes what they display over time. The later colour sequence gives surface values another set of possibilities; the coloured disco returns in tiling.
 
-```gdscript
-class_name DanceFloor extends Node3D
+## Current floor and controls
 
-@export var size: Vector2i = Vector2i(17, 17)
-@export var tile_size: float = 0.8
+The map configures standalone_disco as a 12 by 12 floor with 0.8 metre tile spacing and a single walkable collision box. StandaloneDiscoFloor.gd renders 144 flat boxes through a MultiMesh. The separate disco_controls artifact finds that floor within the hall, disables its autonomous pattern cycle, and supplies CHECKER, ROWS, DIAGONALS and SNAKE through per-instance colours. A fifth mode, SUPER TRIANGLE, adds a shader surface above the same tiles. Neither changes tile transforms.
 
-var tiles: Array = []  # 2D array
-
-func _ready() -> void:
-    for y in range(size.y):
-        var row: Array = []
-        for x in range(size.x):
-            var tile := DanceTile.new()
-            tile.position = Vector3(x, 0, y) * tile_size
-            tile.coordinates = Vector2i(x, y)
-            tile.body_entered.connect(_on_tile_activated.bind(tile))
-            add_child(tile)
-            row.append(tile)
-        tiles.append(row)
-```
-
-## Step Sequencer
-
-The sequencer divides a short loop into steps and advances one step per tick. Each step's contents are the set of tiles that were active during that step.
+The actual checker rule in disco_controls.gd is:
 
 ```gdscript
-class_name StepSequencer extends Node
-
-@export var steps: int = 16
-@export var bpm: float = 120.0
-
-var step_contents: Array = []  # array of arrays of Vector2i
-var current_step: int = 0
-var time_since_step: float = 0.0
-
-func _ready() -> void:
-    for _i in range(steps):
-        step_contents.append([])
-
-func _process(delta: float) -> void:
-    time_since_step += delta
-    var step_interval: float = 60.0 / bpm / 4.0  # 16th notes
-    if time_since_step >= step_interval:
-        time_since_step = 0.0
-        current_step = (current_step + 1) % steps
-        play_step(step_contents[current_step])
-
-func record_tile(coords: Vector2i) -> void:
-    if not coords in step_contents[current_step]:
-        step_contents[current_step].append(coords)
+return (x+z+phase)%2
 ```
 
-## Mode Switch
+PLAY / HOLD stops or resumes this console's phase clock. ONE STEP advances the phase even while held. PATTERN changes the rule and returns its phase to zero. SPEED cycles 0.5, 1.0 and 0.25 seconds between visual updates. These controls do not change the sequencer's tempo.
 
-Mode buttons change what `play_step` does with the active tiles.
+## SUPER TRIANGLE — an image across fixed tiles
 
-```gdscript
-enum Mode { TONE, LIGHT, PROPAGATE }
+After SNAKE, PATTERN selects SUPER TRIANGLE. The first four rules remain unchanged. The new surface is one unshaded PlaneMesh just above the tile tops, following the receiver's actual dimensions, height and gap. It adds no collision. Its shader works in floor-local tile coordinates, so the square joints stay in place.
 
-@export var mode: Mode = Mode.TONE
+Six families each have four quarter-turn poses: uniform diagonals, chevrons, diamonds, turning waves, large diamonds and super diamonds. The final two families span two and three tile pitches per motif respectively. Twenty-four steps complete the cycle. Between poses, an eased divider angle changes the black/white areas continuously; larger groupings also interpolate their pitch. Intermediate clipped regions need not themselves be triangles. These are image transformations, not rotating tile bodies.
 
-func play_step(active_tiles: Array) -> void:
-    for coords in active_tiles:
-        match mode:
-            Mode.TONE:
-                play_tone_at(coords)
-            Mode.LIGHT:
-                light_tile(coords, 0.25)  # one beat
-            Mode.PROPAGATE:
-                propagate_to_neighbours(coords)
-```
+PLAY / HOLD freezes and resumes the fractional pose. ONE STEP moves to the next exact pose. SPEED preserves progress within the current interval when changing its duration. A one-row pulse texture carries the existing musical column responses into the shader; expiry continues while motion is held. The shared colour-hall controller supplies the same mode with its selected pair of colours.
 
-## Tone Mapping
+Sources: commons/artifacts/regularity/super_triangle_surface.gd and super_triangle.gdshader, instantiated by disco_controls.gd only when selected. The book figure uses six native held poses. The review's 96 native frames sample the actual shader at quarter-step intervals and replay at eight frames per second, corresponding to the default half-second pose interval. It is an edited, silent comparison rather than a recorded live walk.
 
-Each tile's x-coordinate maps to a scale degree and its y-coordinate maps to an octave. A pentatonic scale (C, D, E, G, A) avoids dissonance regardless of which tiles are active simultaneously.
+## A score and a second clock
 
-```gdscript
-const PENTATONIC := [0, 2, 4, 7, 9]  # semitones from C
+step_sequencer stores four tracks of sixteen on/off cells in its UI. A track supplies a sound; a step supplies a position in the repeating count. Activating a cell auditions the sound. Playback advances the displayed playhead and requests notes only for active cells, then advances the next-step index. The configured sound preset is 90s_house; displayed track names follow the resolved instruments.
 
-func pitch_for_tile(coords: Vector2i) -> float:
-    var scale_degree: int = coords.x % PENTATONIC.size()
-    var octave: int = coords.y / PENTATONIC.size() - 1
-    var semitones: int = octave * 12 + PENTATONIC[scale_degree]
-    return 440.0 * pow(2.0, (semitones - 9) / 12.0)  # A4 = 440 Hz
-```
+The interval between sixteenth-note steps is 60 / bpm / 4 seconds. Tempo changes how quickly the score is read. The selected cells keep their addresses.
 
-## Propagation Mode
+DiscoSequencerBridge connects the locally placed sequencer to this floor. Sounding steps brighten a column indexed by step % grid_width. Sixteen score steps therefore fold onto twelve columns; step indices 0 and 12 select column 0. The monochrome console expires these responses after 0.15 seconds even while its own pattern is held. Its next repaint may replace a flash sooner.
 
-In propagate mode, an active tile lights its neighbours briefly. Over successive steps the activation spreads across the floor.
+Walking does not write to the score. There are no per-tile foot-contact recorders in the current encounter. A recorded walk would need a separate input and timing representation.
 
-```gdscript
-func propagate_to_neighbours(coords: Vector2i) -> void:
-    for offset in [Vector2i(1, 0), Vector2i(-1, 0), Vector2i(0, 1), Vector2i(0, -1)]:
-        var neighbour_coords := coords + offset
-        if neighbour_coords.x < 0 or neighbour_coords.x >= tiles.size(): continue
-        if neighbour_coords.y < 0 or neighbour_coords.y >= tiles[0].size(): continue
-        tiles[neighbour_coords.x][neighbour_coords.y].flash()
-```
+## Sources and shared illustration
 
-## Complexity
+Production sources: commons/artifacts/regularity/disco_controls.gd, commons/context/discofloor/StandaloneDiscoFloor.gd, commons/context/discofloor/DiscoSequencerBridge.gd, commons/audio/sequencer/step_sequencer.gd and sequencer_ui.gd. Placement: map_data.json.
 
-Tile setup is O(W·H) — 289 tiles at 17×17. Sequencer playback is O(active tiles per step), typically under 10. The visual effects dominate CPU cost, but the rendering is batched via MultiMeshInstance3D so the frame rate stays high.
+The 23 September book figure pairs native captures of CHECKER at phases 0 and 1 from the same selected camera, with the score stopped and the visual clock held. No tile transforms are changed for the figure. The review animation assembles twelve native held ROWS phases at an editorial interval; it is a state comparison, not a real-time audiovisual recording. Labels, layout and resizing are the only image composition.
 
-Within the sequence, Tutorial_Disco is the playful capstone. The array-as-authoring-surface interpretation sets up the compositional concerns of the Wavefunctions sequence.
+Focused evidence and scope: doc/book/iterations/2026-09-23-disco-separate-clocks/. Earlier note/address, instrument-label and modulo checks remain in doc/book/iterations/2026-09-19-arrays-review/disco/. Supplied inputs and muted audio do not establish listening quality, headset comfort or learner understanding.
 
-## Audio Mixing
+## Retained proposal: the walk becomes a score
 
-With 17×17 = 289 possible tone sources, naive per-tile AudioStreamPlayers would exhaust Godot's audio polyphony limits. The map uses a shared audio bus with an oscillator pool: a fixed number of oscillators (say 16) are dynamically assigned to currently-active tiles.
+The previous technical draft described a different, unimplemented encounter: contact-sensitive tiles recording a walk, then interpreting it as sound, light or neighbour propagation. That proposal remains intact in this iteration's before/commons/maps/Tutorial_Disco/technical.md. It could return after the current distinction between score, clock and body is established. It must not be described as the present floor's behaviour.
 
-```gdscript
-class_name OscillatorPool extends Node
+## Optional comparison recipe — 24 September
 
-var oscillators: Array = []
-const POOL_SIZE := 16
+The main chapter now follows making a rhythm with less repeated setup. For an isolated comparison:
 
-func _ready() -> void:
-    for _i in range(POOL_SIZE):
-        var osc := AudioStreamPlayer.new()
-        osc.stream = preload("res://audio/base_tone.tres")
-        add_child(osc)
-        oscillators.append(osc)
+1. Choose the empty sequencer pattern, activate one cell, let its immediate preview finish, then start playback. Compare the note’s return with the playhead reaching that column.
+2. Turn the cell off and follow the same column on the next loop. Its address remains, but that visit requests no new note. Restore it, add a second cell in the same track, and relocate the second event by switching its old cell off and another on. Keep the tempo fixed for this comparison.
+3. Change tempo with the chosen cells unchanged. Then leave the floor on PLAY and stop the sequencer; let any sustained sound fade. Restart the sequencer and HOLD the floor pattern. The two clocks can be stopped separately; sounding steps still cause brief column flashes while the visual pattern is held.
+4. For a clearer view, return to one active cell. Compare its sequencer column with the flash while the floor is held, then while the floor is running. A repaint can overtake the flash; HOLD does not stop its expiry.
+5. In the second track, try step index 0 alone, then 12 alone. Both brighten floor column 0 because the bridge uses `step % 12`. They remain different positions in the sixteen-step score.
 
-func play_pitch(pitch: float) -> void:
-    for osc in oscillators:
-        if not osc.playing:
-            osc.pitch_scale = pitch
-            osc.play()
-            return
-    # All oscillators in use — steal the oldest
-    var oldest := find_oldest_playing()
-    oldest.stop()
-    oldest.pitch_scale = pitch
-    oldest.play()
-```
+A gesture falling between steps would need another representation to retain that timing. This remains a development question alongside the earlier walk-as-score proposal; the current floor does not record footsteps. The main chapter leaves the visitor free to walk across the sounding score in their own time.
 
-## Sequencer Persistence
+This is a prose and reading-order revision. No sequencer, floor, shader, bridge, controls or runtime configuration changed; earlier evidence remains dated to its original checks.
 
-The sequencer's state can be saved and loaded. Each save is a list of (step_index, [tile_coords]) pairs.
 
-```gdscript
-func save_pattern(name: String) -> void:
-    var save_data := {
-        "bpm": bpm,
-        "steps": step_contents,
-        "mode": mode,
-    }
-    var file := FileAccess.open("user://disco_%s.json" % name, FileAccess.WRITE)
-    file.store_string(JSON.stringify(save_data))
-```
+## From changing a rule to advancing its input — 28 September 2026
 
-## Metronome
+The new 4x4 tiling studies make it useful to distinguish changing an instruction from changing phase under a fixed instruction. The revised opening holds CHECKER through two steps before introducing the other patterns. The expression itself stays fixed; its phase input changes, and the binary result returns after two increments. The small-study-to-field comparison in the preceding halls therefore prepares a different operation here, rather than implying that the clock rewrites the rule.
 
-A visual metronome marks the current step. It can be a row of lights at the floor's edge that pulse in sync with the beat, or a digital readout showing step/beat numbers.
+The current artifacts already support this encounter. No runtime source, control, map placement or collision changes were needed. Fresh native views show the checker one step apart from the same eye-height position within the floor, and an exact and held intermediate triangle pose. The focused museum probe also exercises separate clocks and the ordinary controller walking across the floor. Audio remains muted in that probe: note events are evidence of dispatch, not a listening test.
 
-```gdscript
-class_name Metronome extends Node3D
-
-@export var indicator_lights: Array[Node3D]
-
-func update_step(step_index: int, total_steps: int) -> void:
-    for i in range(indicator_lights.size()):
-        var light := indicator_lights[i]
-        var active: bool = (i == step_index * indicator_lights.size() / total_steps)
-        light.get_node("MeshInstance3D").material_override.emission_energy_multiplier = 2.0 if active else 0.2
-```
-
-## Record vs Playback
-
-A record toggle distinguishes modes. In record mode, stepping on tiles captures them into the sequencer's current step. In playback mode, the tiles only light up when the sequencer plays them back — stepping on a tile does not modify the recorded pattern.
-
-## Scales and Modes
-
-The default pentatonic scale can be swapped for other modes: diatonic (7-note), chromatic (12-note), octatonic (8-note), or custom scales. The scale selection affects the tone-mode pitch mapping but nothing else.
-
-```gdscript
-const SCALES := {
-    "pentatonic": [0, 2, 4, 7, 9],
-    "major": [0, 2, 4, 5, 7, 9, 11],
-    "minor": [0, 2, 3, 5, 7, 8, 10],
-    "chromatic": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11],
-}
-```
-
-## Floor Layout
-
-The floor uses a raised border around the 17×17 active area to prevent the learner from walking off the edge. The border also houses the sequencer, metronome, and mode controls.
+The older summary described a 17-by-17 walk-recording floor and an obsolete sequence order. It is preserved in the current review baseline as a future proposal. The current summary now agrees with the map, runtime and manuscript. Review and evidence: doc/book/iterations/2026-09-28-disco-a-rule-in-time/.

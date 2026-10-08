@@ -1,9 +1,9 @@
 # WaveFunctions Effect Sound — Artifacts
-*Wavefunctions: Everything Oscillates · oscillation · 22 artifacts*
+*Wavefunctions: Everything Oscillates · oscillation · 21 artifact types / 33 placements*
 
 > Sound is oscillation made audible. Waveforms become bleeps and bloops — the 8-bit aesthetic of classic games built from square waves and frequency sweeps. Play with the building blocks of chiptune music, hear mathematics sing.
 
-The map, read through what it holds — its artifacts in the order you meet them:
+The primary book encounter is **DualBallFMController** at (8,11). Its two desks carry BASELINE, HOLD, PLAY and COMPARE. All other works below remain secondary exploration or staging; this catalogue order is not the book order.
 
 ## Big Pipe System
 ![Big Pipe System](/scene-catalog/BigPipeSystem.png)
@@ -131,13 +131,6 @@ waveform(t) = generator(p1, p2, p3, t) where generator in {sweep, noise, square,
 
 `MarioSoundController`
 
-## mario_test_sound_ui
-![mario_test_sound_ui](/scene-catalog/mario_test_sound_ui.png)
-
-Sci-fi kiosk hosting a VR map-loader station UI with sequence and algorithm filters.
-
-`mario_test_sound_ui`
-
 ## MelodyChaser3D
 ![MelodyChaser3D](/scene-catalog/MelodyChaser3D.png)
 
@@ -145,16 +138,13 @@ Follow-the-leader musical instrument - a glowing point traces a helix pattern th
 
 `MelodyChaser3D`
 
-## interactable_demo
-![interactable_demo](/scene-catalog/interactable_demo.png)
-
-Inspection rig laying out one of every VR control type in a single row — buttons, knobs, sliders (smooth/horizontal/snap/zero), lever, and wheel — each labelled for testing and review.
-
-`interactable_demo`
-
 ## Lab Table
 ![Lab Table](/scene-catalog/lab_table.png)
 
 Procedural wooden lab table with legs and support frame. Surface for placing instruments and apparatus. The workbench where oscillation becomes experiment.
 
 `lab_table`
+
+## Rack Room
+
+`rack_room` at (6,5) is part of the bench staging and is classified as decoration.

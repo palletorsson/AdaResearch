@@ -1,5 +1,13 @@
 # CA Agents Circuits
 
+**Learning elements — proposed focus**
+
+_The labels below set the revision focus; the existing lesson still needs alignment._
+
+- Procedural comparison
+- State histories
+- Repeated construction
+
 Wireworld. Cells can be empty, electron head, electron tail, or conductor.
 
 Define cell states.

@@ -1,5 +1,11 @@
 # ML Perception
 
+**Learning elements**
+
+- Image neighbourhoods
+- Convolution kernels
+- Edge magnitude
+
 One neuron. Weighted sum, threshold, output.
 
 Build a perceptron.

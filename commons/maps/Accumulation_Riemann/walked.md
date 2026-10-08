@@ -1,3 +1,5 @@
+> Historical walk draft, superseded by final.md and tutorial.md on 2026-09-10. Artifact counts and interaction claims below are retained as history, not the current encounter.
+
 # Accumulation_Riemann — walked
 
 > ghost-drafted from the working map (turn slot, change thread); Palle rules the voice.

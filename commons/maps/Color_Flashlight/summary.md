@@ -1,43 +1,22 @@
-# Color_Flashlight - Map Summary
+# Color_Flashlight — What reaches the surface
 
-## Overview
-Color_Flashlight closes the active color sequence by reducing color to its relational minimum: beam, surface, and observer. After Color_Walls showed continuous gradients as a field, this map narrows attention to controlled light sources. Four flashlights (red, green, blue, white) illuminate a neutral canvas and make additive color logic directly visible.
+Second in Colour, between Color_Context_Placed and Color_Nails. The lamp encounter moves a condition of appearance by hand. The east annex lets the visitor inhabit that relation: a white room with a changing central source and a fixed pink recess, then a stepped light well and a ramp to a raised landing.
 
-## Spatial Layout
-- **Dimensions**: 11x13 declared grid (12 populated rows in current map data)
-- **Architecture**: Open laboratory plate with one raised interaction pedestal and a late-map drop/exit point
-- **Height**: Mostly level 1 floor, with one level 2 block at the flashlight station and one level 0 void near exit
-- **Structure**: Centralized demo stage rather than corridor progression
+The first primary remains `flashlight_demo`: four pickable red, green, blue and white lamps, a pale board, a side cube and the seven-division faceted sphere. Aim, separate and overlap the pools. The lamps retain their assigned RGB values while the visitor changes their position and direction.
 
-## Key Elements
+The second primary, `colour_light_rooms`, reverses the comparison. Geometry and near-white albedo remain fixed; the central RGB light changes continuously on a 110-second cycle. A wide recess offers physical depth behind a luminous outline. Its pink washes stay fixed. The second chamber has a continuous three-level light well, concealed coloured washes, thin luminous lips and a 1.2 m raised landing reached by a shallow ramp. The top opening reveals the existing museum sky. No control panel is required.
 
-### Interactables
-- **flashlight_demo:180** (5,6) - Main additive-light exhibit with red/green/blue/white flashlights and a canvas target
-- **dark_sphere** (6,5) - Black enclosure dome that increases contrast and keeps the light experiment legible
+The hall expands east from 19 by 20 to 42 by 20 cells. Five old east-wall cells open to the annex. The torch placement at (9,9), original spawn, gates and utility positions remain. New room root is at source-grid coordinates (25,0,10), before the museum aligns the embedded grid. Its body-height partitions report their floor footprint separately from its walkable interior and roof.
 
-### Utilities
-- **Teleporter** (`t`) at (11,6) - Sequence exit back to the next flow state
+These are RGB renderer studies. There is no spectral simulation, total-darkness promise or claim that every viewer sees the same colour. Native desktop navigation and rendered-light changes are checked; headset experience and performance remain unverified.
 
-## Atmosphere
-- **Lighting**: Low ambient environment plus directional light in map settings; demo scene itself also applies a dark `WorldEnvironment`
-- **Background**: Dark sky tone (`[0.1, 0.1, 0.15]`)
-- **Mood**: Focused, studio-like, perceptual testing chamber
+Book: `final.md`. Current sources, photographs and checks: `doc/book/iterations/2026-10-02-light-an-opening/`. The earlier configuration remains archived under `doc/book/iterations/2026-09-28-white-room-and-apertures/`.
 
-## Learning Sequence
-1. Player enters a minimal open floor with the flashlight demo on a raised center tile.
-2. Player approaches the demo and observes separate red, green, blue, and white beams.
-3. Player compares beam behavior on the canvas under low ambient light.
-4. Player notices additive mixing patterns where colored light overlaps.
-5. Player uses the dark_sphere zone to understand why color needs controlled context.
-6. Player exits through the teleporter after the final color-sequence comparison.
 
-## Design Intent
-This map shifts from "color as object" to "color as condition." Color_Flashlight does not ask the player to collect or paint. It asks them to inspect how illumination itself structures perception. The single pedestal and sparse utility layout remove distraction so the core relation stays visible: object appearance depends on incident light.
+<!-- study-spine:sphere_in_pink -->
 
-Placing the teleporter near a floor void creates a small threshold gesture at sequence end. The player leaves after performing comparison, not accumulation.
+## Installed application: A sphere in pink
 
-## Connection to Sequence
-- **Position in color sequence**: 7/7 (active sequence endpoint)
-- **Follows**: Color_Walls (continuous gradient field)
-- **Establishes**: Controlled additive light as final perceptual check
-- **Returns to**: Lab (`lab_map` progression after color completion)
+`sphere_in_pink` occupies a new adjoining bay, after the existing encounters. Cell [21, 29], rotation 180°, museum adapter `res://commons/artifacts/spine_studies/pink.tscn`. Original response to Sol LeWitt; no claim of exact reconstruction.
+
+Change one lamp state; compare pink light with a pink surface. Reuses point, colour; adds no prerequisite node. The display and main-player controls are supplied.

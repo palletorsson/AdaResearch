@@ -1,104 +1,46 @@
-# Trans Scale
+# What changed enough to let you through?
 
-Scaling. Size. Volume scales cubically.
+**Learning elements**
 
-Uniform scale.
+- Uniform scale
+- Parent-child transforms
+- Fixed references
 
-```gdscript
-func scale_uniform(node: Node3D, factor: float) -> void:
-    node.scale = Vector3.ONE * factor
-```
+Enter the room and inspect the tiny door beside the standing figure. Try it before taking the bottle. Look at the food tower's plates and at the distance between the table and the figure.
 
-All three axes by the same factor. Shape preserved, size changed.
+Take the DRINK ME bottle on the top plate: VR grip/pickup, or the museum's desktop right-button carry gesture. The room changes size in a cut, and your next position is on the enlarged table. You do not see the sizes between. Find the figure and door again before descending the porcelain steps.
 
-Non-uniform scale.
-
-```gdscript
-func scale_non_uniform(node: Node3D, factors: Vector3) -> void:
-    node.scale = factors
-```
-
-Each axis independent. A Vector3(2, 1, 0.5) stretches horizontally, preserves vertical, shortens depth.
-
-Compute the volume ratio.
+Only after comparing the two views, inspect the implementation:
 
 ```gdscript
-func volume_ratio(before: Vector3, after: Vector3) -> float:
-    return (after.x * after.y * after.z) / (before.x * before.y * before.z)
+room.scale = Vector3.ONE * FACTOR
+var feet := table.to_global(landings[0]) + Vector3.UP*0.08
 ```
 
-The product of scale factors gives the volume scale. Double the linear dimensions, multiply volume by 8.
+The first line multiplies the room and its children's dimensions and relative positions. The second computes the arrival point; moving the body is a separate operation. `FACTOR` is four. The assignment changes the scale at once. After a physics frame, the program relocates the body to the enlarged table; it does not animate growth. The museum, body, gravity and walking speed are outside that multiplication.
 
-Scale with VR gestures.
+Descend the serving plates and walk out of the room through the former tiny door. It has changed from 0.45 by 0.60 metres to 1.8 by 2.4 metres. Pass through the equally sized gold frame beyond it: that frame remained fixed throughout. Then turn toward the museum exit. The fixed wall at the room entrance makes this a route through the experiment; it does not scale with the room. Which proportions survived? Which distances became tasks? If the body and its movement had also scaled, would the door have become usable?
+
+
+<!-- study-spine:reference_passage -->
+
+## Return: Who fits through?
+
+Change opening width while keeping the body and opening height. Begin with the supplied study in the museum and compare the two states from the same place. Name what remained fixed before inspecting the code.
+
+This application reuses coordinates, transform. The small edit belongs to the learner; the display, main player and physical controls are supplied. Its adapter is `commons/artifacts/spine_studies/station.gd` (`passage`), which calls the study’s own setters. Change one parameter, predict the visible consequence, then test another value. Reconstructing every mesh is not a prerequisite for this encounter.
+
+[Earlier study and making notes](/book-review/doc/book/iterations/2026-10-01-five-reference-rooms/index.html). Geometry controls wait until the exhibit is clear. RESET returns the original comparison.
+
+
+<!-- study-edit:reference_passage -->
+
+### One source change: Who fits through?
+
+Change the minimum opening from 0.48 to 0.60 metres. Keep the 0.56-metre comparison strip and test the narrow state again.
 
 ```gdscript
-var initial_hand_distance: float = 0.0
-var initial_scale: Vector3
-
-func start_scaling(target: Node3D, left: XRController3D, right: XRController3D) -> void:
-    initial_hand_distance = left.global_position.distance_to(right.global_position)
-    initial_scale = target.scale
-
-func update_scaling(target: Node3D, left: XRController3D, right: XRController3D) -> void:
-    var current: float = left.global_position.distance_to(right.global_position)
-    var factor: float = current / initial_hand_distance
-    target.scale = initial_scale * factor
+var width := lerpf(0.60, 1.68, amount)
 ```
 
-Two-handed scale gesture. Spread hands apart to grow, bring them together to shrink.
-
-Clamp the scale.
-
-```gdscript
-const MIN_SCALE: float = 0.1
-const MAX_SCALE: float = 5.0
-
-func clamp_scale(node: Node3D) -> void:
-    var s: Vector3 = node.scale
-    node.scale = Vector3(clamp(s.x, MIN_SCALE, MAX_SCALE), clamp(s.y, MIN_SCALE, MAX_SCALE), clamp(s.z, MIN_SCALE, MAX_SCALE))
-```
-
-Prevent scale from going to extremes that break interaction or rendering.
-
-Scale physics body with collision shape.
-
-```gdscript
-func scale_with_collision(body: RigidBody3D, factor: float) -> void:
-    body.scale = Vector3.ONE * factor
-    for child in body.get_children():
-        if child is CollisionShape3D:
-            child.scale = Vector3.ONE * factor
-    body.mass = body.mass * pow(factor, 3)
-```
-
-Collision scales with the body automatically. Mass needs manual adjustment to reflect the cubic volume change.
-
-Animate a scale transition.
-
-```gdscript
-func tween_scale(node: Node3D, target_scale: Vector3, duration: float) -> void:
-    var tween := create_tween()
-    tween.tween_property(node, "scale", target_scale, duration).set_trans(Tween.TRANS_QUAD).set_ease(Tween.EASE_OUT)
-```
-
-Quadratic ease-out feels natural for growth. Linear scaling feels mechanical.
-
-You can now scale uniformly or non-uniformly, with VR gestures or tweens, while keeping collision shapes and mass consistent. Trans_Pit extends scaling into a lethal hazard room.
-
-Check identity.
-
-```gdscript
-func is_identity(t: Transform3D) -> bool:
-    return t.is_equal_approx(Transform3D.IDENTITY)
-```
-
-Identity preserves the input. Useful as a test for whether a chain of transforms cancels out.
-
-Invert a transform.
-
-```gdscript
-func invert(t: Transform3D) -> Transform3D:
-    return t.affine_inverse()
-```
-
-Undo the transform. Composing t with t.affine_inverse() produces identity.
+Source: `commons/artifacts/reference_studies/passage.gd`. Use the prepared scene to run and compare.

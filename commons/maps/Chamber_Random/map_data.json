@@ -10,7 +10,8 @@
     },
     "title": "Chamber_Random",
     "version": "placed-hybrid",
-    "eye_shot_adopted": "Trial_eye_Chamber_Random"
+    "eye_shot_adopted": "Trial_eye_Chamber_Random",
+    "metadata": {}
   },
   "settings": {
     "cube_size": 1.0,
@@ -31,40 +32,40 @@
   },
   "layers": {
     "structure": [
-      ["1","1","1","1","1","1","1","1","1","1","1"],
-      ["1","1","1","1","1","1","1","1","1","1","1"],
-      ["1","1","1","1","1","1","1","1","1","1","1"],
-      ["1","1","1","1","1","1","1","1","1","1","1"],
-      ["1","1","1","1","1","1","1","1","1","1","1"],
-      ["1","1","1","1","1","1","1","1","1","1","1"],
-      ["1","1","1","1","1","1","1","1","1","1","0"]
+      ["1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1"],
+      ["1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1"],
+      ["1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1"],
+      ["1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1"],
+      ["1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1"],
+      ["1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1"],
+      ["1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "0"]
     ],
     "utilities": [
-      ["sp"," "," "," "," "," "," "," "," "," "," "],
-      [" "," "," "," "," "," "," "," "," "," "," "],
-      [" "," "," "," "," "," "," "," "," "," "," "],
-      [" "," "," "," "," "," "," "," "," "," "," "],
-      [" "," "," "," "," "," ","e:2:5:5:swarm:7"," "," "," "," "],
-      [" "," "," "," "," "," "," "," "," "," "," "],
-      [" "," "," "," "," "," "," "," "," "," ","t"]
+      ["sp", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
+      [" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
+      [" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
+      [" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
+      [" ", " ", " ", " ", " ", " ", "e:2:5:5:swarm:7", " ", " ", " ", " "],
+      [" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
+      [" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", "t"]
     ],
     "interactables": [
-      [" "," "," "," "," "," "," "," "," "," "," "],
-      [" "," "," "," "," "," "," "," "," ","proximity_spawner#type:octapod_crawler"," "],
-      [" ","catalyst_target"," "," "," "," "," "," "," "," "," "],
-      [" "," "," "," "," "," "," ","becoming_catalyst#start_mode:chaos"," "," "," "],
-      [" "," "," "," "," "," "," "," "," "," "," "],
-      [" "," "," ","science_screen:180:1.5#mode:scatter"," "," "," "," "," "," "," "],
-      [" "," "," "," "," "," "," "," "," "," "," "]
+      [" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
+      [" ", " ", " ", " ", " ", " ", " ", " ", " ", "proximity_spawner#type:octapod_crawler", " "],
+      [" ", "catalyst_target", " ", " ", " ", " ", " ", " ", " ", " ", " "],
+      [" ", " ", " ", " ", " ", " ", " ", "becoming_catalyst#start_mode:chaos", " ", " ", " "],
+      [" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
+      [" ", " ", " ", "science_screen:180:1.5#mode:scatter", " ", " ", " ", " ", " ", " ", " "],
+      [" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "]
     ],
     "biome": [
-      ["","","","","","","","","","",""],
-      ["","","","","","","","","","",""],
-      ["","flora:scatter:field:on=catalyst.chaos:seed","","flora:scatter:field:on=catalyst.chaos:seed","","","","","","",""],
-      ["","","","","","","","","flora:scatter:field:on=friend:seed","",""],
-      ["","","","","","flora:scatter:mute:on=friend.escort:unmute/seed","","flora:scatter:mute:on=friend.escort:unmute/seed","","",""],
-      ["","","","","flora:scatter:field:on=friend.escort:seed/claim","flora:scatter:field","flora:scatter:field:on=friend.escort:seed/claim","flora:scatter:field","flora:scatter:field:on=friend.escort:seed/claim","flora:scatter:field",""],
-      ["","","","","flora:scatter:field","flora:scatter:field","flora:scatter:field","flora:scatter:field","flora:scatter:field","flora:scatter:field",""]
+      ["", "", "", "", "", "", "", "", "", "", ""],
+      ["", "", "", "", "", "", "", "", "", "", ""],
+      ["", "flora:scatter:field:on=catalyst.chaos:seed", "", "flora:scatter:field:on=catalyst.chaos:seed", "", "", "", "", "", "", ""],
+      ["", "", "", "", "", "", "", "", "flora:scatter:field:on=friend:seed", "", ""],
+      ["", "", "", "", "", "flora:scatter:mute:on=friend.escort:unmute/seed", "", "flora:scatter:mute:on=friend.escort:unmute/seed", "", "", ""],
+      ["", "", "", "", "flora:scatter:field:on=friend.escort:seed/claim", "flora:scatter:field", "flora:scatter:field:on=friend.escort:seed/claim", "flora:scatter:field", "flora:scatter:field:on=friend.escort:seed/claim", "flora:scatter:field", ""],
+      ["", "", "", "", "flora:scatter:field", "flora:scatter:field", "flora:scatter:field", "flora:scatter:field", "flora:scatter:field", "flora:scatter:field", ""]
     ]
   }
 }

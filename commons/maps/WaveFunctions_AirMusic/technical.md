@@ -1,54 +1,28 @@
-# WaveFunctions AirMusic — Technical
+# AirMusic — contact, independent voices and a sampled sum
 
-## The primary: a row of bars, each with its own note
+Builds on Effect Sound's phase and envelope comparison; prepares Synthesis Lab's additive construction. The primary remains `resonating_metallophone:0#stand:table` at (5,9). The walkway, basin, other nine placements and eight-note tuning are preserved.
 
-`ResonatingMetallophone` (`algorithms/wavefunctions/resonance/ResonatingMetallophone.gd`) cuts a row of `ResonatingBar` rigid bodies to a tuning. The shipped `pentatonic` is C4, D4, E4, G4, A4, C5, D5, E5 — eight bars 0.12 m apart as shipped, 0.16 m on the table, because the striker's tip is a 7 cm ball and at 0.12 m one strike rang a neighbour too. Each bar's length comes from its frequency:
+## Implementation
 
-```gdscript
-	return BAR_LENGTH * sqrt(root / maxf(1.0, freq))
-```
+- `ResonatingMetallophone.gd` creates the bars, striker, table and cradle. The table is 1.50 × 0.56 m, top at 0.85 m; bars sit at 0.875 m, 0.16 m apart. Locked axes keep the bars in their row; they remain awake for contact monitoring.
+- `ResonatingBar.gd` recognises stick ancestry through rigid and area contacts. A 60 ms debounce suppresses duplicate notifications. Held-stick speed comes from per-physics-frame position differences. The trigger's strength is clamped to 0.1–1 after multiplying speed by two. This is a configured response, not an impact-energy calculation.
+- The bar generates a mono 44.1 kHz, 16-bit sine buffer once, multiplied by `max_amplitude = 0.5` and `exp(-t/decay_time)`. The default decay is three seconds; the buffer lasts 7.5 seconds and fades over its final 0.1 s. Strike strength maps to player gain with `-6 + 6 * strength` dB. Audio generation and strike behavior are unchanged by this scope revision.
+- Different bars have different players. A repeat on one bar restarts that player; another bar can overlap. The visible response uses frame age and strength-scaled exponential amplitude. The waveform uses source PCM and player gain, so those levels should not be described as identical.
 
-the free-bar relation (flexural frequency ∝ h / L²), so the lowest bar keeps `BAR_LENGTH` 0.30 m and the highest is 0.19 m. `#tuning:equal` (17 bars), `just` (10) and `harmonic` (12) re-cut the row over the same range; the count is part of the argument.
+## Table scope
 
-## The note
+The table enables `sample_audio` on `CombinedWaveVisualizer`, a 0.012 s window and 512 points. Other placements retain the existing schematic mode by default. `ResonatingBar.get_audio_window()` reads the signed PCM near that bar's reported playback position and multiplies by `db_to_linear(audio_player.volume_db)`. The sample buffers are not changed. Samples beyond the end of a note contribute zero.
 
-Each bar renders its note once, in `ResonatingBar._generate_resonance_sound`, and plays it from its own `AudioStreamPlayer3D` (unit size 3 m, max distance 20 m):
+The scope sums each contributor at the same window offset, preserving their different note ages. Its fixed scale is 0.15 m per unit. Display values are clamped to ±1 with `display limit` in the readout when needed; the summed source samples are retained without that clamp. The readout names the selected window and lists frequencies with source playback ages, two voices per line. The expanded casing has room for this hall's eight voices.
 
-```gdscript
-		var envelope = exp(-t / decay_time)
-		var wave = sin(2.0 * PI * frequency * t)
-```
+The former schematic displayed half a second across 100 points at these pitches, using a shared clock and visual amplitudes. The revised table display uses the generated buffers, including quantisation and final fade. It remains source evidence before spatial attenuation, bus processing and the output device. Audio playback positions update with mixing; the curve is not a sample-accurate capture at the listener's ear.
 
-`decay_time` is 3 s; the buffer is 2.5 decays long (7.5 s, 8 % of level at its end) and eases out over its last tenth of a second. The visible response follows the same curve —
+## Return and route
 
-```gdscript
-			current_amplitude = (hit_velocity * max_amplitude) * exp(-resonance_time / decay_factor)
-```
+The striker rests front-to-back at the left end. When unheld more than 0.5 m away for three seconds, it returns in three tweened legs over 0.75 s. The `returning` flag prevents its tip from triggering notes on that journey. The table keeps a pale front rail and dark rear kerb. Perimeter access and the south operating strip are checked by the existing museum probe.
 
-— and ends when the sound does. Because every bar has its own player, notes on different bars overlap; a strike on a bar that is still ringing restarts that bar's player and its clock, adding no voice.
+## Validation and limits
 
-## The strike
+The independent live probe retains Claude's strike, overlap, repeated-note, return, access, desktop approach and streaming checks. New checks independently decode PCM, apply player gain, sum the two source windows, and compare the result with actual ribbon vertices. Captured playback ages differ, so a common global phase cannot substitute for each note's own beginning. Two bar buffers are exported for remote listening comparisons.
 
-A bar's `body_entered` (contact monitor on the rigid body) and a `StrikeZone` Area3D no wider than the bar both fire `_on_body_hit`; a body counts as the striker if it or any ancestor is in the "stick" group — the part of the stick that meets a bar is a StaticBody3D at its tip, 1 m from the handle, and its name alone never matched. One strike is counted once within 60 ms. The striker is `grab_long_stick.tscn`, an XR Tools pickable. Held, a pickable is frozen (kinematic), moved by the hand's transform, its collision mask cleared and its layer set to the pick-up layer; the bars listen on that layer as well, so the held striker forms a contact pair. The bar reads the strike's strength from the striker's speed:
-
-```gdscript
-		hit_velocity = clamp(velocity_magnitude * 2.0, 0.1, 1.0)
-```
-
-where `velocity_magnitude` is the larger of the bodies' `linear_velocity` and, for a held striker that has none, the speed the instrument measures per physics frame and hands over as the stick's `speed` meta. Louder for a faster strike, from −6 dB up to 0 dB.
-
-## The staging
-
-`#stand:table` builds the deck at the origin: a 1.50 × 0.56 m table, top at 0.85 m, with a collider; the bars at 0.875 m, locked on every axis and kept awake; two cradle blocks at the table's left end with the striker lying across them front to back (since the visual pass of 12 September; they stood on the front edge, the striker along the row), a pale emissive rail along the front edge and a dark kerb along the back; the Hz labels and the instruction on the table's front face; the combined wave at 1.35 m and its readout above. Left more than 0.5 m from the cradle and not held for 3 s, the striker is tweened back and frozen at rest; on its way home its tip sweeps across the row, so a returning striker is marked and rings nothing.
-
-## The readout and the sum
-
-`CombinedWaveVisualizer` finds every `ResonatingBar` under the instrument, sums `sin(2π·f·(t + x/2)) · amplitude` over the ringing bars across a metre-wide window, and draws it as a flat ribbon (a one-pixel line strip does not survive a capture); its label lists the voices as `N voices · f Hz level (age s)`, or `silent · strike a bar`.
-
-## Cleanup
-
-Bars, players, table, cradle and labels are children created in `_ready` and freed with the instrument; the museum's streamer frees and rebuilds the hall with an instrument that rings again.
-
-## Where it leads
-
-Every note here is one sinusoid under one decay, and the ribbon draws their sum. The Synthesis Lab builds such sums on purpose; the vocabulary is the additive one — Σ aₙ · sin(2π · fₙ · t) — with each term's amplitude in a hand.
+The run has 67 checks, zero failures and exit 0. This is synthetic movement through the striker's collision path, not a verified tracked-hand strike. A listener and headset visit remain pending. `doc/space/air-music-review-2026-09-12/` records the run, source fingerprints and publication. Geometry and tuning were retained; the primary/book alignment and supporting text were reconciled.

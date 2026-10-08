@@ -1,5 +1,13 @@
 # The Surface Chases the Field
 
+**Learning elements — proposed focus**
+
+*The labels below set the revision focus; the existing lesson still needs alignment.*
+
+- Fixed sample addresses
+- Time dependent values
+- Occupancy histories
+
 Noise evolves; the isosurface follows. Animation here is not motion — it is re-extraction.
 
 The cheapest time axis is a scrolling offset through 3D noise:

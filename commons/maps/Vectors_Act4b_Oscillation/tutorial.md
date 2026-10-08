@@ -1,92 +1,79 @@
-# Oscillation
+# Release the point; keep the attachment
 
-The forces that return what they are given. Before them, a force must already be something that edits motion, and a push must already split along and across.
+**Learning elements**
 
-Make the answer proportional to the offence.
+- Rest length
+- Spring force
+- Damping
+- Equilibrium
+- Spring and hinge
 
-```gdscript
-func restoring_force(displacement: float, k: float) -> float:
-    return -k * displacement
-```
+Pull the rose grip beside the hanging point and release. The point returns, passes its resting place and turns again. The grip lets you pull while the spring keeps acting.
 
-The minus sign is the entire law. F = −kx points back at where you started and grows in exact proportion to how far you took it. A spring gives back exactly what it is given.
+## Make the small study
 
-Ask how long that takes.
+Make one spring from the familiar point and a fixed anchor. In your small study, grab the point itself to set its position, then release it to see the spring act. The thin cylinder shows the attachment.
 
-```gdscript
-func spring_period(mass: float, k: float) -> float:
-    var omega := sqrt(k / mass)
-    return TAU / omega
-```
+**The hall adds:** The hall’s separate rose grip pulls through force while you hold it. ONE / MANY adds six more points and connecting springs. Nearby hinges offer a different kind of attachment.
 
-Stiffen the coil and ω rises, so the period falls — it gives less and ticks faster. Amplitude appears nowhere in T = 2π√(m/k). A big swing and a small one take the same time.
+Save `06_spring.gd` beside your shared files and use it on `PointStudy`. [Setup and complete shared code](../../../doc/book/course/forces-shared-code.md).
 
-Hang the same honesty from a string.
+## Complete code — 06_spring.gd
 
-```gdscript
-func swing(t: float, amplitude: float, arm_length: float) -> float:
-    var omega := sqrt(9.8 / arm_length)
-    return amplitude * cos(t * omega)
-```
-
-Only the length is in it. Mass cancels, so a heavy bob and a light one on the same string keep the same time. Lengthen the arm and T = 2π√(L/g) slows.
-
-Draw the force that is really acting.
+<!-- student-code:06_spring.gd -->
 
 ```gdscript
-func restoring_torque(theta: float, mass: float = 1.0) -> float:
-    return -mass * 9.8 * sin(theta)
+extends "study.gd"
+const ANCHOR := Vector3(0, 2.8, 0)
+var point = Point.new()
+var rest_length := 1.0
+var stiffness := 20.0 # N/m
+var damping := 0.5 # kg/s
+var tether: MeshInstance3D
+
+func _ready() -> void:
+    add_child(point)
+    point.position = Vector3(0.5, 1.8, 0)
+    point.gravity_scale = 1.0
+    tether = rod()
+    caption("Pull the point. Release it. The spring keeps its anchor.")
+
+func spring_force(offset: Vector3, velocity: Vector3) -> Vector3:
+    var length := offset.length()
+    if length < 0.0001:
+        return -damping * velocity
+    return (offset / length * (length - rest_length) * stiffness
+        - damping * velocity).limit_length(150.0)
+
+func _physics_process(_delta: float) -> void:
+    var offset: Vector3 = to_global(ANCHOR) - point.global_position
+    if not point.is_picked_up():
+        point.apply_central_force(spring_force(offset, point.linear_velocity))
+    join(tether, point.position, ANCHOR)
 ```
 
-The true restoring term is mg sin θ, not mg θ. A pendulum is only a spring for small angles, where sin θ ≈ θ. Pull it far enough and the period stops being a constant.
+## Read the change
 
-Hand momentum through a line of still balls.
+`offset` points from the body to the anchor. Its length tells us their current separation. Subtract `rest_length` to find how far the spring is stretched or compressed.
 
-```gdscript
-func total_momentum(masses: Array[float], velocities: Array[Vector3]) -> Vector3:
-    var total := Vector3.ZERO
-    for i in masses.size():
-        total += masses[i] * velocities[i]
-    return total
-```
+Multiplying that difference by `stiffness` gives the force magnitude. The normalized offset gives its direction. A stretched spring pulls toward the anchor; compression reverses the sign.
 
-Sum p = mv before the collision and after: the number does not move. Lift two balls and two leave. The middle of the cradle is where the momentum is owed but not spent.
+The last term subtracts `damping * velocity`. It opposes movement, so the returns gradually settle. Gravity still acts: the hanging point rests with the spring stretched enough to support its weight.
 
-Tax every fall by the same fraction.
+## Change one thing
 
-```gdscript
-func apex_after(bounces: int, drop_height: float, e: float) -> float:
-    return drop_height * pow(e, bounces)
-```
+Release from the same position with damping at 0.5, then at 3.0. Predict which will keep moving longer. Restore damping and double stiffness. Compare the stronger return without changing rest length.
 
-h' = e·h, compounding. e = 1 never stops, e = 0 is a dead thud, and everything between is a geometric series — infinitely many bounces inside a finite time.
+## Return to the hall
 
-Balance a beam by the product, not the weight.
+Return to the full row with ONE / MANY. Pull one grip and follow the movement into its neighbours. Try releasing a second point while the first is still moving. Each spring follows its rule, but the next movement now depends on several bodies.
 
-```gdscript
-func balances(f_left: float, d_left: float, f_right: float, d_right: float) -> bool:
-    return absf(f_right * d_right - f_left * d_left) < 0.06
-```
+## Model notes
 
-τ = F·d, and the beam is level when the two torques agree. A small load far out holds a big one near in — the same trade the barycenter made, with weight for mass and arm for orbital radius.
+The zero-length check avoids dividing by zero; the force is capped at 150 N. The student point is placed by the hand while held, and resumes spring motion on release. A hinge keeps a pivot attached; this spring permits its length to change.
 
-Weigh the children before placing the pivot.
+## Into the next room
 
-```gdscript
-func place_pivot(arm: float, w_left: float, w_right: float) -> Vector2:
-    var total := w_left + w_right
-    return Vector2(arm * w_right / total, arm * w_left / total)
-```
+Here a repeating movement comes from forces changing velocity. Next, make a similar repetition by assigning positions.
 
-The heavier child rides the shorter arm. Build both subtrees first, weigh them, then cut the rod — recurse, and the whole mobile hangs balanced from one point at the ceiling.
-
-Square the speed and the force stops being polite.
-
-```gdscript
-func wind_drag(speed: float, rho: float, c_d: float, area: float) -> float:
-    return 0.5 * rho * speed * speed * c_d * area
-```
-
-Not the linear drag of a corridor. Double the wind and the vane feels four times the push. A force seen only in the bend of what it pushes.
-
-You can now write a restoring force, predict the period of a spring and a pendulum, sum momentum across a collision, decay a bounce series, test a beam for balance, and place a mobile's pivots by recursion. These forces keep time and keep faith, because the pull back is always proportional to how far you have been pulled. Vectors_Act5_ForceAsPlace stops asking what a force does to a body and asks what it does to a room.
+[Reflective text](final.md).

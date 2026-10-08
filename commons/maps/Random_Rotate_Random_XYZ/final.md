@@ -28,7 +28,9 @@ The panel in front of the display is labelled DECAY. The label names the model's
 
 <!-- @RotateGridCubes -->
 
-Behind the display, a low field of cubes begins to tilt, each row by how far along the field it stands. Inside this hall you see only the first few degrees; the steeper rows lie beyond the back wall. Nothing there turns, and nothing there was drawn. The same tilt comes back every time the hall is built. Rotation can be a rule about place as easily as a record of chance.
+Behind the stacks, twenty-five cubes make a low square field. The first row lies level; the middle pitches upward; the last lies level again. Nothing keeps turning as you watch. The angle follows a row’s place along half a sine curve. Walk along its side. The same arrangement returns whenever the hall is built. Here your walk supplies the sequence: level, inclined, level again. Rotation can be a rule about place as easily as a record of chance.
+
+![Twenty-five cubes, level at both ends and tilted through the middle, fit behind the changing stacks.](/book-review/doc/book/figures/randomness/tilt-field-contained.png)
 
 <!-- @ -->
 

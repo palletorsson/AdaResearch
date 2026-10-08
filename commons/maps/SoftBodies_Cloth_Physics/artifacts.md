@@ -1,13 +1,14 @@
-# SoftBodies Cloth Physics — Artifacts
-*Soft Bodies & Morphogenesis: Matter That Finds Its Shape · integration · 1 artifacts*
+# Collection
 
-> A surface made of springs. Each vertex connected to its neighbors by elastic constraints — stretch, shear, structural. The mesh holds shape not through rigidity but through thousands of tiny negotiations. Gravity pulls. The constraints pull back. What drapes is the residue of that argument.
+- `soft_workshop_console` — decoration
+- `cloth_straps` — primary
+- `softstopscene` — primary
 
-The map, read through what it holds — its artifacts in the order you meet them:
 
-## softstopscene
-![softstopscene](/scene-catalog/softstopscene.png)
+<!-- study-spine:tension_membrane -->
 
-Deformable soft body physics simulation
+## Installed application: A little give
 
-`softstopscene`
+`tension_membrane` occupies a new adjoining bay, after the existing encounters. Cell [15, 57], rotation 180°, museum adapter `res://commons/artifacts/spine_studies/tension.tscn`. Original response to Senga Nengudi; no claim of exact reconstruction.
+
+Change the added load while preserving the four anchors and material compliance. Reuses soft, constraint, force; adds no prerequisite node. The display and main-player controls are supplied.

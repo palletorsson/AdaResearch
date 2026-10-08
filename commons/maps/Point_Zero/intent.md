@@ -18,3 +18,7 @@ Arrival, the counter, folding frames and the chosen origin remain poetic and cri
 ## Encounter and making — 30 September 2026
 
 The encounter follows a world already running: its number began before the visitor arrived. The tutorial lets the student change when an instruction runs. Keep the small counter and engine-total line in the encounter; teach syntax, indentation, variables and the comparison between callbacks in the tutorial. Keep all three complete tutorial versions so a beginner can compare them. Alice, the fog and the carried word belong to the encounter and need not be repeated in the making lesson.
+
+## The example owns its display — 3 October 2026
+
+Create the lesson's Label3D in code and retain its reference. Do not fetch a prepared display by dollar reference or another node-path lookup. The room, camera and light remain prepared context. This replaces the earlier supplied-display agreement while preserving the three complete examples and the once/repeatedly comparison. Explain the small creation and variable operations here; Point One develops them through the point.

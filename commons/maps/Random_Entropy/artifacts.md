@@ -14,3 +14,16 @@ The instrument and the spatial encounter share a hall. Placements are source-gri
 The book markers match the primary roles. Glass boundaries are staging, with open entrances and exits. Controls marked `compact` retain their original callbacks on a common console.
 
 The hall is now 17 × 31 m. The ruin occupies a separate stone bed after the glass enclosure: four columns, a lintel and a six-course wall. Seeded top-piece selection redistributes 116 pieces into bounded rubble, leaving the bottom two courses. Its replay is staged erosion, not a thermal or structural solver. The museum floor and side bypasses remain intact.
+
+## Museum architecture
+
+The west wall at z23–28 is an opt-in weathering section, replacing both normal wall mesh and collision (including the outer skin). Its 144 blocks use the colonnade’s seeded top-course rule; 120 can fall, 24 remain above the footing. A compact RUN / PAUSE, ONE STONE, RESTORE console faces the aisle. Rubble stays inside a shallow apron. The rest of the walls, floor and route remain supported. This is authored deterioration, not a structural or thermodynamic solver.
+
+
+<!-- study-spine:signal_room -->
+
+## Installed application: Different neighbours
+
+`signal_room` occupies a new adjoining bay, after the existing encounters. Cell [12, 48], rotation 180°, museum adapter `res://commons/artifacts/spine_studies/signal.tscn`. Original response to Ryoji Ikeda; no claim of exact reconstruction.
+
+Shuffle the retained values; compare unchanged counts with changed neighbours. Reuses array, random; adds no prerequisite node. The display and main-player controls are supplied.

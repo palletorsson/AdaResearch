@@ -1,5 +1,13 @@
 # Physarum Colony
 
+**Learning elements — proposed focus**
+
+*The labels below set the revision focus; the existing lesson still needs alignment.*
+
+- Environmental memory
+- Local sensing
+- Deposition and decay
+
 Slime mould finds shortest paths. Deposits chemical trails.
 
 Build a scalar trail field.

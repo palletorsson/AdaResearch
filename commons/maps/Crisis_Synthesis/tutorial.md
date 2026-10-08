@@ -1,5 +1,12 @@
 # Crisis Synthesis
 
+**Learning elements**
+
+- Sentence arrays
+- Presentation scale
+- Display rhythm
+- Claims and warrant
+
 Four wings, one summit, one complete formula. Build the synthesis that turns crisis into capacity.
 
 Declare the wing registry.
@@ -105,3 +112,34 @@ func animate_summit() -> void:
 ```
 
 A gentle pulse once the four wings are visited. The pulse is slow enough to read as breath.
+
+
+<!-- study-spine:sentence_authority -->
+
+## Return: Permission at three scales
+
+Change one sentence once; follow the same words across label, strip and wall. Begin with the supplied study in the museum and compare the two states from the same place. Name what remained fixed before inspecting the code.
+
+This application reuses loop, array, inscription, limit. The small edit belongs to the learner; the display, main player and physical controls are supplied. Its adapter is `commons/artifacts/spine_studies/station.gd` (`sentence`), which calls the study’s own setters. Change one parameter, predict the visible consequence, then test another value. Reconstructing every mesh is not a prerequisite for this encounter.
+
+[Study and making notes](/book-review/doc/book/iterations/2026-10-02-relations-sentences-and-witnesses/index.html). The display stays fixed while its data, words or images change. RESET returns the original comparison.
+
+<!-- study-edit:sentence_authority -->
+
+### One source change: Permission at three scales
+
+Replace this first entry in SENTENCES with your own short sentence. All three displays read the same array entry. Compare WORD / WHOLE and PACE while keeping that entry fixed. The loop and string array are the learner’s tools; font geometry and pointer fabrication are supplied. Keep the sentence short enough to fit and test all displays.
+
+```gdscript
+"YOU MAY REMAIN HERE"
+```
+
+Source: `commons/artifacts/spine_studies/sentence_authority.gd`. Use the prepared scene to run and compare.
+
+<!-- study-reference:sentence_authority -->
+
+### Reference and scope
+
+Holzer circulated statements in different public formats. The installation uses original Ada sentences; changing their scale or rhythm does not establish their truth and is not an illustration of an incompleteness proof.
+
+[MoMA: Jenny Holzer, Truisms](https://www.moma.org/collection/works/63755).

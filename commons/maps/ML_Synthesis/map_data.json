@@ -17,7 +17,11 @@
    "spatial_temperature": 0.7,
    "design_notes": "Open arena with raised platforms (h3) scattered in a void-floor (h0) space. Walkways (h1) connect spawn to each platform. Three artifacts on separate platforms â€” synthesis requires visiting all. Player navigates between islands."
   },
-  "title": "Agents That Question Themselves"
+  "title": "Agents That Question Themselves",
+  "museum": {
+   "wall_height": 3,
+   "gate_depth_rows": 0
+  }
  },
  "utility_definitions": {
   "t": {

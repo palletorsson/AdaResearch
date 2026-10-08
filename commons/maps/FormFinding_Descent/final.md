@@ -1,51 +1,95 @@
-Nothing places a form at the bottom. A body that can read only the slope under its own feet gets there anyway, and that is the whole chapter.
+# Where does downhill take you?
 
-You arrive inside a hill. One of the exhibits in this room builds a twenty-metre landscape in a room fourteen metres wide, so the terrain swallows the walls, the way out and everything else standing here, and it has no collision at all: you walk through the hillside as though it were weather. Do that, and then find the small things inside it.
+<!-- @descent_landscape_lab -->
 
-A marble in a bowl comes to rest at the bottom and nowhere else. Not because anything put it there, and not because it knows where the bottom is. It follows the slope down until the slope is zero, and where the slope is zero it stops. Every shape in the four halls after this one is found the same way, by something that cannot see the answer and can feel which way is down.
+The last room let a field carry you across a gap. You brought motion into it; the field changed that motion; something of the journey remained when you left. Here a gold point waits above a blue surface. There is no gap to jump. There is a button marked STEP.
+
+Before pressing it, choose where you think the point will go.
+
+One press leaves a short line behind. Another extends it. The number called cost changes. Try a few more presses before RUN. What repeats? What gets smaller? Does the point travel the same distance each time?
+
+RUN lends the operation a rhythm. It repeats the same step, with a pause between updates so you can follow it. The pause helps us watch; it is not time inside the equation. Stop the run and take over with STEP again. The line remembers where the point has been, but that memory does not propel it.
+
+This is already a departure from Forces. There is no stored velocity here.
+
+## A direction without a destination
+
+Press PARTS. The pink arrow offers a local direction. It lies horizontally, above the drawing; its length is capped at one metre. It does not point at a destination that the program has found elsewhere. The program has looked a little to either side of the current address.
+
+In the x direction it asks how much cost changes between x minus 0.03 and x plus 0.03. It divides that difference by the distance between the samples. It does the same along z. Two comparisons make a vector: the sampled gradient. Its negative gives the direction the point will try.
+
+Now reveal RULE. The moving point becomes a short instruction:
 
 ```gdscript
-func _gradient_at(pos: Vector2) -> Vector2:
-    var eps: float = gradient_sample_distance
-    var gx: float = (_sample_height(pos.x + eps, pos.y) - _sample_height(pos.x - eps, pos.y)) / (2.0 * eps)
-    var gz: float = (_sample_height(pos.x, pos.y + eps) - _sample_height(pos.x, pos.y - eps)) / (2.0 * eps)
-    return Vector2(gx, gz)
+proposed = point - rate * gradient(point)
 ```
 
-Look at what that does. It does not know the surface. It takes two small steps either side of where it is, compares the two heights, and divides. The slope is measured, not known, and it is measured from nothing but the neighbourhood. On the bowl in this room, whose wall rises as the square of the distance from the centre, that measurement returns the true slope exactly.
+The subtraction is familiar. We have carried vectors, combined them and used them to cross space. Here subtraction changes an address in a search. RATE decides how far to trust the local direction. It does not name speed in metres per second. No mass is divided out; no acceleration is accumulated.
 
-## The oldest optimiser
+On the opening bowl, the cost is a quarter of the sum of x squared and z squared. At the usual rate, the steps shrink as the point approaches the centre. The program does not need to know the centre's address to make those steps. We can see the whole bowl; the update uses nearby samples.
+
+Eventually the display says SMALL SLOPE. Look at that wording before calling the run solved.
+
+## Two beginnings
+
+Switch SURFACE. The blue drawing now has two unequal valleys. Changing a setting starts a fresh run, so the next trail belongs to that setting alone. Keep RATE at 0.7 and STOP at 0.01. Run from the first START, note the final cost, then select the second START and repeat.
+
+Both runs can stop at a small slope. They do not arrive at the same cost.
+
+In a recorded comparison with these settings, the first run finishes near -0.304 and the second near 0.295. The rule, tolerance and surface are shared. The beginning differs. One valley is lower, but the point in the other valley has no instruction to cross the intervening rise in search of it.
+
+The surface makes this difference visible all at once. The moving point encounters it locally, one update at a time. You can walk around the plot and see the other valley. That knowledge has not entered the algorithm merely because it has entered your view.
+
+What would have to change for the point to search there? Keep the question. Annealing will give us one way of approaching it later.
+
+## How much is enough?
+
+Try a looser STOP setting. A larger tolerance accepts a larger remaining slope. The run can finish earlier, at a different address and cost. Nothing in the surface has announced that this much unfinished movement is acceptable. We supplied that threshold.
+
+Then return to the bowl and increase RATE. A downhill direction is a local statement; a long step can pass the useful part of it. Cost can rise. At the largest setting, a proposed step can leave the six-metre frame. The display says LEFT FRAME and keeps the last valid point. It does not silently push the point back against an edge and congratulate itself.
+
+A third ending, STEP LIMIT, means the budget of 160 moves was spent. These endings answer different questions. Small slope describes a local measurement. Leaving the frame describes a boundary. Spending the budget describes how long we agreed to search.
+
+Even a zero gradient would not by itself prove a global minimum. A maximum or a saddle can have one too. Here we can inspect the authored surface and compare runs. Elsewhere that overview may be unavailable.
+
+## The surface we agreed to search
+
+The plot is drawn with 48 by 48 cells, each split into two triangles. The gradient samples the cost function directly, at offsets of 0.03. It does not read the rendered triangles. What you see and what the point measures are related representations with different resolutions.
+
+Its displayed height is another choice:
+
+```gdscript
+height = 0.40 + 0.22 * cost(point)
+```
+
+The height makes cost legible across a table. It is not gravitational potential energy, and the blue mesh is not a floor for your body to climb. The point's apparent descent comes from changing an address and drawing the result.
+
+## Comparisons
 
 <!-- @descent_marble_toy -->
 
-A bowl the width of two hands, twelve centimetres deep, with a marble rolling in it. You cannot tip it and you cannot touch it; it is a thing to watch, damped, going round for as long as you stand there. This is the chapter in one object, and it is worth staying at until it is boring. The marble is not solving anything. It has no picture of the bowl, no memory of where it has been and no idea that a bottom exists. It reads the tilt under itself and moves that way, and the tilt runs out at exactly one place.
+In the small swaying bowl, the marble carries motion from one moment into the next. Damping reduces it; a programmed kick every five seconds starts a new disturbance. Watch it pass a place the gold point would approach in shrinking steps. Looking downhill has not given these two bodies the same way to move.
 
 <!-- @gradient_descent -->
 
-This is the hill you are standing in. The same rule as the marble, on a landscape nobody smoothed: a gold sphere takes a step down the steepest way about five times a second, trailing a line behind it and an arrow ahead of it. Watch where it ends. It ends in whichever valley it happened to start above, which on a wrinkled surface is not the lowest valley and has nothing to do with the lowest valley. The rule that always works in a bowl is a rule that works locally, and a wrinkled world is where those two stop being the same sentence.
+The terrain station takes the local comparison onto seeded Perlin ground. Here too, samples to either side give a direction, and a threshold or a budget of 160 steps ends the search. The surface has become less orderly; the rule still knows only its neighbourhood.
 
 <!-- @gradient_descent_well -->
 
-A glowing basin banded with contour lines, one deep well off to one side, two shallow dips, and three marbles let go on it. They do not do the same thing. The difference is momentum, which here is set to a little under nine tenths: a marble carrying that much memory of its own motion rolls through a shallow dip and out the other side, and a marble with less settles in the first dip it meets. Same landscape, same rule, and the only thing separating a good answer from a mediocre one is how much of its past each marble is still carrying.
-
-That is the problem the last hall in this chapter is about, posed here on the first bench, four rooms early.
+At the glowing well, marbles descend, settle, pulse and begin again. Its title says that falling is how it learns. The marbles combine the local slope with retained motion; the LOSS readout follows the first marble on this authored landscape. A return to the top gives it another beginning, not a memory of the previous lesson. What does the falling let us understand about learning, and what does that resemblance leave out?
 
 <!-- @settling_tremble -->
 
-A wall chart, a hand's span across, with two curves drawn over each other and nothing moving on it. The amber one is the true catenary, the exact shape a hanging chain takes, where every link balances. The blue one is seventeen nodes of a solver that was trying to reach it, stopped at the moment the largest move in a pass fell below six thousandths of a metre. They do not lie on top of each other. The blue nodes sit scattered a hair off the amber line, and that scatter is the whole point: the solver never arrives, it gets inside a band and stops, and the band is a number somebody chose.
-
-The chart does not animate. It is a photograph of the tremble rather than the tremble, which is the correct way to show something whose whole content is that it never settles. Settled means tired, not still. Keep that. Every shape in the next three halls is a shape that stopped moving because a tolerance said it could.
+The small inset holds an amber curve beside blue points, then magnifies their differences eight times. Nothing trembles. These are fixed, seeded offsets from a sampled catenary, as its plaque says, rather than the residue of a solver. Magnification makes a small disagreement hard to overlook. Whether it matters is still a question for whoever accepts the result.
 
 <!-- @science_screen -->
 
-The screen sweeps eight metres around itself once a second, looking for something it can redraw as a flat diagram. It finds nothing. Not one of the four things in this room answers the questions it knows how to ask, so it stands there lit and empty, facing away from where you came in. A measuring instrument surrounded by four objects it cannot read is a fair enough emblem for a room about a rule that only ever looks at the ground directly under itself.
+The nearby screen is another receiver: being visible in the room does not, by itself, make any of these histories a measurement it can read.
 
 <!-- @ -->
 
-## Down is enough
+There is room for a different body in these small changes. One beginning inhabits a valley another beginning misses. A threshold admits one endpoint and rejects the next. Yet lowering cost only means improving according to the cost we wrote. Nothing in the arithmetic establishes that this measure contains everything worth keeping.
 
-The gradient is a local instrument. It has no opinion about the landscape, only about the ground beneath the object, and from that alone a form appears. That is the strange economy this chapter is about: nature does not compute a shape and then make it. It lets something fall, and the falling is the computation.
+For now the landscape is authored and the point searches it. We have not yet let a connected shape emerge under load. In the next hall, hold two ends of a cable and let the space between them become the question. What can change when some things must remain fixed?
 
-Three things in this room already complicate it, and all three come back. A marble finds the nearest bottom rather than the best one. A solver never actually finishes; it stops. And nothing here can be touched: five objects, not one collider between them, so the only thing you can do with a room about falling is watch other things fall.
-
-Next: the two oldest of these problems, solved by matter itself, without a solver anywhere.
+<!-- @ -->

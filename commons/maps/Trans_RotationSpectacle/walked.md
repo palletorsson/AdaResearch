@@ -1,3 +1,5 @@
+> Historical layout: the active room is now a tunnel-and-carousel exhibition gallery. See `final.md` and `technical.md`.
+
 # Trans_RotationSpectacle — walked
 
 > R-021, amended: this page is the considered critical tutorial for a map that

@@ -1,5 +1,13 @@
 # Random Space
 
+**Learning elements — proposed focus**
+
+_The labels below set the revision focus; the existing lesson still needs alignment._
+
+- Multiscale sampling
+- Weighted field sums
+- Retained contributions
+
 The sequence finale. Build the arena where every thread of the randomness curriculum converges.
 
 Declare the finale environment.

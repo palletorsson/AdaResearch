@@ -1,105 +1,35 @@
-# PG Percolation Network
+# Touching is not enough — encounter
 
-Random grid. At the threshold, a spanning cluster forms.
+**Learning elements — proposed focus**
 
-Generate a random grid.
+_The labels below set the revision focus; the existing lesson still needs alignment._
 
-```gdscript
-const GRID_SIZE := Vector2i(64, 64)
+- Six-neighbour adjacency
+- Local transmission
+- Reachability
 
-func generate_grid(probability: float) -> Array:
-    var grid: Array = []
-    for y in GRID_SIZE.y:
-        var row: Array = []
-        for x in GRID_SIZE.x:
-            row.append(randf() < probability)
-        grid.append(row)
-    return grid
-```
+<!-- @percolationnetwork_ca -->
 
-Each cell occupied with the given probability. The grid is 2D boolean.
+Two cubes stand near the floor of a much larger possible lattice. One is pink, the source. The other is white. Look at their contact before pressing STEP. Where could something pass between them?
 
-Find clusters via flood fill.
+At a face contact the white site becomes flowing. Press CONTACT to start again with a different arrangement. The cubes now meet at a corner. STEP leaves the white one waiting. Their visual contact has not disappeared. The program simply does not consult that relation.
+
+Its neighbourhood consists of six positions: one step in either direction along x, y and z. It does not include the diagonal positions. This is an explicit local definition, not a universal meaning of nearness.
 
 ```gdscript
-func find_clusters(grid: Array) -> Array:
-    var cluster_id: Array = []
-    for y in GRID_SIZE.y:
-        cluster_id.append([])
-        for x in GRID_SIZE.x:
-            cluster_id[y].append(-1)
-    var next_id: int = 0
-    for y in GRID_SIZE.y:
-        for x in GRID_SIZE.x:
-            if grid[y][x] and cluster_id[y][x] < 0:
-                flood_fill(grid, cluster_id, x, y, next_id)
-                next_id += 1
-    return cluster_id
+Vector3i(x+1, y, z), Vector3i(x-1, y, z),
+Vector3i(x, y+1, z), Vector3i(x, y-1, z),
+Vector3i(x, y, z+1), Vector3i(x, y, z-1)
 ```
 
-Each cluster gets a unique ID. Unoccupied cells stay at -1.
+The update reads the old grid while writing another. An occupied site becomes flowing when a permitted neighbour carries flow. One press advances one generation; it does not instantly colour every reachable site. The source remains supplied. Flow values and state transitions have their own rules beyond the simpler question of whether a path exists.
 
-Flood-fill one cluster.
+Press LATTICE. The comparison expands into an 18 by 18 by 18 field, supplied from one z face. STEP lets you follow its spread. DENSITY restarts from the same seeded sequence of occupation draws at a different cutoff: 0.2, 0.4 or 0.6. A larger cutoff admits more sites. The readout counts sites reached and those reached on the opposite face. The desk permits 64 generations before another reset.
 
-```gdscript
-func flood_fill(grid: Array, cluster_id: Array, x0: int, y0: int, id: int) -> void:
-    var stack: Array = [[x0, y0]]
-    while not stack.is_empty():
-        var p = stack.pop_back()
-        if p[0] < 0 or p[0] >= GRID_SIZE.x: continue
-        if p[1] < 0 or p[1] >= GRID_SIZE.y: continue
-        if not grid[p[1]][p[0]] or cluster_id[p[1]][p[0]] >= 0: continue
-        cluster_id[p[1]][p[0]] = id
-        stack.append([p[0] + 1, p[1]])
-        stack.append([p[0] - 1, p[1]])
-        stack.append([p[0], p[1] + 1])
-        stack.append([p[0], p[1] - 1])
-    # Iterative to avoid stack overflow on large clusters
-```
+One such field cannot establish a universal critical threshold. Its seed, dimensions, boundary source and neighbourhood are part of the experiment. We can learn from a failed crossing without claiming that a whole kind of space has become impossible. Keep changing one condition at a time, and name the condition when you describe the result.
 
-Iterative flood fill. Each cell is visited at most once.
+There is another distinction already under your hands. White occupied sites have collision. Pink source and flowing sites do not. The signal travels through the occupied network; as it arrives, that particular obstacle to your body is removed. The same event is connection for one system and a change of resistance for another.
 
-Test for spanning cluster.
+The museum floor supplies an independent way around the field. That support is authored separately from the lattice. We should not call the pink route walkable just because a sequence of neighbour tests succeeded. A body needs dimensions, headroom and somewhere to stand.
 
-```gdscript
-func has_spanning_cluster(cluster_id: Array) -> bool:
-    var top_clusters: Dictionary = {}
-    for x in GRID_SIZE.x:
-        if cluster_id[0][x] >= 0:
-            top_clusters[cluster_id[0][x]] = true
-    for x in GRID_SIZE.x:
-        if cluster_id[GRID_SIZE.y - 1][x] in top_clusters:
-            return true
-    return false
-```
-
-Spanning means a cluster touches both the top row and the bottom row. Probabilities around 0.59 are the threshold for 2D square site percolation.
-
-Colour cells by cluster.
-
-```gdscript
-func colour_clusters(cluster_id: Array) -> void:
-    for y in GRID_SIZE.y:
-        for x in GRID_SIZE.x:
-            if cluster_id[y][x] >= 0:
-                var hue: float = float(cluster_id[y][x] * 31 % 100) / 100.0
-                paint_cell(x, y, Color.from_hsv(hue, 0.8, 0.9))
-```
-
-Each cluster a different hue. Spanning clusters are visible because they reach across the grid.
-
-Animate the threshold sweep.
-
-```gdscript
-func animate_threshold(start_p: float, end_p: float, steps: int) -> void:
-    for i in steps:
-        var p: float = lerp(start_p, end_p, float(i) / steps)
-        var grid: Array = generate_grid(p)
-        var cluster_id: Array = find_clusters(grid)
-        colour_clusters(cluster_id)
-        await get_tree().create_timer(0.2).timeout
-```
-
-Sweep p from start to end. The spanning threshold appears as a visible phase transition.
-
-You can now generate a random grid, find clusters via flood fill, detect spanning clusters, colour them, and animate the threshold sweep. PG_Branching_Growth extends into rule-based vs noise-driven branching.
+The dark sphere and its stand remain in the room as supporting works. They are not hidden steps in this flow calculation. Our next comparison is Caves / Mazes: how can a rule construct the interior that our signal did not need?

@@ -1,3 +1,13 @@
+# Kinetic Forces - current field notes, 11 September 2026
+
+The three primary encounters now distinguish a physical drag force, nominal work annotated on a grabbed prop, and required acceleration calculated from a prescribed orbit. The player walking adapter is explicitly a fourth update path. It scales desktop input and XR stick requests; it does not damp tracked physical steps.
+
+45 checks pass without a headset. Captures exposed old partitions inside the ring and lawn; ten source wall cells are now floor, and their regions exclude generated sculptures. The ring console stands outside the circle. All eight artifact identities remain.
+
+The older review below describes the earlier teaching text and is historical. Its old helper probes do not verify the current interaction or override the revised final/tutorial/critical text.
+
+## Earlier notes (superseded)
+
 # Vectors_Act4a_KineticForces — field notes
 
 > Field notes hold what the wall text cannot carry. `final.md` is for the

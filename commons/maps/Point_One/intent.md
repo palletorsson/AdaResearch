@@ -1,7 +1,9 @@
-Concept: The first instantiated point — position without extension, existence before duration — and the infrastructure (coordinate systems, render loops, void) that must precede it. A point is not geometric but computational: a Vector3 bound to a frame that was already running when the learner arrived.
-Sequence role: Opens the Primitives sequence and the whole curriculum. No predecessor. Establishes the zero-to-one act: the system was already live, the point is the learner's first mark within it. Sets the vocabulary that every later Primitives map extends, from Point_Lines through the meshes and traces that follow.
-Technical angle: Vector3 constructor, coordinate system setup, render loop initialisation, placing a single object at a world-space position. The origin is a reference frame convention rather than a point; the static and interactive points show how two instances of the same type can have radically different relationships to placement.
-Critical angle: Individuation from infrastructure — the point arrives late into a pre-existing field. Heidegger's thrownness; the mark as minimal ontological commitment. Before any individuation is possible, the axes, the loop, and the addressing convention must already be in place, so the point's arrival is always a second act, not a first.
-Key artifacts: origin and static_point ground the zero-reference distinction; CoordinateSystem3M makes the prerequisite visible; interactive_point_origin lets the learner enact placement; frame_counter_display reveals the loop already running.
+# A body in the light
 
-Gap: No gap identified.
+Point Zero supplies readiness and processing. Point One asks what must be attached to a position before it can appear or resist us. The corridor separates absence, a white surface, and an identical surface with collision. The wall switch then makes the directional light removable while keeping the body and its boundary. The large pedestal sphere closes this hall.
+
+The main text follows those encounters. It keeps one position line but leaves component-by-component coordinates to the next hall. Its critical question is how apparently natural solidity and visibility are constructed separately.
+
+The tutorial names the supplied scene and shows three complete scripts. It changes the visible radius and the collision radius independently. A supplied moving feeler makes their disagreement observable in the fixed-camera study through actual physics contact. It reads the sun switch as one decision, without teaching a shadow renderer. Students leave able to change appearance and resistance independently. Point_Coordinates then begins with pickup, names the frame, and prepares two positions for Point_Lines.
+
+The coordinate frame, cards, target and retained secondary comparisons have moved together to Point_Coordinates. Their removal from this hall is a pedagogical split, not a rejection of their work. The actual origin marker and its Point zero label remain in Point_Zero.

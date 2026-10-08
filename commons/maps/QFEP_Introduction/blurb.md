@@ -1,17 +1,5 @@
-*The formula that unifies everything.*
+*Can two different arrangements give the same number?*
 
-You've traveled through primitives, transformations, color, randomness, waves. Each sequence built a capacity. Each capacity prepared you for this.
+Move a control. Keep an outline. Change the arrangement and try to bring its total back.
 
-**QFE = F − λE(S) + φΔE(S,t)**
-
-This is not just mathematics. This is how adaptive systems — including you — navigate between order and chaos.
-
-Here you will:
-- See the formula as a tangible object
-- Touch each term: F, E, λ, φ
-- Begin to understand the oscillation
-- Take your first steps toward control
-
-The sliders await. The formula responds.
-
-*Begin.*
+The formula offers a way to compare. Your hands may find something it leaves out.

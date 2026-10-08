@@ -1,5 +1,13 @@
 # Random Space Geometry
 
+**Learning elements — proposed focus**
+
+_The labels below set the revision focus; the existing lesson still needs alignment._
+
+- Spatial correlation
+- Matched sample coordinates
+- Neighbour differences
+
 Space itself becomes stochastic. Build two chambers where random transformations sculpt the arena.
 
 Declare the chamber pair.

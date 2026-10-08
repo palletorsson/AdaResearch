@@ -1,106 +1,22 @@
-# PG Genetic Evolution
+# Genetic Evolution — a body and two readers
 
-Creatures evolve by selection. Body plans as genomes.
+**Learning elements — proposed focus**
 
-Encode a body plan.
+_The labels below set the revision focus; the existing lesson still needs alignment._
 
-```gdscript
-class_name BodyPlan
+- Candidate records
+- Evaluation functions
+- Selection criteria
 
-var limb_count: int = 4
-var limb_positions: Array = []  # Vector3 per limb
-var behavior_weights: Array = []  # float per behaviour
-```
+Carry forward the list of parameters from Living and the distinction between generation and interpretation from Assemblage. A genome is a list of primitive types with position, rotation and scale. One program builds its image; another evaluates it.
 
-The plan is the genome. Its fields determine the creature's morphology and behaviour.
+1. RESET. Compare the six boxes and choose a reason for preferring one before reading scores.
+2. HOLD the current leader. Explain that this control keeps the leader, not an arbitrary nominated candidate.
+3. TARGET once: 8 becomes 16. The same six descriptions are reordered, the generation stays zero and the held witness is unchanged. Read estimate 15.625 and score about 72.73 on the new leader.
+4. Explain the exact score formula in final.md. Compute what happens at differences zero and one. Avoid calling the proxy measured solid volume.
+5. RING. Observe the new part and unchanged score. RULE reveals that the builder draws toruses but the estimate omits them. Find the box's factor eight and discuss what an exact union-volume measurement would need to handle.
+6. Leave the ring and STEP. Find an unchanged elite among the new generation. Two elites are copied and four slots filled through tournament selection, possible crossover and mutation. A feature can continue without having contributed to its carrier's score.
+7. RESET. The opening population returns; the held witness remains. Later random offspring need not replay. A run stops advancing at the original limit of 50 generations.
+8. Take the side ramp to the retained two-metre deck. Distinguish its physical support from the collision-free generated specimens. Describe the additional construction and test needed to select forms for a visitor's passage.
 
-Random body plan.
-
-```gdscript
-func random_body() -> BodyPlan:
-    var body := BodyPlan.new()
-    body.limb_count = randi_range(2, 6)
-    for _i in body.limb_count:
-        body.limb_positions.append(Vector3(randf_range(-0.5, 0.5), randf_range(-0.5, 0.5), randf_range(-0.5, 0.5)))
-    for _i in 8:
-        body.behavior_weights.append(randf_range(-1, 1))
-    return body
-```
-
-Random within bounds. The population starts with diverse configurations.
-
-Spawn the creature.
-
-```gdscript
-func spawn_creature(body: BodyPlan) -> CharacterBody3D:
-    var creature := CREATURE_SCENE.instantiate()
-    for pos in body.limb_positions:
-        var limb := LIMB_SCENE.instantiate()
-        limb.position = pos
-        creature.add_child(limb)
-    creature.set_behavior_weights(body.behavior_weights)
-    add_child(creature)
-    return creature
-```
-
-Assemble the creature from its body plan. Each limb is a child; the weights drive the behaviour script.
-
-Evaluate fitness.
-
-```gdscript
-func evaluate(body: BodyPlan) -> float:
-    var creature := spawn_creature(body)
-    var start := creature.global_position
-    await get_tree().create_timer(10.0).timeout
-    var fitness: float = start.distance_to(creature.global_position)
-    creature.queue_free()
-    return fitness
-```
-
-Run for 10 seconds. Fitness is total distance from starting position.
-
-Tournament selection.
-
-```gdscript
-func tournament(population: Array, k: int = 3) -> BodyPlan:
-    var contestants: Array = []
-    for _i in k:
-        contestants.append(population[randi() % population.size()])
-    contestants.sort_custom(func(a, b): return a.fitness > b.fitness)
-    return contestants[0]
-```
-
-K random candidates; best wins. Returns the plan, not its fitness.
-
-Crossover two body plans.
-
-```gdscript
-func crossover(a: BodyPlan, b: BodyPlan) -> BodyPlan:
-    var child := BodyPlan.new()
-    child.limb_count = a.limb_count if randf() < 0.5 else b.limb_count
-    for i in child.limb_count:
-        var parent := a if randf() < 0.5 else b
-        child.limb_positions.append(parent.limb_positions[i % parent.limb_positions.size()])
-    for i in a.behavior_weights.size():
-        child.behavior_weights.append(a.behavior_weights[i] if randf() < 0.5 else b.behavior_weights[i])
-    return child
-```
-
-Mix-and-match fields between parents. The child inherits a combination.
-
-Mutate a body plan.
-
-```gdscript
-func mutate(body: BodyPlan, rate: float = 0.15) -> void:
-    for i in body.limb_positions.size():
-        if randf() < rate:
-            body.limb_positions[i] += Vector3(randfn(0, 0.1), randfn(0, 0.1), randfn(0, 0.1))
-    for i in body.behavior_weights.size():
-        if randf() < rate:
-            body.behavior_weights[i] += randfn(0, 0.1)
-            body.behavior_weights[i] = clamp(body.behavior_weights[i], -1, 1)
-```
-
-Each field may mutate by Gaussian noise. Rate controls how many mutations per offspring.
-
-You can now encode body plans as genomes, spawn creatures, evaluate fitness, and run a selection-crossover-mutation loop. PG_Space_Colonization extends into tree growth toward attractors.
+Preserve the secondary science_screen as existing material; its grid display is not connected to this scoring experiment. Ask what a useful genome/score view should expose before promising integration. Continue along the eastern aisle and around the rear partition to PG_Space_Colonization, next on the active museum route. Space Colonization now leads directly into Branching Growth, before Percolation.

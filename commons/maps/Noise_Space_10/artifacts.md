@@ -1,20 +1,9 @@
-# Noise Space 10 — Artifacts
-*Noise: Entropy with Memory · E_entropy · 2 artifacts*
+# One primary terrain and a supporting clock
 
-> Expand the canvas. Ten dimensions of parameters: position, time, octaves, persistence, lacunarity, seed. Each dimension adds variation, adds control, adds possibility. The space of all possible noise configurations is vast. Navigate it. Find terrains no one has seen before.
+`noise_space#stand:walk` at (6,6) retains the existing NoiseSpace mesh/collision implementation and adds local staging. The eight-metre patch sits at a one-metre reference level, bordered by a stable .8 m margin. A cased instrument on the east side exposes HEIGHT, ROUTE, SAMPLE and RESET. The proposed route and its 2D section use actual mesh-triangle heights. The same sample witness appears on the ground and section. A pink trail automatically samples the supported player body, drapes the resulting line over the mesh and keeps the attempt after the body leaves. It has no collider or additional control. The legacy ten-metre scene stays available with stand:none.
 
-The map, read through what it holds — its artifacts in the order you meet them:
+`dark_sphere` moves from (5,5) to the preserved raised margin at (11,3). Its original geometry, pulse and clock remain. It remains supporting, with its brief book return: resetting the terrain does not reset this other time.
 
-## Dark Sphere
-![Dark Sphere](/scene-catalog/dark_sphere.png)
+All two authored tokens are retained. The route posts, line, profile and margin belong to noise_space's optional study. No new artifact token is needed. Two wp ramps are added in empty utility cells; the original sp, annotation and teleporter remain.
 
-USE a neutral sphere as a reference for scale, silhouette, and atmospheric change.
-
-`dark_sphere`
-
-## Noise Space Explorer
-![Noise Space Explorer](/scene-catalog/noise_space.png)
-
-Interactive 3D noise exploration space. Walk through a procedurally generated environment driven by configurable noise parameters.
-
-`noise_space`
+The same optional study now owns a paired scale threshold: SMALLER at local (-2,1,-4.4), miniature RETURN at x=-2,z=-3.94 on the mesh, with a tall pink beacon. The visitor arrives at x=-2,z=-3.55 at one-eighth size. RETURN places the restored body at (-3.25,1.015,-4.4), clear of the entrance detector. The portal pair adds no registry token or automatic route through the terrain.

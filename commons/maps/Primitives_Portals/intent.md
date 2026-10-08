@@ -8,6 +8,6 @@ Interaction: The portal instrument selects and highlights one of twenty rings an
 
 Critical angle: A display can end while a mathematical question continues. Visual overlap differs from coordinate equality. The direction of refinement is authored. A local control must not silently classify an entire passage as blocked.
 
-Spatial boundary: Existing portal dimensions and 4.5-metre spacing remain; twenty origins span 85.5 metres and the live mesh depth is about 87.1 metres. Instrument buttons are excluded from whole-artifact obstruction classification, but a complete museum/headset route has not been verified.
+Spatial boundary: The twenty existing portal meshes retain their dimensions. Map-local 1.4-metre spacing brings every member within this hall; the earlier 4.5-metre spacing remains the default in other uses. The separate polygon calculation is now visible as a live native diagram at the side instrument and in the book. Instrument buttons remain excluded from whole-artifact obstruction classification. Headset comfort and control reach remain to be checked.
 
-Remaining: Walk the whole ladder and check approach, control reach, distant selection legibility and the halving markers. A floating-point saturation experiment remains separate future work, not a claim of this ten-stage model.
+Remaining: Check headset comfort, control reach, distant selection legibility and the halving markers. Two controlled museum walks now cover the central route from Z 3 to 32, with floor support checked at the final ring. These checks do not establish headset experience. A floating-point saturation experiment remains separate future work, not a claim of this ten-stage model.

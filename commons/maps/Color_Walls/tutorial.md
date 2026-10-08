@@ -1,97 +1,71 @@
-# Color Walls
+# Three ways to pass
 
-The corridor becomes a gradient. Surface is continuous flow.
+**Learning elements — proposed focus**
 
-Generate a gradient texture.
+*The labels below set the revision focus; the existing lesson still needs alignment.*
 
-```gdscript
-func gradient_texture(width: int, height: int, start: Color, end: Color) -> ImageTexture:
-    var image := Image.create(width, height, false, Image.FORMAT_RGBA8)
-    for x in width:
-        var t: float = float(x) / (width - 1)
-        var color := start.lerp(end, t)
-        for y in height:
-            image.set_pixel(x, y, color)
-    return ImageTexture.create_from_image(image)
-```
+- Palette composition
+- Independent state
+- Part arrangements
+- Transparency and passage
 
-Linear interpolation between start and end. The result is a horizontal stripe of smooth colour.
+Begin with a chair seen through two coloured panes. Step sideways until only one pane covers it. The chair, its position and its material have stayed fixed. Follow the edge to a gap and walk around the pane. A view through a surface does not promise passage through it.
 
-Apply to a wall.
+Return to the entrance and press FILTER / OPAQUE. Repeat your route. Inspect `toggle_office_glass()` in `algorithms/color/color_mixing/color_constellation_office.gd`: it changes the surface material and shadow setting, without rebuilding the collider. The twelve panes are positioned by `PANES` in `office_planes.gd`. Each row contains x, z, yaw, width, height and colour. The geometry uses transforms already introduced in Transformation and a repeated construction already introduced in Arrays.
 
-```gdscript
-func apply_gradient_wall(wall: MeshInstance3D, texture: ImageTexture) -> void:
-    var mat := StandardMaterial3D.new()
-    mat.albedo_texture = texture
-    mat.texture_filter = BaseMaterial3D.TEXTURE_FILTER_LINEAR
-    wall.material_override = mat
-```
+The new decision is how the surface combines with the view behind it. Both states use `BLEND_MODE_MIX`. Filter mode enables alpha transparency with alpha 0.52; opaque mode disables transparency and sets alpha to 1.0. Start with one pane. Change only its colour, then compare the same chair with and without a second pane in front of it. Keep the supplied pale backing so dark surroundings do not obscure the furniture. This operation blends rendered RGB colours; it is not a model of spectral absorption. Transparent surfaces are sorted for rendering, so their order contributes to the result.
 
-Linear filtering gives smooth transitions. The wall reads as continuous colour rather than as a sequence of pixels.
+For a first alteration, change one row's yaw, rebuild, and find a new overlap by walking. Keep widths and gaps fixed until you have checked which routes remain possible. The furniture, support geometry and comparison button are supplied apparatus; rebuilding them is not the learning target here.
 
-Build a multi-stop gradient.
+At the navigator, identify the RGB axes. Each displayed sample uses its three channels as coordinates relative to the model centre. Locate the same general colour region in the HSV cylinder. Hue is now an angle, saturation a radius, value a height. Compare up in each model: RGB increases green, while HSV increases value, returning to the vertical rule of the Pillar field. Each model shows 500 samples, not every colour. Inspect the black corner's deliberate brightness adjustment.
 
-```gdscript
-func multi_stop_gradient(stops: Array, width: int, height: int) -> ImageTexture:
-    var image := Image.create(width, height, false, Image.FORMAT_RGBA8)
-    for x in width:
-        var t: float = float(x) / (width - 1)
-        var color: Color = sample_stops(stops, t)
-        for y in height:
-            image.set_pixel(x, y, color)
-    return ImageTexture.create_from_image(image)
+At the interpolator, leave the initial red and blue endpoints unchanged and switch RGB / HSV. Describe the middle before reading `_recalculate()` and `_lerp_hsv()` in `algorithms/color/gradient_interpolator/gradient_interpolator.gd`. RGB linearly interpolates channels. HSV chooses the shorter hue arc, then interpolates saturation and value. Use COLOUR A and COLOUR B to choose another pair and repeat.
 
-func sample_stops(stops: Array, t: float) -> Color:
-    for i in range(stops.size() - 1):
-        if t <= stops[i + 1].position:
-            var segment_t: float = (t - stops[i].position) / (stops[i + 1].position - stops[i].position)
-            return stops[i].color.lerp(stops[i + 1].color, segment_t)
-    return stops[-1].color
-```
+Carry three distinctions into Pattern_Disco: a material can change a view, coordinates can organise values, and an interpolation rule can choose a path. Keep the floor arrangement while changing its palette, then keep the palette while changing the pattern. Compare what each change makes visible.
 
-Each stop has a position (0..1) and a colour. The sampler finds the correct segment and interpolates within it.
 
-Build a corridor of gradients.
+<!-- study-spine:colour_assembly -->
 
-```gdscript
-func spawn_corridor() -> void:
-    for i in 8:
-        var wall := MeshInstance3D.new()
-        wall.mesh = BoxMesh.new()
-        wall.scale = Vector3(5, 3, 0.1)
-        wall.position = Vector3(0, 1.5, -i * 3)
-        var start_hue: float = float(i) / 8
-        var end_hue: float = float(i + 1) / 8
-        var tex := gradient_texture(512, 128, Color.from_hsv(start_hue, 0.9, 0.9), Color.from_hsv(end_hue, 0.9, 0.9))
-        apply_gradient_wall(wall, tex)
-        add_child(wall)
-```
+## Return: Room to gather
 
-Each wall is one segment of the full hue cycle. Walking the corridor walks the spectrum.
+Shift the colour index by one without moving a panel. Begin with the supplied study in the museum and compare the two states from the same place. Name what remained fixed before inspecting the code.
 
-Map colour to a mood.
+This application reuses coordinates, transform, array, colour. The small edit belongs to the learner; the display, main player and physical controls are supplied. Its adapter is `commons/artifacts/spine_studies/station.gd` (`assembly`), which calls the study’s own setters. Change one parameter, predict the visible consequence, then test another value. Reconstructing every mesh is not a prerequisite for this encounter.
+
+[Earlier study and making notes](/book-review/doc/book/iterations/2026-10-02-gillick-room-to-gather/index.html). Geometry controls wait until the exhibit is clear. RESET returns the original comparison.
+
+
+<!-- study-spine:colour_wall_studies -->
+
+## Return: Wall relations
+
+Change the pitch of 24 rails without changing their count. Begin with the supplied study in the museum and compare the two states from the same place. Name what remained fixed before inspecting the code.
+
+This application reuses line, coordinates, array, colour. The small edit belongs to the learner; the display, main player and physical controls are supplied. Its adapter is `commons/artifacts/spine_studies/station.gd` (`wall`), which calls the study’s own setters. Change one parameter, predict the visible consequence, then test another value. Reconstructing every mesh is not a prerequisite for this encounter.
+
+[Earlier study and making notes](/book-review/doc/book/iterations/2026-10-02-gillick-wall-relations/index.html). Geometry controls wait until the exhibit is clear. RESET returns the original comparison.
+
+
+<!-- study-edit:colour_assembly -->
+
+### One source change: Room to gather
+
+In colour_for(), replace the initial palette_index assignment with this line. In the alternating colour mode, each numbered panel gets the next colour; its transform stays fixed.
 
 ```gdscript
-func mood_for_color(color: Color) -> String:
-    var hue: float = color.h
-    if hue < 0.1 or hue > 0.9: return "alert"
-    elif hue < 0.3: return "warm"
-    elif hue < 0.5: return "calm"
-    elif hue < 0.7: return "fresh"
-    else: return "cool"
+var palette_index := (index + 1) % PALETTE.size()
 ```
 
-Heuristic mapping. The colour's dominant hue range suggests a mood label.
+Source: `commons/artifacts/colour_assembly/colour_assembly.gd`. Use the prepared scene to run and compare.
 
-Animate the gradient through time.
+<!-- study-edit:colour_wall_studies -->
+
+### One source change: Wall relations
+
+The installed SPACING control calls this setter. Try 0.18 as a third state inside station.gd’s wall branch. Twenty-four centres retain their order and count.
 
 ```gdscript
-func _process(delta: float) -> void:
-    gradient_offset = fmod(gradient_offset + delta * 0.1, 1.0)
-    for wall in gradient_walls:
-        update_gradient_offset(wall, gradient_offset)
+set_spacing(0.21)
 ```
 
-The full gradient scrolls along the wall. The corridor appears to flow.
-
-You can now build a gradient texture, multi-stop gradients, a gradient corridor, and animate the flow. Color_Flashlight extends colour into the interaction between light and surface.
+Source: `commons/artifacts/colour_wall_studies/colour_wall_studies.gd`. Use the prepared scene to run and compare.

@@ -1,1 +1,1 @@
-Six octaves layered. Low frequency for large features, high frequency for fine detail. Each octave adds texture at a different scale. The wall displays the sum — how simple waves at different frequencies combine into complex, natural-looking surfaces. Fractal Brownian motion made visible.
+A pink room waits inside the museum. Hold its current moment, compare one, two, four and six cloud terms, then change its dress. What has moved when the wall looks deeper but your feet meet the same floor?

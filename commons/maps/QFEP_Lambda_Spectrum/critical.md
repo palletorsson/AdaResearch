@@ -1,27 +1,15 @@
-# QFEP Lambda Spectrum - Critical Reflection
+# The invitation can move
 
-## The Corridor as Pharmacopornographic Gradient
+The light has moved. The room has not made room for it.
 
-Preciado describes the pharmacopornographic regime as one that operates through continuous modulation rather than binary prohibition. Not "allowed/forbidden" but a spectrum of intensities managed through dosage, frequency, and duration. The lambda corridor is this regime made architectural. There is no wall between order and chaos — no threshold to cross, no gate to pass. There is only the continuous gradient from blue to green to red, from crystal to complexity to dissolution. The learner's body is the dosage mechanism. Walk further south: increase the lambda dosage. Walk north: decrease it.
+At first the green strip fits an arrangement that seems to welcome it: rows stand aside and nearby forms take on its colour. Move the recommendation and the agreement comes apart. One suggestion travels with your hand; another remains in the disposition of the cubes.
 
-The asymmetric gradient — order-to-edge spans 40% of the range, edge-to-chaos spans 60% — encodes a pharmacological truth. Therapeutic windows are narrow. The green zone where complexity emerges occupies roughly four tiles out of eighteen. The learner can walk through it in three seconds. On either side: regimes that are stable but unproductive (the crystal) or unstable and dispersive (the fog). The edge of chaos is not a resting place. It is a dosage that must be continuously maintained.
+This is a small distinction with consequences. Moving a label is easier than redistributing the conditions that made its old location persuasive. A new invitation can leave the old arrangement intact. It may even recommend standing where a form already appears to be.
 
-Preciado would ask: who controls the gradient? The corridor is designed. The spawn point is at the order end. The teleporter is at the chaos end. The learner walks from structure toward dissolution — the curriculum's default trajectory. But the corridor is walkable in both directions. The learner who walks backward, from chaos toward order, performs a different reading. The gradient does not determine the direction of travel. It provides the medium through which any trajectory becomes legible.
+The repeated side also deserves more than the role of a dead opposite. Its intervals make comparisons possible. Something can be relied on long enough to notice a small difference. The dispersed side can draw attention and unsettle that expectation. Neither effect supplies a verdict about what a body ought to prefer.
 
-## The Body as Lambda Probe: Sedgwick's Affect Theory
+In the project's QFEP documents, keeping a model revisable includes asking who has the capacity to change its terms. This encounter grants a limited version of that authority. You may move the suggestion. You cannot alter its green, extend the rail past its stops, or rearrange the rows through this interface. Self-Q also turns the question on the maker: how much has the original glowing middle trained our own idea of what a good place should look like?
 
-Sedgwick insists that affect is not a secondary effect of cognition but a primary mode of knowing. The lambda corridor makes this claim literal. The learner does not calculate lambda. The learner feels it. The vestibular system registers the vertical drop as heights descend from 1 to 0. The visual system registers the color shift from blue to red. The auditory system registers increasing spectral density. The body knows its lambda value before the mind reads the label.
+Keep the hall's pleasure. Its attraction gives the investigation something to work with. The question is whether we can feel a preference taking shape and still find handles for changing the conditions that produced it.
 
-This is Sedgwick's epistemology of affect: knowing through felt texture rather than propositional content. The complexity_pattern at lambda 0.4 does not announce itself with a sign. It announces itself with a change in the room's character — structures that form and reform, particles that cohere without freezing, a density of event that the body reads as aliveness. The learner stops walking not because a label says "edge of chaos" but because the world feels most interesting here.
-
-The bifurcation_walkway along the left wall performs a different kind of affect. The logistic map's pitchfork cascade — one branch becoming two, two becoming four, then the chaotic band with periodic windows — produces pattern recognition pleasure. The learner walks the bifurcation diagram and the lambda gradient simultaneously, feeling the mathematical structure in the feet while seeing it on the wall. Two sensory channels carrying the same information in different modalities. Sedgwick's "rich" affects: not a single emotion but a layered, cross-modal texture of engagement.
-
-## Walking as Low Theory
-
-Halberstam's low theory stays close to the ground. It does not survey from above. It moves through territory, accumulating knowledge from contact rather than from overview. The lambda corridor forces this mode. There is no elevated platform that reveals the full gradient at once. The corridor is five tiles wide and eighteen deep — narrow and long, designed for walking, not for surveying. The learner discovers the gradient by traversing it.
-
-The bifurcation diagram on the wall is the closest thing to a theoretical overview, but it is experienced laterally — walked past, not gazed upon from a fixed vantage. The period-doubling cascade unfolds as the learner moves south. Feigenbaum's constant (approximately 4.669, the rate at which doublings accelerate) is not a number learned from a textbook. It is the increasing density of branching points that the learner notices accelerating as they approach the chaotic band. Low theory: the constant is felt before it is named.
-
-The green zone — lambda 0.3 to 0.5 — is where low theory lives in the QFEP framework. Not the crystal certainty of high theory (lambda near zero, everything predicted, everything known in advance) and not the chaotic dissolution where no theory holds (lambda near one, everything equally likely, nothing learnable). The edge is where partial knowledge operates, where patterns are real but temporary, where structure exists but does not freeze. Halberstam's queer art of failure is an art practiced at the edge: structure that holds long enough to be useful, then dissolves to make room for what comes next.
-
-Is the edge of chaos a place the learner visits, or a practice the learner cultivates?
+Source framing: [QFEP development notes](../../../doc/research/qfep/README.md) and [Self-Q](../../../doc/ENTRY.md#the-self-q-recursive-qfep). The claims about visitor preference remain questions for an encounter, not established findings.

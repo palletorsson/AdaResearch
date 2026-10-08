@@ -3,7 +3,7 @@
 	"name": "Random Walk",
 	"title": "The trail is already elsewhere",
 	"lookup_name": "Random_Walk",
-	"description": "A reachable instrument and a spatial application of the rule, with clear approach and gallery bypass. Spatial revision 2026-09-16.",
+	"description": "A seeded glass walk exposes step proposals, reflected endpoints, retained trails and two clocks. A raised-cell terrain and a held drawing point show what happens when the same family of rules meets ground or hand.",
 	"version": "1.0",
 	"format": "json",
 	"dimensions": {
@@ -17,7 +17,7 @@
 	  "estimated_time": "5-7 minutes",
 	  "learning_objectives": [
 		"Compare a proposed step, its reflected endpoint and the stored trail",
-		"Distinguish the 2D, 3D and bounded LEVY rules",
+		"Distinguish 2D, 3D and bounded inverse-square-root LONG STEP rules",
 		"Replay positions at equal step counts and separate visual emphasis from population",
         "Inspect omitted wall contacts, discarded history and capped simulation time"
 	  ]
@@ -1379,7 +1379,7 @@
 		" ",
 		" ",
 		" ",
-		" ",
+		"random_position_rails:180",
 		" ",
 		" ",
 		" ",

@@ -4,7 +4,7 @@ Palle's correction, 16 September 2026: this is a preliminary lesson. Show the mo
 
 Keep the cumulative order: still cube → up and down → add turning → add growing and shrinking. Use short code excerpts after observing each addition. Use linear interpolation (`lerp`) between two heights and two sizes. Sine belongs to the later wave lessons. Rotation adds a small turn each frame.
 
-The four pick_up_cube demonstrations remain at (4,2), (4,5), (4,8), (4,11), using motion still / slide / idle / all and hold:demo. The three secondary markers at (6,5), (6,8), (6,11) support recognition. They have independent timing and do not control the demonstrations. The only primary artifact family remains pick_up_cube.
+The four pick_up_cube stations are at (4,3), (4,5), (4,8), (4,11), using motion still / slide / idle / all. The first uses hold:collect; the three moving demonstrations use hold:demo and remain available after approach. The three secondary markers at (6,5), (6,8), (6,11) support recognition. They have independent timing and do not control the demonstrations. The only primary artifact family remains pick_up_cube.
 
 The small level applies the finished animation. Four collectible cubes occupy (4,16), (4,18), (4,19), (4,20); two health crosses remain supporting objects. The existing platform and wedge ramps are retained. Walking to a pickup is a simple way to try the game object.
 

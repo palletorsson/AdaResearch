@@ -1,55 +1,22 @@
-# Trans Scale — Artifacts
-*Transformation: What Stays the Same When Everything Changes · F_order · 7 artifacts*
+# Primary encounter
 
-> Scale me. The object invites manipulation, asks to be made larger, smaller, other than it is. Prism blocks establish proportion while the scalable object waits for your gesture. Size is not fixed but negotiable. The world resizes at your hands, and with it, all relationships of containment, dominance, and fit.
+- `scale_me:0:0:1#encounter:drink_me#plinth:0` at source cell (10,2). A composed room, bottle, instantaneous uniform scale change, separate body relocation and descent.
 
-The map, read through what it holds — its artifacts in the order you meet them:
+Contents created once inside that encounter:
 
-## Chair Assembly Puzzle
-![Chair Assembly Puzzle](/scene-catalog/chair_assembly_puzzle.png)
+- `dream_food_table__spread-blooming__service-tower`, seed 1, with thirteen added porcelain serving landings and a labelled bottle at the crown.
+- `dream_crystal_suit__crust-spire__panels-leaning`, seed 1, standing behind the table.
+- A four-by-four-metre room, normal entry and a far-side 0.45-by-0.60-metre doorway.
 
-ASSEMBLE furniture by combining translation, rotation, and scale on repeated cube primitives.
+The nested sculptures are not additional map tokens. One primary card links the composed experience to its book passage. The old chair, prisms, screens and transport utilities are preserved in the dated source snapshot.
 
-`chair_assembly_puzzle`
+The two doorways are part of this encounter: one is a child of Room and grows, the witness is a sibling and stays at 1.8 x 2.4 m.
 
-## Clipboard
-![Clipboard](/scene-catalog/clipboard.png)
 
-NAVIGATE paged tutorial content as a stateful object in the world.
+<!-- study-spine:reference_passage -->
 
-`clipboard`
+## Installed application: Who fits through?
 
-## Science Screen
-![Science Screen](/scene-catalog/science_screen.png)
+`reference_passage` occupies a new adjoining bay, after the existing encounters. Cell [10, 30], rotation 180°, museum adapter `res://commons/artifacts/spine_studies/passage.tscn`. Original response to Mirosław Bałka; no claim of exact reconstruction.
 
-COMPARE a 3D artifact with its 2D abstraction and see what structure survives projection.
-
-`science_screen`
-
-## scale_me
-![scale_me](/scene-catalog/scale_me.png)
-
-FEEL uniform scaling as a change in bodily reference rather than a numeric ratio.
-
-`scale_me`
-
-## prism_block
-![prism_block](/scene-catalog/prism_block.png)
-
-COMPARE how a non-cubic primitive responds to rotation and scaling.
-
-`prism_block`
-
-## Basic Cube Scene
-![Basic Cube Scene](/scene-catalog/cube_scene.png)
-
-TEST how cubes can split, snap, scale, and recombine while remaining the basic reference primitive.
-
-`cube_scene`
-
-## Dark Sphere
-![Dark Sphere](/scene-catalog/dark_sphere.png)
-
-USE a neutral sphere as a reference for scale, silhouette, and atmospheric change.
-
-`dark_sphere`
+Change opening width while keeping the body and opening height. Reuses coordinates, transform; adds no prerequisite node. The display and main-player controls are supplied.

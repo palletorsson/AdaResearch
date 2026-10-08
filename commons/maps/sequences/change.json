@@ -1,203 +1,123 @@
 {
- "sequences": {
-  "change": {
-   "name": "Change: Rate, Accumulation, and Flow",
-   "truth": "Things change. Change accumulates. Accumulation flows.",
-   "qfep_term": "F",
-   "qfep_connection": "Foundation — the calculus substrate. Derivative as instantaneous rate of change, integral as accumulated quantity, vector field as flow. The conceptual vocabulary that forces, wavefunctions, randomness, and noise will all use.",
-   "formula": "f'(x) = lim_{h→0} (f(x+h) - f(x)) / h; ∫_a^b f(x) dx = F(b) - F(a); F = grad ϕ (vector field as gradient of a scalar)",
-   "demonstration": "Watch a tangent line slide along a curve and read its slope. Pump up the count on a Riemann sum and watch rectangles converge into a continuous integral. Release particles into a vector field and watch them flow. Take over the catalyst and sustain its contact on a target — accumulation made bracelet-felt.",
-   "description": "The calculus substrate, made visible. Change as instantaneous rate (derivative); accumulation as continuous addition (integral); vector field as flow at every point in space. This sequence's job is to establish the vocabulary so forces, wavefunctions, randomness, and noise can name what they're doing instead of running on an unintroduced backbone.",
-   "layer": "F_order",
-   "prerequisites": [
-    "color"
-   ],
-   "unlocks": [
-    "forces",
-    "wavefunctions"
-   ],
-   "ambient_preset": "calc_lab",
-   "difficulty": "intermediate",
-   "estimated_time": "20-30 minutes",
-   "learning_objectives": [
-    "Change as instantaneous rate: the derivative; slope of a curve at a point; velocity as rate of position",
-    "Slope across a curve: how slope itself becomes a function (derivative-as-function)",
-    "Accumulation as continuous addition: the integral; area under a curve; total from rate",
-    "Riemann sum: discrete accumulation approaching continuous; how rectangles become integrals in the limit",
-    "Vector fields: change-and-flow at every point in space; the first encounter with a function of space (not just time)",
-    "The fundamental theorem of calculus: change and accumulation are inverse operations; one undoes the other",
-    "Carry-forward to forces and waves: F = ma is calculus made physical; sine is the function whose second derivative is itself negated"
-   ],
-   "content": [
-    "Change_Intro: rate — how fast, right here: the tangent, the slope, the velocity arrow, the terrain whose steepness you read with your feet",
-    "Accumulation_Riemann: accumulation — the rate added up: rectangles under a curve, the pump that fills, pi found by counting",
-    "Flow_Field: flow — a rate at every point at once, and the particles that make it visible",
-    "Change_Reconciliation: reconciliation — the two were one operation read in opposite directions (the FTC bridge), which closes the loop back onto rate"
-   ],
-   "maps": [
-    "Change_Intro",
-    "Accumulation_Riemann",
-    "Flow_Field",
-    "Change_Reconciliation"
-   ],
-   "axiom_files": [],
-   "algorithm_paths": {},
-   "return_to": "lab",
-   "lab_post": "Lab/map_data_post_change",
-   "unlock_requirements": [
-    "color"
-   ],
-   "completion_rewards": [
-    "calculus_badge",
-    "sustain_affordance"
-   ],
-   "_status": "scaffolded",
-   "_provenance": "Proposed 2026-05-13 via doc/sequence_proposals/2026-05-13_change-sequence.md. Follows from the math-density sieve pass (doc/sieve_passes/2026-05-13T09-15-00_math-density.md) — addresses the calculus shadow running across forces / wavefunctions / randomness / noise. Maps and artifacts are placeholder names; build follows the spine-walker editing pattern.",
-   "artifact_groups": [
-    {
-     "map": "Change_Intro",
-     "position": "intro",
-     "artifacts": [
-      "slope_tangent_demo",
-      "derivative_pair",
-      "code_display",
-      "science_screen"
-     ],
-     "size_budget": "compact_only",
-     "rationale": "Open with the most concrete change: a tangent line sliding along a curve. The number on the tangent IS the derivative. Code panel shows f(x) and f'(x) side by side.",
-     "grammar": "florence"
-    },
-    {
-     "map": "Change_Velocity",
-     "position": "foundation",
-     "artifacts": [
-      "velocity_arrow",
-      "derivative_pair",
-      "player_trace",
-      "code_display"
-     ],
-     "size_budget": "compact_only",
-     "rationale": "Animate a particle. Position over time = the curve. Velocity arrow = the derivative made physical. player_trace from primitives reappears here as the path-becomes-function move.",
-     "grammar": "florence"
-    },
-    {
-     "map": "Change_Slope_Surface",
-     "position": "foundation",
-     "artifacts": [
-      "partial_derivative_terrain",
-      "science_screen"
-     ],
-     "size_budget": "moderate",
-     "rationale": "Extend derivative from curve to surface. Partial derivatives shown as slope arrows in x and y. Sets up vector field as the next move.",
-     "grammar": "florence"
-    },
-    {
-     "map": "Accumulation_Area",
-     "position": "accumulation",
-     "artifacts": [
-      "integral_area",
-      "code_display",
-      "science_screen"
-     ],
-     "size_budget": "moderate",
-     "rationale": "Shaded area under a curve. Slider moves the right boundary; area readout tracks. Accumulation as a function of the upper bound — the integral as a function.",
-     "grammar": "florence"
-    },
-    {
-     "map": "Accumulation_Riemann",
-     "position": "accumulation",
-     "artifacts": [
-      "riemann_pump",
-      "riemann_pi",
-      "integral_area"
-     ],
-     "size_budget": "moderate",
-     "rationale": "Player adjusts partition count; rectangles converge to a continuous integral. Reuse riemann_pi from QFEP lab as a finite example: π from a Riemann sum.",
-     "grammar": "florence"
-    },
-    {
-     "map": "Flow_Field",
-     "position": "flow",
-     "artifacts": [
-      "vector_field_grid",
-      "science_screen"
-     ],
-     "size_budget": "compact_only",
-     "rationale": "A 2D grid of arrows for f(x,y) = (vx, vy). Presets for rotational / divergent / wavy. Player can dial through them.",
-     "grammar": "florence"
-    },
-    {
-     "map": "Flow_Particle_Pulse",
-     "position": "flow",
-     "artifacts": [
-      "vector_field_grid",
-      "particle_flow_swarm"
-     ],
-     "size_budget": "moderate",
-     "rationale": "Release particles into the field. They follow streamlines. Make flow felt as motion-through-rule.",
-     "grammar": "florence"
-    },
-    {
-     "map": "Change_Reconciliation",
-     "position": "synthesis",
-     "artifacts": [
-      "ftc_bridge",
-      "code_display",
-      "science_screen"
-     ],
-     "size_budget": "moderate",
-     "rationale": "The Fundamental Theorem of Calculus made animated: take derivative, then integrate, return to original. Same for the other direction. The bridge that connects every prior map.",
-     "grammar": "florence"
-    },
-    {
-     "map": "Chamber_Change",
-     "position": "chamber",
-     "artifacts": [
-      "catalyst_sustain_demo",
-      "catalyst_foe#initial_state:foe",
-      "becoming_catalyst",
-      "science_screen"
-     ],
-     "size_budget": "moderate",
-     "rationale": "Catalyst chamber. The bracelet acquires the sustain affordance: hold orb contact to accumulate effect. First foe demonstrates the new way of engaging — same goo, but tickled by sustained contact rather than impact.",
-     "grammar": "florence"
+  "sequences": {
+    "change": {
+      "name": "Change: Rate, Accumulation, and Flow",
+      "truth": "A value, a local rate and an accumulated total retain different things. Repeated updates can make the next address depend on the path already taken.",
+      "qfep_term": "F",
+      "qfep_connection": "Calculus vocabulary for later research: distinguish local change, finite accumulation and retained history. The encounters support these comparisons; they do not measure a QFEP term or entropy threshold.",
+      "formula": "rate = rise / h; total += f(x) * width; position += direction(position, time) * speed * delta",
+      "demonstration": "Compare a wide finite difference with an analytic local rate. Keep the function fixed while changing the samples used for an area estimate. Predict the net height difference of an arch, then compare it with a finite sum of its signed rate. Let each particle update determine the address of its next direction lookup.",
+      "description": "Two halls build from addresses and sampling: value versus local rate; contribution versus total; signed accumulation versus endpoint difference; then trajectories in a direction field. Each comparison makes a limit of its representation inspectable before Forces introduces velocity, acceleration and carried motion.",
+      "layer": "F_order",
+      "prerequisites": [
+        "tiling"
+      ],
+      "unlocks": [
+        "forces",
+        "wavefunctions"
+      ],
+      "ambient_preset": "calc_lab",
+      "difficulty": "intermediate",
+      "estimated_time": "20-30 minutes",
+      "learning_objectives": [
+        "Write a finite-rate function over a nonzero horizontal interval, with the independent variable and units stated",
+        "On a separate lesson, accumulate height-times-width samples of the same supplied smooth function",
+        "Vary count or sample position independently; distinguish finite reference sums from exact integrals",
+        "Use the different bridge arch as a signed-change comparison; separate net change from total travel",
+        "Sample a supplied direction field at the position produced by the previous update",
+        "Distinguish unit direction, speed, elapsed seconds and displacement in the declared canvas frame",
+        "Inspect field time, particle updates and misleading trail joins at wraps without claiming an unimplemented repair",
+        "On a return, compare one step with two half-steps under identical start, field, speed and duration; distinguish this from changing SPEED",
+        "Prepare Forces by distinguishing an immediately prescribed velocity from velocity retained and changed by acceleration"
+      ],
+      "content": [
+        "Change_Intro: Change and accumulation",
+        "Flow_Field: Flow and trajectories"
+      ],
+      "maps": [
+        "Change_Intro",
+        "Flow_Field"
+      ],
+      "axiom_files": [],
+      "algorithm_paths": {},
+      "return_to": "lab",
+      "lab_post": "Lab/map_data_post_change",
+      "unlock_requirements": [
+        "tiling"
+      ],
+      "completion_rewards": [
+        "calculus_badge",
+        "sustain_affordance"
+      ],
+      "_status": "Two consolidated halls; targeted local source, staging and reveal pass complete on 19 September 2026. Desktop checks passed for the four book encounters; headset and learner verification remain pending.",
+      "_provenance": "Proposed 2026-05-13; consolidated 2026-09-11. The pre-review overview is preserved in curation_history; current metadata describes the two active maps and their existing comparison adapters.",
+      "artifact_groups": [
+        {
+          "map": "Change_Intro",
+          "artifacts": [
+            "tangent_slope_workbench",
+            "riemann_sum_workbench",
+            "ftc_bridge"
+          ],
+          "position": "intro",
+          "rationale": "Change and accumulation"
+        },
+        {
+          "map": "Flow_Field",
+          "artifacts": [
+            "flow_field_painter"
+          ],
+          "position": "synthesis",
+          "rationale": "Flow and trajectories"
+        }
+      ],
+      "deferred_maps": [
+        "Change_Velocity",
+        "Change_Slope_Surface",
+        "Accumulation_Area",
+        "Flow_Particle_Pulse",
+        "Accumulation_Riemann",
+        "Change_Reconciliation",
+        "Ribbon_Change_01",
+        "Ribbon_Change_02",
+        "Ribbon_Change_03",
+        "Ribbon_Change_04"
+      ],
+      "deferred_reason": "2026-09-11: eight active halls become two; all 23 distinct artifacts retained once. Three rate/accumulation/reconciliation encounters precede flow.",
+      "taxonomy": {
+        "1_measure_and_accumulate": "Change_Intro: finite difference, Riemann sum, signed net change.",
+        "2_follow_a_field": "Flow_Field: sample local direction, update position, inspect the retained path."
+      },
+      "consolidation_ledger": "doc/space/change-two-halls-2026-09-11/ledger.json",
+      "curation_history": [
+        {
+          "recorded_context": "Pre-review overview preserved on 19 September 2026. This records earlier framing; current objectives below describe the consolidated two-hall encounters.",
+          "truth": "Things change. Change accumulates. Accumulation flows.",
+          "qfep_connection": "Foundation â€” the calculus substrate. Derivative as instantaneous rate of change, integral as accumulated quantity, vector field as flow. The conceptual vocabulary that forces, wavefunctions, randomness, and noise will all use.",
+          "demonstration": "Watch a tangent line slide along a curve and read its slope. Pump up the count on a Riemann sum and watch rectangles converge into a continuous integral. Release particles into a vector field and watch them flow. Take over the catalyst and sustain its contact on a target â€” accumulation made bracelet-felt.",
+          "description": "The calculus substrate, made visible. Change as instantaneous rate (derivative); accumulation as continuous addition (integral); vector field as flow at every point in space. This sequence's job is to establish the vocabulary so forces, wavefunctions, randomness, and noise can name what they're doing instead of running on an unintroduced backbone.",
+          "learning_objectives": [
+            "Change as instantaneous rate: the derivative; slope of a curve at a point; velocity as rate of position",
+            "Slope across a curve: how slope itself becomes a function (derivative-as-function)",
+            "Accumulation as continuous addition: the integral; area under a curve; total from rate",
+            "Riemann sum: discrete accumulation approaching continuous; how rectangles become integrals in the limit",
+            "Vector fields: change-and-flow at every point in space; the first encounter with a function of space (not just time)",
+            "The fundamental theorem of calculus: change and accumulation are inverse operations; one undoes the other",
+            "Carry-forward to forces and waves: F = ma is calculus made physical; sine is the function whose second derivative is itself negated"
+          ],
+          "_status": "Two consolidated halls; desktop probes pass; headset and secondary exhibit review pending.",
+          "_provenance": "Proposed 2026-05-13 via doc/sequence_proposals/2026-05-13_change-sequence.md. Follows from the math-density sieve pass (doc/sieve_passes/2026-05-13T09-15-00_math-density.md) â€” addresses the calculus shadow running across forces / wavefunctions / randomness / noise. Maps and artifacts are placeholder names; build follows the spine-walker editing pattern."
+        }
+      ],
+      "learning_objectives_status": "Revised summary proposals; existing companion texts retained, reduced learner edit locations and lessons pending.",
+      "local_review_history": [
+        {
+          "date": "2026-10-04",
+          "report": "doc/book/iterations/2026-10-04-change-capacity-return/index.html",
+          "decision": "Separate rate and sum lessons; preserve bridge as a return; teach field feedback before optional numerical-step comparison.",
+          "status": "Proposed summaries only; no runtime or full companion changes"
+        }
+      ]
     }
-   ],
-   "deferred_maps": [
-    "Change_Velocity",
-    "Change_Slope_Surface",
-    "Accumulation_Area",
-    "Flow_Particle_Pulse"
-   ],
-   "deferred_reason": "THE FOLD, 2026-08-25. Eight rooms, seven of them 10x11, held 27 artifact placements between them — two to five each, which is a corridor with a thing in it, not a room. Folded to the four rungs the map names were already spelling. Checkable: python tools/fold_ledger.py --sequence=change --plan=doc/folds/change.json --check",
-   "taxonomy": {
-    "_readme": "THE LADDER (2026-08-25). FOUR rungs, and the fourth is the loop: reconciliation shows that rate and accumulation were the same operation read in opposite directions, so the walk ends where it started knowing why. The rungs were already in the map names — the fold only stopped spending three rooms on one idea.",
-    "1_rate": "how fast, right here? — tangent, slope, velocity, the partial derivative you read off a terrain with your feet, and now what a slope is FOR: gradient_descent_well (a glowing loss basin where marbles fall, settle and begin again) and descent_marble_toy (the same descent small enough to hold). THE ROOM IS Change_Intro, 20x20 and the only room in the sequence with space to be one; it absorbed Change_Velocity and Change_Slope_Surface.",
-    "2_accumulation": "what does a rate add up to? — Riemann rectangles, the pump that fills, pi counted out. THE ROOM IS Accumulation_Riemann; Accumulation_Area folded in without a single orphan, because integral_area already stood in both.",
-    "3_flow": "what if the rate is everywhere at once? — the field, the particles that make it visible, the arrows themselves (vector_field_visualizer), agents that navigate by following it (noc_5_04_flow_field), and a brush that paints with it (flow_field_painter). THE ROOM IS Flow_Field, which took particle_flow_swarm from Flow_Particle_Pulse.",
-    "4_reconciliation": "when do the two meet? — the fundamental theorem: differentiation and integration are one operation read in opposite directions. THE ROOM IS Change_Reconciliation, and it now HOLDS BOTH OPERANDS — derivative_pair from rung 1 and integral_area from rung 2 stand beside ftc_bridge, because a room that reconciles two things and contains neither cannot show its claim. The loop closes on rung 1.",
-    "_next_door": "forces rung 4 (motion) is this sequence read in a body — velocity is the first derivative and acceleration the second — and forces rung 5 (force) hands the walk back here. The spine has change at 4 and forces at 5 for that reason.",
-    "_received_from_forces": {
-     "riemann_sum_workbench": "Accumulation_Riemann",
-     "tangent_slope_workbench": "Change_Intro",
-     "synthesis_stand": "Change_Intro"
-    },
-    "_rescued": {
-     "partial_derivative_terrain": "rescue Change_Intro",
-     "velocity_arrow": "rescue Change_Intro",
-     "particle_flow_swarm": "rescue Flow_Field"
-    },
-    "_retired_tokens": {
-     "player_trace": "retire furniture, 21 other maps"
-    },
-    "_rooms": {
-     "1_rate": "Change_Intro",
-     "2_accumulation": "Accumulation_Riemann",
-     "3_flow": "Flow_Field",
-     "4_reconciliation": "Change_Reconciliation"
-    },
-    "_thickened": "2026-08-25. Seven MIRRORS, nothing moved: the gradient family stays in FormFinding_Descent (12x10, four artifacts — moving three would have gutted it) and the flow family stays in forces' VFM_04_Fields. A second placement is how this corpus works. The consequence is that formfinding and machinelearning now RECALL a slope already descended here, rather than meeting the derivative for the first time in a room about form. gradient_descent itself was refused: it declares a 20-metre footprint. Plan in doc/folds/change_thicken.json."
-   }
   }
- }
 }

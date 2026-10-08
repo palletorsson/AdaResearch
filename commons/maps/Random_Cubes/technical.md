@@ -1,3 +1,5 @@
+> Current encounter and verification (24 September 2026): [encounter notes](encounter-notes.md). The earlier account below is retained; the current note governs changed placement, controls and validation.
+
 # Random_Cubes - Technical Tutorial
 
 ## Randomizing Geometry
@@ -179,3 +181,25 @@ The per-frame cost of the map scales with the number of instanced artifacts and 
 Failure modes worth naming. A learner who pushes the sliders off the calibrated ranges can produce visually incoherent output — flickering surfaces, runaway growth, or flat featureless fields. The map's controls are clamped at safe bounds, but within those bounds the parameters still interact nonlinearly, and the nonlinear interactions are part of what the map rewards. Understanding the interactions requires running the parameters through their ranges rather than setting them once from a preset.
 
 The map is one station in a longer arc. The artifacts it introduces reappear in later maps with extended parameter sets, composed behaviours, or different contextual framings. The learner who walks this map carefully carries a vocabulary the remaining sequence depends on, and the vocabulary is the map's concrete contribution to the curriculum.
+
+
+## Paired dice column — 24 September 2026
+
+`paired_dice_column:180` at grid (5,4) adds two XRTools dice derived from `dice_throw`. The original die scene/script are unchanged. The local variant keeps its pips, release hooks and mature settle test, using 11 cm dice in 90 cm-high trays and no reward rain. Desktop input remains a release without a tracked throw.
+
+Only a released die settling in its own tray supplies a value. Both fresh values are required; grabbing a pending die invalidates that value, and the next pair cannot reuse the previous pair's other face. A full-size column uses 18 cm per pip, blue A below pink B, on a 20 cm base. Its collision height follows the total. Twelve miniature columns retain the recent ordered pairs; the total count can exceed twelve. Two MultiMeshes bound the shelf's coloured-unit rendering.
+
+RETURN DICE preserves the last column and history. CLEAR RECORD also cancels pending results and removes the record. A loose die below 18 cm or over 3 m from its tray returns after 0.7 seconds; a held die is never reclaimed. Recovery does not produce a throw. The ideal independent fair-dice model has a triangular sum distribution; physical throws do not automatically validate that model.
+
+Review and native evidence: `doc/book/iterations/2026-09-24-paired-dice/`.
+
+
+## The continuing die — 24 September 2026
+
+`continuing_die` at (2,5), yaw 180, uses the unmodified `paired_die.gd` tray and its settled-orientation reader. The die is a production XRToolsPickable with desktop grab/drop hooks. No RNG picks a face, and no automatic reroll is performed. One fresh release arms one valid result; recovery alone never arms it.
+
+Each accepted face appends to a chain and adds to total. A face other than six closes the chain. A six permits another accepted throw unless five throws have already been retained. Five sixes produce total 30, a 2.7m column on a 0.14m base, and an explicit UNFINISHED state. A non-six on the fifth throw completes normally. Further results cannot change a closed or capped column until NEW CHAIN. The cap is a display budget, not a natural end or a claim about an unbounded stochastic process.
+
+One 9cm unit represents each pip; seams and labels retain individual throws. A separate fixed 6+6+3 column is marked WORKED EXAMPLE / NOT LIVE THROWS. It is not sampled, not a remembered player outcome and not mixed into live state. Column support collision follows the live sum. RETURN DIE preserves the chain. NEW CHAIN cancels pending results and clears the live column, retaining ownership if a hand holds the die. Fallen unattended dice return through the existing tray recovery.
+
+Evidence: `doc/book/iterations/2026-09-24-continuing-die/`. Controlled face-up physics drops exercise the production reader; event-only transaction cases are separately identified. These establish behavior, not uniformity, independence or a measured outcome distribution. Tracked-hand throwing and comfort remain pending.

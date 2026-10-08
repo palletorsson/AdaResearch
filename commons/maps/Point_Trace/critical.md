@@ -26,9 +26,17 @@ The useful question is what this instrument lets someone make. A visitor can enl
 
 Queer possibility can appear in that change of use: an interval treated as inadequate for faithful capture becomes material for another drawing. This does not make coarseness inherently queer or finer recording inherently oppressive. It keeps open the question of who gets to define the task, choose the grain, and refuse the instrument's account.
 
+## A limit that changes the task
+
+The amber companion keeps only thirty-two positions. It makes the loss of a beginning encounterable during a short drawing, while the original dots still offer longer records. A pause leaves its tail intact; further accepted positions make room by removing older ones. Time passing and a record changing are different events here.
+
+A visitor may want to preserve a loop, or discover a use for a line that clears space as it travels. Neither purpose settles which capacity is right. The comparison makes the question answerable through another gesture. Its small memory is a chosen limit we can change, not a measured limit of the headset and not an entropy measure.
+
 ## Which point stands for the body?
 
 The stick keeps the same movement threshold while observing a point farther from the fist. Turning the wrist can move that point through an arc. The resulting line describes the trajectory of the chosen tip; it does not become a complete description of the hand.
+
+The head-trace square follows a point the visitor is already carrying. Its floor projection can be a useful account of a route while different heights coincide. Lowering the head and returning makes that choice available to inspect. The suspended version keeps another difference but still has no shoulders or intention. Neither representation needs to become a complete body to be useful; the question is which account a particular purpose requires, and whether its omissions remain available to question.
 
 At the board, proximity to the face and the board's edges decide where a held pen can write. Lifting makes an interval of movement absent from the image. The visitor can use that absence to separate marks. Here the recording boundary supports an action the person wants to perform.
 
@@ -40,7 +48,7 @@ Eighteen retained positions can be displayed beside ten coordinate rows. Both re
 
 Ask where row 1 has gone. Compare the surviving line with the list operation. Ask what a pause contributes, then inspect the movement gate. The display and the code answer related questions, and the visitor's purpose helps decide which answer matters.
 
-The optional writing desk offers another investigation. Marks can look expressive even when a small mapping from camera movement drives their amplitude. The appearance of handwriting invites an interpretation that the data cannot settle. The earlier question remains useful for a return: what makes a mark feel as if it knows you?
+The writing desk now keeps head height against time. A level stretch can record a wait, where the drawing dot's spatial list adds nothing. An interval without measurements leaves blank paper. These forms of apparent quiet have different conditions. Neither a steady height nor an empty interval can establish attention, reluctance or absence of thought. The default generated handwriting remains available elsewhere as a further comparison: what makes a mark feel as if it knows you?
 
 ## Reduction and the possibility of reply
 
@@ -51,3 +59,9 @@ The point count is not an entropy measure, and no numerical QFEP parameter has b
 The copied positions can travel to Grid and take on a new use. Their usefulness does not require us to mistake them for everything that happened. What might we want from them there that this recorder has not kept?
 
 Earlier philosophical associations and drafts remain in [the previous critical text](../../../doc/space/point-trace-focus-2026-09-16/previous/critical.md). They are retained research material, not evidence that the current tool preserves a complete duration or intention.
+
+## A record can acquire another task
+
+The author's 28 September connection to hauntology concerns inherited purposes and uses that have not yet become actual. The drawing record retains a prior gesture while becoming available for another construction. In Grid it can acquire another centre, scale and quantisation; following the enlarged bend remains a visitor's invitation, not an automatic walking route. This gives the final chapter's short passage its material occasion.
+
+The [preface](/book-review/doc/book/iterations/2026-09-23-book-frame/index.html#preface) introduces tinkering through household laboratory equipment and a game camera used in scanning. The [afterword](/book-review/doc/book/iterations/2026-09-23-book-frame/index.html#afterword) develops entropy as difference and requisite variety without equating a position count with freedom. Hauntology is a theoretical connection and project extension, not a new claim about what the trace file stores.

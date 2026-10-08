@@ -1,88 +1,59 @@
-# Point Zero — Hello, world. We are here.
+# Point Zero — Already running
 
-Day Zero gave us somewhere to run a project. Now we will make an instruction happen when our scene is ready, and another keep happening while it runs.
+**Learning elements**
 
-Open [the Point Zero study project](../../../doc/book/studies/point-zero/README.md), then open `hello_world.gd`. This study builds on Day Zero's prepared scene and supplies two text displays named `Greeting` and `Counter`. In `hello_world.tscn`, the script is attached to the root node named `HelloWorld`; both displays are its children. The script contains the finished counter. Replace its contents with the short greeting below.
+- Initialization
+- Per-frame updates
+- Function calls
 
-We borrow the displays, floor, light and camera. Here we are attending to when something happens.
+This tutorial follows a path through **Endless Museum**. We learn selected operations from the works we encounter. Alongside it, `final.md` follows their critical and poetic questions. Some artifacts belong to both tracks; others remain part of the wider field we explore.
 
-## Say hello
+## A number that keeps changing
 
+In Point Zero, the counter is already running. Its number changes as the engine processes frames. We will make the smallest working version of that operation: create a label, then keep updating its text.
+
+Use the working project from Day Zero. Its camera, light and player remain supplied. For this study, attach `counter.gd` to an empty `Node3D` named `CounterStudy`. Place that node where you can see it in your working scene, with its front facing your view. The script creates its own label; there is no child to prepare or fetch through a scene path. The existing museum console is the reference for this study.
+
+Here is the **whole script**.
+
+<!-- student-code:counter.gd -->
 ```gdscript
 extends Node3D
 
-func _ready():
-    $Greeting.text = "Hello, world."
+var label: Label3D
+
+func _ready() -> void:
+    label = Label3D.new()
+    label.text = "0"
+    label.font_size = 96
+    label.pixel_size = 0.005
+    add_child(label)
+
+func _process(_delta: float) -> void:
+    label.text = str(Engine.get_process_frames())
 ```
 
-Run it. “Hello, world.” appears above the floor.
+`var label: Label3D` declares a reference that both functions can use. It does **not** create the label. `Label3D.new()` creates it; `add_child(label)` puts it beneath this node in the scene so its text can appear. The two size settings make the text large enough to read.
 
-A node is one part of a Godot scene. `extends Node3D` says that this script adds behaviour to a 3D node.
+Godot calls `_ready()` when the node and its children are ready. Here it creates the label and gives it an initial text, `"0"`. That setup finishes before this node's first `_process()` call.
 
-`func` introduces a function: a named group of instructions. The colon begins its body; the indented line belongs inside it.
+Godot then calls `_process()` each process frame. `Engine.get_process_frames()` returns the engine's running total; `str()` converts the number to text; `label.text =` replaces the displayed text. The supplied `_delta` is the frame's time interval in seconds. We do not use it: this example reads frames, not seconds.
 
-`_ready()` has a particular meaning to Godot. It is called when this node and its children have entered the scene tree and are ready. In this study, that is where our greeting is set. It is not called again on every frame.
+Run it. The number advances. Its first visible value need not be zero—the engine was running before this label existed.
 
-`$Greeting` finds the supplied child named `Greeting`. Its `text` property holds the words it displays. The equals sign assigns our quoted text to that property. We are changing an existing display, not constructing its letters.
+## Read it once
 
-Change the words and run again. You have chosen what this arrival says.
+What would happen if we read the same total only in `_ready()`?
 
-Our node becoming ready does not mean that the world has just begun. The engine has already been working to bring it here.
+<!-- student-edit:read-once -->
+Move `label.text = str(Engine.get_process_frames())` into `_ready()`, immediately after `add_child(label)`. Delete the now-empty `_process()` function. Keep everything else.
+<!-- /student-edit:read-once -->
 
-## Let a number continue
+Run again. The number stays where it began, while the room keeps running. The label now holds one reading. Undo the move and the number follows the engine again.
 
-Replace the script with this complete version:
+The instruction is the same. Its place determines when it runs. In Point One, `_ready()` will construct a point's visible body.
 
-```gdscript
-extends Node3D
 
-var count := 0
+[Current counter.gd](../../../doc/book/iterations/2026-10-06-starter-one-course/lessons/Point_Zero/counter.gd) · [Complete working project](../../../doc/book/iterations/2026-10-03-ada-xr-starter/ada-xr-starter.zip) · [Verification and changes](../../../doc/book/iterations/2026-10-06-starter-one-course/index.html)
 
-func _ready():
-    $Greeting.text = "Hello, world."
-
-func _process(_delta):
-    count += 1
-    $Counter.text = str(count)
-```
-
-The greeting stays. Beneath it, a number keeps changing.
-
-`var count := 0` creates a variable named `count` and gives it the starting value zero. The variable stores the number we will change. With `:=`, Godot infers the type from the starting value: here, an integer, or whole number.
-
-The declaration sits outside the functions, so `count` belongs to this node and keeps its value between function calls.
-
-Godot calls `_process` on each process frame while processing is enabled. `count += 1` adds one to the value already there. `str(count)` turns that number into text, which we give to the supplied `Counter` display.
-
-Each call begins with what the previous call left behind. The number can continue while our attention goes somewhere else.
-
-Godot also supplies the elapsed time for that update, in seconds. We receive it as `_delta`. The leading underscore says we are deliberately leaving this input unused. Our script counts calls; it does not measure seconds. A hundred updates add a hundred, however long they took.
-
-## Once, or repeatedly?
-
-Move the two indented lines from `_process` into `_ready`, beneath the greeting. Remove the now-empty `_process` function. The script becomes:
-
-```gdscript
-extends Node3D
-
-var count := 0
-
-func _ready():
-    $Greeting.text = "Hello, world."
-    count += 1
-    $Counter.text = str(count)
-```
-
-Run it. The number reaches one and stays there. The engine continues running; our counting instruction now happens only when this node becomes ready.
-
-Restore the version with both functions. Change `count += 1` to `count += 2`. The display advances two at a time. You have changed what happens on each call, without choosing when those calls arrive. Return it to one when you finish.
-
-## Whose beginning?
-
-Our small count begins with this node. Restarting the study creates a fresh instance and begins its count again.
-
-The museum's panel asks for `Engine.get_process_frames()` instead: the engine's process-frame total since startup. That total can include work done before the panel entered the room. Our exercise and the museum panel can therefore show different numbers without either being broken. Their beginnings differ.
-
-To compare the numbers, we need to know what each one counts and when that count started.
-
-In Point One, we will return to `_ready()` to place a marker. We will recognise the moment in which that instruction runs, and can give our attention to its new material: a position.
+[Complete experiment: counter_once.gd](../../../doc/book/iterations/2026-10-06-starter-one-course/lessons/Point_Zero/counter_once.gd)

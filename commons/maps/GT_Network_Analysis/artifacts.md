@@ -25,3 +25,12 @@ COMPARE tree-like and rhizomatic topologies by tuning how often local branches r
 INTERPRET centrality and community structure from motion, glow, and network hierarchy.
 
 `network_analysis`
+
+
+<!-- study-spine:evidence_network -->
+
+## Installed application: A relation needs a record
+
+`evidence_network` occupies a new adjoining bay, after the existing encounters. Cell [11, 23], rotation 180°, museum adapter `res://commons/artifacts/spine_studies/network.tscn`. Original response to Mark Lombardi; no claim of exact reconstruction.
+
+Remove one recorded relation; compare incoming and outgoing counts before moving the layout. Reuses graph, line, array; adds no prerequisite node. The display and main-player controls are supplied.

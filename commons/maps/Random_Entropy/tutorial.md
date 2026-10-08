@@ -1,5 +1,11 @@
 # Keep the counts, change the neighbours
 
+**Learning elements**
+
+- Frequency tables
+- Copied records
+- Marginal entropy
+
 Random_Definition made repeatability depend on a seed and a procedure. Random_Entropy takes another seeded sequence and asks what its measurement retains. The primary is `shannon_entropy_meter:90#stand:ledger#disclosure:ledger` at (5,6). All excerpts below come from `commons/artifacts/shannon_entropy_meter/shannon_entropy_meter.gd`.
 
 ## Read two records of the same sample
@@ -85,3 +91,27 @@ The next hall, Random_Remove, makes selection spatial. Before a random choice re
 ## Spatial staging — 16 September 2026
 
 The map keeps a reachable instrument alongside its spatial applications. `map_data.json` is authoritative for placements. `#controls:compact` gathers the existing Rack panels, preserving their callbacks, into an 80 cm console. `#glass_width` opts into an enclosure with open entrances; its grid marks are not floor colliders.
+
+
+<!-- study-spine:signal_room -->
+
+## Return: Different neighbours
+
+Shuffle the retained values; compare unchanged counts with changed neighbours. Begin with the supplied study in the museum and compare the two states from the same place. Name what remained fixed before inspecting the code.
+
+This application reuses array, random. The small edit belongs to the learner; the display, main player and physical controls are supplied. Its adapter is `commons/artifacts/spine_studies/station.gd` (`signal`), which calls the study’s own setters. Change one parameter, predict the visible consequence, then test another value. Reconstructing every mesh is not a prerequisite for this encounter.
+
+[Earlier study and making notes](/book-review/doc/book/iterations/2026-10-01-signal-room/index.html). Geometry controls wait until the exhibit is clear. RESET returns the original comparison.
+
+
+<!-- study-edit:signal_room -->
+
+### One source change: Different neighbours
+
+Call this on the supplied signal_room component. Mode 2 permutes cells with a repeatable seed. Compare values.count(1) and the neighbour-change readout before and after; then try another seed.
+
+```gdscript
+set_pattern(2, 2026)
+```
+
+Source: `commons/artifacts/signal_room/signal_room.gd`. Use the prepared scene to run and compare.

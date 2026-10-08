@@ -1,92 +1,22 @@
-# Noise Voxel
+# Read a decision before changing its source
 
-A value, a line, and a decision with two states. Every line below is from `commons/artifacts/perlin_terrain_sculptor/perlin_terrain_sculptor.gd` and `algorithms/randomness/voxelnoise/voxelnoise.gd`, the two artifacts this hall places.
+**Learning elements — proposed focus**
 
-Write the sampler down once.
+_The labels below set the revision focus; the existing lesson still needs alignment._
 
-```gdscript
-static func contract_noise(seed_value: int, scale: float, octaves: int) -> FastNoiseLite:
-	var n := FastNoiseLite.new()
-	n.noise_type = FastNoiseLite.TYPE_PERLIN
-	n.fractal_type = FastNoiseLite.FRACTAL_FBM
-	n.frequency = scale * 0.1
-	n.fractal_octaves = octaves
-	n.seed = seed_value
-	return n
-```
+- Occupancy arrays
+- Thresholds
+- Display cuts
 
-One basis, made one way, from a named number. Before this pass the bench and the terrain each made their own, and the link between them passed settings rather than samples.
+The room builds on Noise_One: one scalar can become displacement or colour. Here it becomes a stored occupancy decision. Four primary works carry different parts of that argument.
 
-Ask at a normalised place.
+1. At **perlin_terrain_sculptor**, keep the initial seed. Press THRESHOLD and compare the field value at the yellow cell with the changing line. Read `contract_occupied` in the book only after noticing which quantity stayed fixed. The button wraps from +0.20 to −0.20.
+2. Compare occupied cells with separate pieces. The first count decreases through ascending thresholds; the second need not. A component may split or disappear. This is six-face adjacency, not a route test.
+3. Try CUT and inspect the unchanged occupied count. It changes the visible MultiMesh instances. Restore the view, then use CELL to choose another sample.
+4. At **science_screen**, follow the yellow coordinate between the score slice and the binary mask. Change threshold at the bench. Inspect a value whose answer changes. Change CELL to view another horizontal layer. SEED then changes the field itself.
+5. Approach **voxelnoise** through a ground door in its glass flight enclosure. Find a form shared with the model. Both have 24³ decisions; the physical spacing grows from 0.04 to 1.00 m. Rise in the clear margin, release movement to hover, and approach an opening. Distinguish the occupied set from what a body of your size can traverse. Desktop: look + WASD, Space up, Ctrl down. VR: tilt the left controller and use its stick. Descend and leave through either ground doorway to resume walking.
+6. Find **dark_sphere**. Its emission and rotation continue independently. Compare a value used as a varying material strength with a value used in an occupancy test.
 
-```gdscript
-static func contract_value(n: FastNoiseLite, u: float, v: float, w: float) -> float:
-	return n.get_noise_3d(u * CONTRACT_SPAN, v * CONTRACT_SPAN, w * CONTRACT_SPAN)
-```
+For a group, one person controls the bench while others compare the screen and volume. Swap positions. Alone, keep the seed fixed while returning between the three views. The question to carry into Noise_6_Wall is what another receiver can make of a value the threshold rejected.
 
-`u`, `v` and `w` are where you are INSIDE the display, from 0 to 1. That is the whole of the scale relationship: a 24-cell model and a 32-cell terrain hand the same numbers to the same field, so one is a magnified reading of the other rather than a lookalike.
-
-Keep the bias, and name it.
-
-```gdscript
-static func contract_bias(v: float) -> float:
-	return (v - 0.5) * CONTRACT_BIAS_SCALE
-```
-
-Higher cells are hindered and lower ones helped. This is what makes a terrain rather than a cloud, and it is part of the predicate, so it belongs on the plate beside the value.
-
-Then the line.
-
-```gdscript
-static func contract_occupied(value: float, v: float, threshold: float) -> bool:
-	return value - contract_bias(v) > threshold
-```
-
-Greater-than, and nothing else. Two consequences follow from that one symbol: the answer has exactly two states however finely the value varies, and raising the threshold can only ever take cells away.
-
-Let the receiver use the same four.
-
-```gdscript
-				if _contract:
-					var u := float(x) / float(maxi(1, chunk_size - 1))
-					var v := float(y - 1) / float(maxi(1, world_height - 1))
-					var w := float(z) / float(maxi(1, chunk_size - 1))
-					val = PerlinTerrainSculptor.contract_value(noise, u, v, w)
-					occupied = PerlinTerrainSculptor.contract_occupied(val, v, iso)
-				else:
-					val = noise.get_noise_3d(p.x, p.y, p.z)
-					occupied = val > iso
-```
-
-The `else` is the shipped path, kept: without a staged bench handing over the contract, the terrain samples its own coordinates exactly as before.
-
-Count the pieces, and say what that is worth.
-
-```gdscript
-				var queue: Array = [k]
-				seen[k] = true
-				while not queue.is_empty():
-					var cur: Vector3i = queue.pop_back()
-					size += 1
-```
-
-A flood fill over faces gives the number of separate pieces of the occupied set and the size of the largest. It is a fact about cells touching, and the plate follows it with the sentence that matters: connected is not walkable.
-
-Speak only to your own hall.
-
-```gdscript
-	var hall: Node = _hall_ancestor()
-	for r in get_tree().get_nodes_in_group("voxelnoise_receivers"):
-		if hall != null and not hall.is_ancestor_of(r):
-			continue
-```
-
-`call_group` reaches every receiver in the tree. In a museum that streams several halls at once, that meant a visitor turning this threshold retuned a terrain in a room nobody was standing in.
-
-Stage it in a map.
-
-```
-perlin_terrain_sculptor:180:0.5:1#mount:shelf#stand:lattice
-```
-
-`stand:lattice` names a five-digit seed, takes the contract, and stands the cage, the plate and THRESHOLD, CELL, SEED and CUT. Without the token the bench is what it always was: its own noise at its own coordinates, seeded by `randi()`, with the sliders it shipped with.
+The full code account is in technical.md. The chapter excerpts are actual source; proposed extensions in critical.md are future experiments, not present controls.

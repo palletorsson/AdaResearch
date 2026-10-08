@@ -11,3 +11,10 @@ Nineteen new rows stage the study before the retained gallery, with a two-column
 Museum applications to develop through the chapter: stored CA history as screens, perforated cladding, railings and woven surfaces; moving Life patterns as agents that light neighbouring objects; proximity entering a surface's update in ExpandingSpace; coupled fields as changing wall or garment material in SoftRules after its live simulation exists. Each application must expose its actual mapping, inputs and physical consequences. A common appearance alone does not establish shared state or interaction.
 
 Runtime evidence and remaining limits are recorded separately in doc/space/ca-history-review-2026-09-13. Headset comfort and performance remain unverified.
+
+
+## 25 September — returning does not undo
+
+The existing history encounter is mature enough to keep. The next addition connects its gold witness to the body: walking along the margin selects an existing row; turning back revisits it without erasing its descendants. The stored beginning, local law, update clock and three receivers are preserved. The chapter gains this encounter and one original Godot photograph; both code excerpts and the ornament/support argument remain.
+
+Thirty-seven native checks and seven actual desktop pointer events pass. A supplied CharacterBody follows rows 0, 3, 10 and back to 5. All stored states, colours and collision flags remain unchanged by walking. Existing six controls, record budget, ordinary unconfigured study and the XR player-group convention are covered. The latter is not a tracked headset trial. Full-gallery, Quest and learner acceptance remain open. Existing engine, renderer, UID, registry and generated-art material warnings are kept in the review log.

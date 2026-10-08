@@ -1,168 +1,33 @@
-# PostCrisis Synthesis — Technical
+# The body that returned — implementation and encounter
 
-The map is primarily architectural: a quiet room with miniature displays of the earlier maps, a central plinth with the closing sentence, and an exit panel. The technical content is the interaction layer that makes the miniatures clickable and the recap labels readable.
+Two primary artifacts share a real record: `assembly_return` reconstructs a starting and released pose at standing scale; `accountability_ledger` names the source and reports the same record. The six earlier artifact families and the authored floor remain. The body comparison occupies cell (7,12); the ledger stands to one side at (11,10), height 0.65 m and scale 1.8. Both face the approach. The comparison bodies have visual connections and no supporting collision.
 
-```gdscript
-class_name MiniatureDisplay extends Node3D
+## From a released joint to another hall
 
-@export var source_map_name: String = ""
-@export var recap_text: String = ""
+[AssemblyBodyStudy.gd](../../../algorithms/computationalbiology/molecular_framework/AssemblyBodyStudy.gd) uses the existing VRBody: thirteen named joints and twelve connections. A release more than 0.01 m from the position at pickup increments its edit count and calls [AssemblyPoseRecord.gd](../../../algorithms/computationalbiology/molecular_framework/AssemblyPoseRecord.gd). Merely viewing or holding a joint does not create a record. When two joints are held, releasing one saves the other at its previous released position.
 
-var is_hovered: bool = false
-
-func _on_mouse_entered() -> void:
-    is_hovered = true
-    highlight()
-
-func _on_mouse_exited() -> void:
-    is_hovered = false
-    unhighlight()
-
-func _on_selected() -> void:
-    if source_map_name != "":
-        get_tree().change_scene_to_file("res://commons/maps/%s/map.tscn" % source_map_name)
-```
-
-## Recap Labels
-
-Each miniature has an associated recap label that appears on hover. The labels are concise — one or two sentences — summarising the map's contribution to the arc.
+The record includes the source map, assembly identity and source hash, joint radii, starting and released coordinates, original and released connections, completed edit count and last-save time. A valid changed collar release can save a new relation without moving a point. The normal destination is `user://ada_research/assembly_pose.json`. It holds one latest pose, not a sequence of gestures or a visitor identity.
 
 ```gdscript
-class_name RecapLabel extends Label3D
-
-func fade_in(duration: float = 0.3) -> void:
-    modulate.a = 0.0
-    visible = true
-    var tween := create_tween()
-    tween.tween_property(self, "modulate:a", 1.0, duration)
-
-func fade_out(duration: float = 0.3) -> void:
-    var tween := create_tween()
-    tween.tween_property(self, "modulate:a", 0.0, duration)
-    tween.finished.connect(func(): visible = false)
+file.store_string(JSON.stringify(record,"\t"))
 ```
 
-## Central Sentence Plinth
+Validated data is written to a temporary file and renamed over the earlier record. A SceneTree cache carries the pose through hall unloads; the disk file carries it through application restarts. If writing fails, the cache remains available and the captions say `this session only`. Missing or malformed files produce the empty state. Private probes override the destination with a workspace-local file and never replace the visitor's save.
 
-The plinth holds a short sentence in a clean typeface on a plain base. No ornament, no background gradient, no visual emphasis beyond simple contrast.
+The [return gallery](../../../commons/artifacts/assembly_return/assembly_return.gd) reads the same record once per second and rebuilds only when its revision changes. Blue uses the recorded starting coordinates and graph; amber uses the released coordinates and graph. A changed edge is turquoise in the amber reconstruction. The status distinguishes displaced points, rerouted connections and connected groups. Without a record, only the current catalogue's blue starting pose appears. The second place is visibly empty. The comparison does not invent a visitor history.
 
-```gdscript
-class_name SentencePlinth extends Node3D
+## What the ledger counts
 
-@export var sentence: String = "The foundations crisis was not a failure but the moment the discipline admitted its own edges."
-@export var font_size: int = 24
-@export var text_color: Color = Color.WHITE
+This placement opts into `visitor_record:true`. Its fields give the Assembly Laboratory, UTC save time, joints displaced by more than 0.01 m from their starting positions, twelve connections, a rerouted-connection count when nonzero, and persistence state. Its counter counts completed changed releases. Moving a joint away and back can increase released edits while decreasing the number of displaced joints. Standing still adds neither. All fields retain their text contrast; they are parts of one record, not ageing entries.
 
-func _ready() -> void:
-    $Label3D.text = sentence
-    $Label3D.font_size = font_size
-    $Label3D.modulate = text_color
-```
+Other ledger placements retain their existing illustrative, timed examples. Reconfiguration preserves externally attached museum children.
 
-## Exit Panel
+Revisiting Assembly restores the released pose when its source hash and joint names match the current assembly, ready to edit again. The final gallery can reconstruct an older saved comparison using its included geometry even if the catalogue later changes. Schema 2 keeps original and current edge lists. Schema 1 remains readable as an unchanged graph. The Assembly workshop opens both endpoints of one connection for rerouting; the gallery is a reconstruction, not another editor. No undo history, path recording, identity attribution or new-joint operation is supplied.
 
-The exit panel points forward rather than back. It lists recommended next maps, organised by what the learner might be most ready for.
+## Verification and next question
 
-```gdscript
-class_name ExitPanel extends Node3D
+The private rendered museum run checks real record production, producer teardown, cache clearing and disk reload, reconstruction, revisiting, simultaneous held joints, invalid data, failed writes, empty state, legacy ledger behaviour and a selected continuous walking route. [Evidence and current chapter](../../../doc/book/iterations/2026-09-21-synthesis-return/index.html).
 
-@export var forward_options: Array = [
-    {"title": "Graph Theory", "path": "GT_Foundations", "note": "Concrete mathematical tools for relation and structure"},
-    {"title": "QFEP Laboratory", "path": "QFEP_Sandbox", "note": "The full framework made tunable"},
-    {"title": "Archive", "path": "Gallery", "note": "Every artifact from the curriculum, browsable"},
-]
+Headset readability, comfort, Quest performance and learner understanding remain unverified. A useful next experiment is to retain two alternatives or the hand's path: what questions become answerable when the record changes?
 
-func _ready() -> void:
-    for option in forward_options:
-        var entry := OPTION_BUTTON_SCENE.instantiate()
-        entry.title = option.title
-        entry.note = option.note
-        entry.pressed.connect(func(): get_tree().change_scene_to_file(resolve_path(option.path)))
-        add_child(entry)
-```
-
-## Ambient Lighting
-
-The quiet room uses a low-key lighting setup: a single directional light at low intensity, plus soft indirect illumination from the environment. The lighting is deliberately subdued to produce a reflective rather than exhibition-like atmosphere.
-
-```gdscript
-func _ready() -> void:
-    var world_env := WorldEnvironment.new()
-    world_env.environment = preload("res://commons/environments/quiet_room.tres")
-    add_child(world_env)
-```
-
-## Save State
-
-Reaching this map triggers a save state update: the curriculum is noted as having reached its closing synthesis. Returning to this map from any future session preserves the session history, so the miniatures can display per-learner statistics (time spent, revisits) if desired.
-
-```gdscript
-func _ready() -> void:
-    super()
-    var save := get_tree().get_first_node_in_group("save_manager")
-    save.mark_milestone("reached_postcrisis_synthesis", Time.get_datetime_string_from_system())
-```
-
-## Complexity
-
-The map's interactions are all O(1) per frame. Rendering the miniatures is O(miniature count) per frame — typically fewer than a dozen. Scene transitions triggered by clicks are O(load time) for the target scene.
-
-Within the sequence, Synthesis is the close and the handoff. The curriculum's argument — that post-crisis practice builds from admitted limits — lands as a modest bibliography rather than as a monument.
-
-## Save-State Integration
-
-The map records the learner's completion of the curriculum arc. A summary of their traversal — maps visited, artifacts engaged, befriended creatures, time spent — is written to a persistent profile.
-
-```gdscript
-class_name LearnerProfile
-
-var visited_maps: Array
-var befriended_creatures: Array
-var time_in_curriculum: float
-var milestones: Dictionary
-
-func write_synthesis_complete() -> void:
-    milestones["postcrisis_synthesis_complete"] = Time.get_datetime_string_from_system()
-    save_to_disk()
-
-func summary_statistics() -> Dictionary:
-    return {
-        "maps": visited_maps.size(),
-        "creatures": befriended_creatures.size(),
-        "hours": time_in_curriculum / 3600.0,
-    }
-```
-
-## Exhibition Mode
-
-The closing map supports an exhibition mode that replaces the miniatures with photographs or screenshots of a particular learner's journey. Other learners walking through can see what this learner spent time on.
-
-```gdscript
-class_name ExhibitionMode extends Node3D
-
-@export var profile_path: String
-
-func _ready() -> void:
-    var profile: LearnerProfile = load(profile_path)
-    for miniature in get_children():
-        if miniature.source_map_name in profile.visited_maps:
-            miniature.add_time_indicator(profile.time_per_map[miniature.source_map_name])
-            miniature.add_creature_indicator(profile.creatures_befriended_here[miniature.source_map_name])
-```
-
-## Ambient Audio
-
-A low ambient drone fills the room — a soft, slow-moving pad that does not distract but marks the space as distinct from the active-teaching maps. The drone is generated via the AirMusic station's generative system, running a long, slow phasing pattern.
-
-```gdscript
-func start_ambient_drone() -> void:
-    var ambient_player := AudioStreamPlayer.new()
-    ambient_player.stream = preload("res://audio/postcrisis_drone.ogg")
-    ambient_player.volume_db = -20.0  # very quiet
-    ambient_player.play()
-    add_child(ambient_player)
-```
-
-## Exit Ritual
-
-Leaving the map triggers a brief transition — fade to black, hold for a beat, fade in at the Lab. The transition marks the end of the formal arc and lets the learner land softly rather than cutting abruptly to the Lab's hub activity.
+[Latest connection checks](../../../doc/book/iterations/2026-09-21-assembly-reconnection/index.html) cover a changed relation without moved joints, its persistence and its return.

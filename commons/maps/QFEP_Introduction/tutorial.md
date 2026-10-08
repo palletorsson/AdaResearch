@@ -1,5 +1,14 @@
 # QFEP Introduction
 
+**Learning elements — proposed focus**
+
+*The labels below set the revision focus; the existing lesson still needs alignment.*
+
+- Weighted expressions
+- Scalar summaries
+- Retained inputs
+- Research proposals
+
 The formula arrives as four grabbable spheres on a plinth. Pick them up, read their names, feel the weights.
 
 Declare a term sphere.

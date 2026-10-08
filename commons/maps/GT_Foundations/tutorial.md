@@ -1,5 +1,14 @@
 # GT Foundations
 
+**Learning elements — proposed focus**
+
+*The labels below set the revision focus; the existing lesson still needs alignment.*
+
+- Vertex identifiers
+- Adjacency lists
+- Pending work
+- Traversal order
+
 A graph is vertices and edges. The Königsberg bridges have no Eulerian walk.
 
 Build a graph.

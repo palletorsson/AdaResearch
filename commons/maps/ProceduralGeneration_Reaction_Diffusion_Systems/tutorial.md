@@ -1,128 +1,35 @@
-# Reaction Diffusion Systems
+# A pattern has a metabolism
 
-Two chemicals. Four parameters. Infinite patterns.
+**Learning elements — proposed focus**
 
-Set up concentration grids.
+_The labels below set the revision focus; the existing lesson still needs alignment._
 
-```gdscript
-@export var size: Vector2i = Vector2i(128, 128)
-var U: Array = []
-var V: Array = []
+- Local reactions
+- Diffusion
+- Feed and removal
 
-func initialise() -> void:
-    U.clear(); V.clear()
-    for y in size.y:
-        var u_row: Array = []
-        var v_row: Array = []
-        for x in size.x:
-            u_row.append(1.0)
-            v_row.append(0.0)
-        U.append(u_row); V.append(v_row)
-```
+<!-- @turing_pattern_generator -->
 
-U starts at 1.0 everywhere. V starts at 0.0. Seed a small V region to start the dynamics.
+A patch interrupts the field. Before advancing it, predict where the next change should occur: everywhere at once, around the boundary, or only inside the patch? STEP performs one update. A hundred updates make the consequence easier to see while keeping the same rule.
 
-Seed the initial perturbation.
+At each address the program stores two concentrations, U and V. It reads the old arrays, calculates local changes and writes separate arrays for the next state. Only then are the buffers exchanged. The result does not depend on whether the display happened to draw the left edge first.
 
 ```gdscript
-func seed() -> void:
-    for dy in 10:
-        for dx in 10:
-            var x: int = size.x / 2 + dx - 5
-            var y: int = size.y / 2 + dy - 5
-            V[y][x] = 1.0
-            U[y][x] = 0.5
+var uvv = u * v * v
+var du = Du * lap_u - uvv + feed * (1.0 - u)
+var dv = Dv * lap_v + uvv - (kill + feed) * v
 ```
 
-Central seed. Patterns grow outward from it.
+Diffusion exchanges with neighbours; reaction, feed and removal change the local quantities. This is the Gray-Scott model, not a direct implementation of Turing's original chemical equations. REGIME chooses another feed/removal preset and restarts the field. SEEDING changes the initial arrangement. Compare those interventions separately.
 
-Compute the Laplacian.
+The grid wraps at its edges. Concentrations are clamped to the interval zero to one. These choices are part of the experiment. A field that seems to continue beyond its frame has a particular way of returning through it.
 
-```gdscript
-func laplacian(grid: Array, x: int, y: int) -> float:
-    var w := size.x; var h := size.y
-    return (
-        grid[(y + h - 1) % h][x] +
-        grid[(y + 1) % h][x] +
-        grid[y][(x + w - 1) % w] +
-        grid[y][(x + 1) % w] -
-        4.0 * grid[y][x]
-    )
-```
 
-Discrete Laplacian with periodic boundaries. Wrap-around prevents boundary artifacts.
 
-Gray-Scott update step.
+<!-- @reaction_diffusion -->
 
-```gdscript
-@export var feed: float = 0.055
-@export var kill: float = 0.062
-@export var du: float = 1.0
-@export var dv: float = 0.5
+The second reaction–diffusion display remains a running comparison with its own implementation and settings. It is not a synchronized duplicate of the desk study. Look for recurring spatial features, then return to the controls before attributing a difference to one coefficient.
 
-func step() -> void:
-    var new_U: Array = []
-    var new_V: Array = []
-    for y in size.y:
-        new_U.append([]); new_V.append([])
-        for x in size.x:
-            var u: float = U[y][x]; var v: float = V[y][x]
-            var uvv: float = u * v * v
-            new_U[y].append(u + du * laplacian(U, x, y) - uvv + feed * (1.0 - u))
-            new_V[y].append(v + dv * laplacian(V, x, y) + uvv - (feed + kill) * v)
-    U = new_U; V = new_V
-```
+The soft-body samples, detailed bulge and Confessing Body theatre preserve further connections to the chapter. A chemical field can colour a wall, displace a surface or feed a growth rule, but each application needs an explicit mapping. Pattern formation alone has not made a solid that can bear your weight.
 
-Two coupled PDEs. feed adds U; kill removes V; the uvv term converts U into V where both are present.
-
-Render as texture.
-
-```gdscript
-func to_texture() -> ImageTexture:
-    var image := Image.create(size.x, size.y, false, Image.FORMAT_RGBA8)
-    for y in size.y:
-        for x in size.x:
-            var intensity: float = clamp(V[y][x], 0.0, 1.0)
-            image.set_pixel(x, y, Color(intensity, intensity * 0.4, intensity * 0.7, 1.0))
-    return ImageTexture.create_from_image(image)
-```
-
-Colour intensity tracks V. Reddish-purple when V is high.
-
-Pattern types by parameter.
-
-```gdscript
-enum PatternType { SPOTS, STRIPES, LABYRINTHS, MITOSIS }
-
-func set_pattern(type: PatternType) -> void:
-    match type:
-        PatternType.SPOTS: feed = 0.040; kill = 0.065
-        PatternType.STRIPES: feed = 0.030; kill = 0.057
-        PatternType.LABYRINTHS: feed = 0.050; kill = 0.065
-        PatternType.MITOSIS: feed = 0.028; kill = 0.062
-```
-
-Four regions of the (feed, kill) plane produce distinct visual patterns. Each is a different self-organising regime.
-
-Step continuously.
-
-```gdscript
-func _process(_delta: float) -> void:
-    for _i in 5:  # multiple steps per frame
-        step()
-    texture_rect.texture = to_texture()
-```
-
-Five updates per frame. The pattern evolves visibly over seconds.
-
-Reset via button.
-
-```gdscript
-func _on_reset_pressed() -> void:
-    initialise()
-    seed()
-```
-
-Back to initial conditions. Useful when exploring different parameter regions.
-
-You can now set up Gray-Scott reaction-diffusion, compute the Laplacian, step the update rule, render as texture, and switch between spots/stripes/labyrinths/mitosis pattern regimes. The sequence continues with other morphogenesis techniques.
+This matters to the red thread. New combinations become possible, and so do new confusions. A useful bridge should let us inspect the operation that carries a field into a form. The next artifact provides precisely such a mapping—and gives one of its controls an especially demanding name.

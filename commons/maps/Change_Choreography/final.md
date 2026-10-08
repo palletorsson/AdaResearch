@@ -32,32 +32,56 @@ The wave needed difference. Making every rod agree would destroy that particular
 
 These rods are driven by an angle formula. They do not keep time because a restoring force pulls them back. A spring and a scripted rotor may repeat, but the repetition has different causes. The resemblance is a place to begin investigating.
 
-<!-- @conveyor_backlog -->
+<!-- @force_trial_conveyor -->
 
-Walk to the conveyor. A parcel drops onto the belt, travels toward its end and reaches the collection tray. The receiver flashes when it collects a box. Follow a single parcel before reading the numbers.
+Just get the deliveries through. A wooden crate drops onto the belt. A chair follows, then an extinguisher, then the black point we have been carrying through the museum. Each arrives with an outline and a use we think we know. The belt gives them the same direction.
 
-The inlet attempts a delivery every 1.2 seconds. The matched receiver can collect one arrived parcel every 1.2 seconds. There will still be boxes on the belt: transport takes time. An occupied machine is not necessarily a congested one.
+For a moment the task seems small enough to finish. Will the chair pass the gate? Will that ball stay on the tray? You begin watching for an answer. It is the pleasure of a short game clip before its reveal: enough of the arrangement is legible to make a prediction, and something is still undecided. A clean passage can satisfy that expectation. So can a crate catching the chair by one leg.
 
-Press **BACK UP**. The inlet keeps its interval; the receiver now collects at most one box every three seconds. Wait. Which change becomes visible first: a longer stay in the tray, a neighbouring box touching it, or a parcel losing its straight route?
+Take the rose grip and pull. The gate stays on its hinge; your hand applies a force to it. It also has a spring trying to close it. You are negotiating an opening with everything pressing from the other side. Hold the trigger while holding the grip and the next deliveries come faster.
 
-The parcels have rigid bodies. Friction carries them across a moving collision surface. Gravity and contacts determine how they fall, tilt and press against each other. The sculpture at the end is not a mesh that grows because we asked for a larger sculpture. Its shape is made by the deliveries that have not yet left.
+The receiver is a tray that rocks on another hinge. A load near its edge produces a turning effect. The tray moves, changes what it can support, and offers the next body a different landing. You opened a passage. You did not decide every use the passage would acquire.
 
-Press **RULE** and compare the account with the pile.
+Halfway through the batch, the same prefabs arrive larger and heavier. The chair is still recognisably a chair. It is also a wider obstruction, a longer lever, a body with a different inertia. The simple copy has carried more consequences than its name tells us.
 
-```gdscript
-here = admitted - collected
-```
+A wooden crate wedges under a seat. An extinguisher becomes a roller. A black ball finds the opening that the chair cannot use. These are possibilities of the arrangement, not stages in an animation. Another pull, another collision, another beginning can make a different pile.
 
-The receiver only collects a parcel that has physically reached its end of the machine. Its schedule cannot collect a promise. If the inlet is occupied, admission waits. At forty-eight live parcels the feed also waits, and the console says so. That finite capacity belongs to this implementation; the model does not hide extra boxes by deleting them.
+Everything worked, and this happened.
 
-Now press **RECOVER**. The receiver can collect one arrived box every 0.6 seconds. Existing boxes must still reach it. Watch the heap change before calling the repair complete. Increasing the collection rate and erasing the history are different operations.
+The phrase does not excuse a software fault. We still have to distinguish faulty collision shapes and unstable calculations from an unwanted result of working parts. Here, the moving surface, gravity, contact and hinges can produce a delivery disaster without an instruction to stage one. The engine resolves meetings; it does not know what we meant by successful delivery.
 
-**RESET** clears this local parcel experiment and restores matched intervals. It does not rewind the museum's elapsed time.
+This is the part of Garry's Mod's physics sandbox that interests us: familiar objects become things we can combine and test.[^overflow-gmod] A chair can leave the furniture catalogue and become a brace. The prefab saves us from making every part again, while its new neighbours make its old purpose insufficient. What else can an object support once we stop insisting on the use it arrived with?
+
+Pause the feed. The belt continues, the tray can keep moving, and the spilled objects remain. You can pick them up, push them with the long stick, or leave the arrangement standing. The present holds the consequence of previous meetings as position, velocity, rotation and contact. It has no separate memory of your intention.
+
+Keats's negative capability offers a way to stay here: to bear uncertainty without rushing to close it.[^overflow-keats] We still inspect the rules. We also give the strange result time to become something we had not planned to make. The wish for an interface that always completes our intention can hide this interval of discovery.
+
+There are thirty-two deliveries in this version. A blocked inlet waits instead of placing another body inside the obstruction. Ordinary spills are kept until RESET. Those limits are part of the apparatus, just as its force and friction are. We have arranged a place where a failed delivery can become an object of attention. What will you keep from the attempt?
 
 <!-- @ -->
 
-Every box followed the same admission rule. Every collection followed the same receiver rule. A difference between their intervals nevertheless changed the space. What counted as a successful delivery upstream became somebody else's obstruction downstream.
+<!-- study-spine:paired_time -->
 
-There is comedy in anticipating a clean handover and watching a parcel arrive at the wrong moment. There is also another form appearing in the interruption. For whom is the heap only waste? What would have to change for it to become a shelter, a route, a body worth keeping?
+<!-- @paired_time -->
 
-We have made those questions available; this first machine does not yet let you carry away its boxes or climb its heap as a designed route. Carry the distinction forward: a parameter can change a pattern, but the permissions of the body still need to be built.
+Two pale faces touch at their dark rims. Each carries a hand with a pink tip. Watch one pass the top, then watch the other. For a while, either could have told you where to look.
+
+Press **DRIFT RIGHT**. At first the difference is small enough to miss. Stay for another turn. The right hand has gained something it keeps gaining.
+
+Choose **SAME RATE**. The hands still disagree. They will carry this distance together for as long as the rule holds. Matching their speed has not recovered the time between them.
+
+**ALIGN** brings the right hand to the left. If you leave the rates different, the agreement immediately begins to go. Try aligning once without first making the rates equal. How long do you need to watch before the difference belongs to what you see?
+
+Gonzalez-Torres's paired clocks make shared time available through two ordinary objects. MoMA places the work in the context of his partner's AIDS diagnosis.[^paired-time] Here, both hands receive the same pulse from the game loop. Their disagreement has to be written in. Neither battery will fail; the program has given us an unusually easy power to bring them together again.
+
+We can keep that power visible without pretending it is something we could have offered the lovers. The two rims remain in contact throughout.
+
+<!-- @ -->
+
+Next, gravity. The place the spring returned to acquires a body of its own. Will the centre remain still when another body answers it?
+
+[^paired-time]: [MoMA, Felix Gonzalez-Torres, “Untitled” (Perfect Lovers), 1991](https://www.moma.org/collection/works/81074). Ada’s accelerated dials share one engine clock. Their programmed rate difference is a comparison, not a simulation of illness, battery failure or the historical work.
+
+[^overflow-gmod]: [Facepunch, Garry's Mod](https://gmod.facepunch.com/). The association here concerns its physics sandbox and reuse of objects; Ada uses its own existing prefab geometry, not Garry's Mod assets.
+
+[^overflow-keats]: Keats's phrase comes from his December 1817 letter to George and Tom Keats; see [Poetry Foundation, Negative capability](https://www.poetryfoundation.org/education/glossary/negative-capability). Applying it to the decision to stay with a simulated outcome is our interpretation.

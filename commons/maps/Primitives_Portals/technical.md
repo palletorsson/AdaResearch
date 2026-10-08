@@ -12,7 +12,7 @@ return Vector2i(start_rings + i, start_segments + i * 2)
 
 The final member has 22 rings and 41 ring segments. Godot describes `rings` as slices of the torus and `ring_segments` as edges around each ring. Its inner/outer radius parameters describe the torus's inner and outer radii; they should not be relabelled as the tube radius and centreline radius. [Godot 4.6 TorusMesh reference](https://docs.godotengine.org/en/4.6/classes/class_torusmesh.html).
 
-The existing authored base mesh and its transform remain. Origins are separated by 4.5 local metres along +Z, so the first-to-last span is 85.5 metres before mesh extent is included. The museum's live stamp measured about 87.1 metres of depth. This is an extended exhibit, not a small object guaranteed to fit inside the map's nominal 35 rows. A full-corridor route remains to be checked.
+The authored base mesh and transform remain. This map now sets `#portal_spacing:1.4`: twenty origins span 26.6 metres, placing the last at map Z 31.1 within the existing 35-row hall. The unconfigured artifact retains its 4.5-metre spacing elsewhere. Reversal changes refinement order without moving the rings. The native circular diagram beside the existing controls follows the selected ring count. It draws an inscribed regular polygon and a fixed 256-segment circle reference; analytic circumference and perimeter supply the numbers. The shaded chord-to-arc regions are visual aids, not the numerical perimeter gap. The geometry redraws only when the count changes. The book arranges three instances of this same production component at n = 3, 8 and 22.
 
 ## Select and reverse
 
@@ -69,4 +69,8 @@ The instrument panels mark themselves `em_local_instrument`. The museum's footpr
 - `commons/scenes/endless_museum.gd`, `_has_collider` and `_ledger_note`
 - `commons/testing/probe_portals_primary.gd`
 
-The probe checks pointer controls, mesh-family reversal, stable child names, finite polygon gaps, stage positions, tween pause/restart, actual museum stamping and footprint classification. It does not establish the complete corridor's accessibility or headset comfort. Primitives_Melencolia next asks what purpose these exact constructions should serve.
+The probe checks pointer controls, mesh-family reversal, stable child names, finite polygon gaps, stage positions, tween pause/restart, actual museum stamping and footprint classification. The 23 September pass additionally checks the live polygon selection, preserved Achilles controls, map-local spacing and reversal. Two controlled museum walks cover the central route from Z 3 to 32; a ray confirms floor support at the final ring. Those checks do not establish headset comfort, every possible path, or learner understanding. Primitives_Melencolia next asks what purpose these exact constructions should serve.
+
+## Separate track and controls — 24 September 2026
+
+The Achilles placement moves from source cell `(5,5)` to `(8,8)`, preserving its rotation, one-metre height and six-metre length. Its rail now runs along X = 8, from Z = 8 to Z = 2, above authored floor cells. The ring instrument stays beside the ladder at X = 5.1, Z = 3. The previous rail crossed the instrument's plane within its visible rectangle. The new position separates the two studies and keeps the entire track inside the hall's source extent. The source-map move takes effect when the hall is rebuilt; this pass does not overwrite the active museum's bake or restart it.

@@ -17,7 +17,24 @@
    "spatial_temperature": 0.75,
    "design_notes": "Funnel/pipeline â€” wide entrance (width 8) narrows progressively to tight exit (width 2). Walls converge like a flow bottleneck. Two artifacts placed at wide and narrow sections. Player feels increasing constraint."
   },
-  "title": "Maximum Flow, Minimum Cut"
+  "title": "Maximum Flow, Minimum Cut",
+  "museum": {
+  "wall_height": 5,
+  "open_roof": true,
+  "gate": false,
+  "gate_depth_rows": 0,
+  "piers": false,
+  "plinths": false,
+  "artifact_placement": "map",
+  "sculpture_clear_rects": [
+    [
+      1,
+      1,
+      11,
+      10
+    ]
+  ]
+}
  },
  "utility_definitions": {
   "t": {
@@ -63,7 +80,7 @@
    [ "", "", "grid3d_dfs", "", "", "", "", "", "", "", "grid3d_prim", "", "" ],
    [ "", "", "", "", "", "", "", "", "", "", "", "", "" ],
    [ "", "", "", "karger_algorithm:0:0:0.6", "", "", "", "", "", "", "", "", "" ],
-   [ "", "", "", "", "push_relabel_algorithm:0:0:0.6", "", "", "", "", "", "", "", "" ],
+   [ "", "", "", "", "push_relabel_algorithm:0:1.2:0.6", "", "", "", "", "", "", "", "" ],
    [ "", "", "", "", "", "", "", "", "", "", "", "", "" ],
    [ "", "", "", "", "", "", "", "", "", "", "", "", "" ],
    [ "", "", "", "", "", "", "", "", "", "", "", "", "" ],

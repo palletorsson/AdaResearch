@@ -1,5 +1,14 @@
 # GT Flow
 
+**Learning elements — proposed focus**
+
+*The labels below set the revision focus; the existing lesson still needs alignment.*
+
+- Capacity and flow
+- Residual capacity
+- Excess
+- Reversible allocation
+
 Max flow from source to sink. Edmonds-Karp via BFS.
 
 Build a flow network.

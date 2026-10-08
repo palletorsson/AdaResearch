@@ -1,41 +1,13 @@
-# CA ExpandingSpace — Artifacts
-*Cellular Automata: Local Rules, Global Patterns · lambda_edge · 5 artifacts*
+# CA_ExpandingSpace — retained collection
 
-> Larger neighborhoods reach further. The Moore neighborhood sees eight cells; extend it and see sixteen, twenty-four. Information propagates faster. Patterns scale differently. The choice of neighborhood shape determines what structures can form and how quickly they spread.
+| Artifact | Role | This pass |
+|---|---|---|
+| decaying_bridge | Primary / book hero | Proximity study, shared health frieze, matching floor/wall witness and support/recovery experiment above a lined basin. |
+| ca_chair_test | Secondary | Retained furniture study in the rear gallery. |
+| catalyst_vent | Secondary | Retained with its existing emission configuration. |
+| catalyst_prompter_box | Secondary | Retained; existing viewport-texture diagnostics need separate review. |
+| cellular_automata_3d_tree | Secondary | Retained growth/geometry, with host lighting for this museum placement. |
+| crossway_ca | Secondary | Retained under authored placement; the previous automatic hall removed it when opening a route. |
+| dark_sphere | Decoration | Retained spatial reference. |
 
-The map, read through what it holds — its artifacts in the order you meet them:
-
-## CA Chair Test
-![CA Chair Test](/scene-catalog/ca_chair_test.png)
-
-Cellular Automata Chair Test.
-
-`ca_chair_test`
-
-## Dark Sphere
-![Dark Sphere](/scene-catalog/dark_sphere.png)
-
-USE a neutral sphere as a reference for scale, silhouette, and atmospheric change.
-
-`dark_sphere`
-
-## Cellular Automata 3D Tree
-![Cellular Automata 3D Tree](/scene-catalog/cellular_automata_3d_tree.png)
-
-Tree-like structure growth using 3D CA.
-
-`cellular_automata_3d_tree`
-
-## Crossway CA
-![Crossway CA](/scene-catalog/crossway_ca.png)
-
-Crossway Cellular Automata.
-
-`crossway_ca`
-
-## Decaying Bridge
-![Decaying Bridge](/scene-catalog/decaying_bridge.png)
-
-A bridge that decays when stepped on.
-
-`decaying_bridge`
+The bridge and frieze read one graded state. No artifact quota is imposed. Further primary passages should follow tested encounters with the retained works, rather than borrowing a mechanism from their names.

@@ -1,1 +1,3 @@
-Divide the cube, remove the center. The Cantor principle extends into three dimensions—each face loses its middle, each edge its center. What remains is neither solid nor hollow: infinite surface, zero volume, walkable absence. Dimension 2.727: between plane and solid.
+# A hole becomes a place
+
+The first cut makes a crossing inside a cube. The next makes smaller crossings. Borrow flight, follow one through, then find an opening the eye can enter before the body can.

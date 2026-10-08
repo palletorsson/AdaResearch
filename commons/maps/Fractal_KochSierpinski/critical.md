@@ -1,111 +1,15 @@
-# Fractals_4 - Critical Reflection
+# What the reading leaves room for
 
-## Structure Through Absence
+Koch changes the path between held endpoints. Sierpinski distributes less area across more pieces. The counting bench changes its estimate without changing its sample. None of these observations needs a general equation between complexity and freedom. Each gives us a different decision to examine.
 
-The Cantor set is not built—it is carved. Begin with a whole, remove parts, repeat. What remains is not the leftover of destruction but a new kind of structure, defined precisely by what was taken away.
+The negative triangle is especially useful. Its source already locates the middles that the canonical drawing omits. Promoting them to the visible work changes the object of attention without changing the corner recurrence. Queer misuse can begin in this existing distinction: which computed part is permitted to become the figure? The experiment should let the visitor encounter that switch before interpreting it.
 
-This is **negative construction**: identity through exclusion, form through deletion, presence through absence.
+There are limits to the analogy. The mesh can be rebuilt because vertices and rules remain available. Restoring a view is not equivalent to restoring a destroyed relation. The observer controls all three buttons of VIEW; the represented parts do not decide whether they wish to be displayed. Asking who may revise the rule therefore exceeds the currently implemented controls. It remains a design question, not an achievement certified by this sculpture.
 
-## The Paradox of Uncountable Dust
+The box counter makes a related distinction concrete. Empty means no sampled point was assigned to this grid address. It cannot mean no significant relation exists there. Changing the fitting range while keeping all 8,000 points holds one source of difference still and exposes another. A better fitted line might improve a description without improving the conditions of anything described.
 
-After infinite iterations, the Cantor set contains:
-- **Zero length** (all intervals have been removed)
-- **Uncountably many points** (more than the integers, as many as the real numbers)
+Read this beside [Entropic morality](../../../doc/research/qfep/entropic-morality.md): an incomplete model does not by itself authorize irreversible loss of what it leaves out. The hall supplies a small encounter with the incompleteness of a reading. It does not derive an ethical rule from fractal dimension. Counts, occupied area, finite-scale slope and Shannon entropy are different quantities; this hall computes no entropy score.
 
-How can something have no size yet contain infinitely many points? This is the fractal paradox: measure and cardinality come apart. Size and number, which seem related, reveal themselves as distinct.
+The four-generation boundary also sustains an encounter. It keeps controls responsive and comparisons legible, although performance must still be measured on a headset. More generations might reveal a useful distinction or bury the existing one. A protective limit can make exploration possible. The question is whether that limit can be inspected, revised and justified for the bodies who use the room.
 
-The Cantor set is **more than nothing and less than something**.
-
-## Dimension 0.631
-
-The fractal dimension is not a metaphor. It is a calculated value:
-
-D = log(2) / log(3) ≈ 0.631
-
-This number tells us the Cantor set is:
-- More complex than a point (D = 0)
-- Less complex than a line (D = 1)
-- Exactly 63.1% of the way from point to line
-
-**Fractional dimension is precise**. It is not vague "in-betweenness" but mathematically determined positioning on the complexity spectrum.
-
-## What Gets Removed
-
-The Cantor set removes the middle third—always the center, never the edges. This is not arbitrary:
-
-- Edges are **kept**: the boundaries, the margins, the extremes
-- Centers are **removed**: the middle, the average, the norm
-
-Is this a geometry of marginality? A form that privileges the periphery over the center, the extreme over the moderate?
-
-## The Menger Sponge: Walking Through Infinity
-
-The Menger sponge is the Cantor set applied to 3D space. After infinite iterations:
-- **Infinite surface area** (every point is boundary)
-- **Zero volume** (all interior has been removed)
-- **Dimension ≈ 2.727** (more than a plane, less than a cube)
-
-At sufficient scale (27 meters), the passages become walkable. You can walk through infinite surface enclosing zero volume. Every step is on a boundary—there is no interior, only edge.
-
-**The sponge is all threshold.**
-
-## Ternary and Binary Logic
-
-Points in the Cantor set are exactly those whose ternary (base-3) expansion contains no 1s—only 0s and 2s.
-
-This is a **binary logic hidden in ternary form**:
-- The 1 represents the middle, the moderate, the mediating
-- Removing all 1s leaves only the extremes: 0 and 2
-- The Cantor set is what remains when the middle path is forbidden
-
-What would a society look like that systematically removed the middle? Only extremes surviving, no moderate positions remaining?
-
-## Queer Dimensions
-
-If dimensions can be fractional, then the integer dimensions (0, 1, 2, 3) are special cases, not the norm. Most self-similar structures live between integers.
-
-This challenges the idea that dimension is categorical:
-- Not "point or line" but "anywhere on the spectrum"
-- Not "surface or solid" but "2.727 dimensional"
-- Not binary classification but continuous variation
-
-**Fractal dimension is queer dimension**: existing between categories, measured precisely yet refusing integer identity.
-
-## The Cantor Function (Devil's Staircase)
-
-Map the Cantor set to [0,1] using a continuous function. The result is a "staircase" that:
-- Climbs from 0 to 1
-- Is flat almost everywhere (on the removed intervals)
-- Rises only on the Cantor set (which has zero length)
-
-This is a function that somehow climbs while standing still—rising only on a set of measure zero. **Progress without visible motion.**
-
-## Nothing Left, Everything Remains
-
-The philosophical puzzle: we remove more and more (eventually "all" the length), yet uncountably many points remain. Removal is not destruction but transformation.
-
-What changes:
-- Total size (goes to zero)
-- Continuity (becomes "dust")
-- Dimension (drops from 1 to 0.631)
-
-What remains:
-- Cardinality (uncountably infinite)
-- Self-similarity (Cantor set at every scale)
-- Structure (precise rule-governed organization)
-
-**Deletion preserves something essential while removing everything measurable.**
-
-## Conclusion: The Generativity of Absence
-
-Fractals_4 demonstrates that complexity can emerge from removal. The Cantor set and Menger sponge are defined by what is not there, yet they possess infinite detail, precise dimension, and inexhaustible structure.
-
-This is:
-- **Negative theology**: defining the divine by what it is not
-- **Apophatic identity**: selfhood through exclusion
-- **Marginal existence**: the periphery as location of complexity
-- **Threshold being**: all boundary, no interior
-
-The Cantor set asks: what remains when you remove everything that can be removed? The answer is not "nothing" but "something infinitely complex with zero measure."
-
-More than nothing. Less than something. Precisely 0.631 dimensional.
+Carry this into Menger: additional holes do not guarantee accessible passages. We will have to examine both the space and the capabilities lent to the visitor.

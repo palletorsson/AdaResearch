@@ -6,11 +6,15 @@ There is a room inside the hall. Pink gathers in its corners. The little sphere 
 
 What would have to change for those folds to carry your feet?
 
-Keep that question while you return to the panel. Four small windows show the same coordinates with one, two, four and six cloud terms. Press FREEZE. The room holds the moment of the press. Its colours and the small windows stop changing together. We can stay with a difference long enough to inspect it.
+Keep that question as you turn towards the panel on the inner wall. Four small windows show the same coordinates with one, two, four and six cloud terms. Press FREEZE. The room holds the moment of the press. Its colours and the small windows stop changing together. We can stay with a difference long enough to inspect it.
 
-Press DRESS, then enter again. Grey has taken the place of pink. Something of the cloud remains, but its depth and atmosphere have changed. Follow the wall towards the door. The opening is still there. Your feet meet the same floor.
+Press DRESS without leaving the room. Grey takes the place of pink around you. Your hand has changed the enclosure while your body stays inside it. Something of the cloud remains, but its depth and atmosphere have changed. Follow the wall towards the door. The opening is still there. Your feet meet the same floor.
 
-We have changed what the surface offers the eye. The wall's vertices and the shapes your body collides with have stayed put. This distinction is useful precisely because the surface can be so persuasive. You might still walk differently towards a dark patch, or hesitate before something that looks deep. What the player can physically cross and what the player imagines crossing need not arrive together.
+We have changed what the surface offers the eye. The wall's vertices and the shapes your body collides with have stayed put. This distinction is useful precisely because the surface can be so persuasive. You might still walk differently towards a dark patch, or hesitate before something that looks deep. What your body can cross and what you imagine crossing need not arrive together.
+
+![The four grey windows and their controls inside the pink noise room.](/book-review/doc/book/figures/Noise_6_Wall/inside-controls.png)
+
+*The small windows keep their different counts while the room wears the chosen sum. The doorway remains in place when the finish changes.*
 
 At the panel, compare the first grey window with the second. A smaller variation has entered the same region. The four- and six-term windows add finer disturbances. LAYERS carries each of those cumulative choices into the room; the four windows keep their separate counts so you can look back.
 
@@ -40,7 +44,7 @@ More terms can also make the grey window brighter. Every weighted magnitude is n
         float bare = clamp(cloud_noise(uv * cloud_scale, time * time_scale) * term_gain, 0.0, 1.0);
 ```
 
-The comparison uses a gain of two, and the shader clamps anything above one. Any two sums of 0.5 or more would become the same white, although when the four windows were measured at one held moment, even their brightest pixel reached only about half-white. Grey is already an interpretation, with its own capacity to lose a difference. There is no final undressed picture waiting underneath every other picture.
+The comparison uses a gain of two, and the shader clamps anything above one. Any two sums of 0.5 or more would become the same white. Grey is already an interpretation, with its own capacity to lose a difference. There is no final undressed picture waiting underneath every other picture.
 
 Try BASIS while the moment stays held. Perlin, Value, Cellular and Simplex offer different constructions to the same accumulation. These are the implementations in this shader, with their own scaling constants. Watch what happens to a contour you had begun to recognise. Returning to Perlin restores this construction at the held coordinates. There is no seed button here; the shader's hash uses fixed constants.
 
@@ -53,7 +57,7 @@ Press DRESS again. The pink returns around the same held cloud sum. The finished
 
 Colour mixing, edge and corner shading, roughness and small changes to the lighting normal follow. LAYERS changes the cloud sum; that separate detail loop still has four terms. A one-term cloud can therefore wear a detailed finish. The button's number names one part of a construction.
 
-Take this knowledge inside. The material has crossed from a small square to an enclosure and a sphere. Can you follow one cloud around a corner?
+Turn from the small windows towards the wall beside them. The material has crossed from a small square to an enclosure and a sphere. Can you follow one cloud around a corner?
 
 Each wall piece starts its own UV coordinates. The sphere wraps a different coordinate chart around itself. The same calculation can stretch, repeat or meet a seam when another surface receives it. The room is surrounded by a shared procedure, but it is not an unbroken sample of a world-space cloud.
 

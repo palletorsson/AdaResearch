@@ -1,122 +1,38 @@
-# Fractals_10 - Technical Tutorial
+# Compare procedures and representations
 
-## Julia Set Algorithm
+This hall follows Fractal_GoldenSpiral and precedes LSystems_Grammar_Lab. It reuses two existing, tested instruments in a new comparison; the underlying algorithm scripts are unchanged.
 
-### Basic Iteration
+## Installed controls
 
-```gdscript
-func julia_iterate(z: Vector2, c: Vector2, max_iterations: int) -> int:
-    # z and c are complex numbers represented as Vector2
-    # Real part = x, Imaginary part = y
+- `cantor_set:180#lesson:true`: NEXT/BACK select cuts 0–5; HISTORY switches the full record and latest generation; GHOST marks new removed middles; RESET returns to cut zero; RULE reveals the calculation. Initial length 6 m, thickness 0.12 m, row spacing 0.45 m. The lesson freezes physical intervals.
+- `recursive_tree:180:0:0.42#lesson:true`: FORM, STRATA, REACH, ENDS, RESET and RULE. The generated block tree is reduced in scale, while its desk counter-scales to preserve physical button size. Readings share one generated geometry. REACH/ENDS volumes are visual annotations, not colliders.
 
-    for i in range(max_iterations):
-        # z = z² + c
-        # (a + bi)² = a² - b² + 2abi
-        var z_new = Vector2(
-            z.x * z.x - z.y * z.y + c.x,
-            2.0 * z.x * z.y + c.y
-        )
-        z = z_new
+For Cantor cut n, the current population has 2^n intervals of length 6/3^n m, total 6(2/3)^n m. HISTORY alters visibility and collision for earlier rows without deleting their nodes or advancing the cut. GHOST uses separate meshes without collision; those meshes are not in current_bars. The mathematical limiting set is distinct from these finite thick intervals.
 
-        # Escape condition: |z| > 2
-        if z.length_squared() > 4.0:
-            return i  # Escaped at iteration i
+The block tree calls generate_branches(tree_root, branch_origin, num_main_branches, 0, 3). Each accepted call creates branches, optionally details, then calls itself with current_depth + 1. The local RNG is seeded at build. Descendant views traverse the actual nested scene graph, excluding TreeLesson itself. ENDS marks centres of the deepest recorded blocks; these marks should not be described as exact botanical tips. Bounds include empty space, overlap and display choices; they are not an entropy or traversability measurement.
 
-    return max_iterations  # Didn't escape (probably in set)
-```
+## Source excerpts in final.md
 
-### Rendering the Julia Set
+1. `algorithms/fractals/cantorset/cantor_set.gd`, perform_iteration: new_length = bar_length / 3.0.
+2. `algorithms/fractals/recursive_tree/recursive_tree.gd`, generate_branches: the depth return and recursive call, copied exactly with surrounding indentation removed.
+3. Next hall comparison: `commons/artifacts/lsystem_editor/lsystem_editor.gd`, PRESETS[0] = [F, {F: F+F-F-F+F}, 90.0, 4, Koch Curve]. This is not the equilateral generator shown by koch_curve.
 
-### Famous Julia Sets
+## Room staging
 
-```gdscript
-# Different c values produce different Julia sets
+The twelve-row approach leads into the former 19×21 museum enclosure. Its raised sphere cell remains; the obsolete teleporter floor hole is filled. Historical July/August grid maps and the current map are archived under doc/space/fractal-synthesis-2026-09-14. All ten original tokens remain. `fractal_procedure_gallery` adds a physical prompt, warmer lighting, hides standalone screen overlays, and stages selected rear specimens for comparison.
 
-var julia_gallery = {
-    "dendrite": Vector2(-0.7, 0.27015),
-    "rabbit": Vector2(-0.123, 0.745),
-    "siegel_disk": Vector2(-0.391, -0.587),
-    "douady_rabbit": Vector2(-0.122561, 0.744862),
-    "spiral": Vector2(0.285, 0.01),
-    "disconnected": Vector2(0.285, 0.53),
-    "basilica": Vector2(-1.0, 0.0),
-    "airplane": Vector2(-1.755, 0.0)
-}
+Koch uses its existing trace mode at 0.09 scale. The gasket is held after three subdivisions at 0.3 scale. Cloud wind animation is held. The Fibonacci view calls its original display methods once at time zero and stops its local _process; its downward diagram is raised above the floor. These are explicitly held examples, not new generated procedures. Other works, including the attractor and Romanesco, retain their own animation. The fixture runs only in Fractal_Synthesis and stops scanning after staging; failed discovery reports an error after 15 seconds. Original scenes elsewhere are untouched.
 
-func render_gallery():
-    for name in julia_gallery:
-        var c = julia_gallery[name]
-        var image = render_julia(c, 512, 512, 1.0)
-        save_image(image, "julia_%s.png" % name)
-```
+Desktop pointer, geometry and route evidence belong in the dated review receipt. Human headset reach, readability, comfort and Quest performance require a later pass. Rear works retain development opportunities; this hall does not certify every secondary interaction.
 
-### Julia-Mandelbrot Relationship
+Scene reference repairs: koch_curve.tscn now resolves its declared script path instead of a duplicated UID shared with koch_curve_1. apply_grid_config stores evidence before _ready and builds only once meshes exist. RecursiveTreeUI resolves its owning root with get_parent().get_parent(), independent of instance name. The final runtime test includes ordinary and preconfigured Koch scenes.
 
-### Interactive Parameter Exploration
+## Recipe comparison table — 8 October 2026
 
-```gdscript
-extends Node3D
+The room-local `fractal_procedure_gallery.gd` now installs one table between the original Cantor and block-tree desks, at hall-local (9.5, 0, 8.5), facing the approach. It does not alter their generators or the map's artifact tokens. Native validation found the old exit marker at grid (1,31) blocked against the side wall. It now occupies (9,31), aligned with the existing rear doorway; only those two utility cells changed. Walking through that portal completes arrival in LSystems_Grammar_Lab. The destination's own onward exit reports an obstruction and remains a separate next-hall repair.
 
-var current_c = Vector2(-0.7, 0.27015)
-var julia_texture: ImageTexture
+`commons/artifacts/fractal_recipe_table/recipe.gd` is the complete printed learner program. The installed `museum_recipe_table.gd` inherits it and adds the plinth and nearby NEXT, KEEP, RESTORE and RESET buttons. The carried PointBody chooses one of three retained fractions (1/4, 1/3, 2/5) through its local x position. Its trigger keeps an independent dictionary copy. Both interval arrays are reconstructed from their own settings, with a common display scale of 0.34. Three cuts is the initial depth; five is the cap.
 
-func _ready():
-    update_julia()
+NEXT, RESTORE and RESET are refused while the point is held. RESET edits LIVE only; KEEP replaces the previous snapshot. This is one local in-memory comparison, lost when the instance unloads. No saved drawing, imported student record or cross-hall persistence is implied. The production adapter ignores global Enter; Enter is an additional control in the separate learner reconstruction.
 
-func _input(event):
-    if event is InputEventMouseMotion and Input.is_mouse_button_pressed(MOUSE_BUTTON_LEFT):
-        # Map mouse position to c parameter
-        var mouse_pos = event.position
-        current_c = Vector2(
-            (mouse_pos.x / get_viewport().size.x - 0.5) * 4.0,
-            (mouse_pos.y / get_viewport().size.y - 0.5) * 4.0
-        )
-        update_julia()
-
-func update_julia():
-    var image = render_julia(current_c, 256, 256, 1.0)
-    julia_texture = ImageTexture.create_from_image(image)
-    $JuliaDisplay.texture = julia_texture
-```
-
-### 3D Julia Visualization
-
-### Smooth Iteration Count
-
-```gdscript
-func julia_smooth(z: Vector2, c: Vector2, max_iterations: int) -> float:
-    for i in range(max_iterations):
-        var z_new = Vector2(
-            z.x * z.x - z.y * z.y + c.x,
-            2.0 * z.x * z.y + c.y
-        )
-        z = z_new
-
-        if z.length_squared() > 256.0:  # Higher bailout for smoothing
-            # Smooth iteration count
-            var log_zn = log(z.length_squared()) / 2.0
-            var nu = log(log_zn / log(2.0)) / log(2.0)
-            return float(i) + 1.0 - nu
-
-    return float(max_iterations)
-```
-
-## Implementation Notes
-
-### GPU Acceleration
-Julia sets are embarrassingly parallel—each pixel is independent:
-
-## Key Takeaway
-The Julia set is the Mandelbrot's complement—same formula (z² + c), different question. Mandelbrot asks "which c values are bounded?"; Julia asks "which z values are bounded for fixed c?". Each point in the Mandelbrot set indexes a connected Julia set; each point outside indexes disconnected dust. **Parameter space and dynamic space are dual views of the same underlying mathematics.**
-
-## Implementation Notes and Complexity
-
-The synthesis map assembles the sequence's fractal techniques into a single composable system. Each fractal — Cantor subtraction, Koch addition, Mandelbrot iteration, Sierpinski removal — is represented as a generator whose output can be composed with the outputs of the others. The composition graph is a small DAG; nodes are generators, edges carry geometry or colour data.
-
-Generators are O(1) to instantiate and O(structure size) to evaluate. A Koch snowflake at depth 5 produces 3 times 4 to the 5 equals 3072 line segments; a Sierpinski triangle at depth 5 produces 3 to the 5 equals 243 filled triangles. The composition cost depends on how outputs are combined: overlaying is O(sum of sizes), intersecting requires spatial data structures and is O(N log N) for N combined elements.
-
-The map's combinator set is deliberately small. Overlay, intersect, mask, and scale-offset are the four operations. Each operation has a clear geometric interpretation, and the small vocabulary means that the learner can compose complex structures without a combinatorial explosion of options. Larger combinator vocabularies tend to produce more expressive systems but harder-to-predict results, and the map prioritises predictability.
-
-Memory management matters at deep composition. A tree with multiple generators at depth 5 or higher can produce tens of thousands of geometric primitives. Godot's scene-tree representation becomes a bottleneck at this scale; the map uses MultiMeshInstance3D for repeated primitives and batches draws aggressively.
-
-Within the sequence, Synthesis closes the fractals arc. Previous maps introduced individual fractals; this map treats them as primitives in a compositional algebra. The algebra's expressive power is the sequence's closing argument: fractals are not only individually beautiful but compositionally productive, and the combinations produce structures that no single fractal could have generated alone.
+The next hall's Cantor grammar is a comparison for the thirds variant only. Its fitted line segments must be normalized to the six-metre seed before comparison. Quarters and two fifths do not follow from that same F/f grammar. Native assertions and rendered museum evidence are recorded in `doc/book/iterations/2026-10-08-synthesis-a-rule-kept/`; they do not establish headset comfort, Quest performance or learner understanding.

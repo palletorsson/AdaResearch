@@ -1,5 +1,13 @@
 # ML Sequence Memory
 
+**Learning elements — proposed focus**
+
+*The labels below set the revision focus; the existing lesson still needs alignment.*
+
+- Retained state
+- Gated updates
+- History dependence
+
 Recurrent network. The hidden state carries the past forward.
 
 Build a simple RNN cell.

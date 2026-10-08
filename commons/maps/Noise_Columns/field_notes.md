@@ -23,3 +23,19 @@
 **Rejected.** Leaving all nine columns and colouring three of them differently: the comparison needs identical bodies, and nine moving meshes is the cost Astra asked to bound. Rejected too: labelling the columns from the start, which would have made the room a diagram of an answer instead of a question.
 
 **Pending.** A headset walk; a person watching long enough to catch the return; Astra's review. The museum's passage severance is open on the forum. The marble shader's own parameters are untouched — this pass only takes it off and puts it back.
+
+## 2026-09-13 — Astra: where does change enter a body?
+
+The review starts from all three authored works. The trio remains primary; the existing dark_sphere and synthesis_stand join it as primary book encounters. The orb's independent clock and the stand's hush/swarm construction extend the question into appearance and the choices that construct a body. A single question is allowed to widen in response to the material.
+
+The first rendered review passed the earlier shaft/control checks but exposed an omitted input: bases and capitals still read shader TIME under FREEZE. The shared displacement shader now has opt-in local-time uniforms, defaulting to its old behaviour. The trio feeds those uniforms; BASELINE holds zero, while the two moving columns use the trio clock. The nine material clock inputs remain unchanged during FREEZE. The dark orb's independent time continues, so the pause has a visible boundary.
+
+The readout has a larger tilted case and supports. Its phases now describe the stored shaft meshes, not values calculated between rebuilds. MARBLE affects the shaft veining specifically; the bases and capitals keep their own patterns and displacement. Both CPU and GPU clock inputs participate in FREEZE, while SPIN deliberately remains independent.
+
+The synthesis stand was partly concealed by a dealt sculpture. It moved from (2,9) to (3,4), facing the approach, with a reserved viewing area. All three authored tokens, the recovered structure and the utility layer remain. A local straight passage, three metres wide, clears the previously reported museum severance. No shared passage code was changed.
+
+The final and supporting text now follow the actual scalar-to-shaft mapping, held reference, separate material operations, independent orb and six-part body. Removed unsupported claims include 3D Perlin erosion, a terrain and entrance slider, inverse deformation, and noise that can never return on a schedule. The earlier text is preserved in the review's before/ snapshot. Retained connectivity is not proof of an invertible embedded surface; the square-root height rule can fold early rings below the root at larger phases. The original non-trio column ring remains available in the source.
+
+Accepted run: 53 checks, zero failures, engine exit 0, PID 25876, 09:15:49–09:16:26 +02:00. Actual desktop-pointer input operated FREEZE, REVEAL, SPIN and MARBLE. Full vertex-array repeatability, shader clocks, retained artifacts and the hall/passage route were checked. The saved hand is unchanged. Headset comfort, reach and Quest performance remain pending. Engine cache-write/startup warnings and build-cost observations are retained separately from the passing assertions.
+
+[Review, images and recorded traces](http://localhost:3003/research/possible-bodies/noise-columns.html). [Evidence and next step](../../../doc/space/columns-review-2026-09-13/README.md). Next: inspect the whole of Noise_One, then develop its relief/colour comparison and any other substantial encounters.

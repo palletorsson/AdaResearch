@@ -1,5 +1,13 @@
 # NonEuclidean Spaces
 
+**Learning elements — proposed focus**
+
+*The labels below set the revision focus; the existing lesson still needs alignment.*
+
+- Distance models
+- Geodesics
+- Triangle comparisons
+
 Two alternatives, equally consistent with the first four postulates. Build a curvature slider that moves continuously between hyperbolic, Euclidean, and elliptic space.
 
 Declare the curvature state.

@@ -1,41 +1,25 @@
 # Primitives Portals — Artifacts
-*Primitives: Points Build Worlds · F_order · 5 artifacts*
 
-> A toroidal portal sequence guided by increasing rings approaching π, staging continuity as asymptotic relation rather than arrival. This map makes approximation and limit visible: discrete rings approximate the circle without ever reaching it. It foregrounds the tension between the countable and the infinite within computational geometry.
+Five existing placements remain. Two primary encounters investigate finite approaches to limits. Neither turns these meshes into teleporters.
 
-The map, read through what it holds — its artifacts in the order you meet them:
+## combine_portals — primary
 
-## Dark Sphere
-![Dark Sphere](/scene-catalog/dark_sphere.png)
+At (3,4), twenty tori retain the mesh family `(3+i, 3+2i)` and their original size. Map-local `portal_spacing:1.4` fits every member into the 35-row hall. NEXT RING and PREVIOUS highlight a member; REVERSE changes refinement order in fixed positions.
 
-USE a neutral sphere as a reference for scale, silhouette, and atmospheric change.
+The existing side instrument now includes a native planar circle/polygon diagram. Its side count follows the selected torus's ring count. Its perimeter is a separate planar comparison, not a measurement of torus accuracy. The same diagram supplies the book figure.
 
-`dark_sphere`
+## Achilles and the Tortoise — primary
 
-## capsule
-![capsule](/scene-catalog/capsule.png)
+At (8,8), the six-metre track starts held. NEXT STEP places a halving stage, PLAY interpolates on a regular schedule, PAUSE freezes that movement, and RESTART restores the start. Ten stages leave Achilles' anchor 6/1024 metres from the limit. Visible overlap and coordinate equality are different observations.
 
-Grid-shaded capsule primitive with glowing wireframe overlay.
+## Capsule — secondary
 
-`capsule`
+At (1,2), the capsule offers another surface and aperture comparison. It remains available without carrying the chapter's main progression.
 
-## combine_portals
-![combine_portals](/scene-catalog/combine_portals.png)
+## Dark Sphere — decorative remainder
 
-Duplicates a base torus to form a tunnel of portals that grow denser down the hallway.
+At (0,0), the inherited grid enclosure remains secondary to the present investigation. Its presence does not make it a primary argument.
 
-`combine_portals`
+## Floating Sphere Field — atmosphere
 
-## Achilles and the Tortoise
-![Achilles and the Tortoise](/scene-catalog/achilles_tortoise.png)
-
-Zeno's paradox of Achilles and the Tortoise. Watch infinite steps converge to a finite limit: A_n = L*(1-1/2^n). Each step halves the gap — infinite steps, finite distance. The paradox dissolves in the limit.
-
-`achilles_tortoise`
-
-## Floating Sphere Field
-![Floating Sphere Field](/scene-catalog/floating_sphere_field.png)
-
-A sparse field of soft glowing spheres drifting in the void on a single GPUParticles3D. The subtle successor to the Kusama dot-grid biome layer — presence-by-scarcity instead of overwhelming repetition. Ambient atmosphere for the void around the player.
-
-`floating_sphere_field`
+At (3,17), the existing field remains within its authored bounds. It contributes the setting rather than a further convergence experiment.

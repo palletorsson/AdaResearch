@@ -1,97 +1,84 @@
-# Situated Computation
+# Which part of a judgement tells you where it came from?
 
-Three viewing platforms, one dataset, three different pictures. Build objectivity as the careful accounting of perspective.
+**Learning elements**
 
-Declare a standpoint.
+- Observation provenance
+- Exposure time
+- Camera transforms
+- Retained views
 
-```gdscript
-class_name Standpoint
-extends Resource
+The conflict room asked for sources. Here the source travels visibly with the verdict.
 
-@export var name: String = ""
-@export var origin: Vector3 = Vector3.ZERO
-@export var filter_weights: Dictionary = {}
-@export var color: Color = Color.WHITE
-```
+<!-- @situated_readout -->
 
-Each platform is a standpoint. The origin is where the observer stands. The filter is what the standpoint can see.
+Read all four panels. Keep SUBJECT #4729 fixed in your comparison and record each verdict, confidence and footer. Return to the first panel and identify which fields changed between panels.
 
-Build three standpoints.
+Then keep one panel in view. COVER puts a strip over its address; FOOTNOTE restores the footer; WITNESS adds a symbolic eye and station frame. The verdict and percentage remain unchanged. What has become easier to question, and what evidence is still missing?
 
-```gdscript
-func build_standpoints() -> Array[Standpoint]:
-    var sps: Array[Standpoint] = []
-    sps.append(make_standpoint("analyst", Vector3(-5, 2, 0), {"metrics": 1.0}))
-    sps.append(make_standpoint("user", Vector3(0, 1.7, 5), {"friction": 1.0}))
-    sps.append(make_standpoint("archivist", Vector3(5, 2, 0), {"history": 1.0}))
-    return sps
-```
+Four authored verdicts share one identifier. Your movement changes which panel you read. It does not make a panel recalculate an assessment of you.
 
-The analyst sees metrics. The user feels friction. The archivist traces history.
-
-No viewpoint is a superset of another.
-
-Project the dataset through a standpoint.
+The source makes the operation inspectable:
 
 ```gdscript
-func project(records: Array, sp: Standpoint) -> Array:
-    var out: Array = []
-    for r in records:
-        var score := 0.0
-        for key in sp.filter_weights:
-            score += float(r.get(key, 0.0)) * sp.filter_weights[key]
-        out.append({"record": r, "score": score})
-    return out
+var pos := global_position
+var key := _resolve_quadrant_key(pos)
+var verdict: Dictionary = QUADRANT_VERDICTS.get(key, QUADRANT_VERDICTS["NW"])
+
+_verdict_label.text = verdict.label
+_verdict_label.modulate = verdict.color
+_confidence_label.text = "confidence %d%%" % int(verdict.confidence * 100.0)
+_footer_label.text = "view from %s (%.1f, %.1f)" % [key, pos.x, pos.z]
 ```
 
-The standpoint scores each record against its own weights. The same record receives three different scores. The dataset is the same; the readings diverge.
+The dictionary supplies a verdict and a confidence; the footer supplies a location. There is a revealing extra decision: this hall explicitly assigns NW, NE, SW and SE through its map tokens. That override takes precedence over the position-based fallback. The four-way disagreement has been composed for us. The percentages have not been earned by measuring the subject.
 
-Render records as heights on a platform.
+[Implementation](../../../commons/artifacts/situated_readout/situated_readout.gd). This is an excerpt from the artifact, not a standalone program.
+
+A visible address makes a claim easier to question, but cannot make it correct. ORDERLY and CREATIVE are not logical negations; they could both describe someone under different criteria. DANGEROUS demands an account of danger to whom and in what circumstances. Even an agreeable label needs evidence. The room's productive limit is the gap between displaying a standpoint and exposing the method that produced its judgement.
+
+<!-- @ -->
+
+Keeping viewpoints visible is different from combining their contributions into a common object.
+
+## Next experiment — not yet a visitor control
+
+Give each panel an inspectable criterion and the evidence used. Compare disagreement caused by different criteria with disagreement caused by different observations. First verify that all four small panels can be read without losing their footers.
+
+
+<!-- study-spine:museum_witnesses -->
+
+## Return: The room arrives late
+
+Change the delay from three seconds to one; retain the camera and compare the recorded times. Begin with the supplied study in the museum and compare the two states from the same place. Name what remained fixed before inspecting the code.
+
+This application reuses loop, trace, array, situation. The small edit belongs to the learner; the display, main player and physical controls are supplied. Its adapter is `commons/artifacts/spine_studies/station.gd` (`witness`), which calls the study’s own setters. Change one parameter, predict the visible consequence, then test another value. Reconstructing every mesh is not a prerequisite for this encounter.
+
+[Study and making notes](/book-review/doc/book/iterations/2026-10-02-relations-sentences-and-witnesses/index.html). The display stays fixed while its data, words or images change. RESET returns the original comparison.
+
+<!-- study-edit:museum_witnesses -->
+
+### One source change: The room arrives late
+
+Change the initial delay from 3.0 to 1.0 and reload. D stays blank until enough frames exist. Compare A and D using their exposure times; then HOLD E and change VIEWPOINT. The first edit uses the clock and retained state. The supplied SubViewport cameras share the current museum World3D; the bounded image buffer is a close-reading extension, not a prerequisite for the edit.
 
 ```gdscript
-func render_column(parent: Node3D, record: Dictionary, score: float) -> void:
-    var column := MeshInstance3D.new()
-    column.mesh = BoxMesh.new()
-    column.scale = Vector3(0.2, max(0.05, score), 0.2)
-    column.position = record.get("position", Vector3.ZERO)
-    parent.add_child(column)
+var delay_seconds := 1.0
 ```
 
-Each record becomes a column whose height is the standpoint's score. The three platforms tell three different stories about the same city.
+Source: `commons/artifacts/spine_studies/museum_witnesses.gd`. Use the prepared scene to run and compare.
 
-Label each platform with its accountability.
+<!-- study-reference:museum_witnesses -->
 
-```gdscript
-func label_platform(label: Label3D, sp: Standpoint) -> void:
-    var keys: Array = sp.filter_weights.keys()
-    label.text = "%s sees: %s" % [sp.name, ", ".join(keys)]
-```
+### Reference and scope
 
-The sign names what this standpoint attends to. Nothing is hidden; nothing is pretended to be neutral. Accountability replaces the view from nowhere.
+The ZKM presentation describes five episodes on separate monitors linked by steel tubing. Our five monitors carry museum cameras, not Gilligan’s films. The relation concerns distributed attention, mediation and dependence on a shared system.
 
-Mark disagreement bands between platforms.
+[ZKM: Melanie Gilligan, The Common Sense](https://zkm.de/en/artwork/the-common-sense).
 
-```gdscript
-func disagreement(records: Array, sps: Array) -> Array:
-    var out: Array = []
-    for r in records:
-        var scores: Array = sps.map(func(s): return project_one(r, s))
-        var spread: float = scores.max() - scores.min()
-        out.append({"record": r, "spread": spread})
-    return out
-```
+<!-- witness-portable-cameras -->
 
-Records with high spread are precisely where the perspectives matter most. The spread is not noise to smooth away. It is the evidence.
+### Take a view
 
-Colour the highest-spread records across all platforms.
+Cameras A and B are the pink grabbable bodies beside the original readouts; C stays fixed. On desktop, right-click to pick up, look to aim, and right-click again to release. The usual XR pickup grip moves and turns the same bodies. They stay in the released pose. RETURN CAMERAS restores the current starting views; release the cameras before using return, VIEWPOINT or RESET. Returning the cameras keeps an explicitly held screen image. RESET also clears the held image.
 
-```gdscript
-func highlight_spread(columns: Array, spreads: Array, threshold: float) -> void:
-    for i in columns.size():
-        if spreads[i].spread > threshold:
-            (columns[i] as MeshInstance3D).modulate = Color(1.0, 0.6, 0.2)
-```
-
-Orange bands ring the contested records across all three platforms simultaneously. The controversy is structured, not scattered.
-
-You have built a triple viewing station where perspective is declared before measurement. The next map, Collective Knowledge, turns three standpoints into four reasoning agents who must share a commons.
+The camera follows the physical body's transform, with its lens 0.32 metres forward. The delayed and held records retain their exposure pose and source label as well as the image and time. Moving A does not rewrite those earlier frames. This reuses coordinates and transforms; constructing the camera housing and pickup system remains supplied.

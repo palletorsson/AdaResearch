@@ -1,93 +1,40 @@
-# Applied Ethics
+# Who becomes easy to address before anyone speaks?
 
-Every classifier has an outside. Stage three live cases where the model commits, and show what the commitment costs.
+**Learning elements**
 
-Declare a case record.
+- Spatial arrangements
+- Comparison variables
+- Participation conditions
 
-```gdscript
-class_name EthicsCase
-extends Resource
+The previous hall moved labels. Here positions, count and scale arrange possible participants.
 
-@export var title: String = ""
-@export var features: Dictionary = {}
-@export var ground_truth: bool = false
-@export var stakes: String = ""
-```
+<!-- @room_shape_demonstrator -->
 
-Each case is a resource. Features drive the model; stakes name who bears the outcome. Keeping them on one object prevents drift.
+Select HEAD, then CIRCLE, before choosing PAIR. Count every chair in each model. Compare the head chair with a side chair, then compare two chairs around the round table. Imagine a participant who needs a clear sightline to an interpreter.
 
-Run the classifier.
+The long-table model has a head chair and six smaller side chairs. The circle has six equally scaled chairs. Count, scale and position change between the plans; COLOUR restores the original red/green contrast; the pair is not an experiment that isolates table shape.
+
+The source makes the operation inspectable:
 
 ```gdscript
-func classify(case: EthicsCase) -> bool:
-    var score := 0.0
-    for key in case.features:
-        score += float(case.features[key]) * weights.get(key, 0.0)
-    return score > threshold
+for i in 6:
+    var a: float = TAU * float(i) / 6.0
+    var chair := _make_chair(chair_color_distributed)
+    chair.scale = Vector3(s, s, s)
+    chair.position = origin + Vector3(cos(a) * 0.4 * s, floor_y + 0.1 * s, sin(a) * 0.4 * s)
+    _add_part(chair)
 ```
 
-Linear model, deliberately simple. Complexity is not what makes ethics hard. The threshold is a choice the designer must defend.
+Six iterations divide a full turn, TAU, into equal angles. cos and sin place each chair on a ring around origin. The little circle carries the arrays, transformations and waves we have already learned. Equal spacing is what this loop guarantees. Equal opportunity to speak would require another kind of evidence.
 
-Compute the confusion outcome.
+[Implementation](../../../algorithms/postfoundationscrisis/room_shape_demonstrator.gd). This is an excerpt from the artifact, not a standalone program.
 
-```gdscript
-func outcome(case: EthicsCase) -> String:
-    var predicted := classify(case)
-    if predicted and case.ground_truth: return "true_positive"
-    if predicted and not case.ground_truth: return "false_positive"
-    if not predicted and case.ground_truth: return "false_negative"
-    return "true_negative"
-```
+Press COLOUR while keeping PAIR selected. The chairs stay in place, but green now recommends the circle. NEUTRAL removes this colour contrast without changing the arrangement. Before accepting that judgement, consider sightlines, hearing, turning and entry. A shared centre can be useful without meeting every body's needs. Geometry sets conditions for participation; it does not contain the participants' agreements or resolve unequal authority. The next design should let those conditions be compared with people using the space.
 
-Four outcomes, not two. False positives and false negatives are the outside of the classifier. The ethics lives there.
+<!-- @ -->
 
-Render the outcome on a case plinth.
+A place at the table does not make every account agree. The next hall keeps two accounts visible.
 
-```gdscript
-func label_case(plinth: Label3D, case: EthicsCase) -> void:
-    var kind := outcome(case)
-    plinth.text = "%s\n%s\n→ %s" % [case.title, case.stakes, kind]
-    plinth.modulate = color_for_outcome(kind)
-```
+## Next experiment — with participants
 
-Each plinth holds a case, a stake, a verdict. The colour codes what kind of mistake was made, if any. The verdict is never just a number.
-
-Colour the outcomes.
-
-```gdscript
-func color_for_outcome(kind: String) -> Color:
-    match kind:
-        "true_positive": return Color(0.2, 0.8, 0.3)
-        "true_negative": return Color(0.5, 0.6, 0.5)
-        "false_positive": return Color(0.9, 0.4, 0.2)
-        "false_negative": return Color(0.8, 0.1, 0.1)
-    return Color.WHITE
-```
-
-False negatives are the deepest red. A missed call costs more than a miscall when the stakes are unequal. Colour encodes that asymmetry.
-
-Adjust the threshold live.
-
-```gdscript
-func _on_threshold_slider_moved(v: float) -> void:
-    threshold = lerp(-1.0, 1.0, v)
-    for plinth in case_plinths:
-        label_case(plinth, plinth.get_meta("case"))
-```
-
-The slider is the moral dial. Moving it right reduces false positives and increases false negatives. There is no setting with neither.
-
-Show the aggregate cost.
-
-```gdscript
-func aggregate_costs(cases: Array) -> Dictionary:
-    var counts := {"fp": 0, "fn": 0}
-    for c in cases:
-        if outcome(c) == "false_positive": counts.fp += 1
-        elif outcome(c) == "false_negative": counts.fn += 1
-    return counts
-```
-
-The total FP/FN count updates on every slider move. The ethics is not in the model; it is in the choice of where to place the knob.
-
-You have built a room where every classification is a commitment. Carry that framing into Paraconsistent Engineering, which turns contradiction from a fatal system state into an engineered affordance.
+Build a comparison with equal chair count, scale and colour, changing only the arrangement. Test sightlines and approach routes before claiming the circle is more accessible. Retain the original coloured pair as a comparison visitors can choose after inspecting each plan.

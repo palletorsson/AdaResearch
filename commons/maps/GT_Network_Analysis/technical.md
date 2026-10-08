@@ -75,3 +75,21 @@ Within the sequence, Network_Analysis is the measurement chapter. GT_Connectivit
 ## One More Note on Weighted Centrality
 
 Closeness centrality — one over the average shortest-path distance from a vertex to all others — is a fourth common measure the map can display. It rewards central vertices in the literal sense: vertices whose average distance to the rest of the graph is small. Computing it requires running shortest-path from every vertex, giving O(V · (V + E)) total.
+
+
+<!-- study-spine:evidence_network -->
+
+## Installed application: A relation needs a record
+
+`evidence_network` occupies a new adjoining bay, after the existing encounters. Cell [11, 23], rotation 180°, museum adapter `res://commons/artifacts/spine_studies/network.tscn`. Original response to Mark Lombardi; no claim of exact reconstruction.
+
+Remove one recorded relation; compare incoming and outgoing counts before moving the layout. Reuses graph, line, array; adds no prerequisite node. The display and main-player controls are supplied.
+
+
+<!-- study-reference:evidence_network -->
+
+### Reference and scope
+
+Lombardi assembled narrative structures from researched relations. Our invented institutional records make provenance inspectable without pretending to reconstruct his historical investigations.
+
+[Whitney Museum: Mark Lombardi](https://whitney.org/artists/7340).

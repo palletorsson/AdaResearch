@@ -1,1 +1,1 @@
-A marble in a bowl comes to rest at the bottom and nowhere else — not because anything placed it there, but because the bottom is where the energy stops dropping. That is the whole principle of this chapter in one object: a form is the answer to a minimization problem. The gradient is the arrow that always points downhill, and rolling along it is how matter, and every optimizer, finds its shape.
+Two beginnings. One downhill instruction. Two valleys. Take a step before revealing the rule, then ask what the word finished can actually mean.

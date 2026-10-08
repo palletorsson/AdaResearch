@@ -1,55 +1,18 @@
-# Noise Perlin / Simplex
+# Try a comparison, then test its conditions
 
-Two fields, one aisle, and four things held still. The order below is the order of the encounter.
+**Learning elements**
 
-Walk between the fields and point at a difference. Then read the text above the left panel, and the text above the right one, line by line.
+- Matched comparisons
+- Generator settings
+- Value differences
 
-One format string prints both readouts, so the two are the same shape. The first line differs in exactly one word, its basis; the second line differs in every number it prints. That is the whole demonstration: the seed, the octaves, the frequency, the gain and the two coordinates are identical, so the numbers can only have moved because the word did.
+1. Choose a feature in each field before looking at their names. REPLAY the Simplex field, move FREQ, then replay it again.
+2. Press SAMPLE on the central instrument. Follow the pink markers to the same local coordinate in both displays. Read their two values and the signed difference.
+3. Compare the live generator settings. The matched pair differs in noise_type; a shared seed gives repeatability within each basis, not corresponding ridges.
+4. Move one FREQ or OCTAVES slider. Watch the plate name the changed condition. Use MATCH to restore both declared configurations; use either REPLAY to restore only its own side.
+5. Press VIEW. Check whether the answers change when relief becomes a flat colour display. Return to relief. The cube grid is a display choice shared by two different generators.
+6. Step beneath each arch. Come out and press VIEW: why do the cube fields flatten while the arches remain curved? Follow the shared sample into the arch; then change a frequency from outside and walk beneath the changed surface. An occupied arch holds its shape until the visitor leaves.
+7. Visit the small pink terrain. Its third noise coordinate advances by .5 every .5 seconds. Then watch the independent orb. MATCH belongs to the pair and does not restart either clock.
+8. Follow the central aisle onward. The labelled Lab Path side portal is not connected. Cellular Automata changes the operation from querying a field to updating stored neighbourhood states.
 
-Press REGEN on the left. The seed changes and the field is redrawn:
-
-```gdscript
-func regenerate_noise() -> void:
-	current_seed = randi()
-	noise_generator.seed = current_seed
-	update_noise_field()
-```
-
-Press REPLAY. The declared seed is restored and the field, and its two values, come back:
-
-```gdscript
-func reseed(s: int) -> void:
-	current_seed = s
-	noise_generator.seed = s
-	update_noise_field()
-```
-
-Move the FREQ slider on one side. The features change scale; the two values move. Move it back until the readouts match again.
-
-Read where the basis is chosen. It is one match statement in the visualizer:
-
-```gdscript
-func _noise_type_for(name_in: String) -> int:
-	match name_in:
-		"perlin":
-			return FastNoiseLite.TYPE_PERLIN
-		"value":
-			return FastNoiseLite.TYPE_VALUE
-		"cellular":
-			return FastNoiseLite.TYPE_CELLULAR
-		_:
-			return FastNoiseLite.TYPE_SIMPLEX
-```
-
-The default is simplex. The display named Perlin never received the word until it was placed with `generator:perlin`.
-
-Read how both fields sample. The same line, at the same coordinates, half a metre apart:
-
-```gdscript
-func generate_noise_at(x: float, z: float) -> float:
-	return noise_generator.get_noise_2d(x * frequency, z * frequency)
-```
-
-Set both OCTAVES sliders to one. With a single octave the basis is easiest to see; with six the detail buries it. Compare the character of the variation rather than any particular ridge: the same integer in two bases gives two unrelated fields.
-
-Behind the pair, the small terrain turns the same sampling into ground. The corner door is labelled Lab Path and does nothing: its code looks for two ways to load a map and finds neither, so it is a door in the sense a painted door is. The hall after this one on the spine is CA_Introduction, which keeps a grid of cells whose values come from their neighbours, not from a function.
+No walkability, isotropy or performance ranking follows from these small display fields. A shelter comparison would need bodies and lines of sight; a speed comparison would need measurements. Keep those questions available for a later instrument.

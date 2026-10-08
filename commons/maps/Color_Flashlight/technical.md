@@ -1,136 +1,85 @@
-# Color_Flashlight - Technical Tutorial
+# Colour at a receiving surface
 
-*This tutorial builds on Color_Walls (continuous gradients) and closes the color sequence by isolating additive light control as a final implementation pattern before returning to the Lab.*
+This is the second Colour room. It follows Color_Context_Placed and prepares Color_Nails. Keep two variables distinct: the light's colour and the receiving material's base colour.
 
-## The Concept as Scene Data
+## Repeat the comparison
 
-Color_Flashlight is driven by one map interactable entry:
+Hold a coloured lamp, aim it away from the board, then bring it back across another beam. Release it; the pickable is configured to remain frozen in place when released. Compare separate pools with their overlap. White begins aimed aside so it does not obscure the first RGB comparison. Bring it onto the board as another contribution.
 
-```json
-[" ", " ", " ", " ", " ", "flashlight_demo:180", " ", " ", " ", " ", " "]
+There is no on/off control or hue picker in this encounter. Moving and aiming the lamps are the controls. Other museum illumination remains present.
+
+## Trace the implementation
+
+The map places this token at grid (9,9):
+
+```text
+flashlight_demo:180:0:1#plinth:0#mount:standing#receiver_sides:7
 ```
 
-That artifact resolves to:
-- `res://algorithms/effects/flashlight_demo/flashlight_demo.tscn`
+The registry resolves `flashlight_demo` to `res://algorithms/postprocessing/flashlight_demo/flashlight_demo.tscn`. That scene instances `flashlight.tscn` four times. Each copy inherits XRTools' pickable scene and contains a spotlight and a `ColorSetter` child running `flashlight_color.gd`.
 
-The demo scene then instantiates four copies of one grabbable flashlight scene and assigns each a different `light_color`.
-
-## Core Scene Composition
-
-The composition in `flashlight_demo.tscn` is explicit and easy to extend:
-
-```tscn
-[node name="RedFlashlight" parent="." instance=ExtResource("1_flashlight")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.5, 0.6, 3)
-
-[node name="ColorSetter" type="Node3D" parent="RedFlashlight"]
-script = ExtResource("2_color")
-light_color = Color(1, 0, 0, 1)
-
-[node name="GreenFlashlight" parent="." instance=ExtResource("1_flashlight")]
-[node name="BlueFlashlight" parent="." instance=ExtResource("1_flashlight")]
-[node name="WhiteFlashlight" parent="." instance=ExtResource("1_flashlight")]
-```
-
-The scene also adds:
-- a dark `WorldEnvironment` (`ambient_light_energy = 0.15`)
-- a white `Canvas` target mesh for beam readability
-
-## Color Assignment Script
-
-The color logic lives in `flashlight_color.gd`:
+The colour assignment is actual source:
 
 ```gdscript
-extends Node3D
-
-@export var light_color: Color = Color.WHITE
-@export var target_path: NodePath
-
-func _ready() -> void:
-	var target_root = _resolve_target_root()
-
-	var spot = _find_spot_light(target_root)
-	if spot:
-		spot.light_color = light_color
-	else:
-		push_warning("FlashlightColor: No SpotLight3D found in %s" % target_root.name)
-
-	var lens = _find_lens_mesh(target_root)
-	if lens and lens is MeshInstance3D:
-		var mat = StandardMaterial3D.new()
-		mat.albedo_color = light_color.lerp(Color.WHITE, 0.5)
-		mat.emission_enabled = true
-		mat.emission = light_color * 0.5
-		lens.material_override = mat
+var spot = _find_spot_light(target_root)
+if spot:
+    spot.light_color = light_color
 ```
 
-Two implementation details matter:
-1. It sets both the beam (`SpotLight3D.light_color`) and the physical lens tint, so rendered object and emitted light stay visually coherent.
-2. It warns if no spotlight is found, which makes broken scene wiring visible during iteration.
+Red, green, blue and white instances supply `Color(1,0,0,1)`, `Color(0,1,0,1)`, `Color(0,0,1,1)` and `Color(1,1,1,1)`. Lens tint and emission are set separately so the handle's lens identifies the beam. They do not recolour the board.
 
-## Robust Node Resolution
+The receiving `Canvas` is a 6 × 4 × 0.1 metre CSG box. Its material has albedo `(0.95, 0.95, 0.95, 1)` and roughness `0.9`. The lamps have a 25-degree spotlight angle, range 20 metres and shadows enabled. Direction, distance, material and other scene lighting contribute to the rendered result; pixel values should not be equated directly with the exported RGB value.
 
-The helper search is recursive and allows flexible scene nesting:
+## Standing installation
 
-```gdscript
-func _find_spot_light(node: Node) -> SpotLight3D:
-	for child in node.get_children():
-		if child is SpotLight3D:
-			return child
-		var found = _find_spot_light(child)
-		if found:
-			return found
-	return null
-```
+The optional `mount:standing` metadata is read by `flashlight_demo.gd` before it stages the receiving surface. It places the board centre at local y=2, enables board collision, and puts each handle at y=1.1. Lamp energy is 2.5 in this installation; white begins turned 60 degrees aside. The map places the root at museum floor level. Legacy placements retain their previous mounting.
 
-Because this search does not require fixed child names, the same `ColorSetter` script can be reused if the flashlight scene hierarchy changes.
+The separate `ground` authoring option supports `white`, `swatch`, `relief`, `mirror` and `none`. This room uses `white`. These are authoring configurations, not controls offered to the visitor. In particular, the option called `mirror` changes material properties; it does not install the project's player-reflection system.
 
-## XR Pickable Flashlight Pattern
+## What has been checked
 
-Each flashlight instance is itself an XR Tools pickable object (`flashlight.tscn`):
+`commons/testing/probe_flashlight_lesson.gd` loads the actual endless museum, checks placement, floor and lamp heights, exercises XRTools pickup/release using a supplied moving grabber, and compares rendered light contributions against an unchanged receiving material. Its lamp-visibility toggles are test isolation only. A separate test aims a held lamp aside and back, matching the book's gesture.
 
-```tscn
-[node name="Flashlight" instance=ExtResource("1_pickable")]
-freeze = true
+See `field_notes.md` for the recorded run. Tracked controllers, headset comfort and frame-rate performance are not established by this desktop test.
 
-[node name="SpotLight3D" type="SpotLight3D" parent="."]
-light_energy = 12.0
-spot_range = 20.0
-spot_angle = 25.0
+Carry the distinction into Color_Nails: a change of illumination differs from assigning colour to the material of a preview or tracked hand.
 
-[node name="GrabPointHandLeft" parent="." instance=ExtResource("4_grab_left")]
-[node name="GrabPointHandRight" parent="." instance=ExtResource("3_grab_right")]
-```
+## Faceted receiver — 23 September 2026
 
-This gives you:
-- standard grab behavior from `pickable.tscn`
-- hand-specific grab points for stable controller alignment
-- reusable highlight ring support
+The standing installation can opt into `receiver_sides:5` or `receiver_sides:7`; the default zero adds nothing. Color_Flashlight selects seven. The numeric key is registered in `GridInteractablesComponent.CONFIG_PARAM_NAMES` so it cannot be misread as a tutorial rotation. The root retains its authored 180-degree yaw.
 
-## Why Dark Context Is Required
+The new receiver is at local (-5.6, 0, -1), opposite the existing cube. A 0.65-metre pedestal carries a sphere of radius 0.85 metres, centred 1.5 metres above the floor. It uses Godot SphereMesh with seven radial divisions and three rings, converted to flat-shaded triangles. Degenerate pole triangles are omitted; the final mesh has 42 triangles. Seven is not its total face count. A triangle-mesh static collider follows the visible surface. Both board and sphere use the same near-white matte, nonemissive material; no emissive wire overlay masks the lamp response.
 
-The map pairs `flashlight_demo` with `dark_sphere` (`res://commons/primitives/sphere/dark_sphere.tscn`), which is a large black inward sphere:
+The focused probe and native captures are in `doc/book/iterations/2026-09-23-flashlight-faceted-sphere/`. Forty-three checks pass in the isolated production museum: authored placement/yaw, outward flat normals, collider, supporting floor and three standing-body clearances, pickup/movement/release of all four lamps, and changed rendered red contribution on the unchanged sphere when a held lamp moves sides. All four lights remain on; no lamp toggle is introduced. Five-division authoring and legacy mounting are also checked. The book figure crops and labels two native renders from the same camera.
 
-```tscn
-[sub_resource type="SphereMesh" id="SphereMesh_s108s"]
-radius = 80.0
+These supplied-grabber desktop checks do not establish tracked-controller reach, headset comfort, a complete walk around the pedestal or Quest performance.
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_r6p2k"]
-albedo_color = Color(0, 0, 0, 1)
-```
 
-Technically, this removes background visual noise and makes beam/surface interaction readable at a glance.
+## Walk-in light rooms — 28 September 2026
 
-## Key Takeaway
+`commons/artifacts/colour_light_rooms/colour_light_rooms.tscn` builds the east annex. Its first room is 8.8 m square; a single central OmniLight3D at y=2.1 m cycles through five RGB values over 110 seconds. Receiving geometry shares near-white albedo (0.92, 0.91, 0.88). `set_phase()` changes light colours and source/reveal materials, never the receiving material or geometry. Emission alone does not light the walls: actual local lights supply the coloured contribution. Existing museum illumination can still contribute.
 
-Color_Flashlight uses a compact pattern that is useful beyond this map: instantiate one reusable XR pickable light object, then configure behavior per-instance through exported color parameters. Combined with a dark environment and neutral target surface, this creates a reliable additive-color test rig where RGB overlap is legible and physically intuitive in VR.
+The second room is 9.2 by 14 m with roof slabs at y=4.4, 5.75 and 7.1 m. Each slab consists of four strips around an actual hole. Two concealed OmniLight3Ds illuminate each level; a narrow emissive reveal marks its opening. The 2 October revision gives all slabs the same outer footprint and connects their openings with vertical return walls, creating a continuous stepped light well. A 1:7.5 ramp leads to the y=1.2 m landing. Wall, slab, ramp and furniture bodies have static colliders. The museum sky is visible through the top opening; there is no dynamic daylight calculation.
 
-## Within the Sequence
+Meshes and local lights share rendering layer 20, keeping the new lights off ordinary museum exhibits. Six roof washes and two recess washes have shadows disabled; the central source retains shadows. The rendered desktop test verifies the result; headset cost and comfort still need measurement.
 
-Color_Flashlight detaches colour from the object it lights. The lighting-rather-than-material argument sets up the sequence's closing claim that colour is a relational rather than possessive property.
+The artifact implements `get_museum_occupied_cells()`. The museum honours this opt-in list for route occupancy. Only body-height partitions, benches and rails reserve cells; floor, roof and traversable ramp do not seal the entire room envelope. Physical collisions remain active. Existing artifacts retain their normal occupancy behaviour.
 
-The per-frame cost of the map scales with the number of instanced artifacts and the resolution of the procedural effects. On typical consumer hardware the whole map runs at 60 frames per second with the default parameter ranges; pushing the parameters to their extremes can raise GPU load to the point where frame rate drops, and the map does not hide this from the learner. A corner indicator reads out the current frame time so the learner can observe the cost of their parameter choices.
+Placement: cell (25,10), floor-mounted and pinned, offset (-0.5,0,-0.5). The original hall expands east to 42 by 20 cells, opening only x=18, z=8..12 of its old boundary. The first exhibit and all original utility positions remain.
 
-Failure modes worth naming. A learner who pushes the sliders off the calibrated ranges can produce visually incoherent output — flickering surfaces, runaway growth, or flat featureless fields. The map's controls are clamped at safe bounds, but within those bounds the parameters still interact nonlinearly, and the nonlinear interactions are part of what the map rewards. Understanding the interactions requires running the parameters through their ranges rather than setting them once from a preset.
+## Pink recess — 2 October 2026
 
-The map is one station in a longer arc. The artifacts it introduces reappear in later maps with extended parameter sets, composed behaviours, or different contextual framings. The learner who walks this map carefully carries a vocabulary the remaining sequence depends on, and the vocabulary is the map's concrete contribution to the curriculum.
+The first room now has a 5.8 m wide, 3.2 m high opening at local z=-3.1. Cheeks, lintel, soffit and return walls bound an approximately 1.1 m deep recess ending at the original back wall. Its floor is continuous with the room. Two fixed-colour OmniLight3Ds at x=±2.62, y=2.8, z=-3.65 provide pink illumination (1, 0.025, 0.30), energy 0.65. A thin unshaded lip marks the opening; it does not itself cast light on the receiving walls. The bench moves to z=3.8.
+
+The roof reveals are 0.025 m thick and sit just below their solid slabs, avoiding coplanar overlapping faces. The three roof hues are separated by 0.055 cycle phase rather than the earlier 0.20. The well still opens all the way through to the rendered sky.
+
+Current native evidence: `doc/book/iterations/2026-10-02-light-an-opening/figures/report.json`. It records actual museum assembly, collision rays, sampled standing-capsule clearances and floor support, route footprint, fixed receiving material and changed rendered light. The capture runtime preserves the artifact's active collision objects while freezing its colour loop. This is desktop evidence; the new study has not been walked in a headset.
+
+
+<!-- study-spine:sphere_in_pink -->
+
+## Installed application: A sphere in pink
+
+`sphere_in_pink` occupies a new adjoining bay, after the existing encounters. Cell [21, 29], rotation 180°, museum adapter `res://commons/artifacts/spine_studies/pink.tscn`. Original response to Sol LeWitt; no claim of exact reconstruction.
+
+Change one lamp state; compare pink light with a pink surface. Reuses point, colour; adds no prerequisite node. The display and main-player controls are supplied.

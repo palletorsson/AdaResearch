@@ -23,3 +23,32 @@
 **Rejected.** A single volume with the two rules alternating in time (press to switch): it makes the comparison a memory test and there is no moment when both are in view. Rejected too: enforcing the distance after birth (a repulsion that pushes points apart), which would have made a prettier toy and destroyed the room's only real distinction.
 
 **Pending.** A headset walk; a person carrying a point with their own hand rather than the desktop pointer's; Astra's review. The galleries' own internal claims (what each noise colour means) are untouched — they are somebody else's exhibit and only their relation to this bench is addressed here.
+
+
+## 2026-09-13 — Astra review: which rules keep acting?
+
+This entry supersedes the earlier packing-limit, refusal-total and single-point resampling claims. Both `randompoint` and `randompoints` are now primary, with two corresponding final.md passages, an aligned book hero/order and all four map artifacts placed. The single point's visible local bounds are continuously maintained; the bench's spacing is a condition at generation.
+
+Added an opt-in frame and raised cased invitation for the single point, moving it clear of the entrance wall to (3,2), facing east. Added the bench's LOAD x1/x4 control, preserving spacing and slab dimensions. Corrected refusal accounting beyond the 220-ghost cap, finite-attempt language, actual distinct-pair counting, Gaussian candidate counts and restore/readout semantics. The readout now names the slab's three dimensions and fits inside its casing.
+
+At seed 31415 and request 96, 49 points are accepted after 5,507 candidates; 5,458 are refused and 47 requested slots remain unfilled. This is a finite search result, not a maximal packing certificate. Returning LOAD exactly repeats the generated home coordinates; live transforms retain a measured sub-micrometre residue.
+
+84 rendered-museum checks passed, including actual desktop pointer controls and both point grabs; independent Python geometry/accounting checks also passed. The saved hand is unchanged. Headset verification and the two secondary galleries' audio/control/spectral audit remain pending. The final book is 898 whitespace-separated words with six source-exact code excerpts across its final/tutorial/technical texts.
+
+Review: http://localhost:3003/research/possible-bodies/random-noise-types.html
+
+Evidence and next step: [Astra handover](../../../doc/space/points-review-2026-09-13/README.md). Continue with Noise_Columns.
+
+## 2026-09-13 — the material expands the question
+
+Palle asked whether the guiding questions were removing too much existing work. This entry supersedes the two-primary choice and pending gallery audit above. The whole room now enters the book: `randompoint`, `randompoints`, `WhiteNoiseGallery`, `NoiseColors3D`, in that order. All four are primary, placed, and have working book passages in the encyclopedia. The earlier two passages are preserved except for their final handoff sentence; the chapter grows to 1,583 whitespace-separated words.
+
+The galleries contribute their own encounters: a regular allocation of addresses with independent heights, colour drawn from the same values, illustrated spectral shapes, sound generated separately from those images, and filters that retain or subtract the past. Their full visual fields and existing generation functions remain. We let these works extend the question rather than requiring them to illustrate the point bench's distinction.
+
+The two miniatures gain optional full-size consoles beside their existing platforms, at a reachable desktop-test height. Their existing five sound settings and STOP controls remain. A missed upper button row led to corrected local hit volumes; a console approach against a raised platform led to a better side placement, preserving that platform. Switching sounds clears previously buffered audio; model geometry remains unchanged.
+
+The final gallery run passed 81 checks with zero failures, including actual desktop-pointer inputs for ten sound selections and both STOP controls. Ten dry source previews were exported and checked against the sample functions. The updated review offers five selectable previews and fixed-scale waveforms. Browser checks confirm all four primary passages open. Earlier failed runs and the unchanged original saved hand are documented. Headset reach, room sound and Quest performance remain pending; the dry previews are not headset recordings.
+
+The working strategy now begins with the whole existing hall. A question can change, and the primary count has no arbitrary ceiling. Omitted works must have an explicit account; atmosphere, pleasure and contradictions also deserve attention. No work was removed here.
+
+[Gallery handover and evidence](../../../doc/space/noise-galleries-2026-09-13/README.md). Next: inspect all of Noise_Columns before deciding its route.

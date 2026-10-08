@@ -1,101 +1,49 @@
-# PG Sculpted Forms
+# What did the sample keep? — encounter
 
-Accumulation. Cubes pile; domes arc; membranes laminate.
+**Learning elements — proposed focus**
 
-Drop cubes to form a mound.
+_The labels below set the revision focus; the existing lesson still needs alignment._
 
-```gdscript
-func drop_cube(drop_position: Vector3) -> RigidBody3D:
-    var cube := RigidBody3D.new()
-    var mesh := MeshInstance3D.new()
-    mesh.mesh = BoxMesh.new()
-    cube.add_child(mesh)
-    var shape := CollisionShape3D.new()
-    shape.shape = BoxShape3D.new()
-    cube.add_child(shape)
-    cube.global_position = drop_position
-    add_child(cube)
-    return cube
-```
+- Coordinate conversion
+- Voxel sampling
+- Exposed faces
 
-RigidBody3D for physics. Gravity and collision handle the settling.
+<!-- @cube_mound_scene -->
 
-Rain cubes over time.
+Press DROP and watch twelve cubes fall. They turn, strike the ground and meet one another. Do not press the next button immediately. Choose the moment you want the next construction to inherit.
+
+SAMPLE freezes the cubes at that moment and builds a surface from their centres. It can record a settled pile or an unfinished fall. The word sample matters: the new mesh is not the physical event preserved in full.
+
+The positions must first belong to the model's local frame:
 
 ```gdscript
-@export var drop_rate: float = 2.0
-
-var time_since_drop: float = 0.0
-
-func _process(delta: float) -> void:
-    time_since_drop += delta
-    if time_since_drop >= 1.0 / drop_rate:
-        time_since_drop = 0.0
-        drop_cube(Vector3(randf_range(-0.5, 0.5), 8.0, randf_range(-0.5, 0.5)))
+positions.append(to_local(cube.global_position))
 ```
 
-Two cubes per second. The mound grows unevenly as cubes land on each other.
+Without that conversion, a mesh attached beneath the translated artifact could receive its museum displacement twice. Coordinate systems are part of the construction, even when an object makes us forget that it has a parent.
 
-Build a dome segment.
+Each centre is mapped to a voxel address. The implementation then marks an axis-aligned neighbourhood around that address and emits faces where occupied cells meet empty ones. The extent is deliberately described here as the program computes it: `ceil(cube_size / voxel_size)` cells in each direction. It is an enlarged centre-based approximation. The cubes' rotations and exact contact surfaces are not copied.
+
+Press ORIGINAL to alternate the frozen bodies with the sampled surface. They share the recorded centres but need not share their silhouette, openings or contact shapes. The sampled collider stays active during this visual comparison. ORIGINAL does not secretly restore the earlier physics experiment.
+
+VOXEL rebuilds from those same frozen positions at a different cell size. Look for an opening that becomes filled or a boundary that moves. A change of resolution can change the opportunities offered by a surface, not merely its smoothness. More detail has a cost, but less detail also makes decisions. Neither setting is innocent by virtue of being easy to compute.
+
+DROP begins another physical run. The previous generated collider is removed when its mesh is replaced, so an invisible old sample does not remain as an extra law inside the new one.
+
+
+
+<!-- @dome -->
+
+Turn to the dome. Here the empty region has not come from a wandering point or a fallen cube. A geometric operand has cut it from a stock volume.
+
+CUT cycles through the cast, the uncut blank, the cutting cores and a section. The cores show the shapes that made the absence. A hole can carry as much authorship as the material around it.
 
 ```gdscript
-func build_dome_segment(latitude: float, longitude: float, radius: float) -> MeshInstance3D:
-    var segment := MeshInstance3D.new()
-    segment.mesh = BoxMesh.new()
-    segment.mesh.size = Vector3(0.2, 0.2, 0.2)
-    var x: float = radius * sin(latitude) * cos(longitude)
-    var y: float = radius * cos(latitude)
-    var z: float = radius * sin(latitude) * sin(longitude)
-    segment.position = Vector3(x, y, z)
-    add_child(segment)
-    return segment
+cut.operation = CSGShape3D.OPERATION_SUBTRACTION
 ```
 
-Spherical coordinates. Each segment sits on the dome's surface.
+Return to the cast after seeing its operands. The result may now look less self-evident. It was one possible agreement between volumes and operations. Moving a cutter would make another agreement; it could admit a body, divide an interior or close an opening we had begun to rely upon.
 
-Populate the dome.
+The layered membrane remains nearby. Its repaired scene makes a further contrast available: nested displaced surfaces can suggest thickness without being one filled solid. Look between them. Do not assume that a convincing skin carries the collision or interior its appearance promises.
 
-```gdscript
-@export var dome_ring_count: int = 8
-@export var dome_radius: float = 3.0
-
-func build_dome() -> void:
-    for ring in dome_ring_count:
-        var latitude: float = ring * PI / 2 / dome_ring_count  # 0 to PI/2
-        var segments_in_ring: int = max(8, int(16 * sin(latitude)))
-        for seg in segments_in_ring:
-            var longitude: float = seg * TAU / segments_in_ring
-            build_dome_segment(latitude, longitude, dome_radius)
-```
-
-Fewer segments near the top, more near the equator. Density adapts to the dome's curvature.
-
-Build a membrane.
-
-```gdscript
-func build_membrane(width: float, height: float, layer_count: int, offset_per_layer: float) -> void:
-    for layer in layer_count:
-        var membrane := MeshInstance3D.new()
-        membrane.mesh = QuadMesh.new()
-        membrane.mesh.size = Vector2(width, height)
-        membrane.position = Vector3(0, layer * offset_per_layer, 0)
-        add_child(membrane)
-```
-
-Thin layers stacked. Each offset slightly; together they form a thick surface.
-
-Curve the membranes.
-
-```gdscript
-func curve_membrane(membrane: MeshInstance3D, amplitude: float) -> void:
-    var mesh: ArrayMesh = membrane.mesh
-    var st := SurfaceTool.new()
-    st.create_from(mesh, 0)
-    st.begin(Mesh.PRIMITIVE_TRIANGLES)
-    # Displace vertices according to a sin curve
-    # Full implementation omitted for brevity
-```
-
-Vertex displacement by a sinusoid. The flat quad becomes a curved sheet.
-
-You can now drop cubes to form a mound, build a dome with spherical-coordinate segments, layer membranes with offsets, and curve them into sheets. PG_Mirrored_Patterns extends into symmetry-amplified generation.
+These works give us different ways to materialize a decision: sample an event, subtract a volume, arrange surfaces. Next we will compose operations we already know, while keeping two questions distinct: how is an image copied, and how are places connected?

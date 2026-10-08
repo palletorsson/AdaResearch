@@ -52,3 +52,8 @@ archive. At every arrow something is kept and something is invented or
 discarded. The room teaches `Array[Vector3]`; underneath it teaches that data is
 what survived a sequence of decisions about what could count as having
 happened. That sentence is a candidate for the sequence's own truth line.
+
+
+## 2026-09-28 — inherited use and another future
+
+At the author's request, final.md gains one short paragraph before the Grid handoff and a hauntology footnote. The recorder's saved movement becomes material for another use; no new storage or transfer behaviour is claimed. Preface and QFEP afterword develop the connection through tinkering, entropy as difference and requisite variety. Primary theoretical and example sources were checked; the conceptual bridge is identified as Ada's proposal. Existing chapter wording, code and five notes are preserved. No map or artifact changes. Review: doc/book/iterations/2026-09-28-trace-other-futures/.

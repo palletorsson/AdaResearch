@@ -1,111 +1,46 @@
-# PG Mirrored Patterns
+# A repeated image, another way through — encounter
 
-Mirror a cellular automaton. Symmetry amplifies pattern.
+**Learning elements — proposed focus**
 
-Run a 2D CA.
+_The labels below set the revision focus; the existing lesson still needs alignment._
 
-```gdscript
-@export var size: Vector2i = Vector2i(64, 64)
-var grid: Array = []
+- Array reflection
+- Preserved inputs
+- Image and connectivity
 
-func initialise() -> void:
-    grid.clear()
-    for y in size.y:
-        var row: Array = []
-        for x in size.x:
-            row.append(randi_range(0, 1))
-        grid.append(row)
-```
+<!-- @mirror_cellular_texture_for_3d -->
 
-Start with random binary values. Subsequent updates depend on the CA rule.
+An uneven cellular field lies before you. The opening is an authored arithmetic arrangement, held still so that we can inspect a comparison without chasing a changing picture. Press STENCIL. Much of what you see now comes from copying part of that same held field.
 
-Apply a simple rule.
+HOLD stores the current array. STENCIL always returns to that held array before applying the next arrangement: quadrant reflection, eight-way reflection, rotation, or no copying. It does not obtain a different random field and ask you to attribute all the differences to symmetry.
+
+For the quadrant arrangement, the operation reads a cell from one quarter and writes its value to corresponding positions elsewhere:
 
 ```gdscript
-func ca_step() -> void:
-    var new_grid: Array = []
-    for y in size.y:
-        var row: Array = []
-        for x in size.x:
-            var count: int = neighbour_count(x, y)
-            var alive: bool = grid[y][x] == 1
-            var new_state: int = 0
-            if alive and (count == 2 or count == 3): new_state = 1
-            elif not alive and count == 3: new_state = 1
-            row.append(new_state)
-        new_grid.append(row)
-    grid = new_grid
+new_grid[y][grid_size - 1 - x] = value
+new_grid[grid_size - 1 - y][x] = value
 ```
 
-Conway's Game of Life rules. Could be replaced by any CA.
+There are consequences at the edges of this promise. This study uses an odd-sized grid; its centre row and column do not belong to every copying loop. The rotational operation also converts floating-point positions into integer addresses. A symmetrical intention still passes through a particular implementation.
 
-Mirror horizontally.
+STEP performs one cellular update and then its selected symmetry operation. In this desk study, eligible births and deaths have probability one, so the comparison isolates the update and copying rules. HOLD can keep that new result as the input for the next comparison. Cycling STENCIL to none restores the held field with copying disabled; it does not erase what you chose to hold.
 
-```gdscript
-func mirror_horizontal() -> void:
-    var half: int = size.x / 2
-    for y in size.y:
-        for x in range(half):
-            grid[y][size.x - 1 - x] = grid[y][x]
-```
+We have returned to arrays, cellular neighbourhoods and transformation. Their combination makes a surface whose apparent unity can conceal how little independent information was consulted. That economy can be beautiful. It can also make one repeated fragment stand in for a difference we have not learned to construct.
 
-Copy the left half onto the right in reverse. The right half becomes the mirror of the left.
 
-Mirror in both axes.
 
-```gdscript
-func mirror_both() -> void:
-    mirror_horizontal()
-    var half: int = size.y / 2
-    for y in range(half):
-        for x in size.x:
-            grid[size.y - 1 - y][x] = grid[y][x]
-```
+<!-- @rhizomatic_maze_space -->
 
-Horizontal and vertical. The full grid becomes a 4-fold symmetric kaleidoscope.
+Now move your attention from the surface to the network beside it. NETWORK changes the connection policy over six fixed starting positions. The opening is a tree. Its unique connections give one connected component and no cycle. The next policy admits more nearby connections; the third severs connections across a central gap and separates the remaining pieces.
 
-Apply rotational symmetry.
+Watch the counts before deciding what the silhouette means. The desk reports distinct undirected connections, components and independent cycles. The generator may store an edge in both directions; those duplicate records do not create another physical route. For this finite undirected graph, the cycle count is `edges - nodes + components`.
 
-```gdscript
-func apply_rotational(steps: int = 4) -> void:
-    var base: Array = []
-    for y in size.y: base.append(grid[y].duplicate())
-    for step in range(1, steps):
-        var angle: float = step * TAU / steps
-        for y in size.y:
-            for x in size.x:
-                var cx: float = size.x / 2.0; var cy: float = size.y / 2.0
-                var rx: int = int(cx + cos(-angle) * (x - cx) - sin(-angle) * (y - cy))
-                var ry: int = int(cy + sin(-angle) * (x - cx) + cos(-angle) * (y - cy))
-                if rx >= 0 and rx < size.x and ry >= 0 and ry < size.y:
-                    grid[y][x] = grid[y][x] or base[ry][rx]
-```
+Changing NETWORK preserves the six initial positions. The severed result subsequently displaces positions as part of making its gap, so the final coordinates are not all held fixed. This is a comparison of construction policies, not a claim that every visible difference came from deleting one edge.
 
-Rotate the base grid; OR it onto itself. Four-fold rotation produces kaleidoscopic symmetry.
+SURFACE alternates the bare connections with the tunnel surfaces constructed around them. The specimen's collision is disabled in both views: it is an observation model, not a secretly solid set of invisible tubes. Its gaps and curved surfaces are available to examine before we develop a full bodily traversal. A thick skin can obscure connections that were obvious in the skeleton.
 
-Grow a rhizomatic maze.
+The original generator can also add secondary growth. This opening study sets those iterations to zero so that we can inspect the connections between the six seeds first. We have made a restriction to gain a foothold, not discovered the network's final possibilities.
 
-```gdscript
-class_name RhizomaticMaze
+The pattern tunnel remains a bodily application in the collection. Its surface can be dressed while its supporting route persists. A reflected image does not by itself connect two rooms; a graph edge does not by itself guarantee that its tunnel has sufficient clearance. Geometry, connection and access can be composed, but they require their own checks.
 
-var passages: Dictionary = {}  # cell -> set of adjacent open cells
-
-func grow_from_seed(seed: Vector2i, max_cells: int) -> void:
-    var active: Array = [seed]
-    passages[seed] = {}
-    var count: int = 0
-    while not active.is_empty() and count < max_cells:
-        var cell: Vector2i = active[randi() % active.size()]
-        var next: Vector2i = random_unclaimed_neighbour(cell)
-        if next == Vector2i(-1, -1):
-            active.erase(cell)
-            continue
-        passages[cell][next] = true
-        passages[next] = {cell: true}
-        active.append(next)
-        count += 1
-```
-
-Multiple seeds produce a non-hierarchical maze. Passages merge where seed territories meet.
-
-You can now run a 2D CA, mirror horizontally, rotate for 4-fold symmetry, and grow a rhizomatic maze from multiple seeds. Chamber_ProcGen extends into the bricoleur encounter.
+Across this sequence, we have selected, guided, branched, connected, carved, sampled and copied. Each operation gives us something to build with and something more precise to question. What bodies are possible now? We can answer with a construction, try its limits, and carry the unresolved part into the next hall.

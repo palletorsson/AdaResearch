@@ -1,1 +1,3 @@
-1, 1, 2, 3, 5, 8, 13... The Fibonacci sequence spirals into the golden ratio, and the golden angle of 137.5 degrees arranges seeds and petals. The romanesco cauliflower computes this algorithm in vegetable form. Nature's fractals are grown, not drawn—phyllotaxis as self-similar geometry.
+# A number needs a mapping
+
+The numbers remain when the towers change height. Farther in, a rectangle loses a square and keeps a proportion. A curve appears only when we ask for it. What did the next rule add?

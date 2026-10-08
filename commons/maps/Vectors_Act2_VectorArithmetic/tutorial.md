@@ -1,90 +1,26 @@
-# Vector Arithmetic
+# One gap, two stations
 
-What vectors do to each other. Before this, a vector must already be a direction and a length that can be slid anywhere without changing.
+**Learning elements**
 
-Add by walking one arrow from the other's tip.
+- Signed dot product
+- Projection
+- Remainders
+- Recombination
 
-```gdscript
-func head_to_tail(a: Vector3, b: Vector3) -> Array[Vector3]:
-    var origin := Vector3.ZERO
-    return [origin, a, a + b]   # tail, joint, resultant head
-```
+Keep five existing primary tokens in order: vector_add, vector_sub, dot_aligner, projection_shadow, torque_crank. All twelve artifacts remain. The new work upgrades vector_sub and projection_shadow through opt-in room_gap and room_projection configurations; other placements keep their original consoles.
 
-b is drawn from a's tip, not from the origin. Moving it there is free, because a vector carries no address. The resultant is the arrow that closes the walk.
+Subtraction: A/B selects an address, X-/X+/F-/F+ change a component by 0.5 coordinate metres, SWAP reverses A-B, SHIFT translates both by 0.5 along X and reverses on next accepted press, SAME copies A to B, RESET restores A=(1,.5), B=(-.5,0), RULE reveals arithmetic. Components are bounded to [-1.5,1.5]; common moves are refused atomically at the boundary.
 
-Subtract by flipping the second arrow and adding it.
+Projection: binds to the gap source inside the same museum segment. TURN rotates a unit rail 30 degrees, SLIDE moves source A perpendicular to that rail by 0.5 metres (alternating sign), FLIP reverses rail orientation, RESET restores both source inputs and rail, RULE reveals arithmetic. The actual shared gap feeds kept=axis*gap.dot(axis), remainder=gap-kept. One coordinate metre is displayed as half a metre on both stages and walls. This is a diagram scale, not player/world position measurement. Values are live while the hall is loaded, not a saved cross-session state.
 
-```gdscript
-func difference(a: Vector3, b: Vector3) -> Vector3:
-    var b_flipped := -b
-    return a + b_flipped
-```
+Test sequence: swap; common translation; coincidence; perpendicular slide; rail turn; sign reversal. Predict first, reveal second. Keep the input fixed while changing the receiver, then change the input in a direction the receiver cannot record. The closed loop is kept+remainder=gap. Zero gaps remain finite; the rail is never a zero direction.
 
-There is no second operation. a − b is a + (−b), and it points from b's tip to a's — the arrow of the gap between them.
+Existing dot and torque consoles are distinct examples, not subscribers to this pair. Dot uses an alignment slider and a chosen threshold; torque uses normalized directions and a displayed wheel angle. Its readout reports sin(theta), the chosen angle and a static wheel pose. The unit-direction cross product sets that pose; it does not integrate angular velocity or report rpm. The final chapter now identifies those limits instead of claiming free aiming, continuous physical wheel motion or a newly simulated force.
 
-Scale a direction without turning it.
+Next on the unchanged route: VFM_05_Launch. Motion-before-Launch remains an editorial proposal.
 
-```gdscript
-func weight_of(mass: float) -> Vector3:
-    return Vector3.DOWN * 9.8 * mass
-```
+The remaining dot console uses normalized directions and FRIEND at dot >= 0.985. Its ordinary slider spans a limited range; the full signed range of a dot product is mathematical context, not a claim that this control reaches every angle. The crank computes r_dir.cross(f_dir) from unit directions. Actual torque would include arm length and force magnitude; the displayed angular factor alone is not physical torque. Projection recombination and perpendicularity hold to ordinary floating-point precision.
 
-A scalar multiplies the length and leaves the line alone. Negative scalars are the one exception: they keep the line and reverse the sense.
+## Reading and retained detail
 
-Ask two directions how much they agree.
-
-```gdscript
-func agreement(a: Vector3, b: Vector3) -> float:
-    return clampf(a.normalized().dot(b.normalized()), -1.0, 1.0)
-```
-
-Between unit vectors the dot is cos θ. 1 is the same direction, 0 is square, −1 is opposed. One float stands in for a whole angle.
-
-Recover the angle the dot hid.
-
-```gdscript
-func angle_between(a: Vector3, b: Vector3) -> float:
-    return rad_to_deg(acos(agreement(a, b)))
-```
-
-acos undoes the cosine. The dot was never an angle — it is what an angle costs once both lengths have been divided out.
-
-Cast one vector's shadow onto another's line.
-
-```gdscript
-func project(a: Vector3, onto: Vector3) -> Vector3:
-    var n := onto.normalized()
-    return n * a.dot(n)
-```
-
-a·n̂ is how far along the rail the shadow falls. Multiplying by n̂ puts that number back on the rail as a vector. That is the projection.
-
-Keep what the shadow left behind.
-
-```gdscript
-func reject(a: Vector3, onto: Vector3) -> Vector3:
-    return a - project(a, onto)
-```
-
-The rejection is perpendicular to the rail by construction, and the two parts add back to a exactly. Every vector splits into a part along another and a part square to it.
-
-Push across an arm instead of along it.
-
-```gdscript
-func torque(arm: Vector3, force: Vector3) -> Vector3:
-    return arm.cross(force)
-```
-
-r × F points up the axle, a third direction perpendicular to both. Its length is |r||F| sin θ, so a push straight down the arm produces nothing at all.
-
-Measure the half of the push the turn threw away.
-
-```gdscript
-func wasted_half(arm: Vector3, force: Vector3) -> Vector3:
-    var r := arm.normalized()
-    return r * force.dot(r)
-```
-
-What the projection keeps, the cross discards. Dot and cross are the same question asked in opposite directions: how much do these agree, and how much do they refuse to.
-
-You can now add, subtract and scale vectors, measure agreement with the dot, split one vector along and across another, and produce the third direction born when two refuse to align. To add is to walk; to dot is to agree; to cross is to turn. Act III takes these operations and spreads them over space and time.
+The canonical [chapter](final.md) follows the encounter. Exact scales, control steps, timing and implementation qualifications remain here. The complete [pre-pass chapter](../../../doc/book/iterations/2026-09-24-forces-relations/before/commons/maps/Vectors_Act2_VectorArithmetic/final.md) is retained for comparison.

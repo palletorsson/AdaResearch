@@ -9,3 +9,10 @@ The first screenshots showed the retained hexagonal work entering the new bay. S
 The tested scope is the primary and a portion of its surrounding route. The retained rear gallery is not fully reviewed for reach or traversal. Existing startup UID diagnostics are recorded in the engine log; runtime script errors must be absent before publication. Headset testing remains deferred.
 
 Source backups and evidence: `doc/space/ca-life-review-2026-09-13/`. The active CA order and all artifact roles remain unchanged. The book hero now agrees with the existing primary role. Next: CA_ExpandingSpace, proximity, surface state and support.
+
+
+## 25 September — a place can keep holding you
+
+Enlarging the Life floor exposed an existing obstruction: the retained hexagonal terrain extended from the rear into the primary bay. The first native walk stopped against that geometry, and floor rays found the terrain above the museum floor. The hex simulation is retained on a new rear table, with a uniformly scaled root and independently human-sized control/status. No cells or layers were removed. The first failed captures and results remain in the review.
+
+The second native run passes 41 checks. A supplied CharacterBody reaches A when empty; the glider occupies it at generation 8 and leaves it empty at generation 12. The body remains supported while the lamp changes. TRACE-off's stale dish colours were separately reproduced and repaired. Fourteen actual desktop pointer events cover the existing controls. The code, neighbour law and fixed floor remain separate from the visitor's presence. Headset/Quest and complete secondary-gallery review remain open.

@@ -1,77 +1,109 @@
-# Wavefunctions Intro
+# The cube returns
 
-One pendulum you release by hand, a line that does not move, and cubes that were only told where to be. The order below is the order of the room.
+**Learning elements**
 
-Find the still reference first. From the pivot a hairline hangs to a ring. Nothing about it changes while the bob swings.
+- Periodic movement
+- Amplitude
+- Frequency and period
+- Phase
 
-Take the bob and release it from one side. It is an XR Tools pickable; the pendulum listens to its `picked_up` and `dropped` signals.
+Start with the cube moving up and down near the entrance. Follow it from the middle to the top, through the middle to the bottom, then back. Its direction changes while its shape remains familiar.
 
-```gdscript
-func _on_bob_picked_up(_pickable):
-	_is_grabbed = true
-	_grab_velocity_samples.clear()
-```
+## What you bring
 
-While the bob is held, the pendulum only follows your hand and computes the angle from the bob's position. No swing is integrated and no crossing is counted.
+Keep the cube from Transformation: one `MeshInstance3D`, a `BoxMesh`, and a position updated from elapsed time. There we made a body travel, turn and change size. Here we open the rule for a movement that keeps returning. We do not need to rebuild its faces or introduce a new body.
 
-Watch the ring. It brightens once as the bob passes through, and once again on the way back. Read the label: the angle, and the angular velocity with its sign. The sign differs between the two crossings.
+**Build:** use a sine function to place the cube along one vertical axis.
 
-```gdscript
-if signf(_angle) != signf(_prev_angle) and signf(_angle) != 0.0 \
-		and absf(_angular_velocity) > CROSSING_MIN_OMEGA:
-	_crossings += 1
-	_last_crossing_dir = 1 if _angular_velocity > 0.0 else -1
-	centre_crossed.emit(_last_crossing_dir, _angular_velocity)
-```
+**Investigate:** change how far it moves, how often it returns, and where in the cycle it begins. Keep these three decisions separate.
 
-A crossing is a sign change of the angle while the bob is moving. The room counts them and says which way the last one went.
+## Work inside the museum
 
-Release from the other side and compare the direction of the first crossing.
+Use your existing `PointStudy` Node3D, under this hall, upright at unit scale. The working bay is hall-local `(6.3, 0, 16.5)` metres. The name of the study node does not restrict it to spheres. The museum supplies floor, lighting, camera and player.
 
-Follow the swing to a turning point. The velocity reading passes through zero and changes sign; the angle is at its extreme.
+Save `01_cube_return.gd` and attach it to the study. This is the complete program; no companion scripts or named scene children are required. It uses the same cube construction as Transformation, displayed at 0.4 metres across. The overlap sensor from the collection exercise is left out so the cube remains available to observe.
 
-Read the update that makes all of this happen. Each physics step:
+## Complete code — 01_cube_return.gd
+
+<!-- student-code:01_cube_return.gd -->
 
 ```gdscript
-var angular_acceleration: float = -(gravity / pendulum_length) * sin(_angle)
-_angular_velocity += angular_acceleration * delta
-_angular_velocity *= _damping_multiplier(delta)
-_angle += _angular_velocity * delta
+extends Node3D
+
+@export var amplitude := 0.4
+@export var frequency := 0.5
+@export var phase := 0.0
+var centre := Vector3(0, 1.3, 0)
+var elapsed := 0.0
+var cube := MeshInstance3D.new()
+var label := Label3D.new()
+
+func _ready() -> void:
+    assert(amplitude >= 0.0 and frequency >= 0.0)
+    cube.mesh = BoxMesh.new()
+    cube.scale = Vector3.ONE * 0.4
+    add_child(cube)
+    label.position = centre + Vector3(0, 0.8, 0)
+    label.font_size = 36
+    label.pixel_size = 0.0025
+    label.billboard = BaseMaterial3D.BILLBOARD_ENABLED
+    add_child(label)
+    draw_state()
+
+func _process(delta: float) -> void:
+    elapsed += delta
+    draw_state()
+
+func height_at(seconds: float) -> float:
+    return centre.y + amplitude * sin(TAU * frequency * seconds + phase)
+
+func draw_state() -> void:
+    cube.position = Vector3(centre.x, height_at(elapsed), centre.z)
+    label.text = "time %.2f s   height %.2f m\nA %.2f m   f %.2f Hz   phase %.2f rad" % [
+        elapsed, cube.position.y, amplitude, frequency, phase]
 ```
 
-Gravity pulls toward the hanging position in proportion to sin(θ); the pull changes the velocity; the velocity changes the angle. Under the shipped `free` regime the damping multiplier is a constant 0.995 per physics frame.
 
-Release again, faster. On release the pendulum averages the bob's last positions into a velocity and keeps only the part along the swing:
+## Read the movement
 
-```gdscript
-var tangent_velocity = avg_velocity.dot(tangent_direction)
-_angular_velocity = tangent_velocity / pendulum_length
-```
+`elapsed += delta` keeps time in seconds, as before. `height_at` turns that time into a height. The cube receives the resulting position every frame.
 
-At a desk, the hand is the pointer. Right-click the bob, turn the view to carry it out, hold still and right-click again. The pointer does not know what a pendulum is, so the bob tells it who to tell:
+Sine returns a value between −1 and +1. Multiplying by `amplitude` gives the displacement above or below `centre.y`. With amplitude 0.4 metres, the cube's centre travels between 0.9 and 1.7 metres: a total span of 0.8 metres. Amplitude is half that span.
 
-```gdscript
-_bob_sphere.set_meta("desktop_hook_target", self)
-```
+`frequency` counts complete cycles per second, in hertz. At 0.5 Hz, a cycle takes two seconds. `TAU` is one full turn in radians; multiplying it by frequency and time turns elapsed cycles into the angle that sine reads. The Unit Circle hall will make that relationship visible around a circle.
 
-and the two hooks go to the same handlers a headset's grab reaches:
+`phase` adds a starting angle, in radians. At phase zero the cube begins at its middle and rises. At `PI / 2.0` it begins at the top. At `PI` it begins in the middle and falls. That middle position alone does not tell us which way the cube is travelling.
 
-```gdscript
-func on_desktop_grab(_pointer: Node) -> void:
-	if _bob_sphere != null and not _is_grabbed:
-		_on_bob_picked_up(_bob_sphere)
-```
+The `@export` lines expose these values in the Inspector for each study instance. The instances can share one script while using different parameters.
 
-```gdscript
-func on_desktop_drop(_pointer: Node) -> void:
-	if _bob_sphere != null and _is_grabbed:
-		_on_bob_dropped(_bob_sphere)
-```
+## Predict one cycle
 
-Held still before letting go, the release is from rest: the hand's last samples are zero, so the tangent velocity is zero too.
+With the original values and phase zero, predict these heights before running:
 
-Try a small release and a large one and count crossings for each. Behind the swing the predicted θ(t) is drawn for the standard starting angle of 0.3 rad. A large release does not follow it: the sine in the acceleration lengthens a wide swing and the damping shortens each pass.
+| Time | Position in the cycle | Height of the cube's centre |
+| --- | --- | --- |
+| 0 s | Middle, rising | 1.3 m |
+| 0.5 s | Top | 1.7 m |
+| 1 s | Middle, falling | 1.3 m |
+| 1.5 s | Bottom | 0.9 m |
+| 2 s | Middle, rising again | 1.3 m |
 
-Then look at the cubes. `y_oscillation_cube` and `transformation_cube` set their height from a sine of the clock; `rotating_cube` spins at a constant rate; `oscillation_controlled_cube` listens to this pendulum's `oscillation_updated` signal and maps one swing to height, tilt and size. Take the bob and the driven cube stops with it; the clock-driven cubes do not notice.
+Watch the readout in your study. Then change one parameter. Double amplitude: the span doubles while the cycle still takes two seconds. Restore it and double frequency: the span stays the same while the cycle takes one second. Restore frequency and set phase to `PI`: the starting height stays the same, but the first direction reverses.
 
-The next room, Pendulum, records the swing along a depth axis. Carry the centre crossing with you.
+The formula assigns a height from the centre each time. It does not keep adding the sine value to the previous height. The cube therefore stays within the same band instead of drifting away.
+
+## Build a comparison
+
+Make a second study instance beside the first and attach the same script. Keep their amplitude and frequency equal; give the second a phase of `PI`. Predict when they share a height and when one is at the top while the other is at the bottom. Each instance owns its clock and parameters.
+
+Next give the second cube frequency 1.0 Hz while the first keeps 0.5 Hz. Count both cycles over the same two seconds. Explain which value changed the rate and which only changed the starting part of a cycle.
+
+## Compare with the hall
+
+The installed `y_oscillation_cube` uses this same sine-of-time operation with its own dimensions, rail, markers and trail. Your smaller program isolates the moving cube and its readout. The surrounding rotating and transforming cubes let you recognise other kinds of return without making all of them part of this lesson.
+
+This movement is prescribed by a clock. It does not calculate gravity, collision or a hand's release. A push cannot change a movement rule that never reads it. The pendulum elsewhere in the hall offers a comparison: its next movement depends on its current angle and angular velocity. We will work with that distinction as the sequence continues.
+
+## What travels onward
+
+Keep the cube, elapsed time and the three parameters. The next hall, Pendulum, lets us compare a responding swing with a prescribed cycle and keep a timestamped record. Trace's earlier list returns with another job: making the history of a movement visible.

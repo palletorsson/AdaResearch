@@ -32,3 +32,16 @@ The secondary sampling pavilion mounts `monte_carlo_apparatus`. Its `#show_obser
 Validation: `commons/testing/probe_wcn_walk.gd`, its generated live port, and isolated runner `ada_run/review_walk.py`. The extension captures three complete 300-step, five-walker histories at seed 31415, records actual proposals for walker zero without consuming extra draws, and verifies every frame against a replay that erases trail history at step 60 and selects ALL. Separate assertions cover frame-time loss and the pavilion's boolean metadata. Existing tests cover seven controls, desktop pointer input, bounds, seed replay, physical routes, reach and unload/rebuild.
 
 Runtime evidence, final assertion count, images and diagnostic limits belong to `doc/space/walk-review-2026-09-12/README.md` and the illustrated `random-walk.html` review. Headset use remains pending.
+
+
+## Paired positions and steps — 2026-09-24
+
+`random_position_rails` stands at (13,8), facing the first chamber. Its production source is `commons/artifacts/random_position_rails/random_position_rails.gd`.
+
+One private RNG draw u in [-1,1] serves both rails per accepted NEXT. Blue's destination is 2.2u metres. Pink proposes previous_position + 0.4u metres, folded into [-2.2,2.2] at the ends. This intentionally coupled comparison is a bounded random walk versus fresh positions, not an unbounded Brownian process or a physical randomness source. The generator does not consult the record of twelve landing pairs or the prediction marker.
+
+Targets appear immediately; a 0.65s reveal precedes a shared 1s cubic ease-in/out. Both use the same interpolation weight, not equal speeds. Pink's folded destination is joined directly to its previous position; the motor does not visit an omitted wall contact. NEXT is latched at 28 degrees and rearms below 8 degrees. Busy input cannot consume another draw. RUN requests every 2.8s. HOLD prevents future requests while letting the current move finish. REPLAY kills pending movement, stops RUN, clears the record, recentres the guess and restores seed 79.
+
+The marker uses the existing horizontal slider with explicit metre-sized meshes, shapes and limits; its root is not scaled. Native grab handles and desktop pointer input share the production control. Stationary feet/posts/stands have collision; the carriage blocks and thin prediction needle are visual markers, not rideable transport or barriers.
+
+Current book primaries: terrarium → paired rails → random drawing dot → visited-cell terrain. Original placements and map floor/utility layers are retained. Native checks, isolated actual-museum captures and remaining headset questions: `doc/book/iterations/2026-09-24-random-walk-rails/`.

@@ -1,50 +1,11 @@
-# Color_Nails - Map Summary
+# Grand / Petit — Nail Salon
 
-## Overview
-Color_Nails introduces color as personal expression through a nail salon metaphor. Players use color controllers to select hues and apply them to a hand model, experiencing color not as abstract property but as wearable decoration. The intimate scale shifts color from observation to embodiment.
+Color_Nails is third in Colour, after Color_Flashlight and before Color_Rainbow. The lamps changed illumination; the salon changes the receiving material.
 
-## Spatial Layout
-- **Dimensions**: 6×7 salon bay
-- **Architecture**: Enclosed studio with concentric lighting
-- **Height**: Single level workspace
-- **Structure**: Intimate interaction space with accessory stations
+A 4.3-metre hand rises behind a fine-legged manicure table. A 32-centimetre copy rests on its cushion. Tiny polish bottles, a file and two velvet stools give the oversized client a familiar, intimate setting. Both display hands use the existing right-hand mesh, with independent nail and skin material overrides.
 
-## Key Elements
+The existing nail_color_controller and hand_color_controller remain primary. Their RGB boxes stand at 0.9–1.4 metres on separate plinths, clear of the table and stools, open for the player's hand to reach in. Move either point to recolour the corresponding surfaces on both display hands. The salon subscribes to the same GameManager colour signals already used for persistent player appearance. Updating the display hands does not establish that a tracked player hand is connected.
 
-### Interactables
-- **nail_color_controller** (-90°, 1.0) - Primary color selection interface
-- **hand_model** (180°, 2.0 scale) - Target for color application
-- **hand_color_controller** (-90°, 1.0) - Secondary color control
-- **colorballs** (×2) - Grabbable color samples
-- **grab_stick_scanner** - Color sampling tool
-- **brick_wall_factory** - Environmental element
-- **dark_side_prism** (1.5 scale) - Light refraction display
-- **dark_sphere** - Ambient atmosphere dome
+The room remains 15 by 21 metres, enclosed by its recovered outer walls. Internal grid obstacles and the dark dome were removed to stage the salon on a level floor. The salon replaces the disconnected hand_model exhibit. The colour balls, science screen and a smaller brick-wall study remain at the sides. Automatic sculptures are excluded from the salon's working area. Both side routes admit the tested body capsule.
 
-### Utilities
-- **Extra lights** (el) - Studio illumination
-- **Waypoint** (wp) - Navigation marker
-- **Teleporter** (t) - Exit to next map
-
-## Atmosphere
-- **Lighting**: Cool ambient (0.4, 0.4, 0.5) with warm directional
-- **Background**: Sky blue
-- **Mood**: Intimate, creative, personal
-
-## Learning Sequence
-1. Player enters nail salon studio
-2. Examines color ball samples
-3. Uses grab_stick_scanner to sample colors
-4. Operates nail_color_controller to select hue
-5. Applies color to hand_model
-6. Experiments with hand_color_controller
-7. Observes light through dark_side_prism
-8. Exits via teleporter
-
-## Design Intent
-The map reframes color from technical property to **personal adornment**. By making color something you wear rather than something you observe, it establishes the subjective, embodied nature of color perception. The nail salon metaphor emphasizes choice, identity, and the cultural meanings we attach to color.
-
-## Connection to Sequence
-- **Position in color sequence**: 1/6 (Introduction)
-- **Establishes**: Color as personal expression, interactive color selection
-- **Leads to**: Grid-based color systems
+The book invites a comparison between a small coordinate gesture and the same colour becoming intimate or monumental. See final.md for that passage and field_notes.md for verification and the archived previous arrangement.

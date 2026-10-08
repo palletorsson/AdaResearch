@@ -1,5 +1,14 @@
 # ML Gradient Landscape
 
+**Learning elements — proposed focus**
+
+*The labels below set the revision focus; the existing lesson still needs alignment.*
+
+- Prediction functions
+- Loss aggregation
+- Numerical gradients
+- Descent steps
+
 Gradient descent. Compute the slope; step downhill.
 
 Define a loss function.

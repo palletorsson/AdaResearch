@@ -1,5 +1,13 @@
 # GT Connectivity
 
+**Learning elements — proposed focus**
+
+*The labels below set the revision focus; the existing lesson still needs alignment.*
+
+- Directed reachability
+- Reversed graphs
+- Mutual reachability
+
 Directed edges. Strong components. Tarjan's algorithm.
 
 Build a directed graph.

@@ -1,146 +1,92 @@
-Nothing in the last hall acted on anything. This one is where vectors first act on each other, and the hall is built to say it twice: every idea once as a toy in your hand, then once at the size of a room you step into.
-
-There are six operations. Three verbs carry them, and the room's own reflection puts them in one line at the end. You will arrive there having done each one with your hands.
-
-## To add is to walk
-
-```gdscript
-func head_to_tail(a: Vector3, b: Vector3) -> Array[Vector3]:
-    var origin := Vector3.ZERO
-    return [origin, a, a + b]   # tail, joint, resultant head
-```
+# What the line can keep
 
 <!-- @vector_add -->
 
-Two pads on the front of a console, one per vector. Drag a pad and that arrow's tip follows your hand: cyan for the first, amber for the second, and the second is drawn *from the first's tip*, not from the origin. Moving it there costs nothing, because you learned in the last hall that a vector has no address. The green arrow that closes the walk is the sum.
+The carriage is behind us. We have watched two routes reach one destination, and a journey return with zero displacement. A smaller addition console offers the relationship again, through two pads that place the arrow tips on its upright diagram.
 
-That is the whole of addition. Not a count. A walk: go a, then go b, and a plus b is where you are standing.
-
-<!-- @vector_addition_walk -->
-
-Now step into it. Three metres of grid, half a metre to a line, and the endpoints at body height where you can take hold of them. Walk the first arrow. Walk the second from where the first left you. The parallelogram draws itself around you, and the resultant is the diagonal you would have taken if you had known where you were going.
-
-<!-- @ -->
-
-## Subtraction is the gap
-
-```gdscript
-func difference(a: Vector3, b: Vector3) -> Vector3:
-    var b_flipped := -b
-    return a + b_flipped
-```
+Move one pad. The sum moves with it. There is no carriage to wait for. A body given that destination would still need a way to get there.
 
 <!-- @vector_sub -->
 
-The same console, flipped. Set a and b, and watch what is drawn: a, then *minus* b head to tail, with a faint ghost of the original b left standing so you can see the flip happen. The result points from b's tip back to a's. That is what subtraction is, and read the code again to see what it is not: there is no second operation. a minus b is a plus the reverse of b, and the arrow you get is the arrow of the gap between them, the one that says how far, and which way, one thing is from another.
+Two small blocks stand on the next gridded stage. Amber is A, pink is B. The cyan arrow runs from B to A. Its copy on the wall makes the same connection.
 
-<!-- @ -->
+With **SWAP**, the arrow reverses.
 
-## A volume knob for a direction
+In the previous hall, exchanging the contributions kept the sum. Here exchanging their roles changes the answer. The distance between the blocks has not changed. Which one we are trying to reach has.
 
-```gdscript
-func weight_of(mass: float) -> Vector3:
-    return Vector3.DOWN * 9.8 * mass
-```
+**SHIFT** moves both addresses sideways together. The gap stays the same: the first vector room returns inside this new operation. **SAME** brings B to A, leaving no length for the cyan arrow to draw.
 
-<!-- @example_2_3_gravity_scaled_by_mass_vr -->
-
-Three masses on a ladder, half a kilogram, one and a half, three, and over each a force arrow pointing at the floor. Every arrow points the same way. Only the lengths differ, and they differ in exactly the ratio of the masses, because a scalar multiplies a length and leaves the line alone.
-
-A scalar cannot turn a vector. It can stretch it, shrink it, and, if it is negative, reverse it along the same line, and that is the whole of what a plain number can do to a direction. Gravity is the room's example because it is the one scalar you have been carrying since you arrived: nine point eight, times whatever you weigh, straight down.
-
-<!-- @ -->
-
-## To dot is to agree
+Behind **RULE** is the subtraction:
 
 ```gdscript
-func agreement(a: Vector3, b: Vector3) -> float:
-    return clampf(a.normalized().dot(b.normalized()), -1.0, 1.0)
+gap = a - b
 ```
+
+From a shared origin, A and B each had an address. Subtraction gives the displacement needed to get from B to A. We could also add the reverse of B. We have asked a different question of the same coordinates.
+
+The blocks and their wall picture use a reduced scale. They represent addresses on the stage, not the visitor's position. The arrow can tell the little block how to reach its neighbour. Applying it to our own body would require another connection.
 
 <!-- @dot_aligner -->
 
-A turret on a pedestal, and a cube drifting past it. The gold arrow is where the turret aims; the cyan arrow is the direction to the cube. Swivel until they agree, and watch the charge: it is one number, the dot of the two directions, and it climbs from nothing as the angle closes. At an agreement of 0.985, which is within ten degrees, the beam locks and the cube turns from red to green.
+## When an angle becomes agreement
 
-That number is the cosine of the angle between them, once both lengths have been divided out. One float stands in for a whole angle: one is the same direction, zero is square on, minus one is opposed. The dot product was never an angle. It is what an angle *costs*.
+Between the gap and its next use, a small aiming console makes a decision from an angle. Its **ALIGNMENT** slider brings the drawn aim toward a target direction. As they approach one another, the target acquires the name *FRIEND*.
 
-```gdscript
-func angle_between(a: Vector3, b: Vector3) -> float:
-    return rad_to_deg(acos(agreement(a, b)))
-```
+The console compares normalised directions. Their dot product reaches one when they align. In the wider operation it is zero at a right angle and negative when the directions point sufficiently against each other; this slider explores only a limited angular range.
 
-<!-- @vector_dot_product_xl -->
+Here `0.985` is enough to cross the threshold. The direction changes continuously. The name changes at once.
 
-Five metres square, and the two arrows share an origin you can stand at. Take hold of either and swing it; the readout above you gives the dot and the angle side by side, so you can watch one fall as the other opens. Stretch the second with the slider and the dot grows while the angle does not move. The hinge between them is the angle made into a thing you can push.
-
-<!-- @ -->
-
-## The part of you that lives on someone else's line
-
-```gdscript
-func project(a: Vector3, onto: Vector3) -> Vector3:
-    var n := onto.normalized()
-    return n * a.dot(n)
-```
+Nothing about the target's intentions entered the calculation. It became a friend by pointing nearly the same way. The number measures alignment; the label supplies a story about whom to welcome. What happens to that story if agreement stops being our condition for approach?
 
 <!-- @projection_shadow -->
 
-A sun overhead, a rail on the floor, and an object floating off to one side of it. Its shadow lands on the rail, and the distance of that shadow from the origin is the dot of the object's position with the rail's direction. Multiply that number back along the rail and you have the projection: the part of the object that lives on the rail's line.
+## Somewhere for the remainder
+
+At the next wall, the cyan gap has arrived before us. This station reads A and B from the subtraction stage we just left.
+
+A rail lies across the diagram. Gold runs along it; pink reaches from gold's endpoint to cyan's. **RESET** returns both stations to their opening coordinates, with the rail along X. Then **SLIDE** moves A across the rail.
+
+The cyan gap changes. Gold stays where it was. Pink grows.
+
+The rail's along-direction reading cannot register this movement. Beside it, the remainder makes the change visible. A second SLIDE reverses the step.
+
+Now **TURN** moves the rail thirty degrees while the incoming gap stays fixed. What was beside the rail becomes partly available along it. The vector did not become more complete. The direction of the question changed.
+
+The rule separates the gap into two parts:
 
 ```gdscript
-func reject(a: Vector3, onto: Vector3) -> Vector3:
-    return a - project(a, onto)
+kept = axis * gap.dot(axis)
+remainder = gap - kept
 ```
 
-The perpendicular drop from the object to its shadow is the rest. Every vector splits this way, into a part along another and a part square to it, and the two parts add back to the original exactly.
+The axis has unit length. `gap.dot(axis)` gives a signed distance along it. Multiplying by the axis makes that number into the gold vector. Subtracting gold from the gap leaves the perpendicular pink remainder.
 
-<!-- @vector_projection_reflection_xl -->
-
-Walk into it. A vector arrives at a glowing plane and comes apart against it: the projection lying in the plane, the reflection leaving it. Take hold of the plane's normal and tilt it, and both halves recompute as you turn. This is the operation a mirror performs, and a floor, and every surface a thing has ever bounced off.
-
-<!-- @ -->
-
-## To cross is to turn
+The addition we already know can put them together again:
 
 ```gdscript
-func torque(arm: Vector3, force: Vector3) -> Vector3:
-    return arm.cross(force)
+kept + remainder
 ```
+
+It gives the gap back. Nothing needs to disappear if we keep both parts. If a later machine stores only the projection, many different gaps will fit the answer it retained.
+
+**FLIP** reverses the rail's orientation. The signed distance changes sign, but gold stays in place: both the axis and its coordinate reverse. A negative number needs its frame before it can tell us where to go.
+
+There is pleasure in finding that the pink part has somewhere to go. It was excluded from this rail's account, not from existence. Turn the rail and the distinction moves. We can build a machine that needs only the gold part. We can also ask what another body could do with the pink.
 
 <!-- @torque_crank -->
 
-A lever arm on a flywheel's hub, and a push. The cross product of the arm and the push is a third arrow, gold, pointing up the axle, and the wheel turns about it. Its length is the two lengths times the sine of the angle between them, and read what that means with your hands: push straight along the arm and nothing happens at all. Push square across it and the wheel spins hardest. The cross product is the turn left over when two directions refuse to align.
+## Across the arm
 
-You have used it before without being told. Two rooms into the first chapter, every face in the museum got its direction from two edges crossed at a corner. Here the same operation, with a push instead of an edge, is what makes anything turn.
-
-<!-- @vector_cross_product_xl -->
-
-Five metres square. Two arrows span a glowing parallelogram on the floor, and the purple arrow rises out of it, perpendicular to both. Swing either arrow and the parallelogram thins toward nothing as they line up, and the purple arrow shrinks with it. The paddle wheel spins by the right-hand rule, and the readout confirms what you can see: the product is square to both of its parents, always.
+The crank farther along brings this perpendicular part to a different question. Its **LEVERAGE** slider changes the angle between an illustrated arm and push. Along the arm, the cross-product magnitude is zero. Across it, the value grows toward one.
 
 ```gdscript
-func wasted_half(arm: Vector3, force: Vector3) -> Vector3:
-    var r := arm.normalized()
-    return r * force.dot(r)
+var torque_vec: Vector3 = r_dir.cross(f_dir)
 ```
 
-Now put the two products beside each other. What the projection keeps of a push, the part along the arm, is exactly what the cross product throws away, and what the cross product keeps is exactly what the projection discarded. Dot and cross are one question asked in opposite directions: how much do these two agree, and how much do they refuse to.
+These are unit directions. Their cross product supplies an axis and an angular factor. For physical torque we would also need the actual arm length and force magnitude. A push directed through the pivot supplies no torque about it; the perpendicular part can turn the arm.
 
-<!-- @ -->
+The readout names the factor, sin θ, beside the chosen angle. The wheel changes its pose as the slider moves. Let go and it holds still.
 
-## Out of reach
+We can study the relation here without waiting for a wheel to accelerate. But setting a pose has not yet given the wheel momentum. To let it keep turning, we would have to give it a state that carries from one moment into the next.
 
-<!-- @vector_addition_xl_laser -->
-
-<!-- @vector_subtraction_xl_laser -->
-
-At the far end, addition and subtraction once more, built so large that the tips are past your arm. Point a hand's laser at an endpoint, hold, and sweep, and the sum and the difference redraw at a scale no hand could hold. The room has now shown you each operation three ways: in your hand, around your body, and beyond your reach, which is the size most of them come at.
-
-<!-- @ -->
-
-## Three verbs
-
-To add is to walk. To dot is to agree. To cross is to turn.
-
-That is the act, and it is a definition no page could give you, because each verb was something your body did before it was something you knew. Nothing here was a symbol. Every operation was a thing one vector did to another, and you were the thing doing it.
-
-The next act takes these and spreads them over space and time, so that a vector is no longer one arrow you hold but a field of them, everywhere at once, and the arrow stops holding still.
+The larger comparisons and the distant laser-operated diagrams remain around this route. Ahead, in Launch, a vector will be given another job. It will leave the diagram and become an initial velocity for a moving body.

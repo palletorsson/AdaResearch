@@ -8,6 +8,10 @@ Press NEXT. The middle lifts into a peak. Follow it up and down before reading t
 
 At the fourth step, 256 segments share a path a little over twelve and a half metres long. The endpoints still stand four metres apart. Distance between them and distance along the boundary have begun telling different stories.
 
+Beside the desk, the familiar black point rests on a smaller drawing. Take it and follow a fold. A second point travels over the larger line on the floor. The same position has acquired another reach. Press the trigger once while holding: every segment takes the next detour. The point has become a way to read the construction as well as a way to ask for more of it.
+
+Your hand can leave the line. The reading finds its nearest span; on release, the sphere settles there. Jump across a fold and the number can jump too. It tells you where you are along the path, not how far your hand has travelled. Try the floor drawing with your eyes and feet. The little turns that fit inside one gesture have spread across the room, but at the fourth step some are already too small to follow as separate steps. A route can remain exact after this body loses the means to perform every part of it.
+
 This is the small decision inside each replacement:
 
 ```gdscript
@@ -50,7 +54,9 @@ We can change the view back. That matters here. The ease with which this display
 
 <!-- @box_counting_dimension -->
 
-The next triangle arrives as points. This bench has its own generator: eight thousand repeated moves halfway towards a chosen corner. It is related to the triangle we just cut, but it is not reading that sculpture's mesh.
+Two side benches offer a detour before removal enters a volume in the next hall. Stay with them to ask how we measure or recognise a construction; the route into Menger can also continue from the triangle's openings.
+
+At the first bench, the triangle arrives as points. This instrument has its own generator: eight thousand repeated moves halfway towards a chosen corner. It is related to the triangle we just cut, but it is not reading that sculpture's mesh.
 
 Press FINER. The grid tightens over the same points. Try COVER. Coloured cells mark where at least one sample was found. A crowded cell and a cell holding one point each count once. An empty cell contributes nothing, even when the ideal construction might place detail there.
 

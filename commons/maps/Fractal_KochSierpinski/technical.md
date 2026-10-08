@@ -1,200 +1,45 @@
-# Fractals_4 - Technical Tutorial
+# Replacement, removal and finite measurement
 
-## The Cantor Set Algorithm
+Three primary artifacts follow the book's order. All ten map placements remain. The old 13×11 room is retained as the rear collection, translated by (3,18) inside a 19×29 enclosure. Its raised cell remains; old exit voids receive museum floor coverage. The new front study area supplies reachable controls and room for the comparisons.
 
-### Basic Construction
-The Cantor set is defined by recursive deletion:
+The 8 October tutorial pass selects Koch as the single learner construction. Sierpinski remains a comparison using the replacement idea, and box counting is an optional measuring study. See `tutorial.md` for the three complete printed files and the distinction between the smaller reconstruction and production fixture.
 
-```gdscript
-func cantor_set(segments: Array, depth: int) -> Array:
-    if depth <= 0:
-        return segments
+## Controls and data
 
-    var new_segments = []
+| Artifact | Controls | Held quantities / changing quantities |
+|---|---|---|
+| fractal_koch_curve | NEXT, BACK, FORM, TURN, RESET, RULE | Depth 0–4; open endpoints 4 m apart; FORM starts a 3.5 m-sided triangle; TURN reverses peak direction. |
+| sierpinski_triangle | NEXT, BACK, VIEW, DEPTH, RESET, RULE | Depth 0–4, side 6 m. VIEW changes drawing of retained/removed parts. DEPTH switches 0.08/0.35 m thickness. |
+| box_counting_dimension | FINER, COARSER, COVER, RANGE, RESET, RULE | 8,000 points, seed 2026. Grids 2,4,8,16,32,64. RANGE cycles coarse three, fine three, all six. |
 
-    for seg in segments:
-        var start = seg[0]
-        var end = seg[1]
-        var third = (end - start) / 3.0
+`#lesson:true` installs `commons/artifacts/koch_sierpinski_lesson/koch_sierpinski_lesson.gd` on these placements. It holds their timers, starts at the first construction and reuses the existing algorithms. Each desk has six physical touch buttons in a 3×2 arrangement and a tilted 1.18×0.36 m text plane at alpha 0.14. Source scenes without that flag keep their ordinary modes. The measurement registry entry previously had `map_ready:false`; the hall loader therefore skipped it even though its scene existed. This pass enables the tested scene.
 
-        # Keep left third and right third, discard middle
-        new_segments.append([start, start + third])
-        new_segments.append([end - third, end])
+## Koch
 
-    return cantor_set(new_segments, depth - 1)
+`algorithms/fractals/example_8_5_koch_curve_vr.gd` stores start/end dictionaries per generation. `_koch_subdivide` replaces one segment by four joined segments of one-third length. The open lesson begins with local length 0.8 and mesh scale 5, hence 4 m. Counts are 4^n; path lengths are 4(4/3)^n. At n=4 this is 256 segments and about 12.642 m. FORM uses three local sides of length 0.7, giving initial perimeter 10.5 m. Its first replacement has perimeter 14 m. For lesson snowflakes, the counterclockwise initial triangle receives outward peaks; TURN reverses this. Reversed constructions retain segment counts/lengths without inheriting every property of the standard non-overlapping Koch limit.
 
-# Usage
-var initial = [[0.0, 1.0]]  # Unit interval
-var cantor = cantor_set(initial, 5)  # 5 iterations
-# Result: 32 segments, each of length 1/243
-```
+The lesson draws two triangles per segment as a 0.02 m-wide ribbon. This provides readable width in the compatibility renderer, where a requested line width would not reliably produce it. Finite ribbons, finite polylines and mathematical limiting sets have different dimensional claims. `log(4)/log(3)` describes the standard ideal Koch curve; non-integer dimension is not a universal definition of every fractal.
 
-### Visualizing in 3D
-For VR, represent each segment as a 3D box:
+`hand_path.gd` now receives the current source records. It draws them horizontally on an off-white hand table at factor 1.5, and on the existing museum floor at factor 5 (matching the upright exhibit's represented metres). A carried PointBody selects the nearest finite segment; its projection and preceding-segment sum place a second sphere on the floor. Height is omitted from the hand query. The reading is an arc position, not accumulated hand distance. The free hand may skip folds; release parks at the selected point. The four-generation budget permits at most 257 open or 769 closed positions. Three nearby buttons offer NEXT/BACK/RESET; the held point's existing XRTools action signal requests NEXT. Original FORM/TURN/RULE controls remain.
 
-```gdscript
-func render_cantor_set(segments: Array, height: float, y_position: float):
-    for seg in segments:
-        var start = seg[0]
-        var end = seg[1]
-        var length = end - start
+The tabletop drawing, floor ribbon and floor marker add no collision; the table supplies a solid support, and the drawn floor route uses the hall's existing floor. The receiver changes no generating rule. Its supported vertices and standing approach are tested in the actual hall. `tools/test_koch_hand_lesson.py` extracts the three fenced files from `tutorial.md` and executes 39 native checks; `tools/probes/koch_hand_museum.gd` adds 33 actual-museum checks and captures. These are supplied input tests, not physical headset or learner verification.
 
-        var box = CSGBox3D.new()
-        box.size = Vector3(length, height, height)
-        box.position = Vector3((start + end) / 2.0, y_position, 0)
+## Sierpinski
 
-        add_child(box)
+`algorithms/fractals/sierpinskitriangle/sierpinski_triangle.gd` computes midpoints and three corner triangles. At side 6 m, initial area is 9√3 m². The lesson displays only the current kept generation, whose area is 9√3(3/4)^n. Four cuts yield 81 kept triangles and about 4.932 m². Ghost and negative modes draw each newly removed middle across the full construction history: (3^n−1)/2 pieces, or 40 at n=4. Negative mode still computes the corner data. Changing thickness does not alter the planar area calculation.
 
-# Show multiple iterations stacked vertically
-func render_cantor_stack(max_depth: int):
-    for depth in range(max_depth):
-        var segments = cantor_set([[0.0, 1.0]], depth)
-        var height = 0.1 / pow(1.5, depth)  # Thinner at higher depths
-        var y = depth * 0.3  # Stack vertically
+The original script rotates its root; the lesson instead rotates generated meshes, leaving the desk upright. Rebuild detaches old meshes immediately before deferred deletion. The sculpture has no colliders. The desk and measurement backing do. There is no claim that the triangle's apparent openings support or constrain locomotion.
 
-        render_cantor_set(segments, height, y)
-```
+## Box counting
 
-### Cantor Set Properties
-Mathematical properties to visualize:
+`algorithms/fractals/box_counting_dimension/box_counting_dimension.gd` owns an independent chaos-game point cloud. This is not a live measurement of either neighbouring sculpture. A dedicated seeded RNG makes RESET reproducible without reseeding the global stream. `N` counts unique grid addresses occupied by at least one point. COVER draws exactly two triangles for every occupied cell at the selected resolution. Display mapping scales the six-unit square to 3.3 m and turns it upright; the readout keeps box size in source units.
 
-```gdscript
-func cantor_statistics(depth: int) -> Dictionary:
-    var segments = cantor_set([[0.0, 1.0]], depth)
+RANGE selects three coarse samples, three fine samples, or all six for least-squares slope of log₂(N) versus log₂(1/box_size). All six measured points remain in the plot; the fit is computed only from the named subset and its line is drawn across the plot. The selected grid point has a cross. Box counts remain fixed when changing fit range. The ideal triangle's 1.585 dimension is a comparison, not an expected exact finite output. More resolution can eventually expose sampling sparsity; a finite cloud does not supply detail indefinitely.
 
-    # Total length remaining
-    var total_length = 0.0
-    for seg in segments:
-        total_length += seg[1] - seg[0]
-    # Formula: (2/3)^depth
+## Retained collection and source cautions
 
-    # Number of segments
-    var num_segments = segments.size()
-    # Formula: 2^depth
+`recursion_observatory`, `cube_cabin`, `cube_bookshelf`, `koch_curve_3d`, `sierpinski_pyramid`, and `science_screen` remain secondary; `dark_sphere` is decoration. The observatory supports comparison with prior constructions. The cabin and shelf are assembled architectures. The Koch arch bends a generated curve into a head and legs, repeated through depth; this does not establish a fractal dimension equal to its planar value plus one. The registry's pyramid resolves to `algorithms/cellularautomata/sierpinski_pyramid/SierpinskiPyramid.gd`: it has two distinct top calls plus four lower calls, despite five-copy comments. Treat it as its implemented six-call variant, not a four-copy tetrahedron. The trace screen remains an unconnected reference display; no new trace feed is claimed.
 
-    # Length of each segment
-    var segment_length = 1.0 / pow(3, depth)
-    # Formula: (1/3)^depth
+The previous map and prose are archived in `doc/space/koch-sierpinski-2026-09-14/before/`. Runtime evidence separates synthetic input through the project's DesktopPlayer rig, native museum walker interaction, and headset use. Only explicitly recorded checks are verified; VR reach, comfort and Quest frame time remain pending.
 
-    return {
-        "total_length": total_length,
-        "num_segments": num_segments,
-        "segment_length": segment_length,
-        "fractal_dimension": log(2) / log(3)  # ≈ 0.631
-    }
-```
-
-### The Menger Sponge
-The 3D analog of the Cantor set:
-
-```gdscript
-func menger_sponge(cube: AABB, depth: int) -> Array:
-    if depth <= 0:
-        return [cube]
-
-    var result = []
-    var size = cube.size / 3.0
-
-    for x in range(3):
-        for y in range(3):
-            for z in range(3):
-                # Skip if 2 or more coordinates are 1 (center)
-                var center_count = int(x == 1) + int(y == 1) + int(z == 1)
-                if center_count >= 2:
-                    continue  # Remove center and face centers
-
-                var new_pos = cube.position + Vector3(x, y, z) * size
-                var new_cube = AABB(new_pos, size)
-
-                # Recursive call
-                result.append_array(menger_sponge(new_cube, depth - 1))
-
-    return result
-
-# Menger sponge properties:
-# - 20 sub-cubes per iteration (27 - 7 removed)
-# - Dimension = log(20) / log(3) ≈ 2.727
-# - Infinite surface area, zero volume
-```
-
-### Cantor Dust (2D)
-The 2D analog—Cantor set applied in both dimensions:
-
-```gdscript
-func cantor_dust(rect: Rect2, depth: int) -> Array:
-    if depth <= 0:
-        return [rect]
-
-    var result = []
-    var size = rect.size / 3.0
-
-    # Keep corners only (4 quadrants minus center cross)
-    for x in [0, 2]:
-        for y in [0, 2]:
-            var new_pos = rect.position + Vector2(x, y) * size
-            var new_rect = Rect2(new_pos, size)
-            result.append_array(cantor_dust(new_rect, depth - 1))
-
-    return result
-
-# Cantor dust properties:
-# - 4 sub-squares per iteration
-# - Dimension = log(4) / log(3) ≈ 1.262
-# - More than Cantor set (0.631) but less than a plane (2)
-```
-
-### Ternary Representation
-Points in the Cantor set have a special property:
-
-```gdscript
-func is_in_cantor_set(x: float, precision: int = 20) -> bool:
-    # A number is in the Cantor set if and only if
-    # its base-3 representation contains no 1s
-
-    var value = x
-    for i in range(precision):
-        value *= 3.0
-        var digit = int(value) % 3
-        if digit == 1:
-            return false
-        value -= int(value)
-
-    return true
-
-# This gives an infinite set of points!
-# Examples in Cantor set: 0, 1/3, 2/3, 1, 1/9, 2/9, 7/9, 8/9, ...
-```
-
-## Implementation Notes
-
-### Iteration Limits
-At 10 iterations:
-- 1024 segments (2^10)
-- Each segment length: 1/59049 (3^-10)
-- Total length: ≈ 0.017 (about 1.7% of original)
-
-```gdscript
-@export var max_iterations: int = 10
-@export var min_segment_length: float = 0.001
-
-func render_adaptive(depth: int, segment_length: float):
-    if segment_length < min_segment_length:
-        return  # Stop when segments become invisible
-    # ... render logic
-```
-
-### LOD for Menger Sponge
-The sponge grows rapidly:
-- Depth 1: 20 cubes
-- Depth 2: 400 cubes
-- Depth 3: 8,000 cubes
-- Depth 4: 160,000 cubes
-
-```gdscript
-func menger_lod(center: Vector3, camera_pos: Vector3, max_depth: int) -> int:
-    var distance = center.distance_to(camera_pos)
-    return clamp(max_depth - int(distance / 5.0), 1, max_depth)
-```
-
-## Key Takeaway
-The Cantor set proves that **removing can create complexity**. After infinite deletions, uncountably many points remain. The fractal dimension D = log(2)/log(3) ≈ 0.631 quantifies this: more than isolated points, less than a continuous line. Structure emerges from systematic absence.
+Reference for the broader recursion progression: [The Nature of Code, Fractals](https://natureofcode.com/fractals/). Numerical claims above follow these local implementations.

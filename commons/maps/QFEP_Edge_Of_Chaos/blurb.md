@@ -1,20 +1,5 @@
-*λ ≈ 0.3 - 0.5*
+*The image changes. Which part of the change belongs to the way we calculated it?*
 
-You've seen order. You've seen chaos.
-Now you're in the space between.
+Two fields begin together. One takes smaller steps.
 
-This is where:
-- Patterns emerge from noise (Turing morphogenesis)
-- Complexity arises from simple rules (Langton's λ)
-- Adaptation becomes possible (Kauffman's NK landscapes)
-- Life happens
-
-The lambda slider is locked at 0.4. The edge.
-
-Walk through the Turing patterns.
-Feel the emergence happening around you.
-You are inside the sweet spot.
-
-*Not frozen. Not dissolved. Alive.*
-
-*This is what QFEP describes: the capacity to find and maintain this edge.*
+Choose a boundary and keep looking.

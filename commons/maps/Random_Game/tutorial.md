@@ -1,5 +1,11 @@
 # Read the decision before naming the randomness
 
+**Learning elements**
+
+- Stored deadlines
+- Decision timing
+- State disclosure
+
 From Random_Mushrooms, carry the distinction between a recipe and its choices. Random_Game has two primary encounters: the three-stone crossing, then the falling field. Noise_Types follows on the active route.
 
 At the crossing, watch two cycles from the lip. Say the state order aloud. Then compare the three lines on the tablet. Distinguish knowing the next state, knowing the current stored deadline, and knowing the next random draw.

@@ -1,19 +1,35 @@
-# No view from nowhere — Haraway's situated knowledge and the politics of standpoint in compute
+# Which part of a judgement tells you where it came from?
 
-Donna Haraway's 1988 essay on situated knowledges argued that objectivity is not the absence of a perspective but the careful accounting of which perspective one is occupying. A view from nowhere is a myth that masks the particular history, body, and position from which every view is actually given. Haraway's proposal was that knowledge be treated as partial, locatable, and critical — not as a ladder toward universal truth but as a practice whose validity depends on naming its standpoint.
+Read all four panels. Keep SUBJECT #4729 fixed in your comparison and record each verdict, confidence and footer. Return to the first panel and identify which fields changed between panels.
 
-Situated_Computation takes Haraway's essay as a design specification. The room is arranged as an observation chamber with three viewing platforms. Each platform renders a shared dataset differently even though the underlying coordinates, heights, and distances are constant. Heights and distances are the same in every view; the meaning of those heights and distances changes with the platform. The three renderings are three standpoints, and the map refuses to pick a best one.
+Then keep one panel in view. COVER puts a strip over its address; FOOTNOTE restores the footer; WITNESS adds a symbolic eye and station frame. The verdict and percentage remain unchanged. What has become easier to question, and what evidence is still missing?
 
-The first platform is a ground-level view. The dataset is rendered from a human standpoint at one metre off the ground, with the usual affordances of first-person perception: occlusion by foreground objects, foreshortening of distance, shadows that mark where the sun is assumed to be. This is the standpoint that most visualisations default to, and the map notes the default without privileging it.
+A visible address makes a claim easier to question, but cannot make it correct. ORDERLY and CREATIVE are not logical negations; they could both describe someone under different criteria. DANGEROUS demands an account of danger to whom and in what circumstances. Even an agreeable label needs evidence. The room's productive limit is the gap between displaying a standpoint and exposing the method that produced its judgement.
 
-The second platform is an aerial view. The dataset is rendered from above, with occlusion reduced and spatial extent clarified. This is the standpoint of the survey, the planner, the state — the view from which populations become legible as distributions. Trees appear as crowns rather than as trunks. Figures disappear under canopy. What the aerial view sees best is exactly what the ground-level view cannot access, and vice versa.
+The dictionary supplies a verdict and a confidence; the footer supplies a location. There is a revealing extra decision: this hall explicitly assigns NW, NE, SW and SE through its map tokens. That override takes precedence over the position-based fallback. The four-way disagreement has been composed for us. The percentages have not been earned by measuring the subject.
 
-The third platform is a slanted view from a local community's vantage. The dataset is rendered from an oblique angle at variable height, with annotations added by community members. Features the aerial view missed — local pathways, informal gathering points, the locations where routine practice happens — are marked. Features the ground-level view missed — long-distance spatial relationships, aggregate patterns — are partially visible. The view is neither fully ground-level nor fully aerial, and the partiality is the standpoint.
+The material comparison is specific: four authored verdicts share one identifier. Your movement changes which panel you read. It does not make a panel recalculate an assessment of you.
 
-A central bench lets the learner annotate what each view can see and what each view cannot. The annotations accumulate, and a running panel reads out the combined account as partial, located, and accountable rather than as universal. The annotation practice is Haraway's discipline of situated knowledge made concrete: naming what a view shows and what it omits is the work that converts a partial view into accountable knowledge.
+Keeping viewpoints visible is different from combining their contributions into a common object.
 
-A second station stages the same principle on a small classifier. The learner chooses a standpoint — which features to prioritise, which populations to treat as primary, which training data to weight — before training. The resulting model labels the dataset from that standpoint, and the panel makes the standpoint visible in the model's outputs. A different standpoint produces a different classifier, and the map does not claim that any standpoint is objectively correct.
+## A question the next version can test
 
-The politics of situated computation are in the refusal of universal viewpoint. Machine learning systems often claim to learn a universal pattern from data, and the claim is almost always a masked standpoint. The map argues that making the standpoint explicit is the minimum condition for accountable computation, and that systems which refuse to name their standpoints are systems whose politics operate in the dark.
+Give each panel an inspectable criterion and the evidence used. Compare disagreement caused by different criteria with disagreement caused by different observations. First verify that all four small panels can be read without losing their footers.
 
-Within the sequence, Situated_Computation replaces the view from nowhere with an explicit account of where the view is coming from. Collective_Knowledge will next turn standpoint from a solitary posture into a shared condition, and the sequence's post-crisis architecture will continue to build from explicit rather than assumed positioning.
+The earlier theoretical and design text is [preserved for further development](../../../doc/space/postcrisis-pass-2026-09-15/before/commons/maps/SpeculativeComputation_Situated_Computation/critical.md). This encounter grounds the claim in the current primary artifact; it does not turn an illustrative scene into empirical evidence about people.
+
+
+<!-- study-spine:museum_witnesses -->
+
+## Installed application: The room arrives late
+
+Gilligan's distributed moving images offer a way to keep these partial accounts beside one another. Here every view comes from this museum. Sharing an image does not give us the position from which it was seen. Before agreeing about what happened, we may need to agree about which moment we are seeing.
+
+
+<!-- study-reference:museum_witnesses -->
+
+### Reference and scope
+
+The ZKM presentation describes five episodes on separate monitors linked by steel tubing. Our five monitors carry museum cameras, not Gilligan’s films. The relation concerns distributed attention, mediation and dependence on a shared system.
+
+[ZKM: Melanie Gilligan, The Common Sense](https://zkm.de/en/artwork/the-common-sense).

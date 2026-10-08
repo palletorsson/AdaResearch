@@ -1,43 +1,23 @@
-# Color_Gradiant - Map Summary
+# The view has partitions
 
-## Overview
-Color_Gradiant concludes the color sequence with an immersive rainbow hallway installation. Unlike the discrete emitters of Color_Rainbow, this map presents continuous color transitions - true gradients where boundaries between named colors dissolve. The hallway becomes pure chromatic field.
+Twelve freestanding coloured panes break the former cubicle arrangement into overlapping views and gaps. Three workstations remain. A FILTER / OPAQUE console changes how the surfaces render while preserving their positions and collisions. A pale architectural backing makes the filters visible against the museum's dark surroundings.
 
-## Spatial Layout
-- **Dimensions**: 11×26 gallery hall
-- **Architecture**: Walled corridor with layered platforms
-- **Height**: Single level with 2-high boundary walls
-- **Structure**: Long gallery terminating in rainbow installation
+Two standing exhibits then separate colour coordinates from colour interpolation: finite RGB/HSV sample models, and sixteen gradient samples with endpoint and mode controls. Color_Walls closes the authored Colour sequence. Pattern_Disco follows in Patterns, returning to the familiar floor in colour.
 
-## Key Elements
 
-### Interactables
-- **rainbow_hallway:180** (5,12) - Continuous gradient tunnel
-- **dark_sphere** (5,8) - Ambient atmosphere dome
+<!-- study-spine:colour_assembly -->
 
-### Utilities
-- **Teleporter** (t) at (8,24) - Exit to Lab (sequence completion)
+## Installed application: Room to gather
 
-## Atmosphere
-- **Lighting**: Cool ambient with warm directional
-- **Background**: Sky blue
-- **Mood**: Contemplative, culminating, transcendent
+`colour_assembly` occupies a new adjoining bay, after the existing encounters. Cell [18, 50], rotation 180°, museum adapter `res://commons/artifacts/spine_studies/assembly.tscn`. Original response to Liam Gillick; no claim of exact reconstruction.
 
-## Learning Sequence
-1. Player enters gradient hall
-2. Walks through neutral gallery space
-3. Encounters dark_sphere atmospheric zone
-4. Enters rainbow_hallway installation
-5. Experiences continuous color gradient
-6. Observes seamless transitions between hues
-7. Reaches end of gradient tunnel
-8. Exits via teleporter (returns to Lab)
+Shift the colour index by one without moving a panel. Reuses coordinates, transform, array, colour; adds no prerequisite node. The display and main-player controls are supplied.
 
-## Design Intent
-The map presents color as **continuous field rather than discrete values**. The rainbow hallway eliminates the gaps between emitters, creating unbroken chromatic transition. This reveals that color names (red, orange, yellow) are arbitrary divisions of a continuous spectrum - language imposed on gradient.
 
-## Connection to Sequence
-- **Position in color sequence**: 6/6 (Final)
-- **Follows**: Color_Paint (gestural color)
-- **Establishes**: Color as continuous, categories as constructed
-- **Returns to**: Lab (post-color state)
+<!-- study-spine:colour_wall_studies -->
+
+## Installed application: Wall relations
+
+`colour_wall_studies` occupies a new adjoining bay, after the existing encounters. Cell [18, 70], rotation 180°, museum adapter `res://commons/artifacts/spine_studies/wall.tscn`. Original response to Liam Gillick; no claim of exact reconstruction.
+
+Change the pitch of 24 rails without changing their count. Reuses line, coordinates, array, colour; adds no prerequisite node. The display and main-player controls are supplied.

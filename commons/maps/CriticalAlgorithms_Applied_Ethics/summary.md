@@ -1,11 +1,9 @@
-# Applied Ethics — Summary
+# Before the first person speaks
 
-CriticalAlgorithms_Applied_Ethics is the second map in the Post-Foundations Crisis sequence. It takes the structural diagnosis from Bias_Visualization and stages it as practice: decisions being made by algorithmic systems on actual cases, with the outside of each classification kept visible.
+Who does this room make easiest to address?
 
-The room is arranged as a small case-review chamber. A central table holds three case files, each a concrete claim a classifier might be asked to make: a loan-approval decision, a hiring-shortlist decision, and a content-moderation decision. Each case is represented by a short narrative card, a set of features the classifier would see, and a prediction the classifier produced. An adjacent panel shows what the classifier did not see: context, relationships, history, exception.
+Choose HEAD, CIRCLE, PAIR, WATCH or VACANT. Examine each miniature from several sides. Compare NEUTRAL with COLOUR while holding the plan fixed. The models change chair count, scale and arrangement; the palette comparison holds the chair transforms fixed.
 
-A second station re-runs the same cases with an intervention. A calibration slider adjusts the threshold at which the classifier commits to a positive outcome. A re-weighting panel lets the learner lift or lower the influence of specific features. The outcomes change with each adjustment, and a side display tracks the downstream consequences on the affected populations.
+The six original artifact families remain. room_shape_demonstrator is primary; tt, excluded_class_visualizer, bias_from_inside, godel_statement_plaque and synthesis_stand remain secondary. The central model has an accessible panel and solid pedestals. It proposes conditions for participation without simulating speech or certifying accessibility.
 
-A small library on one wall holds annotated excerpts from practitioners — an excerpt on disparate impact, an excerpt on refusal, an excerpt on audit. The excerpts are deliberately short; the map rewards reading them against the cases rather than reading them alone.
-
-Within the sequence, Applied_Ethics turns the diagnosis into method. Every classifier has an outside; the map asks what a responsible practice looks like once that is true.
+The next hall lets conflicting accounts remain visible.

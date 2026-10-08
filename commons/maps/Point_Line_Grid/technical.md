@@ -74,13 +74,15 @@ The scene sets six subdivisions, so `snap_step` is 1/6 m in display space, in al
 
 The cased panel names source count and length, enlargement and display pitch. Rows show the latest source's world coordinates to three decimal places, ten per page, advancing every two seconds. The summary covers the latest ten releases; the scene can still contain older replay meshes. Displayed length and source length should not be confused. The original source array is unchanged by either rendering transform.
 
+PREVIOUS and NEXT hold a page of source positions for comparison with the displayed line. AUTO resumes the page cycle; either arrow returns to a held page. These controls page through the record without changing its positions or either rendered trace.
+
 ## The numbered plan
 
 The placed `plan_vitrine` wraps `commons/artifacts/simulation_grid/simulation_grid.tscn`. Its script creates 25 cell meshes with indices X/Z = 0 through 4. Their local centres use `Vector3(x-2, -0.024, z-2)`: the plan's cell `(2,2)` is horizontally centred at local zero. A one-metre change in either index moves a cell by one metre.
 
 These indices name finite cells in this particular plan. The held tool's signed lattice indices count from world zero. Neither numbering scheme defines the walking recorder's local origin. Keep the frame and the kind of thing being indexed explicit when comparing them.
 
-Each visual tile measures 0.988 by 0.988 m horizontally, with 0.06 m thickness and a top 0.006 m above local zero. A separate `PlanFloor` static body has one 5 by 0.06 by 5 m box collider centred at Y = -0.03, giving a continuous top at zero. The tile gaps do not become gaps in that collider. The vitrine's glass panes have no colliders. Its additional controller-mounted drawing behavior is outside the primary floor-plan exercise and awaits headset validation.
+Each visual tile measures 0.988 by 0.988 m horizontally, with 0.06 m thickness and a top 0.006 m above local zero. A separate `PlanFloor` static body has one 5 by 0.06 by 5 m box collider centred at Y = -0.03, giving a continuous top at zero. The tile gaps do not become gaps in that collider. The vitrine's glass panes have no colliders. Its configured controller-mounted drawing comparison now belongs to the primary encounter, as described below; headset validation remains open.
 
 ## The basin and the next boundary
 
@@ -96,3 +98,26 @@ Possible later controls include changing the walking grid's spacing or moving it
 [Companion notes for the current book passage](encounter-reference.md) retain instrument settings, recording distinctions and code excerpts moved out of the main reading.
 
 Source entry points: `commons/primitives/point/grab_sphere_point_snap.gd` and its scene; `commons/primitives/point/player_trace.gd`; `commons/globals/trace_data.gd`; `commons/primitives/line/grid_lines.gd` and its scene; `commons/artifacts/plan_vitrine/plan_vitrine.gd`; `commons/artifacts/simulation_grid/simulation_grid.gd`.
+
+## Two spatial pens on the plan — 21 September 2026
+
+The placement opts into `#pen_pair:space_grid`. Entering with both active VR controllers mounts a cyan left pen and an amber right pen. Both retain `draw_dot`'s movement sampling and 2048-position capacity. Neither consumes elapsed time as a coordinate or projects onto a nearby whiteboard. Desktop keeps the numbered floor but has no mounted pens.
+
+The cyan pen stores sampled world positions unchanged. The amber pen converts each accepted position into the vitrine's local frame, rounds X and Z to integer metres, keeps local Y, then converts back to world space. Local X/Z integers coincide with the centres of the one-metre plan cells; indices 0–4 name the centres at local -2–2. This uses the artifact frame, so translating or rotating the exhibit does not detach its addresses from its floor. There is no additional height lattice.
+
+```gdscript
+var on_plan := grid_frame.to_local(p)
+on_plan.x = roundf(on_plan.x)
+on_plan.z = roundf(on_plan.z)
+return grid_frame.to_global(on_plan)
+```
+
+The 6 mm movement gate still samples actual tip movement before shaping. Consecutive identical shaped positions are omitted. A held hand without movement does not add positions; changing height can add positions while the horizontal address stays fixed. Segments connect accepted samples, so a diagonal jump need not follow cell edges. Pens have marker nibs without colliders or pickup/drop signals and do not publish their records to TraceData. Entry clears the previous visit's traces. On exit, pens detach from the controllers and the traces remain for the configured six seconds before clearing.
+
+Other placements retain the default `space_time` pair. This chapter's configuration postpones that comparison without removing its implementation. See [the finishing-pass evidence](../../../doc/book/iterations/2026-09-21-primitives-finish/SUMMARY.md) for controlled runtime scope; headset use remains untested.
+
+## Recording and platform scope — review clarification, 24 September 2026
+
+The snapping sphere's table displays the latest ten retained positions while the count can be larger. Both table columns describe retained positions, one in metres and one in lattice indices.
+
+The walking recorder takes X/Z from the headset and height from the rig's origin; its desktop fallback follows the walking body. The book follows the headset visit. The plan's controller-mounted pen pair requires active tracked controllers; on desktop the numbered plan remains available to walk across, without those pens.

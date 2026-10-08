@@ -1,27 +1,10 @@
-# CA AgentsCircuits — Artifacts
-*Cellular Automata: Local Rules, Global Patterns · lambda_edge · 3 artifacts*
+# CA_AgentsCircuits — current encounters
 
-> Wireworld: cells can be empty, electron head, electron tail, or conductor. Electrons flow along conductor paths, enabling logic gates, circuits, computers. A cellular automaton that can simulate computers. Turing completeness in four colors.
+Two authored primary artifacts remain in their existing locations.
 
-The map, read through what it holds — its artifacts in the order you meet them:
+| Artifact | Placement | Work in the encounter |
+| --- | --- | --- |
+| ca_rule_explorer | Cell (3,5), 180°, 1.04 m | A held 32-cell Rule 90 history; original rule, seed and time controls; the same stored rows enlarged on the floor through `room:comparison`. |
+| sierpinski_pyramid | Cell (9,12), scale .42, plinth .25 m | A fixed recursive construction to compare with the remembered gaps. Six calls per level, four levels; it stays unchanged when the explorer’s seed changes. |
 
-## Cellular Automata Rule Explorer
-![Cellular Automata Rule Explorer](/scene-catalog/ca_rule_explorer.png)
-
-Browse and experiment with different cellular automata rule sets in real-time. Dial through Wolfram's elementary rules or configure custom neighborhood and transition tables to discover the full spectrum from dead stillness to chaotic noise, with complexity emerging at the edge.
-
-`ca_rule_explorer`
-
-## CellularAutomata3DStacked
-![CellularAutomata3DStacked](/scene-catalog/CellularAutomata3DStacked.png)
-
-layer(n+1) = life_rules(layer(n)) with outward→upward phase transition
-
-`CellularAutomata3DStacked`
-
-## Sierpinski Pyramid
-![Sierpinski Pyramid](/scene-catalog/sierpinski_pyramid.png)
-
-Recursive Sierpinski Pyramid construction using cubes.
-
-`sierpinski_pyramid`
+The floor is a read-only part of ca_rule_explorer. It introduces no new collision, rule, clock or control panel. Decorative museum furnishing is retained. Wireworld and CellularAutomata3DStacked belong to the earlier proposal saved in wireworld-proposal.md, not the current placement inventory.

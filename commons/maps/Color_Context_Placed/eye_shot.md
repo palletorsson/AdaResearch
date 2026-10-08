@@ -1,3 +1,5 @@
+> Historical report: predates the 2026-09-10 pattern-machine removal. See field_notes.md for the changed placement; these clearance findings need a fresh walk.
+
 # Eye shot — Color_Context_Placed
 
 > one pass: ride (gaze), move (place --only-improve), gate (pathfinder), voice (qfep). Field note, not a ruling.

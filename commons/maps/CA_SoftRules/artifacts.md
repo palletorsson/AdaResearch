@@ -1,19 +1,12 @@
-# CA SoftRules — Artifacts
-*Cellular Automata: Local Rules, Global Patterns · lambda_edge · 2 artifacts*
+# Retained collection
 
-> Stochastic automata add randomness. A rule might fire with 80% probability, not certainty. Noise enters the system. Perfect patterns become imperfect. Edges fuzz. Strict determinism softens into probabilistic flow. The automaton breathes.
+| Work | Role | Place in this pass |
+|---|---|---|
+| rd_artifact | Primary | Live matched Gray–Scott fields; eight controls; table/wall mapping; a body crossing performs the existing matched injection once |
+| the_clockmaker_of_rules | Primary | Restored diagram bench; stencils, trays, computed histories and labelled static ring |
+| lattice_gas_pump | Secondary | Preserved in rear gallery; interaction review pending |
+| ca_sphere | Secondary | Preserved in rear gallery; topology/control review pending |
+| crack_propagation_ca | Secondary | Preserved in rear gallery; interaction review pending |
+| rule_30_110_gravity | Secondary | Preserved in rear gallery; interaction review pending |
 
-The map, read through what it holds — its artifacts in the order you meet them:
-
-## CA Sphere
-
-Cellular Automata on a sphere surface.
-
-`ca_sphere`
-
-## Rule 30/110 Gravity
-![Rule 30/110 Gravity](/scene-catalog/rule_30_110_gravity.png)
-
-Rule 30/110 with gravity effects.
-
-`rule_30_110_gravity`
+The earlier served museum plan placed only two of the six map works. Both plan copies now derive this room from its current authored map. The clockmaker also lacked the registry's map_ready flag. No authored artifact is removed.

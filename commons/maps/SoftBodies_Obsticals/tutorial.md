@@ -1,111 +1,33 @@
-# Soft Bodies Obstacles
+# The room has a body
 
-Soft body collides with a rigid obstacle. Response is elastic.
+**Learning elements**
 
-Detect penetration.
+- Pressure drivers
+- Solver response
+- Changing clearance
 
-```gdscript
-func penetration_at(mass: Vector3, obstacle: Node3D) -> Vector3:
-    var obstacle_local: Vector3 = obstacle.to_local(mass)
-    var shape: CollisionShape3D = obstacle.get_node("CollisionShape3D")
-    if shape.shape is SphereShape3D:
-        var radius: float = shape.shape.radius
-        if obstacle_local.length() < radius:
-            return obstacle_local.normalized() * (radius - obstacle_local.length())
-    return Vector3.ZERO
-```
+<!-- @breathing_room -->
 
-Returns the correction vector needed to push the mass outside the obstacle. Zero if no penetration.
+The walls swell. Find a position from which both their edges and their centres remain visible. Selected vertices stay pinned while the surfaces respond between them. Before entering, watch a complete pressure cycle.
 
-Apply collision response.
+AMPLITUDE changes the range of pressure. RATE changes how quickly its driving phase advances. HOLD DRIVE holds that phase; it does not freeze the wall vertices. The soft solver can continue settling under the pressure it last received.
 
 ```gdscript
-func apply_collision(cube: MassSpringCube, obstacle: Node3D) -> void:
-    for i in cube.masses.size():
-        var mass_world: Vector3 = cube.to_global(cube.masses[i])
-        var correction: Vector3 = penetration_at(mass_world, obstacle)
-        if correction.length() > 0.01:
-            cube.masses[i] += cube.to_local(correction)
-            var normal: Vector3 = correction.normalized()
-            var velocity_component: float = cube.velocities[i].dot(normal)
-            if velocity_component < 0:
-                cube.velocities[i] -= normal * velocity_component * 1.8  # elastic rebound
+var p = (sin(_time) + 1.0) * 0.5 * breath_amplitude
+for sb in _walls:
+    sb.pressure_coefficient = p
 ```
 
-Push the mass out of the obstacle; reflect the inward velocity component. Coefficient 1.8 produces slightly elastic rebound.
+The sine wave supplies pressure to a deformable body. It does not directly specify the location of every point on the wall. The actual surface is a result of the solver, its constraints and its encounters. This is the bridge from the earlier sine spaces: a periodic instruction now enters a system that can respond.
 
-Spawn a sphere obstacle.
+Calling it breathing is an invitation to bodily recognition. This room has no need for air and no sensor deciding when to inhale. The resemblance can be affecting without becoming a description of its mechanism. Its capacity to narrow space still deserves a practical question: how much room remains for the visitor?
 
-```gdscript
-func spawn_sphere_obstacle(position: Vector3, radius: float) -> StaticBody3D:
-    var obstacle := StaticBody3D.new()
-    var mesh := MeshInstance3D.new()
-    mesh.mesh = SphereMesh.new()
-    mesh.mesh.radius = radius
-    obstacle.add_child(mesh)
-    var shape := CollisionShape3D.new()
-    var s := SphereShape3D.new()
-    s.radius = radius
-    shape.shape = s
-    obstacle.add_child(shape)
-    obstacle.global_position = position
-    add_child(obstacle)
-    return obstacle
-```
 
-Standard static body with a sphere collision shape. The obstacle cannot move.
 
-Spawn a plane obstacle.
+<!-- @softbody_gallery_part2 -->
 
-```gdscript
-func spawn_plane_obstacle(y: float) -> StaticBody3D:
-    var obstacle := StaticBody3D.new()
-    var shape := CollisionShape3D.new()
-    shape.shape = WorldBoundaryShape3D.new()  # infinite plane
-    obstacle.add_child(shape)
-    obstacle.global_position = Vector3(0, y, 0)
-    add_child(obstacle)
-    return obstacle
-```
+The nearby contact gallery keeps other combinations visible: soft bodies meet rigid obstructions. Look at one named cell before surveying the whole array. The specimen, its support and its settings constitute a particular test; their variety is not a single scale from hard to soft.
 
-Infinite floor. Any mass below y is pushed up.
+The flag dancer remains as another encounter with a driven system. Together these objects begin to distribute softness across the room rather than confine it to one specimen. Yet the museum crossing still has independent support. A deforming wall and an onward route make different promises.
 
-Detect plane penetration.
-
-```gdscript
-func plane_penetration(mass: Vector3, plane_y: float) -> Vector3:
-    if mass.y < plane_y:
-        return Vector3(0, plane_y - mass.y, 0)
-    return Vector3.ZERO
-```
-
-Single axis comparison. Correction is purely vertical.
-
-Apply friction on sliding contacts.
-
-```gdscript
-func apply_friction(cube: MassSpringCube, friction: float = 0.3) -> void:
-    for i in cube.masses.size():
-        if cube.masses[i].y < 0.01:  # touching floor
-            var horizontal := Vector3(cube.velocities[i].x, 0, cube.velocities[i].z)
-            cube.velocities[i] -= horizontal * friction
-```
-
-Reduce horizontal velocity for masses in contact. Produces slowing as the cube slides.
-
-You can now detect penetration, apply elastic rebound, spawn sphere and plane obstacles, and apply friction on ground contact. SoftBodies_Obsticals_Part2 extends with moving obstacles.
-
-Emergency stop the simulation.
-
-```gdscript
-var paused: bool = false
-
-func toggle_pause() -> void:
-    paused = not paused
-
-func _physics_process(delta: float) -> void:
-    if paused: return
-    super(delta)
-```
-
-Lets the learner freeze the scene to examine a moment. Useful for studying specific deformation states.
+Next we will hold and replay a contact experiment. A spectacle of differences becomes more useful when we can identify which differences were introduced.

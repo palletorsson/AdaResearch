@@ -1,5 +1,13 @@
 # Noise Inside Noise — find the borrowed address
 
+**Learning elements — proposed focus**
+
+_The labels below set the revision focus; the existing lesson still needs alignment._
+
+- Domain warping
+- Function composition
+- Sampling coordinates
+
 1. Enter through a side opening and stand inside the noise sphere. Look at the relief overhead, then press RELIEF once to enter SKIN mode. Compare the now-round smaller spheres and press ZERO. The two sampled fields agree while the same palette and round support remain.
 2. Press WARP. Look up as the enclosing field changes while the room stays in place. Find the hollow yellow ring on the enclosing surface, then follow the yellow point on each small body and image. It still names p. The pink point on the left names q, the address from which the right-hand display obtains its answer.
 3. Compare the cyan original grid and pink displaced grid. The selected yellow line follows p to q. SAMPLE chooses another witness, including the hollow ring on the enclosing surface, without rebuilding or changing the field images or sphere meshes. In SKIN the ring stays put through WARP and ZERO. In RELIEF its radius follows the changed surface while its direction remains the same. Its open centre lets you inspect the field it marks.

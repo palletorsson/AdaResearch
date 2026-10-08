@@ -1,3 +1,5 @@
+> Historical note: this predates the 13 September 2026 walking study. See field_notes.md and final.md for the current configuration and tested claims.
+
 # Noise_Space_10 — walked
 
 > ghost-drafted from the working map (world slot, noise thread); Palle rules the voice.

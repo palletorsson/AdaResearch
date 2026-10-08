@@ -1,167 +1,40 @@
-# Trans_Scale - Technical Tutorial
+# A bounded fourfold change
 
-## Scale in Code
+The source token is `scale_me:0:0:1#encounter:drink_me#plinth:0`. `algorithms/primitives/scaleme/scale_me.gd` detects that configuration before binding the legacy target and builds `drink_me_room.gd`. Unconfigured scale_me instances retain their legacy behavior.
 
-### Basic Scaling
+`Room` owns the architecture and the two seeded dream figures. It begins four metres wide and deep, with a 3.2-metre ceiling. Its floor sits 4 cm above the museum deck to avoid coincident surfaces. Its far-side door is a genuine gap between colliders, 0.45 by 0.60 metres. The entrance is 1.4 by 2.4 metres.
 
-```gdscript
-# Uniform scale (same in all directions)
-node.scale = Vector3(2, 2, 2)  # Double size
-node.scale = Vector3.ONE * 0.5  # Half size
+The food tower uses spread=blooming and service=tower; the crystal suit uses crust=spire and panels=leaning. Sculpture meshes are combined into one static concave collision shape per sculpture. Thirteen visible porcelain serving plates have matching cylinder colliders. Their tops descend from 1.76 m in 0.135 m increments, becoming drops of 0.54 m after scaling.
 
-# Non-uniform scale (different per axis)
-node.scale = Vector3(1, 2, 1)  # Stretched vertically
-node.scale = Vector3(2, 1, 0.5)  # Wide and flat
-```
-
-### Scale vs Size
-
-### The Cube Law: Volume Scales Exponentially
-
-When you double linear scale, volume increases 8-fold (2³):
+`drink_me_bottle.gd` extends XRToolsPickable. VR picked_up resolves the grabbing controller's player body. Desktop uses the shared pointer's optional on_desktop_grab callback and resolves its owning CharacterBody3D. Both defer consumption, release the hand, hide/disable the bottle, and call the same encounter operation. Mere proximity does not trigger it.
 
 ```gdscript
-# Original cube: 1x1x1
-var volume_before = 1.0
-
-# Scale by factor of 3
-var scale_factor = 3.0
-cube.scale = Vector3(scale_factor, scale_factor, scale_factor)
-
-# New volume: 3x3x3 = 27
-var volume_after = pow(scale_factor, 3)  # 27x the volume!
-
-# This is why giants don't exist in nature:
-# A creature scaled 10x has:
-# - 100x the cross-sectional area (strength)
-# - 1000x the volume (mass to support)
-# Strength-to-weight ratio: 100/1000 = 0.1
-# Only 1/10 as strong relative to weight
+room.scale = Vector3.ONE * FACTOR
+var feet := table.to_global(landings[0]) + Vector3.UP*0.08
 ```
 
-### Alice's Problem: Relative Size
+FACTOR is 4. The scale assignment is instantaneous; there is no interpolation through intermediate sizes. After the physics frame updates, XRToolsPlayerBody.teleport moves the VR body and origin together; desktop moves the character transform. Velocity is cleared. The body, museum, locomotion and gravity remain unchanged. There is no timed reversal; the encounter resets when the hall is freshly loaded.
 
-Like Alice in Wonderland, size only has meaning relative to context:
+The source map reserves a 21-by-22-cell hall for the 16-by-16-metre expanded room. Its fixed structure-4 wall spans row 2 except cells 9–11, where the small room's own entrance remains accessible. The wall joins that room to the hall sides, preventing a forward bypass around its exterior. It intersects the room front only, leaving the expanded interior and far exit clear. This wall is outside the scaled hierarchy. The standalone spawn is `s` at (10,0), with `utility_definitions.s.properties.player_rotation = 180`; `sp` would create a score point, not a spawn. Its continuous museum floor remains underneath, 4 cm below the room floor, and supports entry and exit at both states. This is a gallery, without an embedded grid basin. An optional em_visibility_bounds metadata AABB tells museum distance culling to measure from the expanded room boundary instead of its now-distant placement anchor.
 
-### Interactive Scaling with VR Gestures
+A separate `UnscaledDoorway` is a sibling of `Room`, never a descendant. Its 1.8-by-2.4-metre opening lines up just beyond the expanded exit. Both admit the same body after the change, but only the room doorway has been multiplied. This fixed comparison makes the transform hierarchy visible.
 
-The scale_me artifact implements gesture-based scaling:
+Verification: commons/testing/probe_drink_me_room.gd loads the actual museum hall, takes the bottle through the desktop pointer, checks both door sizes against a body capsule, scale boundaries, arrival clearance, landing collision, descent and visibility near the exit. Headset comfort and learner discovery remain to be walked by a person.
 
-```gdscript
-extends Node3D
 
-@export var min_scale: float = 0.1
-@export var max_scale: float = 5.0
-@export var scale_sensitivity: float = 2.0
+## Shared book illustration — 23 September
 
-var initial_hand_distance: float = 0.0
-var initial_scale: Vector3
-var is_scaling: bool = false
-var left_hand: XRController3D
-var right_hand: XRController3D
+The chapter's paired door image comes from the actual museum encounter before and after taking the bottle through the desktop pointer. Both cameras sit 1.65 m above the room floor and 2.5 m in front of the opening, look toward a point 1.2 m above its centre, and use the same 70-degree field of view. Camera position follows the doorway when the room grows; camera height, viewing distance and pitch do not scale. The second gold frame visible beyond the enlarged door retains its original world transform.
 
-func start_scaling():
-    is_scaling = true
-    initial_hand_distance = get_hand_distance()
-    initial_scale = scale
+`tools/probes/scale_book_illustrations.gd` records those views and checks a 0.44 m wide, 1.6 m high capsule before and after the change. A hypothetical fourfold body is only a probe comparison, not a new visitor control. No room, sculpture, map or runtime behavior changed. The earlier full serving-plate descent remains historical evidence; this illustration pass does not rewalk it.
 
-func _process(delta):
-    if is_scaling:
-        var current_distance = get_hand_distance()
-        var scale_factor = current_distance / initial_hand_distance
-        var new_scale = initial_scale * scale_factor
+[Full reading, paired image and scope](../../../doc/book/iterations/2026-09-23-scale-door-and-body/index.html).
 
-        # Clamp to limits
-        new_scale = new_scale.clamp(
-            Vector3.ONE * min_scale,
-            Vector3.ONE * max_scale
-        )
-        scale = new_scale
 
-func get_hand_distance() -> float:
-    return left_hand.global_position.distance_to(
-        right_hand.global_position
-    )
-```
+<!-- study-spine:reference_passage -->
 
-### Pinch-to-Scale Gesture
+## Installed application: Who fits through?
 
-### Scale and Collision
+`reference_passage` occupies a new adjoining bay, after the existing encounters. Cell [10, 30], rotation 180°, museum adapter `res://commons/artifacts/spine_studies/passage.tscn`. Original response to Mirosław Bałka; no claim of exact reconstruction.
 
-Scaling affects physics:
-
-```gdscript
-# When scaling physics bodies, collision shapes must also scale
-func scale_with_collision(new_scale: Vector3):
-    scale = new_scale
-
-    # CollisionShape3D scales automatically with parent
-    # But physics properties may need adjustment:
-
-    if self is RigidBody3D:
-        # Mass scales with volume (cubic)
-        var volume_factor = new_scale.x * new_scale.y * new_scale.z
-        mass = base_mass * volume_factor
-
-        # Inertia scales with mass and size
-        # (handled automatically if using default inertia)
-```
-
-### Scale Inheritance
-
-### Prism Reference Geometry
-
-The prism blocks provide scale reference:
-
-```gdscript
-# Create prism for scale comparison
-extends MeshInstance3D
-
-func _ready():
-    var prism = PrismMesh.new()
-    prism.size = Vector3(1, 1, 1)  # Unit prism
-    mesh = prism
-
-# Prisms make scale visible because:
-# 1. They have clear geometric proportions
-# 2. Their angles stay constant under uniform scale
-# 3. Human perception compares object sizes automatically
-```
-
-### Animated Scaling
-
-### Scale in Transform Matrix
-
-```gdscript
-# Scale is encoded in the basis matrix
-var basis = transform.basis
-
-# Extract scale from basis
-var scale_x = basis.x.length()
-var scale_y = basis.y.length()
-var scale_z = basis.z.length()
-var extracted_scale = Vector3(scale_x, scale_y, scale_z)
-
-# Note: non-uniform scale + rotation = shear
-# The basis can't cleanly separate rotation from non-uniform scale
-```
-
-### Negative Scale: Reflection
-
-Scale can be negative, which mirrors the object:
-
-## Key Takeaway
-
-Scale changes size while preserving proportions (for uniform scale) or distorts proportions (for non-uniform scale). Unlike translation and rotation, scale is **immediately visible** - objects look bigger or smaller.
-
-Interactive scaling empowers the player to control transformation directly. "Scale me" is an invitation: you are the agent of change.
-
-## Implementation Notes and Complexity
-
-Scaling a Node3D in Godot is O(1) — the operation writes three floats into the transform basis. The cost of the operation is not in the scale itself but in the downstream propagation: every child's world transform must be recomputed when the parent's scale changes. For a tree of N nodes, a single scale on the root triggers O(N) transform updates on the next frame.
-
-Non-uniform scale is where the practical complexity arrives. A uniform scale commutes with rotation; a non-uniform scale does not. The basis matrix that would represent rotation followed by non-uniform scale cannot generally be decomposed back into clean rotation and scale components — the decomposition produces shear. Code that intermixes the two operations often ends up with nodes whose children inherit unintended skew, and the skew is not easy to remove after the fact because it was encoded in the basis when the scale was applied.
-
-Collision shapes follow the parent's scale automatically in Godot, but physics properties do not. A rigid body with its scale doubled will still have its original mass unless the author adjusts it explicitly. The scale_with_collision routine above shows the cubic law applied to mass; real applications frequently forget to apply it and end up with rigid bodies that punch through walls because their inertia is wrong for their new size.
-
-Within the sequence, Trans_Scale sits between translation and rotation as the third of three fundamental geometric transformations. The scale_me artifact lets the learner control the operation directly with their hands, so the cubic volume law becomes a body-level experience rather than an equation. The prism blocks provide scale reference because their angular geometry is unambiguous at every size, and human perception automatically compares angles across scales even when it cannot compare lengths reliably.
+Change opening width while keeping the body and opening height. Reuses coordinates, transform; adds no prerequisite node. The display and main-player controls are supplied.

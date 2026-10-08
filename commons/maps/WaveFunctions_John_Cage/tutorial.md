@@ -1,5 +1,13 @@
 # John Cage
 
+**Learning elements — proposed focus**
+
+_The labels below set the revision focus; the existing lesson still needs alignment._
+
+- Chance scores
+- Event intervals
+- Prepared vocabularies
+
 4'33" made the silence the piece. Build a room where absence is measurable and the noise floor is never actually zero.
 
 Declare the listener.

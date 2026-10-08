@@ -1,62 +1,18 @@
-# Trans Translation — Artifacts
-*Transformation: What Stays the Same When Everything Changes · F_order · 8 artifacts*
+# Trans Translation — current encounters
 
-> Walkways extend over void. Transport cubes shuttle across gaps that feet cannot cross. Translation is the first transformation: not rotation's reorientation, not scale's resizing, but pure displacement. Here becomes there. The body learns what code already knows - that position is mutable, that space is traversable, that gaps are invitations rather than barriers.
+Seven rides make the main course. Nineteen artifact placements accompany them: thirteen collecting cubes, three axis markers, the torus/cylinder study, and two existing door mechanisms. The previous generated inventory named an older arrangement; its version is preserved in the 23 September iteration baseline.
 
-The map, read through what it holds — its artifacts in the order you meet them:
+| Role | Artifact or utility | Source placement | Work in the hall |
+|---|---|---|---|
+| Primary | `tc` | Seven authored utility cells | Depth, sideways, lift, high crossing, reverse x, down-and-forward, x/z diagonal. The carriers keep their facing and size. |
+| Primary | `pick_up_cube` | Thirteen placements along the rides | Carried contact collects a vertically bobbing cube. The carrier can return without restoring the collected object. |
+| Primary | `translation_cube_demo` | (3,52), lift_lateral / rail | One permitted direction at a time. A pale trace records the accepted handle motion. |
+| Primary | `translation_cube_demo` | (7,52), free / ghost | The same relative destination admits a diagonal or curved route. The trace records that choice within the bounds. |
+| Secondary | `z_translation_cube` | (5,2) | A small depth reference near the entrance. |
+| Secondary | `x_translation_cube` | (8,2) | A small sideways reference. |
+| Secondary | `y_translation_cube` | (11,2) | A small vertical reference. |
+| Secondary | `toruscylinder` | (4,25) | Existing combined movement, acknowledged as a glimpse of Rotation. |
 
-## player_trace
-![player_trace](/scene-catalog/player_trace.png)
+The two door studies stand on 0.8 m plinths. Native checks measured the resting handles around 1.3 m above their approach floor. `#trace:on` adds a bounded visual record to these two placements; their doors, constraints, dimensions, positions and guides remain. No additional controller panel is introduced.
 
-SEE your own motion become a drawable path through time.
-
-`player_trace`
-
-## Transform Composition Workbench
-![Transform Composition Workbench](/scene-catalog/transform_composition_workbench.png)
-
-WALK the non-commutativity of transformations
-
-`transform_composition_workbench`
-
-## Z-Translation Cube
-![Z-Translation Cube](/scene-catalog/z_translation_cube.png)
-
-ISOLATE translation on the Z axis and see that only depth changes.
-
-`z_translation_cube`
-
-## Pick Up Cube
-![Pick Up Cube](/scene-catalog/pick_up_cube.png)
-
-MOVE an object through space and understand translation as carried displacement.
-
-`pick_up_cube`
-
-## Science Screen
-![Science Screen](/scene-catalog/science_screen.png)
-
-COMPARE a 3D artifact with its 2D abstraction and see what structure survives projection.
-
-`science_screen`
-
-## Dark Sphere
-![Dark Sphere](/scene-catalog/dark_sphere.png)
-
-USE a neutral sphere as a reference for scale, silhouette, and atmospheric change.
-
-`dark_sphere`
-
-## Y-Translation Cube
-![Y-Translation Cube](/scene-catalog/y_translation_cube.png)
-
-ISOLATE translation on the Y axis and see that only vertical position changes.
-
-`y_translation_cube`
-
-## Pickup Gate
-![Pickup Gate](/scene-catalog/pickup_gate.png)
-
-REASON about threshold state change: when enough objects move through, the gate transforms from closed to open.
-
-`pickup_gate`
+Current record: [Translation paths](../../../doc/book/iterations/2026-09-23-translation-paths/index.html). All seven rides and thirteen pickup placements are unchanged by this pass.

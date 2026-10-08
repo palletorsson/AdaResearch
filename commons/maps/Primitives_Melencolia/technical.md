@@ -1,3 +1,5 @@
+> Earlier technical research draft. For the current court, connection puzzle, illustrated viewpoints and counter return, use [the implementation companion](tutorial.md). Some sequence counts, placements and code examples below predate the restored hall.
+
 # 09 Melencolia
 
 ## The Final Primitive

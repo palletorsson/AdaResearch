@@ -1,3 +1,5 @@
+# An address needs a surface
+
 When does repetition become an environment rather than a picture?
 
 The red bend returns, with its blue corner and ochre interruption. It is the same starting arrangement you met in Tutorial_Pattern, entered here as a fixed source. Your edits from the previous room have not secretly travelled with you. This time the question is what gives the mark a place to appear.

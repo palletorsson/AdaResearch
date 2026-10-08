@@ -1,118 +1,44 @@
-# Color_Grid_Pallet - Technical Tutorial
+# Colour at an address
 
-## Grid-Based Color Systems
+Pillar evaluated colour at spatial sample positions. Here the same coordinate can receive an explicit edit, then receive a computed value again. The next room, Color_Paint, accumulates strokes.
 
-### Color as Indexed Data
+## The actual implementation
 
-```gdscript
-# Every tile in the grid stores a color at coordinates
-var color_grid: Array[Array] = []
+`algorithms/color/gridcolorizer/gridcolorizer.gd` remains the legacy GridColorMutator alias for ordinary placements. Only `#lesson:addresses` activates `address_lesson.gd`, hides the obsolete desktop overlay and disables automatic/global NextCube cycling for this encounter.
 
-func initialize_grid(width: int, height: int):
-    color_grid.resize(height)
-    for y in range(height):
-        color_grid[y] = []
-        color_grid[y].resize(width)
-        for x in range(width):
-            color_grid[y][x] = Color.WHITE  # Default color
-
-func set_tile_color(x: int, y: int, color: Color):
-    if x >= 0 and x < width and y >= 0 and y < height:
-        color_grid[y][x] = color
-        update_tile_visual(x, y)
-
-func get_tile_color(x: int, y: int) -> Color:
-    return color_grid[y][x]
-```
-
-### The GridColorizer Implementation
-
-### Images as Color Grids
+The lesson finds its room's GridMultiMesh and GridStructureComponent. It maps each interior floor coordinate to the corresponding instance using `cube_positions`. This matters: the room is rectangular, has stacked boundary walls and omitted cells. A square inferred from instance count does not encode those addresses.
 
 ```gdscript
-# An image IS a color grid
-var image = Image.create(256, 256, false, Image.FORMAT_RGBA8)
-
-# Set pixel color (same as setting grid tile)
-image.set_pixel(x, y, Color.RED)
-
-# Get pixel color
-var pixel_color = image.get_pixel(x, y)
-
-# The conceptual model is identical:
-# Grid tile at (3, 5) = Pixel at (3, 5)
-# Both store Color values at indexed positions
+cells[Vector2i(xyz.x, xyz.z)] = i
 ```
 
-### Spectrum Forest: 3D Color Space
-
-### Color Palette Management
+The dictionary includes floor cubes at y=0 with 0<x<18 and 0<z<20. It excludes wall columns on the perimeter. Selection is restricted to x/z 8 through 12; each button wraps that coordinate over five values.
 
 ```gdscript
-# Predefined palettes for quick selection
-var palettes = {
-    "primary": [Color.RED, Color.GREEN, Color.BLUE],
-    "secondary": [Color.CYAN, Color.MAGENTA, Color.YELLOW],
-    "grayscale": [],
-    "rainbow": []
-}
-
-func _ready():
-    # Generate grayscale palette
-    for i in range(10):
-        var gray = float(i) / 9.0
-        palettes["grayscale"].append(Color(gray, gray, gray))
-
-    # Generate rainbow palette
-    for i in range(12):
-        var hue = float(i) / 12.0
-        palettes["rainbow"].append(Color.from_hsv(hue, 1.0, 1.0))
-
-func select_from_palette(palette_name: String, index: int) -> Color:
-    return palettes[palette_name][index]
+colorizer.multimesh.set_instance_color(cells[selected], INKS[ink_index])
 ```
 
-### Real-Time Grid Updates
-
-### Additive Color Mixing on Grid
+COLOUR cycles pink, teal, yellow and white. Reading another cell does not rewrite the previous one. The swatch reads the actual stored instance colour, rather than assuming that the requested value was stored at infinite precision.
 
 ```gdscript
-# When colors overlap or blend
-func mix_tile_colors(x: int, y: int, new_color: Color, blend_mode: String):
-    var existing = get_tile_color(x, y)
-    var result: Color
-
-    match blend_mode:
-        "replace":
-            result = new_color
-        "additive":
-            # Light mixing (RGB add, clamped)
-            result = Color(
-                min(existing.r + new_color.r, 1.0),
-                min(existing.g + new_color.g, 1.0),
-                min(existing.b + new_color.b, 1.0)
-            )
-        "multiply":
-            # Subtractive-like effect
-            result = existing * new_color
-        "average":
-            result = existing.lerp(new_color, 0.5)
-
-    set_tile_color(x, y, result)
+var colour_index: int = (address.x + address.y) % palette.size()
+colorizer.multimesh.set_instance_color(cells[address], palette[colour_index])
 ```
 
-### Export Grid as Image
+Here Vector2i.y represents room z. RULE applies this coordinate-sum assignment to every mapped floor cube. PALETTE selects another existing palette resource and applies the same rule. A single edit is one instance write; a rule pass visits all mapped floor instances. Neither operation changes transforms or collision.
 
-## Key Takeaway
+## What this does not implement
 
-The grid colorizer reveals that **images are color grids**. Every digital image is a 2D array of color values at indexed positions. When you color a grid tile, you are doing exactly what image editing software does: setting pixel values at coordinates. The spectrum forest extends this to 3D, showing that color itself is a three-dimensional space (HSV or RGB) that can be navigated spatially.
+There is no ImageTexture palette editor, texture export, palette_changed broadcast, undo stack or saved edit history here. These were generic examples in the former tutorial, not the running artifact. This lesson writes MultiMesh instance colours. Renderer storage has finite precision; focused checks allow a channel error of 1/255 and separately check that only the selected instance changes.
 
-## Implementation Notes and Complexity
+## Verification
 
-The palette grid is a 2D array of colour cells whose contents can be edited in place. Each cell holds an RGBA quadruple. The grid's dimensions are fixed at load, but the cell values are mutable, so the whole palette can be retoned without reallocating. The edit operation is O(1) per cell; a full-palette retone is O(W times H) where W and H are the grid's dimensions.
+`commons/testing/probe_grid_address_lesson.gd` loads the actual museum, emits the real console button signals, inspects buffer writes, checks returning to an address, rule replacement, palette evaluation, preserved geometry, standing reach and a body-sized approach. Tracked-controller pressing and headset comfort require a separate walkthrough.
 
-The grid is backed by an ImageTexture in Godot. Editing a cell writes to the underlying Image, and the Image must be pushed back to the texture for the GPU to see the change. This push is not free: it triggers a texture upload, which in the worst case stalls the render thread briefly. For interactive editing at palette scale (16 by 16 or smaller), the stall is imperceptible. For larger grids, batching multiple cell edits between pushes is necessary to maintain frame rate.
+## Native sequence and ordinary walk, 23 September 2026
 
-The palette's content is referenced by other nodes via palette-index lookups. When the palette changes, those nodes do not automatically redraw; they have to be notified and re-render. Godot's signal system is the conventional plumbing. The palette emits a palette_changed signal, and interested nodes connect to it. The signal is cheap — a few function calls — but the downstream redraw can be expensive depending on how many nodes are listening and how much geometry each has to refresh.
+The shared illustration captures the actual floor from one fixed camera after COLOUR, X+, a full address return and RULE. The final frame is taken while the ordinary museum walker stands on the rewritten square. The small swatch and readout are captured separately. No source, geometry or placement changed.
 
-Within the sequence, Color_Grid_Pallet introduces the palette as a first-class artifact the learner can edit. Previous maps treated colour as assignment; this map treats it as collection. The grid's cells can be rearranged, retoned, or replaced wholesale, and the changes propagate to whatever art is referencing them. The sequence's later maps extend this with interactive palette composition and wavelength-based response.
+36 focused assertions pass in the isolated production museum. Supplied pressed/released pointer events operate the five actual console buttons. COLOUR changes exactly one MultiMesh instance; selection changes on both axes preserve it. The swatch reads the stored value. RULE restores the original value, and equal coordinate sums agree. PALETTE retains the assignment across every mapped floor address, including addresses outside the manual selection region. Three palette changes restore the starting collection; the probe also restores the initial ink index.
+
+Supplied key input drives the ordinary controller from the console approach to the selected cell and back, passing beside the plinth. The same floor supports the body before and after RULE; all instance transforms remain unchanged. Evidence is in `doc/book/iterations/2026-09-23-grid-colour-kept/`. The checks retain a per-channel colour tolerance of 1/255. Tracked pressing/reach, headset comfort, colour calibration, learner response and performance are not established.

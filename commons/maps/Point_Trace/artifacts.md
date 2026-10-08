@@ -39,3 +39,9 @@ sample(hand_position) → ImmediateMesh trail — the hand writes points in 3D s
 COMPARE a 3D artifact with its 2D abstraction and see what structure survives projection.
 
 `science_screen`
+
+## trace_ball_ramp
+
+A black point released to gravity; the real ball leaves a path down a sloping plank.
+
+Source: `res://commons/artifacts/trace_ball_ramp/trace_ball_ramp.tscn`. Placed in this map on 26 September 2026.

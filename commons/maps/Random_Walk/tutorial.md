@@ -1,5 +1,11 @@
 # Random Walk — draw, fold, keep
 
+**Learning elements**
+
+- Random displacements
+- Boundary rules
+- Position histories
+
 The primary is `random_walk_terrarium:90#stand:logbook` at map cell (4,1). Read the final passage as the encounter; use this chapter to follow the implementation. All GDScript excerpts are from `commons/artifacts/random_walk_terrarium/random_walk_terrarium.gd`.
 
 ## What the previous rooms supply

@@ -1,9 +1,11 @@
 # WaveFunctions AirMusic — Summary
 
-Brian Eno's ambient loops drift past one another at slightly different rates. Each loop is simple. Their intersection is never the same twice. This map builds a small laboratory around that principle: sound as spatial event, harmony as emergent, composition as the arrangement of slow independent cycles.
+What continues after the hand has left? This hall puts a struck instrument at the end of a walk round a void, so that a brief contact and its long response can be told apart, and two responses heard together.
 
-The space is a single room with three stations. An FM piano plays a pattern on a fixed interval. A second loop plays a complementary pattern on a nearby but non-identical interval, so the two patterns phase in and out of alignment. A third voice shifts its own interval when approached, so walking near it changes the combined result.
+The room is a ring of floor round a basin of nothing, with a pillar standing in the void. Along the north side are glass racks and lab tables; over the pillar an FM-piano looper plays its patterns; a drone rack and a run of pipes,  stand on the way round. On the south side, at a table, is the metallophone: eight metal bars cut to a pentatonic scale, the longest at the left, a striker resting front-to-back at the left end.
 
-A set of position-triggered notes lines the floor. Standing on a tile plays a tone; moving across the tiles plays a melody determined by the path. The room rewards slow movement: long enough to hear the loops cross, short enough to change your contribution to the chord.
+Take the stick and strike a bar. Lift it away: the bar glows and rings for seconds, and the plate above the row names the voice, its hertz and its source playback age. Strike a second bar while the first still fades and the plate says two voices; the ribbon above it adds a 12 ms window from their generated samples. Strike the same bar again and it starts again, adding nothing. A slow strike lands softer than a fast one. Leave the unheld stick more than half a metre from its cradle for three seconds and its return begins.
 
-Within the sequence, AirMusic follows Cage's silence and precedes the sequence's vertical and horizontal wave-walks. Sound returns, but not as composition in the traditional sense. The harmony is a property of the room and the people in it.
+Each note is a sine wave under an exponential decay, three seconds to fall to about 37 percent of its initial envelope, seven and a half seconds long, made once by the bar and played from its own speaker — a synthesised resonance, not a solved metal bar, with length assigned from frequency so the scale has a visible order before it is heard.
+
+Within the sequence, AirMusic follows Effect Sound on the active route: one oscillation changed another's phase there; here a strike sets a response going and two responses overlap. The Synthesis Lab adds such sinusoids on purpose.

@@ -1,5 +1,13 @@
 # Ant Colony Optimization
 
+**Learning elements — proposed focus**
+
+*The labels below set the revision focus; the existing lesson still needs alignment.*
+
+- Two channel communication
+- Foraging states
+- Trail reinforcement
+
 Ants find shortest paths. Pheromones mark good routes.
 
 Define a pheromone graph.

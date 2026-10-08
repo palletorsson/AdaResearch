@@ -1,3 +1,5 @@
+> Current encounter and verification (24 September 2026): [encounter notes](encounter-notes.md). The earlier account below is retained; the current note governs changed placement, controls and validation.
+
 # CA_Introduction — walked
 
 > ghost-drafted from the working map (threshold slot, cellularautomata thread); Palle rules the voice.

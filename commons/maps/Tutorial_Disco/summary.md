@@ -1,9 +1,11 @@
 # Tutorial Disco — Summary
 
-Tutorial_Disco is the seventh and final map in the Array Tutorial sequence. It scales the array from the small, comprehensible grids of the earlier maps to a floor large enough to get lost in, and it adds time as a new dimension.
+Tutorial_Disco closes the five-hall Arrays and Regularity sequence, after floor and wall tiling and before Color. The preceding encounters show how a local rule produces a larger spatial pattern. Here an extra input, phase, advances through time while the array addresses remain fixed.
 
-The dance floor is seventeen cells on a side. Each tile is an address — row, column, and a local state — and stepping on a tile activates a response. The responses are coordinated by a step sequencer that runs along one wall. The sequencer divides a short loop into steps and advances one step at a time; the pattern a learner steps out on the floor is captured, cell by cell, into the sequencer's state, and the sequencer plays it back at a steady tempo.
+A 12 by 12 monochrome floor can be held, advanced one step or played at three speeds. CHECKER, ROWS, DIAGONALS and SNAKE offer different relations between the addresses and that count. SUPER TRIANGLE returns the earlier diagonal motif, continuously turning it and grouping it into figures spanning several tiles. The physical standing surface stays level.
 
-A set of mode buttons changes what the sequencer does with that state. One mode triggers a sound per active tile; another lights the tile for one beat; another propagates the active tile to its neighbours. The floor becomes a two-dimensional array whose third index is time.
+A separate four-track, sixteen-step sequencer starts empty. The visitor can place a note, hear its return, add another event and change their timing. Musical playback and the floor animation have separate clocks. A sounding step briefly brightens a floor column; because sixteen steps map onto twelve columns, distinct score addresses can reach the same place. Walking neither records a score nor triggers notes in this encounter.
 
-A wall panel names the move: the previous maps showed arrays as spatial addressing; this map adds the temporal dimension and hands the learner a grid they can compose on. Within the sequence, Disco is the playful capstone. The next encounter in the curriculum, the Wavefunctions sequence, picks up on the temporal pattern the dance floor hints at.
+The hall invites the visitor to make a beat worth waiting for, then move with or across it. The score keeps selected events; it does not contain everything a body can do with them. The next hall holds familiar primitives, transformations and arrays in coloured stacks. The controlled colour disco returns later in the Tiling sequence.
+
+The earlier movement-as-score proposal, including contact-sensitive tiles and a captured walk, is retained in doc/book/iterations/2026-09-28-disco-a-rule-in-time/before/commons/maps/Tutorial_Disco/summary.md. It remains a possible future encounter rather than a description of this one.

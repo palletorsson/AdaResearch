@@ -1,3 +1,5 @@
+> Historical record of an earlier layout and interpretation. For the reviewed 14 September 2026 encounter, see final.md and field_notes.md.
+
 # CA_EdgeOfChaos — walked
 
 > ghost-drafted from the working map (close slot, cellularautomata thread); Palle rules the voice.

@@ -1,5 +1,11 @@
 # Boids Algorithm
 
+**Learning elements**
+
+- Local neighbourhoods
+- Vector averages
+- Weighted steering
+
 Reynolds' three rules. Separation, alignment, cohesion.
 
 Define a boid.

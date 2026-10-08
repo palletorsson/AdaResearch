@@ -1,5 +1,15 @@
 # Noise_Voxel — field notes
 
+## 2026-09-13 — Astra: four retained readings of presence
+
+All four authored works now belong to the book: lattice bench, science screen, voxel volume and independent orb. The earlier N4 contract still reset the receiver to Simplex during rebuild; that path is repaired, and both grids now have 24³ samples. The source seed 31415 produces identical scalar values and occupancy across all 13,824 cells at each of five thresholds. Previous claims that a shared normalized domain made 24³ and 32³ sample arrays identical are superseded by this measured comparison.
+
+The large volume is staged at 0.20 m cell spacing in a 5.2 m frame. Only exposed faces are emitted, and the same triangles provide collision. The bench gains a plinth, cased readout, centred cell marker and a tilted four-button panel with a clear approach at (4,7). The existing screen now shows a real horizontal score slice beside stored decisions. The orb retains its own implementation. No authored artifact, recovered structural cell or utility is removed.
+
+Occupied counts descend 11040 → 9176 → 6767 → 4582 → 2685 as thresholds rise. Component counts go 4 → 15 → 25 → 21 → 32: fragments can split or disappear. CUT only changes the model view. The rewritten book lets these differences be discovered before the explanation, and distinguishes connected cells from a body-specific route.
+
+Accepted rendered run: 61 checks, zero failures, PID20528, 11:18:08–11:18:32 +02:00. Four controls work through the actual desktop pointer; collider faces, sampled roof hits, empty cleanup and cross-hall isolation pass. A cramped initial approach and a test helper's five-centimetre spawn fall explained earlier pointer failures. Headset and Quest checks remain pending. See `doc/space/voxel-review-2026-09-13/README.md`, the source snapshot and `/research/possible-bodies/noise-voxel.html`. Historical notes below are preserved; their counts and dimensions describe earlier states.
+
 ## 2026-09-12 — N4: when does a value become a place a body can occupy (Fable, the fourth hall of Astra's noise arc, after Noise_One; Astra's card: "keep both artifacts primary as one linked encounter and make their relationship exact — preferably share one sampler contract for basis, seed, coordinates, height bias, threshold and scale while changing representation/size; show the sample value and occupied/empty decision for a selected cell; allow threshold changes at fixed seed; debounce regeneration and bound the receiver; audit the link's scope so it cannot retune receivers in other halls")
 
 **The ruling.** The two primaries were linked and the link passed CONTROL VALUES, not samples: the bench sampled Perlin at its own coordinates with a height bias, the receiver sampled its own noise at world integers against its own iso level, and the room could call them "the same field" only by not looking. So the sampler is written down once, as four static functions on the bench — `contract_noise`, `contract_value`, `contract_bias`, `contract_occupied` — and both displays go through them. The coordinates are NORMALISED, so a 24-cell model and a 32-cell terrain ask one field the same question at two magnifications, which is the scale relationship Astra asked to be chosen and made true.
@@ -21,3 +31,13 @@
 **Rejected.** Making the receiver sample at the bench's own extent (a literal 1:1 copy): it would have made the terrain a magnified model and nothing else, and Astra's card asks for one relationship that is true, not for sameness. Rejected too: claiming a passage through the terrain — nothing here verifies one, and the room says that rather than implying it.
 
 **Pending.** A headset walk; a body actually trying the terrain, which is the only way the passage question can be answered; Astra's review. The receiver's own chunk bounds (32 × 64 × 32 at voxel_scale 1) are unchanged and were not the subject of this pass.
+
+## 25 September — carry the reading across the room
+
+The standing photograph showed the small and large bodies facing opposite ways. Rotated only the large placement by 180 degrees and added a CELL-linked yellow perimeter at the selected horizontal layer, with a selected-cell outline. The existing control now locates the screen reading in the full-size body. No new control or field rule. Solid cells can still hide the selected address; the frame does not cut the body or collide with the visitor.
+
+The chapter keeps all former passages except the opening orientation phrase, adding one observation paragraph and a native photograph. Current role lists and sequence are unchanged. The core record still promotes the bench and volume, while older companion/book-role records name four works; this pre-existing discrepancy is recorded, not treated as permission to promote the legacy orb. The earlier orb passage remains available as a supporting comparison.
+
+## 25 September — author asks for one-metre cells and flight
+
+Expanded the receiver from 0.20 m to 1.00 m spacing while retaining the 24³ field, miniature and decisions. Added a 28 m glass flight enclosure using the museum's existing local locomotion, with physical sides/roof and two ground doors. The larger 33 × 44 m hall keeps the bench and screen in front and the orb outside the enclosure. Current book claims and dimensions follow this revision; earlier measurements and photographs above describe the previous staging.

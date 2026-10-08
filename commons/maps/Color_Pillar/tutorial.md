@@ -1,112 +1,24 @@
-# Color Pillar
+# Three directions through colour
 
-Pillars collect colour. Mixing reveals process.
+**Learning elements — proposed focus**
 
-Build a pillar of coloured segments.
+*The labels below set the revision focus; the existing lesson still needs alignment.*
 
-```gdscript
-class_name ColorPillar extends Node3D
+- HSV coordinates
+- Function substitution
+- Coordinate adapters
+- Sampling
 
-@export var segments: int = 12
+Begin on the near-black floor and look up. X changes hue; Z changes saturation. The ceiling holds value at 1 and meets the pillar tops at 4.6 m. At each pillar centre, its ceiling colour matches the top of that pillar. The ceiling extends beyond the outer samples; the extension clamps to the field edges, so the added width does not stretch the colour coordinates.
 
-func _ready() -> void:
-    for i in segments:
-        var segment := MeshInstance3D.new()
-        segment.mesh = CylinderMesh.new()
-        segment.position.y = i * 0.4
-        var hue: float = float(i) / segments
-        var mat := StandardMaterial3D.new()
-        mat.albedo_color = Color.from_hsv(hue, 0.9, 0.9)
-        segment.material_override = mat
-        add_child(segment)
-```
+Look up the thirty-five columns. Each keeps the hue and saturation of its x/z address, while value rises from 0 at the coloured mesh's bottom (0.46 m) to 1 at its top (4.6 m). A separate zero-saturation column runs from black to white. The main field keeps saturation between 0.25 and 1, so its coloured tops do not turn white merely by reaching value 1.
 
-Twelve segments. Each carries a different hue. The stack reads as a vertical palette.
+Pick up the sampling card using the existing grab interaction. Its x/z position samples the horizontal field. A physical hand-height range of 0.65–1.85 m covers value 0–1; the marker and FIELD Y readout show the corresponding position in the taller field. This is an explicit change of scale. At the two limits the value clamps. Beyond the horizontal field it samples the closest edge and displays EDGE. Release leaves the frozen card available where it was placed.
 
-Grab a colour stick from the pillar.
+Raise the card without deliberately moving sideways. Compare HSV and RGB: hue and saturation stay fixed, value changes, and the RGB channels scale together. Then carry it across a gap to change hue, or farther along the field to change saturation. At value zero every colour becomes RGB (0,0,0), while the address can retain its hue and saturation coordinates. The display's value is not a promise of equal perceived brightness across hues.
 
-```gdscript
-class_name ColorStick extends RigidBody3D
+The upright columns, ceiling, marker and sampler use the same unshaded colour calculation. The ceiling is the full-value boundary, the columns are vertical ranges, and the marker is a selected sample. The dark floor is a neutral near-black surface over the existing walkable floor. The zero-saturation reference remains beside the coloured canopy.
 
-@export var source_color: Color
+Finally take a swatch from the named collection wall. That existing swatch keeps its assigned colour when you move it; the new sampler changes colour as you move it. The two actions now offer a useful comparison: carrying a chosen value, and evaluating a value at a new position. The wall titles are authored associations, not complete representations of the artists or movements they name.
 
-func _on_grab_released() -> void:
-    apply_to_world(source_color)
-```
-
-Releasing the stick applies its colour to whatever it touches. The stick becomes a paint-pickup.
-
-Mix two colours additively.
-
-```gdscript
-func mix_additive(a: Color, b: Color) -> Color:
-    return Color(
-        min(1.0, a.r + b.r),
-        min(1.0, a.g + b.g),
-        min(1.0, a.b + b.b),
-    )
-```
-
-Red plus green makes yellow. Red plus green plus blue makes white. This is how light mixes.
-
-Mix two colours subtractively.
-
-```gdscript
-func mix_subtractive(a: Color, b: Color) -> Color:
-    return Color(a.r * b.r, a.g * b.g, a.b * b.b)
-```
-
-Cyan times magenta makes blue. Paint mixing: each pigment absorbs certain wavelengths. Multiplication models absorption.
-
-Build a mixing station.
-
-```gdscript
-class_name MixingStation extends Node3D
-
-var input_colors: Array[Color] = []
-
-func add_input(color: Color) -> void:
-    input_colors.append(color)
-    recompute_output()
-
-func recompute_output() -> Color:
-    if input_colors.is_empty(): return Color.BLACK
-    var result: Color = input_colors[0]
-    for i in range(1, input_colors.size()):
-        result = mix_additive(result, input_colors[i])
-    return result
-```
-
-Accumulate inputs; recompute on each addition. The output updates continuously.
-
-Visualise a spectrum.
-
-```gdscript
-func spawn_spectrum_visualizer() -> void:
-    for i in 32:
-        var hue: float = float(i) / 32
-        var bar := MeshInstance3D.new()
-        bar.mesh = BoxMesh.new()
-        bar.scale = Vector3(0.1, 1.0, 0.1)
-        bar.position = Vector3(i * 0.15, 0, 0)
-        var mat := StandardMaterial3D.new()
-        mat.albedo_color = Color.from_hsv(hue, 1.0, 1.0)
-        bar.material_override = mat
-        add_child(bar)
-```
-
-Thirty-two vertical bars across the hue circle. A compact spectrum display.
-
-Demonstrate flashlight-dependent colour.
-
-```gdscript
-func apply_flashlight_color(target: Node3D, light_color: Color) -> void:
-    for mesh in target.find_children("", "MeshInstance3D"):
-        var mat: StandardMaterial3D = mesh.material_override
-        if mat:
-            mat.albedo_color = mix_subtractive(mat.albedo_color, light_color)
-```
-
-A red object under green light absorbs most of the illumination and appears dark. The multiplicative mix is physically accurate.
-
-You can now build a pillar of colour samples, grab colour sticks, mix additively or subtractively, display a spectrum, and apply flashlight-dependent colour. Color_Paint extends into gestural application.
+The next hall, Color_Grid_Pallet, lets you write a colour to an address and return to find it there.

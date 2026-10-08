@@ -20,7 +20,8 @@
 		"Compare the same seed with one discarded draw before RGB assignment",
 		"Distinguish continuous handle movement from integer seed selection",
         "Identify what the seed, generator, draw order and colour mapping each contribute"
-	  ]
+	  ],
+	  "n_artifacts": 8
 	},
 	"museum": {
 	  "wall_height": 5,
@@ -850,7 +851,7 @@
 	  ],
 	  [
 		" ",
-		" ",
+		"film_prng_register:90:0#plinth:0#pin:true",
 		" ",
 		" ",
 		" ",

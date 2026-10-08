@@ -19,12 +19,15 @@
   "title": "Trans_AxisDecomposition",
   "eye_shot_adopted": "Trial_eye_Trans_AxisDecomposition",
   "museum": {
-   "simulation": {
-    "depth": 1.5,
-    "margin": 2.0,
-    "grid": true
-   }
+  "simulation": {
+    "depth": 2.5,
+    "margin": 2,
+    "grid": true,
+    "staged": true,
+    "padding": 2,
+    "fire": false
   }
+}
  },
  "utility_definitions": {
   "t": {
@@ -126,16 +129,16 @@
    [ "", "", "", "", "", "", "", "", "" ],
    [ "", "", "", "", "", "", "", "", "" ],
    [ "", "", "", "pick_up_cube:0:1", "", "", "", "", "" ],
-   [ "", "", "", "", "", "mario_cube", "", "", "" ],
-   [ "", "", "", "", "", "", "", "", "" ],
+   [ "", "", "", "", "", "pick_up_cube", "", "", "" ],
+   [ "", "", "rotatescalecubes:0:0", "", "", "", "", "", "" ],
    [ "", "", "dark_sphere", "", "", "", "", "", "" ],
    [ "", "", "", "", "", "", "", "", "" ],
-   [ "", "mario_cube", "", "", "", "", "", "", "" ],
+   [ "", "pick_up_cube", "", "", "", "", "", "", "" ],
    [ "", "", "", "toruscylinder:0:4", "", "", "pickup_gate#pickups:6", "", "" ],
    [ "", "", "", "", "", "", "", "", "" ],
    [ "", "", "", "", "", "cube_scene:0:3", "", "", "" ],
-   [ "", "pick_up_cube:0:1", "", "mario_cube", "", "", "", "", "" ],
-   [ "", "", "", "", "", "", "mario_cube", "pick_up_cube:0:1", "" ],
+   [ "", "pick_up_cube:0:1", "", "pick_up_cube", "", "", "", "", "" ],
+   [ "", "", "", "", "", "", "pick_up_cube", "pick_up_cube:0:1", "" ],
    [ "", "", "", "", "pick_up_cube:0:1", "", "", "", "" ],
    [ "", "", "x_translation_cube:180:1:2", "", "", "z_translation_cube:0:2:2", "", "", "" ],
    [ "", "", "translation_cube_demo:180:0.5", "", "pick_up_cube:0:1", "", "pick_up_cube", "", "" ]

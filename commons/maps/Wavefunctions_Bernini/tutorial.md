@@ -1,5 +1,13 @@
 # Bernini
 
+**Learning elements — proposed focus**
+
+_The labels below set the revision focus; the existing lesson still needs alignment._
+
+- Ring sampling
+- Height-dependent twist
+- Spatial and temporal variation
+
 Solomonic columns are sines wrapped around cylinders. Build the vertex displacement that turns stone into frozen motion.
 
 Declare the column generator.

@@ -1,106 +1,21 @@
-# CA Expanding Space
+# Approach, wait, withdraw; then inspect the update
 
-The neighbourhood grows. More reach, different structure.
+**Learning elements — proposed focus**
 
-Variable-radius neighbourhood.
+_The labels below set the revision focus; the existing lesson still needs alignment._
 
-```gdscript
-@export var radius: int = 1
+- External inputs
+- Graded state
+- Update order
 
-func count_in_radius(x: int, y: int, r: int) -> int:
-    var count: int = 0
-    for dy in range(-r, r + 1):
-        for dx in range(-r, r + 1):
-            if dx == 0 and dy == 0: continue
-            var nx: int = (x + dx + size.x) % size.x
-            var ny: int = (y + dy + size.y) % size.y
-            count += grid[ny][nx]
-    return count
-```
+Start with the inherited array and the Life dish's explicit output connection. The new capability is a graded field whose external input can be the observing body.
 
-Moore neighbourhood at arbitrary radius. Radius 1 gives 8 neighbours; radius 2 gives 24.
+1. From the desk choose SOURCE → PROBE and inspect NEAR. Run, watch W=(2,6), and hold. Name separately the colour, health and support changes.
+2. Move the probe FAR and run. Follow recovery from a healthier edge into the depleted region. The probe controls a position, not a load.
+3. RESTORE the full beginning. Select VISITOR and RUN. Approach, wait, withdraw; inspect the actual tracked body's distance. The ordinary margin and the basin ramps let the learner return after lost support.
+4. Explain the proximity subtraction and four-neighbour recovery after observation. Compare the >0.5 participation threshold with the ≥0.2 support threshold. A value between them is a useful counterexample to “healthy or dead.”
+5. Read the same state in the wall frieze. Ask which parts change colour, which support a body, and which influence the next update.
+6. Choose CHAIN. With input NONE, STEP in SYNC. Switch ORDER to SCAN (the beginning resets), then STEP. REVERSE resets again; compare the same three addresses. Follow the `read_states` reference into the code.
+7. Return to FULL and VISITOR. Describe one observation through an input, a state update, a threshold and a physical consequence.
 
-Weighted neighbourhood.
-
-```gdscript
-func weighted_neighbourhood(x: int, y: int, weights: Array) -> float:
-    var total: float = 0.0
-    var r: int = (weights.size() - 1) / 2
-    for dy in range(-r, r + 1):
-        for dx in range(-r, r + 1):
-            if dx == 0 and dy == 0: continue
-            var w: float = weights[dy + r][dx + r]
-            var nx: int = (x + dx + size.x) % size.x
-            var ny: int = (y + dy + size.y) % size.y
-            total += w * grid[ny][nx]
-    return total
-```
-
-Each neighbour contributes its weight times its state. Equivalent to a convolution.
-
-Smoothing kernel.
-
-```gdscript
-const SMOOTH_KERNEL := [
-    [1, 2, 1],
-    [2, 4, 2],
-    [1, 2, 1],
-]
-```
-
-Gaussian-like. Heavier weight on closer neighbours.
-
-Grow a 3D tree from a cellular rule.
-
-```gdscript
-class_name CAGrowthTree extends Node3D
-
-var occupied: Dictionary = {}  # Vector3i -> int
-
-func grow_step(radius: int, threshold: int) -> void:
-    var new_cells: Dictionary = {}
-    for cell in occupied:
-        for dx in range(-radius, radius + 1):
-            for dy in range(-radius, radius + 1):
-                for dz in range(-radius, radius + 1):
-                    if dx == 0 and dy == 0 and dz == 0: continue
-                    var candidate: Vector3i = cell + Vector3i(dx, dy, dz)
-                    if candidate in occupied: continue
-                    var count: int = count_occupied_neighbours(candidate, radius)
-                    if count >= threshold:
-                        new_cells[candidate] = 1
-    for c in new_cells:
-        occupied[c] = 1
-```
-
-Cells activate when enough nearby cells are already active. Produces fractal branching structures.
-
-Spawn the tree.
-
-```gdscript
-func spawn_visual_cells() -> void:
-    for cell in occupied:
-        var mesh := MeshInstance3D.new()
-        mesh.mesh = BoxMesh.new()
-        mesh.scale = Vector3(0.2, 0.2, 0.2)
-        mesh.position = Vector3(cell) * 0.3
-        add_child(mesh)
-```
-
-Each occupied cell is a small cube. The tree emerges as an accumulation of cubes.
-
-Crossway interference.
-
-```gdscript
-func crossway_step(zone_a: Array, zone_b: Array) -> void:
-    for y in size.y:
-        for x in size.x:
-            var in_a: bool = Vector2i(x, y) in zone_a
-            var in_b: bool = Vector2i(x, y) in zone_b
-            var rule: Callable = rule_a if in_a else (rule_b if in_b else rule_default)
-            grid[y][x] = rule.call(x, y)
-```
-
-Different regions use different rules. Overlap produces interference that neither region produces alone.
-
-You can now implement variable-radius neighbourhoods, weighted convolutions, 3D CA tree growth, and cross-zone rule interference. CA_SoftRules extends into stochastic rules.
+Do not require a learner to fall to understand the rule; PROBE and the readout permit inspection from the stable floor. A desktop body has been tested on the bridge and recovery ramp. Headset comfort and reach are deferred. The next hall needs a live weighted-neighbour or coupled-field experiment before the book can claim richer exchange.

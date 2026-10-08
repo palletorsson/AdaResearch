@@ -1,278 +1,39 @@
-# Decompose and reconstruct signals at workstations where every instrument vibrates at a frequency that belongs to it
+# Synthesis Lab — a finite sum made inspectable
 
-The walking path proved that the body can trace a wave. Steps landed on computed positions, sine and cosine became architecture, and the learner moved through trigonometry as a physical act. But walking one function at a time leaves a question unanswered: what happens when waves stack?
+Builds on AirMusic's separate voices and leads to Random_Definition's question of replay. `additive_wave_demo:0#stand:bench#waveform:sawtooth#name_after_compare:true` at (4,2) is the sole primary. It is a visual sum, not an audio synthesizer. The other 25 placements remain supporting laboratory material; their states are not controlled by this bench.
 
-A single sine wave is a tone. Two sines at different frequencies produce a chord. A thousand sines at the right amplitudes and phases produce a human voice, a violin bow, a heartbeat. The Synthesis Laboratory is where this stacking becomes material.
+## State and computation
 
-Fourier's theorem states that any periodic signal decomposes into a sum of sine waves at integer multiples of a fundamental frequency. The formula is compact:
+Five sliders supply nonnegative amplitudes in [0,1]. Harmonic h uses `amplitude[h] * sin((h + 1) * phase)`. All components share a phase, with no separate phase offsets, signed coefficients, constant term or harmonics above five. The arrival coefficients are [1, 0.5, 0.333, 0.25, 0.2]. These are rounded 1/n values, a finite sawtooth approximation.
 
-```
-f(t) = Sigma An * sin(n * omega * t + phi_n)
-```
+The sum and components use 256 samples spanning four cycles across two metres. `_time` advances by `delta * base_frequency` (default 1) and wraps at 1000; HOLD pauses this display clock. The sum's scale is 0.30 m per unit. Ladder rows use 0.20 m per unit, with axes separated by 0.15 m. Their vertical offsets must be removed before comparing geometry with the sum.
 
-Each term contributes one harmonic. The fundamental (n=1) sets the pitch. The overtones (n=2, 3, 4...) shape the timbre. This room contains the apparatus to build signals from components, observe the patterns that emerge when frequencies agree, and discover that biological systems run on oscillation too.
+The slider signal reads the handle's normalized value back into exactly one coefficient. BASELINE writes the saved arrival table to all sliders. H1 ALONE preserves H1 (or sets it to one if below 0.01), and zeroes the rest. Neither resets `_time`. The readout updates on changes and ten times per second while scrolling.
 
-## Additive Synthesis: Stacking Harmonics
+## Naming after comparison
 
-The `additive_wave_demo` is the laboratory's central instrument and the room's primary. Five sliders control the amplitudes of harmonics 1 through 5. The combined waveform is drawn every frame from 256 samples across two metres, four cycles wide and scrolling at one cycle a second, and below it each harmonic is drawn as its own row (the `components` axis: `ladder`, the shipped default; `overlay` draws the rows on the sum's own axis; `hidden` withholds them). The room places it with `#waveform:sawtooth`, so the five amplitudes arrive at 1, 1/2, 1/3, 1/4 and 1/5, and with `#stand:bench`, the W4 staging described below.
+This hall opts into `name_after_compare:true`. Arrival shows `ARRIVAL RECIPE`; a manual coefficient edit changes that invitation to `COMPARE THE SUM`. HOLD leaves the name waiting. The existing H1 ALONE or BASELINE action reveals the detector’s current name, and subsequent edits keep recognition available. Coefficients, formula, rows, marker and controls remain visible. The bench-front caption identifies the finite, nonnegative, phase-locked family. Other placements retain immediate names and their existing caption.
 
-```gdscript
-func _calculate_wave_value(phase: float) -> float:
-    var value = 0.0
-    for h in range(harmonic_amplitudes.size()):
-        value += harmonic_amplitudes[h] * sin(phase * (h + 1))
-    return value
-```
+## Recipe recognition revised
 
-The loop body is the Fourier series made operational. `harmonic_amplitudes[h]` is An. The multiplier `(h + 1)` produces integer multiples of the fundamental phase. No phase offset appears here because the sliders control only amplitude, keeping the demonstration focused on one variable at a time. The output is a single float — the vertical displacement of the combined wave at that instant.
+The former detector ignored H4/H5 in several classifications and could call a lower-amplitude lone sine a triangle. The new detector recognizes zero and a single sine first, then compares all five coefficients relative to H1, with a per-coefficient tolerance of 0.025. Matching is skipped if H1 is below 0.01. A match describes proximity to a recipe, not equality to an ideal discontinuous waveform.
 
-Each harmonic renders in its own color below the combined waveform: green for the fundamental, blue for the second, pink for the third, yellow for the fourth, purple for the fifth. The color separation makes the contribution of each harmonic trackable even when the combined wave grows complex. Turn off all harmonics except the third and fifth, and the component waves remain visible underneath. The learner sees the ingredients and the result in the same frame.
+The legacy `triangle` preset ID retains its positive odd 1/n² table to preserve existing configurations. Its label is now `Odd 1/n² mix (positive terms)`. A triangle in this sine orientation requires alternating signs. No new control or change to the five-term waveform calculation is introduced. The label repair applies to other placements of this shared artifact too.
 
-Raise the first slider alone and a pure sine wave appears. Add the third harmonic at one-third the amplitude of the fundamental and the waveform begins to square off. The preset detection recognizes this:
+## What the display leaves out
 
-```gdscript
-# Square wave: odd harmonics with 1/n amplitude
-if a[0] > 0.9 and a[1] < 0.1 and abs(a[2] - a[0]/3.0) < 0.1 and a[3] < 0.1:
-    return "= Square Wave (odd harmonics)"
-```
+Rows below 0.01 disappear, while the total still includes their coefficients. The formula uses one decimal place; the plate uses two. The marker is sample 159, local x ≈ 0.247 m. `display_values()` reports each row, the sum of drawn rows and the complete total; the readout uses an equality threshold of 0.005. Thus an invisible small contribution can produce a visible disagreement. There is no automatic normalization of the sum.
 
-A square wave contains only odd harmonics (1, 3, 5, 7...) with amplitudes that decay as 1/n; a sawtooth all of them at 1/n. The demo approximates either with five sliders, and five is enough to see the flat tops or the ramp forming and not enough to make a corner. It takes infinitely many terms to produce a true discontinuity, and even then the partial sums overshoot beside it by about nine per cent of the jump (Gibbs). With five terms the ripple is the visible thing: for the placed sawtooth, whose ideal Σ sin(nφ)/n = (π − φ)/2 drops in no distance, the drawn sum climbs from trough to crest over 11 of the 64 samples in a cycle (about 9 cm of 50), its slope carries about five local maxima per cycle where the ideal has one, and its peak is 1.58 against the ideal's π/2 = 1.571. The demo does not name the effect; the learner sees it, and the W4 readout lets them read it at one place.
+The sampled baseline peaks around ±1.582, with an approximately 0.086 m rounded rise in its 0.5 m cycle. Other coefficient settings can exceed this amplitude. High sums extend beyond the dark backing and can approach the upper lettering; the current staging has not been enlarged in this review.
 
-A sawtooth wave uses all harmonics at 1/n amplitude. A triangle wave uses only odd harmonics at 1/n-squared. The preset system detects all three by comparing slider positions against known signatures. The distinction between waveforms is entirely in the harmonic recipe — which overtones are present and how loud they are. Timbre, in music, is this recipe. A trumpet and a flute on the same note differ because their harmonic amplitudes differ. The additive demo makes this audible concept visual.
+## Preserved staging and route
 
-The formula label updates dynamically as sliders move:
+Claude's bench is 2.90 × 0.50 m, top at 0.92 m. The sum's axis is at 1.75 m; ladder axes are 1.40, 1.25, 1.10, 0.95 and 0.80 m. The lowest axis is below the bench top in height, but the checked standing sight line clears its rear edge. The five slider handles sit roughly 0.99–1.36 m high at the right end. A three-button panel and tilted five-line readout occupy the front.
 
-```gdscript
-if h == 0:
-    active_terms.append("%.1f·sin(ωt)" % harmonic_amplitudes[h])
-else:
-    active_terms.append("%.1f·sin(%dωt)" % [harmonic_amplitudes[h], h + 1])
-```
+Retain the recovered platform/wall contract, clear approach rectangles, miniature hallway on the synthesis stand and the synth shutdown repair. All map layers are preserved. `coloredlines` was removed by Claude's prior pass because it changed the visitor's camera; this review only removes its stale book/role references.
 
-Every slider position maps to a term in the Fourier series. The label reads `f(t) = 1.0·sin(ωt) + 0.3·sin(3ωt) + 0.2·sin(5ωt)` and the learner sees both the equation and its shape simultaneously. The symbol and the signal occupy the same space.
+## Evidence and remaining visit
 
-### The bench (W4, 2026-09-11): the `stand` axis
+The independent live run passed 110 checks with zero failures and engine exit 0. The retained tests exercise the five real slider paths, desktop pointer drag and buttons, readout versus ribbon vertices, finite-corner comparison, access, room cleanup and rebuilding. Ten new coefficient settings verify label regressions and independently compare all 256 drawn sum samples with arithmetic; the worst discrepancy is below 9e-8. The clear-rectangle assertion now matches the already-authored corridor and operating strip.
 
-The shipped scene hangs its component ladder from −0.35 to −1.15 m below the demo's origin and puts the five sliders in front of the sum's right third; placed at a 0.5 m offset, harmonics 2–5 were drawn under the floor. `additive_wave_demo:0#stand:bench` (opt-in; `none` is the previous behaviour byte for byte, in the artifact's ten other placements) lifts the display 1.75 m onto a dark backboard — the rows' axes at 1.40, 1.25, 1.10, 0.95 and 0.80 m, which a standing eye 0.55 m before the bench sees over the bench's back edge — and builds a 2.90 × 0.50 m bench at 0.92 m with a collider. The shipped `ControlPanel` becomes a console at the bench's right end (handles between about 0.99 and 1.36 m, the farthest 0.86 m from a standing eye at the console's spot). The sum and the rows are drawn as flat triangle ribbons under the bench (half-thickness 7 and 4.5 mm), because a one-pixel line strip vanishes in a capture; the point at sample k is the mean of vertices 6k and 6k + 5.
-
-Three push buttons (RackTemplates) on the bench's front-left are wired to the same paths the sliders use: BASELINE restores `_baseline`, the five coefficients recorded after `set_preset(waveform)` at `_ready` (and again whenever the grid config changes the preset), through `_set_amplitudes`, so every slider moves back; H1 ALONE keeps the first coefficient and zeroes the rest; HOLD stops `_time`, and with it the scroll. A housed readout prints five lines: the coefficients, the arrival five, each drawn row's value at a marker, the sum of the drawn rows beside the total the sum mesh was drawn from (with `=` or `≠`), and `differs: a2 0.50→0.00, …`. The marker is sample `round(0.625 · 255) = 159`, x = +0.247 m, drawn as an amber line across the sum and the ladder. The readout's arithmetic is `display_values(i)`, the same loop and the same phase the meshes are built from:
-
-```gdscript
-func phase_at(i: int) -> float:
-	var t: float = float(i) / float(WAVE_POINTS - 1)
-	return t * TAU * 4.0 + _time * TAU
-```
-
-For probes, `get_synthesis_state()` returns the staging, the coefficients, the baseline, the values at the mark and the differences. The probe `commons/testing/probe_wcn_synthesis_lab.gd` reads the ribbons' own vertices at six samples in one frame and compares the drawn total with the sum of the drawn rows; the runtime record is in `field_notes.md`.
-
-## Chladni Patterns: Where Vibration Cancels to Zero
-
-Sand reveals what mathematics describes. The `chladni_plate` vibrates at a frequency determined by two mode numbers (n, m), and 400 particles migrate toward the nodal lines — curves on the plate surface where the vibration amplitude equals zero.
-
-```gdscript
-func _chladni_amplitude(x: float, y: float) -> float:
-    var n = mode_n * PI
-    var m = mode_m * PI
-    return cos(n * x) * cos(m * y) - cos(m * x) * cos(n * y)
-```
-
-The classic Chladni equation. Two cosine products subtracted produce a 2D standing wave pattern. Where this function returns zero, the plate does not move. Sand collects there because the gradient pushes particles away from vibrating regions and toward stillness:
-
-```gdscript
-var amplitude = _chladni_amplitude(nx, nz)
-var grad = _chladni_gradient(nx, nz)
-var force = -grad * abs(amplitude) * particle_speed
-```
-
-The force is proportional to both the gradient direction and the local amplitude. Particles far from nodal lines experience strong force toward them. Particles already on a nodal line feel nothing — they have arrived. Random jitter proportional to local amplitude keeps particles in motion near antinodes while allowing them to settle at nodes:
-
-```gdscript
-var jitter = Vector3(
-    randf_range(-1, 1), 0, randf_range(-1, 1)
-) * 0.02 * abs(_chladni_amplitude(nx, nz))
-```
-
-The pattern self-organizes from chaos. Random initial positions converge into geometric lines within seconds.
-
-The plate auto-cycles through mode pairs: (2,3), (3,4), (4,5), (2,5), and others. Each pair produces a distinct geometry. Low mode numbers create simple patterns — a few broad nodal lines. High mode numbers create dense, finely patterned lattices. The complexity scales with frequency, not with any new physics. The same equation, the same particles, the same gradient descent — only the numbers change. Pattern emerges from parameter.
-
-Every question about resonance lives on this plate. Why does a wine glass shatter at a specific pitch? Because that pitch excites the glass's natural mode, and the amplitude at the antinodes exceeds what the material can absorb. Antinodes vibrate maximally. Nodes stand still. The boundary between them concentrates the energy.
-
-## Lissajous Curves: Frequency Ratios as Geometry
-
-Two perpendicular oscillations combined in time produce a parametric curve. The `lissajous_curves` artifact extends this to three dimensions:
-
-```gdscript
-func _calculate_point(t: float) -> Vector3:
-    return Vector3(
-        amplitude_x * sin(freq_ratio_x * t + phase_shift),
-        amplitude_y * sin(freq_ratio_y * t),
-        amplitude_z * sin(freq_ratio_z * t)
-    )
-```
-
-Each axis oscillates at its own frequency. When the frequency ratios are integers — 3:2, 5:4, 2:1 — the curve closes on itself and forms a stable knot. When the ratios are irrational, the curve never closes and eventually fills a volume. The distinction between rational and irrational frequency ratios becomes visible as the difference between pattern and chaos.
-
-The phase shift parameter `delta` rotates the figure continuously. A Lissajous curve with ratio 1:1 and phase shift PI/2 is a circle. The same ratio with phase shift 0 is a straight diagonal line. Phase determines whether two equal frequencies reinforce along one axis or distribute into circular motion. The artifact animates this transition — a line unfurls into a circle as phase increases from zero.
-
-Lissajous figures encode a deep fact: the geometry of any combined oscillation depends only on the frequency ratio and the phase relationship. Amplitude scales the figure. Phase rotates it. But the shape — the topology of the knot — comes from the ratio alone. Ratio 2:1 always produces a figure eight. Ratio 3:2 always produces a trefoil. The integers determine the form.
-
-## The Spring and the Oscillator Equation
-
-The `spring_demo` implements Hooke's law with damping:
-
-```gdscript
-var spring_force = -spring_k * position_y
-var damping_force = -damping_c * velocity_y
-var total_force = spring_force + damping_force
-var acceleration = total_force / mass
-```
-
-F = -kx is the simplest oscillator. The restoring force opposes displacement and scales linearly with it. The solution is a sine wave whose frequency depends on the spring constant and mass: omega = sqrt(k/m). Integration uses Euler's method:
-
-```gdscript
-velocity_y += acceleration * delta
-position_y += velocity_y * delta
-```
-
-Two lines of code. Acceleration changes velocity, velocity changes position. Each frame advances the simulation by one timestep. The result is visually indistinguishable from the analytic solution for reasonable step sizes — and when the step size grows too large, the simulation blows up.
-
-The demo exposes all three parameters through sliders. Increase stiffness and the oscillation speeds up — a stiffer spring produces a higher natural frequency. Increase mass and it slows down — heavier objects resist acceleration. Increase damping and the amplitude decays — energy bleeds into the environment.
-
-The natural frequency emerges from these two parameters alone:
-
-```gdscript
-func get_natural_frequency() -> float:
-    return sqrt(spring_k / mass) / TAU if mass > 0 else 0
-```
-
-Every object that can oscillate has a natural frequency. A bridge, a building, a vocal cord, a crystal. The spring demo reduces this principle to its minimal form: one mass, one spring, one equation. The sine wave that results is the same sine wave the additive demo stacks. The connection is not metaphorical. It is literal. The spring traces the fundamental harmonic of every oscillating system.
-
-The spring coil itself visualizes tension. Color shifts from neutral to red as displacement increases:
-
-```gdscript
-var tension = abs(position_y) / initial_displacement
-var color = Color(0.5 + tension * 0.5, 0.5, 0.5 - tension * 0.3)
-```
-
-Maximum displacement produces maximum redness. At equilibrium, the coil fades to gray. The color encodes the potential energy stored in the spring — red means loaded, gray means relaxed.
-
-The demo also reveals damping regimes. When damping is subcritical (c < 2*sqrt(k*m)), the mass oscillates with exponentially decaying amplitude. At critical damping, it returns to rest as fast as possible without overshooting. Beyond critical, it sluggishly creeps back. These three behaviors — underdamped, critically damped, overdamped — appear everywhere: car suspensions, door closers, the settling of a needle on a scale.
-
-## Phase Propagation: Waves Traveling Through Glass
-
-The `samplevialrack` demonstrates wave propagation as phase offset across discrete elements. Six vials pulse with emission intensity driven by a sine wave, each offset by a fraction of TAU:
-
-```gdscript
-# Linear - wave travels left to right
-for i in range(num_vials):
-    phase_offsets.append(float(i) * TAU / float(num_vials))
-```
-
-Each vial receives the same sine wave, shifted by one-sixth of a full cycle from its neighbor. The result: a pulse of light that appears to travel from left to right across the rack. No physical object moves. Each vial oscillates in place. The traveling wave is an illusion created by coordinated phase offsets — the same mechanism that produces the wave in a stadium crowd.
-
-```gdscript
-var wave = sin(time * wave_frequency * TAU + phase)
-var normalized = (wave + 1.0) / 2.0  # 0 to 1
-var glow = lerp(glow_min, glow_max, normalized)
-```
-
-The normalization from [-1, 1] to [0, 1] maps the sine wave onto the glow range. This is the same shift-and-scale the dark sphere uses for its emission pulse. Whenever a sine must drive a parameter that only accepts positive values, this mapping bridges the gap.
-
-The rack supports three phase modes: linear, radial, and random. Linear produces a traveling wave. Radial produces a wave that expands outward from the center vial. Random produces no coherent pattern — the same frequency, the same amplitude, but without phase alignment there is no wave. Phase coherence is the difference between signal and noise.
-
-## Biological Oscillation: DNA, Worms, and Resonance
-
-The laboratory extends oscillation beyond physics. The `dna_specimen` rotates a double helix in a glass jar — two sinusoidal strands displaced by half a period, wound around a shared axis:
-
-```gdscript
-# Rotate helix slowly
-if helix:
-    helix.rotation.y += delta * rotation_speed
-
-# Pulse the fluid glow
-if fluid and fluid.material_override:
-    var pulse = 0.2 + sin(pulse_phase) * 0.1
-    fluid.material_override.emission_energy_multiplier = pulse
-```
-
-The DNA helix is a wave frozen in molecular geometry. Two strands of nucleotides trace sine curves around the helical axis, offset by 180 degrees — the same relationship as sine and cosine on the unit circle. Rotation makes this visible. The specimen turns at 0.2 radians per second, slow enough to track the interleaving of the strands. The fluid pulses softly, a secondary oscillation suggesting metabolic activity inside the jar.
-
-The `petri_dish_worms` carry oscillation into locomotion. Each worm crawls forward while its body undulates laterally:
-
-```gdscript
-var wave_offset = sin(_time * worm.frequency + worm.phase + t * 8.0)
-    * oscillation_amplitude * (1.0 - t * 0.5)
-segment_pos += perpendicular * wave_offset
-```
-
-The sine wave drives lateral displacement perpendicular to the direction of travel. The `t * 8.0` term creates a spatial wave along the body — multiple oscillation cycles visible from head to tail. The `(1.0 - t * 0.5)` decay factor reduces amplitude toward the tail, matching the biomechanics of nematode locomotion. C. elegans moves by generating a traveling wave along its body. The wave pushes against the substrate, and the reaction force propels the worm forward. Locomotion as wave propagation.
-
-Each worm has its own phase, its own frequency, its own speed — all drawn from random ranges at spawn time. The petri dish contains a population of independent oscillators. No two are synchronized, yet all use the same equation. Individual variation within structural uniformity: a hallmark of biological systems.
-
-## Standing Waves and Resonance
-
-The `biomagneticresonator` visualizes standing waves through concentric field rings:
-
-```gdscript
-for h in range(1, harmonic_count + 1):
-    var harmonic_amplitude = 1.0 / float(h)
-    wave += harmonic_amplitude * sin(
-        time * resonance_frequency * float(h) * TAU + ring_phase * float(h)
-    )
-```
-
-Each ring receives a superposition of harmonics. The fundamental and its overtones combine, with amplitudes decaying as 1/n — the same harmonic series the additive wave demo builds manually. The ring phases multiply with harmonic number, producing standing wave nodes at specific heights. Some rings pulse brightly while their neighbors dim. The bright rings are antinodes. The dim rings are nodes. The pattern is stable in space while oscillating in time: a standing wave.
-
-Resonance occurs when the driving frequency matches a natural frequency of the system. The resonator's `trigger_resonance_burst` method momentarily doubles the field strength:
-
-```gdscript
-func trigger_resonance_burst() -> void:
-    var original_strength = field_strength
-    field_strength = 2.0
-    await get_tree().create_timer(0.5).timeout
-    field_strength = original_strength
-```
-
-A half-second of doubled energy, then relaxation back to baseline. This is what happens when external energy matches internal periodicity. Amplitude spikes. In physical systems, this amplification is what breaks bridges, shatters glass, and tunes radio receivers.
-
-The `seismograph` writes oscillation into permanent record. Its pen arm traces the output of a sine wave mixed with noise:
-
-```gdscript
-func _get_current_trace_value() -> float:
-    var base_wave = sin(_time * trace_frequency * TAU)
-    var noise = (randf() - 0.5) * noise_intensity
-    var spike = 0.0
-    if randf() < SPIKE_CHANCE:
-        spike = (randf() - 0.5) * 2.0
-    return (base_wave + noise + spike) * trace_amplitude
-```
-
-The trace is a sum: signal plus noise plus rare spikes. This is the Fourier thesis in reverse. The additive demo builds complexity from simple components. The seismograph records complexity and implicitly challenges the viewer to decompose it. The underlying sine wave is visible in the trace, but the noise obscures it. Signal extraction — recovering the fundamental from a noisy measurement — is the practical application of Fourier analysis. Every medical EKG, every seismic survey, every audio equalizer performs this operation.
-
-## The Unit Circle Returns
-
-The `UnitCircleTrig` artifact sits inside the laboratory, connecting the final map back to the sequence's origin. A point travels the unit circle. Its y-coordinate projects rightward as a sine trail. Its x-coordinate projects downward as a cosine trail:
-
-```gdscript
-var x = cos(angle) * radius
-var y = sin(angle) * radius
-driver_ball.position = Vector3(x, y, 0)
-
-sine_ball.position = Vector3(radius + projection_offset, y, 0)
-cosine_ball.position = Vector3(x, -radius - projection_offset, 0)
-```
-
-The unit circle generates every wave in this room. The additive demo sums sines. The Chladni plate multiplies cosines. The Lissajous curves combine sines across axes. The spring oscillates at a frequency determined by sqrt(k/m). The DNA helix winds two sinusoidal strands.
-
-The worms undulate laterally by sin(). The vials pulse by sin(). The seismograph traces sin(). The unit circle is the source function. Rotation becomes oscillation. Oscillation becomes signal. Signal decomposes back into rotation.
-
-Fourier's theorem closes the loop. Any periodic function — no matter how complex, how jagged, how biological — equals a sum of circular motions at integer frequencies. The sequence began with a point on a circle. It ends with the proof that the circle was always sufficient.
-
-## Possible Artifacts
-
-**fourier_decomposer** — The inverse of the additive wave demo. The learner draws or selects a complex waveform (square, sawtooth, arbitrary), and the artifact computes and displays its Fourier coefficients as a bar graph of harmonic amplitudes. Each bar links to a visible sine wave component, and toggling bars on and off shows how the reconstruction improves or degrades. Connects the synthesis direction (building up) to the analysis direction (breaking down), completing the conceptual round trip.
-
-**resonance_bridge** — A suspension bridge model with adjustable driving frequency. The learner sweeps frequency with a slider. At most frequencies the bridge barely moves. At the natural frequency, amplitude grows dramatically — the mesh deforms visibly, cables oscillate, and a displacement graph spikes. A damping slider shows how friction suppresses the resonance peak. Demonstrates why resonance matters in engineering and connects the spring demo's natural frequency to a structural-scale consequence.
-
-**circadian_oscillator** — Three coupled sine waves representing core clock genes (per, cry, bmal1) with phase offsets modeling the transcription-translation feedback loop. The waves drive a day-night color gradient in the background. Disrupting one oscillator's phase (simulating jet lag) causes transient desynchronization visible as interference patterns before the system re-entrains. Extends the biological oscillation thesis from molecular geometry (DNA) and locomotion (worms) into temporal biology.
+No tracked-hand or human listening observation is claimed. Verify headset reach and lettering, particularly at higher amplitudes. The radio rack was playing during the probe, 7.7 m from the bench; this does not establish how it sounds at a listener's head. See `doc/space/synthesis-lab-review-2026-09-12/` and `/research/possible-bodies/synthesis-lab.html`.

@@ -1,3 +1,5 @@
+> Historical record of an earlier layout and interpretation. For the reviewed 14 September 2026 encounter, see final.md and field_notes.md.
+
 # Eye shot — CA_EdgeOfChaos
 
 > one pass: ride (gaze), move (place --only-improve), gate (pathfinder), voice (qfep). Field note, not a ruling.

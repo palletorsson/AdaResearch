@@ -1,51 +1,104 @@
-# Trans_Pre — making the animated pickup
+# Move, turn, change size
 
-Start with the cube learned in Primitives. Add three operations to make the Mario-style pickup used in this room.
+**Learning elements**
 
-| Stage | What to watch | Name |
-|---|---|---|
-| 1 | A still cube | Starting form |
-| 2 | The cube moves up and down | Translation: change position |
-| 3 | It also turns | Rotation: change facing |
-| 4 | It also grows and shrinks | Scale: change size |
+- Translation: position
+- Rotation: orientation
+- Scale: size
+- Animation: changing a transform over time
+- Pickup: overlap detection and a signal
 
-Each example keeps the movements introduced before it. Ask the learner to spot the new movement before naming it.
+The cubes in Trans_Pre introduce one change at a time: rising, turning, then growing and shrinking. Here we use a single cube mesh. Its `MeshInstance3D` gives it a position, rotation and scale. Change those properties to transform the whole object.
 
-The room uses four instances of `commons/scenes/mapobjects/pick_up_cube.tscn`. The following excerpts come from its `pick_up_cube.gd` script.
+## One cube
 
-Translation changes the vertical position:
+The Endless Museum supplies the room, player, camera and light. Attach this script to an empty `Node3D` named `TransformStudy` beside the installed examples. Its origin sits at floor level, with zero rotation and unit scale. Coordinates below are local to that study.
 
+This is the complete `lesson.gd`. It needs no companion scripts.
+
+<!-- student-code:lesson.gd -->
 ```gdscript
-global_position.y = lerp(original_y - bob_height, original_y + bob_height, t)
+extends Node3D
+
+var cube := MeshInstance3D.new()
+var start := Vector3(0, 1, 0)
+var turn_degrees := 0.0
+var size_factor := 1.0
+var rise := 0.0
+var duration := 2.0
+var elapsed := 0.0
+
+func _ready() -> void:
+    assert(duration > 0.0 and size_factor > 0.0)
+    cube.mesh = BoxMesh.new()
+    add_child(cube)
+    cube.position = start
+    cube.rotation_degrees.y = turn_degrees
+    cube.scale = Vector3.ONE * size_factor
+
+    var sensor := Area3D.new()
+    sensor.collision_layer = 0
+    sensor.collision_mask = 1
+    sensor.set_collision_mask_value(20, true)
+    cube.add_child(sensor)
+    var hitbox := CollisionShape3D.new()
+    hitbox.shape = BoxShape3D.new()
+    sensor.add_child(hitbox)
+    sensor.body_entered.connect(_on_body_entered)
+
+func _process(delta: float) -> void:
+    elapsed += delta
+    var t: float = minf(elapsed / duration, 1.0)
+    cube.position = start + Vector3.UP * rise * t
+
+func _on_body_entered(body: Node3D) -> void:
+    if body.is_in_group("em_walker") or body.is_in_group("player_body"):
+        print("Collected")
+        queue_free()
 ```
 
-`lerp(a, b, t)` chooses a value between `a` and `b`: zero gives the first endpoint, one the second, and 0.5 the midpoint. The endpoints here sit `bob_height` below and above the saved starting height.
+`MeshInstance3D` displays the shape; `BoxMesh.new()` supplies a one-metre cube centred on its origin. `add_child(cube)` places it in the scene. We transform that one node. There are no separate faces to manage.
 
-The script adds `delta` to `time_passed` each update, then repeats the journey with:
+The cube starts one metre above the study origin. With `rise` at zero, it remains still.
 
-```gdscript
-var t: float = pingpong(time_passed / maxf(lerp_duration, 0.001) + 0.5, 1.0)
-```
+## Translate, rotate, scale
 
-`pingpong` moves the number back and forth between zero and one. Each leg takes `lerp_duration` seconds, set to 1.5 here. Adding 0.5 starts the cube halfway, at its authored height. `maxf` protects against a zero duration. This gives constant speed on each leg and a change of direction at each endpoint. Wave functions come later.
+Edit one value on its existing `var` line, then run. Restore it before trying the next change.
 
-Rotation adds a turn around Y, the upright axis:
+| Value | Result |
+| --- | --- |
+| `start = Vector3(1, 1, 0)` | Translate one metre along X. Facing and size stay fixed. |
+| `turn_degrees = 45.0` | Rotate 45 degrees around Y, through the cube's centre. Its size stays fixed. |
+| `size_factor = 1.5` | Scale all three dimensions to 1.5 times their size. The centre stays fixed. |
 
-```gdscript
-rotate_y(rotation_speed * delta)
-```
+`position`, `rotation_degrees` and `scale` belong to the instance. The `BoxMesh` still describes the same cube. `Vector3.ONE * size_factor` applies one factor equally along X, Y and Z, preserving its proportions.
 
-`rotation_speed` sets the rate. Multiplying by the update's time interval gives the turn to add now. This runs alongside the translation.
+## Make the translation move
 
-Scale changes the visible cube's size:
+Restore the starting values, then set `rise` to `1.0`. The cube travels one metre upward in two seconds and stops.
 
-```gdscript
-var size_factor: float = lerp(1.0 - pulse_scale, 1.0 + pulse_scale, t)
-_apply_pulse(size_factor)
-```
+`elapsed += delta` counts seconds. Dividing by `duration` gives the fraction of the journey completed; `minf(..., 1.0)` stops that fraction at one. The final line assigns **start + upward displacement × fraction**. At one second, the cube has risen half a metre.
 
-With `pulse_scale = 0.3`, the factor travels between 0.7 and 1.3. `_apply_pulse` multiplies the saved mesh scale by that factor. A factor of one gives the starting size. All three directions use the same factor, keeping the cube's proportions.
+Set `duration` to `4.0`. The destination stays the same; reaching it takes twice as long. The assertion at the start requires a positive duration and size.
 
-The demonstration settings are `motion:still`, `motion:slide`, `motion:idle` and `motion:all`; all four use `hold:demo` so they remain available to inspect. All eight pickup cubes in this hall use `motion_curve:lerp`. The translation marker uses straight travel, the rotation marker uses continuous turning, and the scale marker also uses linear interpolation. They have their own clocks and do not control the pickups.
+Now combine what you know: keep the rise, set the angle to 45 degrees and the scale factor to 1.5. The larger, turned cube moves upward. Its facing and size remain fixed during that journey. Continuous turning and pulsing develop the same three properties further.
 
-On the platform, four ordinary collectible instances use `motion:all`. Find the rise and fall, the turn and the change in size before collecting one. The task is to recognise how the simple movements combine into a familiar game animation.
+## Try another change
+
+Choose a new angle, size or destination. Predict the result before running it. Change only one property first; then combine two.
+
+## Walk into it: collect the cube
+
+Restore `rise` to zero so the cube stays within reach. Walk into it. It disappears, and `Collected` appears in Output.
+
+The script gives the cube an `Area3D` containing a `CollisionShape3D`. `BoxShape3D` supplies the one-metre detection box. It follows the cube's position, rotation and scale because the sensor is a child of the cube. This area detects overlap; it does not block your movement.
+
+When a physics body enters, `body_entered` emits a **signal**. The `connect` line sends that event to `_on_body_entered(body)`. This function checks that the entering body belongs to the player, then `queue_free()` removes this study and its cube at the end of the frame. An ordinary object entering the area does not collect it.
+
+The museum supplies two player arrangements: the desktop walker uses layer 1 and group `em_walker`; the XR body uses layer 20 and group `player_body`. The sensor's mask listens to those layers. The group check distinguishes the player from other bodies on layer 1. Those names connect this example to the existing museum; we do not rebuild the player here.
+
+Try moving the cube sideways and walking through its former position. Only its new position should collect it. Translation, rotation and scale now affect where an interaction can happen.
+
+This small pickup prints a confirmation and disappears. The installed pickup's score, sound and collection flourish can be added later. Carry **translate → rotate → scale → detect an overlap → collect** into the next hall.
+
+[Working code and native checks](../../../doc/book/iterations/2026-10-06-trans-pre-three-operations/index.html)

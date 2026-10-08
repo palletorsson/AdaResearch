@@ -1,140 +1,67 @@
-# A clean laboratory with raised benches and a void pit — formal systems rebuilt after crisis
+# Assemble a body — implementation and encounter
 
-The bias map showed that classification produces inequality. The rhizome map offered an alternative topology: connection without hierarchy. The laboratory map completes the sequence's arc with a return to formalization — not naive formalization (the pre-crisis belief that formal systems are complete and sufficient) but post-crisis formalization: building with tools you know to be incomplete.
+The primary artifact is `MolecularDesigner`. Its [scene](../../../algorithms/computationalbiology/molecular_framework/MolecularDesigner.tscn) and [implementation](../../../algorithms/computationalbiology/molecular_framework/Part.gd) supply the behaviour described here.
 
-## The Clean Room
+The scene starts with forty reusable part instances. This hall configures eight seconds of floating, eighteen seconds of assembly, scale 2 and body_study=true. An amber ring stays attached to the first instance as its catalogue type changes. The source scene's default phases remain ten seconds elsewhere. _assemble() reads node specifications, reapplies each part's catalogue mesh and calls set_target(target_pos); the call does not supply a target basis. Bonds are read from the assembly data. Part._dock_to_target() integrates a damped spring in _process(), while idle translation accumulates a sine-derived offset weighted by elapsed time. Inventory positions are local to the exhibit; target positions use to_global(), so museum position, rotation and scale apply to the assembly. Changing assembly releases surplus instances from their previous targets. In body_study mode the controller moves unused instances into two visible side racks; their own floating process resumes on release. This display arrangement is authored too. Keyboard shortcuts exist in the script, but the book does not rely on them in VR. The automatic display remains a catalogue showcase, not a chemistry solver. This hall also enables `body_workshop=true`; other placements retain the earlier default.
 
-The structure layer defines a 9x8 grid. The heights are modest — maximum 2, a stark contrast to the height-5 walls of the bias and rhizome maps:
-
-```
-Row 0: 1 1 1 1 1 1 1 1 1     Flat floor
-Row 1: 1 1 1 1 1 1 2 2 1     Lab bench (NE)
-Row 2: 1 1 1 1 1 1 2 2 1     Lab bench (NE)
-Row 3: 1 1 1 1 1 1 1 1 1     Open floor
-Row 4: 1 2 2 1 0 0 1 1 1     Lab bench (W) + void pit (center)
-Row 5: 1 2 2 1 0 0 1 1 1     Lab bench (W) + void pit (center)
-Row 6: 1 1 1 1 1 1 1 0 1     Open floor + void (SE)
-Row 7: 1 1 1 2 2 1 1 1 1     Lab bench (S)
-```
-
-Three bench areas at height 2:
-- **Northeast bench** (columns 6-7, rows 1-2): A 2x2 raised surface
-- **West bench** (columns 1-2, rows 4-5): A 2x2 raised surface
-- **South bench** (columns 3-4, row 7): A 2x1 raised surface
-
-Height 2 for lab benches — regulation work surface height. The benches are where formal work happens: organized, elevated, clean. The floor at height 1 is the circulation space. The lab is functional architecture: surfaces for construction, paths between surfaces, instruments placed where hands can reach them.
-
-The aesthetic is deliberately ordered. Three benches at regular intervals. Floor tiles at uniform height. The grid animation (not specified in map_data but following the default pattern) would produce a systematic appearance. This is the F-term's domain — structure imposed, prediction error minimized, the formal system's clean room where every element has a place and every place has an element.
-
-## The Void Pit
-
-At grid positions (4,4), (4,5), (5,4), and (5,5) — the center of the map — four tiles drop to height 0. The floor is gone. Underneath: the void. The substrate the clean room pretends does not exist.
-
-```
-        columns 3-6:
-Row 3:  1  1  1  1    (solid floor)
-Row 4:  1  0  0  1    (void pit)
-Row 5:  1  0  0  1    (void pit)
-Row 6:  1  1  1  1    (solid floor, but column 7 has another void)
-```
-
-A 2x2 hole in the center of a 9x8 room. The benches surround it. The formal systems — the lab equipment, the molecular designer — operate on their raised surfaces while the void opens beneath the floor between them. The spatial metaphor is precise: every formal system rests on something it cannot formalize. The lab works. The lab is also incomplete. Godel in the foundation.
-
-The additional void at (7,6) — a single tile drop in the southeast — adds an asymmetric rupture. The laboratory is not perfectly symmetric. One of the voids is off-center, away from the main pit. The formal system has multiple incompleteness points, not just one. The floor fails in more than one place.
-
-## The Molecular Designer
-
-The `MolecularDesigner` artifact sits at grid position (4,3) — adjacent to the void pit, on solid ground but within view of the gap:
+## Operation to read after the encounter
 
 ```gdscript
-# MolecularDesigner — chemical formalization as interactive construction
-@export var available_atoms: Array[String] = ["C", "H", "O", "N", "S"]
-@export var bond_types: Array[String] = ["single", "double", "triple"]
-@export var valence_rules: Dictionary = {
-    "C": 4, "H": 1, "O": 2, "N": 3, "S": 2
-}
+var to_target = target_pos - global_position
+
+# Spring force toward target
+velocity = (velocity + to_target * dock_spring * delta) * dock_damp
+global_position += velocity * delta
 ```
 
-Five atom types. Three bond types. A valence dictionary that constrains construction. Carbon forms four bonds. Hydrogen forms one.
+Here the restoring force returns from the earlier halls. The vector to_target points from a part to its assigned destination. The spring changes velocity and velocity changes position. A moving piece can look as if it has found its place, although another file already supplied the target. dock_damp is applied each frame, which also makes the settling depend on the update rate. The clock remains inside the body we are watching.
 
-Oxygen forms two. Nitrogen forms three. Sulfur forms two. The rules are not arbitrary — they encode the electron shell structure of each element. The formal system (valence theory) predicts molecular geometry with high accuracy for most simple molecules.
+## What to compare
+
+Walk around the floating inventory and follow the part carrying the amber ring. Keep that instance in view as the body gives way to a chair or another assembly. Its position and visible form can change while the ring remains with it.
+
+The controller reuses part instances, but can replace their mesh, type and colour when assigning a new assembly. The same instance need not keep the same visual identity. Target positions are authored before the parts move.
+
+## A body whose positions the visitor can change
+
+[AssemblyBodyStudy.gd](../../../algorithms/computationalbiology/molecular_framework/AssemblyBodyStudy.gd) reads the same `VRBody` assembly: thirteen named joints and twelve declared connections. It builds a separate body at 1.12 times the assembly coordinates, with real XRTools pickable joints. The top-level study has a unit global basis, avoiding scaled rigid bodies beneath the two-times-scale automatic display. Its position is derived from the configured exhibit transform. The automatic display is placed at cell (3,5); its workshop stands 5.2 metres to the right and 1.2 metres along its local Z direction.
+
+Grip and move a joint in VR. On desktop, point at a joint, right-click to carry it, and right-click again to release it; the standard mouse wheel changes carrying distance. Both paths retain the new position. Connections redraw between endpoints. They do not transmit forces or preserve limb lengths. Moving a gold joint alone does not alter adjacency. The independent catalogue cycle cannot overwrite this pose. Spare carriers in the automatic study now gather along the left wall, leaving the comparison aisle clear.
 
 ```gdscript
-func _try_add_bond(atom_a: Node3D, atom_b: Node3D, bond_type: String) -> bool:
-    var bond_order := _bond_type_to_order(bond_type)  # single=1, double=2, triple=3
-    var a_remaining := valence_rules[atom_a.element] - atom_a.current_bonds
-    var b_remaining := valence_rules[atom_b.element] - atom_b.current_bonds
-
-    if a_remaining >= bond_order and b_remaining >= bond_order:
-        _create_bond(atom_a, atom_b, bond_type)
-        atom_a.current_bonds += bond_order
-        atom_b.current_bonds += bond_order
-        return true
-    return false  # Valence violated — bond rejected
+targets[index] = to_local(handle.global_position)
 ```
 
-The constraint satisfaction is strict. If a carbon already has four bonds, no fifth bond is permitted. The system enforces the formal rules physically — the grab interaction fails, the atom does not connect, the bond does not form. The learner feels the constraint as resistance. The formal system says no, and the hand stops.
+Joint centres are bounded to local X/Z ±1.9 metres and Y 0.12–2.35 metres. A thin square floor inlay marks the horizontal bounds. There is no anatomical validation. The bounds concern joint centres; the visible sphere can extend beyond them. Joints have pickup collision on layer 3, while connections are visual. Neither body is a wearable avatar or a load-bearing chair.
 
-This strictness is the point. After the rhizome's refusal of hierarchy and the bias map's exposure of classification's costs, the molecular designer reasserts that formal rules have value. Valence theory is not arbitrary. It predicts real molecular behavior. Water is H2O because oxygen has two available bonds and hydrogen has one. The formal system is not complete (it cannot predict all chemical behavior — quantum effects, resonance structures, delocalized electrons exceed the simple valence model) but it is useful. It works for a wide class of cases. It fails at the edges.
+A changed release now keeps one latest pose through [AssemblyPoseRecord.gd](../../../algorithms/computationalbiology/molecular_framework/AssemblyPoseRecord.gd), normally at `user://ada_research/assembly_pose.json`. Starting and released positions, joint identities, radii, original and current connections, and the source hash travel together. Schema 2 retains both graphs; existing schema-1 pose records remain readable with their original graph. A changed connection counts as a released edit even when no point moves. Another held joint is saved at its previous released position. Re-entering this workshop restores a valid matching pose and continues its edit count. The final hall reconstructs both versions at standing scale. Failed disk writes retain an explicitly labelled session-only record. `export_pose()` reports released coordinates; it is not a hand trajectory. `reset_pose()` remains an authoring/probe API, restores both positions and connections, refuses to reset during a held joint or collar edit, and does not save automatically; no reset panel is added. See the [persistence and final-hall checks](../../../doc/book/iterations/2026-09-21-synthesis-return/SUMMARY.md).
 
-```gdscript
-func _compute_bond_angle(atom: Node3D) -> float:
-    var bond_count := atom.current_bonds
-    match bond_count:
-        4: return 109.5  # Tetrahedral (sp3)
-        3: return 120.0  # Trigonal planar (sp2)
-        2: return 180.0  # Linear (sp)
-        _: return 0.0    # Undefined
-    return 0.0
-```
+## Limits and next test
 
-Bond angles derived from hybridization theory: tetrahedral at 109.5 degrees for four bonds, trigonal planar at 120 for three, linear at 180 for two. The angles are not aesthetic choices. They are predictions of the VSEPR model (Valence Shell Electron Pair Repulsion) — a formal system that minimizes electron repulsion energy. F-minimization: the electrons arrange themselves to minimize their mutual repulsion, and the bond angles are the geometric consequence.
+The gold joints change geometry. Two turquoise collars now open both ends of the original left forearm connection: pick up either collar, carry it to a different gold joint and release within 0.28 m to change its neighbour. A green ring previews a valid target. Both ends of this one connection are editable; the other eleven connections and all thirteen joints remain. Taking the hand end to the head isolates the hand; taking the elbow end to that hand reconnects all thirteen joints without restoring their original adjacency. When both collars are held, each release commits only its own endpoint. The second release is validated against the first released change; an attempted self-connection or duplicate is rejected. Self-connections, duplicates and empty-space drops return to the previous attachment. They create no saved edit. The finite workspace applies to the held collar too. Both desktop carry and XRTools pickup use the same begin/release actions. A new joint remains a possible later operation. The spring damping in the automatic study is still applied per frame; compare fixed update rates before changing that separate behaviour.
 
-The molecular geometry that emerges when the learner constructs a molecule — say, methane (CH4) with four hydrogen atoms bonded to one carbon — is a tetrahedron. The same tetrahedron from the snap_tetra_puzzle in QFEP_F_Term. The same geometry from Primitives_Polythedra. The formal system produces a shape the curriculum has been teaching since the beginning. The circle closes.
+The private museum probe checks instantiated behaviour and selected walking routes. See the [two-end encounter evidence](../../../doc/book/iterations/2026-09-21-assembly-belonging/SUMMARY.md). Headset readability, comfort, Quest performance and learner understanding remain unverified. The automatic catalogue and gold workshop are visual objects without supporting collision: walking among them does not establish a chair you can sit on or a body you can wear.
 
-## The Post-Crisis Position
+[Earlier design proposal](../../../doc/space/postcrisis-pass-2026-09-15/before/commons/maps/AdvancedLaboratory_Lab_Equipment_Simulation/technical.md) preserves the previous text and its proposed systems. It is not a description of the current implementation.
 
-The lab benches at height 2 surround the void pit at height 0. The molecular designer sits next to the void. The learner constructs molecules — snapping atoms to valence rules, watching bond angles enforce geometry — while the void is visible one tile away. This spatial arrangement is the sequence's thesis: build formal systems. Use them. Trust them within their domain. But keep the void in view. Know that the floor has gaps.
+[Reconnection encounter and latest checks](../../../doc/book/iterations/2026-09-21-assembly-reconnection/index.html): same points and same edge count can have different connectivity. The record retains both graphs, so the final gallery can show the original and altered connections honestly.
 
-The post-crisis position is not anti-formalization. It is formalization with epistemological humility. The molecular designer works. Valence rules predict molecular geometry accurately for simple organic molecules. But valence theory fails for metallic bonding, for pi-delocalized systems, for quantum tunneling effects. The void pit does not invalidate the molecular designer. It contextualizes it. The clean room is clean, and the floor has holes.
+## A body whose connections carry force
 
-The waypoint at (6,6) with 180-degree rotation redirects the learner's gaze toward the void pit from the south corridor. The rotation forces the body to face the gap. The lab is not hiding its incompleteness. It is incorporating it into the navigation flow.
+This hall also opts into `body_ragdoll=true`. `AssemblyRagdoll.gd` makes a separate, unsaved physics comparison from the existing VRBody points. The same thirteen names remain available as coral grab rings. Ten rigid parts supply a torso, head and two segments per arm and leg; nine PinJoint3D constraints join them. The hip attachments are separated by 0.24 m so the hanging legs remain distinct. These are freely rotating pin joints, without anatomical angle limits. Non-adjacent parts collide with one another and the museum floor; directly joined pairs exclude mutual collision.
 
-## The Exit and the Sequence's Resolution
+The study stands at map coordinates (3.5, 0, 9.2), facing the central lane, with a 2.8 m square, 0.024 m high mat and a hanging support. Its global basis has unit scale despite the catalogue's two-times placement. The head is initially supported. Taking any ring releases that support. The target follows desktop carry or the XRTools grab driver, while a capped damped spring applies force at the corresponding attachment point of the unfrozen physical limb. A thin coral tether makes the gap between held target and physical attachment visible. This separates hand tracking from rigid-body motion; grabbing does not teleport the limb or impose a pose. Two controllers can pull different limbs at once. A finite target region and 90 N force cap bound the interaction.
 
-The teleporter at (7,7) and secondary spawn at (7,7) occupy the southeastern corner. The exit point is on solid ground — height 1, away from the void. The sequence does not end in the gap. It ends on a floor that knows the gap is there.
+Releasing a ring stops its pulling force, leaving gravity, inertia and constraints to act. The HANG AGAIN button on the stand resets velocities and authored part transforms, then recreates the head support. It refuses while a limb is held. Physics transforms are explicitly synchronized before constructing joints and after resetting, avoiding stale attachment frames. No external pose or visitor save is written: the existing gold body and its Synthesis return remain independent.
 
-The teleporter label is "Next" with a generic "Continue to next step" description. The Post-Foundations Crisis does not end with a grand synthesis. It ends with an ordinary exit from an ordinary laboratory. The lesson is in the ordinariness: after the crisis, after the bias, after the rhizome, what remains is the practice of building formal systems while knowing their limits. The laboratory is not a triumph.
+[Godot PinJoint3D documentation](https://docs.godotengine.org/en/4.6/classes/class_pinjoint3d.html) describes the free joint; [RigidBody3D documentation](https://docs.godotengine.org/en/4.6/classes/class_rigidbody3d.html) describes force application. This is a stylized physics puppet, not a biomechanics model or an avatar worn by the player. Headset reach, comfort, haptic feel and Quest performance still require on-device testing. [Actual museum captures and controlled checks](../../../doc/book/iterations/2026-09-21-assembly-ragdoll/index.html).
 
-It is a workspace. The molecular designer is not a revelation. It is a tool. The void pit is not a metaphor. It is a structural fact.
+## Furniture with the same pulling rule
 
-The map's spatial temperature is 0.8 — high, indicating a warm, populated feel. Despite its small grid (9x8), the room contains enough structural variation (three bench positions, the void pit, the secondary void) to feel occupied. The laboratory is full of things. The formalization is active. The incompleteness is acknowledged but does not prevent work.
+`body_furniture=true` adds three simultaneous studies via `AssemblyFurnitureStudy.gd`, which inherits the existing ragdoll's force application, coral grips, elastic tethers and reset behavior. Chair, Table and Lamp retain the part names, relative source positions, part masses and connection lists from `assemblies.json`. Their collision geometry is fitted explicitly: the chair back is vertical, panels have finite thickness, legs reach the support surface, and the lamp gets a conical shade and a light on its bulb. This is a staged physics interpretation of those graphs, not a literal reproduction of every catalogue mesh.
 
-## Chemistry as Proof Theory
+Chair has six rigid parts and five pin joints; Table has five and four; Lamp has four and three. Chair and Lamp use a 1.2 physical size multiplier, Table 1.15; all have unit node scale and a 0.04 m floor offset. Non-adjacent parts collide. The links freely rotate, so these are articulated experiments rather than ordinary welded furniture or seating for the player.
 
-Each valid molecule is a theorem in the valence formal system. The axioms are the valence rules. The inference rules are bond formation. A complete molecule — all atoms at full valence, all bond angles consistent — is a proof that the axioms admit this configuration. An incomplete molecule — an atom with unfilled valence — is a theorem in progress. An impossible molecule — an atom forced beyond its valence — is a contradiction, rejected by the constraint satisfaction engine.
+Thin visible lines mark initial staging supports. One extra pin per part holds its centre in the authored starting arrangement. Taking any coral ring removes all staging pins for that object. Its structural joints remain. Released objects settle through gravity and contact; each REASSEMBLE button restores only its own supported pose, refusing during a hold. The lamp's bulb retains its light when it falls; electrical breakage is not simulated. Furniture changes are not saved into the gold body's return record.
 
-The snap-to-grid behavior of the molecular designer (atoms snapping to valid bond angles) mirrors the snap puzzles of the F-term map. Both enforce formal constraints through haptic feedback. Both produce the satisfaction of pattern completion. Both have edges where the formal system stops holding.
-
-For valence theory, the edge is resonance. Benzene (C6H6) has alternating single and double bonds in the naive model, but the actual electron distribution is delocalized — a ring of shared electrons that the simple valence model cannot represent. The molecular designer handles benzene by allowing the learner to toggle between resonance structures, but the toggle acknowledges the model's limitation. The benzene ring is the Godelian sentence of simple valence theory: a structure the axioms can describe only through a workaround.
-
-The void pit beneath the lab is where the Godelian sentences live. Not visible from the work surfaces. Not relevant to most molecular constructions. But always there, always structurally present, always reminding the formal system of what it cannot contain.
-
-## Valence Check Implementation
-
-```gdscript
-# MolecularDesigner valence check
-func can_add_bond(atom: Atom, bond_type: int) -> bool:
-    var current_bond_order: int = atom.total_bond_order()
-    var max_bond_order: int = atom.valence_capacity()
-    return current_bond_order + bond_type <= max_bond_order
-
-# VSEPR angle lookup
-const IDEAL_ANGLES := {
-    2: 180.0,   # linear
-    3: 120.0,   # trigonal planar
-    4: 109.5,   # tetrahedral
-    5: 90.0,    # trigonal bipyramidal
-    6: 90.0,    # octahedral
-}
-```
+The studies stand at map coordinates Chair (3.0, 0, 2.3), Table (8.7, 0, 2.3), and Lamp (9.2, 0, 9.8), facing the central passage. Each mat is 2.6 m square and 0.024 m high. The automatic sculpture exclusion grows to [1,1,11,11] to keep these workspaces available. The existing catalogue, gold workshop and human ragdoll are preserved. [Actual museum images, source diffs and controlled checks](../../../doc/book/iterations/2026-09-21-assembly-furniture/index.html). On-headset reach, comfort and performance remain unverified.

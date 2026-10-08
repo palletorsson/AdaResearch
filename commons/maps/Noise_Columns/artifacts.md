@@ -1,20 +1,7 @@
-# Noise Columns — Artifacts
-*Noise: Entropy with Memory · E_entropy · 2 artifacts*
+# Noise Columns — three primary encounters
 
-> Noise extruded vertically. Sample the 2D function, lift the result into height. Mountains rise from mathematics, valleys fall from continuous variation. The columnar terrain is noise made navigable — you walk through the function, feeling its gradients as slopes beneath your feet.
+1. **MeltingBerniniScene** — The existing three-column comparison, with held/sine/field drivers, local FREEZE, independent SPIN and shaft MARBLE controls. Same shaft recipe, bounded rebuild rate. Bases and capitals retain their own patterns and now follow the local clock.
+2. **dark_sphere** — Existing witness/orb. An independent clock drives appearance and rotation while the column instrument is paused. Quiet presence can become an encounter; it need not be treated as inert decoration.
+3. **synthesis_stand** — Existing dark-sphere family, hush/swarm selection. Six small orbs in a turning parent. Moved to (3,4) with a clear viewing approach so another sculpture does not conceal it.
 
-The map, read through what it holds — its artifacts in the order you meet them:
-
-## Dark Sphere
-![Dark Sphere](/scene-catalog/dark_sphere.png)
-
-USE a neutral sphere as a reference for scale, silhouette, and atmospheric change.
-
-`dark_sphere`
-
-## Melting Bernini Columns
-![Melting Bernini Columns](/scene-catalog/MeltingBerniniScene.png)
-
-Noise-based vertex displacement applied to classical column geometry. Bernini's baroque forms dissolve under procedural noise fields.
-
-`MeltingBerniniScene`
+All three remain in the room and have matching final.md anchors. The room's recovered structure is retained. Additional automatically staged sculptures remain part of the museum atmosphere; the reserved approach prevents them from covering a primary encounter.

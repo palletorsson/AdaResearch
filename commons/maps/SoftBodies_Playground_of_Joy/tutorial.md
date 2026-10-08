@@ -1,129 +1,40 @@
-# Playground of Joy
+# When does a body become a form?
 
-Interactive soft bodies. Throw, catch, mash.
+**Learning elements — proposed focus**
 
-Spawn a throwable soft sphere.
+_The labels below set the revision focus; the existing lesson still needs alignment._
 
-```gdscript
-class_name SoftBall extends Node3D
+- Vertex snapshots
+- Process and sculpture
+- Measurement proxies
 
-@export var radius: float = 0.5
-@export var segment_count: int = 16
+<!-- @rounded_softbody_test -->
 
-func build() -> void:
-    # Build a spherical mass-spring mesh
-    for i in segment_count:
-        var theta: float = i * PI / (segment_count - 1)
-        for j in segment_count * 2:
-            var phi: float = j * TAU / (segment_count * 2)
-            var p := Vector3(
-                radius * sin(theta) * cos(phi),
-                radius * cos(theta),
-                radius * sin(theta) * sin(phi)
-            )
-            spawn_mass_at(p)
-```
+The rounded body continues to respond while an instrument colours its surface. MEASURE changes what is made legible: strain, collision or volume. The body has not acquired a new material because we changed its reading.
 
-Spherical parameterisation. Masses cover the surface of a sphere.
+Keep the reading on volume and press FEEDBACK. Now the instrument acts back: it adjusts pressure to bring its reading toward the recorded value. Switching FEEDBACK off restores the selected pressure. It does not retrieve the body you had before.
 
-Make it grabbable.
+What has been asked to stay the same? This instrument measures the box around the vertices, aligned with the room's axes. It does not measure the space enclosed by the skin. A fold can change the body without changing that box. A number that helped us look has become a number the body is asked to follow.
 
-```gdscript
-func make_grabbable() -> void:
-    add_to_group("grabbable")
-    var grab_area := Area3D.new()
-    var shape := CollisionShape3D.new()
-    var s := SphereShape3D.new()
-    s.radius = radius
-    shape.shape = s
-    grab_area.add_child(shape)
-    add_child(grab_area)
-```
+SQUEEZE changes the strength used by the artifact's existing squeeze interaction. STIFFNESS changes resistance in the solver. Watch the instrument as well as the silhouette. A colour scale can bring a small difference forward, or persuade us that its chosen quantity is the whole event.
 
-Standard VR grab pattern. The learner's controller triggers the area.
+The strain display compares the current vertex positions with recorded positions. That reference belongs to the model. Returning toward it is not a universal tendency toward an original or natural body; it is a particular constraint implemented here.
 
-Apply a grab as force to each mass.
+The branching study and field sculpture remain nearby, so the new capability can be compared with earlier ways of constructing an organic-looking form. A branch recipe, a deformed surface and a sampled field may resemble one another without explaining one another.
+
+
+
+<!-- @frozen_glass_vessel -->
+
+The glass vessel has already stopped. Its program begins with a sphere, pins an upper region and runs a custom soft-body simulation for a chosen number of steps. It then builds a surface from the resulting positions.
 
 ```gdscript
-func apply_grab_force(grab_position: Vector3, grab_strength: float = 5.0) -> void:
-    for i in masses.size():
-        var to_grab: Vector3 = grab_position - masses[i]
-        velocities[i] += to_grab * grab_strength * get_physics_process_delta_time()
+sim.gravity = Vector3(gravity_x, gravity_y, gravity_z)
+sim.constraint_passes = 5
 ```
 
-Each mass is pulled toward the grab point. Strong force deforms the ball into a bag shape.
+DURATION reconstructs the vessel using 40, 200 or 400 solver steps. GRAVITY changes the lateral component of the force. Compare duration first while the force remains fixed. These are numerical steps in a reconstruction, not seconds borrowed from the museum clock.
 
-Detect a release.
+The object is evidence of a process, with most of that process absent. A different stop could have become the sculpture. Walk up to the frozen skin. Its surface can meet your body; transparency has not made it passable. Look for a mouth. This specimen began as a closed sphere, and deforming it has not cut an opening. To make a vessel we could enter, we would have to change more than its silhouette.
 
-```gdscript
-var was_grabbed: bool = false
-var release_velocity: Vector3
-
-func _on_grab_released(controller: XRController3D) -> void:
-    if was_grabbed:
-        release_velocity = controller.velocity
-        was_grabbed = false
-        apply_throw(release_velocity)
-```
-
-Capture the controller's velocity at release. The ball inherits it.
-
-Apply a throw.
-
-```gdscript
-func apply_throw(initial_velocity: Vector3) -> void:
-    for i in velocities.size():
-        velocities[i] += initial_velocity
-```
-
-Add the velocity to every mass. The whole ball travels as a unit, then deformation propagates.
-
-Spawn a soft floor mat.
-
-```gdscript
-class_name SoftMat extends MassSpringCube
-
-func _ready() -> void:
-    super()
-    pinned_indices = get_bottom_layer_indices()
-
-func get_bottom_layer_indices() -> Array:
-    var indices: Array = []
-    for x in size:
-        for z in size:
-            indices.append(index_of(x, 0, z))
-    return indices
-```
-
-Bottom layer pinned to the floor. Balls land softly.
-
-Detect bounce height.
-
-```gdscript
-var last_y: float = 0.0
-
-func _process(_delta: float) -> void:
-    var centroid_y: float = compute_centroid().y
-    if centroid_y > last_y + 0.5:
-        record_bounce(centroid_y)
-    last_y = centroid_y
-```
-
-Record the height of each bounce. Useful for scoring or visual feedback.
-
-You can now build a soft ball, make it grabbable, throw it, spawn a soft mat, and detect bounces. SoftBodies_Affect_Theory_Visualization extends into biological soft-body form.
-
-Emergency stop the simulation.
-
-```gdscript
-var paused: bool = false
-
-func toggle_pause() -> void:
-    paused = not paused
-
-func _physics_process(delta: float) -> void:
-    if paused: return
-    super(delta)
-```
-
-Lets the learner freeze the scene to examine a moment. Useful for studying specific deformation states.
+A frozen result lets us look longer. It also makes the timing of a decision disappear into the apparent permanence of a thing. Next, we will ask what else an image of a body invites us to infer.

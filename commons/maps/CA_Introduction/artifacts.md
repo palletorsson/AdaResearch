@@ -1,34 +1,15 @@
-# CA Introduction — Artifacts
-*Cellular Automata: Local Rules, Global Patterns · lambda_edge · 4 artifacts*
+# CA Introduction — retained collection
 
-> A grid of cells. Each cell looks at its neighbors and decides: alive or dead, on or off. Simple rules, applied everywhere simultaneously. One generation becomes the next. From trivial local logic, global patterns emerge. This is cellular automata — computation distributed across space.
+| Artifact | Role | What it contributes |
+|---|---|---|
+| ca_rule_explorer | primary | Held elementary row, inspectable triplet, one-step update, rule/seed comparison; the same history wraps around the visitor overhead |
+| persian_rug | primary | Two-dimensional local rules with a repeatedly imposed mirror and frame |
+| line_network_ca | primary | Persistent occupancy, stochastic growth and a separately drawn connection history |
+| dark_sphere | secondary | A continuing visual rhythm; no claim to cell-state computation |
+| synthesis_stand | secondary | Existing dark-sphere variant presentation |
+| grid_substrate_runner | unplaced | Removed from this hall after native inspection found no GridMultiMesh target and no visible geometry; implementation retained |
+| langton_swarm | secondary | Existing shared-surface agent encounter for later investigation |
+| rule110_computer | secondary | Existing Rule 110 display; a display alone does not demonstrate universality |
+| ca_showcase | secondary | Existing collection; retain and review its footprint/performance in the runtime pass |
 
-The map, read through what it holds — its artifacts in the order you meet them:
-
-## Dark Sphere
-![Dark Sphere](/scene-catalog/dark_sphere.png)
-
-USE a neutral sphere as a reference for scale, silhouette, and atmospheric change.
-
-`dark_sphere`
-
-## Persian Rug
-![Persian Rug](/scene-catalog/persian_rug.png)
-
-Persian Rug Cellular Automata.
-
-`persian_rug`
-
-## Grid Substrate Runner
-![Grid Substrate Runner](/scene-catalog/grid_substrate_runner.png)
-
-Integrated substrate component — single-cell artifact that mounts visibility (and optionally colour) mutators on the MAP'S existing GridMultiMesh. Same integration shape as gridcolorizer: doesn't build its own multimesh, finds the floor that's already there. Cycles Wolfram CA, fractal, and BFS-frontier expressions on the actual cubes the player walks. Floor-plan SPAWN_LARGEST keeps reachability honest.
-
-`grid_substrate_runner`
-
-## Line Network CA
-![Line Network CA](/scene-catalog/line_network_ca.png)
-
-Base class visualization for line-based cellular automata.
-
-`line_network_ca`
+Eight placements remain; the inactive runner placement is preserved in the opening-review baseline. The rule explorer stands at (10,5), one cell clear of the entrance wall, and supplies the overhead ring; the rug plane is lifted above the deck. The text does not promise controls on the rug or network that they do not have.

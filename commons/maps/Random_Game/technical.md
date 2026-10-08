@@ -65,3 +65,14 @@ Six folding creatures and `monte_carlo` remain secondary. The latter's π sampli
 The independent desktop run checks museum placement, floor rays, recovery, real pointer controls, reset during movement, cue invariance, initial launch records and the cap. Headset approach, comfort, legibility and performance remain for a later visit.
 
 The map still names `monte_carlo`, but the current museum loader reports no living scene for it and omits that body. It is a secondary candidate, not a verified encounter in this lane. Eight of the nine requested artifact placements currently build.
+
+
+## Current staging and door timing — 24 September 2026
+
+This note supersedes the earlier placement and creature-inventory notes above; those describe an older hall. The current 19×66 source map has the crossing (9,6), removal arena (9,17), original fire doors (9,29), door_timing_trials (9,38), falling field (9,51), and waiting_profile (9,61). Fourteen floor rows were inserted before old row 32, retaining every former row and token. The incomplete Monte Carlo display and folding creatures are not current placements.
+
+The new trials share geometry and the binary uniform `randi_range(0, 1)` draw law, but use distinct local seeds. SHOWN FIRST draws and reveals on reset. DRAWN AFTER draws after the first accepted plate entry. HIDDEN FIRST draws on reset but reveals only after plate entry. Each accepted choice records an immutable DRAW/CHOOSE/REVEAL event order for that round. Re-entry cannot draw again. This comparison separates assignment from disclosure; it does not claim a visitor can infer timing from outcome statistics alone.
+
+Each plate is a player-filtered Area3D, usable by the museum CharacterBody or registered VR player bodies. Initially both entry panels and both shortcut panels are closed. Selection lifts the chosen entry, and its shortcut only if it is the direct lane; the unchosen entry stays closed. This prevents the hidden assignment being exposed by different pre-choice geometry. The other lane has a 1.2 m side opening and one-metre outer corridor. Both routes meet at the rear. The visitor may retreat through the chosen entrance. Reset/new-round controls are outside the route and reject requests while player occupancy is detected. An accepted reset kills any opening tween before restoring collision. No draw forces a particular face or switches passage after selection.
+
+The printed seed belongs to that trial only. REPLAY repeats its assignment, not the visitor's knowledge or the rest of the hall. NEW ROUND excludes the present seed but can still give the same binary result. The existing fire-door artifact is unchanged and remains a separate earlier encounter.

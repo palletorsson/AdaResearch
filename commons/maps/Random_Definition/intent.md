@@ -1,8 +1,13 @@
-Concept: A surprise can return. Compare two grids constructed from the same seed, then change one step before colour assignment. Separate unfamiliar appearance, repeatable procedure and the state required to recover it.
-Sequence role: First active Randomness hall, after WaveFunctions_Synthesis_Lab and before Random_Entropy. Five coefficients and a phase become a seed, generator and draw order; then a histogram will retain counts while losing arrangement.
-Primary: seed_replay_demo:180#comparison:replicas#stand:table at (5,6), facing −Z in the middle of the hall. Two 8×8 grids use three local RNG draws per cell. REPLAY reconstructs the current procedure; +1 DRAW toggles one discarded draw on the last grid. RANDOM uses its own picker and may repeat. The slider chooses integer seeds 0–999.
-Critical angle: RGB roles arise through grouping the stream by threes. A one-draw shift changes those assignments without moving cells. A continuous gesture selects discrete seeds; more seeds cannot alter the instrument's fixed representation. An offset palette can be retained as a useful result.
-Supporting space: An 11×13 hall contains the central replay table, crank, slot machine, TRNG/PRNG comparison, historical number page and one catalyst. The entropy cloud, jar and butterflies belong to Random_Entropy. Original placements are archived; supports extend the visit without becoming primary book content by proximity.
-Current evidence: 65 independent desktop checks, matched captures, exact sample export, all buttons, slider, unload and rebuild. Panel contrast and an obsolete slider path repaired. Headset reach and close lettering remain unverified. One engine resource remains reported at shutdown.
+# Random Definition — three connected routes
 
-Reading revision, 16 September: retain surprise, replay, seed, extra draw and assigned colour roles in that order. Explain a draw in one sentence after the first observation, clarify that +1 DRAW is a toggle, and keep the opening and transition to the currently adjacent Entropy hall. The proposed sequence reorder remains a separate, unapplied review.
+Question: Can we keep an unfamiliar colour arrangement, and what must remain the same to find it again?
+
+Reading: A patch worth returning to gives seed and replay a purpose. One unused draw changes which values become red, green and blue. Keep the mismatch available as a desirable result. The textile panels, disappearing number page and crank extend the question from recovery to vocabulary, retention and individual requests.
+
+Hall: Seven artifacts in the current 13 × 20 source grid. The primary replay instrument stands at (6,6), facing −Z, with wall display and compact controls. Textile comparison at (6,11); crank (3,4); slot machine (10,4); TRNG/PRNG comparison (3,16); number page (9,16); catalyst (10,8). Proximity alone does not make each support part of the manuscript or first lesson. Preserve the actual encounter before judging explanatory gaps.
+
+Making: One generated cube colour → seeded replay → an array of colours → two equal beginnings → one unused draw → equal draws assigned to different channels. Borrow the generator internals, mesh construction and input. Teach ownership of the seed, request order and mapping. The self-contained study needs no museum or XR dependencies.
+
+Lineage: `_ready()` and functions, arrays and loops, RGB materials are prior tools. A local random generator is new. Synthesis Lab asks what a return keeps; Random Entropy will distinguish an arrangement from its statistical summary. The walk remains a later investigation.
+
+Boundary: A fresh load uses configured state. A portal return may restore retained artifact state. Keep generator/version/procedure with a seed; do not promise cross-version identity. Desktop software verification is not a learner or headset trial.

@@ -1,34 +1,17 @@
-# Random Noise Types — Artifacts
-*Noise: Entropy with Memory · E_entropy · 4 artifacts*
+# Random Noise Types — encounters
 
-> White noise screams chaos — every frequency, every sample independent, pure static. Blue noise whispers structure — random but refusing to clump, maintaining distance. Between them: the spectrum of coherent randomness.
+## Primary: randompoint
 
-The map, read through what it holds — its artifacts in the order you meet them:
+A pickable point in a visible square. Its initial x/y are drawn uniformly; later movements are repeatedly clipped to local bounds with z = 0. The frame and cased invitation make that restriction discoverable.
 
-## randompoint
-![randompoint](/scene-catalog/randompoint.png)
+## Primary: randompoints
 
-Drops a single draggable point inside an XY bounds and keeps its billboarded coordinate label in range.
+Two matched slabs compare every uniform proposal kept with minimum-distance rejection or clamped Gaussian sampling. Five controls support replay, changed seed, changed rule, restored positions and increased load. Shells report current close pairs; they apply no spacing force.
 
-`randompoint`
+## Primary: WhiteNoiseGallery
 
-## randompoints
-![randompoints](/scene-catalog/randompoints.png)
+A grid of independently sampled bar heights. Retained in place; this is not a measured frequency spectrum.
 
-DISTINGUISH structured randomness from uniform randomness by seeing how a single constraint (minimum distance) transforms a point cloud from chaos to jazz
+## Primary: NoiseColors3D
 
-`randompoints`
-
-## White Noise Gallery
-![White Noise Gallery](/scene-catalog/WhiteNoiseGallery.png)
-
-A gallery showcasing pure white noise — uniform random values with no correlation between samples. The baseline for understanding structured noise types.
-
-`WhiteNoiseGallery`
-
-## Noise Colors 3D
-![Noise Colors 3D](/scene-catalog/NoiseColors3D.png)
-
-Compares different noise 'colors' (white, pink, brown, blue) in 3D space, visualizing their distinct frequency distributions and correlation properties.
-
-`NoiseColors3D`
+Prescribed spectral-power curves, random variation and clipped display heights. Retained in place; the plotted heights do not measure the generated audio or the point bench. Full-size side controls expose the five existing sound filters. Their illustrative curves are distinguished from measured audio.

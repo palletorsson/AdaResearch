@@ -1,27 +1,33 @@
-# Random Definition — replay is a procedure
+# Random Definition — the instrument beside the lesson
 
-The primary is `seed_replay_demo:-90#comparison:replicas#stand:table` at map cell (8,11). The 13 × 22 hall retains all 15 placements. Its two 8 × 8 grids compare one generator under a shared seed and a controlled change in draw order. This is a pseudorandom colour experiment; it does not measure thermodynamic entropy, demonstrate an uncaused event or test cryptographic security.
+The current 13 × 20 source grid places `seed_replay_demo:180#display:wall#comparison:replicas#stand:table#controls:compact#control_front:1.0` at column 6, row 6 (zero-based). Its controls face −Z. Seven placed artifacts remain: the replay instrument, textile comparison, crank, slot machine, TRNG/PRNG comparison, changing number page and catalyst. Map layers and the scene implementation are unchanged by this writing pass.
 
-## State and assignment
+## Generator and assignment
 
-`_rng` is a local `RandomNumberGenerator` used for colours. Each column resets `_rng.seed` before assigning one `randf()` result to each of red, green and blue, row by row. There are 64 cells, 192 assigned channel values per grid. The `replicas` comparison supplies the current seed to both columns. The implementation and draw procedure determine the repeatability tested here; the seed alone is insufficient to specify an image across changes of generator, version or mapping.
+Source: `algorithms/randomness/seed_replay/seed_replay_demo.gd`. `_regenerate()` resets the local `_rng.seed` before colouring each grid. Each cube takes three successive `randf()` results as RGB. The two 8 × 8 grids therefore assign 192 values each. With `_extra_on`, only the last grid discards `extra_draws` values after seeding and before colour assignment. This placement uses one: 193 requests, 192 assigned values. REPLAY keeps the selected procedure; +1 DRAW toggles it instead of accumulating offsets.
 
-`_extra_on` causes the last column to discard `extra_draws` values after seeding but before colouring. The map uses the default of one, so that column consumes 193 draws. It retains the same cell count, meshes and positions. Relative to the unshifted stream, G becomes R, B becomes G, and the next cell's R becomes B. The final blue channel requires the 193rd draw. Replaying preserves this choice; +1 DRAW toggles it. Waiting does not advance this colour generator.
+`raw_prefix()` uses a separate generator to inspect the first twenty-four draws without advancing the colour stream. These bars expose the offset, not a measured period. `_pick`, randomized on arrival, is separate again: RANDOM chooses `_pick.randi() % 1000`, so it may choose the current seed. Waiting alone never advances `_rng`.
 
-`_pick` is another local generator, randomized once in `_ready`. RANDOM requests `_pick.randi() % 1000`. This menu contains 1000 seed values and allows repeats. No guarantee of a different seed, unique picture for every seed, perfectly equal selection frequencies, or statistical independence is asserted. The separate generator prevents these controls from advancing the game's shared random state.
+The handle chooses `roundi(clampf(norm, 0, 1) * 999)`. Its continuous travel selects integers 0–999; adjacent seeds need not produce adjacent-looking palettes. This is a menu of seeds, not a guarantee of one thousand distinct images. `Panel/Param_0` is the current slider path. `_syncing_seed_slider` guards programmatic updates. The previous wrong path and compact-control repair are documented in the archived tutorial, preserved in this review's `before/tutorial.md`.
 
-The slider reads a normalized handle value, clamps it to [0,1] and rounds `norm * 999` to an integer. Its displayed range is 0–999 with no decimals. Programmatic changes synchronize the handle. Source configuration can accept integers outside this menu; the handle is clamped to its endpoint while the seed captions retain the actual configured integer. Hall rebuilding restores the configured state, rather than saving the visitor's last chosen seed.
+## A fresh instance and a restored visit
 
-## Interaction repair and staging
+`_ready()` starts a fresh instance at configured `seed_value` (42 here) and its comparison mode. `capture_museum_state()` records the selected seed, extra-draw flag, picker state and last action. `restore_museum_state()` restores these, regenerates the colours and synchronizes the handle. `commons/scenes/em/em_portal_stream.gd` calls these methods when capturing and restoring compatible artifact nodes. A portal return with retained state is therefore different from a fresh load without retained state.
 
-The slider receiver still looked for `SEED_REPLAY/Param_0` after the panel had been renamed `Panel`. It now reads `Panel/Param_0`; a synchronization guard separates programmatic updates from gestures. The repair applies to other placements of this shared artifact as well. The generator and colour assignment loop remain unchanged.
+This is visit-state restoration, not an authored save-seed button or a promise of persistence across restarting the application. Current source inspection confirms the caller. The current native run verifies the artifact methods and the actual portal caller’s save/restore methods. During restoration the instrument rebuilds its bar strips; the caller now skips removed nodes before computing their state keys. This is not a physical portal or headset trial.
 
-Claude's table and east-side staging remain: a 0.85 m table, controls around 1.01 m, a west-facing comparison with the east wall behind it. The entropy cloud remains west of the visitor. The museum clear rectangle remains [[5,9,10,13]], with wall_height 3 and map-authored placement. No room layer or artifact token was altered in this review.
+## Supporting encounters
 
-The panel's local dark backing and pale lettered tags are now unshaded, keeping their contrast under room lighting. The original black lettering baked into tag textures is preserved. Font enlargement is idempotent across repeated contrast passes. The action readout uses 20 px type on a 0.60 × 0.085 m case. Shared rack templates and cube colour materials are unchanged.
+The textile comparison at (6,11) gives three frozen vocabularies the same seed 41. NEXT SEED advances them together; RESET restores 41. The number page at (9,16) draws from shared game randomness and lets old numbers fall off its display. The crank at (3,4) makes each advance an individual action. These supports change the question about a sequence's use and retention; they are not alternative entrances to the first making exercise.
+
+## The portable construction
+
+`doc/book/studies/random-definition/` isolates the same generator and assignment principle. `study.gd` begins with one cube. Six complete scripts carry it through a seeded colour, a 4 × 4 grid, a matched pair, a one-draw offset and an RGB-role exchange. `display.gd` supplies geometry, individual materials and input; it consumes no random values. No XR setup, slider wiring or museum placement code is introduced in the lesson.
+
+The final assignment exercise starts from the matched pair, with no discarded draw. It changes only the right grid's mapping from `(a,b,c)` to `(c,b,a)`. This comparison belongs to the editable study; the museum has not gained a channel-swap button.
+
+Repeatability is scoped to the generator implementation, engine version and complete procedure. See [Godot's RandomNumberGenerator reference](https://docs.godotengine.org/en/stable/classes/class_randomnumbergenerator.html).
 
 ## Evidence
 
-The independent 12 September run passed 65 checks with zero assertion failures and engine exit 0. Checks include exact colour bytes, independent generator reconstruction, endpoint and intermediate seeds, the real slider move path, a desktop pointer drag, all three buttons, unchanged cube positions, global RNG isolation, panel contrast, approach, unload and rebuild. Seed 42's first 193 draws and both colour assignments are exported in samples.json. Matched captures use the same desktop camera pose.
-
-The run still reports an ObjectDB leak warning and one resource in use at engine shutdown. Exit 0 and passing assertions do not resolve that warning. No engine script errors were reported. Headset reach and close text legibility remain for a later visit. See `doc/space/random-definition-review-2026-09-12/` and `/research/possible-bodies/random-definition.html`.
+The September 12 run's 65 checks describe an older layout and remain historical evidence. Current checks, source snapshots and their exact scope are in [the September 30 review](/book-review/doc/book/iterations/2026-09-30-random-definition-making/index.html). No learner, physical-headset or Quest performance claim is made.

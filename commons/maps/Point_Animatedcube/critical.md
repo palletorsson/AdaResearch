@@ -26,7 +26,7 @@ The connection lists remain unchanged while the handles move. Equal lengths, rig
 
 The script continues rebuilding those patches. That continuation opens room for another purpose: a silhouette, a folded-looking surface, an awkward form someone wants to keep exploring. Its departure from the cube is neither automatically a failure nor proof of freedom. We have to ask what became possible and which constraints are still doing the work.
 
-The counter on the side panel measures displacement from the initial positions. A large number is not a measure of novelty or queer possibility. It is one geometric measurement which might help us compare two attempts. The interpretation belongs to the encounter we choose to build around it.
+The counter on the front panel measures displacement from the initial positions. A large number is not a measure of novelty or queer possibility. It is one geometric measurement which might help us compare two attempts. The interpretation belongs to the encounter we choose to build around it.
 
 ## Replay and restoration
 
@@ -39,5 +39,7 @@ The boxes later in the room carry an additional question about use. A crate, a s
 The next hall will unsettle another familiar primitive. We take the distinction with us: a name, the data beneath it, and the operations that can carry that data elsewhere.
 
 ## Implementation anchors
+
+The neighbouring net closes, shrinks and drops a cube. Its pause can look like hesitation because we have watched an object undergo a change and then stop. `cube_net_cycle.gd` gives that pause a duration; it does not give the object a thought. The fallen cube remains while another net opens above it. Repeating the operation changes the room: each result occupies a place where the next body may land. A box collider makes the floor and the other copies consequential to the new body.
 
 The claims about visibility, replay, restoration and fixed connectivity come from `animatedcubebuilder.gd` and `cube_experiment_panel.gd`. Hinge behavior comes from `polyhedron_nets.gd`. The builder's surfaces are visual meshes; pickup collision belongs to the handles. Their appearance does not establish a physical enclosure or a usable shelter.

@@ -38,4 +38,4 @@ So the black region you are looking at is slightly too big, and it is too big in
 
 That is the chapter's last honesty, and it belongs here rather than in the halls before it. Recursion had a base case that stopped it. The Koch curve had a line thickness that hid it. Julia had a zoom that breathed. And the atlas of all Julia sets has an iteration cap, which is the same admission in its final form: the rule is infinite and every look at it is finite.
 
-Next: what these rules make when they are set to grow rather than to draw.
+Next: compare two recursive constructions and explain exactly what each repeats.

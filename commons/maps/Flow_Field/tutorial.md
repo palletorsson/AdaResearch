@@ -1,46 +1,38 @@
-# A Vector at Every Point
+# Shared field experiment
 
-The slope arrows leave the ground. A field is a function whose answer is a direction.
+**Learning elements — proposed focus**
 
-```gdscript
-func field(p: Vector3) -> Vector3:
-    # a gentle rotor around the y-axis plus a slow updraft
-    return Vector3(-p.z, 0.4, p.x).normalized() * 1.5
-```
+*The labels below set the revision focus; the existing lesson still needs alignment.*
 
-Feed it any point in the room, get back which way and how hard. The function is total — it has an answer *everywhere* — but you can only ever draw finitely many of them.
+- Field sampling
+- Position updates
+- Prescribed velocity
+- Retained trails
 
-Sample it on a lattice and plant arrows:
+The primary `flow_field_painter` is a 4.8 × 3.2 metre wall monitor in the first bay, with separate waist-height controls. Its opt-in `shared_field` lesson uses 80 particles and seed 43, and starts with field evolution held. The `wall_monitor` display moves the canvas, trails and arrows together: the local XZ drawing plane becomes vertical, with the second canvas coordinate running down the screen. Sampling and particle updates still use the same local two-dimensional positions.
 
-```gdscript
-func build_field(extent: int = 4, spacing: float = 1.0) -> void:
-    for x in range(-extent, extent + 1):
-        for y in range(0, extent + 1):
-            for z in range(-extent, extent + 1):
-                var p := Vector3(x, y, z) * spacing
-                add_arrow(p, field(p))
+## Two clocks and one sampler
 
-func add_arrow(p: Vector3, v: Vector3) -> void:
-    var a := arrow_scene.instantiate()
-    add_child(a)
-    a.global_position = p
-    a.look_at(p + v)
-    a.scale = Vector3.ONE * clamp(v.length() * 0.4, 0.1, 1.0)
-```
+ARROWS reveals 24 glyphs. Both glyphs and particle updates call `field_direction`. Arrow geometry refreshes at 10 Hz; particles update every rendered frame. A nearby arrow samples its own address and has its own refresh schedule: it is a representation of the field, not the source steering the particle.
 
-The grid of arrows is not the field — it is a census of it. Halve the spacing and the same function yields four times the arrows; the field was always there between them.
+FIELD TIME toggles only the field clock, holding its current time on pause. Particles continue. In lesson mode SCALE affects the noise frequency once; legacy instances retain their existing sampling behaviour. Existing SCALE and SPEED controls remain.
 
-Fields come from somewhere. The gradient of any height function is one:
+The field takes a noise value, turns it into an angle and constructs a unit direction with cosine and sine. It does not calculate the gradient of the noise. The two short code blocks in final.md are teaching sketches of the angle conversion and the position update, with the coordinate mapping and renderer omitted.
 
-```gdscript
-func gradient_field(p: Vector3) -> Vector3:
-    var e := 0.01
-    return Vector3(
-        (h(p.x + e, p.z) - h(p.x - e, p.z)) / (2 * e),
-        0.0,
-        (h(p.x, p.z + e) - h(p.x, p.z - e)) / (2 * e))
-```
+## What the controls retain
 
-Every terrain owns an invisible field of steepest-ascent arrows. This room just makes one visible and hangs it in the air.
+RESET scatters new particle positions and clears their trails without selecting a new seed. SEED changes the seed and resets those particles. Neither rewinds every clock. Changes to speed or scale leave existing trail positions present until new samples replace them; they therefore temporarily show the history of more than one setting.
 
-Try: walk through the lattice and read the arrows around you like weather. Nothing moves yet — the field is all instruction and no obedience. The next map releases the particles.
+The fixed sample capacity limits each trail's memory; it is not a fixed duration. Increasing speed changes the distance travelled between samples at a given update interval. Different display timing can change the sampling and numerical trajectory. Finite updates hold a sampled direction for a whole step before looking up another.
+
+## The return seam
+
+Opposite edges wrap the particle coordinates. The renderer joins consecutive stored positions, including across a wrap, so a long visible segment can cross an interior the particle did not traverse. The noise itself is not periodic: wrapping position does not ensure that directions agree at opposite edges.
+
+## Which body this makes
+
+This is prescribed motion through a direction field, not a force, gradient or fluid model. The update stores no inertial velocity, mass or particle-to-particle collision negotiation. Neighbours can change the aggregate picture without changing one another's movement. The standalone `vector_field_visualizer`, `vector_field_grid` and other supporting artifacts are independent examples; their arrows do not steer this painter.
+
+The revised final.md follows a single particle, the held field, a changing field, and the edge's return before introducing the missing interaction. An immersive field affecting the visitor would require a separate receiver and a verified movement connection. That remains development material, not a capability added by this prose pass.
+
+Full previous prose: [before the reading revision](../../../doc/book/iterations/2026-09-24-change-reading/before/commons/maps/Flow_Field/final.md). The wall display and control placement were updated on 4 October 2026; its museum captures and desktop checks are recorded in [the wall-monitor review](../../../doc/book/iterations/2026-10-04-flow-wall-monitor/index.html). Headset testing remains separate.

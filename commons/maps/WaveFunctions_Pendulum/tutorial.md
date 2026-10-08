@@ -1,85 +1,196 @@
-# Pendulum
+# A swing keeps a record
 
-A swing that keeps returning, and a record of it that keeps receding. Build the pendulum on the fixed step, then decide what its record is allowed to keep. All code below is from `algorithms/wavefunctions/oscillation_driver/PendulumWave.gd`.
+**Learning elements**
 
-Integrate the swing on the physics step.
+- Angular state and a restoring acceleration
+- Records with named position and time fields
+- Sampling intervals
+- Count and age limits
+- Drawing time as distance
 
-```gdscript
-angular_acceleration = -(gravity / length) * sin(angle)
-angular_velocity += angular_acceleration * delta
-angular_velocity *= (1.0 - damping * delta) # Apply damping
-angle += angular_velocity * delta
-time += delta
-```
+Watch the pendulum in its frame. Choose one teal mark behind it. The bob turns back; the mark keeps travelling down the hall. The bob has not visited that depth. The drawing gives its past somewhere to go.
 
-Gravity over length, times the sine of the angle, pulls the bob back toward hanging. Velocity accumulates the pull; the angle accumulates the velocity. `delta` is one sixtieth of a second at this project’s current physics setting, and `time` is this experiment's own clock. With `damping` at zero there is no deliberate energy loss; numerical integration still approximates the motion.
+## What you bring
 
-Keep a sample with the time it was taken.
+Keep the cube from the previous hall and the list from Trace. There, a distance condition decided when to keep another position. Here a time condition does that job. Each entry needs both the position and the time it was observed.
 
-```gdscript
-_sample_clock += delta
-if _sample_clock >= sample_interval:
-	_sample_clock -= sample_interval
-	if _sample_clock >= sample_interval:
-		_sample_clock = fmod(_sample_clock, sample_interval)
-	var bob_local := Vector3(length * sin(angle), pivot_height - length * cos(angle), 0.0)
-	trail_points.push_front(Vector3(bob_local.x, bob_local.y, time))
-```
+**Build:** let the familiar cube swing beneath a pivot, then keep a bounded record of its positions. The installed exhibit uses a spherical bob; our cube remains a recognisable marker for the same point-mass model.
 
-A sample is where the bob is and when. The third component is not a position; it is the clock reading. Nothing is kept between samples. A 25 ms target at 60 physics ticks per second is serviced on alternating one/two-tick gaps, about 16.7/33.3 ms. The display reports those actual gaps alongside the target.
+**Investigate:** change the recording interval while keeping the movement rule. Predict whether you will retain more detail, more duration, or both.
 
-Give the record two limits.
+## Work inside the museum
+
+Keep the opening script. Save this next version as `02_pendulum_record.gd` and attach it to your `PointStudy` Node3D in the Pendulum hall. Use hall-local position `(10, 0, 21.8)`, zero rotation and unit scale. Its history extends towards local negative Z. The museum supplies the room, light, camera and player.
+
+The complete script below creates every object it uses. The cube construction returns unchanged at 0.4 metres across. A pivot and a thin rod give it a constraint. Small teal copies mark the recorded positions; their meshes are allocated once, then reused. No named scene children, external classes or scene references are required.
+
+## Complete code — 02_pendulum_record.gd
+
+<!-- student-code:02_pendulum_record.gd -->
 
 ```gdscript
-while trail_points.size() > max_trail_length:
-	trail_points.pop_back()
-while not trail_points.is_empty() and time - trail_points.back().z > max_history_seconds:
-	trail_points.pop_back()
+extends Node3D
+
+class Sample:
+    var position: Vector3
+    var time: float
+
+    func _init(at: Vector3, seconds: float) -> void:
+        position = at
+        time = seconds
+
+@export var sample_interval := 0.025
+@export var trail_speed := 0.6
+var length := 1.0
+var gravity := 9.8
+var initial_angle := PI / 4.0
+var angle := initial_angle
+var angular_velocity := 0.0
+var elapsed := 0.0
+var sample_clock := 0.0
+var max_samples := 120
+var max_age := 6.0
+var history: Array[Sample] = []
+var marks: Array[MeshInstance3D] = []
+var pivot := Node3D.new()
+var cube := MeshInstance3D.new()
+var label := Label3D.new()
+
+func _ready() -> void:
+    assert(sample_interval > 0.0 and length > 0.0)
+    var mesh := BoxMesh.new()
+    pivot.position = Vector3(0, 2.0, 0)
+    add_child(pivot)
+    cube.mesh = mesh
+    cube.scale = Vector3.ONE * 0.4
+    cube.position.y = -length
+    pivot.add_child(cube)
+    var rod := MeshInstance3D.new()
+    var cylinder := CylinderMesh.new()
+    cylinder.top_radius = 0.008
+    cylinder.bottom_radius = 0.008
+    cylinder.height = length
+    rod.mesh = cylinder
+    rod.position.y = -length / 2.0
+    pivot.add_child(rod)
+    var ink := StandardMaterial3D.new()
+    ink.albedo_color = Color(0.08, 0.65, 0.7)
+    ink.shading_mode = BaseMaterial3D.SHADING_MODE_UNSHADED
+    for i in range(max_samples):
+        var mark := MeshInstance3D.new()
+        mark.mesh = mesh
+        mark.material_override = ink
+        mark.scale = Vector3.ONE * 0.035
+        mark.visible = false
+        add_child(mark)
+        marks.append(mark)
+    label.position = Vector3(0, 2.35, 0)
+    label.font_size = 36
+    label.pixel_size = 0.0025
+    label.billboard = BaseMaterial3D.BILLBOARD_ENABLED
+    add_child(label)
+    draw_state()
+
+func _physics_process(delta: float) -> void:
+    var acceleration := -(gravity / length) * sin(angle)
+    angular_velocity += acceleration * delta
+    angle += angular_velocity * delta
+    elapsed += delta
+    pivot.rotation.z = angle
+    sample_clock += delta
+    if sample_clock >= sample_interval:
+        sample_clock = fmod(sample_clock, sample_interval)
+        history.append(Sample.new(to_local(cube.global_position), elapsed))
+    while history.size() > max_samples:
+        history.pop_front()
+    while not history.is_empty() and elapsed - history[0].time > max_age:
+        history.pop_front()
+
+func _process(_delta: float) -> void:
+    draw_state()
+
+func display_position(sample: Sample) -> Vector3:
+    var age := elapsed - sample.time
+    return sample.position + Vector3.FORWARD * age * trail_speed
+
+func draw_state() -> void:
+    pivot.rotation.z = angle
+    for i in range(marks.size()):
+        marks[i].visible = i < history.size()
+        if i < history.size():
+            marks[i].position = display_position(history[i])
+    label.text = "swing %.2f rad   time %.2f s\n%d marks   request %.3f s" % [
+        angle, elapsed, history.size(), sample_interval]
+
+func set_sampling(seconds: float) -> void:
+    assert(seconds > 0.0)
+    sample_interval = seconds
+    sample_clock = 0.0
+    history.clear()
+    draw_state()
+
+func reset_experiment() -> void:
+    angle = initial_angle
+    angular_velocity = 0.0
+    elapsed = 0.0
+    sample_clock = 0.0
+    history.clear()
+    draw_state()
 ```
 
-Three hundred marks, or ten seconds, whichever runs out first. At the 25 ms target the count binds near 7.5 seconds. At 200 ms the age binds around fifty marks; entry count and time span are different quantities.
 
-Draw depth from age.
+## From a prescribed cycle to a responding swing
 
-```gdscript
-var depth: float = (time - p.z) * time_speed
-var at := Vector3(p.x, p.y, -depth)
-```
+In the opening, elapsed time directly supplied a height. Here the next angle depends on the current angle and angular velocity. The update follows the integration we used in Forces: acceleration changes velocity; velocity changes position. Both steps multiply by `delta` in seconds. Angle is measured in radians and angular velocity in radians per second.
 
-Age times 0.6 metres per second. The newest mark sits at the bob; the oldest retained mark is the farthest. The line joining them is a list laid out along the hall, not a path anything travelled.
+The acceleration `-(gravity / length) * sin(angle)` points back towards the hanging position. Start on the right: acceleration is negative. At the bottom it is zero, but the accumulated velocity carries the cube through. The cube slows on the other side before returning. Change its angular velocity and you change what follows; a clock prescribing its position would overwrite that intervention.
 
-Let the pendulum time itself.
+The pivot rotates around Z. Its child cube stays one metre below it in the pivot's coordinates. We therefore need `to_local(cube.global_position)` to record the moving centre in the **study's** coordinates. Recording `cube.position` would repeatedly save the unchanged offset beneath the pivot.
 
-```gdscript
-if _prev_angle < 0.0 and angle >= 0.0 and angular_velocity > 0.0:
-	if _last_upward_crossing >= 0.0:
-		_period_measured = time - _last_upward_crossing
-```
+This is a numerical, undamped, fixed-length pendulum model. The cube represents a point mass; its shape, rotational inertia, air resistance and collisions are absent. It is not a Jolt rigid body and cannot be grabbed. Small numerical energy errors remain. Keep the room's existing pendulum as the encounter; the small reconstruction isolates its update and recorder.
 
-Two successive upward crossings of the centre give a period. STROBE sets the sampling interval to that period, and marks nearly align. The period and the sampling instants are both quantized to ticks.
+## One observation has two fields
 
-Reset this experiment only.
+`Sample` groups a position with a time. `Array[Sample]` says what kind of entry belongs in `history`. Position is a three-dimensional vector in metres; time is a separate number in seconds. Z remains a spatial coordinate.
 
-```gdscript
-angle = deg_to_rad(initial_angle)
-angular_velocity = 0.0
-time = 0.0
-trail_points.clear()
-```
+Each physics update advances the local clock. When the sampling interval has elapsed, `append` saves the cube's current centre and the current time. Oldest records stay at the beginning of the list, so `pop_front` removes the oldest.
 
-The swing back to its starting angle, the clock to zero, the list to empty. The hall's clock, and everything else swinging in it, is untouched.
+`fmod` keeps the unused fraction of the sampling interval. We save at most one observation per physics update. If an update is late, we keep the position actually observed; we do not invent several earlier positions from that one observation.
 
-## The walk
+With a 60 Hz physics tick, a requested interval of 0.025 seconds falls between ticks. Actual gaps alternate between approximately 0.0167 and 0.0333 seconds. A headset's display rate does not, by itself, set the physics tick rate. The timestamps describe the observations we obtained, not the ideal schedule we requested.
 
-Enter from the north and pass the raised stage on either side. At the head of the open south half the pendulum swings under its frame; the record recedes away from you toward the exit. Stand at the east post and pick one mark to follow. Walk south beside the record and find two crossings a whole swing apart; count the marks between them. Read the plate: count, span, interval, rate, period, step. Divide the period by the interval. Return to the post and press COARSE; read the plate again. Walk to the far end and wait for a mark to leave. Press STROBE and watch the record stand still while the bob swings. Press RESET. On the way to the south door, ask the seismograph on the west walkway the same questions.
+## Two limits on a record
 
-You have seen a record made from a motion, and the rules that end it. The next map, Sine Space, lays the rising and falling along a passage you walk.
-<<</MAP>>>
+The first `while` loop keeps no more than 120 entries. The second removes entries older than six seconds. Either condition can shorten the history.
 
-Change the depth rate.
+At 0.025 seconds per sample, 120 entries cover about three seconds. At 0.2 seconds, the six-second age limit is reached with about thirty entries. The exact oldest-to-newest span depends on the retained timestamps. The count limit gives fine sampling less duration here.
 
-```gdscript
-@export var time_speed: float = 0.6
-```
+`set_sampling` clears the record and sampling clock while keeping angle, angular velocity and elapsed time. `reset_experiment` also resets those movement variables. The museum's own clock continues in either case.
 
-A faster rate stretches the same ten seconds over more of the hall; the marks do not change, only their spacing. Any placement can set it, and the readout prints whatever value is in force.
+## Give age a direction
+
+`display_position` starts from a stored position, then displaces its **drawing** along negative Z. Age in seconds times `trail_speed` in metres per second becomes distance in metres. At 0.6 metres per second, a two-second-old mark is drawn 1.2 metres behind its recorded position.
+
+The stored position never changes. Changing the display speed rearranges the same record; it does not make the pendulum swing faster. This distinction carries Trace's original-data rule into another representation.
+
+## Build and compare
+
+Run the original values. Predict where a mark will be drawn two seconds after its timestamp. Check a record in Godot's Remote Inspector: compare its saved position with the corresponding mesh in `marks`.
+
+Place a second study across the hall, at `(2.5, 0, 22.2)`, with the same script and initial state. Set its exported sampling interval to `0.2` before running. After eight seconds, both cubes should still swing together. The coarse record should contain fewer marks and reach further back. Explain both results using the two limits, not the appearance alone.
+
+Now set the second study's `trail_speed` to `0.3`. Its history occupies half as much depth for the same ages. The period, stored positions and sample count do not change. This is a change to the drawing.
+
+For an independent variation, edit the second script to request `0.1` seconds and retain at most twenty samples. Predict which limit will end its history. Then change only the count limit until all six seconds fit. Use the actual timestamps to judge the result.
+
+## Read the installed exhibit
+
+The hall's enlarged `PendulumWave` uses the same update and recording principle with a 2.8-metre pendulum, up to 300 records and ten seconds of history. Its FINE, COARSE and RESET controls make the comparisons available in the existing museum. Our shorter study uses smaller limits so the record fits beside it.
+
+The floor beneath the installation carries a second drawing of its record. It retains horizontal position and age while omitting height. Compare that projection with the suspended marks. The floor drawing and measured-period control belong to the installed exhibit; the printed reconstruction builds the small swing and its suspended record.
+
+The exhibit also has STROBE: it measures a period from successive crossings in the same direction, then samples approximately once per return. Watch the moving bob while its marks almost line up. Much of the motion happened between observations. That measured-period control is an encounter here; it is not concealed inside the printed reconstruction.
+
+## What travels onward
+
+Keep the timestamped list and the distinction between data and its drawing. The next hall, Sine Space, gives a repeating rule a spatial coordinate directly. Here depth described a record's age; there position in space will be an input to the rule.

@@ -19,3 +19,10 @@ DISCLOSE changes how much of the measurement appears on the upper panel. At orac
 For the later QFEP inquiry, this is groundwork: name the observable, its distribution and the operation that reduces it before asking an entropy term to describe a world. This marginal histogram entropy is not a measured amount of freedom, terrain difficulty or ontological possibility. The relation to those questions has to be constructed through further experiments. A simulation can help us think about theory by making the limits of that construction available to experience.
 
 We leave with one pair still remembered. The next hall will remove cells at random. Before the draw, a rule decides which cells may disappear. Once again the algorithm begins after a choice has already been made.
+
+
+<!-- study-spine:signal_room -->
+
+## Installed application: Different neighbours
+
+The small four-by-four witness lets you inspect the same record at another scale. The entropy reading stays at one bit per symbol while the number of unlike neighbours changes. In this response to Ikeda, the immensity is made from a finite stored array. Its authority can be felt before its omissions are understood. You can leave along either side of the display; the dark pixels never remove the floor.

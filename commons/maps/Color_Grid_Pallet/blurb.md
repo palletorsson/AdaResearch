@@ -1,1 +1,1 @@
-The grid becomes a canvas. Each cell awaits its color assignment, a pixel in a larger pattern you construct. The gridcolorizer transforms the floor into a palette - systematic, addressable, yours to paint. Above, the spectrum forest grows in chromatic variation, while below, the grid records your choices in colored light.
+A colour waits at an address. Leave it, find it again, then ask the rule to run once more. The floor keeps supporting you while the exception disappears.

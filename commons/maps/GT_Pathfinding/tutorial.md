@@ -1,5 +1,14 @@
 # GT Pathfinding
 
+**Learning elements — proposed focus**
+
+*The labels below set the revision focus; the existing lesson still needs alignment.*
+
+- Breadth first search
+- Predecessor records
+- Path reconstruction
+- Unreachable destinations
+
 The maze is a graph. Walk it with DFS, BFS, or A*.
 
 Build a grid graph.

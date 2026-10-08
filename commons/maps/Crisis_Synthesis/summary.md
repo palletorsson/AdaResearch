@@ -1,9 +1,14 @@
-# Crisis_Synthesis — Summary
+# Crisis Synthesis
 
-The eighth and final map in the foundationscrisis sequence. A 17x18 grid, max height 4 — the largest and most expansive map in the sequence. Its structure is a central raised summit (heights 3-4) surrounded by four ground-level wings radiating outward, enclosed in a diamond-shaped boundary. After seven maps of increasing compression and constraint, the synthesis opens into a panoramic arena.
+A formula offers to gather the preceding rooms. Its three term buttons and two local sliders turn the offer into questions about prediction, variation and change. An independent logistic-map control lets the visitor compare repeating and irregular numerical samples. A walk-in recursive atrium makes self-description bodily, while the Russell workbench and four returning works retain the distinctions the sequence has earned.
 
-Eight artifacts converge here. At the summit, `qfep_formula_3d` presents the complete QFEP formula — `QFE = F - lambda*E(S) + phi*delta_E(S,t)` — rendered as color-coded floating text at the sequence's highest point. Four wings contain callback artifacts from earlier maps: `godel_statement_plaque` (northeast), `russell_set_box` (northwest), `escher_staircase` (southwest), and `florensky_sphere` (southeast) — the four crisis insights placed in relation without being resolved. On the descent, `lambda_slider` (entropy coupling, blue-to-red) and `phi_slider` (rate sensitivity, purple-to-gold) parametrize the entire space of system behaviors. At the exit threshold, `bifurcation_diagram` renders the logistic map's period-doubling cascade into chaos — the learner walks through the phase transition from order to chaos on their way out.
+All ten existing artifact families remain in a level 19 by 24 hall. The chapter treats QFEP as Ada's research proposal, asks whose possibilities a model sustains, and leads into the QFEP Laboratory.
 
-The map's argument: the foundations crisis revealed that every formal system has an outside it cannot formalize. This is not a failure but a structural feature. Pure order (lambda = 0) is Hilbert's impossible dream. Pure entropy (lambda = 1) is trivial chaos. The productive zone is the edge between them — where computation, adaptation, and life occur. The two sliders let the learner explore this space. The bifurcation diagram shows its structure.
 
-Position: map 8 of 8 in foundationscrisis. Difficulty: expert. Estimated time: 6-8 minutes. Follows Florensky_Paraconsistent. Leads to the QFEP Laboratory sequence, where the formula becomes an interactive working tool. The sequence's truth: "Every formal system has an outside. Complete order is impossible."
+<!-- study-spine:sentence_authority -->
+
+## Installed application: Permission at three scales
+
+`sentence_authority` occupies a new adjoining bay, after the existing encounters. Cell [11, 34], rotation 180°, museum adapter `res://commons/artifacts/spine_studies/sentence.tscn`. Original response to Jenny Holzer; no claim of exact reconstruction.
+
+Change one sentence once; follow the same words across label, strip and wall. Reuses loop, array, inscription, limit; adds no prerequisite node. The display and main-player controls are supplied.

@@ -1,15 +1,9 @@
-# PG_Genetic_Evolution — walked
+# Genetic Evolution — support and available evidence
 
-> ghost-drafted from the working map (threshold slot, proceduralgeneration thread); Palle rules the voice.
+Enter at the six-button desk. The candidate grid occupies the marked front study; a side plinth holds an independent witness. The population meshes do not support or obstruct a visitor. The museum provides the continuous ground floor.
 
-## The cast
+The original raised structure remains in the rear half, translated by (3,20). Numeric height-3 cells now provide two-metre decks rather than full walls. A closed convex ramp enters through two opened west boundary cells. A separate eastern aisle and two extra rear turning rows keep the crossing to the museum exit clear.
 
-GeneticProgramming · science_screen
+Automated DesktopPlayer pointer input exercises all six buttons. Physics rays verify each of the 25 deck cells, and the actual collision body climbs the ramp and crosses to the exit. These are desktop tests and rendered Godot captures; human headset reach, legibility, comfort and Quest performance remain pending. The secondary science screen is retained, with its scoring integration still open.
 
-## The walk
-
-The chapter opens by evolving not creatures but *code*. The GeneticProgramming station breeds a population of little algorithms — mutating them, crossing them, keeping the ones that score well against a task — until a program no human wrote does the job. You watch expressions grow, branch, and get culled, competence assembled out of nothing but variation and a fitness test.
-
-## What it opens
-
-The threshold's provocation is the chapter's truth aimed at its own foundation. *A world doesn't need an author, rules and randomness are enough* — and here even the rule refuses an author, evolving itself. Genetic programming is procedural generation turned reflexive: if worlds can be grown, so can the growers, and the designer retreats one more step, from placing things, to writing the rule that places things, to merely *judging* the rules that write themselves. The whole chapter is the walk down that staircase of retreating authorship, and it starts by showing the bottom step.
+Next active hall: PG_Space_Colonization. Carry forward the need to distinguish visual form, measured property and bodily passage.

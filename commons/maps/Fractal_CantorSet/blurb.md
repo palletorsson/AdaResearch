@@ -1,1 +1,1 @@
-Remove the middle third. Remove it again. And again. The Cantor set is defined by absence—after infinite deletions, uncountably many points remain with zero total length. More than nothing, less than something. Dimension 0.631: between point and line.
+Another cut gives us more pieces and less material. Walk the gap that the missing third has opened. When the openings multiply, which ones still admit your body?

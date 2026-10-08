@@ -1,5 +1,14 @@
 # Form-Finding: Forge
 
+**Learning elements — proposed focus**
+
+*The labels below set the revision focus; the existing lesson still needs alignment.*
+
+- Success predicates
+- Duration thresholds
+- Restart conditions
+- Physical and prescribed outcomes
+
 Shape your own — by arranging the landscape, not the form. Before it, everything this chapter has built: a cost, a slope, a body willing to fall.
 
 Write the cost you want matter to fall down.

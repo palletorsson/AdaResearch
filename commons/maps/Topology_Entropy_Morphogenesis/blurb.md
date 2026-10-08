@@ -1,7 +1,3 @@
-Matching pairs nodes. Given a graph, find the largest set of edges where no vertex appears twice — every node matched at most once. In bipartite graphs this is straightforward. In general graphs, odd cycles break everything. A cycle of three, five, seven nodes — one is always left out. The matching can't close.
+# Who connected the controls?
 
-Edmonds' blossom algorithm solves this by refusing the problem's terms. When it finds an odd cycle, it contracts the entire structure into a single vertex — collapses the impossible into a point. Solves the reduced graph. Then re-expands, restoring the blossom with its matching intact. The thing that couldn't pair doesn't disappear. It transforms.
-
-Augmenting paths alternate matched and unmatched edges, flipping the system toward optimality. Each path found increases the matching by one. When no more paths exist, the solution is maximum — proved by Berge's theorem, the absence that guarantees completeness.
-
-The final map in this sequence. Soft bodies deform. Reaction-diffusion patterns emerge. Here, structure finds its optimal configuration not by imposing order but by contracting what resists — the odd cycle, the irreducible remainder — and letting form emerge from that negotiation. Pairing is not natural. It is computed, and the computation requires shapeshifting.
+Does a parameter named entropy measure disorder, or prescribe a family of forms?

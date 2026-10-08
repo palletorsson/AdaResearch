@@ -1,5 +1,14 @@
 # GT Spanning Trees
 
+**Learning elements — proposed focus**
+
+*The labels below set the revision focus; the existing lesson still needs alignment.*
+
+- Weighted connections
+- Cycle checks
+- Minimum spanning trees
+- Alternative routes
+
 Connect every vertex. Minimise total weight. MST via Kruskal.
 
 Build a weighted graph.

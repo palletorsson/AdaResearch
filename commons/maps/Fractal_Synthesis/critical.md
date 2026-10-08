@@ -1,91 +1,15 @@
-# Fractals_10 - Critical Reflection
+# The rule and its reading
 
-## The Same Formula, Different Questions
+Pressing HISTORY in the Cantor encounter removes older rows from view while preserving the surviving intervals. Pressing NEXT makes another selection. A first-person view may make those operations feel similar: something has disappeared. Their consequences differ. One changes the presentation of a history; the other constructs a new surviving population.
 
-Mandelbrot: z = z² + c, starting from z=0. Which c values stay bounded?
+GHOST complicates this comparison. The discarded middles become visible, but remain outside the population and without collision. Their pale bodies are annotations. Visibility can help us examine an exclusion without repairing it. Conversely, the absence of a visible record does not establish that its consequences have disappeared.
 
-Julia: z = z² + c, with c fixed. Which starting z values stay bounded?
+The block tree supplies a complementary seam. It is already generated. Its colour strata, enclosing volumes and terminal marks rearrange what we can read of the same geometry. The enclosing box includes void as well as matter. It would be an error to infer a room's usable capacity from that volume alone. A body, its dimensions, collision rules and possible route would have to enter the account.
 
-Same iteration. Same formula. Different slices through infinite-dimensional behavior. The Mandelbrot set is a map of Julia sets—each point in the Mandelbrot corresponds to a unique Julia.
+Entropic morality asks us to distinguish reducing a representation from enforcing its reduction on the conditions of life. These desks give that distinction a concrete starting point without pretending a visual toggle carries the stakes of habitat destruction. We can inspect what a control changes and what it leaves available. Later applications can ask who has authority to change those conditions and whose responses the model neglects.
 
-**Same rule, different questions, infinite different answers.**
+The available buttons also define this instrument's limits. A visitor can reveal branch levels but cannot invent a new branching grammar at this desk. That restriction creates a clear comparison; it must not quietly become a claim that these are the only possible forms. The next sequence makes rewriting available as another capability. A later iteration may connect the gallery's observations to editable rules, while preserving the ability to hold a form steady and understand it.
 
-## Parameter as World
+This is one place where the desire to make another world can stay specific. What must be inherited? Where can the next branch begin? What relation could be retained while its interpretation changes? We can enjoy a strange outline and still ask which procedure permits it. Complexity, novelty and change are not automatic measures of freedom. Stability can supply the comparison through which an unnoticed possibility becomes legible.
 
-In the Julia set, the parameter c is fixed. It is the "laws of physics" for that particular mathematical universe. Change c, and the entire geometry changes.
-
-This is **parameter space cosmology**: each choice of parameters creates a different world. The Mandelbrot set is a map of all possible Julia worlds, showing which parameters produce connected universes and which produce scattered dust.
-
-What parameters define our universe? What would "adjacent" universes look like?
-
-## Connected vs. Disconnected
-
-Julia sets come in two types:
-- **Connected**: One piece, continuously traversable
-- **Disconnected**: Cantor dust, infinitely scattered
-
-The Mandelbrot set separates these: c inside Mandelbrot → connected Julia; c outside → disconnected.
-
-This is a **topological phase transition**: crossing the Mandelbrot boundary is like a phase change, fundamentally altering the structure of the Julia set.
-
-## The Boundary is Maximum Complexity
-
-The most complex Julia sets come from c values on the Mandelbrot boundary. Not inside (too ordered), not outside (too scattered), but on the edge.
-
-This is the **edge of chaos** principle: maximum complexity at the transition between order and disorder. The QFEP's λ parameter at its optimal value: neither too much order (F dominates) nor too much chaos (E(S) dominates).
-
-## Gaston Julia's Lost Priority
-
-Gaston Julia discovered these sets in 1918, decades before Benoit Mandelbrot. But without computers, Julia could only describe them mathematically—he never saw them.
-
-Mandelbrot, with 1980s computers, could visualize what Julia could only imagine. The images made the mathematics famous.
-
-Who discovered the fractal: the mathematician who described it or the visualizer who showed it? **Is an unseen truth known?**
-
-## Fatou and Julia: A Rivalry
-
-Pierre Fatou and Gaston Julia were rivals, both working on complex dynamics in the early 20th century. Their competition drove the field forward but also created priority disputes.
-
-The Julia set is named after Julia, but Fatou contributed equally. The Fatou set is the complement of the Julia set—the points that behave "normally" under iteration.
-
-**Even in mathematics, names are political. Attribution is never neutral.**
-
-## The Rabbit and the Basilica
-
-Mathematicians name Julia sets like constellations:
-- The "Douady rabbit": Three lobes like rabbit ears
-- The "basilica": Two symmetric lobes
-- The "dendrite": Tree-like branching
-- The "airplane": Elongated, wing-like
-
-These names humanize the abstract. They make the mathematics memorable, navigable, shareable.
-
-**Naming is a form of care.**
-
-## Iteration as Time
-
-Each step of z = z² + c represents a moment in time. The Julia set is all starting points whose futures stay bounded. Points outside the Julia set are those that "escape to infinity."
-
-This is a **temporal classification**: not "where is this point?" but "what is this point's destiny?" The Julia set contains all points with stable futures.
-
-Do our lives have Julia sets—regions of starting conditions that lead to stable outcomes vs. those that lead to unbounded trajectories?
-
-## Computational Irreducibility Again
-
-To know if a point is in the Julia set, you must iterate. There is no shortcut, no closed-form test (in general). You must do the computation.
-
-This is **computational irreducibility**: the future cannot be predicted faster than it unfolds. The Julia set cannot be known without being computed.
-
-## The Mandelbrot Set as Meta-Map
-
-The Mandelbrot set is a map of all Julia sets. Each point c in the Mandelbrot set corresponds to a connected Julia set. The shape of the Mandelbrot set encodes the topology of all possible Julia sets.
-
-This is **meta-mathematics made visible**: a single image that contains information about infinitely many other images. The Mandelbrot set is a library of Julia sets.
-
-## Conclusion: Duality and Infinity
-
-Fractals_10 introduces the Julia set as the Mandelbrot's dual—same formula, different perspective. The relationship between them (c inside Mandelbrot → connected Julia) shows how different questions about the same system reveal complementary truths.
-
-The Julia set asks: **what is the fate of each starting point?** The Mandelbrot set asks: **which laws produce coherent worlds?**
-
-Together, they map the infinite possibilities of z² + c—a formula so simple it fits in five characters, so rich it contains infinite complexity.
+All ten earlier works remain in the collection. Choosing two primary encounters gives attention a path through them. It does not declare the rest irrelevant. Our first pass through the spine should protect those return paths: keep the work, state what has been tested, and record what a further encounter could disclose.

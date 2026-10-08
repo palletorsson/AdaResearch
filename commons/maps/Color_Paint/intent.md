@@ -1,6 +1,9 @@
-Concept: Makes color gestural — paint is thrown, splashed, accumulated on curved surfaces, turning color from selection into physical action.
-Sequence role: Fifth map in Color sequence; shifts from analytical color mixing (Color_Pillar) to embodied color application. The Albers gallery connects practice to theory. Leads to the continuous gradient work in Color_Walls.
-Technical angle: Physics-based paint simulation on 3D surfaces (ball_painting_demo), color accumulation and layering on curved geometry. The albers_wall_gallery introduces color interaction theory — how adjacent colors alter each other's appearance.
-Critical angle: Color as action, not property. The gesture of throwing paint makes color a verb — something that happens through motion and contact. Albers' color studies formalize the sequence truth: what you see depends on context, not wavelength alone. The same color appears different next to different neighbors.
-Key artifacts: ball_painting_demo is the primary interaction — spheres as canvases receiving color through physics; albers_wall_gallery provides the theoretical anchor, connecting hands-on painting to the perceptual science of color relativity.
-Gap: The connection between the paint physics and the Albers perceptual theory could be made more explicit — an artifact showing the same paint color appearing different on different backgrounds would close the loop.
+Question: what does a surface keep after a gesture has passed?
+
+Action: watch the automatic painter, take a spray can, aim and hold the trigger, vary distance and duration, then release it and look elsewhere.
+
+Observation: manual and automatic inputs reach the same canvas. A rendered image remains and evolves; individual gestures are not stored as recoverable objects.
+
+Implementation: automatic UV positions come from two timed oscillations. A triggered manual nozzle maps its actual ray-hit canvas to UV coordinates and projects a distance-dependent footprint using the surface proportions. The spray shader adds grainy deposits to a persistent viewport, whose feedback settles and fades the preceding image toward its ground.
+
+Primary encounters: ball_painting_demo and albers_wall_gallery. Handoff: Grid Pallet's current value becomes Paint's evolving image; Walls gives colour an architectural role.

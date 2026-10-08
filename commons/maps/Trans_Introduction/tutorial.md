@@ -1,131 +1,77 @@
 # Transformation Introduction
 
-Three transformations, three lanes. Translate, rotate, scale.
+**Learning elements**
 
-Define a transform from scratch.
+- Signals and event handlers
+- One function for shared behaviour
+- Target and current state
+- Gradual reset
+- Readout feedback
 
-```gdscript
-var t := Transform3D.IDENTITY
-```
+Trans_Pre used elapsed time to change a cube's pose. Here, an action chooses where a surface should go. Work with the existing MOVE THE BANK panel beside the rotation crossing. Its BANK slider and RESET button control the far landing.
 
-The identity transform: origin at zero, no rotation, unit scale.
+First watch the three supplied crossings: a transport cube moves, a growing cube reaches floor height, and a plank turns to meet the banks. Their automatic motion supplies the encounter. This lesson follows the landing's controls, from an event to a visible change.
 
-Apply translation.
+Move BANK toward its maximum, then release it. Watch the landing continue toward the requested position. Press RESET before it arrives. The slider returns immediately; the landing changes direction and travels home. Use the fixed side aisle to compare the bank edge and readout while the plank keeps turning.
 
-```gdscript
-func translate(t: Transform3D, offset: Vector3) -> Transform3D:
-    return t.translated(offset)
-```
+The excerpts below come from `commons/artifacts/adjustable_landing/adjustable_landing.gd`. They explain the installed artifact; its geometry, controls and object references are already supplied.
 
-Adds the offset to the origin. The orientation and scale are preserved.
+## The panel announces an event
 
-Apply rotation.
-
-```gdscript
-func rotate_y(t: Transform3D, angle_rad: float) -> Transform3D:
-    return t.rotated(Vector3.UP, angle_rad)
-```
-
-Rotates around the Y axis by the given angle. Other axes work the same way.
-
-Apply scale.
+In `_ready()`, `RackTemplates.gd` creates the panel. The script finds its slider as `Param_0` and the RESET button's `InteractableAreaButton` as `reset`, then connects their signals:
 
 ```gdscript
-func scale(t: Transform3D, factors: Vector3) -> Transform3D:
-    return t.scaled(factors)
+slider.slider_moved.connect(_on_slider)
+reset.button_pressed.connect(func(_button): reset_landing())
 ```
 
-Scales each axis independently. Uniform scale uses Vector3.ONE times a single factor.
+A signal announces that something happened. Connecting it names the code to run when that event occurs. Moving the slider calls `_on_slider`; pressing the panel button calls `reset_landing` through the short anonymous function. The button signal includes a button argument, which this function accepts but does not use.
 
-Compose three transforms in order.
+## Both paths reach one function
 
 ```gdscript
-func srt(position: Vector3, rotation_rad: Vector3, scale_factors: Vector3) -> Transform3D:
-    var t := Transform3D.IDENTITY
-    t = t.scaled(scale_factors)
-    t = t.rotated(Vector3.UP, rotation_rad.y)
-    t = t.rotated(Vector3.RIGHT, rotation_rad.x)
-    t = t.rotated(Vector3.FORWARD, rotation_rad.z)
-    t.origin = position
-    return t
+func _on_slider(_value: Variant) -> void:
+    if not _syncing:
+        set_bank_fraction(float(slider.get_normalized_value()))
+
+func reset_landing() -> void:
+    set_bank_fraction(0.0)
 ```
 
-Scale, then rotate, then translate. The order matters: different orders produce different final transforms.
-
-Build a transport cube.
+The slider wrapper converts its physical position to a fraction from zero to one. `_on_slider` reads that fraction rather than using the signal's raw value. RESET requests the same operation with zero as its argument. Both events therefore share the named function `set_bank_fraction`:
 
 ```gdscript
-class_name TransportCube extends StaticBody3D
-
-@export var translation_offset: Vector3 = Vector3(3, 0, 0)
-
-func activate(target: Node3D) -> void:
-    target.global_position += translation_offset
+func set_bank_fraction(fraction: float) -> void:
+    target_displacement = clampf(fraction,0.0,1.0) * TRAVEL
+    if is_instance_valid(slider) and not _syncing:
+        _syncing = true
+        slider.set_normalized_value(target_displacement/TRAVEL)
+        _syncing = false
 ```
 
-Picking up the cube teleports the target by the offset. Translation as a gap-closing move.
+`TRAVEL` is one metre. Clamping bounds the request, so a fraction of `0.5` requests half a metre. The function also puts the slider at the requested fraction, which matters when RESET calls it. `_syncing` prevents a slider event during that update from repeating the request.
 
-Build a rotation cube.
+## Separate the request from the motion
+
+`target_displacement` stores the requested offset. `displacement` stores the current offset. The physics callback brings the current value toward the target:
 
 ```gdscript
-class_name RotationCube extends StaticBody3D
-
-@export var rotation_axis: Vector3 = Vector3.UP
-@export var rotation_angle_deg: float = 90.0
-
-func activate(target: Node3D) -> void:
-    target.rotate(rotation_axis, deg_to_rad(rotation_angle_deg))
+func _physics_process(delta: float) -> void:
+    displacement = move_toward(displacement,target_displacement,SPEED * delta)
+    landing.position = HOME + Vector3.BACK * displacement
+    _update_readout()
 ```
 
-Ninety degrees around a chosen axis. Rotation as a reorientation.
+`SPEED` is `0.25` metres per second; `delta` is the time since the previous physics tick. Multiplying them gives this tick's maximum movement. `Vector3.BACK` means local positive Z. Adding that offset to `HOME` moves the landing along its existing route.
 
-Build a scale cube.
+RESET changes the target to zero. It never assigns zero directly to the current displacement, so returning home remains gradual. Once the target is reached, `move_toward` leaves the bank there.
 
-```gdscript
-class_name ScaleCube extends StaticBody3D
+## Read what has happened
 
-@export var scale_factor: float = 2.0
+`_update_readout()` formats the current `displacement` as `BANK +… m`. It reports “edges meet” at zero and otherwise gives the gap for the plank's aligned pose. Immediately after RESET, the slider can show zero while this readout still shows a positive distance. Those displays describe the request and the moving bank respectively. The gap label describes the surfaces; crossing also depends on the player's body and movement.
 
-func activate(target: Node3D) -> void:
-    target.scale *= scale_factor
-```
+## Try one source parameter
 
-Doubles the target's size. Scale as a presence expansion.
+For a local experiment, change only `const SPEED := 0.25` to `const SPEED := 0.50` in the landing script, then rerun the existing scene. Predict the result before moving BANK fully from home: one metre should take about two seconds instead of four. RESET from the far endpoint should take the same reduced time. The endpoints and final gap stay the same. Compare the readout during travel, then restore `0.25`.
 
-You can now compose scale, rotate, and translate in order, and build lane cubes that enact each transformation. Trans_Translation extends translation into its own detailed map.
-
-Check identity.
-
-```gdscript
-func is_identity(t: Transform3D) -> bool:
-    return t.is_equal_approx(Transform3D.IDENTITY)
-```
-
-Identity preserves the input. Useful as a test for whether a chain of transforms cancels out.
-
-Invert a transform.
-
-```gdscript
-func invert(t: Transform3D) -> Transform3D:
-    return t.affine_inverse()
-```
-
-Undo the transform. Composing t with t.affine_inverse() produces identity.
-
-Compose with multiplication.
-
-```gdscript
-func combine(a: Transform3D, b: Transform3D) -> Transform3D:
-    return a * b
-```
-
-Right-to-left application order. a * b applies b first, then a.
-
-Extract the origin.
-
-```gdscript
-func get_origin(t: Transform3D) -> Vector3:
-    return t.origin
-```
-
-The origin is the translation part of the transform. Ignore the basis to get just the position.
+Trans_Translation extends this distinction between a destination and the journey to it through carrier routes. Carry forward the question established here: which function changes the request, and which callback performs the movement?

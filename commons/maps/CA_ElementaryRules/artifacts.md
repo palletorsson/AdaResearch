@@ -1,20 +1,17 @@
 # CA ElementaryRules — Artifacts
-*Cellular Automata: Local Rules, Global Patterns · lambda_edge · 2 artifacts*
 
-> Elementary cellular automata: one dimension, three-cell neighborhoods, eight possible patterns. 256 possible rules, each producing different behavior. Rule 30 generates apparent chaos. Rule 110 is Turing complete. Wolfram's classification: from death to complexity in a single number.
-
-The map, read through what it holds — its artifacts in the order you meet them:
-
-## Structure Growth
-![Structure Growth](/scene-catalog/structure_growth.png)
-
-3D structure growth simulation.
+## Structure Growth — primary
 
 `structure_growth`
 
-## Dark Sphere
-![Dark Sphere](/scene-catalog/dark_sphere.png)
+The existing three-state, 26-neighbour volume: empty, active and fading. Its held console lets us STEP, RUN, REPLAY, change the colour reading with VIEW, and extend the observation budget with +20.
 
-USE a neutral sphere as a reference for scale, silhouette, and atmospheric change.
+The enlarged neighbourhood beside it reads the same 27 positions around cell (26, 22, 24). At the seeded beginning that cell is active; after one step it is fading beside seven active neighbours; after another it is empty. Gold marks its address. Spacing makes the positions approachable, while the original volume retains their compact relation. Both views share the existing controls and state arrays.
+
+## Dark Sphere — supporting
 
 `dark_sphere`
+
+Retained as a comparison of silhouette and appearance, outside the chapter's primary encounter. It does not supply the neighbourhood rule or the fading-cell example.
+
+The historical map name is preserved. This hall does not exhibit all 256 elementary one-dimensional rules; the preceding hall introduces the three-cell rule table.

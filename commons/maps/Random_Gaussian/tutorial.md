@@ -1,5 +1,11 @@
 # Random Gaussian — a sample and its account
 
+**Learning elements**
+
+- Histograms
+- Distribution comparisons
+- Clipping and binning
+
 The primary is `distribution_sampler:180#stand:cabinet` at (11,19). This builds on Random Walk's distinction between a sampled event and its stored record. The next room, Random Mushrooms, uses sampled parameters to vary forms. All excerpts below are from `commons/artifacts/distribution_sampler/distribution_sampler.gd`.
 
 ## Begin with the existing controls

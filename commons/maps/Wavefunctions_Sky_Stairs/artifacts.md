@@ -1,7 +1,7 @@
 # Wavefunctions Sky Stairs — Artifacts
 *Wavefunctions: Everything Oscillates · oscillation · 4 artifacts*
 
-> Ascent through oscillation. Stairs that climb along sine curves — each step a moment in a wave cycle. Rising through space by following frequency, the spiral staircase as helix, vertical progress as rotational persistence.
+> Inspect one helix with radial sine modulation and uniform rise. Compare tread centres, edges and connecting membranes from the surrounding floor; a full ascent still needs testing.
 
 The map, read through what it holds — its artifacts in the order you meet them:
 

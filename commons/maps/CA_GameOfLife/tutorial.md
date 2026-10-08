@@ -1,97 +1,19 @@
-# CA Game of Life
+# Read a row, wear a history
 
-Birth, survival, death. Three rules produce infinite variety.
+**Learning elements — proposed focus**
 
-Implement the life-cycle rule.
+_The labels below set the revision focus; the existing lesson still needs alignment._
 
-```gdscript
-func game_of_life_rule(alive: bool, neighbours: int) -> bool:
-    if alive:
-        return neighbours in [2, 3]  # survival
-    return neighbours == 3  # birth
-```
+- History snapshots
+- Generation coordinates
+- State receivers
 
-Two survival counts, one birth count. Every other count produces death.
+1. At the desk, find the gold row in the flat record, stepping tiles and lattice. ROW moves attention through the retained record without changing it.
+2. From the rim, REPLAY to the beginning. Predict the next row, then STEP. Compare ordered left/centre/right bits with the answer in Rule 30.
+3. Walk along the basin margin: gold follows the nearest recorded row through all three mappings. Walk back and check that later rows remain. Name which direction carries site address and which carries generation. Beyond the record, walking cannot select an unmade row.
+4. RUN to a fuller record. It stops after twenty-four rows; this is the display budget. X wraps according to the neighbourhood rule.
+5. Use SEED or FLIP X9 and repeat. Explain why later rows are recalculated when the beginning changes.
+6. Compare a gap in ornament with a gap in support. Inspect from the side passage before entering the shallow basin; use the end ramps to return. Replay and seed controls alter support, so operate them from the desk on the museum floor.
+7. Continue into the retained rear collection, then the next hall's Life dish. The lab, columns and mirrored work are secondary comparisons, not evidence that this Rule 30 history implements Conway Life or a working universal circuit.
 
-Seed a glider.
-
-```gdscript
-const GLIDER := [
-    [0, 1, 0],
-    [0, 0, 1],
-    [1, 1, 1],
-]
-
-func place_pattern(pattern: Array, x: int, y: int) -> void:
-    for dy in pattern.size():
-        for dx in pattern[0].size():
-            var nx: int = (x + dx) % size.x
-            var ny: int = (y + dy) % size.y
-            grid[ny][nx] = pattern[dy][dx]
-```
-
-The glider walks diagonally. Four generations bring it back to the same shape, displaced by one cell.
-
-Seed a glider gun.
-
-```gdscript
-const GOSPER_GLIDER_GUN := [
-    # 36-wide, 9-tall pattern
-    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-    # ... remaining rows
-]
-```
-
-A structure that emits a new glider every 30 generations. Proves Conway's Life supports sustained activity.
-
-Count the population.
-
-```gdscript
-func population() -> int:
-    var count: int = 0
-    for row in grid:
-        for cell in row:
-            if cell == 1: count += 1
-    return count
-```
-
-Total live cells. Oscillators have periodic populations; gliders have constant populations.
-
-Detect still lifes.
-
-```gdscript
-func is_still_life() -> bool:
-    var next := step_to(grid.duplicate(true))
-    return grids_equal(grid, next)
-```
-
-A configuration that doesn't change. Classic examples: block, beehive, loaf, boat.
-
-Detect oscillators.
-
-```gdscript
-func is_oscillator(period: int) -> bool:
-    var snapshot: Array = []
-    for row in grid: snapshot.append(row.duplicate())
-    for _i in period:
-        step()
-    return grids_equal(grid, snapshot)
-```
-
-Test whether the grid returns to its starting state after `period` steps. Period 2 catches blinkers; period 3 catches pulsars.
-
-Render a life-and-death visualization.
-
-```gdscript
-func render_life_colored() -> void:
-    for y in size.y:
-        for x in size.x:
-            var cell := grid[y][x]
-            var age := cell_age[y][x]
-            var color := Color.WHITE.lerp(Color.YELLOW, min(age / 20.0, 1.0)) if cell else Color.BLACK
-            paint_cell(x, y, color)
-```
-
-Newly-born cells are white; older survivors fade toward yellow. The pattern's history becomes visible.
-
-You can now implement Conway's rule, place standard patterns (glider, glider gun), count the population, detect still lifes and oscillators, and render the grid with age-colouring. CA_BeyondBinary extends into multi-state and hex grids.
+Primary: `ca_bridge:0:0#study:history#plinth:0#follow:walk`. Its three mappings belong to this one anchored encounter. Existing secondary roles and the orb remain.

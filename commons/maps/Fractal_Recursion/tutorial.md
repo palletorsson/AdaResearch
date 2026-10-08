@@ -1,107 +1,120 @@
-# Fractal Recursion
+# Recursion — one more frame
 
-A function that calls itself. Depth bounded, structure unbounded.
+**Learning elements**
 
-Recursive factorial.
+- A function calling itself
+- A smaller argument and a stopping condition
+- A finite construction budget
 
+In the museum, press MORE at the frame study. Another frame appears, smaller than the last. Change its arrangement and try the doorway version. A frame your eye can follow may be too small for your body. We will reconstruct the repeated frame; the room's doors and controls already exist.
+
+## Continue with the line
+
+You bring positions, lists, loops and functions from earlier halls. Keep the `LineSkin` supplied in Point Lines. Four segments make one square. The new operation is to call the square-making function again with a smaller size and one fewer step available.
+
+Keep your previous study as a working version. Save `frames.gd` and `line_skin.gd` together and attach `frames.gd` to your existing, empty `PointStudy` Node3D in the prepared museum workspace. Use unit scale; position and rotate the station to face you. The museum supplies the camera, lights and player. This script creates only the study. Do not attach it to the museum's generator or remove the room's existing artifact.
+
+## frames.gd
+
+Run it with `depth = 3`. Predict the sizes before counting the visible frames.
+
+<!-- student-code:frames.gd -->
 ```gdscript
-func factorial(n: int) -> int:
-    if n <= 1: return 1
-    return n * factorial(n - 1)
-```
+extends Node3D
 
-Base case at 1; recursive call with smaller argument. The call stack captures the recursion depth.
+const LineSkin = preload("line_skin.gd")
+const MAX_DEPTH := 7
+const MIN_SIZE := 0.08
+@export_range(0, 7) var depth := 3
+@export_range(0.25, 0.85) var ratio := 0.65
+var sizes: Array[float] = []
+var frames: Node3D
 
-Recursive tree structure.
+func _ready() -> void:
+    frames = Node3D.new()
+    add_child(frames)
+    rebuild()
 
-```gdscript
-func recursive_tree(start: Vector3, direction: Vector3, length: float, depth: int) -> void:
-    if depth <= 0: return
-    var end := start + direction * length
-    draw_segment(start, end)
-    var axis: Vector3 = direction.cross(Vector3.UP).normalized()
-    var left: Vector3 = direction.rotated(axis, deg_to_rad(20))
-    var right: Vector3 = direction.rotated(axis, deg_to_rad(-20))
-    recursive_tree(end, left, length * 0.7, depth - 1)
-    recursive_tree(end, right, length * 0.7, depth - 1)
-```
+func rebuild() -> void:
+    for child in frames.get_children():
+        frames.remove_child(child)
+        child.queue_free()
+    sizes.clear()
+    repeat_frame(Vector3(0, 1.3, 0), 1.8, clampi(depth, 0, MAX_DEPTH))
 
-Binary branching. Each call spawns two shorter children.
-
-Memoisation.
-
-```gdscript
-var memo: Dictionary = {}
-
-func fib(n: int) -> int:
-    if n in memo: return memo[n]
-    if n <= 1: return n
-    var result: int = fib(n - 1) + fib(n - 2)
-    memo[n] = result
-    return result
-```
-
-Cache results. Fibonacci without memoisation is exponential; with it, linear.
-
-Tail-recursive form.
-
-```gdscript
-func sum_tail(n: int, acc: int = 0) -> int:
-    if n == 0: return acc
-    return sum_tail(n - 1, acc + n)
-```
-
-Accumulator carries state forward. Compilers can optimise this into a loop.
-
-Iterative equivalent.
-
-```gdscript
-func sum_iterative(n: int) -> int:
-    var total: int = 0
-    while n > 0:
-        total += n
-        n -= 1
-    return total
-```
-
-Same computation; no call stack. Faster and safer for large n.
-
-Detect stack depth.
-
-```gdscript
-func measure_depth(n: int, depth: int = 0) -> int:
-    if n <= 0: return depth
-    return measure_depth(n - 1, depth + 1)
-```
-
-Returns the number of recursive calls made. Useful for testing stack-overflow limits.
-
-Self-similar structure.
-
-```gdscript
-func render_fractal_at(position: Vector3, size: float, depth: int) -> void:
-    if depth <= 0:
-        spawn_cube_at(position, size * 0.3)
+func repeat_frame(centre: Vector3, size: float, remaining: int) -> void:
+    if remaining <= 0 or size < MIN_SIZE:
         return
-    var offset: float = size * 0.5
-    for dx in [-1, 1]:
-        for dy in [-1, 1]:
-            for dz in [-1, 1]:
-                render_fractal_at(position + Vector3(dx, dy, dz) * offset, size * 0.5, depth - 1)
+    sizes.append(size)
+    draw_frame(centre, size)
+    repeat_frame(centre, size * clampf(ratio, 0.25, 0.85), remaining - 1)
+
+func draw_frame(centre: Vector3, size: float) -> void:
+    var half := size * 0.5
+    var corners: Array[Vector3] = [
+        centre + Vector3(-half, -half, 0),
+        centre + Vector3(half, -half, 0),
+        centre + Vector3(half, half, 0),
+        centre + Vector3(-half, half, 0)
+    ]
+    for i in range(4):
+        var start := corners[i]
+        var displacement := corners[(i + 1) % 4] - start
+        var line := LineSkin.new()
+        frames.add_child(line)
+        line.show_segment(start, displacement, displacement.length())
 ```
 
-Each cube spawns 8 smaller cubes. Cantor dust in 3D.
+`repeat_frame()` receives the centre, the current size and the steps remaining. Its first `if` is the base case: when no step remains, or the square is smaller than our chosen limit, return without drawing.
 
-You can now write recursive functions, memoise their results, recognise tail recursion, convert to iteration, measure call depth, and build self-similar 3D structures. Fractal_RecursiveTrees extends into tree morphologies.
+Otherwise it draws one frame. The last line calls the same function with the same centre, a smaller size and `remaining - 1`. With the default values, the sizes are 1.8, 1.17 and 0.7605 metres. The next call receives zero remaining steps and returns. Each earlier call then finishes.
 
-Convert iteration to pixel coordinates.
+The loop in `draw_frame()` constructs four sides. Recursion repeats the whole construction. `(i + 1) % 4` returns to the first corner after the fourth; the last line closes the square.
 
+`depth` controls how many frames may be made. `ratio` controls their relative sizes. They are separate choices. The small-size cutoff is another stopping condition: raising the depth does not guarantee that every allowed frame will be drawn. `clampi()` also caps scripted depth requests at seven; the limit applies beyond the Inspector slider.
+
+## Supplied line skin — line_skin.gd
+
+This is the same finite cylinder renderer from Point Lines, printed here so the example has no missing helper. Its thickness makes an abstract segment visible. Keep it unchanged for this lesson.
+
+<!-- student-code:line_skin.gd -->
 ```gdscript
-func complex_to_pixel(c: Vector2, bounds: Rect2, resolution: Vector2i) -> Vector2i:
-    return Vector2i(
-        int((c.x - bounds.position.x) / bounds.size.x * resolution.x),
-        int((c.y - bounds.position.y) / bounds.size.y * resolution.y)
-    )
+# Supplied renderer, adapted from commons/primitives/line/line.gd.
+# This finite cylinder gives the segment a visible thickness. It is not a collider.
+# Inputs share the parent station's local frame; that station has unit scale.
+extends MeshInstance3D
+
+func _init() -> void:
+	var cylinder := CylinderMesh.new()
+	cylinder.top_radius = 0.012
+	cylinder.bottom_radius = 0.012
+	cylinder.radial_segments = 16
+	cylinder.rings = 0
+	mesh = cylinder
+	var finish := StandardMaterial3D.new()
+	finish.albedo_color = Color(0.98, 0.70, 0.82)
+	finish.roughness = 0.3
+	material_override = finish
+	visible = false
+
+func show_segment(start: Vector3, displacement: Vector3, distance: float) -> void:
+	# A zero-length segment has no direction. Do not normalize it.
+	visible = distance > 0.0001
+	if not visible:
+		return
+	(mesh as CylinderMesh).height = distance
+	position = start + displacement * 0.5
+	# CylinderMesh runs along local Y. This borrowed basis aligns it to the ends.
+	var direction := displacement / distance
+	var right := direction.cross(Vector3.UP).normalized()
+	if right.length() < 0.001:
+		right = Vector3.RIGHT
+	var depth := right.cross(direction).normalized()
+	basis = Basis(right, direction, depth)
 ```
 
-Maps math-space to image-space. Inverse of pixel-to-complex used in rendering.
+## Make a prediction of your own
+
+Change `ratio` to 0.5 and keep `depth` at 3. Before running, write down the three sizes. They should be 1.8, 0.9 and 0.45. Explain why there are still three frames. Now set depth to zero: no frame should be created. Restore depth to three.
+
+You should be able to change the reduction and predict the result without replacing the drawing function. The next hall keeps the stopping condition but lets a call make two children. Shorter pieces can then produce many more pieces.

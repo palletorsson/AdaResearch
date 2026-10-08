@@ -1,5 +1,13 @@
 # Lab Path
 
+**Learning elements — proposed focus**
+
+_The labels below set the revision focus; the existing lesson still needs alignment._
+
+- Encounter accounts
+- Operation accounts
+- Return experiments
+
 The corridor back. Shared template across every sequence.
 
 Build the corridor.

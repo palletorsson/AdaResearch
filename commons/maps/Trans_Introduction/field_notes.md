@@ -192,3 +192,31 @@ without opening the scene produced wrong numbers twice in this chapter.
 **Fix.** The next hall is translation on its own, and its floor has holes in it.
 
 **Evidence.** Trans_Translation/final.md:3 opens "This hall has holes in its floor." One line changed.
+
+
+### 2026-09-09: Three crossings, seated and written from the running source
+
+The new final.md follows tc, sc, rc in walking order and investigates transformation through banks, body, collision and timing. Existing supporting exhibits remain. Older notes above refer to earlier configurations.
+
+Measured in the actual grid at the museum's -0.5 m origin: transport top was +0.5 m; maximum scale top was +1 m. Shared transport placement now seats from its collider before _ready caches endpoints. Scale explicitly opts into #seat:deck at full size. Its minimum is now 0.5; the old negative minimum was silently clamped to 0.001.
+
+The old rotating wall reached z=15.9..18.1 across banks at 15.5 and 18.5. This map now uses a 3.2 x 0.2 x 1 m bridge profile, overlapping both banks by 0.1 m at ninety degrees. Other maps retain the default wall geometry and their scale/rotation offsets.
+
+Evidence: commons/testing/probe_introduction_crossings.gd builds the real grid and checks rider displacement, full-size collision, quarter-turn timing, capsule passage and raised-deck transport vectors. Report: ada_run/introduction_crossings_checks.json. This checks programmed behaviour, not learner understanding or VR comfort.
+
+### 2026-09-09: Author-requested half-metre drop and three-metre width
+
+Lowered the scale utility by another 0.5 m (y_offset=-0.5) and the rotation utility by another 0.5 m (y_offset=-0.55, including the preceding 0.05 m recess). The bridge profile is now 3.6 m long, 3 m wide and 0.2 m thick. Mesh and collision share these dimensions. Transport placement was not edited in this revision.
+
+Actual GridSystem measurements: full-scale top y=-0.5; rotation top y=-0.55, with aligned footprint 3 x 3.6 m. The current capsule test cannot step back onto the banks. At three metres wide the rotating platform also spans the gap before turning, so the earlier final.md account of opening a passage through alignment needs reconsideration after the author reviews this staging. Do not claim this revision passes the previous crossing test. Its transport coordinate assertions also refer to an earlier cell: the live map now starts the ferry at row 6 instead of row 5.
+
+Evidence: ada_run/introduction_half_metre.log and ada_run/introduction_crossings_checks.json. The book/core fingerprint is intentionally not refreshed as an accepted spatial match.
+
+
+## 2026-09-27 — fire under the crossings; plank meets the banks
+
+Palle requested fire in these basins and pointed out that the rotating plank overlapped the floor in the museum photograph. Enabled fire in this map's staged simulation. The existing fire bed stays 1.9 m below the deck. Reduced the bridge profile from 3.6 x 0.2 x 1 m to 3 x 0.2 x 1 m; this is the only map currently selecting that profile. The default wall profile is unchanged. Mesh and collider use the same dimensions. At the held 90-degree pose, the plank meets the banks with zero overlap. During rotation, the rectangular corners still sweep their normal arcs; this is not a new circular or clipped bridge.
+
+The bank readout starts at “edges meet”, then reports the actual one-metre gap at full displacement. Current final.md, summary.md, intent.md, critical.md and tutorial.md now use these measurements. Historical measurements above remain as the record of previous staging.
+
+Isolated production-museum probe: 35/35 checks, exit 0. Verified actual fire coverage under translation, scale and rotation; supporting faces at the same deck height; a capsule crossing the shortened plank in both directions; real slider/reset events; and an actual desktop player entering the fire, triggering the death and save-point reset. Native in-museum images are saved in doc/book/iterations/2026-09-27-crossings-fire-and-fit/. A generic ObjectDB leak warning appears on engine shutdown. This was not a headset test.

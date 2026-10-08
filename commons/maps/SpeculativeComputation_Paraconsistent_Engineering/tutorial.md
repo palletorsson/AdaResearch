@@ -1,101 +1,41 @@
-# Paraconsistent Engineering
+# What disappears when a disagreement is declared resolved?
 
-A database that holds both P and not-P without collapsing into triviality. Build a logic engine that survives contradiction.
+**Learning elements — proposed focus**
 
-Declare the knowledge base.
+*The labels below set the revision focus; the existing lesson still needs alignment.*
 
-```gdscript
-class_name ParaKB
-extends Node
+- Source tagged reports
+- Decision records
+- Revisable resolutions
 
-var facts: Array[Dictionary] = []
+Different positions can produce different requirements. Preserving the requirements is the first step towards inspecting their conflict.
 
-func assert_fact(subject: String, predicate: String, value: bool, source: String) -> void:
-    facts.append({"s": subject, "p": predicate, "v": value, "src": source})
-```
+<!-- @merge_conflict_visualizer -->
 
-Every fact carries its source. Contradictions are tagged rather than resolved. The source makes ex falso impossible: you cannot reason from conflicting sources as though they agreed.
+Read branch A and branch B and locate the light between them. Give each branch a concrete report about one door, including a time and a source. Decide whether your reports actually contradict each other before proposing a resolution.
 
-Query a subject without collapsing.
+JUNCTION keeps two separate upright pillars and a pulsing marker. OVERLAP leans them into a shared volume; FORK leans them apart. MARKER hides or reveals the glow without moving either branch. The sculpture displays relations; it does not run a merge algorithm or derive logical consequences.
 
-```gdscript
-func query(subject: String, predicate: String) -> Array:
-    var hits: Array = []
-    for f in facts:
-        if f.s == subject and f.p == predicate:
-            hits.append(f)
-    return hits
-```
-
-The query returns every match, including disagreements. The caller, not the database, decides what to do with a split. Classical logic would have raised here.
-
-Detect contradictions.
+The source makes the operation inspectable:
 
 ```gdscript
-func contradictions() -> Array:
-    var groups := {}
-    for f in facts:
-        var key := f.s + "/" + f.p
-        if not groups.has(key): groups[key] = []
-        groups[key].append(f)
-    var out: Array = []
-    for key in groups:
-        var values := groups[key].map(func(f): return f.v)
-        if true in values and false in values:
-            out.append({"key": key, "facts": groups[key]})
-    return out
+func _build_resolved() -> void:
+    _build_pillar(branch_a_color, Vector3(0, 0, 0),
+        Vector3(0.2, pillar_height, 0.2), "branch A", 0.0, false)
+    _build_pillar(branch_b_color, Vector3(BASE_X, 0, 0),
+        Vector3(0.2, RESOLVED_STUMP_H, 0.2), "branch B", 0.0, true)
 ```
 
-Group by subject and predicate. If both true and false appear, the pair is a contradiction. They are logged, not deleted.
+The MERGE panel exposes JUNCTION, OVERLAP, RESOLVED and FORK. In RESOLVED, A keeps its full height and takes the centre; B becomes a labelled stump. Return to OVERLAP to recover both full-height branches. This is an authored picture of a decision, not a proof that the decision was warranted.
 
-Continue inference on the consistent parts.
+[Implementation](../../../algorithms/postfoundationscrisis/merge_conflict_visualizer.gd). This is an excerpt from the artifact, not a standalone program.
 
-```gdscript
-func consistent_facts() -> Array:
-    var bad := {}
-    for c in contradictions():
-        bad[c.key] = true
-    return facts.filter(func(f): return not bad.has(f.s + "/" + f.p))
-```
+Two stored reports need not be a contradiction: they might concern different doors or different times. Preserving sources helps investigate that difference. It does not by itself change the rules of inference. The paraconsistent question is narrower: when both P and not-P are admitted, can unrelated conclusions still be refused? The sculpture makes room for that question but cannot answer it through overlapping meshes. Its unresolved glow should invite investigation rather than make conflict desirable in every case.
 
-The filter yields the inference-safe subset. Classical reasoning operates here. The contradictory pair is visible on its own spotlight.
+<!-- @ -->
 
-Render the sphere of contradictions.
+To investigate disagreement we need to know where each claim came from.
 
-```gdscript
-func update_sphere(mesh: MeshInstance3D) -> void:
-    var c := contradictions()
-    var scale := 1.0 + float(c.size()) * 0.1
-    mesh.scale = Vector3.ONE * scale
-    var material := mesh.get_active_material(0) as StandardMaterial3D
-    material.emission_energy_multiplier = 0.5 + float(c.size()) * 0.2
-```
+## Next experiment — not yet a visitor control
 
-The sphere grows with each held contradiction. Florensky's icon becomes a load-bearing indicator. The system glows brighter the more disagreement it survives.
-
-Offer a provenance tooltip.
-
-```gdscript
-func tooltip_for(c: Dictionary) -> String:
-    var lines: Array = []
-    for f in c.facts:
-        lines.append("%s → %s (%s)" % [str(f.v), f.src, f.p])
-    return "\n".join(lines)
-```
-
-Each contradiction opens its sources. The engineer reads the disagreement as data, not as failure. The tool treats reality as multi-voiced.
-
-Wire the live inference stage to the clean subset.
-
-```gdscript
-func infer_new_facts() -> void:
-    var base := consistent_facts()
-    for rule in inference_rules:
-        var derived := rule.apply(base)
-        for d in derived:
-            assert_fact(d.s, d.p, d.v, "derived:" + rule.name)
-```
-
-Inference runs on the consistent subset and writes new facts back with a derivation source. The sphere does not explode. The database keeps working.
-
-You have built a database that refuses to collapse under contradiction. The next map, Situated Computation, turns this refusal into a design constraint on how any system occupies its perspective.
+Add a small inspectable inference table with a contradictory pair and an unrelated proposition. Require the visitor to predict which consequences follow. Compare that with preserving two source-tagged reports, so storage and inference remain distinct lessons.

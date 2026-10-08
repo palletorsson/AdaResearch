@@ -1,9 +1,3 @@
-# PG Space Colonization — Summary
+# Space Colonization — guide, then branch
 
-PG_Space_Colonization is the second map in the Procedural Generation sequence. It grows a tree without using a grammar. Instead, the space is seeded with scattered attractor points, a small seed is dropped at the base of the room, and branches reach outward toward whichever attractor is nearest.
-
-The algorithm is visible as it runs. Each branch tip samples the attractors within a given radius and extends a short segment in the averaged direction of those attractors. When a segment gets close enough to an attractor, the attractor is consumed and removed from the field. New tips sprout from the growing branch and repeat the process, so the tree's shape is determined by where the attractors happened to be.
-
-Three controls change the outcome. A density slider changes how many attractors are scattered. A kill-radius slider decides how close a branch must get before an attractor is consumed. A new-seed button re-scatters the attractors and re-runs the algorithm, so the learner can watch several different trees grow from the same rule under different spatial conditions.
-
-Within the sequence, Space_Colonization extends the claim of the previous map: structure can come from the geometry of the environment rather than from an author. PG_Percolation_Network will next turn to connectivity.
+Second of seven procedural-generation halls, following Genetic Evolution and leading directly to Branching Growth. The existing space_colonization_algorithm becomes an opt-in, manually stepped encounter with three deterministic fields. Predict a vector sum; compare TIPS with NETWORK over identical points; retain a witness; inspect reached targets and explicit limits. The structure remains a rooted tree. Museum floor covers, the inherited two-metre deck and a closed ramp support the body independently of the drawn growth.

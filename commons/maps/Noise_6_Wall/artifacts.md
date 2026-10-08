@@ -1,20 +1,9 @@
-# Noise 6 Wall — Artifacts
-*Noise: Entropy with Memory · E_entropy · 2 artifacts*
+# Noise 6 Wall — one primary encounter, three placements
 
-> Six octaves layered. Low frequency for large features, high frequency for fine detail. Each octave adds texture at a different scale. The wall displays the sum — how simple waves at different frequencies combine into complex, natural-looking surfaces. Fractal Brownian motion made visible.
+`shader_noise_space#stand:panel` at (6,4) is the supported four-patch instrument, facing inward from the north wall. Its controls can be reached while standing inside the enclosure. LAYERS, BASIS, FREEZE and DRESS control only receivers in this museum hall. The cased, tilted plate states the held/live phase, term counts, weights, gain and finish.
 
-The map, read through what it holds — its artifacts in the order you meet them:
+`shader_noise_space#stand:room` at (6,6) is the same primary work at bodily scale. Its five-metre floor sits over the current level floor. A 4.8 m enclosure has a 2.8 m ceiling and opposing 1.6 m wide, 2.3 m high door openings. The original internal sphere is retained and now receives the material at its combined CSG root. Each wall piece uses its own UV chart. Legacy standalone enclosure geometry remains available in the unchanged scene resource.
 
-## Shader Noise Space
-![Shader Noise Space](/scene-catalog/shader_noise_space.png)
+`dark_sphere` at (10,10) is a supporting work on solid floor near the exit. Its original material, rotation and independent sine-driven pulse remain. FREEZE at the panel does not stop this orb.
 
-Interactive shader-based noise space exploration with procedural textures and patterns
-
-`shader_noise_space`
-
-## Dark Sphere
-![Dark Sphere](/scene-catalog/dark_sphere.png)
-
-USE a neutral sphere as a reference for scale, silhouette, and atmospheric change.
-
-`dark_sphere`
+The primary token is shader_noise_space. The book also briefly returns to the supporting dark_sphere; that encounter anchor is retained. The two shader placements share a passage; the internal sphere is part of that scene, not an additional map token. Recovered structure and utilities are unchanged. See `/research/possible-bodies/noise-six-wall.html` for photographs and evidence.

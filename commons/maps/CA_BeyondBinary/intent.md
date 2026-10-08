@@ -1,6 +1,14 @@
-Concept: Totalistic rules as the first generalization beyond elementary CA — counting neighbors without distinguishing direction, so the rule depends only on the sum of neighbor states. The hexagonal grid and VR Game of Life immerse the learner in non-rectangular topologies where neighbor-counting takes new geometric meaning.
-Sequence role: Fourth map in the Cellular Automata sequence; the bridge from elementary rules (CA_3) to multi-state automata (CA_5). Totalistic rules compress the rule table by treating neighborhood sums rather than individual configurations, reducing combinatorial explosion while preserving complex behavior. The hexagonal VR artifact introduces non-square grids — connecting forward to CA_5's hexagonal and 3D substrates. The VR framing is the first embodied CA experience in the sequence.
-Technical angle: Totalistic rule: next state = f(sum of neighbor states) rather than f(individual neighbor pattern). For k states and n neighbors, the totalistic rule table has k^(k*n+1) entries vs k^(k^n) for general rules — dramatically fewer. The hexagon_ca_vr places Life-like rules on a hexagonal lattice (6 neighbors instead of 8), altering threshold dynamics. The ca_growth_network tracks how active cell populations expand or contract over time.
-Critical angle: Totalistic rules reveal that many CA behaviors depend not on the spatial arrangement of neighbors but only on their aggregate count. This is a compression of information — the cell is even more ignorant than we assumed, yet complexity persists. The hexagonal grid challenges the assumption that CA require Cartesian coordinates; any tessellation that defines neighbors suffices. Geometry is a parameter, not a prerequisite.
-Key artifacts: ca_growth_network tracks population dynamics of active cells; hexagon_ca_vr places CA on a hexagonal lattice in virtual reality; dark_sphere anchors the research space.
-Gap: Needs a totalistic rule table visualizer — an artifact that shows how the sum-based lookup table maps to evolution, contrasting it with the full elementary rule table to make the compression visible.
+# A pattern visits an address
+
+Question: What moves when a recognisable pattern crosses fixed cells, and what must we add for the room to answer it?
+
+Inheritance: arrays, colours, clocks, repeated local updates and the distinction between a present and a displayed history. The Life dish uses a two-dimensional present. Its centre state and eight-neighbour count feed the original B3/S23 solver.
+
+Primary: game_of_life_petri, configured with study:addresses. One held glider; fixed witnesses in a small dish and a walkable floor; three occupancy-driven lamps; GLIDER, BLINKER and MEET comparisons; explicit LINK separation. This remains binary despite the historical map ID.
+
+Transfer: use a cell's state to drive another museum object through a declared mapping. The installed output is light. Appearance, collision and feedback must not be conflated. The next hall, CA_ExpandingSpace, introduces the visitor's proximity as an input.
+
+Preservation: six existing artifacts remain. The added primary bay precedes the retained gallery. Other works need specific comparisons and separate review before receiving additional book passages. No artifact-count quota and no sequence reorder are applied.
+
+
+25 September: enlarge the existing floor receiver to 9.6 m so a fixed address can be approached at body scale. Keep support independent of occupancy and the visitor independent of the rule. Preserve the hexagonal comparison as a table specimen in the rear, clearing its former overflow across the primary. Its full simulation remains; only its museum staging changes.

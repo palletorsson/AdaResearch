@@ -36,3 +36,12 @@ The front excerpt's lower edge is 0.832 m; the readout case's top is 0.825 m. It
 The independent review exercises real button signals and the desktop pointer, both source/disclosure orders, sorting, endpoint samples, expected bars, floor routes and hall unload/rebuild. It exports the two complete samples for independent counting and entropy calculation. The review compares the enlarged strip with its original symbols while allowing for the precision of the MultiMesh colour buffer; the measured precision is recorded in the report.
 
 Headset reach and close lettering still need a later visit. Nine placements remain declared; eight instantiate because secondary `replay_casino` has no living scene. The run records an unrecognized audio-bus UID, a root-certificate error, a logger failure and an ObjectDB warning at shutdown; passing assertions do not resolve these diagnostics. There are no script errors. The specific run result, placement ledger, images and remaining limitations are in `doc/space/entropy-review-2026-09-12/` and `/research/possible-bodies/random-entropy.html`.
+
+
+<!-- study-spine:signal_room -->
+
+## Installed application: Different neighbours
+
+`signal_room` occupies a new adjoining bay, after the existing encounters. Cell [12, 48], rotation 180°, museum adapter `res://commons/artifacts/spine_studies/signal.tscn`. Original response to Ryoji Ikeda; no claim of exact reconstruction.
+
+Shuffle the retained values; compare unchanged counts with changed neighbours. Reuses array, random; adds no prerequisite node. The display and main-player controls are supplied.

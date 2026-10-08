@@ -1,100 +1,106 @@
-# Effect Sound
+# One wave enters another rule
 
-Waves become bleeps. This lesson builds the smallest tone player and a spectrum reader from scratch — the vocabulary the hall's racks use. The hall's own primary is a phase-modulation rig; its code is quoted in `final.md`.
+**Learning elements**
 
-Declare the tone player.
+- Signal sampling
+- Phase modulation
+- Amplitude envelopes
 
-```gdscript
-class_name TonePlayer
-extends AudioStreamPlayer
+In Sine Space we applied sine to a position and asked what the resulting surface let a body do. Effect Sound keeps the oscillation and changes its destination: one sine enters the phase of another. AirMusic will carry this listening into a struck body whose response continues after contact.
 
-@export var frequency: float = 440.0
-@export var kind: int = 0
-```
+Begin at the two desks. Press BASELINE, wait for the note, then HOLD. Lift only the orange ball, let it settle and press COMPARE. A is the held note; B is the current setting, played after A and a quarter-second gap. Decide where the change happens before reading the formula: near the onset, through the middle, or in the tail.
 
-The player extends Godot's AudioStreamPlayer. Frequency defaults to A4. Kind selects waveform.
+## A position becomes three values
 
-Generate a sine buffer.
+The primary artifact is `DualBallFMController`. Each ball belongs to a `ValueMapper3D` cage with a half-metre span. Its three local axes supply three numbers.
 
-```gdscript
-func generate_sine_buffer(sample_rate: int, seconds: float) -> PackedFloat32Array:
-    var out := PackedFloat32Array()
-    var n: int = int(sample_rate * seconds)
-    for i in n:
-        var t := float(i) / float(sample_rate)
-        out.append(sin(TAU * frequency * t))
-    return out
-```
+| Ball | Local x | Local y | Local z |
+|---|---|---|---|
+| Blue carrier | Frequency, 100–2000 Hz | Attack, 0.01–0.5 s | Decay, 0.1–3 s |
+| Orange modulator | Frequency ratio, 0.5–8 | Phase depth / index, 0–10 | Modulator decay, 0.1–2 s |
 
-A sample buffer at the given sample rate. Each sample is the sine displacement at that moment. Godot plays the buffer when fed.
+These are the cage's axes. The whole instrument faces north in this room, so follow its arrows rather than assuming screen-right is positive world x. Translation supplies a parameter here; it does not carry the sound to the ball's new location. The rig's audio player stays with the instrument.
 
-Push the buffer to the playback stream.
+The orange cage's signal reaches this assignment in `_on_modulator_changed`:
 
 ```gdscript
-func push_buffer(playback: AudioStreamGeneratorPlayback, buffer: PackedFloat32Array) -> void:
-    for sample in buffer:
-        playback.push_frame(Vector2(sample, sample))
+mod_ratio = x
+mod_index = y
+mod_decay = z
 ```
 
-Stereo frame with the same sample in left and right. The speaker reproduces the sine as pressure waves.
+A hand can change several values at once. The `differs:` line compares the six current values with the held reference. Use it to make a deliberate one-variable comparison. It has a reporting tolerance: changes up to 1 Hz for carrier frequency, or 0.005 for another value, are not listed. An empty list is agreement within those tolerances.
 
-Shape the waveform.
+## The other wave goes inside the sine
+
+The generator computes a time for each sample:
 
 ```gdscript
-func shape(sample: float, k: int) -> float:
-    match k:
-        0: return sample
-        1: return sign(sample)
-        2: return 2.0 * (fmod(sample + 1.0, 2.0) - 1.0)
-        3: return abs(sample) * 2.0 - 1.0
-    return sample
+var t = float(i) / SAMPLE_RATE
 ```
 
-Four waveform shapes from a single sine source.
+`SAMPLE_RATE` is 44,100. This is an index into the note being generated, not the running museum clock. All the samples are calculated before that note begins playback. The baseline's 1.8 seconds contain 79,380 samples.
 
-Square is sign. Sawtooth is fmod. Triangle is absolute value.
-
-Chiptune from one function.
-
-Compute the FFT.
+The orange values make a decaying contribution to phase:
 
 ```gdscript
-func fft(samples: PackedFloat32Array) -> PackedVector2Array:
-    var bins := PackedVector2Array()
-    for k in samples.size() / 2:
-        var re := 0.0
-        var im := 0.0
-        for n in samples.size():
-            var angle := -TAU * k * n / samples.size()
-            re += samples[n] * cos(angle)
-            im += samples[n] * sin(angle)
-        bins.append(Vector2(re, im))
-    return bins
+var mod_env = exp(-t / mod_decay)
 ```
-
-Direct DFT, not FFT, but fast enough for teaching. Each bin holds a real and imaginary part. Magnitude is sqrt of the sum of squares.
-
-Render the spectrum on a panel.
 
 ```gdscript
-func draw_spectrum(line: Line2D, bins: PackedVector2Array) -> void:
-    line.clear_points()
-    for i in bins.size():
-        var mag := bins[i].length()
-        line.add_point(Vector2(i * 2.0, -mag * 20.0))
+var modulator_freq = carrier_freq * mod_ratio
+var modulator = sin(2.0 * PI * modulator_freq * t) * mod_index * mod_env
 ```
 
-Height per bin shows how much of that frequency is present. The spectrum is a fingerprint of the waveform.
+The ratio gives the modulator frequency relative to the carrier. Index sets how far it displaces the carrier's phase; its unit here is radians. The decay controls how quickly that displacement fades. At index zero the entire contribution is zero, whatever its frequency or decay.
 
-Expose a knob for frequency.
+Now read the carrier's line:
 
 ```gdscript
-func _on_frequency_knob(v: float) -> void:
-    frequency = lerp(110.0, 1760.0, v)
-    reload_buffer()
+var carrier_env = attack_env * decay_env
+var output = sin(2.0 * PI * carrier_freq * t + modulator) * carrier_env
 ```
 
-Two octaves from A2 to A6. The knob sweeps the audible range in that band. Pitch follows the hand.
+The modulator is added inside the argument. It advances and delays the carrier's phase. It is not added to the final signal as a separate voice. The instrument is called FM; this expression implements phase modulation, whose changing phase also changes instantaneous frequency.
 
-You have turned waves into sound. In the hall itself the primary, `DualBallFMController`, goes one step further: a second oscillator enters the first one's phase (see `final.md` and `technical.md`). The next room on the active route, AirMusic, strikes a resonance and waits for it; Bernini, further along, wraps oscillation around columns.
-<<</MAP>>>
+Return to the orange ball. Keep its height and left-to-right position steady while changing depth. COMPARE again. A longer modulator decay can keep changing the character while the carrier's own envelope grows quiet. One apparent fading contains two adjustable processes.
+
+## An envelope is another rule
+
+Before the carrier line, the actual generator constructs its amplitude envelope:
+
+```gdscript
+var attack_env = 1.0
+if t < attack_time:
+    attack_env = t / attack_time
+```
+
+```gdscript
+var decay_env = 1.0
+if t > attack_time:
+    decay_env = exp(-(t - attack_time) / decay_time)
+```
+
+The attack ramps to one; the subsequent decay falls exponentially. The generator later applies:
+
+```gdscript
+output = tanh(output * 0.8) * 0.5
+```
+
+Even BASELINE has an envelope, this nonlinear shaping, gain and 16-bit quantisation. Index zero gives an unmodulated reference, not a sound before processing.
+
+The note's file ends according to a separate rule:
+
+```gdscript
+var duration = min(decay_time * 1.2, 3.0)
+```
+
+An exponential has not mathematically reached zero when this finite buffer ends. Listen to the tail as an ending the implementation chose. PLAY lets the whole buffer run if another action does not replace it. During a drag the movement threshold and 0.3-second minimum interval can repeatedly restart playback, so moving continuously does not audition the same thing as letting one note finish.
+
+## What HOLD saves, and what the scope selects
+
+HOLD captures both parameters and a rendered sample buffer. Changing B does not regenerate A. COMPARE replays A, waits its duration plus 0.25 seconds, then renders the current B. Leave the controls alone during that pair if you want the comparison you prepared.
+
+The scope is computed from the synthesis expression. It is a selected window, two carrier periods beginning at `attack_time`, with 1,200 points in each waveform lane. The orange lane is divided by index; the output lane is magnified twofold. The carrier lane is shown without its amplitude envelope. These choices make shapes inspectable, but equal screen heights do not mean equal signal amplitudes. The scope is neither a microphone recording nor the whole note.
+
+Keep one sound because you want to hear it again. Change one relation that made it, then listen. This is the capability we carry to AirMusic: a body can answer a brief contact over time, and the way we inspect that answer can reveal one difference while hiding another.

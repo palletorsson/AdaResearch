@@ -1,5 +1,15 @@
 # Form-Finding: Annealing
 
+**Learning elements — proposed focus**
+
+*The labels below set the revision focus; the existing lesson still needs alignment.*
+
+- Bounded random draws
+- Candidate proposals
+- Acceptance conditions
+- Temperature
+- Current and best states
+
 Descent is greedy and gets stuck. Before this map, a landscape with more than one valley.
 
 Wrinkle the surface so it has many rests.

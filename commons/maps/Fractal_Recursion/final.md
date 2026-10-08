@@ -6,7 +6,7 @@ A square waits above the first desk. Press MORE. Another square appears inside i
 
 Before opening RULE, try LAYOUT. The squares spread into a descending row. Nothing has been added. What looked like an interior can be arranged as a succession. COLLAPSE presses all the drawn squares down to the smallest term, leaving the outer frame where it was. The count does not fall with their visibility.
 
-Here is the self-call from the artifact:
+Here is the self-call from the artifact:[^noc]
 
 ```gdscript
 var new_size: float = size * size_reduction
@@ -22,7 +22,16 @@ if d <= 0 or size < TERM_MIN_SIZE:
 
 `TERM_MIN_SIZE` is one centimetre. This desk also caps the requested depth at seven. Those are different limits: a chosen number of calls and a chosen minimum size. Neither is the same as the smallest detail your eye can distinguish in the helmet.
 
-Seven levels produce seven squares. One call makes one further call. Each square is a smaller copy of the one around it, and that is the first half of what the word *fractal* names: a shape whose parts are reduced copies of the whole.[^1] The second half is that the copying does not run out at any scale you can reach. A straight line is also made of smaller lines, and nobody calls it a fractal; the word begins where a shape keeps its detail however close you come. We could also write this particular descent as a loop. Seeing a square inside another square does not tell us which program made it. We had to look behind the image.
+Beside the desk, the same sizes stand on the floor as doorframes. Ask for more, then leave the buttons and approach them. The first square is 2.2 metres across. You can walk through it. The next is half that height; it meets a standing body before the body can pass. The next is half again. The instruction keeps making openings after it has stopped making a passage for you.
+
+Walk alongside the smaller frames. They remain available to the eye after they have become unavailable to that upright walk. LAYOUT and COLLAPSE change the squares above the desk; the doorframes keep the original measurements. A rearranged image, a limit in the function, the reach of a body: each can stop us somewhere else.
+
+![The same shrinking terms become doorframes on the museum floor.](images/recursion-thresholds.png)
+
+
+Seven levels produce seven squares. One call makes one further call. Each square repeats the shape of the one around it at a smaller size. That resemblance gives us a way towards fractals, but it is not enough to define one. A straight line is also made of smaller lines; looking closer brings no new structure. In the exact fractal constructions ahead, smaller parts repeat the whole and fine structure continues however far we zoom.[^1] Here we reach a last square. The room has stopped where a rule could go on.
+
+We could also write this particular descent as a loop. Seeing a square inside another square does not tell us which program made it. We had to look behind the image.
 
 <!-- @example_8_3_recursion_circles_vr -->
 
@@ -64,4 +73,8 @@ The table, staircase, pagoda and other works remain beyond the desks, a collecti
 
 A rule, a stopping condition, a choice of where to continue: we can now separate them. In the next hall the call branches. What does a tree inherit from the branch before it, and where can it differ?
 
-[^1]: Benoît Mandelbrot coined *fractal* from the Latin *fractus*, broken, in *Les objets fractals* (1975); the definition is his, from *The Fractal Geometry of Nature* (1982). The square desk and the ring desk are carried into the headset from Daniel Shiffman's Examples 8.2 and 8.3 in *The Nature of Code* (natureofcode.com), as several desks in this sequence are.
+There are two ways to leave this room with something changed. Walk to another frame, and the same construction meets you elsewhere. Return to the desk and change its rule, and another construction becomes available. The museum is one arrangement of these possibilities. Its finite rooms give us somewhere to begin looking; they need not settle where the inquiry ends.
+
+[^1]: Benoît Mandelbrot coined *fractal* in 1975. The distinction here between self-similarity and fine structure follows Daniel Shiffman's introductory discussion in [“What Is a Fractal?”, *The Nature of Code*](https://natureofcode.com/fractals/#what-is-a-fractal). It is a way into the examples, not a complete mathematical definition.
+
+[^noc]: The square and ring source files credit Daniel Shiffman's *The Nature of Code*, Examples 8.2 and 8.3, adapted from Processing into GDScript for VR. The compact desks and their LAYOUT, COLLAPSE and PACKING comparisons are additions in this project. The example numbers follow the source-file headers.

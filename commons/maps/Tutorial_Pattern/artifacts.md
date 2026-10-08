@@ -1,9 +1,9 @@
 # Tutorial Pattern — Artifacts
-*Array Tutorial Sequence · F_order · 10 artifacts*
+*Tiling and Symmetry · second room*
 
 > Arrays hold data. Patterns are data that rhymes. A checkerboard — two values alternating: `grid[y][x] = (x + y) % 2`. A wave — one function swept across indices. Every pattern is an equation the eye solves before the mind catches up.
 
-The map, read through what it holds — its artifacts in the order you meet them:
+Primary encounter: `pattern_maker_station` in the east comparison bay, with one editable source, fixed P1/PM reference panels and selectable floor. The book follows this encounter. The other artifacts below remain supporting experiments; this catalogue is not the teaching order.
 
 ## Grid Model
 ![Grid Model](/scene-catalog/grid_model.png)
@@ -50,7 +50,7 @@ Create patterns on a small tile grid. Watch them repeat across a carpet. Handmad
 ## Pattern Maker Station
 ![Pattern Maker Station](/scene-catalog/pattern_maker_station.png)
 
-Interactive wallpaper group station — paint a domain grid on an upright panel, choose from 17 symmetry groups, and watch the tiled result unfold on a large floor carpet in real time.
+Primary in this map. The fixed-motif configuration provides sixteen pointer-capable source cells, eight paints, P1/PM floor selection, source flip/rotation, undo and reset. Two framed panels retain their respective P1 and PM rules. The standard seventeen-group station remains available in other maps.
 
 `pattern_maker_station`
 

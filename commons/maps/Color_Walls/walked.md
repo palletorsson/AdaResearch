@@ -1,10 +1,20 @@
+## 2026-10-01 — Open colour planes
+
+The active office now uses layout=planes: twelve large freestanding coloured sheets replace the eight cubicles. Three furnished places remain. Interrupted pale wings and a split canopy give the layered colours a readable ground; the central ceiling slot, side gaps and rear opening remain open. The FILTER / OPAQUE button changes alpha/transparency and shadow casting, preserving every pane's RGB, transform and exact collider. These are layered screen tints, not spectral glass or projected coloured light.
+
+The supplied photograph prompted the arrangement; no artist attribution or exact reconstruction is claimed. Current final.md, tutorial, technical, critical, intent and summary follow the new layout. The earlier forty-pane and eight-cubicle observations below are historical.
+
+47 focused native checks pass in the actual isolated production museum: ordinary-controller passage through the staggered route and rear exit in both modes, refusal at a pane, actual pointer callbacks, material state, fixed collision/geometry, repeated-config stability and the retained legacy layouts. No headset, learner or Quest performance trial. Review and working-copy snapshots: doc/book/iterations/2026-10-01-office-open-colour/index.html.
+
+---
+
 # Color_Walls — walked
 
 > ghost-drafted from the working map (world slot, color thread); Palle rules the voice.
 
 ## The cast
 
-color_space_navigator · color_constellation_office · subpixel_display · gradient_interpolator · rainbow_hallway · loom_bolt_memphis_p4g · dark_sphere
+color_space_navigator · color_constellation_office · subpixel_display · gradient_interpolator · rainbow_hallway · dark_sphere
 
 ## The walk
 

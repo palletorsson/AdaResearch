@@ -33,67 +33,60 @@
         "physics_vector_badge"
 	  ],
 	  "content": [
-		"Vectors_Act1_WhatAVectorIs: the same question at the size of a processional hall, four stations and nothing else",
-		"VFM_02_Operations: two arrows meet — add, subtract, dot, cross, project, torque",
-		"Vectors_Act2_VectorArithmetic: every operation twice, once in your hand and once at the size of the room",
-		"VFM_05_Launch: aiming it — catapult, turret, mortar, and the arc you have to predict",
-		"Vectors_Act3_FieldsAndMotion: motion at building scale (its flow console belongs to rung 5 and says so)",
-		"VFM_07_Gravity: attraction, two bodies, three, and the chaos after",
-		"VFM_09_Legs: one leg to eight in a row, everything else held equal — the gait is a consequence of the count",
-		"VFM_08_Arena: force against force — collision, reflection, targets",
-		"Vectors_Act4a_KineticForces: a park of machines, each one a force bending your walk",
-		"Vectors_Act4b_Oscillation: the pendulum hall and the spring tower, at building scale",
-		"Vectors_Act5_ForceAsPlace: a chasm with no floor. The arrow from rung 1 is now the room."
-	],
-	  "demonstration": "See vectors as arrows in space. Add them head-to-tail. Feel dot product measure alignment. Watch cross product create perpendicular vectors. Then feel gravity pull you down. Push objects and feel resistance. Watch attraction and repulsion create orbits and explosions.",
-	  "description": "The fundamental language of 3D space meets the physics that brings it to life. Vectors encode direction and magnitudeâ€”the building blocks of everything spatial. Forces convert those vectors into motion through Newton's laws. Master vectors, master forces, master the physical world.",
+		"Vectors_Act1_WhatAVectorIs: Displacement, magnitude and unit direction; addition; signed projection and remainder",
+		"VFM_05_Launch: Initial velocity and constant acceleration",
+		"VFM_03_Motion: Force, mass and retained velocity",
+		"Vectors_Act3_FieldsAndMotion: Sample a field; retain a moving state",
+		"Vectors_Act4a_KineticForces: Speed-dependent drag, buoyancy approximation and contact friction",
+		"Vectors_Act4b_Oscillation: Restoring force, coupling, damping and constraints",
+		"Change_Choreography: Phase, rate and accumulated backlog",
+		"VFM_07_Gravity: Pairwise attraction and initial conditions",
+		"VFM_09_Legs: Support, contact and centre of mass",
+		"VFM_08_Arena: Impulse, recoil and collision",
+        "Vectors_Act5_ForceAsPlace: The visitor as another receiver"
+	  ],
+	  "demonstration": "Carry the known point through displacement, addition and projection. Give it a launch, a force pulse, a field and resistance. Compare restoration with prescribed phase, mutual attraction with a selected receiver, support with commanded gait, and collision with targeting. Finally let the held points propel the visitor through a court of earlier capacities.",
+	  "description": "Eleven halls: one hand-controlled vector room, then launch, force, fields, resistance, restoration, accumulation, attraction, support, collision and the visitor as receiver.",
 	  "difficulty": "intermediate",
 	  "estimated_time": "60-90 minutes",
 	  "formula": "v = (x,y,z), |v| = âˆš(xÂ²+yÂ²+zÂ²), F = ma â†’ a = F/m â†’ v += aÂ·dt â†’ p += vÂ·dt",
 	  "lab_map": "Lab/map_data_post_forces",
 	  "layer": "oscillation",
 	  "learning_objectives": [
-		"Coordinate systems and spatial reasoning in 3D",
-		"Vector components: x, y, z as decomposed direction",
-		"Magnitude: length as âˆš(xÂ² + yÂ² + zÂ²)",
-		"Unit vectors: direction without magnitude",
-		"Addition and subtraction: combining and differencing vectors",
-		"Dot product: measuring alignment (aÂ·b = |a||b|cos Î¸)",
-		"Cross product: creating perpendicular vectors, torque, normals",
-		"Projection and reflection: mirrors and collisions",
-		"Vector fields: spatial functions mapping position to direction",
-		"F = ma: Force equals mass times acceleration",
-		"Gravity: constant downward acceleration (9.8 m/sÂ²)",
-		"Friction and drag: resistance to motion",
-		"Attraction and repulsion: inverse square laws",
-		"Springs: Hooke's law (F = -kx)",
-		"Particle systems: many bodies under forces",
-		"N-body dynamics: gravitational chaos from simple rules",
-        "Derivative as instantaneous rate of change: velocity is the rate of position; acceleration is the rate of velocity. F = ma is calculus made physical — the calculus substrate named at change (seq 4.5) carried into the world here."
+		"Use displacement independently of display origin; name retained projection components and the installed small-vector threshold",
+		"Keep compatible vector sums distinct from travelled distance and intermediate route records",
+		"Construct an along-rail component and remainder; check they recombine without turning a diagram into a physical torque claim",
+		"Sample a supplied analytic flight formula with explicit initial state, constant acceleration and landing-height assumptions",
+		"Control a finite force pulse while the engine integrates a rigid body; distinguish ending force from stopping motion",
+		"Own the two numerical updates that either assign velocity or add acceleration to retained velocity",
+		"Reuse state-dependent resistance and restoration with named units, mass and update order; retain the supplied fixed-step runner",
+		"Introduce period and phase at the rods, then use the existing paired-dial rate edit to distinguish a fixed offset from growing separation",
+		"Distribute equal and opposite interaction forces while allowing different acceleration and fixed-source policies",
+		"Keep support and targeting as bounded comparisons; do not require a gait controller or creature reconstruction",
+        "Apply a local acceleration to a declared cube receiver; compare the separate visitor contract and preserve the departure into optimisation without inertia"
 	  ],
 	  "maps": [
 		"Vectors_Act1_WhatAVectorIs",
-		"VFM_02_Operations",
-		"Vectors_Act2_VectorArithmetic",
 		"VFM_05_Launch",
 		"VFM_03_Motion",
 		"Vectors_Act3_FieldsAndMotion",
 		"Vectors_Act4a_KineticForces",
 		"Vectors_Act4b_Oscillation",
+		"Change_Choreography",
 		"VFM_07_Gravity",
 		"VFM_09_Legs",
 		"VFM_08_Arena",
-		"Vectors_Act5_ForceAsPlace"
-	],
+        "Vectors_Act5_ForceAsPlace"
+	  ],
 	  "name": "Vectors & Forces: From Direction to Dynamics",
 	  "prerequisites": [
 		"primitives",
         "transformation"
 	  ],
-	  "qfep_connection": "Vectors define system statesâ€”the S in QFEP. Forces introduce changeâ€”they drive the temporal evolution Ï†Î”E(S,t). Together, vectors and forces are the complete grammar of physical motion: direction encodes where, magnitude encodes how much, and F=ma encodes why things change.",
+	  "qfep_connection": "The sequence gives the research a set of inspectable choices: what a model retains, what its update changes, and which bodies can respond. Those choices support questions about possible bodies and exclusions. These exhibits do not collectively measure entropy or calculate a QFEP threshold.",
 	  "qfep_term": "dynamics",
 	  "return_to": "lab",
-	  "truth": "Direction + magnitude = vector. F = ma. Acceleration is the only thing you feel. Position and velocity are states; force is what changes them.",
+	  "truth": "An arrow does not decide what happens. Its quantity, frame, receiver and retained state give it a consequence.",
 	  "unlock_requirements": [],
 	  "unlocks": [
 		"physicssimulation",
@@ -237,6 +230,19 @@
 		  "size_budget": "world_scale",
 		  "rationale": "Grand finale: drone combat, physics destruction sandbox, and exhibition gallery. Applied forces across three massive arenas with callbacks to throwing and vectors.",
 		  "grammar": "vatican"
+		},
+		{
+		  "map": "Change_Choreography",
+		  "artifacts": [
+			"phase_rod_array",
+			"conveyor_backlog",
+            "paired_time"
+		  ],
+		  "position": "after_oscillation",
+		  "rationale": "Phase difference can cooperate; rate mismatch can accumulate into an obstruction.",
+		  "application_studies": {
+			"paired_time": "Halve the rate difference; compare the growing gap with an unchanged phase offset."
+		  }
 		}
 	  ],
 	  "deferred_maps": [
@@ -259,8 +265,8 @@
 		"VFM_01_Foundations",
 		"VFM_06_Springs",
 		"VFM_04_Fields",
-		"Forces_PropGallery"
-	],
+        "Forces_PropGallery"
+	  ],
 	  "deferred_reason": "THE FOLD, 2026-08-25 (Palle: 'too many maps but we do not want to lose any essential artifacts'). forces listed 30 maps because it held THREE rival ladders and a junk drawer. Retired here: the older Vector*/Forces* ladder (9 rooms, superseded by the museum) and 7 bench/test rooms that were never curriculum (Console_Test, Reformed_Instruments, Force_Props_Sandbox, Force_Preview, Sky_Climb, Void_Crossing, Chamber_Forces). Every token they held was judged one by one in doc/folds/forces.json and the verdict is checkable: python tools/fold_ledger.py --sequence=forces --plan=doc/folds/forces.json --check || THE SECOND FOLD, 2026-09-02 (Palle: 'forces are 16 maps, can we compress them'; ruled: Arena is the F = ma exam). Measured first: the ten bench rooms held 137 tokens and the six Acts 44, sharing 23, so benches below rung 2 are not duplicates and could not be deleted without losing artifacts. Folded BY RUNG, every token with a verdict in doc/folds/forces_2026-09-02.json: VFM_01 -> VFM_02 (one operations bench), VFM_03 -> VFM_05, VFM_06 -> Vectors_Act4b (springs are oscillation), VFM_04 -> Vectors_Act3's field half (the field idea is no longer stated at room 7 and dropped for six), Forces_PropGallery -> VFM_08_Arena (the exam is where forces are felt). 57 tokens rescued and placed, 21 retired as duplicates of live spine rooms, 2 retired as plumbing. 16 -> 11. Check: python tools/fold_ledger.py --sequence=forces --plan=doc/folds/forces_2026-09-02.json --check || THE RESTORE, 2026-09-07 (Palle: 'restore VFM_03_Motion'). The second fold folded the motion bench into VFM_05_Launch and left it carrying 31 artifacts doing two jobs - the arc tutorial and a motion gallery - which is what the roles pass found from the floor: 24 of those 31 read as secondary. VFM_03_Motion is re-listed between VFM_05_Launch and Vectors_Act3_FieldsAndMotion, its rung-3 bench place in taxonomy._rooms. Fourteen placements were CLEARED from Launch rather than moved, because every one of them already stood in VFM_03_Motion's own map file; Launch keeps ForceMagnitudeDemo and VectorForces, which are its primaries. Launch 31 -> 17. The other three deferred bench rooms (VFM_01_Foundations, VFM_04_Fields, VFM_06_Springs) are NOT restored: the compression stands except where a room was doing two jobs.",
 	  "taxonomy": {
 		"_readme": "THE LADDER (2026-08-25), five rungs at TWO SCALES. The Acts and the VFM museum were not rivals — measured, they share only 22 of 169 tokens — so both survive: the museum is the BENCH (an operation at arm's length) and the Acts are the BUILDING (the same operation at the scale of a room you walk through). Folding them into one room each would have flattened the sequence's own claim, the way folding color's hand/set/space would have flattened colour's. Closes as a LOOP: rung 5 is a force you STAND INSIDE, which is rung 1's arrow with the walker put inside it.",
@@ -379,7 +385,128 @@
 		  "Vectors_Act3_FieldsAndMotion": "its own title says Fields AND Motion, and its blurb says 'two rooms, two ways a vector stops holding still'. Filed on MOTION; its flow console and weather field belong to rung 5. The straddle is declared rather than smoothed — a room that spans two rungs is a fact about the room, not a gap in the ladder."
 		},
 		"_known_weak": "FIXED 2026-08-25, the five misfilings named here: newtons_laws and example_2_1_forces_vr left rung 1 for the Arena, work_energy_demo left rung 2 for Springs, normal_force_demo left rung 2 for Motion beside friction_ramp, and flocking_controls left forces entirely for SwarmIntelligence_Boids_Algorithm, where the boids it controls live. Plan and reasons in doc/folds/forces_misfiled.json.\n\nWHAT DID NOT GET FIXED, and an earlier claim corrected: removing two tokens took rung 1 from 5.2x to 4.8x, not 'roughly even' as first written. The imbalance is STRUCTURAL, not a filing error — VFM_01 is a lobby that previews the sequence (19 tokens including the whole add/subtract family) and Vectors_Act1 is four stations by design. Evening the rung would mean moving ~8 operation tokens out of the front door, which is a different decision about what a front door is for, not a cleanup."
-	  }
+	  },
+	  "curation_history": [
+		{
+		  "date": "2026-09-19",
+		  "reason": "Preserve the earlier overview while aligning current descriptions with the thirteen authored halls.",
+		  "truth": "Direction + magnitude = vector. F = ma. Acceleration is the only thing you feel. Position and velocity are states; force is what changes them.",
+		  "description": "The fundamental language of 3D space meets the physics that brings it to life. Vectors encode direction and magnitudeâ€”the building blocks of everything spatial. Forces convert those vectors into motion through Newton's laws. Master vectors, master forces, master the physical world.",
+		  "demonstration": "See vectors as arrows in space. Add them head-to-tail. Feel dot product measure alignment. Watch cross product create perpendicular vectors. Then feel gravity pull you down. Push objects and feel resistance. Watch attraction and repulsion create orbits and explosions.",
+		  "qfep_connection": "Vectors define system statesâ€”the S in QFEP. Forces introduce changeâ€”they drive the temporal evolution Ï†Î”E(S,t). Together, vectors and forces are the complete grammar of physical motion: direction encodes where, magnitude encodes how much, and F=ma encodes why things change.",
+		  "learning_objectives": [
+			"Coordinate systems and spatial reasoning in 3D",
+			"Vector components: x, y, z as decomposed direction",
+			"Magnitude: length as âˆš(xÂ² + yÂ² + zÂ²)",
+			"Unit vectors: direction without magnitude",
+			"Addition and subtraction: combining and differencing vectors",
+			"Dot product: measuring alignment (aÂ·b = |a||b|cos Î¸)",
+			"Cross product: creating perpendicular vectors, torque, normals",
+			"Projection and reflection: mirrors and collisions",
+			"Vector fields: spatial functions mapping position to direction",
+			"F = ma: Force equals mass times acceleration",
+			"Gravity: constant downward acceleration (9.8 m/sÂ²)",
+			"Friction and drag: resistance to motion",
+			"Attraction and repulsion: inverse square laws",
+			"Springs: Hooke's law (F = -kx)",
+			"Particle systems: many bodies under forces",
+			"N-body dynamics: gravitational chaos from simple rules",
+            "Derivative as instantaneous rate of change: velocity is the rate of position; acceleration is the rate of velocity. F = ma is calculus made physical — the calculus substrate named at change (seq 4.5) carried into the world here."
+		  ],
+		  "content": [
+			"Vectors_Act1_WhatAVectorIs: the same question at the size of a processional hall, four stations and nothing else",
+			"VFM_02_Operations: two arrows meet — add, subtract, dot, cross, project, torque",
+			"Vectors_Act2_VectorArithmetic: every operation twice, once in your hand and once at the size of the room",
+			"VFM_05_Launch: aiming it — catapult, turret, mortar, and the arc you have to predict",
+			"Vectors_Act3_FieldsAndMotion: motion at building scale (its flow console belongs to rung 5 and says so)",
+			"VFM_07_Gravity: attraction, two bodies, three, and the chaos after",
+			"VFM_09_Legs: one leg to eight in a row, everything else held equal — the gait is a consequence of the count",
+			"VFM_08_Arena: force against force — collision, reflection, targets",
+			"Vectors_Act4a_KineticForces: a park of machines, each one a force bending your walk",
+			"Vectors_Act4b_Oscillation: the pendulum hall and the spring tower, at building scale",
+			"Change_Choreography: twenty clocks, phase differences, and a conveyor whose receiver cannot keep up",
+            "Vectors_Act5_ForceAsPlace: a chasm with no floor. The arrow from rung 1 is now the room."
+		  ]
+		}
+	  ],
+	  "learning_objectives_status": "Revised summary proposals; existing companion texts retained, reduced learner edit locations and lessons pending.",
+	  "local_review_history": [
+		{
+		  "date": "2026-10-04",
+		  "report": "doc/book/iterations/2026-10-04-forces-capacity-return/index.html",
+		  "decision": "Keep the thirteen-hall order, share the state-update reasoning across Fields and Oscillation, and lighten support/arena obligations.",
+		  "status": "Proposed summaries only; no runtime or full companion changes"
+		}
+	  ],
+	  "curation_manifest": "res://commons/artifacts/force_halls/curation.json",
+	  "tutorial_progression": [
+		{
+		  "map": "Vectors_Act1_WhatAVectorIs",
+		  "artifact": "force_point_direction",
+		  "subject": "Displacement, magnitude and unit direction; addition; signed projection and remainder",
+		  "carry": "One point class; a declared local frame; direction, sum and selected component ready for launch and force."
+		},
+		{
+		  "map": "VFM_05_Launch",
+		  "artifact": "launch_arc",
+		  "subject": "Initial velocity and constant acceleration",
+		  "carry": "Initial state and a rule for change; prediction can be compared with an actual release."
+		},
+		{
+		  "map": "VFM_03_Motion",
+		  "artifact": "force_play_mass",
+		  "subject": "Force, mass and retained velocity",
+		  "carry": "A dynamic point retains velocity after an input ends."
+		},
+		{
+		  "map": "Vectors_Act3_FieldsAndMotion",
+		  "artifact": "force_play_vortex",
+		  "subject": "Sample a field; retain a moving state",
+		  "carry": "A local rule becomes a trajectory through repeated sampling."
+		},
+		{
+		  "map": "Vectors_Act4a_KineticForces",
+		  "artifact": "force_play_liquids",
+		  "subject": "Speed-dependent drag, buoyancy approximation and contact friction",
+		  "carry": "A force may depend on the state it is changing."
+		},
+		{
+		  "map": "Vectors_Act4b_Oscillation",
+		  "artifact": "force_play_springs",
+		  "subject": "Restoring force, coupling, damping and constraints",
+		  "carry": "Restoration and resistance can act together; a periodic appearance can have a dynamic cause."
+		},
+		{
+		  "map": "Change_Choreography",
+		  "artifact": "phase_rod_array",
+		  "subject": "Phase, rate and accumulated backlog",
+		  "carry": "Repeated local actions can accumulate into a new condition."
+		},
+		{
+		  "map": "VFM_07_Gravity",
+		  "artifact": "force_play_mutual",
+		  "subject": "Pairwise attraction and initial conditions",
+		  "carry": "A source can also be a receiver; selecting bodies is part of a force system."
+		},
+		{
+		  "map": "VFM_09_Legs",
+		  "artifact": "force_play_support",
+		  "subject": "Support, contact and centre of mass",
+		  "carry": "A body depends on a configuration of other bodies."
+		},
+		{
+		  "map": "VFM_08_Arena",
+		  "artifact": "force_play_bowling",
+		  "subject": "Impulse, recoil and collision",
+		  "carry": "An action can redistribute motion beyond its intended recipient."
+		},
+		{
+		  "map": "Vectors_Act5_ForceAsPlace",
+		  "artifact": "force_capability_lab",
+		  "subject": "The visitor as another receiver",
+		  "carry": "Earlier operations become available capacities, and their combinations leave consequences."
+		}
+	  ]
 	}
   },
   "world_phase": "grid",

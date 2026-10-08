@@ -1,5 +1,13 @@
 # Escher Impossible
 
+**Learning elements — proposed focus**
+
+*The labels below set the revision focus; the existing lesson still needs alignment.*
+
+- Closed path differences
+- Projection
+- Local and global claims
+
 Local truth, global impossibility. Build a staircase where every step is correct and the whole cannot exist.
 
 Declare the staircase graph.

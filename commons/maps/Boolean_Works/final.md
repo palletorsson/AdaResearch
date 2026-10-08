@@ -119,6 +119,18 @@ The model has no collider. Its carved air also begins above the museum floor; a 
 
 Look back toward the burrow. Related operations have produced two different relations to an interior. One offers a surface to examine. The other has been fitted to a body's approach, support and return. The large hollow may make us want another passage; wanting it does not yet give it a floor.
 
+## A darkness held
+
+<!-- @boolean_eggs -->
+
+Three coloured bodies wait on a low white plinth. Violet swells into a second volume. Blue keeps the region where two volumes meet. In the teal body, an oval opens toward you. Its rim catches the light; the darkness inside gives almost nothing back.
+
+Move sideways. The lip changes its outline, but the dark interior offers no travelling highlight to tell you how far it goes. The cut has a bottom. Its material has stopped helping you find it.
+
+These are three different arrangements of ovoids, using union, intersection and subtraction. Their colours and proportions differ too. The first hall held the operands still to compare the verbs. Here those verbs have become choices in making a body we might want to stay with.
+
+The study borrows a question from Anish Kapoor's void works: how can a surface make depth uncertain? An ordinary unlit material covers this real concavity. The calculation has finished, but looking has not. Knowing the recipe does not quite return the bottom to the eye.
+
 ## A collection within reach
 
 <!-- @booleanvariations -->
@@ -136,5 +148,25 @@ An outside photograph can show an entrance. It cannot establish the route a part
 In the burrow, the cutters kept their centres while a changed profile made a walk possible. The old description, *connected*, remained true. We had to ask what connection would mean for the body arriving there.
 
 Keep the signs that overpromise in view. They tell us where the desire for a room arrived before its floor, contact rules or entrance. The next construction can take that desire seriously. Sometimes a different cut lets the body arrive too.
+
+<!-- @ -->
+
+<!-- study-spine:conical_sightline -->
+
+<!-- @conical_sightline -->
+
+Three walls stand apart. Through them, one widening cut makes a view reach from room to room. Walk through the ordinary doors beside it; looking through and passing through remain different permissions.
+
+The removed volumes stand nearby. Move the cutter and compare what stays with what is kept as an offcut. This response to Matta-Clark's Conical Intersect makes the subtraction reversible. The buildings, demolition and people of the historical work cannot be restored by our RESET button. The clean operation gives us a relation to inspect; it also shows what the model has left outside.
+
+<!-- study-spine:kapoor_void_studies -->
+
+<!-- @kapoor_void_studies -->
+
+A dark circle opens in a raised plinth. Beside it, six smaller apertures repeat the hesitation. At the wall, an outward swelling shares its pale surface with a hollow. Approach from the clear floor and look across their edges.
+
+Choose BLACK / CHALK. The cavity has not changed, but light now gives you more of its shape. In these responses to Kapoor, an opening and the evidence of an opening can be separated. The raised base keeps the deep bowl above the museum floor, and its whole footprint stays closed to your feet. Darkness is available to look into without turning uncertainty into a demand to step.
+
+<!-- @ -->
 
 In the next hall many small bodies lay a trace in the ground and follow it. The question moves from what a hollow permits one body to what a shared ground permits many.

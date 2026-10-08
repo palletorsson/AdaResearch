@@ -1,17 +1,18 @@
-# Noise 6 Wall
+# Noise 6 Wall — hold, accumulate, dress
 
-A sum of six scales, and what it takes to see one of them. Every line below is from `algorithms/randomness/shadernoisespace/WallNoiseShader.gdshader` and `noiseroom.gd`, the shader and script this hall places.
+**Learning elements — proposed focus**
 
-Make the bound a uniform.
+_The labels below set the revision focus; the existing lesson still needs alignment._
 
-```glsl
-uniform int layers : hint_range(1, 6) = 6;
-uniform int show_term : hint_range(0, 1) = 0;   // 0 = the room's picture, 1 = the sum alone
-```
+- Layered fields
+- Colour composition
+- Appearance and support
 
-Six is the shipped room, and it was written into the loop as a literal, which is why this room's own text could propose isolating an octave that nobody could isolate.
-
-Add the terms.
+1. Enter through either side door. Look along the floor towards the other opening and notice the cloud finish on the room's sphere.
+2. Turn to the panel on the inner wall and press FREEZE. Compare the current moment before and after the press; it should hold without jumping to time zero.
+3. Press DRESS while staying inside the room. Compare greyscale cloud accumulation with the full pink material. Check the same doorway and floor; the controls change material parameters, not collision.
+4. At the panel, compare the fixed 1/2/4/6 windows. Press LAYERS to carry each cumulative bound into the enclosure. Keep BASIS and the moment fixed for this comparison.
+5. Read the loop below. Each term folds noise through abs, adds a weighted magnitude, halves amplitude and doubles frequency. The sine/cosine offsets are held by the same local clock.
 
 ```glsl
     for (int i = 0; i < layers; i++) {
@@ -25,90 +26,13 @@ Add the terms.
     }
 ```
 
-Half the amplitude and twice the frequency each time round. Two consequences, and the room shows both: the sum of the amplitudes is 0.5 for one term and 0.984375 for six, which is a brightness difference and nothing else; and each term is ADDED, so nothing a later term does can move what an earlier one put there.
+The first weight is .5 and the frequency is 1. The cumulative weights are .5, .75, .9375 and .984375. These are not predicted brightness values: each term has its own sampled magnitude, followed by gain and clipping.
 
-Show the sum on its own.
+6. Change BASIS separately. The control cycles the implementations Perlin → Value → Cellular → Simplex → Perlin. Return to Perlin at the held moment. There is no exposed seed control.
+7. Restore the dress. The complete finish adds an independent four-term turbulence calculation, density, smoothstep, colour, corner/edge shading, roughness and lighting-normal variation. Reducing LAYERS does not disable that second calculation.
+8. Follow a cloud towards a door or corner. Each quad restarts its UV chart; the sphere has another chart. A shared procedure does not guarantee continuity between those surfaces.
+9. Watch the independent dark orb while the room is held. Resume with FREEZE again. The room continues from its held phase; the orb has been advancing throughout.
 
-```glsl
-    if (show_term == 1) {
-        float bare = clamp(cloud_noise(uv * cloud_scale, time * time_scale) * term_gain, 0.0, 1.0);
-        ALBEDO = vec3(bare);
-        EMISSION = vec3(bare) * 0.9;
-        ALPHA = 1.0;
-    }
-```
+Both shaders expose the same cloud term bound and sum-only mode. The comparison patches always show the sum at gain 2, while DRESS selects what the enclosure and its sphere wear. The actual desktop pointer operates all four controls in the accepted rendered run. The current panel is at (6,4), facing into the room; earlier entrance photographs describe the previous placement. Human VR reach and comfort remain for the deferred headset session.
 
-No turbulence, no colour, no corner darkening. The patch emits its own value rather than being lit, because a comparison surface in a dark interior photographs black; `term_gain` is the same on all four, and the plate says what it is.
-
-Build four patches that differ in one thing.
-
-```gdscript
-		mat.set_shader_parameter("layers", n)
-		mat.set_shader_parameter("show_term", 1)
-		mat.set_shader_parameter("time", 0.0)
-		mat.set_shader_parameter("cloud_scale", 2.0)
-		mat.set_shader_parameter("cloud_density", 1.0)
-```
-
-Every patch gets the same everything except `n`. The probe reads all four materials back and fails if any other parameter differs, because a fair comparison is a claim that has to be checkable.
-
-Stop every clock, not one of them.
-
-```gdscript
-func set_frozen(frozen: bool) -> void:
-	animation = "frozen" if frozen else "live"
-	animation_enabled = not frozen
-	color_cycling = not frozen
-	cloud_density_animation = not frozen
-	for m in [room_material, wall_material]:
-		if m != null:
-			m.set_shader_parameter("time_scale", 0.0 if frozen else 0.2)
-	for p in _patches:
-		var mat: ShaderMaterial = (p as Dictionary)["mat"]
-		if mat != null:
-			mat.set_shader_parameter("time_scale", 0.0 if frozen else 0.2)
-```
-
-Three movers and a shader clock, on the walls and on all four patches. Freezing one of them leaves a still picture of a moving thing.
-
-Give every instance its own materials.
-
-```gdscript
-		if room_material != null and not room_material.resource_local_to_scene:
-			room_material = room_material.duplicate() as ShaderMaterial
-			room_material.resource_local_to_scene = true
-```
-
-The scene's materials were shared resources, so a uniform set in one hall was set in every placement of this room. Duplicating changes no pixel and stops the leak.
-
-And speak only to your own hall.
-
-```gdscript
-	var hall: Node = _hall_ancestor()
-	for r in get_tree().get_nodes_in_group("noise_rooms"):
-		if hall != null and not hall.is_ancestor_of(r):
-			continue
-```
-
-The same boundary the voxel bench needed a room earlier: the museum streams several halls at once, and a group is not a place.
-
-Stage it in a map.
-
-```
-shader_noise_space:180#stand:panel
-```
-
-`stand:panel` builds the board, the four patches, the plate and LAYERS, BASIS and FREEZE; `layers` sets the count from the token. Without it the artifact is the immersive interior it always was, six layers deep, with the generator axis an earlier pass gave it.
-
-And a board is not a room.
-
-```gdscript
-func _strip_enclosure_for_panel() -> void:
-	for n in ["RoomContainer", "WallsContainer", "LightingContainer", "Camera3D"]:
-		var node: Node = get_node_or_null(n)
-		if node != null:
-			remove_child(node)
-			node.queue_free()
-```
-
-The staged body used to carry the whole 27 m enclosure behind the board. Removed rather than hidden: an extent is measured from the tree, and the museum decides where a body may stand from its extent. Put a 2 m board across a 1 m corridor and the museum will seal the route and then slide the body aside to reopen it — which is the right call, and worth knowing before you write that the board stands where you put it.
+Next: Noise_Inside_Noise. Keep the distinction between changing the value returned at a coordinate and changing the coordinate at which the question is asked.

@@ -10,7 +10,8 @@
     },
     "title": "Chamber_LSystems",
     "version": "placed-hybrid",
-    "eye_shot_adopted": "Trial_eye_Chamber_LSystems"
+    "eye_shot_adopted": "Trial_eye_Chamber_LSystems",
+    "metadata": {}
   },
   "settings": {
     "cube_size": 1.0,
@@ -31,40 +32,40 @@
   },
   "layers": {
     "structure": [
-      ["1","1","1","1","1","1","1","1","1","1","1"],
-      ["1","1","1","1","1","1","1","1","1","1","1"],
-      ["1","1","1","1","1","1","1","1","1","1","1"],
-      ["1","1","1","1","1","1","1","1","1","1","1"],
-      ["1","1","1","1","1","1","1","1","1","1","1"],
-      ["1","1","1","1","1","1","1","1","1","1","1"],
-      ["1","1","1","1","1","1","1","1","1","1","0"]
+      ["1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1"],
+      ["1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1"],
+      ["1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1"],
+      ["1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1"],
+      ["1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1"],
+      ["1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1"],
+      ["1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "0"]
     ],
     "utilities": [
-      ["sp"," "," "," "," "," "," "," "," "," "," "],
-      [" "," "," "," "," "," "," "," "," "," "," "],
-      [" "," "," "," "," "," "," "," "," "," "," "],
-      [" "," "," "," "," "," "," "," "," "," "," "],
-      [" "," "," "," "," "," ","e:2:5:5:branch"," "," "," "," "],
-      [" "," "," "," "," "," "," "," "," "," "," "],
-      [" "," "," "," "," "," "," "," "," "," ","t"]
+      ["sp", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
+      [" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
+      [" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
+      [" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
+      [" ", " ", " ", " ", " ", " ", "e:2:5:5:branch", " ", " ", " ", " "],
+      [" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
+      [" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", "t"]
     ],
     "interactables": [
-      [" "," "," "," "," "," "," "," "," "," "," "],
-      [" "," "," "," "," "," "," "," "," ","proximity_spawner#type:branching_vine"," "],
-      [" ","catalyst_target"," "," "," "," "," "," "," "," "," "],
-      [" "," "," "," "," "," "," ","becoming_catalyst#start_mode:branching"," "," "," "],
-      [" "," "," "," "," "," "," "," "," "," "," "],
-      [" "," "," ","science_screen:180:1.5#mode:trace"," "," "," "," "," "," "," "],
-      [" "," "," "," "," "," "," "," "," "," "," "]
+      [" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
+      [" ", " ", " ", " ", " ", " ", " ", " ", " ", "proximity_spawner#type:branching_vine", " "],
+      [" ", "catalyst_target", " ", " ", " ", " ", " ", " ", " ", " ", " "],
+      [" ", " ", " ", " ", " ", " ", " ", "becoming_catalyst#start_mode:branching", " ", " ", " "],
+      [" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
+      [" ", " ", " ", "science_screen:180:1.5#mode:trace", " ", " ", " ", " ", " ", " ", " "],
+      [" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "]
     ],
     "biome": [
-      ["","","","","","","","","","",""],
-      ["","flora:lsystem:field:on=catalyst.branching:seed","","flora:lsystem:field:on=catalyst.branching:seed","","","","","","",""],
-      ["","","flora:lsystem:field:on=catalyst.branching:seed","","","","","","","",""],
-      ["","flora:lsystem:field:on=catalyst.branching:seed","","flora:lsystem:field:on=catalyst.branching:seed","","","","","fungus:mycelium:field:on=friend:seed","",""],
-      ["","","","","","fungus:mycelium:mute:on=friend.bridger:unmute/seed","","fungus:mycelium:mute:on=friend.bridger:unmute/seed","","",""],
-      ["","","","","","","","fungus:mycelium:field:on=friend.bridger:seed/claim","fungus:mycelium:field","fungus:mycelium:field",""],
-      ["","","","","","","","","fungus:mycelium:field","fungus:mycelium:field",""]
+      ["", "", "", "", "", "", "", "", "", "", ""],
+      ["", "flora:lsystem:field:on=catalyst.branching:seed", "", "flora:lsystem:field:on=catalyst.branching:seed", "", "", "", "", "", "", ""],
+      ["", "", "flora:lsystem:field:on=catalyst.branching:seed", "", "", "", "", "", "", "", ""],
+      ["", "flora:lsystem:field:on=catalyst.branching:seed", "", "flora:lsystem:field:on=catalyst.branching:seed", "", "", "", "", "fungus:mycelium:field:on=friend:seed", "", ""],
+      ["", "", "", "", "", "fungus:mycelium:mute:on=friend.bridger:unmute/seed", "", "fungus:mycelium:mute:on=friend.bridger:unmute/seed", "", "", ""],
+      ["", "", "", "", "", "", "", "fungus:mycelium:field:on=friend.bridger:seed/claim", "fungus:mycelium:field", "fungus:mycelium:field", ""],
+      ["", "", "", "", "", "", "", "", "fungus:mycelium:field", "fungus:mycelium:field", ""]
     ]
   }
 }

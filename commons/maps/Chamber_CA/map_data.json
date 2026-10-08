@@ -10,7 +10,8 @@
     },
     "title": "Chamber_CA",
     "version": "placed-hybrid",
-    "eye_shot_adopted": "Trial_eye_Chamber_CA"
+    "eye_shot_adopted": "Trial_eye_Chamber_CA",
+    "metadata": {}
   },
   "settings": {
     "cube_size": 1.0,
@@ -31,40 +32,40 @@
   },
   "layers": {
     "structure": [
-      ["1","1","1","1","1","1","1","1","1","1","1"],
-      ["1","1","1","1","1","1","1","1","1","1","1"],
-      ["1","1","1","1","1","1","1","1","1","1","1"],
-      ["1","1","1","1","1","1","1","1","1","1","1"],
-      ["1","1","1","1","1","1","1","1","1","1","1"],
-      ["1","1","1","1","1","1","1","1","1","1","1"],
-      ["1","1","1","1","1","1","1","1","1","1","0"]
+      ["1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1"],
+      ["1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1"],
+      ["1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1"],
+      ["1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1"],
+      ["1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1"],
+      ["1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1"],
+      ["1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "0"]
     ],
     "utilities": [
-      ["sp"," "," "," "," "," "," "," "," "," "," "],
-      [" "," "," "," "," "," "," "," "," "," "," "],
-      [" "," "," "," "," "," "," "," "," "," "," "],
-      [" "," "," "," "," "," "," "," "," "," "," "],
-      [" "," "," "," "," "," ","e:2:5:5:drainfriend"," "," "," "," "],
-      [" "," "," "," "," "," "," "," "," "," "," "],
-      [" "," "," "," "," "," "," "," "," "," ","t"]
+      ["sp", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
+      [" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
+      [" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
+      [" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
+      [" ", " ", " ", " ", " ", " ", "e:2:5:5:drainfriend", " ", " ", " ", " "],
+      [" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
+      [" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", "t"]
     ],
     "interactables": [
-      [" "," "," "," "," "," "," "," "," "," "," "],
-      [" "," "," "," "," "," "," "," "," ","proximity_spawner#type:lifeform_walker"," "],
-      [" ","catalyst_target"," "," "," "," "," "," "," "," "," "],
-      [" "," "," "," "," "," "," ","becoming_catalyst#start_mode:cellular"," "," "," "],
-      [" "," "," "," "," "," "," "," "," "," "," "],
-      [" "," "," ","science_screen:180:1.5#mode:grid"," "," "," "," "," "," "," "],
-      [" "," "," "," "," "," "," "," "," "," "," "]
+      [" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
+      [" ", " ", " ", " ", " ", " ", " ", " ", " ", "proximity_spawner#type:lifeform_walker", " "],
+      [" ", "catalyst_target", " ", " ", " ", " ", " ", " ", " ", " ", " "],
+      [" ", " ", " ", " ", " ", " ", " ", "becoming_catalyst#start_mode:cellular", " ", " ", " "],
+      [" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
+      [" ", " ", " ", "science_screen:180:1.5#mode:grid", " ", " ", " ", " ", " ", " ", " "],
+      [" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "]
     ],
     "biome": [
-      ["","","","","","","","","","",""],
-      ["","","","fungus:ca:field:on=catalyst.cellular:seed","","","","","","",""],
-      ["","","fungus:ca:field:on=catalyst.cellular:seed","","fungus:ca:field:on=catalyst.cellular:seed","","","","","",""],
-      ["","fungus:ca:field:on=catalyst.cellular:seed","","","","","","","fungus:mycelium:field:on=friend:seed","",""],
-      ["","","","","","fungus:mycelium:mute:on=friend.replicator:unmute/seed","","fungus:mycelium:mute:on=friend.replicator:unmute/seed","","",""],
-      ["","","","","","","","fungus:mycelium:field:on=friend.replicator:seed/claim","fungus:mycelium:field","fungus:mycelium:field:on=friend.replicator:seed/claim",""],
-      ["","","","","","","","","fungus:mycelium:field","fungus:mycelium:field",""]
+      ["", "", "", "", "", "", "", "", "", "", ""],
+      ["", "", "", "fungus:ca:field:on=catalyst.cellular:seed", "", "", "", "", "", "", ""],
+      ["", "", "fungus:ca:field:on=catalyst.cellular:seed", "", "fungus:ca:field:on=catalyst.cellular:seed", "", "", "", "", "", ""],
+      ["", "fungus:ca:field:on=catalyst.cellular:seed", "", "", "", "", "", "", "fungus:mycelium:field:on=friend:seed", "", ""],
+      ["", "", "", "", "", "fungus:mycelium:mute:on=friend.replicator:unmute/seed", "", "fungus:mycelium:mute:on=friend.replicator:unmute/seed", "", "", ""],
+      ["", "", "", "", "", "", "", "fungus:mycelium:field:on=friend.replicator:seed/claim", "fungus:mycelium:field", "fungus:mycelium:field:on=friend.replicator:seed/claim", ""],
+      ["", "", "", "", "", "", "", "", "fungus:mycelium:field", "fungus:mycelium:field", ""]
     ]
   }
 }

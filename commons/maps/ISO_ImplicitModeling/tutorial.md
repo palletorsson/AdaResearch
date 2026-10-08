@@ -1,5 +1,13 @@
 # Shape as a Condition
 
+**Learning elements — proposed focus**
+
+*The labels below set the revision focus; the existing lesson still needs alignment.*
+
+- Signed distance fields
+- Shape composition
+- Surface representations
+
 A sphere is not vertices. It is a sentence: every point whose distance from the center equals the radius. Implicit modeling takes the sentence as the object.
 
 Signed distance functions are the cleanest dialect — each returns *how far to the surface*, negative inside:

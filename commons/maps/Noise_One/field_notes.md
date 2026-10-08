@@ -21,3 +21,12 @@
 **Rejected.** Colour and relief on one ring with a button to switch: it makes the comparison a memory test, which is what this room is trying to escape. Rejected too: raising the amplitude until the corrugation is dramatic — it stops being a reading of the field and becomes a different object, and Astra's card asks to preserve the ring opening over the beginner range.
 
 **Pending.** A headset walk; a person stepping sideways to separate a viewpoint change from a field change, which is the one thing a probe cannot do for this room; Astra's review.
+
+
+## 13 September 2026 — whole-hall review
+
+All three authored works retained as primary: noisetorus, noiselayers, dark_sphere. Shared local phase fixes the ring pause; REMAP exposes signed colour encoding; a rendered GPU readback checks CPU agreement. The original three-source terrain generator and grids return at 1:50 with contribution controls. The orb moves onto the perimeter. Recovered structure and utilities unchanged. 49 rendered checks passed; headset pending. See doc/space/torus-review-2026-09-13/README.md and /research/possible-bodies/noise-one.html. Noise_Voxel is next.
+
+## 25 September — standing comparison and entrance clearance
+
+The pair's holders now turn mesh and sample marker together into an upright view at 1.40 m centre height. The field and its two receiving operations are unchanged. Two floor rows inserted inside the entrance let the visitor see both rings beyond the doorway piers. All old rows and works remain; current coordinates are in artifacts.md. Native paired captures, pointer checks and walking routes: doc/book/iterations/2026-09-25-noise-one-standing/index.html. The historical notes above remain intact. Artifact roles are unchanged in this pass.

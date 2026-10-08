@@ -1,6 +1,6 @@
 # Sphere names, mesh counts and visible differences
 
-Point_Animatedcube separated vertex positions from connectivity and presentation. This hall keeps those distinctions available while examining the sphere. Its primary encounters now follow the ordinary sphere near the entrance, the high, middle and low sphere pairs in their placed order, then a deliberate return to `budget_of_smoothness` at (5,9), followed by the five-segment capsule at (0,16). The other solids remain available as further comparisons.
+Point_Animatedcube separated vertex positions from connectivity and presentation. This hall keeps those distinctions available while examining the sphere. Its route now passes an ordinary sphere and the five-solid courtyard, then the existing sphere pairs and a twelve-sphere atlas, the counting counter, the central five-segment capsule, and the additional engine mesh prefabs. Sixteen older placements remain in a side alcove.
 
 ## What the polygonal representation cannot retain
 
@@ -30,7 +30,7 @@ The counter generates four smaller spheres with radius 0.26 and height 0.52. The
 
 The two pointer/press buttons independently show or hide counts and edges. Revealing either leaves the original surface mesh resource unchanged. The spheres are fixed exhibits, not grabbable samples. Their stands raise them above the tilted labels.
 
-The counter has moved from column 1 to the clear central cell at column 5, row 9, retaining one placement. Its three-metre-wide counter previously extended toward the room's side boundary. The new placement faces the earlier rows. Actual museum stamping is checked; full-room approach still needs a headset walk.
+The counter now stands at (9,26), facing back into the second room. The three pairs occupy columns 13 and 16 at rows 18, 21 and 24. Their requested support is 0.70 m with no extra vertical offset. The former 0.10 m support plus 0.60 m offset has been consolidated; the new plain block honors the requested height.
 
 ## Two triangle counts
 
@@ -69,7 +69,7 @@ The low-resolution form may preserve the distinctive outline a visitor wants to 
 
 ## Five segments: a particular symmetry fails
 
-The installed `commons/primitives/capsule/capsule.tscn` authors a CapsuleMesh with radius 0.25, height 1.0, five radial segments and five rings. The root script defaults to `facture = "cast"`, which leaves this mesh unchanged. The map has no facture override. Its child uses `commons/primitives/prismes/rotation.gd`, with angular speed `(0,45,0)` degrees per second.
+The installed `commons/primitives/capsule/capsule.tscn` authors a CapsuleMesh with radius 0.25, height 1.0, five radial segments and five rings. The root script defaults to `facture = "cast"`, which leaves this mesh unchanged. The reliquary instantiates this scene without a facture override, gives the visible mesh an off-black material, and scales it uniformly by 1.6. Its bottom sits at the 1.04 m top of eight 0.13 m cylinder tiers, with radial segments 4 through 11. The original rotation script remains inside the source scene. The capsule has no pickup or collider; the solid support prevents walking through its base. Its child uses `commons/primitives/prismes/rotation.gd`, with angular speed `(0,45,0)` degrees per second.
 
 The straight middle has a regular pentagonal cross-section. Its equal angular intervals are 72 degrees. A 72-degree rotation preserves the cross-section's corners; a 180-degree rotation does not. Opposite a corner's radial direction is a side midpoint. The absent half-turn symmetry should not be described as total asymmetry or as an inability to infer the back from the full generative rule.
 
@@ -85,4 +85,31 @@ A direct Godot mesh measurement is archived at `doc/space/ignorance-focus-2026-0
 - `commons/maps/Primitives_Ignorance/map_data.json`
 - `commons/testing/probe_ignorance_primary.gd`
 
-The probe exercises pointer events, reads actual mesh arrays, compares paired vertex/index buffers and stamps the configured counter through the museum loader. Full-room distances, hand reach and headset legibility remain to be checked. Primitives_Portals next develops the distinction between finite approximations and a mathematical limit.
+The probe exercises pointer events, reads actual mesh arrays, compares paired vertex/index buffers and stamps the configured counter through the museum loader. Full-room distances, hand reach and headset legibility remain to be checked. Primitives_Godot, Primitives_Columns and Primitives_Profiles now follow this hall before Primitives_Portals develops the distinction between finite approximations and a mathematical limit.
+
+## Shared sphere figure
+
+The book comparison loads the actual `sphere_high`, `sphere_mid` and `sphere_low` scenes, applying the six inspection configurations read from this map. It retains their generated geometry, normals and inspection materials. The book layout changes only their arrangement, with equal scale, viewpoint and lighting across the pairs. These are the existing museum exhibits; there is no new museum plate or additional control.
+
+`tools/capture_sphere_resolution.py` stages a private Godot project and checks the paired position, index and normal arrays, material colours, orientation and overlay visibility before rendering. The measured submitted / area-bearing counts are 544 / 512, 112 / 98 and 40 / 20, in finer-to-coarser order. These are the full-size exhibits, not the four smaller counter samples listed above.
+
+
+## Courtyard, independent subdivisions and reusable mesh scenes — 27 September 2026
+
+Relocation note, 4 October: the mesh library and seven-form choir now belong to Primitives_Godot. The source mechanisms below are retained; the earlier placement and verification evidence describes the prior arrangement.
+
+`geometry_courtyard` uses meshes from the existing tetrahedron, cube, octahedron, dodecahedron and icosahedron source scenes. There is one of each, normalized to a maximum dimension of 0.88 m, with an unscaled RigidBody and a convex collider generated from the scaled source vertices. All use the production XRTools pickup path. The sixteen cylinder columns use eight radial resolutions twice: 4, 5, 6, 8, 12, 20, 32, 64. The inscription sits above the entrance with clear headroom.
+
+`sphere_resolution_atlas` crosses radial segments [4, 8, 16, 32] with rings [1, 4, 12]. Each sphere has radius 0.39 m and height 0.78 m; the shared inspection helper draws its actual triangle edges. These twelve constructions supplement the six existing paired specimens.
+
+`primitive_mesh_library` instantiates eight separate `.tscn` prefabs in `commons/artifacts/ignorance_gallery/prefabs/`. The resource classes are PrismMesh, TorusMesh, PlaneMesh, QuadMesh, PointMesh, TextMesh, RibbonTrailMesh and TubeTrailMesh. They extend the earlier box, cylinder, capsule and sphere selection. There is no ConeMesh class: CylinderMesh supplies that shape through unequal end radii. QuadMesh is a PlaneMesh subclass. The PointMesh uses a 22-pixel point material; its screen extent is not a metre measurement. Both trail examples display undeformed rest geometry, not particle animation. The additional prefabs are fixed viewing exhibits, now in Primitives_Godot. The five Platonic solids remain pickable in Ignorance.
+
+After the choir relocation, the alcove keeps fifteen earlier secondary/decorative placements. `diamonds` uses a room-local scale of 0.12 and a 0.45 m support, retaining twelve units and their twist. Its original scene remains unchanged elsewhere.
+
+## Shared museum support
+
+StationPlinth, its wide variant and its micropod now default to `presentation = "museum"`: one matte off-white box with a matching collider, no ornamental trim or lights. Requested top height is honored down to 0.02 m. Captions and information lines remain as plain type. `presentation = "industrial"` retains the prior authored workshop variants. Automatic low broad supports now use the same plain family; automatic minimum lift remains 0.25 m, while explicit lower decks are honored. Architectural podium/plinth material roles use the same off-white finish. The capsule's resolution tiers are deliberately part of the exhibit, not generic furniture.
+
+The room's new courtyard and two walk-through collections do not seal their entire bounding rectangles in the museum's path map. Their individual colliders govern passage. The capsule's compact footprint uses normal sealing. The main rooms remain 19 cells wide; the retained side alcove extends total width to 27, an intentional exception to the sequence template's 19-cell width preference.
+
+Native evidence, photographs, code and scope notes: [courtyard review](/book-review/doc/book/iterations/2026-09-27-ignorance-courtyard/index.html). Desktop geometry and supplied pickup are tested; headset targeting, label legibility and Quest performance still need an in-headset visit.

@@ -1,7 +1,7 @@
-Concept: Transforms the visible spectrum into an architectural walkthrough — Newton's prism stretched into a corridor where color gradients unfold temporally.
-Sequence role: Third map in Color sequence; shifts from discrete color assignment (Color_Grid_Pallet) to continuous spectral flow. The midpoint of the sequence — color becomes something you move through, not just select; leads to Color_Pillar.
-Technical angle: Rainbow emitters cycling through HSV hue space, demonstrating continuous gradients and temporal color transitions. The mario_cube and pick_up_cube let learners grab and isolate individual colors from the flow.
-Critical angle: Walking through a spectrum collapses the distinction between observer and observed — you are inside the phenomenon. The gradient made temporal means color is experienced as duration, not category. This is color as process, not state.
-Key artifacts: rainbow is the core environmental artifact driving the spectral corridor; pick_up_cube allows extracting discrete samples from the continuous field — a physical metaphor for quantization.
+# Color_Rainbow — intent
 
-Gap: rainbow needs interactive angle control, Label3D.
+Give the hall the pleasure of a queer platform-game celebration: bright colour, optional steps, dressed mushrooms, pride banners and repeatable confetti. Keep a level route and reachable controls.
+
+Use the existing rainbow as the primary. Make the critical comparison operable: RE-DIVIDE changes the colour partition while keeping total band width and route geometry fixed. The available counts are 6, 7, 48 and 2. The reader first notices a boundary change, then encounters the thickness rule and the finite HSV sampling behind the mode called continuous.
+
+Sequence handoff: the salon's shared material address at two scales → a list distributed over a familiar arch → the pillar field's colours sampled at spatial addresses. Do not equate this RGB geometry with atmospheric optics or claim that four presets exhaust possible colour arrangements.

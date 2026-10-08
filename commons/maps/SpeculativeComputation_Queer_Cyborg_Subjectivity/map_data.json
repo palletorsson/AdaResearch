@@ -2,7 +2,7 @@
   "map_info": {
     "name": "Queer Cyborg Subjectivity",
     "lookup_name": "SpeculativeComputation_Queer_Cyborg_Subjectivity",
-    "description": "Explore queer cyborg subjectivity and non-normative embodiment in computation. Scaffold map — awaiting content.",
+    "description": "A body assembled across flesh, interface, code, and costume. The mirror shows a subject that is never only one substrate.",
     "version": "1.0",
     "format": "json",
     "dimensions": {
@@ -34,10 +34,10 @@
     }
   },
   "documentation": {
-    "summary": "SpeculativeComputation_Queer_Cyborg_Subjectivity - Scaffold map for queer cyborg subjectivity content",
-    "layout": "Simple 10x10 room with spawn and teleporter",
-    "objective": "Placeholder — build out queer cyborg subjectivity artifacts and interactions.",
-    "key_elements": []
+    "summary": "SpeculativeComputation_Queer_Cyborg_Subjectivity - a body assembled across substrates",
+    "layout": "Simple 10x10 room with a central mirror plinth, spawn, and teleporter",
+    "objective": "Change the visible body while keeping the code, interface, and social reading in view.",
+    "key_elements": ["super_drag_mirror - body assembly and reflective self-reading"]
   },
   "lighting": {
     "ambient_color": [0.3,0.3,0.4],
@@ -85,7 +85,7 @@
       [" "," "," "," "," "," "," "," "," "," "]
     ],
     "interactables": [
-      [" "," "," "," "," "," "," "," "," "," "],
+      [" "," "," "," ","super_drag_mirror"," "," "," "," "," "],
       [" "," "," "," "," "," "," "," "," "," "],
       [" "," "," "," "," "," "," "," "," "," "],
       [" "," "," "," "," "," "," "," "," "," "],

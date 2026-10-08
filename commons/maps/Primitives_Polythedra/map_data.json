@@ -10,9 +10,138 @@
 	  "depth": 28,
 	  "max_height": 3
 	},
+	"museum": {
+	  "simplex_corners": [
+		{
+		  "name": "entry-west",
+		  "corner": [
+			1,
+			1
+		  ],
+		  "inward": [
+			1,
+			1
+		  ],
+		  "reach_m": 1.5,
+		  "color": "#ee5599"
+		},
+		{
+		  "name": "first-east-return",
+		  "corner": [
+			10,
+			4
+		  ],
+		  "inward": [
+			-1,
+			1
+		  ],
+		  "reach_m": 1.5,
+		  "color": "#ee5599"
+		},
+		{
+		  "name": "first-east-end",
+		  "corner": [
+			10,
+			8
+		  ],
+		  "inward": [
+			-1,
+			-1
+		  ],
+		  "reach_m": 1.5,
+		  "color": "#ee5599"
+		},
+		{
+		  "name": "exit-west",
+		  "corner": [
+			1,
+			27
+		  ],
+		  "inward": [
+			1,
+			-1
+		  ],
+		  "reach_m": 1.5,
+		  "color": "#ee5599"
+		},
+		{
+		  "name": "exit-east",
+		  "corner": [
+			8,
+			27
+		  ],
+		  "inward": [
+			-1,
+			-1
+		  ],
+		  "reach_m": 1.5,
+		  "color": "#ee5599"
+		},
+		{
+		  "name": "side-entry-west",
+		  "corner": [
+			9,
+			16
+		  ],
+		  "inward": [
+			1,
+			1
+		  ],
+		  "reach_m": 0.9,
+		  "color": "#ee5599"
+		},
+		{
+		  "name": "side-entry-east",
+		  "corner": [
+			12,
+			16
+		  ],
+		  "inward": [
+			-1,
+			1
+		  ],
+		  "reach_m": 1.1,
+		  "color": "#ee5599"
+		},
+		{
+		  "name": "side-exit-west",
+		  "corner": [
+			9,
+			27
+		  ],
+		  "inward": [
+			1,
+			-1
+		  ],
+		  "reach_m": 1.1,
+		  "color": "#ee5599"
+		},
+		{
+		  "name": "side-exit-east",
+		  "corner": [
+			12,
+			27
+		  ],
+		  "inward": [
+			-1,
+			-1
+		  ],
+		  "reach_m": 1.1,
+		  "color": "#ee5599"
+		}
+	  ],
+	  "sculpture_clear_rects": [
+		[
+		  1,
+		  6,
+		  3,
+		  10
+		]
+	  ]
+	},
 	"metadata": {
 	  "source": "editor",
-	  "n_artifacts": 34
+	  "n_artifacts": 36
 	}
   },
   "layers": {
@@ -446,8 +575,8 @@
 		"",
 		"",
 		"",
-		"an:-90",
 		"sp",
+		"an:-90",
 		"",
 		"",
 		"",
@@ -893,7 +1022,7 @@
 	  ],
 	  [
 		"",
-		"",
+		"polyhedra_reveal_monitor:90:0#plinth:0#pin:1#offset:1.5,0,0.50",
 		"",
 		"",
 		"",
@@ -938,7 +1067,7 @@
 	  ],
 	  [
 		"",
-		"",
+		"polyhedra_boundary_plate:90:0:0.8#offset:-0.30,0.34,0",
 		"prism_block#grain:quartered",
 		"prism_block#grain:shell",
 		"",
@@ -946,7 +1075,7 @@
 		"",
 		"",
 		"",
-		"grab_trihedron:90:0#plinth:0.90",
+		"grab_trihedron:180:0#plinth:0.90",
 		"",
 		"",
         ""
@@ -971,9 +1100,9 @@
 		"",
 		"",
 		"",
-		"pyramid_edit:0:0#plinth:1.10#offset:0.00,0.15,0.00",
+		"pyramid_edit:180:0#plinth:0.65,micropod#workbench:1",
 		"",
-		"grab_tetrahedron:0:0#plinth:0.90",
+		"grab_tetrahedron:180:0#plinth:0.90",
 		"",
 		"cube_scene:0:0#plinth:0.90",
 		"",

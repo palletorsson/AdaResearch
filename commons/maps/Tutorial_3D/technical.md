@@ -1,148 +1,40 @@
-# Tutorial 3D — Technical
+array_flight_lab reuses the existing pickup-cube grid and the Menger flight enclosure. X/Y/Z selects an address. Collection writes zero without shifting other indices. Flight belongs to a locomotion region, not to the array data structure.
 
-A 4×4×4 volume of cells, addressed by three indices. Stepped platforms and lifts provide physical access to upper layers.
+Implementation: commons/artifacts/regularity/. Current authored placement: map_data.json. Read final.md for the supported controls and sequence bridge.
 
-```gdscript
-class_name Volume3D extends Node3D
 
-@export var size: Vector3i = Vector3i(4, 4, 4)
-@export var cell_size: float = 1.0
+## Current continuation — 23 September 2026
 
-var cells: Array = []  # 3D array of Node3D
+Builds on Array's row/grid and transparent nested-cube study; prepares the return to a surface in Tutorial_Tiling_Floor. The full-scale volume contributes local flight and bodily passage between samples. It need not repeat the previous hall's transformation controls.
 
-func _ready() -> void:
-    for x in range(size.x):
-        cells.append([])
-        for y in range(size.y):
-            cells[x].append([])
-            for z in range(size.z):
-                var cell := create_cell(x, y, z)
-                cells[x][y].append(cell)
-```
+The unchanged array_flight_lab builds a 4×4×4 pickup grid with spacing 2.4 m and origin (-3.6,0.7,-3.6) inside its enclosure. The visible coordinate order is x,y,z. Storage is values[y][z][x]: layer, row, entry. Collection removes a cube and its attached label; tree_exiting writes zero. The independent selection marker stays at the selected site. This data records cube occupancy, not a continuous occupancy field or visitor position.
 
-## Layer Transparency
+The enclosure is 12 m across, with two ground-level openings. It supplies a bounded movement velocity, normalised to at most 2.4 m/s, and neutral input hovers. The production museum controller selects that locomotion when the player's position lies inside the zone; it retains normal collision movement. XR uses the shared flight provider. Current desktop journey evidence does not verify a worn headset.
 
-The volume is rendered with transparent cells so layers above and below are visible. Transparency uses a shader that writes to the alpha channel.
+### Shared book figure
 
-```glsl
-void fragment() {
-    ALPHA = 0.3;
-    ALBEDO = base_color.rgb;
-}
-```
+an-address-you-can-enter.png in doc/book/iterations/2026-09-23-array-entered-address pairs the actual selected cube [1,2,0] before and after contact. Matching camera poses and frozen bob/turn animation keep the comparison stable; collection stays live. The lower image strips are crops of the actual console readout in those states, not added numerical overlays. The production scene is unchanged. The cube's label disappears with it; the independently selected translucent marker remains. A separately provided interior view is captured at the reached player position plus the museum's 1.65 m eye offset.
 
-Transparent geometry in Godot requires careful render-ordering to avoid sorting artefacts. The engine sorts transparent objects back-to-front per frame; scenes with hundreds of transparent cells can show visible sorting errors when cells overlap.
+### Evidence
 
-## Three-Slider Highlight
+31 focused checks pass in an isolated copy of the production museum. Supplied Godot pointer events select [1,2,0]; supplied W/Space/Ctrl events drive the unchanged museum physics handler and actual player capsule through the entrance, upwards, to contact, into the interior, down and out. Only the chosen cube is collected at the checked collection point, all other positions remain, zero persists while the body hovers, and flight permission ends outside. The camera is independently placed for paired figures. Probe: tools/probes/array_entered_address.gd.
 
-Three sliders — one per axis — select row, column, and layer independently. The highlight cube's position updates as the sliders move.
+The first run failed five related checks because the probe assumed obsolete Btn_* node names. It already passed the physical flight journey. The probe now finds the existing InteractableAreaButton nodes and all checks pass. No production control or locomotion repair was necessary. The first report is preserved with the review. No new claims about headset comfort, human legibility or learner understanding.
 
-```gdscript
-class_name HighlightController extends Node3D
 
-@export var volume: Volume3D
-var highlight_node: Node3D
+<!-- study-spine:open_structures -->
 
-func _process(_delta: float) -> void:
-    var x: int = int(slider_x.value)
-    var y: int = int(slider_y.value)
-    var z: int = int(slider_z.value)
-    highlight_node.position = Vector3(x, y, z) * volume.cell_size
-    code_label.text = "grid[%d][%d][%d]" % [x, y, z]
-```
+## Installed application: A rule takes up space
 
-## Platform Generation
+`open_structures` occupies a new adjoining bay, after the existing encounters. Cell [10, 35], rotation 180°, museum adapter `res://commons/artifacts/spine_studies/open.tscn`. Original response to Sol LeWitt; no claim of exact reconstruction.
 
-Stepped platforms are generated procedurally to match the volume's size. Each platform is a flat plane with a bordering railing.
+Replace (column + row) % 5 with column; keep all 25 addresses. Reuses line, coordinates, transform, array; adds no prerequisite node. The display and main-player controls are supplied.
 
-```gdscript
-func build_stepped_platform_north(height: int) -> void:
-    for h in range(height):
-        var platform := PLATFORM_SCENE.instantiate()
-        platform.position = Vector3(-1, h * cell_size, h * cell_size)
-        add_child(platform)
-```
 
-## Lift Mechanism
+<!-- study-spine:reference_suspension -->
 
-Two corner lifts provide faster vertical access. A lift is an Area3D that smoothly translates the learner up or down.
+## Installed application: A place still held
 
-```gdscript
-class_name Lift extends Area3D
+`reference_suspension` occupies a new adjoining bay, after the existing encounters. Cell [10, 56], rotation 180°, museum adapter `res://commons/artifacts/spine_studies/suspension.tscn`. Original response to Mona Hatoum; no claim of exact reconstruction.
 
-@export var target_height: float = 4.0
-@export var lift_speed: float = 2.0
-
-var active_bodies: Array = []
-
-func _physics_process(delta: float) -> void:
-    for body in active_bodies:
-        var target_y: float = global_position.y + target_height
-        body.global_position.y = move_toward(body.global_position.y, target_y, lift_speed * delta)
-```
-
-## Accessibility
-
-Vertical navigation can be challenging in VR. The map provides a direct teleport control as an alternative to the platforms and lifts — click a cell on a 2D selector to teleport directly to it.
-
-## Complexity
-
-Volume generation is O(W·H·D). At 4×4×4 that is 64 cells; rendering cost is dominated by the transparency rather than by cell count.
-
-Within the sequence, Tutorial_3D completes the dimensional ladder. Tutorial_Pattern will next pivot from addressing to generation.
-
-## Volume Rendering
-
-The transparent volume is rendered with order-independent transparency (OIT) to avoid the sorting artefacts that back-to-front rendering produces. OIT accumulates all transparent fragments into a shared buffer with per-fragment weights, then composites them in a single pass.
-
-```glsl
-// OIT accumulation
-uniform vec4 src_color;
-out vec4 fragAccum;
-out float fragRevealage;
-
-void fragment() {
-    float weight = clamp(src_color.a * 10.0, 0.01, 3.0);
-    fragAccum = vec4(src_color.rgb * src_color.a * weight, src_color.a);
-    fragRevealage = src_color.a * weight;
-}
-```
-
-Godot 4 does not provide OIT out of the box; the map falls back to standard back-to-front sorting, which is adequate at the 4×4×4 volume size but would need OIT at larger scales.
-
-## Slider Mapping
-
-The three sliders are integer-valued — dragging continuously snaps to the nearest integer. The snap provides tactile feedback in VR; the slider feels like it "clicks" into each index.
-
-```gdscript
-func _on_slider_changed(slider: Slider, axis: String) -> void:
-    var snapped: int = int(round(slider.value))
-    if snapped != current_indices[axis]:
-        current_indices[axis] = snapped
-        update_highlight()
-        play_click_sound()
-```
-
-## Code Display
-
-The code label shows `grid[x][y][z]` with the current indices substituted in. A second line shows the flat-array equivalent: `grid[x + y * size_x + z * size_x * size_y]`.
-
-```gdscript
-func update_code_display(indices: Vector3i) -> void:
-    code_label.text = "grid[%d][%d][%d]\n# or equivalently:\ngrid[%d]" % [
-        indices.x, indices.y, indices.z,
-        indices.x + indices.y * size.x + indices.z * size.x * size.y
-    ]
-```
-
-## Row-Major vs Column-Major
-
-Different languages and libraries use different storage orders. GDScript's nested arrays are effectively row-major (x varies fastest). NumPy defaults to row-major but can use column-major. Fortran uses column-major. The map notes this on a side panel — the physical volume is order-agnostic but the flat-index formula depends on the convention.
-
-## Platform Ascent
-
-The stepped platforms on two sides let the learner walk up through the layers. Each step is 0.5 metres high, which is a comfortable VR step size. Lifts provide faster vertical travel for learners who prefer not to climb.
-
-## Transparency Limitations
-
-Transparent rendering costs more than opaque rendering per pixel. For large volumes or many overlapping transparents, performance can drop noticeably. The map caps volume size at 4×4×4 and uses conservative transparency alpha (0.3) to keep the cost manageable.
+Change fragment roughness without changing any of the 75 positions. Reuses array, coordinates; adds no prerequisite node. The display and main-player controls are supplied.

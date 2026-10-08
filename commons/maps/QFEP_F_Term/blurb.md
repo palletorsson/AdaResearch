@@ -1,16 +1,5 @@
-*Systems minimize surprise.*
+*The bits stay. Your mistakes change sides.*
 
-F is Free Energy — the prediction error. Every adaptive system tries to reduce it. Find patterns. Predict better. Reduce surprise.
+Make a guess, then look for the cells that refuse it. Leave the world where it is and change the guess.
 
-This is learning.
-This is homeostasis.
-This is the crystalline drive toward order.
-
-Here you will:
-- Complete snap puzzles (feel the satisfaction of pattern-completion)
-- See crystalline structures (pure order, λ=0)
-- Encounter the dark room (where pure F-minimization leads)
-
-The puzzles feel good. The crystals are beautiful.
-
-*But notice the trap. The dark room awaits.*
+What was difficult: the source, or your way of meeting it?

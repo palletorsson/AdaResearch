@@ -1,3 +1,5 @@
+> Arrangement update — 29 September 2026: the desk, head projection, stick and neutral dot have been removed from Point_Trace. This document retains earlier comparisons; see [current intent](intent.md) and [preserved passages](trace-retired-encounters.md) for their status.
+
 # Point Trace: encounter reference
 
 Companion to the revised final.md, updated 16 September 2026.

@@ -1,76 +1,20 @@
-# Fractal Recursion — Artifacts
-*Fractals: Infinite Within Finite · lambda_edge · 10 artifacts*
+# Fractal Recursion — the installed collection
 
-> Infinity lives in finite rules. A simple instruction — divide, repeat — becomes unbounded complexity. Here, recursion reveals its paradox: order generates chaos, the whole contains copies of itself, and dimension refuses to be an integer.
+Ten authored works remain. The manuscript develops four encounters; the core registry identifies the squares and rings as primary. The doorframes are a second receiver attached to the existing square study, not an eleventh artifact or a separate solver. Coordinates below are authored grid cells (x, z).
 
-The map, read through what it holds — its artifacts in the order you meet them:
+| Work | Cell | Contribution |
+| --- | --- | --- |
+| `fractal_recursion_2` | (4, 5) | Primary. One self-call, halved sizes, stopping conditions. The same term list becomes doorframes: a standing body meets a limit before the function does. |
+| `example_8_3_recursion_circles_vr` | (12, 5) | Primary. Four calls per ring; count, packing and the size cutoff expose different costs. |
+| `cube_subdivision` | (4, 11) | Supporting encounter. Spend twelve splits by DRILL, SPREAD or LOTS. One selected cell becomes eight; children have 0.45 of the parent scale, including the authored gap. |
+| `recursive_chair` | (12, 11) | Supporting encounter. Five authored stages select, transform and add parts. GHOST/SCAR/GONE expose what was discarded. Its name does not imply a self-call. |
+| `science_screen` | (2, 14) | Secondary. An independent sample, not a live profiler of these demonstrations. |
+| `dark_sphere` | (14, 15) | Secondary remainder. Retained, without making it the chapter's organizing evidence. |
+| `recursive_table` | (4, 17) | Supporting collection. An authored furniture construction available for comparison with the chair. |
+| `cube_staircase` | (12, 17) | Supporting collection. A constructed staircase form, not a promised player route. |
+| `fibonacci_pagoda` | (4, 22) | Supporting collection. Tiered scale and repetition beyond the four desks. |
+| `synthesis_stand` | (12, 22) | Secondary presentation with `dark_sphere` subject. |
 
-## Science Screen
-![Science Screen](/scene-catalog/science_screen.png)
+`recursive_boolean_cube` appeared in the earlier inventory but is not placed in this hall. Its prior listing is preserved in the recursion-thresholds review folder. No work was removed to make this inventory agree with the map.
 
-COMPARE a 3D artifact with its 2D abstraction and see what structure survives projection.
-
-`science_screen`
-
-## fibonacci_pagoda
-![fibonacci_pagoda](/scene-catalog/fibonacci_pagoda.png)
-
-tier_scale(n) = base_scale / phi^(n*0.5), stacking Fibonacci-ratioed tiers with golden finial
-
-`fibonacci_pagoda`
-
-## Recursive Chair
-![Recursive Chair](/scene-catalog/recursive_chair.png)
-
-Chair created through recursive cube subdivision
-
-`recursive_chair`
-
-## Fractal Recursion 2
-![Fractal Recursion 2](/scene-catalog/fractal_recursion_2.png)
-
-Advanced recursion patterns with multiple levels of depth
-
-`fractal_recursion_2`
-
-## recursive_table
-![recursive_table](/scene-catalog/recursive_table.png)
-
-table = subdivide_3x2(cube) -> keep(top_layer, corner_legs) -> flatten(top) -> stretch(legs)
-
-`recursive_table`
-
-## Dark Sphere
-![Dark Sphere](/scene-catalog/dark_sphere.png)
-
-USE a neutral sphere as a reference for scale, silhouette, and atmospheric change.
-
-`dark_sphere`
-
-## example_8_3_recursion_circles_vr
-![example_8_3_recursion_circles_vr](/scene-catalog/example_8_3_recursion_circles_vr.png)
-
-circle(center, r, d) = torus(r) + 4 * circle(center +/- offset, r * 0.5, d-1)
-
-`example_8_3_recursion_circles_vr`
-
-## cube_subdivision
-![cube_subdivision](/scene-catalog/cube_subdivision.png)
-
-cube -> 8 sub-cubes -> pick one -> repeat. Scale reduction 0.5 per level.
-
-`cube_subdivision`
-
-## recursive_boolean_cube
-![recursive_boolean_cube](/scene-catalog/recursive_boolean_cube.png)
-
-menger(center, size, d) = {subcube(i) for i in 27 if zeros(i) < 2}, recursive cross-removal
-
-`recursive_boolean_cube`
-
-## Cube Staircase
-![Cube Staircase](/scene-catalog/cube_staircase.png)
-
-Staircase created through diagonal cube subdivision with treads, risers, stringers and handrail
-
-`cube_staircase`
+The first frame starts at hall-relative (8.5, 0, 4.5). Further frames follow the aisle at one-metre intervals. The side route is part of the encounter: a rule can keep producing smaller openings without requiring the visitor to keep going through them.

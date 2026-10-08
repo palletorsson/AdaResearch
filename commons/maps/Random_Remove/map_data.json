@@ -19,7 +19,8 @@
 		"Find a cube excluded before the random draw and separate filter, draw and removal",
 		"Replay an ordered removal history from the same seed and candidate list",
 		"Compare eight-choice ROW and COLUMN masks using equal draw bounds",
-        "Inspect the address and original transform retained behind visible absence"
+		"Inspect the address and original transform retained behind visible absence",
+        "Compare returning a drawn member with removing it from the set of future candidates"
 	  ]
 	},
 	"museum": {
@@ -27,6 +28,7 @@
 	  "gate_depth_rows": 0,
 	  "artifact_placement": "map",
 	  "plinths": false,
+	  "piers": false,
 	  "props_deny": [
         "dream_bodies"
 	  ],
@@ -1212,7 +1214,7 @@
 		" ",
 		" ",
 		" ",
-		" ",
+		"sampling_hoppers:180",
 		" ",
 		" ",
 		" ",

@@ -1,15 +1,9 @@
-# Color_Context_Placed — walked
+# Color_Context_Placed — current encounter outline
 
-> ghost-drafted from the working map (turn slot, color thread); Palle rules the voice.
+An authored route, not a claim of human headset testing.
 
-## The cast
+Enter a long hall of still columns. Compare colour assignments on one construction, change its alphabet, then compare fixed turns and narrowing. Four richer stacks vary proportions and offsets. Continue into taller gallery studies: block and border, warm steps, Memphis colour and the eight-piece Bauhaus totem. Walk around the blues and the six-colour shaft. End between two columns that combine earlier configurations into new wholes.
 
-the color stacks (simultaneous_contrast · complementary_red_green · monochrome_blue · triadic_primary · value_steps_warm) · the moderns (albers_homage_warm · kandinsky_bauhaus_triad · mondrian_de_stijl · rothko_chromatic_field) · the furniture (utensilo, coco pendant, warm lamp, vignelli metafora) · looms and mills (memphis, bauhaus, pastel) · crackpropagation_ca · pattern_tunnel_machine · constraint_sculptor · primitive_assembler · primitive_combo_puzzle · dress_selector · csg_architecture_cavity · 2d_in_3d_point_vis
+The 61 m hall keeps a clear central aisle. The final stacks are 7.2 and 7.4 m tall; their plates remain at reading height. No animation or physical balance is required. Color_Flashlight next asks what happens when the illumination changes.
 
-## The walk
-
-The turn is the chapter's largest room and its thesis is in the name: color, *placed*. The simultaneous-contrast stack does the demonstration Albers spent a career on — the same swatch changed by its neighbors, before your eyes. Around it the moderns hang their arguments: Albers' nested homage, Kandinsky's Bauhaus triad, Mondrian's primaries in cages, Rothko's field that swallows the wall it's on. Then the room widens the claim past art: lamps, pendants, a Vignelli chair, Memphis looms — color doing its contextual work in *furniture*, where nobody calls it theory. The crackpropagation_ca runs its slow fracture through it all like a counter-voice: pattern that emerges instead of being composed.
-
-## The turn
-
-One sentence, proven twenty ways: the truth of the chapter — *what you see depends on context, not wavelength alone* — stops being optics here and becomes curation. Every placement in this room is an argument about its neighbor. Which pairs argue best is a ruling that sleeps on the bench, not in this text.
+Implementation, source snapshots and runtime evidence: doc/space/color-dna-columns-2026-09-17/.

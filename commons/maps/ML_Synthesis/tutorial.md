@@ -1,5 +1,14 @@
 # ML Synthesis
 
+**Learning elements — proposed focus**
+
+*The labels below set the revision focus; the existing lesson still needs alignment.*
+
+- Reference populations
+- Coordinate scaling
+- Outlier scores
+- Decision thresholds
+
 Reinforcement learning, generation, classification. Three islands.
 
 Build a Q-table.

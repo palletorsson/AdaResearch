@@ -2,17 +2,18 @@
   "sequences": {
     "facade_assembly": {
       "name": "Facade Assembly: Composition Grammar at Architectural Scale",
-      "truth": "Facades are assembly. Column orders, rhythm, hierarchy, fenestration, rustication \u2014 the vertical and horizontal syntax of architectural form. Where mosaics are arrays in stone, facades are CSG composition pointed at building parts.",
+      "truth": "Facades compose parts into a public face. Repetition, proportion, hierarchy, openings and surface treatment make an architectural arrangement legible; changing their relations changes what it can say.",
       "qfep_term": "F",
-      "qfep_connection": "Pure F: deterministic composition grammar. The principle taught by boolean_surfaces (union, intersection, difference) pointed at architectural primitives \u2014 column orders, bays, cornices, rustication. Six expression maps demonstrate what the assembly grammar does that a single rule cannot say in isolation.",
+      "qfep_connection": "Deterministic composition rules arrange architectural parts into bays, storeys and hierarchies. The branch extends primitives, transformation, arrays and colour into architectural form. Some parts use Boolean construction internally, but the encounter teaches composition rather than set operations.",
       "layer": "F_order",
       "branch_status": "branch",
-      "parent_sequence": "boolean_surfaces",
+      "parent_sequence": "color",
+      "placement_note": "2026-09-24: moved by the author from Boolean Surfaces to Color and Composition. The eight-hall order is retained. The separate room-and-positive-cast study remains a Boolean encounter.",
       "prerequisites": [
         "primitives",
         "transformation",
         "array_tutorial",
-        "boolean_surfaces"
+        "color"
       ],
       "unlocks": [],
       "difficulty": "intermediate",

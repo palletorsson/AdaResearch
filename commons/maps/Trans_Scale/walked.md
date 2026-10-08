@@ -1,3 +1,7 @@
+> Historical walk of the earlier scale hall. For the current fourfold Drink Me encounter, use final.md, tutorial.md and the 2026-09-17 entry in field_notes.md. This record is preserved as earlier research, not a claim about the current cast or controls.
+
+> Historical record of the previous layout. Trans_Scale was rebuilt as the Drink Me encounter on 2026-09-09; this is not acceptance evidence for the new room.
+
 # Trans_Scale — walked
 
 > R-021, amended: this page is the considered critical tutorial for a map that

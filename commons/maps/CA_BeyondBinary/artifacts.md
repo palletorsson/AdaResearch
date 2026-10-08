@@ -1,48 +1,14 @@
-# CA BeyondBinary — Artifacts
-*Cellular Automata: Local Rules, Global Patterns · lambda_edge · 6 artifacts*
+# CA_BeyondBinary — retained collection
 
-> Totalistic rules count neighbors without distinguishing direction. Nine neighbors become one number. That number determines the next state. Smoothness emerges: similar configurations produce similar outcomes. The automaton forgets which direction the influence came from.
+Six works remain. The primary passage follows the Life dish. A smaller initial focus is not a limit on how many works may later join the book.
 
-The map, read through what it holds — its artifacts in the order you meet them:
+| Artifact | Role | Place in this pass |
+|---|---|---|
+| `game_of_life_petri` | Primary / book hero | Front bay: held Life dish, 9.6 m matching floor, three fixed-address lamps and explicit connection controls. |
+| `mold_network` | Secondary | Retained rear configuration; a future comparison needs its own mechanism and observation. |
+| `science_screen` | Secondary | Retained grid-mode display. |
+| `hexagon_ca_vr` | Secondary | Rear table at (9,23), with all sites/generations retained and a full-size control. The uniform display scale prevents the original terrain from overflowing into the Life floor. |
+| `ca_growth_network` | Secondary | Retained network work; do not conflate its growth with the primary Life rule. |
+| `dark_sphere` | Decoration | Retained spatial reference. |
 
-## Mold Network
-![Mold Network](/scene-catalog/mold_network.png)
-
-Slime mold network generation.
-
-`mold_network`
-
-## Game of Life Petri Dish
-![Game of Life Petri Dish](/scene-catalog/game_of_life_petri.png)
-
-Conway's Game of Life presented as a laboratory petri dish — cellular automata as biological experiment. Watch gliders, oscillators, and still lifes emerge from simple birth/death rules in a circular containment vessel.
-
-`game_of_life_petri`
-
-## Science Screen
-![Science Screen](/scene-catalog/science_screen.png)
-
-COMPARE a 3D artifact with its 2D abstraction and see what structure survives projection.
-
-`science_screen`
-
-## Dark Sphere
-![Dark Sphere](/scene-catalog/dark_sphere.png)
-
-USE a neutral sphere as a reference for scale, silhouette, and atmospheric change.
-
-`dark_sphere`
-
-## Hexagon CA VR
-![Hexagon CA VR](/scene-catalog/hexagon_ca_vr.png)
-
-Cellular Automata on a hexagonal grid.
-
-`hexagon_ca_vr`
-
-## CA Growth Network
-![CA Growth Network](/scene-catalog/ca_growth_network.png)
-
-Network structure that grows using cellular automata rules, forming organic branching patterns through local neighbor interactions.
-
-`ca_growth_network`
+The floor and three receivers belong to the configured Life artifact. They share its state and are not duplicate independent Life simulations. The historical room ID does not promise a multistate primary.

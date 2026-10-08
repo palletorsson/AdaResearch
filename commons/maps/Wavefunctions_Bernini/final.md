@@ -14,7 +14,9 @@ Circular coordinates provide sine and cosine values around an axis. Combining th
 
 Look at the columns together. Their repetition creates intervals and sight lines that a single shaft cannot. The form and its arrangement contribute different things: one supplies the twist, the other decides whether you meet a field of objects, a threshold or an aisle. This version presents a repeated set rather than a control for rearranging the plan.
 
-The scene is inspired by spiral architectural columns. Its mathematical construction does not account for the whole history of a building, the labour of making it, or what it means to those who use it. Nor does the accompanying generated sound make the column an instrument you play by touching its surface.
+The scene is inspired by spiral architectural columns. Its mathematical construction does not account for the whole history of a building, the labour of making it, or what it means to those who use it. A low generated hum accompanies the columns; its level is tied to their rotation speed. Touching a shaft does not play it.
+
+From the wall, a synthetic voice attempts “right here, right now”, pauses, then begins again. This is a separate instrument. The words return while the columns keep turning. Which “now” has the repeated phrase brought back?
 
 <!-- @ -->
 

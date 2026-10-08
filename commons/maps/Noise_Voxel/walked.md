@@ -1,5 +1,7 @@
 # Noise_Voxel — walked
 
+> Historical draft retained. The four-dial description below is superseded by the reviewed THRESHOLD / CELL / SEED / CUT encounter in final.md and technical.md (13 September 2026). The current hall also has a working section screen. See field_notes.md and doc/space/voxel-review-2026-09-13/README.md for evidence and the retained source snapshot.
+
 > ghost-drafted from the working map (walk slot, noise thread); Palle rules the voice.
 
 ## The cast

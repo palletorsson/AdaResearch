@@ -12,7 +12,7 @@ Choose three consecutive treads that you can see clearly from the surrounding fl
 
 Those sampled positions are only the beginning of a staircase. Each needs a tread with width and depth, an orientation, and a relationship to the next tread. The default construction adds connecting membranes between facing edges. They make the gaps part of the visible argument: a formula gives positions, while a route needs provision for the body moving between them.
 
-Do not judge the whole climb from the smoothness of its outline. An entrance, a comfortable rise, headroom and continuous support have to work at the scale of the visitor. This room still needs that full walking check. You can inspect the sequence and compare accessible parts without treating the entire visible spiral as an established route.
+Do not judge the whole climb from the smoothness of its outline. An entrance, a comfortable rise, headroom and continuous support have to work at the scale of the visitor. From the surrounding floor you can follow the spiral with your eyes. That journey does not tell you whether your body could complete it.
 
 Identify one turn or gap that would matter to a different stride. A route that feels continuous to one walker can remain discontinuous to another. The question is not answered by adding more samples alone: their arrangement and support also matter.
 

@@ -1,5 +1,14 @@
 # Trans Translation
 
+**Learning elements — proposed focus**
+
+*The labels below set the revision focus; the existing lesson still needs alignment.*
+
+- Waypoint lists
+- Direction and length
+- Guard conditions
+- Route state
+
 Moving. Displacement. Position as coefficients.
 
 Translate a single object.
@@ -74,7 +83,7 @@ func move_along_bezier(node: Node3D, curve: Curve3D, duration: float) -> void:
 
 Sample the Bezier curve at interpolated positions. The node follows the curve's shape over the duration.
 
-You can now translate a node instantly or over time, locally or relative to another node, along straight lines or curves. Trans_AxisDecomposition extends the translation into component-wise thinking.
+You can now translate a node instantly or over time, locally or relative to another node, along straight lines or curves. The seven rides in this hall already separate and combine those components. Trans_Rotation follows in the active sequence.
 
 Check identity.
 
@@ -111,3 +120,23 @@ func get_origin(t: Transform3D) -> Vector3:
 ```
 
 The origin is the translation part of the transform. Ignore the basis to get just the position.
+
+
+## Same destination, different permission
+
+On the final terrace, `translation_cube_demo` is instantiated twice: `course:lift_lateral` with a rail guide, and `course:free` with ghost endpoints. Their knobs begin 0.5 m above each artifact root; the 0.8 m plinth brings that to 1.3 m above the deck.
+
+The guided mechanism projects hand displacement onto a permitted axis, clamps the distance and admits the next axis only after the lift threshold. The free mechanism admits both components at once within the same bounds. In `constrained_door.gd`:
+
+```gdscript
+var t = _clamp_run((knob_pos - start).dot(phase1_dir), target_y, 0.0, 0.05)
+knob_pos = start + phase1_dir * t
+```
+
+Pure translations commute: adding the same two displacement vectors in reverse order gives the same endpoint. This puzzle imposes an order through its constraints; that is a property of the mechanism, not a limitation of vector addition.
+
+## Watch the accepted movement
+
+The exit mechanisms now leave a pale trace when a handle is held. Try the same small upward-and-outward gesture on each. The guided door records the lift after discarding the sideways component; the free door keeps both components within its bounds. Then follow the rail to its corner and outwards. Compare that bend with a direct diagonal in the other mechanism.
+
+The free handle can be brought back towards its starting corner to try a curved route. The short recent history remains visible, with older samples eventually rolling off. This returns to Point_Trace with a changed receiver: the record belongs to the constrained knob, not to the whole hand gesture. Release does not reset the mechanism or erase its trail; the artifact’s existing reset method clears it when called, and reloading the hall starts a fresh record.

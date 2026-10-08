@@ -1,5 +1,13 @@
 # The set before the choice
 
+**Learning elements — proposed focus**
+
+_The labels below set the revision focus; the existing lesson still needs alignment._
+
+- Eligibility filters
+- Sampling without replacement
+- Replacement policies
+
 Random Definition gave us a procedure that can return. Random Entropy showed what counting leaves out. At this bench, look first for a cube whose chance of removal is zero.
 
 ## Find the boundary before drawing

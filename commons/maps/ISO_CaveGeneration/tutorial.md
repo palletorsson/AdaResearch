@@ -1,5 +1,13 @@
 # Cave Generation
 
+**Learning elements — proposed focus**
+
+*The labels below set the revision focus; the existing lesson still needs alignment.*
+
+- Field scale
+- Sampling resolution
+- Construction methods
+
 Give a volume one number per point and march it. Before it, the noise must be given a scale — a ratio between the field and the box that holds it.
 
 Fix the ratio.

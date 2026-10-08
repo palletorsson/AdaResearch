@@ -1,76 +1,30 @@
-# Vector Operations Lab
+# Two contributions, one destination
 
-Two products and their consequences. Dot answers *how aligned*; cross answers *which way is perpendicular*.
+**Learning elements**
 
-Take the dot product at the workbench.
+- Vector addition
+- Resultant displacement
+- Route length
+- Coordinate conversion
 
-```gdscript
-var d := a.dot(b)   # |a||b|cos(θ)
-```
+Primary: `adder_board`, opt-in `lesson:room_sum`. Start with GO; then SWAP and GO. Predict the endpoint before revealing RULE. Compare PATH via A with direct. CANCEL makes B = -A; compare nonzero out-and-back distance with zero resultant.
 
-One scalar out. Positive when the vectors agree, zero at right angles, negative when they oppose.
+Controls use real push_button pointer events: A/B selects input; X-/X+/F-/F+ change components by 0.5 m within [-1,1]. PATH switches route, SWAP exchanges inputs, CANCEL opposes them, GO homes and runs, RULE toggles arithmetic. There are no draggable pins in this room variant. The ordinary board retains its original interface in other placements.
 
-Align the dots with the aligner.
+`result = a + b` drives both wall and floor. Vector2 stores (local X, local forward) in metres; floor placement is Vector3(v.x, height, -v.y). Wall plotting uses 0.48 display metres per input metre. Both operands and all sums fit the chart; no projection component or result is clipped. Carriage speed is prescribed at 0.8 m/s. Waypoint traversal consumes leftover time across corners; movement is updated in the physics callback. The guarded AnimatableBody is not a force experiment or a player transport platform.
 
-```gdscript
-func alignment(a: Vector3, b: Vector3) -> float:
-    return a.normalized().dot(b.normalized())
-```
+GO instantly resets position and travelled distance. Input/path changes stop and reset the trip; input selection and RULE do not stop it. The old 26 supporting instruments remain in their original relative arrangement, shifted ten source rows behind this arena. The next sequence hall remains Vectors_Act2_VectorArithmetic.
 
-Normalizing first strips magnitude out of the answer. What remains is pure agreement, −1 to 1.
+## From the floor plan into the scene
 
-Recover the angle.
+The carriage's coordinate conversion is:
 
 ```gdscript
-var angle := acos(clamp(alignment(a, b), -1.0, 1.0))
+return Vector3(v.x, height, -v.y)
 ```
 
-NoC exercise 5.9, solved on the bench: the dot product is how code measures angles without a protractor.
+The second plan component becomes local negative Z; height is supplied separately. The wall's upward diagram axis denotes forward movement on the stage, not a climb. Starting values A=(1,0), B=(0,1) give route length 2 m and direct length sqrt(2) m. The travelled counter starts again after GO's instantaneous homing; it does not include the reset movement.
 
-Cast a projection shadow.
+## Reading and retained detail
 
-```gdscript
-func project(v: Vector3, onto: Vector3) -> Vector3:
-    var n := onto.normalized()
-    return n * v.dot(n)
-```
-
-The shadow station does this with light: the projection is the part of v that lies along the other vector.
-
-Take the cross product.
-
-```gdscript
-var perp := a.cross(b)   # perpendicular to both
-```
-
-Its direction is the right-hand rule; its length is the area of the parallelogram the two vectors span.
-
-Crank the torque.
-
-```gdscript
-func torque(arm: Vector3, force: Vector3) -> Vector3:
-    return arm.cross(force)
-```
-
-The crank is the cross product with a handle. Push at right angles and the crank turns hardest; push along the arm and nothing happens — the cross of parallel vectors is zero.
-
-Compute work at the energy station.
-
-```gdscript
-func work(force: Vector3, displacement: Vector3) -> float:
-    return force.dot(displacement)
-```
-
-Work is the dot; torque is the cross. The two products split force into what moves you and what spins you.
-
-Press the normal force demo.
-
-```gdscript
-var normal := surface_normal * gravity.dot(-surface_normal)
-```
-
-The ground pushes back along its normal, exactly hard enough. Projection again, wearing a physics costume.
-
-> Try: at the torque crank, find the push direction that turns the crank not at all. Then check it against the dot aligner — what does the gauge read?
-
-Next: Motion. The vectors stop posing and start moving — velocity, acceleration, and the bouncing ball.
+The canonical [chapter](final.md) follows the encounter. Exact scales, control steps, timing and implementation qualifications remain here. The complete [pre-pass chapter](../../../doc/book/iterations/2026-09-24-forces-relations/before/commons/maps/VFM_02_Operations/final.md) is retained for comparison.

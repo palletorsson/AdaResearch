@@ -1,113 +1,21 @@
-# Affect Theory Visualization
+# What makes this look alive?
 
-A radiolarian. Soft cell with rigid silica skeleton.
+**Learning elements**
 
-Build a Voronoi sphere.
+- Apparent life
+- Construction cues
+- Controlled variation
 
-```gdscript
-class_name Radiolarian extends Node3D
+<!-- @radiolaria -->
 
-@export var seed_count: int = 60
-@export var radius: float = 1.0
+The forms invite recognition before explanation. Spikes, rings and lattices suggest organisms, shells, pollen or something that might brush against skin. Let that recognition arrive, then keep it beside the question of how these objects were made.
 
-func generate_seeds() -> Array:
-    var seeds: Array = []
-    for _i in seed_count:
-        var theta: float = acos(2.0 * randf() - 1.0)  # uniform over sphere
-        var phi: float = randf() * TAU
-        var p := Vector3(sin(theta) * cos(phi), cos(theta), sin(theta) * sin(phi)) * radius
-        seeds.append(p)
-    return seeds
-```
+Stop ROTATION. Toggle EFFECTS to change the particles surrounding the forms. What still looks alive when these motions cease? COLOUR also rebuilds the geometry in this implementation; with the initial unpinned random seed, it can change more than colour. Press SEED to choose a repeatable construction before comparing palettes. SPIKES changes a probability in that recipe; it does not teach an organism to defend itself.
 
-Uniform distribution on the sphere's surface. Each seed becomes a Voronoi cell.
+The program constructs several families from geometric elements. Its parameters include `spikiness_probability`, `max_spike_length` and `detail_level`. These names describe decisions available to the generator. They are not measured properties of a living radiolarian.
 
-Compute Voronoi neighbours.
+We have arrived here with the ability to generate patterns, branch, deform a mesh and sample a process. That toolbox makes several accounts of an organic-looking object possible. Which one did you expect when you first saw these forms? What in their colour, repetition or motion supported that expectation?
 
-```gdscript
-func voronoi_neighbours(seeds: Array) -> Array:
-    var adjacency: Array = []
-    for i in seeds.size():
-        adjacency.append([])
-    for i in seeds.size():
-        for j in range(i + 1, seeds.size()):
-            if are_voronoi_neighbours(seeds, i, j):
-                adjacency[i].append(j)
-                adjacency[j].append(i)
-    return adjacency
-```
+The gap is productive. Desire can travel ahead of an explanation; a strange body can invite attention before we know how to describe it. Learning the recipe need not cancel that encounter. It gives us something specific to vary when the familiar repertoire begins to close around what a body is allowed to look like.
 
-Two cells are neighbours if they share a boundary. For spheres, this is roughly proximity-based.
-
-Approximate Voronoi adjacency.
-
-```gdscript
-func are_voronoi_neighbours(seeds: Array, i: int, j: int) -> bool:
-    var midpoint: Vector3 = (seeds[i] + seeds[j]) / 2.0
-    for k in seeds.size():
-        if k == i or k == j: continue
-        if seeds[k].distance_to(midpoint) < seeds[i].distance_to(midpoint):
-            return false
-    return true
-```
-
-The midpoint test: two seeds are neighbours iff no third seed is closer to their midpoint. Fast approximation; not exact for non-convex cells.
-
-Build the silica skeleton.
-
-```gdscript
-func build_skeleton(seeds: Array, adjacency: Array) -> void:
-    for i in seeds.size():
-        spawn_node_at(seeds[i])
-        for j in adjacency[i]:
-            if j > i:
-                spawn_strut_between(seeds[i], seeds[j])
-```
-
-Nodes at seed positions; struts between neighbours. The skeleton is a wireframe.
-
-Add the soft protoplasm.
-
-```gdscript
-func add_protoplasm() -> void:
-    var sphere := MeshInstance3D.new()
-    sphere.mesh = SphereMesh.new()
-    sphere.mesh.radius = radius * 0.95
-    var mat := StandardMaterial3D.new()
-    mat.albedo_color = Color(0.8, 0.6, 0.9, 0.4)
-    mat.transparency = BaseMaterial3D.TRANSPARENCY_ALPHA
-    sphere.material_override = mat
-    add_child(sphere)
-```
-
-Semi-transparent sphere inside the skeleton. The soft living matter visible through the rigid structure.
-
-Animate growth.
-
-```gdscript
-var current_radius: float = 0.0
-@export var grow_rate: float = 0.2
-
-func _process(delta: float) -> void:
-    current_radius = min(radius, current_radius + grow_rate * delta)
-    update_skeleton_scale(current_radius / radius)
-```
-
-The radiolarian grows over time. Skeleton struts extend; protoplasm fills the interior.
-
-Show Haeckel's illustration reference.
-
-```gdscript
-func display_haeckel_reference() -> void:
-    var image := preload("res://commons/softbodies/haeckel_radiolaria.jpg")
-    var quad := QuadMesh.new()
-    var mat := StandardMaterial3D.new()
-    mat.albedo_texture = image
-    quad.size = Vector2(2, 2)
-    mesh_instance.mesh = quad
-    mesh_instance.material_override = mat
-```
-
-Historical illustration as a reference panel. The procedural form is a reinterpretation of Haeckel's 19th-century drawing.
-
-You can now build a radiolarian with Voronoi-partitioned silica skeleton, soft protoplasm, animated growth, and a Haeckel reference panel. Topology_Entropy_Morphogenesis extends into morphogenetic algorithms.
+Radiolaria belongs here as an explicit contrast, not proof that static geometry is a soft-body simulation. In the next hall, spatial differences will be maintained by exchanges in an evolving field. Biological resemblance and a model of morphogenesis will finally meet as different claims we can examine.

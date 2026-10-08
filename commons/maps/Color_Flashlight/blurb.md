@@ -1,3 +1,3 @@
-Light reveals color by adding wavelengths. The flashlight illuminates, and surfaces respond differently — some absorb, some reflect, some fluoresce. In darkness, color vanishes. Color is not property but interaction: object, light source, and eye together produce what we see.
+# What reaches the surface
 
-Point the `flashlight_demo` at a surface and watch what was black resolve into hue. The `prism` decomposes your beam back into the spectrum that composed it, closing the loop opened in Color_Nails. The `dark_sphere` has been present throughout the Color sequence as a control — the same surface, whose color is never constant. This map is the gate: once color is understood as event rather than attribute, Forces and Arrays and Wavefunctions become legible as the physics of system states, not the behavior of things.
+Several colours meet on a pale board. Take one lamp and turn it aside. What leaves with it? Bring it back across another beam and watch a colour appear that neither makes alone. The surface has kept its material; your hand has moved a condition of its appearance.

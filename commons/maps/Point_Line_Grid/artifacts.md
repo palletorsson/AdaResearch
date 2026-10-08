@@ -7,7 +7,7 @@ Seven physical placements; four primary artifacts in book order. No placement is
 - **grab_sphere_point_snap** — move and release the sphere; compare retained metres with integer indices on its five-centimetre world grid.
 - **player_trace** — follow the finer and one-metre local records of a chosen point in the visitor; try holding an address, crossing it and returning.
 - **grid_lines** — find a released Trace drawing, centred and scaled in pink, rounded again in green; read the source coordinates beside the display.
-- **plan_vitrine** — step onto the enclosed five-by-five plan and find cells by two indices. The internal `simulation_grid` supplies the numbered tiles and continuous floor collider.
+- **plan_vitrine** — step onto the enclosed five-by-five plan and find cells by two indices. The internal `simulation_grid` supplies the numbered tiles and continuous floor collider. In VR, the configured `space_grid` pair compares sampled cyan drawing with amber drawing rounded over the floor cells; height remains continuous.
 
 ## Secondary
 

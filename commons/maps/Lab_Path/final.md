@@ -1,4 +1,6 @@
-What has followed you out of the room?
+# What has followed you out of the room?
+
+*An optional return to the Noise rooms.*
 
 A dark patch that returned with REMAP. A connection that broke when the threshold moved. A ridge that caught your foot. Let one encounter come back before you try to explain the whole sequence.
 
@@ -17,7 +19,5 @@ The sphere offers no verdict. Its pulse continues while you choose what to atten
 Perhaps what stays with you is the small sheet's swelling surface. You wanted to remain near it, or to make a body that could live in its folds. Knowing its operation gives you something to change. It need not settle what the encounter was worth to you.
 
 <!-- @ -->
-
-In the cellular-automata rooms, a cell's next state will depend on what its neighbours were doing in the previous step. That previous step has to be kept while the next one is written. The neighbourhood we have been learning to recognise acquires another task. What kinds of bodies could come from that dependence?
 
 Bring one of your unfinished questions with you.

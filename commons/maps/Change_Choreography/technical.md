@@ -17,3 +17,31 @@ Feed attempts occur every 1.2 seconds. Each collection pulse removes at most the
 ## Review
 
 Compare one phase offset before a phase wave, then frequency drift. Compare actual transport under matched intervals, backlog and recovery. Desktop scripted-pointer and physics tests accompany the first implementation. Headset reach, hand interaction, label comfort and live performance remain to be walked.
+
+
+<!-- study-spine:paired_time -->
+
+## Installed application: A second together
+
+`paired_time` occupies a new adjoining bay, after the existing encounters. Cell [12, 36], rotation 180°, museum adapter `res://commons/artifacts/spine_studies/paired_time.tscn`. Original response to Felix Gonzalez-Torres; no claim of exact reconstruction.
+
+Halve the rate difference; compare the growing gap with an unchanged phase offset. Reuses loop, rate, transform; adds no prerequisite node. The display and main-player controls are supplied.
+
+<!-- paired-time-reference -->
+
+### Paired-time implementation
+
+`paired_time_score.gd` is the state model: two scalar angles, a 12-second base period, a right-rate ratio, and a local pause flag. `advance(delta)` accepts finite positive elapsed seconds and wraps each accumulated angle within TAU. Both dials share the engine delta; no random hardware drift is claimed. `paired_time.gd` constructs two matching 1.94-metre dials with 60 marks each, above a solid display wall, and rotates only their hand nodes. Readout updates reuse the labels and meshes. The station supplies seven pointer controls; it adds no player or camera.
+
+Tests exercise no-jump rate changes, retained phase at equal rates, alignment without rate changes, deliberate phase offset, local hold/resume, reset, equal elapsed time at 30 and 144 updates per second, invalid elapsed inputs, bounded long updates, native museum captures and side-route support. Pointer dispatch is tested; physical XR comfort and Quest frame time remain unverified.
+
+
+### References and model limits
+
+[Whitney: Felix Gonzalez-Torres](https://whitney.org/artists/3454). The Whitney research led to this artist. This particular paired-clock reference is not presented as a Whitney collection work.
+
+[Foundation: “Untitled” (Perfect Lovers), 1991](https://www.felixgonzalez-torresfoundation.org/works/untitled-perfect-lovers2). The Foundation records two wall clocks and wall paint, ideally installed above head height. Ada uses enlarged single-hand dials and explicit rate controls; it is an original application, not an authorized installation or reconstruction of that work.
+
+[MoMA: “Untitled” (Perfect Lovers), 1991](https://www.moma.org/collection/works/81074). MoMA describes initially synchronized battery-powered clocks, possible drift or stoppage, resetting, and the context of the artist’s partner being diagnosed with AIDS. The digital study models none of that bodily or material vulnerability.
+
+<!-- /paired-time-reference -->

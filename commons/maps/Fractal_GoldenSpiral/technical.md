@@ -1,208 +1,37 @@
-# Fractals_7 - Technical Tutorial
+# Numerical recurrence, height and geometric remainder
 
-## Dimensional Extension of Cantor
+Two primary artifacts now have compact physical desks. `fibonacci_sequences` uses the existing live script at `algorithms/fractals/fibonacci_sequences/FibonacciSequences.gd`. The scene's text path previously named an inactive copy under stringalgorithms while its UID loaded the fractals copy; path and UID now agree. The inactive file is preserved exactly as archived. Both artifacts opt in with `#lesson:true`; ordinary scenes retain their automatic behavior.
 
-### 1D: Cantor Set
-Remove middle third of each segment:
+## Fibonacci values and height
 
-```gdscript
-func cantor_1d(segments: Array, depth: int) -> Array:
-    if depth <= 0:
-        return segments
+The source starts at [1,1] and generates twenty values by appending the preceding pair's sum. The teaching desk reveals two through ten terms, ending at 55. No automatic step advances this teaching view. NEXT/BACK change only the number of visible terms. HEIGHT switches between `h = 0.05 * value` and the existing logarithmic rule `h = 0.5 * log(value) + 0.5`. Indices, values, spacing and colour assignments remain consistent across the comparison. These are mathematical mappings into metres, not physical growth models.
 
-    var result = []
-    for seg in segments:
-        var third = (seg.end - seg.start) / 3.0
-        result.append(Segment.new(seg.start, seg.start + third))
-        result.append(Segment.new(seg.end - third, seg.end))
+SUM shows the last available addition as two matching stacks at a fixed 0.05 m per unit: the left stack joins the two summands in separate colours; the right is their sum. It is independent of the tower-height mapping. With fewer than three terms there is no addition to display. At ten terms, both stacks contain 55 units and are 2.75 m high. RESET restores two logarithmic towers and hides SUM/RULE. Ten terms bound the size and draw work of this encounter.
 
-    return cantor_1d(result, depth - 1)
+The original helix, natural-pattern panels and branching diagram are built once from their existing source functions and retained on supports. Their process-driven CSG rebuilding is disabled in the opted-in teaching instance. Their dimensions and construction rules remain. The downward branching diagram is raised so its last generation meets its display rather than being buried below the museum floor. The legacy Godot 3 material property `flags_transparent` is replaced by Godot 4's transparency enum in the live source.
 
-# Properties:
-# - 2^n segments after n iterations
-# - Dimension = log(2)/log(3) ≈ 0.631
-```
+The source helix uses `r = 0.1 * phi ** (angle / TAU)`, with a vertical term; this multiplies radius by phi per full revolution. It is not the conventional golden logarithmic spiral, whose radial multiplier is phi per quarter revolution. The 144 seed points use `r = 0.1 * sqrt(i)` and `angle = i * TAU / phi²`. The pinecone-like construction has 8 pieces in each of 13 layers with a 0.3-radian turn between layers. Shell-like chambers and the branching diagram introduce other explicit rules. These are constructed resemblances, not validated biological explanations.
 
-### 2D: Cantor Dust (Sierpinski Carpet)
-Remove middle ninth of each square:
+## Hand pair and complete learner construction — 8 October 2026
 
-```gdscript
-func cantor_2d(squares: Array, depth: int) -> Array:
-    if depth <= 0:
-        return squares
+The numbers desk now installs `hand_sum.gd`, extending the complete small `sum_points.gd` construction printed in `tutorial.md`. `point_body.gd` is carried unchanged from the preceding hand models. The adapter reads a separate prefix of the original source's precomputed Fibonacci array and sends each new request through the existing desk NEXT. The printed learner version owns `[1,1]` and appends the last two entries' sum itself. Both render the same record twice, through linear and logarithmic height functions, then apply a common factor 0.2. One unit in the small linear view is 0.01 m. The two equal-sized point bodies carry labels; size and contact distance do not encode their quantities.
 
-    var result = []
-    for sq in squares:
-        var third = sq.size / 3.0
-        for x in [0, 1, 2]:
-            for y in [0, 1, 2]:
-                # Skip center square (1,1)
-                if x == 1 and y == 1:
-                    continue
-                var new_pos = sq.position + Vector2(x, y) * third
-                result.append(Square.new(new_pos, third))
+One held point within 0.19 m of its partner requests one sum. A latch requires both points released before another held request; this also guards the trigger alternative. Released points return to their reachable homes. A desk edit during a hold synchronises the data and inhibits an additional contact until release. The installed version ignores global Enter; the printed workspace example uses the named `ui_accept` action. Two simultaneous hand pickups are possible but unnecessary: one hand can bring a point to its resting partner. No new locomotion or cross-hall storage is introduced.
 
-    return cantor_2d(result, depth - 1)
+The new off-white table stands beside the original console at desk-local (-2.15, 0, 2); its NEXT/BACK/RESET controls are adjacent to the points. Small drawings have no collision, while the support and pickable points do. The original six controls, SUM witness, secondary displays, seven placements and map structure remain. Ten terms bound both representations. The independent printed seed variation `[1,2]` is executed separately and ends at 89. Numerical recurrence, geometric square removal and visual resemblance remain separate claims.
 
-# Properties:
-# - 8^n squares after n iterations
-# - Dimension = log(8)/log(3) ≈ 1.893
-```
+## Golden rectangle and arcs (existing comparison)
 
-### 3D: Menger Sponge
-Remove center and six face-centers:
+The second source computes `phi = (1 + sqrt(5)) / 2`. The initial rectangle is 5 by 5/phi metres. A cut removes a square of side `min(width,height)` and retains a rectangle with one dimension reduced by that side. The remainder alternates orientation and retains the long/short ratio phi, up to floating-point error. Squares plus the current remainder partition the original area; historical remainder records must not be summed again as additional material.
 
-```gdscript
-func menger_3d(cubes: Array, depth: int) -> Array:
-    if depth <= 0:
-        return cubes
+The desk permits zero through eight cuts. It presents the existing generated geometry upright, with shallow 0.01 m extrusion. MEASURE labels the actual square side in metres and the cut index. Legacy Fibonacci number labels do not measure these shrinking squares. NEXT/BACK/RESET regenerate bounded geometry and detach old nodes before queueing deletion.
 
-    var result = []
-    for cube in cubes:
-        var third = cube.size / 3.0
-        for x in [0, 1, 2]:
-            for y in [0, 1, 2]:
-                for z in [0, 1, 2]:
-                    # Count how many coordinates are at center (1)
-                    var center_count = int(x == 1) + int(y == 1) + int(z == 1)
+ARC adds quarter-circle segments through the squares. Corrected arc centres in directions 1 and 3 make adjacent endpoints meet; each complete arc has 20 straight segments and both endpoints. The displayed curve is a polygonal rendering of piecewise circular arcs, not an exact logarithmic spiral. The arc is kept slightly in front of the squares. View toggles do not change the rectangle data. Ordinary source modes retain their auto-generation with the endpoint repair.
 
-                    # Skip if 2 or more are at center
-                    # (center cube + 6 face-center cubes)
-                    if center_count >= 2:
-                        continue
+## Retained room and limits
 
-                    var new_pos = cube.position + Vector3(x, y, z) * third
-                    result.append(Cube.new(new_pos, third))
+The original 17×15 structure is preserved at offset (3,24) in a 23×39 hall. Its five other placements stay at that offset. The two primaries move into the added approach so controls and their studies have space. The old raised sphere cell, gaps and walls remain. This wider hall exceeds the automatic 13–19-cell width recommendation because it stages the retained full-sized diagrams; the authored placement and walking route are checked explicitly.
 
-    return menger_3d(result, depth - 1)
+The existing recursion cabinet had no map-ready registry flags and was omitted at runtime. Its existing scene is now available. Romanesco's source was trying to add already-parented buds a second time. Reparenting without preserving the global transform now gives each bud its intended local offset under its actual parent: 13, 169 and 2,197 descendants at depths 1–3. This bug repair affects other instances using the same source. The 0.382 scale is approximately 1/phi², not 1/phi. DLA and the Fibonacci terrain retain their own automatic rules; neither receives a new controlled comparison.
 
-# Properties:
-# - 20^n cubes after n iterations
-# - Dimension = log(20)/log(3) ≈ 2.727
-```
-
-### Interactive Cube Subdivision
-
-```gdscript
-extends RigidBody3D
-
-@export var max_depth: int = 3
-var current_depth: int = 0
-
-func _on_touched():
-    if current_depth >= max_depth:
-        # Reset to single cube
-        reset_to_original()
-        return
-
-    subdivide_menger()
-    current_depth += 1
-
-func subdivide_menger():
-    var cubes = get_all_child_cubes()
-    if cubes.is_empty():
-        cubes = [self]
-
-    for cube in cubes:
-        var new_cubes = menger_subdivide_single(cube)
-        for new_cube in new_cubes:
-            add_child(new_cube)
-        if cube != self:
-            cube.queue_free()
-
-func menger_subdivide_single(cube: Node3D) -> Array:
-    var result = []
-    var size = cube.scale / 3.0
-    var offset = cube.scale.x / 3.0
-
-    for x in [0, 1, 2]:
-        for y in [0, 1, 2]:
-            for z in [0, 1, 2]:
-                var center_count = int(x == 1) + int(y == 1) + int(z == 1)
-                if center_count >= 2:
-                    continue
-
-                var new_cube = create_cube()
-                new_cube.scale = size
-                new_cube.position = cube.position + Vector3(x - 1, y - 1, z - 1) * offset
-                result.append(new_cube)
-
-    return result
-```
-
-### Dimensional Table
-
-| Dimension | Name | N kept | Scale | D = log(N)/log(S) |
-|-----------|------|--------|-------|-------------------|
-| 1D | Cantor Set | 2 | 3 | 0.631 |
-| 2D | Sierpinski Carpet | 8 | 3 | 1.893 |
-| 3D | Menger Sponge | 20 | 3 | 2.727 |
-| nD | Generalized | 3^n - ... | 3 | varies |
-
-### Passages in the Menger Sponge
-
-```gdscript
-func calculate_passage_size(initial_size: float, iterations: int) -> float:
-    # Smallest passages after n iterations
-    return initial_size / pow(3, iterations)
-
-# For walkable passages (≥1 meter):
-# Initial size 27m, 3 iterations → passages = 1m
-# Initial size 81m, 4 iterations → passages = 1m
-# Initial size 243m, 5 iterations → passages = 1m
-```
-
-### Surface Area and Volume
-
-```gdscript
-func menger_properties(initial_size: float, depth: int) -> Dictionary:
-    var side = initial_size
-
-    # Volume: (20/27)^n of original
-    var volume_ratio = pow(20.0 / 27.0, depth)
-    var volume = pow(side, 3) * volume_ratio
-    # Limit as n → ∞: 0
-
-    # Surface area calculation is more complex
-    # It grows without bound as depth increases
-    # Limit as n → ∞: ∞
-
-    return {
-        "volume": volume,
-        "volume_ratio": volume_ratio,
-        "note": "Surface area → ∞ while volume → 0"
-    }
-```
-
-## Implementation Notes
-
-### Efficient Menger Rendering
-Use instancing for repeated cube patterns:
-
-```gdscript
-func render_menger_instanced(depth: int):
-    var positions = calculate_menger_positions(depth)
-
-    var multimesh = MultiMesh.new()
-    multimesh.mesh = cube_mesh
-    multimesh.instance_count = positions.size()
-
-    for i in range(positions.size()):
-        var transform = Transform3D()
-        transform = transform.translated(positions[i].position)
-        transform = transform.scaled(Vector3.ONE * positions[i].scale)
-        multimesh.set_instance_transform(i, transform)
-```
-
-## Key Takeaway
-The Cantor principle (remove middles) scales across dimensions. From 1D dust to 2D carpet to 3D sponge, the same logic produces structures with zero measure (length, area, volume) but fractional dimension. The Menger sponge is **walkable infinity**: finite bounding box, infinite surface, zero volume.
-
-## Within the Sequence
-
-Fractal_GoldenSpiral demonstrates the self-similar spiral governed by the golden ratio. The construction recurs in nature and in design, and the map's parameter sliders let the learner explore the ratio's variants.
-
-The per-frame cost of the map scales with the number of instanced artifacts and the resolution of the procedural effects. On typical consumer hardware the whole map runs at 60 frames per second with the default parameter ranges; pushing the parameters to their extremes can raise GPU load to the point where frame rate drops, and the map does not hide this from the learner. A corner indicator reads out the current frame time so the learner can observe the cost of their parameter choices.
-
-Failure modes worth naming. A learner who pushes the sliders off the calibrated ranges can produce visually incoherent output — flickering surfaces, runaway growth, or flat featureless fields. The map's controls are clamped at safe bounds, but within those bounds the parameters still interact nonlinearly, and the nonlinear interactions are part of what the map rewards. Understanding the interactions requires running the parameters through their ranges rather than setting them once from a preset.
-
-The map is one station in a longer arc. The artifacts it introduces reappear in later maps with extended parameter sets, composed behaviours, or different contextual framings. The learner who walks this map carefully carries a vocabulary the remaining sequence depends on, and the vocabulary is the map's concrete contribution to the curriculum.
+The same six full-size push targets and small transparent tilted screen used in preceding halls serve each desk. The rendered acceptance runner uses synthetic input through the real DesktopPlayer pointer pipeline. Native mouse interaction, human headset reach/comfort/readability and Quest frame time remain separate pending checks. Archive and receipts: `doc/space/golden-mapping-2026-09-14/`.

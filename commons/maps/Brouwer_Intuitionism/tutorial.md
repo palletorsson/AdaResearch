@@ -1,5 +1,13 @@
 # Brouwer Intuitionism
 
+**Learning elements — proposed focus**
+
+*The labels below set the revision focus; the existing lesson still needs alignment.*
+
+- Finite prefixes
+- Witnesses
+- Open continuations
+
 No existence without construction. Build a room where claims are only valid if the learner assembles them step by step.
 
 Declare an intuitionistic proposition.

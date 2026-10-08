@@ -1,5 +1,13 @@
 # Euclid Parallel
 
+**Learning elements — proposed focus**
+
+*The labels below set the revision focus; the existing lesson still needs alignment.*
+
+- Geometric assumptions
+- Constructed examples
+- Measurement and proof
+
 Five postulates. The first four feel inevitable. Build a room that exposes the fifth as a choice.
 
 Declare the five postulates as data.

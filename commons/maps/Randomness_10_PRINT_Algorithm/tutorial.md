@@ -1,5 +1,11 @@
 # 10 PRINT Algorithm
 
+**Learning elements**
+
+- Binary choices
+- Grid traversal
+- Mark interpretation
+
 One coin flip per cell, infinite visual structure. Build the maze from the simplest random choice.
 
 Declare the maze grid.

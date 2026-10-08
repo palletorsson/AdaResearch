@@ -1,4 +1,16 @@
+> Current placement, 30 September 2026: Point One holds absence, visibility, collision, a removable directional light and the pedestal sphere. Holding, WORLD/LOCAL, the frame and target belong to Point_Coordinates. [README.md](README.md) identifies the current files. The older research below remains as material, not a claim that every referenced artifact still stands in this hall.
+
 # Point One - Critical Reflection
+
+## Reading status — 26 September 2026
+
+This is an earlier research draft, retained for its questions. The current literary argument is in [final.md](final.md); [technical.md](technical.md) now follows the actual encounter.
+
+Some assertions below need revision before reuse. A geometric point does not by itself discretize a continuum or establish a binary classification. The current room does not establish a fixed 90 Hz tracking rate. A position value alone does not record a trajectory, but a surrounding program can record one. Claims about ownership, surveillance and colonial mapping require a particular practice and evidence; they do not follow from the definition of a point alone.
+
+The running-system and inherited-work inquiry now opens Point_Zero. Here, begin with absence, a visible surface that permits passage, an identical surface that resists, and the removable light. The held black body, reference frames and acceptance of an arrival continue in Point_Coordinates. These are investigative leads, not required conclusions. Preserve the rabbit, pleasure, curiosity and the usefulness of the abstraction alongside its limits.
+
+---
 
 ## That Which Has No Part
 

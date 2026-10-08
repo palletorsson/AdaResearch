@@ -1,7 +1,16 @@
 # One centre, many centres, an enclosure
 
+**Learning elements — proposed focus**
+
+*The labels below set the revision focus; the existing lesson still needs alignment.*
+
+- Pivots
+- Axes and angles
+- Rotated offsets
+- Operation order
+
 1. Find the fixed middle of each 8.4 m blade. Y offers a level crossing; X and Z retain held climbing slopes. Then board their small level end-platforms: X travels forward along z and up3m, Z travels sideways along x and up3m. Each platform follows a180-degree upper arc while remaining upright, with12-second docking pauses and a12-second turn. It reverses along the upper arc for the return. Compare the blade's changing orientation with the platform's fixed upright basis; remaining on a bare blade through vertical cannot be a standing ride. Grid wedges and still aisles provide returns.
-2. Walk forward through each two-column, six-row array. The angles are 0, 18, 36, 54, 72 and 90 degrees. Compare X, Y, Z and fixed X-then-Y-then-Z order without changing cube size or centre spacing. Then compare the cyan 0.44 m and pink 1.20 m test bodies: the same 1.6 m height, 2 m/s forward input, gravity, 45-degree slope limit and 0.15 m floor snap. Rings retain endpoints; readouts include sideways displacement. REPLAY starts both passes again. A wider body need not stop sooner: Z can carry it sideways into a continuing route. These are collision trials, not a proof that another body or movement cannot pass. Inspect a stopped route from an aisle. Ninety degrees can restore a flat-looking endpoint without making the intervening passage easy.
+2. Walk forward through each two-column, six-row array. The angles are 0, 18, 36, 54, 72 and 90 degrees. Compare X, Y, Z and fixed X-then-Y-then-Z order without changing cube size or centre spacing. Then compare the narrow 0.44 m and wider 1.20 m test bodies: the same 1.6 m height, 2 m/s forward input, gravity, 45-degree slope limit and 0.15 m floor snap. Rings retain endpoints; readouts include sideways displacement. REPLAY starts both passes again. A wider body need not stop sooner: Z can carry it sideways into a continuing route. These are collision trials, not a proof that another body or movement cannot pass. Inspect a stopped route from an aisle. Ninety degrees can restore a flat-looking endpoint without making the intervening passage easy.
 3. Walk through five hollow tunnel segments with the same eighteen-degree spatial increment. Then observe the five carousel profiles: their layers use angular speeds of `0.5 * pow(1.2, i)` radians per second. Separate an angle assigned by position from an angle accumulating with time.
 
 ```gdscript
@@ -21,3 +30,33 @@ The compact arrangement retains full-size crossing blades and array cubes. It re
 The deck's top follows `(0,1.5,0) + R(axis, angle) * radial + side_offset`. X uses radial `(0,-1.5,-3.5)` and side offset `(-2.2,0,0)`; Z uses radial `(-3.5,-1.5,0)` and side offset `(0,0,-2.2)`, turning in the opposite sense so both trips use the upper arc. The platform's basis stays upright. Its fixed bracket height compensates for the original blade's thickness-adjusted axle. Both endpoint tops meet grid heights0m and3m.
 
 Tests must cover the moving ride, natural boarding, departure and the full body volume around the arc. A static ramp crossing test alone did not cover the failure reported in VR.
+
+## Following a marked orientation — 23 September
+
+Compare the first and last top marks in the Y array: at ninety degrees the occupied cube shape repeats while the L points another way. Beyond the combined array, the restored composition workbench starts on pair four, X30° and Y45°. Follow the intermediate forms to compare `Y * X` with `X * Y`. Pair two is the counterexample: rotation and uniform scale about the same origin commute, although their intermediate states differ. The stage separates the drawings for visibility; both calculations use the same origin.
+
+The array has two batched mark surfaces per band; the sweep’s mark is attached to its rotating cube. Neither changes collision. The grid parser now recognises `initial_pair` as a numeric parameter rather than a tutorial rotation shorthand.
+
+
+<!-- study-spine:hinge_release -->
+
+## Return: A pose left
+
+Change the return speed while keeping the reference pose. Begin with the supplied study in the museum and compare the two states from the same place. Name what remained fixed before inspecting the code.
+
+This application reuses loop, transform, trace. The small edit belongs to the learner; the display, main player and physical controls are supplied. Its adapter is `commons/artifacts/spine_studies/station.gd` (`hinge`), which calls the study’s own setters. Change one parameter, predict the visible consequence, then test another value. Reconstructing every mesh is not a prerequisite for this encounter.
+
+[Earlier study and making notes](/book-review/doc/book/iterations/2026-10-01-clark-a-pose-left/index.html). Geometry controls wait until the exhibit is clear. RESET returns the original comparison.
+
+
+<!-- study-edit:hinge_release -->
+
+### One source change: A pose left
+
+Change the existing degrees_per_second value from 45 to 20. Return takes longer; the destination angle stays the same.
+
+```gdscript
+degrees_per_second = 20.0
+```
+
+Source: `commons/artifacts/spine_studies/hinge_score.gd`. Use the prepared scene to run and compare.

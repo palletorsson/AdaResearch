@@ -96,6 +96,20 @@ There is a desire running through this museum: give the world another opening. M
 
 Yet someone has to live with the opening. A system can become easier for one inhabitant by shifting difficulty onto another. More variation is not automatically more freedom; compulsory change can also exhaust a life. Ada's question is becoming more demanding: whose possibilities does this arrangement sustain, and who can answer back when its terms fail them?[^3]
 
+<!-- @ -->
+
+<!-- study-spine:sentence_authority -->
+
+<!-- @sentence_authority -->
+
+YOU MAY REMAIN HERE. On a small label, the sentence is easy to overlook. Above it, a strip gives you one word at a time. Across the wall, the whole permission waits in letters larger than your hand.
+
+Hold the strip on MAY. The other two displays continue to offer the sentence in full. Who is speaking from that height? The words have acquired a place from which to address you, without acquiring a reason you should obey.
+
+These are our sentences, placed in relation to Holzer's public uses of language. Slow the strip. The permission takes longer to arrive. An assertion on a wall remains something to question, even here, among the limits of proof.
+
+<!-- @ -->
+
 Leave the formula lit. We will meet it again in the laboratory, where particular implementations give its terms consequences. The seven rooms behind us have supplied ways to question that work. They have not excused it from being questioned.
 
 An equals sign waits. So does the world it has not yet accounted for.

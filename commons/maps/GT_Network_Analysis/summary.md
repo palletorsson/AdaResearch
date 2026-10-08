@@ -7,3 +7,12 @@ The space is built as a hub-and-spoke network. A central platform sits at the mi
 A fourth station runs a network-flow demonstration. Pipes replace edges; a source floods the network with capacity-bounded flow; and the network's throughput becomes a different form of importance — structural rather than topological. A panel at each station names the metric and shows its formula.
 
 Within the sequence, Network_Analysis is the measurement chapter. GT_Connectivity will next introduce directed edges and the asymmetries they produce.
+
+
+<!-- study-spine:evidence_network -->
+
+## Installed application: A relation needs a record
+
+`evidence_network` occupies a new adjoining bay, after the existing encounters. Cell [11, 23], rotation 180°, museum adapter `res://commons/artifacts/spine_studies/network.tscn`. Original response to Mark Lombardi; no claim of exact reconstruction.
+
+Remove one recorded relation; compare incoming and outgoing counts before moving the layout. Reuses graph, line, array; adds no prerequisite node. The display and main-player controls are supplied.

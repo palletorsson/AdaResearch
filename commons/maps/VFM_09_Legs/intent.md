@@ -1,5 +1,7 @@
-Seven walkers in one row, one leg to eight, with everything else held equal — same scale, same pace, same short leash — so the only variable left is the number of feet on the ground. One leg can do nothing but pogo. Two are a controlled fall caught just in time. Three stand without negotiating: the first polygon that does not have to argue with gravity. Four discover diagonal pairing because geometry gives them no other option. Five break bilateral symmetry and have to invent a gait that cannot be mirrored. Six run two alternating tripods and always keep three down. Eight is the crawler with its hunt switched off, standing still enough to be looked at.
+# What Lets a Body Stand?
 
-They are on the floor, not on plinths. Every other exhibit in this museum is a static object and a plinth suits it; these walk, and an animal that paces off a one-metre pedestal is worse than no pedestal at all. Each keeps to roughly its own bay on a 1.1 m leash.
+Two book primaries: support_polygon_lab, then four_leg_critter. First compare actual rigid-body contact with an initial support forecast. Then observe the retained procedural walker as a different implementation of a body and its feet.
 
-The room sits between Gravity and the Arena on purpose. Gravity is the force that makes standing a problem; this is what it costs to solve it; and the Arena, one teleport further on, is where the four-leg rung's descendant is still walking around on a body made of twenty-four cylinders and thirty-two spheres.
+Do before explaining: RELEASE on four supports, FEET to three, compare SHIFT toward and away from the missing corner. PARTS reveals the footprint and mass projection; RULE names the assumptions. Compare adjacent and diagonal pairs of finite pads. Visit the four-leg walker and observe its planted/swing phases.
+
+Preserve all seven original walkers. One new physical encounter makes eight artifacts. The row is a family of implementations, not a controlled experiment in leg count alone. Static support is not a complete theory of locomotion. Next: VFM_08_Arena, where controller, movement and player relations can be distinguished in an encounter.

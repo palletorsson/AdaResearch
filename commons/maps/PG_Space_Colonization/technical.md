@@ -1,90 +1,27 @@
-# PG Space Colonization — Technical
+# Space Colonization — assignment, eligibility and support
 
-The space colonisation algorithm grows a branching structure by letting branch tips reach toward scattered attractor points. Each tip consumes attractors within a kill radius, and new tips sprout from the growing branches.
+The existing space_colonization_algorithm is the sole primary. The opt-in museum token is `space_colonization_algorithm:180#lesson:true`. colonization_museum.gd installs colonization_lesson.gd and hides/disables the old UI and its collision shapes. Ordinary placements keep the existing programmatic 3D UI and the original TIPS policy. The old Control attachment was replaced with Node3D to match SpaceColonizationUI.gd; the UI script itself is unchanged.
 
-```gdscript
-class_name SpaceColonizer extends Node3D
+## Reusable kernel and explicit policy
 
-@export var attractor_count: int = 200
-@export var attraction_radius: float = 3.0
-@export var kill_radius: float = 0.5
-@export var step_length: float = 0.2
+SpaceColonizationAlgorithm.gd retains the original grow_iteration body as _grow_tips_iteration. Each attraction point chooses its nearest eligible leaf strictly inside influence_distance. A point at or inside kill_distance is removed from the active list. Other assigned points contribute unit directions. Each influenced leaf adds one successor in the normalized sum direction and is replaced by that successor. With one root this cannot fork. The legacy kernel can produce a zero-length successor when opposing requests cancel completely; it is preserved for comparison rather than represented as a universal growth model.
 
-var attractors: Array = []
-var nodes: Array = []  # list of {position, parent_index}
+The new decision_snapshot exposes eligible sites, target assignments, accumulated directions and reached indices without advancing the state. Under NETWORK, all earlier nodes remain eligible. _grow_network_iteration reads one unchanged generation, removes reached points, then adds at most one child per eligible site. Zero sums and already occupied proposed positions are skipped. Every child has one parent; no joining operation creates cycles. Older sites can produce another child on a later generation, so forks become possible. The name NETWORK does not certify a looped network.
 
-func _ready() -> void:
-    for i in range(attractor_count):
-        attractors.append(random_point_in_bounds())
-    nodes.append({"position": Vector3.ZERO, "parent_index": -1})
+The wrapper grow_iteration reports a budget or a no-growth reason. Ordinary placements have node_budget 0 (no additional node cap) and retain the original iteration setting. The museum study uses node_budget 192, max_iterations 60, segment_length .5 m, influence_distance 8 m and kill_distance .32 m. One-root TIPS advances one node per step; NETWORK enforces the node cap during additions. Parent/child reference cycles are broken when discarded and on exit.
 
-func grow_step() -> bool:
-    var tip_influences: Dictionary = {}
-    var nodes_to_kill_attractors: Array = []
-    for i in range(attractors.size() - 1, -1, -1):
-        var a: Vector3 = attractors[i]
-        var best_tip: int = -1
-        var best_dist: float = attraction_radius
-        for j in range(nodes.size()):
-            var d := a.distance_to(nodes[j].position)
-            if d < best_dist:
-                best_dist = d; best_tip = j
-            if d < kill_radius:
-                attractors.remove_at(i); break
-        if best_tip != -1:
-            tip_influences.get_or_add(best_tip, Vector3.ZERO)
-            tip_influences[best_tip] += (a - nodes[best_tip].position).normalized()
-    if tip_influences.is_empty():
-        return false  # terminated
-    for tip_index in tip_influences:
-        var direction = tip_influences[tip_index].normalized()
-        var new_pos: Vector3 = nodes[tip_index].position + direction * step_length
-        nodes.append({"position": new_pos, "parent_index": tip_index})
-    return true
-```
+## Fixed fields and controls
 
-## Complexity
+The three fields contain 3, 8 and 96 deterministic positions. The opening positions are (-2,3,0), (2,3,0), (0,5,0); with root zero the first step is (0,.5,0). The second field is an explicit asymmetric eight-point array. The third uses four heights, three rings and eight points per ring, with declared sine offsets to break rotational balance. No shared random seed is changed by the lesson.
 
-Each step is O(A·N) where A is the attractor count and N is the branch node count. A grows shorter as attractors are consumed; N grows longer as branches extend. The product tends toward a peak in the middle of the growth and decreases as the algorithm terminates.
+STEP performs one generation. FIELD cycles fields and restarts the origin while preserving the policy. POLICY toggles TIPS/NETWORK and restarts the same field. HOLD copies node positions, parent indices and depths into a separate witness, displayed at .45 scale and retained across resets. A later HOLD replaces it. RESET restores field zero and TIPS, leaving the witness. RULE toggles the explanation card. The six physical controls share one compact 3×2 console and a small inclined translucent readout.
 
-Spatial indexing accelerates the inner loop. A KD-tree reduces the nearest-tip query from O(N) to O(log N), which matters when N reaches hundreds of nodes. The map's tree scales use 200 attractors and produce a few hundred nodes; naive O(A·N) runs at interactive rates.
+Rendering shows the actual node/parent record as constant-width cyan segments, so branch thickness is a display choice here. Unreached points are pink; reached points remain small/dark. One eligible site's assignments are shown at a time to keep the canopy legible. Gold unit-direction lines, fine pink target connections and the white normalized half-metre resultant preview the next decision. This is a preview, not a stored historical explanation. The original model is hidden; its cylinder builder is reused. Generated branches and points have no colliders.
 
-## Termination
+## Floor ownership
 
-The algorithm terminates when no attractor is within attraction_radius of any tip. Bounded attractor regions produce bounded trees; unbounded regions produce trees that keep growing. The map uses a bounded region so the tree finishes in a predictable number of steps.
+The earlier 8×14 structure remains at offset (4,18) in a 19×36 surround. Its four numeric height-3 cells are two-metre decks under wall_height 4. All 43 raw zeros remain zeros: 42 former specimen-void cells plus one old teleporter hole. Explicit map_info.museum.floor_cells supply museum support because the relocated specimen supplies none. This decision does not redefine zeros in other halls.
 
-## Mesh Generation
+A closed convex ramp rises two metres over x=1..4, z=23..25. The eastern aisle and rear rows provide an independent exit. Source placement is explicit, and both portable plans carry the same hall. Prior files and historical grid are archived in doc/space/space-colonization-2026-09-14.
 
-Converting the branch skeleton to a mesh is a separate step. Generalised cylinders — a tube whose radius varies along the branch — are the standard approach. Radius can be a function of child-branch count (thicker at the trunk, thinner at the leaves) or a function of accumulated flow from the root.
-
-Within the sequence, Space_Colonization grows a tree without an L-system grammar. The environment's geometry — where the attractors happen to be — determines the tree's shape. PG_Percolation_Network will next turn to connectivity as a different generative phenomenon.
-
-## Initial Node Choice
-
-The root node's position determines where the tree begins. A single root at the origin produces a single trunk. Multiple roots produce a forest. A root high above the attractor cloud produces a tree that grows downward; below it, one that grows upward. The map's default places the root at the bottom of the attractor cloud and lets the tree grow toward the sky.
-
-## Attractor Distribution
-
-Uniform random attractors produce uniform trees. Clustered attractors produce trees that reach into the clusters selectively. Structured attractors — for instance, attractors placed on the surface of a target shape — produce trees that grow into the shape.
-
-```gdscript
-func attractors_on_surface(mesh: ArrayMesh, count: int) -> Array:
-    var attractors: Array = []
-    for _i in range(count):
-        attractors.append(random_point_on_surface(mesh))
-    return attractors
-```
-
-This technique generates trees that grow to fit a specific envelope — useful for populating a volume with convincing vegetation.
-
-## Runciman's Original
-
-Runciman and colleagues introduced the algorithm in 2007 for tree modeling. The original publication parameterised attraction by kd (the kill distance) and di (the radius of influence), which the map's kill_radius and attraction_radius preserve. Setting di equal to kd makes the algorithm produce linear branches; setting di much larger than kd produces dense bushy branching.
-
-## Variants
-
-Weighted attractors produce trees that prefer specific directions. Dynamic attractors that move or disappear produce trees that adapt to changing environments. Multi-resource attractors that represent different growth factors (light, water, nutrients) produce trees whose branching reflects ecological priorities.
-
-## Final Mesh
-
-Converting the branch skeleton to a mesh is a separate step after growth terminates. Simple cylinders capture the basic look; generalised cylinders with tapered radius look more organic; mesh refinement with normal smoothing produces production-quality output at higher rendering cost.
+Desktop verification must exercise the pointer controls, half-metre prediction, actual fork records, independent canopy calculation, witness retention, budgets, all covers/decks, ramp and museum exit. Headset reach/readability/comfort, audio and Quest performance remain pending. The next hall is PG_Branching_Growth.

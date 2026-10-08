@@ -1,27 +1,18 @@
-# LSystems Grammars And Curves — Artifacts
-*L-Systems: Rules Grow Structure · lambda_edge · 3 artifacts*
+# Grammars and Curves — five works
 
-> A production rule: `A → -BF+AFA+FB-`. A handful of symbols, a single substitution. Apply it once — a simple path. Apply it again — the path folds. Again — it begins to fill space.
+1. **the_believing_turtle**, primary: restored museum placement with a compact synchronized comparison. Its original smaller studies remain behind the new desk.
+2. **ContextFreeGrammars**, secondary: existing derivation station and physical controls.
+3. **space_filling_curve_gallery**, secondary: independently fitted finite Hilbert, Peano and Moore drawings; standard depths 4 / 3 / 3.
+4. **Hilbert3D**, secondary: volumetric path and existing controls; repaired scene script path.
+5. **lindenmayer_tube_tree**, secondary: the separate tube-rendered grammar study.
 
-The map, read through what it holds — its artifacts in the order you meet them:
+The four secondary algorithms do not share the primary's sentence. Their more detailed encounters remain for a later pass. All current book anchors refer to the actual primary.
 
-## 3D Hilbert Curve
-![3D Hilbert Curve](/scene-catalog/Hilbert3D.png)
 
-Space-filling curve visualization demonstrating efficient 3D traversal
+<!-- study-spine:tube_painting -->
 
-`Hilbert3D`
+## Installed application: A line takes up room
 
-## Space-Filling Curve Gallery
-![Space-Filling Curve Gallery](/scene-catalog/space_filling_curve_gallery.png)
+`tube_painting` occupies a new adjoining bay, after the existing encounters. Cell [11, 39], rotation 180°, museum adapter `res://commons/artifacts/spine_studies/tube.tscn`. Original Ada geometry lesson, continuing an already started drawing.
 
-Triptych of classic space-filling curves — Hilbert, Peano, and Moore — generated via L-system rules and turtle graphics on a floor display. Curves that visit every point in a 2D region.
-
-`space_filling_curve_gallery`
-
-## Context-Free Grammars
-![Context-Free Grammars](/scene-catalog/ContextFreeGrammars.png)
-
-Context-Free Grammars visualizer — animated parse trees showing Chomsky hierarchy (regular → context-free → context-sensitive → unrestricted) with leftmost derivation step-by-step.
-
-`ContextFreeGrammars`
+Change the middle ring side count from twelve to eight. Keep the path and radius; compare the skin. Reuses trace, mesh, refinement, rotation, array, sweep; introduces the sweep capability after those earlier tools. The display and main-player controls are supplied.

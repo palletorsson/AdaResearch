@@ -37,3 +37,38 @@
 **Offline arithmetic (the numbers the corner checks expect, Python on the same five coefficients, 256 samples, four cycles):** 18 local maxima over four cycles (a sawtooth has four); the rise from the trough to the crest 11 samples = 0.086 m of a 0.5 m cycle; peak 1.58; the ideal Σ sin(nφ)/n = (π − φ)/2 is missed by π/2 at the corner and by up to 0.29 on the flank.
 
 **2026-09-12 — the visual pass (Astra: "large red geometry fills the desktop operating view and covers most of the waveform and controls"; and the abnormal shutdown).** The geometry was `algorithms/wavefunctions/sine_hallway/hallway_scene.gd` — a sixty-metre tunnel of eighty-metre, 0.4 m tubes swinging 2.5 m — built at its own size as the synthesis stand's hero at (10,4); it fits the slab now when its parent is a synthesis stand (a three-metre miniature: the same waves per metre, the sway in proportion; measured 0.52 × 0.16 × 3.05 m at x 10.3–10.8). The `coloredlines:0:1:0.05` ornament at (5,4) is gone from this map: its `setup_scene()` dresses whatever camera is current in a dark sky and fog — in the museum, the visitor's — and the file is another hand's mid-edit (forum 260912-uf0uo). The corridor rect `[7,3,7,11]` had protected nothing (the far edge is exclusive) and the bench rect stopped a row short of the operator's spot: `[7,3,8,12]` and `[2,2,6,7]` now; a dealt plinth had landed in the corridor and the aisle before the bench once the deal changed. The shutdown crash was the same `FMPianoSynth` release fault as AirMusic's (via `air_music_display_case` at (1,2)), fixed at its source. Live: 98 checks / 0 failures, exit 0, no backtrace; the operating view shows the display, the ribbons, the plate and the console with nothing in front of them.
+
+
+## 2026-09-12 — Astra: the curve and its name
+
+Kept Claude's accepted bench, controls, protected approaches, miniature hallway and all 25 map placements. Repaired shared recipe recognition: all five ratios count; zero and a single sine are handled first; the legacy positive odd 1/n² mix is named without claiming triangle signs. The sum and its geometry are unchanged. Final/tutorial/critical now follow naming thresholds, visibility thresholds and the difference between restoring coefficients and phase. Book hero and primary are additive_wave_demo; the obsolete coloredlines metadata was removed.
+
+Independent live run: 110 checks, zero failures, exit 0, no script errors; includes ten new coefficient settings and independent 256-sample arithmetic comparisons. Original hand and Claude reports preserved. Map metadata changed after the run; layers did not. Evidence: `doc/space/synthesis-lab-review-2026-09-12/`. Review: `/research/possible-bodies/synthesis-lab.html`. Headset and listening remain pending; high-amplitude sums can extend beyond the dark backing. Next: Random_Definition and its existing replay/contrast work.
+
+
+## 2026-09-22 — Slow Circuits, an audible companion
+
+Added `ambient_patch:0:0` at (4,6), facing +Z, in the authored map and portable museum plan. All 25 previous placements remain. The primary harmonic bench stays a visual sum; the new supporting console is a separate instrument with three clocks, seeded chance, a pentatonic pitch set and Ada’s Discreet/FM synthesis. Six physical sliders and three buttons control the actual audio. Its cable graph is fixed except for the selectable LFO destination; the scope reads output PCM.
+
+Desktop verification: 33 audio/control/lifecycle checks and 82 checks in the actual hall passed. The museum CharacterBody reached the operating pose; all control rays were clear and native XR Tools grabs retained the intended values. Maximum horizontal control distance was 0.653 m; control heights 0.834–1.116 m. No clipping in the captured preview. Two cached notes, eight finite voices, a private bus, lazy preparation and culling shutdown limit the added work. Quest performance and physical listening remain untested.
+
+Review and audio: `/book-review/doc/book/iterations/2026-09-22-ambient-patch/index.html`. Reproducible tests: `doc/reports/ambient-patch-2026-09-22/`.
+
+
+## 2026-09-22 — Walk inside the instrument
+
+The user clarified that this should be a room-sized instrument to walk inside. Added a separate staged VR room reached through ENTER ROOM on the compact console. Curved walls and an open centre surround three physical stations: Rhythm, Tone, Space. Each voice family has a 3D source; orbit modulation moves the emitters and their visible markers together. The room keeps the existing XR rig and tracked height. The doorway and BACK TO HALL restore WaveFunctions_Synthesis_Lab using the museum open_at contract. Existing map placements are unchanged.
+
+Review: `/book-review/doc/book/iterations/2026-09-22-ambient-room/index.html`. Desktop geometry, native interaction, spatial audio and transition-contract checks are recorded in `doc/reports/ambient-room-2026-09-22/`. Quest hardware testing remains pending.
+
+
+## 2026-09-22 - The title was a reference to Lucier
+
+The user clarified that “I sitting in a room” referred to Alvin Lucier's *I Am Sitting in a Room*. The earlier room answered a different question. ENTER ROOM now opens Room Memory: a local recorded voice or labelled synthetic demo, recursive passes, original comparison, and adjustable absorption. A finite three-axis delay model ties the processing to a 6 x 5 x 3 m room, with its simplifications named. The ambient room is preserved behind AMBIENT ROOM. No map placements or final.md text were removed.
+
+Evidence and listening examples: `/book-review/doc/book/iterations/2026-09-22-room-memory/index.html`. Desktop tests exercise actual PCM, recursion, native VR controls, reach, cancellation, muted recording bus and staged travel. Microphone tests inject known synthetic PCM; no actual user recording was captured. Physical Quest verification remains outstanding.
+
+
+## 2026-09-22 - Book passage: what the room keeps
+
+Added the Room Memory detour to final.md after the existing additive-bench encounter and before its handoff to Random_Definition. Preserved the original bench argument. The new section grounds the analogue/digital distinction in HEAR ORIGINAL, NEXT PASS, RESET and ABSORB, with abbreviated code for recursive processing and actual reset code. It names the fixed recording window, peak normalization, sampling and simplified spatial response. Impossible material assignments remain explicitly speculative. Footnotes locate Lucier/Collins and the acoustic-model distinction without moving the main encounter into a literature review. Intent updated; runtime and map placements unchanged. The review's book-passage panel is generated from final.md to avoid a separate drifting copy.

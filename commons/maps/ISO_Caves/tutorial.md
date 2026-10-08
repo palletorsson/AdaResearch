@@ -1,42 +1,40 @@
-# The Same Surface, Entered
+# On the enclosing side
 
-Outside: terrain with arches. Inside: a cave. Same field, same triangles — the only thing that changed is which side of the surface you stand on.
+**Learning elements**
 
-```gdscript
-func density(p: Vector3) -> float:
-    var ground := noise2d.get_noise_2d(p.x, p.z) * 4.0 - p.y
-    var tunnels := noise3d.get_noise_3d(p.x * 0.5, p.y * 0.5, p.z * 0.5)
-    return ground + tunnels * 3.0
-```
+- Entrance conditions
+- Enclosing boundaries
+- Bodily clearance
 
-The 3D noise term doesn't just make overhangs — where it runs strongly negative *below* ground level, it eats the interior. The cave is not modeled; it is the region the subtraction hollowed out. Negative space as a first-class output.
+<!-- @mc_portal_landscape -->
 
-For a walkable cave, the mesh needs collision and its triangles must face *inward*:
+The portal landscape is a promise made by a boundary. From the approach it looks like terrain with openings: stone rises, a ring declares a passage, and the field has been asked to join the two. Walk its edge first. Does the opening meet the floor, or does the name “portal” ask you to supply a route the mesh has not made?
 
-```gdscript
-func make_walkable(mesh: ArrayMesh) -> StaticBody3D:
-    var body := StaticBody3D.new()
-    var mi := MeshInstance3D.new()
-    mi.mesh = mesh
-    body.add_child(mi)
-    var shape := CollisionShape3D.new()
-    shape.shape = mesh.create_trimesh_shape()
-    body.add_child(shape)
-    return body
-```
-
-Marching cubes hands you this for free: because the algorithm triangulates the *boundary between inside and outside*, the same wall is correct from both sides. An exterior arch and an interior vault are one surface wearing two readings.
-
-Carve a guaranteed route so the cave is traversable, not just true:
+The generator carries a count and a burial choice:
 
 ```gdscript
-func carve_path(a: Vector3, b: Vector3, r: float = 1.6) -> void:
-    for t in 64:
-        var p := a.lerp(b, t / 63.0)
-        p.y += sin(t * 0.3) * 0.8         # let the tunnel wander
-        brush(p, r, -2.0)                  # subtract density along the line
+num_portals = 7
+burial = "straddling"
 ```
 
-A moving subtraction is a corridor. This is the map-generation trick under half this project's caves: guarantee connectivity by carving, let noise provide everything you didn't specify.
+Press PORTALS and watch the rings multiply. Press BURIAL to move the same family of portals from sunken to standing to floating. A change in count is a change in repetition. A change in burial is a change in the relation between a boundary and the floor. Neither word guarantees that a body can cross.
 
-Try: walk in until the entrance light disappears, then turn around. The passage reads completely differently outbound — same geometry, other side of the threshold. The cave teaches what the isovalue always meant: inside and outside are one decision, and you are standing in it.
+<!-- @mc_inside_cave -->
+
+Now turn towards the enclosing cave. The same kind of sampled boundary is no longer a facade in front of you. It is above, beside and behind the eye. Press PLUMB once, then OCTAVES once. Notice which changes you can read from outside and which only become legible when the wall closes around your viewpoint.
+
+```glsl
+density = ridged_noise(p) - plumbScale * (p.y + 100.0) / 300.0;
+```
+
+`plumb` is a written vertical bias: bedded, overturned, weightless or steep. `octaves` decides how many scales of the ridged sum survive. The field is sampled at a level and extracted into triangles. It is not a cave because the label says so; it becomes an interior when the classified air has enough width, headroom and an entrance.
+
+Press HOLD before changing the field. The earlier view stays behind the live specimen as a memory of the surface. A column can show several crossings, but a counter is not a body. Follow the wall, look back to the entrance, and test the route with your own clearance rather than with the most dramatic chamber in view.
+
+<!-- @queer_marching_cave -->
+
+The long cave in the rear aisle keeps a different vocabulary: bulge and resolution. It is a useful remainder, not a third answer to the same control panel. Its folds make the distinction felt: topology is not only whether a surface exists, but which bodies its passages permit.
+
+<!-- @ -->
+
+An isosurface gives inside and outside one calculation. The museum makes the choice visible by changing your side of the boundary. A portal can be a hole that does not connect; an enclosing cave can be a room with no adequate entrance. The field supplies possibilities. A route is authored through width, collision and a body that can arrive.

@@ -1,152 +1,40 @@
-# Paraconsistent Engineering — Technical
+# Keep the conflict — implementation and encounter
 
-A spherical rig holds a knowledge base with deliberate contradictions. A four-valued logic (Belnap's FOUR: true, false, both, neither) lets inference continue past contradictions without trivialising.
+The primary artifact is `merge_conflict_visualizer`. Its [scene](../../../algorithms/postfoundationscrisis/merge_conflict_visualizer.tscn) and [implementation](../../../algorithms/postfoundationscrisis/merge_conflict_visualizer.gd) supply the behaviour described here.
 
-```gdscript
-class_name BelnapLogic
+This follows Applied Ethics: choosing an arrangement made its assumptions available for inspection. Here four stored arrangements let us compare preserving, suppressing and separating a disagreement. Situated Computation next asks where the resulting claims come from.
 
-enum Value { NEITHER = 0, TRUE = 1, FALSE = 2, BOTH = 3 }
+The artifact still defaults to a passive `merge=junction` in other placements. This hall uses `merge_conflict_visualizer:180:0:1#merge:junction#interactive:true` at (4,4). An independent console presents JUNCTION, OVERLAP, RESOLVED and FORK. MARKER toggles only the glow; it does not rebuild or move the branches. Its choice survives a change of arrangement.
 
-static func conjunction(a: int, b: int) -> int:
-    # Truth table for AND in four-valued logic
-    const TABLE := [
-        [0, 0, 2, 2],  # NEITHER & {NEITHER, TRUE, FALSE, BOTH}
-        [0, 1, 2, 3],
-        [2, 2, 2, 2],
-        [2, 3, 2, 3],
-    ]
-    return TABLE[a][b]
+`_build_all()` selects the geometry. `apply_grid_config()` validates the selection, then rebuilds only the nodes owned by the visualization. External labels and the console survive. Each interactive branch has a box collision matching its size and rotation. Branch names use baked text plates; B's plate remains beside the short stump. Other placements keep their previous passive geometry and labels.
 
-static func disjunction(a: int, b: int) -> int:
-    const TABLE := [
-        [0, 1, 0, 3],
-        [1, 1, 1, 1],
-        [0, 1, 2, 3],
-        [3, 1, 3, 3],
-    ]
-    return TABLE[a][b]
+The display uses transformations already encountered in the book. JUNCTION leaves 0.6 m between upright boxes. OVERLAP rotates each 1.8 m box inward by 14 degrees about its foot, with the centre lines crossing at about 1.60 m. FORK rotates them outward by 18 degrees. RESOLVED moves A to the centre and gives B a height of 0.2 m. `_process()` varies the marker's emission with sine. None of these operations executes a logical rule.
 
-static func negation(a: int) -> int:
-    const TABLE := [0, 2, 1, 3]  # NEITHER, FALSE, TRUE, BOTH
-    return TABLE[a]
-```
 
-## Knowledge Base
-
-The knowledge base is a dictionary mapping propositions to their truth values. Contradictions appear when the same proposition is asserted as both true and false by different sources; the value becomes BOTH rather than producing a logical explosion.
+## Operation to read after the encounter
 
 ```gdscript
-class_name KnowledgeBase
-
-var facts: Dictionary = {}  # proposition -> Value
-var sources: Dictionary = {}  # proposition -> list of (source_name, claimed_value)
-
-func assert_fact(proposition: String, value: int, source: String) -> void:
-    if not proposition in sources:
-        sources[proposition] = []
-    sources[proposition].append([source, value])
-    var existing: int = facts.get(proposition, BelnapLogic.Value.NEITHER)
-    facts[proposition] = combine(existing, value)
-
-func combine(existing: int, new_val: int) -> int:
-    # Information ordering: NEITHER < {TRUE, FALSE} < BOTH
-    if existing == new_val: return existing
-    if existing == BelnapLogic.Value.NEITHER: return new_val
-    if new_val == BelnapLogic.Value.NEITHER: return existing
-    return BelnapLogic.Value.BOTH  # any disagreement yields BOTH
+func _build_resolved() -> void:
+    _build_pillar(branch_a_color, Vector3(0, 0, 0),
+        Vector3(0.2, pillar_height, 0.2), "branch A", 0.0, false)
+    _build_pillar(branch_b_color, Vector3(BASE_X, 0, 0),
+        Vector3(0.2, RESOLVED_STUMP_H, 0.2), "branch B", 0.0, true)
 ```
 
-## Inference Engine
+The MERGE panel exposes JUNCTION, OVERLAP, RESOLVED and FORK. In RESOLVED, A keeps its full height and takes the centre; B becomes a labelled stump. Return to OVERLAP to recover both full-height branches. This is an authored picture of a decision, not a proof that the decision was warranted.
 
-The paraconsistent inference engine evaluates queries against the knowledge base. A query returns one of the four values, reflecting the evidential state of the proposition.
+## What to compare
 
-```gdscript
-func query(proposition: String) -> int:
-    return facts.get(proposition, BelnapLogic.Value.NEITHER)
+Read branch A and branch B and locate the light between them. Give each branch a concrete report about one door, including a time and a source. Decide whether your reports actually contradict each other before proposing a resolution.
 
-func query_with_rules(expression: String) -> int:
-    # Parse the expression and evaluate it under Belnap logic
-    # e.g. "P AND NOT Q"
-    var tokens := tokenize(expression)
-    return evaluate_tokens(tokens)
-```
+JUNCTION keeps two separate upright pillars and a pulsing marker. OVERLAP leans them into a shared volume; FORK leans them apart. MARKER hides or reveals the glow without moving either branch. The sculpture displays relations; it does not run a merge algorithm or derive logical consequences.
 
-Classical inference would crash when encountering a BOTH value; paraconsistent inference continues and propagates the BOTH through subsequent operations.
+## Limits and next test
 
-## Production Pipeline
+Add a small inspectable inference table with a contradictory pair and an unrelated proposition. Require the visitor to predict which consequences follow. Compare that with preserving two source-tagged reports, so storage and inference remain distinct lessons.
 
-A small sensor-fusion pipeline demonstrates the paraconsistent machinery in practice. Two sensors report values for the same quantity; their disagreement is marked rather than resolved arbitrarily.
+The controlled museum probe checks button callbacks, selected reach, oriented-box overlap and selected walking routes. It does not establish headset readability, comfort or Quest frame rate. Existing supporting artifacts stay in the map; primary status identifies the book's encounter, not the only permitted content.
 
-```gdscript
-class_name SensorFusion
+[Earlier design proposal](../../../doc/space/postcrisis-pass-2026-09-15/before/commons/maps/SpeculativeComputation_Paraconsistent_Engineering/technical.md) preserves the previous text and its proposed systems. It is not a description of the current implementation.
 
-var readings: Dictionary = {}  # sensor_id -> reading
-
-func fuse() -> Dictionary:
-    # For each quantity, check whether sensors agree
-    var fused: Dictionary = {}
-    var all_quantities := collect_quantities()
-    for q in all_quantities:
-        var values: Array = []
-        for sensor_id in readings:
-            if q in readings[sensor_id]:
-                values.append(readings[sensor_id][q])
-        fused[q] = {
-            "values": values,
-            "agreement": all_equal(values),
-            "fused_value": mean(values) if all_equal(values) else "CONFLICT"
-        }
-    return fused
-```
-
-## Complexity
-
-Conjunction, disjunction, and negation are O(1) with precomputed truth tables. Fact assertion is O(1) with dictionary storage. Query resolution is O(|expression|) for an expression with |expression| operators. Sensor fusion is O(Q·S) for Q quantities and S sensors.
-
-Within the sequence, Paraconsistent_Engineering makes contradiction a first-class engineering concern. SpeculativeComputation_Situated_Computation will next extend the posture to standpoint-awareness.
-
-## Resolution Strategies
-
-When contradictions appear in a paraconsistent system, the engineering decision is what to do about them. Three common strategies: isolate (mark the contradiction and refuse to infer from it), resolve (use a separate rule to pick a winner), or defer (log the contradiction for human review).
-
-```gdscript
-func resolution_strategy(prop: String, values: Array, strategy: String) -> int:
-    match strategy:
-        "isolate": return BelnapLogic.Value.BOTH
-        "resolve_by_source_priority":
-            var priority_table := {"official": 3, "expert": 2, "crowd": 1}
-            var best: int = -1; var best_val: int = BelnapLogic.Value.NEITHER
-            for v in values:
-                var pri: int = priority_table.get(v.source, 0)
-                if pri > best: best = pri; best_val = v.value
-            return best_val
-        "defer": return BelnapLogic.Value.NEITHER  # wait for human
-    return BelnapLogic.Value.BOTH
-```
-
-## Integration With Production
-
-The paraconsistent stage in a production pipeline sits between data ingestion and downstream consumers. Consumers are expected to handle BOTH and NEITHER values explicitly, rather than assuming all data is classically true or false.
-
-```gdscript
-func downstream_consumer_guard(value: int, callback: Callable) -> void:
-    match value:
-        BelnapLogic.Value.TRUE: callback.call(true)
-        BelnapLogic.Value.FALSE: callback.call(false)
-        BelnapLogic.Value.BOTH: log_contradiction_for_review()
-        BelnapLogic.Value.NEITHER: log_missing_evidence()
-```
-
-## Testing the Engine
-
-A test suite for the paraconsistent inference engine checks that classical inferences remain sound when the knowledge base is consistent, and that inference continues without explosion when contradictions are present.
-
-```gdscript
-func run_tests() -> void:
-    assert(query("unrelated_fact") == BelnapLogic.Value.NEITHER)
-    assert_fact("P", BelnapLogic.Value.TRUE, "sensor_A")
-    assert(query("P") == BelnapLogic.Value.TRUE)
-    assert_fact("P", BelnapLogic.Value.FALSE, "sensor_B")
-    assert(query("P") == BelnapLogic.Value.BOTH)
-    assert(query("Q") == BelnapLogic.Value.NEITHER)
-```
+The retained rhizome vault uses `#ground_top:0` here, making its ground plate flush with the museum floor. Its default remains 0.03 m in other placements. The vault retains its original position and scale; its broad footprint still extends beyond this hall and needs a separate architectural placement pass.

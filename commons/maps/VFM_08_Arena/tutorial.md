@@ -1,57 +1,75 @@
-# Vector Arena
+# One impact, then the world
 
-The exam, disguised as a shooting range. Every station re-asks a question this sequence already answered — at speed.
+**Learning elements**
 
-Conserve momentum in the cradle.
+- Impulse
+- Momentum change
+- A one-shot action
+- Collision response
 
-```gdscript
-# before == after, always:
-var p := a.mass * a.velocity + b.mass * b.velocity
-```
+Send the black bowling point down the lane. Watch the first pin it reaches and follow that pin into the next contact. Your throw starts a sequence you no longer direct.
 
-The cradle's click is conservation you can hear. Mass times velocity in, mass times velocity out.
+## Make the small study
 
-Crash the carts.
+Use the same point twice: one striker and one target. Give the striker one impulse, then let their collision unfold. Start without gravity or a floor so the first question is the impact.
 
-```gdscript
-func elastic_1d(m1: float, v1: float, m2: float, v2: float) -> Array:
-    var u1 := ((m1 - m2) * v1 + 2 * m2 * v2) / (m1 + m2)
-    var u2 := ((m2 - m1) * v2 + 2 * m1 * v1) / (m1 + m2)
-    return [u1, u2]
-```
+**The hall adds:** The hall adds ten pins, floor friction, rolling and a score. Its ROLL control can be used repeatedly; your study allows one launch before a restart.
 
-The collision carts run this equation at floor scale. Heavy hitting light, light hitting heavy — predict, then watch.
+Save `10_impulse.gd` beside your shared files and use it on `PointStudy`. [Setup and complete shared code](../../../doc/book/course/forces-shared-code.md).
 
-Bounce a shot down the reflection hall.
+## Complete code — 10_impulse.gd
+
+<!-- student-code:10_impulse.gd -->
 
 ```gdscript
-var bounced := v - 2.0 * v.dot(wall_normal) * wall_normal
+extends "study.gd"
+var point = Point.new()
+var target: RigidBody3D
+var used := false
+var impulse := Vector3(0, 0, 3) # N·s in the study frame
+
+func _ready() -> void:
+    add_child(point)
+    point.position = Vector3(0, 1.2, -1)
+    target = Point.new()
+    add_child(target)
+    target.position = Vector3(0, 1.2, 1)
+    for body in [point, target]:
+        body.mass = 1.0
+        body.collision_layer = 4
+        body.collision_mask = 4
+    caption("One impulse. Then the contact has its turn.")
+    button("ROLL ONCE", Vector3(0, 1, -1.8), roll)
+
+func roll() -> void:
+    if used:
+        return
+    used = true
+    point.apply_central_impulse(global_basis * impulse)
 ```
 
-The preview shelf showed this once; the hall makes you aim with it. Hit the target around the corner using the wall as the second half of your throw.
+## Read the change
 
-Lead the moving target.
+An impulse changes momentum in one action. With a 1 kg body, the chosen 3 N·s impulse gives a velocity change of 3 m/s before contact. Doubling mass halves that initial change in velocity.
 
-```gdscript
-func lead(target_pos: Vector3, target_vel: Vector3,
-          shot_speed: float, from: Vector3) -> Vector3:
-    var t := (target_pos - from).length() / shot_speed
-    return (target_pos + target_vel * t - from).normalized()
-```
+`roll()` calls `apply_central_impulse` once. The `used` flag stops another button event from adding a second impulse. This differs from the sustained force you applied during repeated physics updates.
 
-The sentry turret solves interception: aim not where the target is, but where it will be. Position plus velocity times time — Motion 101, weaponized.
+Both points use collision layer and mask 4, so they can meet. The script never assigns a velocity to the target. Its response comes from contact with the striker.
 
-Survive the turret's logic.
+## Change one thing
 
-```gdscript
-# the turret leads YOU. Change velocity, not position —
-# its prediction is only as good as your consistency.
-```
+Double the striker’s mass while keeping the impulse. Predict its initial speed, then observe the collision separately. Restart each trial. A prediction about the launch speed does not yet tell you how the whole collision will end.
 
-Walking a straight line makes you solvable. The dodge is acceleration: be a worse equation.
+## Return to the hall
 
-> Try: in the reflection hall, score a two-bounce hit. Each bounce is one subtraction — chain them in your head before you throw.
+Back at the lane, throw slightly off-centre. Follow the first sideways deflection and the contacts it makes possible. A small change in aim can produce a different arrangement of fallen pins.
 
-> Try: against the sentry turret, walk a circle. Why does it keep missing in the same direction?
+## Model notes
 
-This closes the loop that opened in the sandbox: pushes you couldn't name are now equations you can aim. The chamber — ForcesArena — waits with the catalyst, the creatures, and everything this hall taught, alive at once.
+Impulse is measured in N·s, equivalent to kg·m/s. The collision settings and body properties determine the contact response; this code does not promise a perfectly elastic collision. The study’s points meet in mid-air, before the hall adds rolling and floor contact.
+
+## Into the next room
+
+An impulse happens once. In the last hall, hold a trigger to keep adding acceleration to your own movement.
+
+[Reflective text](final.md).

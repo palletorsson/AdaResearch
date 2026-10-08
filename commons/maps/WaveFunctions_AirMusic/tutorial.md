@@ -1,89 +1,98 @@
-# Air Music
+# A strike gives a note its own beginning
 
-Walk into a position, the room plays a note. Build the spatial instrument where phasing loops drift over each other.
+**Learning elements**
 
-Declare the voice registry.
+- Event-driven voices
+- Independent clocks
+- Decay envelopes
+- Signal addition
 
-```gdscript
-class_name SpatialVoice
-extends Node3D
+Effect Sound let us keep a reference while changing the parameters of another note. In AirMusic, the comparison concerns events: one strike, a repeated strike on the same bar, and a second bar struck while the first continues. Synthesis Lab will build on the sum that appears here.
 
-@export var midi_note: int = 60
-@export var phase_period: float = 7.3
-```
+Take the striker from its cradle at the table's left end. Strike the longest bar, lift the stick away, and listen. Read the frequency and age above the row. Make the same contact again before the sound ends: the age restarts. Now use a different bar. Two ages continue together.
 
-Each voice is a Node3D with a note and a phase period. Periods are irrationally spaced so the voices drift rather than lock.
+## One player belongs to each bar
 
-Build the grid of voices.
+`ResonatingMetallophone` creates eight `ResonatingBar` bodies for this room. Their notes are C4, D4, E4, G4, A4, C5, D5 and E5. Each owns its own `AudioStreamPlayer3D`. Starting one player again replaces that bar's current playback; starting a different player's note leaves the first one running.
 
-```gdscript
-func populate_voices(parent: Node3D) -> void:
-    var scale := [0, 2, 4, 5, 7, 9, 11]
-    for i in 12:
-        var v := preload("res://commons/artifacts/wavefunctions/spatial_voice.tscn").instantiate()
-        v.midi_note = 48 + scale[i % scale.size()] + 12 * (i / scale.size())
-        v.position = Vector3(i * 1.2 - 6.5, 1.2, 0.0)
-        v.phase_period = 5.0 + float(i) * 0.7
-        parent.add_child(v)
-```
-
-Twelve voices across a major scale. Phase periods grow slowly. No two voices share a rate.
-
-Detect the listener within range.
+The length is assigned from the chosen frequency:
 
 ```gdscript
-func within_range(listener: Vector3) -> bool:
-    return global_position.distance_to(listener) < 1.0
+return BAR_LENGTH * sqrt(root / maxf(1.0, freq))
 ```
 
-The voice wakes only when the learner comes close. Everything else stays silent. The instrument plays by being visited.
+The lowest note keeps a length of 0.30 m. Higher notes get shorter bars. This is a mapping from frequency to visible form, not a simulation deriving sound from the material. Other tunings exist as source configurations; this hall has no visitor tuning selector.
 
-Emit when triggered.
+## A recognised contact starts the response
+
+The rigid body's contact signal and its `StrikeZone` area feed `_on_body_hit`. The handler follows the hitting node's ancestors to recognise the striker's tip, which is a child collider rather than the stick's root. It ignores the stick while it is returning to its cradle and suppresses closely spaced duplicate notifications.
+
+Strike strength comes from velocity, including the speed measured from a held stick's changing position. The handler applies:
 
 ```gdscript
-func _process(dt: float) -> void:
-    if within_range(listener.global_position):
-        var t := Time.get_ticks_msec() / 1000.0
-        var phase_gate: bool = fmod(t, phase_period) < phase_period * 0.3
-        if phase_gate and not sounding:
-            play_note()
-            sounding = true
-        elif not phase_gate:
-            sounding = false
+hit_velocity = clamp(velocity_magnitude * 2.0, 0.1, 1.0)
 ```
 
-Within range, the voice plays only during its phase window. Two nearby voices overlap only when their windows coincide. Harmony emerges from independent cycles.
-
-Render a soft halo on the active voice.
+Try a slow and a quick contact on the same bar. Above 0.5 m/s this mapping has already reached its ceiling of one. Below it, strength changes without changing the chosen frequency. The bar then starts its response:
 
 ```gdscript
-func show_halo(active: bool) -> void:
-    halo.visible = active
-    halo.modulate = Color(1.0, 0.9, 0.6, 0.6)
+is_resonating = true
+resonance_time = 0.0
+current_amplitude = impact_strength * max_amplitude
 ```
-
-A warm halo marks the active voice without sound alone. Visually quiet, sonically present.
-
-Apply FM synthesis on the note.
 
 ```gdscript
-func play_note() -> void:
-    var freq: float = 440.0 * pow(2.0, (midi_note - 69) / 12.0)
-    audio_player.frequency = freq
-    audio_player.modulator = freq * 2.1
-    audio_player.play()
+audio_player.volume_db = -6.0 + (impact_strength * 6.0)
+audio_player.play()
 ```
 
-FM piano-like tone, bright and bell-like. The modulator ratio gives Eno-era character. No composed sequence; the room composes.
+The visible response starts from strength times `max_amplitude`. Playback volume uses a decibel mapping. At strength 0.1, glow starts at one tenth of its full-strength value, while the player's gain is about 0.54 of its full-strength gain. These are different representations of the same strike, not equal measurements of loudness.
 
-Log the walk as a piece.
+## The buffer was made before you touched it
+
+Each bar generates its mono PCM note once during setup, at 44,100 samples per second. Inside that loop:
 
 ```gdscript
-func log_note(v: SpatialVoice, t: float) -> void:
-    piece.append({"t": t, "note": v.midi_note})
+var envelope = exp(-t / decay_time)
 ```
 
-The piece records each voice that played and when. The learner takes a generated composition home. The room is a pencil, not a score.
+```gdscript
+var wave = sin(2.0 * PI * frequency * t)
+```
 
-You have made the space an instrument. The next map, Sky Stairs, ascends the wave.
-<<</MAP>>>
+```gdscript
+var sample_value = wave * envelope * max_amplitude
+var sample_int = int(sample_value * 32767.0)
+```
+
+The sine and envelope are multiplied, then encoded as a signed 16-bit sample. The collision does not solve a metal bar's vibration or regenerate this buffer. It chooses when the stored note starts and at what player gain.
+
+The default decay constant is three seconds. After three seconds the exponential is `exp(-1)`, about 0.368 of its initial amplitude. Its mathematical tail has no finite end. The implementation makes a finite buffer:
+
+```gdscript
+return maxf(1.0, decay_time * 2.5)
+```
+
+For this room that is 7.5 seconds. The last 0.1 seconds receive an additional fade. The bar clears its resonance state when the player stops, so the glow cannot remain as a claim that the note still plays. The final audio fade and the glow's exponential are not identical curves.
+
+## Two notes, two clocks, one picture
+
+Strike C4, wait a little, then strike A4. Each audio player has its own playback position. The table's scope reads a 12 ms window near each position using 512 points. For every point it decodes that bar's PCM and includes the player's gain:
+
+```gdscript
+samples[i] = float(pcm.decode_s16(frame * 2)) / 32768.0 * gain
+```
+
+The visualiser adds the windows:
+
+```gdscript
+_summed_samples[i] += values[i]
+```
+
+The gain is fixed: one signal unit becomes 0.15 m of height. The drawn range is limited to ±1 and the readout reports `display limit` if the sampled sum exceeds it. The stored sum remains available for inspection. The picture does not automatically enlarge a fading signal.
+
+This display follows source playback positions, which advance with audio mixing. It is not a microphone at the listener's head and does not include spatial attenuation, bus effects or the output device. The reported ages can differ slightly from the frame-updated glow ages. Watching the ribbon does not replace listening to the overlap.
+
+The striker returns when left more than 0.5 m from its rest, unheld, for three seconds. Its three-part return takes another 0.75 seconds and is excluded from striking. A returning tool should not compose extra notes on its way across the row.
+
+Try the same pair far apart and then overlapping. The pitches can stay fixed while the relation changes through their starting times. That is what the Synthesis Lab inherits: a sum depends on the terms, their levels and where they are in their cycles.

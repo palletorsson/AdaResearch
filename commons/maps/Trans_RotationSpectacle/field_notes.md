@@ -211,3 +211,19 @@ MeshInstance3D, hidden or not. It is built at the moment of the crossing now,
 so the cube seals its one cell; the registry's measured footprint (17) is stale
 by the same amount. The Spectacle's twelve stood exactly where placed, because
 its rows are thirteen wide.
+
+
+## 2026-09-09 — exhibition gallery, not grid simulation
+
+User specified that Trans_RotationSpectacle is a museum exhibition holding boolean_tunnel and different carousel_cake configurations. Removed the simulation declaration and old crossing course; retained the source and manuscripts in `doc/space/rotation-spectacle-gallery-2026-09-09/before`. The active hall is 37 x 55, with continuous museum floor, a fourteen-segment tunnel and five full-scale cakes: cake, ziggurat, column, spindle, flare.
+
+All five share eight layer heights and the same angular-speed rule. Their gallery:clean option removes the baked duplicate stack/colliders and matches generated collision to the displayed profile. Legacy instances keep their previous behaviour. Each gallery cake identifies its profile. The tunnel's segment_vertical_offset=-0.65 seats its hollow for floor-level passage, independently of root placement.
+
+Actual museum probe: 32 checks, zero failures, including no grid/enclosure/basin, exact instance counts, distinct profiles, matching collision, tunnel accumulation, a capsule sweep through its passage, continuous floor and clear viewing aisle. Capture: `ada_run/Trans_RotationSpectacle_gallery.png`. Human VR review remains pending.
+
+Book and primary roles now contain only boolean_tunnel and carousel_cake; five cake instances belong to that second encounter. The cached museum plan row was refreshed in isolation so old utilities cannot reappear from it.
+
+
+### Central tunnel, three cakes on either side
+
+Moved the tunnel onto x18 and placed cakes at x7/x29 in three paired rows (z12,28,44), as requested. Six instances show the five existing profiles with a repeated original cake. Entry and exit now share the centreline. Both side aisles and the tunnel passage remain clear. Actual museum probe: 40 passing checks; capture updated in `ada_run/Trans_RotationSpectacle_gallery.png`. Current manuscript and source fingerprints match this arrangement.

@@ -1,7 +1,15 @@
-Concept: Scale as relational change — magnitude shifts while shape relations persist. Size is not intrinsic but assigned through comparison, making scale the transformation that most directly reveals invariance.
-Sequence role: Sixth and final map of the Transformation sequence. After translation (position) and rotation (orientation), scale addresses magnitude — the last degree of freedom in the 4x4 transformation matrix. Closes the sequence by returning to the question posed in Trans_Intro: what stays the same when everything changes? Scale's answer: proportion. Leads outward to the Color sequence, where transformations move from geometric to perceptual; follows Trans_Rotation_2.
-Technical angle: Uniform scaling S * v where S is a scalar matrix. Interactive scaling via player gesture (scale_me, vr_scale_controls). Reference geometry (prism_block) establishes proportion so that scaling is perceived relationally, not absolutely. Chair_assembly_puzzle requires correct scale matching — scale as a constraint to be solved, not just observed.
-Critical angle: Scale is the transformation that most nakedly exposes the relational nature of measurement. There is no absolute size — only size relative to something else. The invitation "scale me" makes the learner the agent of transformation, collapsing the subject-object boundary. Proportion as the invariant under scaling echoes the sequence's governing truth: identity preserved under transformation.
-Key artifacts: scale_me as the interactive scaling object that invites direct manipulation; prism_block as the reference geometry that makes scale comparative rather than absolute; chair_assembly_puzzle as the test of scale reasoning — correct assembly requires matching magnitudes; clipboard#vr_scale_controls for explicit parametric control; dark_sphere as the final appearance of the sequence's persistent invariant.
+Concept: Uniform scale preserves proportions while changing access relative to a fixed body.
+Primary: scale_me configured with encounter:drink_me. It composes the blooming/service-tower food table and spire/leaning crystal suit; these are room contents, not duplicate standalone placements.
+Sequence: From carousel radii in Trans_Rotation to body-relative space here, then Trans_Body.
+Encounter: Enter a four-metre room. Inspect the tiny far-side door. Take the labelled bottle on the food tower. A cut changes only this room and its contents to fourfold scale; the visitor is placed on the top serving plate. Descend the thirteen porcelain landings and leave through the enlarged room door and fixed witness frame, then turn toward the museum exit. A fixed wall joins the small room front to the hall sides, making it the forward route while leaving retreat possible.
+Comparison: A second 1.8 x 2.4 m frame stays fixed outside the scaling hierarchy. Door 0.45 x 0.60 m becomes 1.8 x 2.4 m. Body, walking speed, gravity and museum retain their own scales.
+Status: Authored prototype; automated spatial checks do not constitute a learner or headset walkthrough.
 
-Gap: No gap identified.
+
+<!-- study-spine:reference_passage -->
+
+## Installed application: Who fits through?
+
+`reference_passage` occupies a new adjoining bay, after the existing encounters. Cell [10, 30], rotation 180°, museum adapter `res://commons/artifacts/spine_studies/passage.tscn`. Original response to Mirosław Bałka; no claim of exact reconstruction.
+
+Change opening width while keeping the body and opening height. Reuses coordinates, transform; adds no prerequisite node. The display and main-player controls are supplied.

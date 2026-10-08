@@ -1,110 +1,35 @@
-# Soft Body Deformation
+# What holds a cube together?
 
-A cube made of springs. Push it; watch it deform.
+**Learning elements — proposed focus**
 
-Build a mass-spring lattice.
+_The labels below set the revision focus; the existing lesson still needs alignment._
 
-```gdscript
-class_name MassSpringCube extends Node3D
+- Deformable meshes
+- Resistance and damping
+- Pinned attachments
 
-var masses: Array = []      # Vector3 positions
-var velocities: Array = []
-var springs: Array = []     # [idx_a, idx_b, rest_length, stiffness]
-@export var size: int = 3
+<!-- @jelly_cube -->
 
-func build() -> void:
-    masses.clear()
-    velocities.clear()
-    for z in size:
-        for y in size:
-            for x in size:
-                masses.append(Vector3(x, y, z) * 0.5)
-                velocities.append(Vector3.ZERO)
-```
+The cube gives way. Yet it does not become a collection of loose triangles. Something continues to hold its parts in relation. Before looking at the settings, choose what you expect a softer cube to do: change further, return more slowly, or fail to return at all?
 
-A 3D grid of point masses. Each stores a position and a velocity.
-
-Connect adjacent masses with springs.
+Try STIFFNESS, then change DAMPING separately. The first changes resistance to deformation; the second damps motion. A body that moves less is not necessarily a body that resists deformation more. RESET restores the opening coefficients. It does not put every vertex back where it was before you arrived.
 
 ```gdscript
-func add_springs() -> void:
-    springs.clear()
-    for z in size:
-        for y in size:
-            for x in size:
-                var i := index_of(x, y, z)
-                if x + 1 < size: springs.append([i, index_of(x + 1, y, z), 0.5, 20.0])
-                if y + 1 < size: springs.append([i, index_of(x, y + 1, z), 0.5, 20.0])
-                if z + 1 < size: springs.append([i, index_of(x, y, z + 1), 0.5, 20.0])
-
-func index_of(x: int, y: int, z: int) -> int:
-    return z * size * size + y * size + x
+_soft_body.linear_stiffness = stiffness
+_soft_body.damping_coefficient = damping
+_soft_body.pressure_coefficient = pressure
 ```
 
-Edge springs keep the cube's shape. Rest length matches the grid spacing.
+These are parameters of Godot's soft-body solver. The program supplies a subdivided cube and lets its vertices respond under those rules. PRESSURE introduces another contribution. Watch what inflation can conceal: the same outer silhouette can be maintained by different balances of resistance and internal pressure.
 
-Compute spring forces.
+We have already changed whole objects by translation, rotation and scale. Here, their constituent positions change relative to one another. The surface connectivity remains prescribed. Yielding is a new capability; tearing, growing a hole or exchanging a neighbour would require more code. A soft appearance does not announce every freedom a body possesses.
 
-```gdscript
-func compute_forces() -> Array:
-    var forces: Array = []
-    for _i in masses.size(): forces.append(Vector3.ZERO)
-    for spring in springs:
-        var a: Vector3 = masses[spring[0]]
-        var b: Vector3 = masses[spring[1]]
-        var direction: Vector3 = b - a
-        var current_length: float = direction.length()
-        var extension: float = current_length - spring[2]
-        var force: Vector3 = direction.normalized() * extension * spring[3]
-        forces[spring[0]] += force
-        forces[spring[1]] -= force
-    return forces
-```
 
-Each spring pulls its endpoints toward its rest length. Equal and opposite forces on the two ends.
 
-Integrate.
+<!-- @softmill -->
 
-```gdscript
-@export var damping: float = 0.5
+Turn toward the mill. The moving apparatus brings a repeated encounter to a soft sphere. Use MILL to hold the drive. The sphere's physics continues; stopping a mechanism is different from stopping everything it has set in motion.
 
-func _physics_process(delta: float) -> void:
-    var forces := compute_forces()
-    for i in masses.size():
-        velocities[i] += forces[i] * delta
-        velocities[i] *= (1.0 - damping * delta)
-        masses[i] += velocities[i] * delta
-```
+The cube made its coefficients available on a desk. The mill makes the source of an encounter visible in the room. Follow the motion from the machinery to the surface, then consider the room around both: the collider, support and pinned points belong to this body's conditions as much as its stiffness does.
 
-Euler integration with velocity damping. Damping prevents unbounded oscillation.
-
-Apply an external push.
-
-```gdscript
-func apply_push(push_position: Vector3, force: Vector3, radius: float = 0.5) -> void:
-    for i in masses.size():
-        var distance: float = masses[i].distance_to(push_position)
-        if distance < radius:
-            var falloff: float = 1.0 - distance / radius
-            velocities[i] += force * falloff
-```
-
-Nearby masses take more force. The push produces a travelling wave through the lattice.
-
-Rebuild the mesh each frame.
-
-```gdscript
-func rebuild_mesh() -> void:
-    var mesh := ArrayMesh.new()
-    var st := SurfaceTool.new()
-    st.begin(Mesh.PRIMITIVE_TRIANGLES)
-    for face in cube_faces():
-        for vi in face:
-            st.add_vertex(masses[vi])
-    st.generate_normals()
-    mesh_instance.mesh = st.commit()
-```
-
-The visible cube follows the masses. Deformation is visible as warping of the mesh.
-
-You can now build a mass-spring lattice, compute forces, integrate, apply pushes, and rebuild the visual mesh. SoftBodies_Carusell extends into rotating soft bodies.
+The nearby jelly variants remain useful comparisons, and radiolaria offers a different warning: intricate biological resemblance can be constructed without soft-body dynamics. Keep that distinction for later. First we need to see how a surface changes when some of its points are required to stay.

@@ -1,9 +1,8 @@
-# WaveFunctions Synthesis Lab — Artifacts
-*Wavefunctions: Everything Oscillates · oscillation · 24 artifacts*
+# Synthesis Lab — the primary and its laboratory
 
-> Fourier's theorem: any signal decomposes into sine waves. Any wave, no matter how jagged or complex, is just simple oscillations stacked. This is the room where that principle becomes material.
+26 placed artifacts. The book follows one primary, `additive_wave_demo`: five coefficients, their visible component rows and a shared sum. The other pieces are supporting laboratory material; they do not receive the bench's coefficient state.
 
-The map, read through what it holds — its artifacts in the order you meet them:
+The inventory below preserves the existing catalog descriptions. They describe the wider collection and are not additional steps in the primary lesson.
 
 ## DNA Specimen
 ![DNA Specimen](/scene-catalog/dna_specimen.png)
@@ -172,3 +171,11 @@ Digital multimeter with analog-style oscillating needle. Demonstrates AC voltage
 Parametric curves with particle tracer
 
 `lissajous_curves`
+
+## Slow Circuits — Ambient Patch
+
+`ambient_patch` · supporting playable instrument · cell (4,6), front toward +Z.
+
+Three independent clocks pass through seeded chance and a C-major pentatonic scale. Ada’s Discreet pad and FM piano feed a low-pass filter, stereo delays and reverb. Press PLAY, lower DENSITY to leave gaps, then move SPACE to hear what remains between notes. LFO ROUTE sends the slow modulation to the filter or stereo pan. Six physical sliders have flat labels; the output trace reads real PCM. This is a fixed patch with a switchable modulation destination, not a free cable editor. It does not sonify the additive bench’s coefficients.
+
+The console also has **ENTER ROOM**: **Room Memory**, an experiment after Alvin Lucier's *I Am Sitting in a Room*. Record a phrase or use a synthetic demo, then hear it pass repeatedly through a simplified room-resonance model. Compare the original and change absorption. BACK TO HALL returns here; AMBIENT ROOM opens the earlier circular instrument. These staged rooms leave the other laboratory exhibits in place.

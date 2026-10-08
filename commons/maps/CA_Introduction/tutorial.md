@@ -1,108 +1,242 @@
-# CA Introduction
+# A row with neighbours
 
-A grid of cells. Each cell reads its neighbours. All update at once.
+## Learning elements
 
-Build a 2D grid.
+- Binary cell state: `bool`.
+- An ordered neighbourhood: left, self, right.
+- A rule as eight stored answers.
+- A synchronous update: read the old row, then replace it.
+- A wrapped boundary.
+- Current state and retained history.
+
+## At the board
+
+We are in Endless Museum. The explorer already works. Hold its small black point and move your hand sideways: three marks follow the selected address. The point reads the row; it does not turn a cell on. Press the trigger to advance one generation. The overhead ring receives the same stored rows.
+
+Choose Rule 90 and a single seed. Pause before stepping. Pick a cell, read its left neighbour, itself and its right neighbour, and predict its next state from the table below. The museum's side plate can check your answer. Our smaller reconstruction leaves that prediction to you.
+
+## What we carry
+
+Trace gave us an array of positions; Grid gave those positions addresses. Arrays let us read and replace stored entries. Here each address holds a Boolean: `false` or `true`. The address stays; its state changes. We reuse the pickable sphere from the point lessons as a reader. Its hand position selects an address in the study's local frame.
+
+Continue on your existing `PointStudy` node inside the museum, keeping its earlier script as a previous working version. Save both files below in one folder and attach `row.gd` to that node. Use unit scale. This builds a separate small experiment inside the museum. The camera, lighting, player and XR Tools are already present from Day Zero. No authored mesh, label or scene-child reference is required. Face the node's positive Z side; the board is 0.95 metres above its origin. Keep this experiment separate from the installed explorer while comparing them.
+
+## Three inputs, eight answers
+
+| Left / self / right | Address in the answer list | Next state, Rule 90 |
+|---|---:|---:|
+| 000 | 0 | 0 |
+| 001 | 1 | 1 |
+| 010 | 2 | 0 |
+| 011 | 3 | 1 |
+| 100 | 4 | 1 |
+| 101 | 5 | 0 |
+| 110 | 6 | 1 |
+| 111 | 7 | 0 |
+
+`4 * int(left) + 2 * int(self_cell) + int(right)` turns the ordered inputs into an address. `int(false)` is zero; `int(true)` is one. Compare `100` with `010`: both contain one active cell, but use different entries. A count alone would lose information.
+
+The installed explorer packs these eight answers into the number 90. We keep them as a readable list. They give the same answers; bit operations can wait.
+
+## Give every cell the same present
+
+`evolve` allocates a separate `next` array. Its loop reads only `old`. The result replaces `current` after all addresses have received an answer. Writing directly into `old` would allow a freshly changed neighbour to affect a later calculation.
+
+`posmod` supplies our boundary choice. With 32 cells, the left neighbour of cell 0 is cell 31; the right neighbour of 31 is 0. The calculation joins the ends even when we draw a straight row.
+
+`remember` puts a copy of the current row at the front of `history`. This copy is an observation, not another neighbourhood. Twenty-four observations fit on the board. Older ones leave the display while the generation count continues. The newest row is at the far edge; earlier rows extend towards you. History's second dimension describes time, not a second spatial direction in the rule.
+
+## Complete `row.gd`
+
+The first half defines the state and its update. `make_display` supplies the repeated boxes, marks and label; `redraw` gives those boxes the stored states. Both are included so the experiment can be reconstructed. MultiMesh is display plumbing here, not another lesson to master before understanding the rule.
 
 ```gdscript
-@export var size: Vector2i = Vector2i(32, 32)
-var grid: Array = []
+extends Node3D
 
-func initialise_random() -> void:
-    grid.clear()
-    for y in size.y:
-        var row: Array = []
-        for x in size.x:
-            row.append(1 if randf() < 0.3 else 0)
-        grid.append(row)
-```
+const PointBody = preload("point_body.gd")
+const WIDTH := 32
+const ROWS := 24
+const SPAN := 1.6
+# Inputs:                  000    001   010    011   100   101    110   111
+var answers: Array[bool] = [false, true, false, true, true, false, true, false]
+var seeds: Array[int] = [16]
+var current: Array[bool] = []
+var history: Array[Array] = []
+var generation := 0
+var selected := 16
+var point: XRToolsPickable
+var tiles := MultiMesh.new()
+var reading := Label3D.new()
+var marks: Array[MeshInstance3D] = []
 
-Each cell is 0 or 1. Random initialisation with 30% live density.
+func _ready() -> void:
+	make_display()
+	point = PointBody.new()
+	add_child(point)
+	point.action_pressed.connect(func(_body): step())
+	reset()
+	park_point()
 
-Count Moore neighbourhood.
+func reset() -> void:
+	current = []
+	current.resize(WIDTH)
+	current.fill(false)
+	for address in seeds:
+		assert(address >= 0 and address < WIDTH)
+		current[address] = true
+	generation = 0
+	history.clear()
+	remember()
+	redraw()
 
-```gdscript
-func count_neighbours(x: int, y: int) -> int:
-    var count: int = 0
-    for dy in [-1, 0, 1]:
-        for dx in [-1, 0, 1]:
-            if dx == 0 and dy == 0: continue
-            var nx: int = (x + dx + size.x) % size.x
-            var ny: int = (y + dy + size.y) % size.y
-            count += grid[ny][nx]
-    return count
-```
+func answer(left: bool, self_cell: bool, right: bool) -> bool:
+	var index := 4 * int(left) + 2 * int(self_cell) + int(right)
+	return answers[index]
 
-Eight neighbours, periodic boundaries. The wrap-around lets patterns flow across the edges.
+func evolve(old: Array[bool]) -> Array[bool]:
+	var next: Array[bool] = []
+	next.resize(old.size())
+	for i in range(old.size()):
+		var left := old[posmod(i - 1, old.size())]
+		var right := old[posmod(i + 1, old.size())]
+		next[i] = answer(left, old[i], right)
+	return next
 
-Apply a rule.
-
-```gdscript
-func apply_rule(alive: bool, neighbours: int) -> bool:
-    if alive:
-        return neighbours == 2 or neighbours == 3
-    return neighbours == 3
-```
-
-Conway's Game of Life. Live cells survive with 2 or 3 neighbours; dead cells revive with exactly 3.
-
-Step the grid.
-
-```gdscript
 func step() -> void:
-    var new_grid: Array = []
-    for y in size.y:
-        var row: Array = []
-        for x in size.x:
-            var alive: bool = grid[y][x] == 1
-            var count: int = count_neighbours(x, y)
-            row.append(1 if apply_rule(alive, count) else 0)
-        new_grid.append(row)
-    grid = new_grid
+	current = evolve(current)
+	generation += 1
+	remember()
+	redraw()
+
+func remember() -> void:
+	history.push_front(current.duplicate())
+	if history.size() > ROWS:
+		history.pop_back()
+
+func _physics_process(_delta: float) -> void:
+	if point.held():
+		var x := to_local(point.global_position).x
+		selected = clampi(int(floor((x / SPAN + 0.5) * WIDTH)), 0, WIDTH - 1)
+	else:
+		park_point()
+	show_reading()
+
+func park_point() -> void:
+	point.position = Vector3(cell_x(selected), 1.15, 0.90)
+
+func _unhandled_key_input(event: InputEvent) -> void:
+	if event is InputEventKey and event.pressed and not event.echo and event.keycode == KEY_ENTER:
+		step()
+		get_viewport().set_input_as_handled()
+
+func cell_x(i: int) -> float:
+	return ((i + 0.5) / WIDTH - 0.5) * SPAN
+
+func make_display() -> void:
+	tiles.transform_format = MultiMesh.TRANSFORM_3D
+	tiles.use_colors = true
+	tiles.instance_count = WIDTH * ROWS
+	var cell := BoxMesh.new()
+	cell.size = Vector3(SPAN / WIDTH * 0.94, 0.014, 1.2 / ROWS * 0.94)
+	tiles.mesh = cell
+	var board := MultiMeshInstance3D.new()
+	board.multimesh = tiles
+	var finish := StandardMaterial3D.new()
+	finish.vertex_color_use_as_albedo = true
+	finish.shading_mode = BaseMaterial3D.SHADING_MODE_UNSHADED
+	board.material_override = finish
+	add_child(board)
+	for row in range(ROWS):
+		for col in range(WIDTH):
+			var at := Vector3(cell_x(col), 0.95, -0.6 + (row + 0.5) * 1.2 / ROWS)
+			tiles.set_instance_transform(row * WIDTH + col, Transform3D(Basis.IDENTITY, at))
+	reading.position = Vector3(0, 1.42, -0.66)
+	reading.font_size = 30
+	reading.pixel_size = 0.0017
+	reading.outline_size = 4
+	add_child(reading)
+	for j in range(3):
+		var mark := MeshInstance3D.new()
+		var edge := BoxMesh.new()
+		edge.size = Vector3(SPAN / WIDTH * 0.94, 0.006, 0.006)
+		mark.mesh = edge
+		var ink := StandardMaterial3D.new()
+		ink.shading_mode = BaseMaterial3D.SHADING_MODE_UNSHADED
+		ink.albedo_color = Color("ff80b4") if j == 1 else Color("ffd77d")
+		mark.material_override = ink
+		add_child(mark)
+		marks.append(mark)
+
+func redraw() -> void:
+	tiles.visible_instance_count = history.size() * WIDTH
+	for row in range(history.size()):
+		for col in range(WIDTH):
+			var ink := Color("87dca5") if history[row][col] else Color("243238")
+			tiles.set_instance_color(row * WIDTH + col, ink)
+	show_reading()
+
+func show_reading() -> void:
+	var left := posmod(selected - 1, WIDTH)
+	var right := posmod(selected + 1, WIDTH)
+	reading.text = "GEN %d / CELL %d\nLEFT %d   SELF %d   RIGHT %d\nMove point: inspect / trigger or Enter: STEP" % [generation, selected, int(current[left]), int(current[selected]), int(current[right])]
+	for j in range(3):
+		marks[j].position = Vector3(cell_x(posmod(selected + j - 1, WIDTH)), 0.963, -0.597)
 ```
 
-Build a new grid from the old. The two must be separate — updating in place would corrupt the neighbour counts.
+## Carried `point_body.gd`
 
-Render as a texture.
+This is the earlier pickable sphere construction, reduced to an 8.5 cm radius for this desk. The finish and desktop hooks are supplied adapters. `held()` accepts an XR pickup or the museum's desktop grab; release leaves the reader parked at its selected cell. The point does not collide with or edit the automaton. The complete helper is here so no prior file is silently missing.
 
 ```gdscript
-func to_texture() -> ImageTexture:
-    var image := Image.create(size.x, size.y, false, Image.FORMAT_L8)
-    for y in size.y:
-        for x in size.x:
-            image.set_pixel(x, y, Color.WHITE if grid[y][x] else Color.BLACK)
-    return ImageTexture.create_from_image(image)
+extends XRToolsPickable
+## Point Lines' frozen point construction, made smaller for the hand model.
+var tint := Color("25212a")
+var desktop_pointer: WeakRef
+
+func _init() -> void:
+	freeze = true
+	freeze_mode = RigidBody3D.FREEZE_MODE_KINEMATIC
+	release_mode = XRToolsPickable.ReleaseMode.FROZEN
+	ranged_grab_method = XRToolsPickable.RangedMethod.NONE
+	collision_layer = 4
+	collision_mask = 0
+	var surface := MeshInstance3D.new()
+	var sphere := SphereMesh.new()
+	sphere.radius = 0.085
+	sphere.height = 0.17
+	sphere.radial_segments = 24
+	sphere.rings = 12
+	surface.mesh = sphere
+	add_child(surface)
+	var boundary := CollisionShape3D.new()
+	var shape := SphereShape3D.new()
+	shape.radius = 0.085
+	boundary.shape = shape
+	add_child(boundary)
+
+func _ready() -> void:
+	super._ready()
+	var finish := StandardMaterial3D.new()
+	finish.albedo_color = tint
+	finish.roughness = 0.24
+	get_child(0).material_override = finish
+
+func held() -> bool:
+	return is_picked_up() or (desktop_pointer != null and desktop_pointer.get_ref() != null)
+
+func on_desktop_grab(pointer: Node) -> void:
+	desktop_pointer = weakref(pointer)
+
+func on_desktop_drop(_pointer: Node) -> void:
+	desktop_pointer = null
 ```
 
-Greyscale. One pixel per cell, sampled nearest-neighbour for a pixelated look.
+## Try a change and account for it
 
-Animate the steps.
+1. Keep the table unchanged. Set `seeds` to `[15, 16]`. Before running, write the addresses you predict will be active after one step. Run and compare. Explain one address where the two seeds meet.
+2. Return to `[16]`. Reverse the traversal by replacing `for i in range(old.size()):` with `for i in range(old.size() - 1, -1, -1):`. Predict whether the next row will change. Test both versions from the same seed, keeping the original file.
+3. Use `[0]` as the seed. Follow both sides of its first generation and explain where the boundary appears in the drawing.
 
-```gdscript
-@export var steps_per_second: float = 10.0
+Hold the point to inspect. Trigger or Enter advances the reconstruction once. Re-running or calling `reset()` restores the selected seed and clears its history. Unlike the installed explorer, this small study has no automatic RUN, rule slider or overhead receiver. The same eight-answer list can later receive a different interface.
 
-var time_since_step: float = 0.0
-
-func _process(delta: float) -> void:
-    time_since_step += delta
-    if time_since_step >= 1.0 / steps_per_second:
-        time_since_step = 0.0
-        step()
-        update_texture()
-```
-
-Ten steps per second. Fast enough to show evolution; slow enough to watch structures form.
-
-Seed a glider.
-
-```gdscript
-func seed_glider(x: int, y: int) -> void:
-    var pattern := [[0, 1, 0], [0, 0, 1], [1, 1, 1]]
-    for dy in pattern.size():
-        for dx in pattern[0].size():
-            grid[(y + dy) % size.y][(x + dx) % size.x] = pattern[dy][dx]
-```
-
-A specific starting pattern. The glider walks across the grid at one cell per four generations.
-
-You can now build a 2D grid, count neighbours, apply Conway's rule, step and render, animate updates, and seed specific patterns. CA_ElementaryRules extends into 1D automata.
+Carry the row engine, its explicit boundary and its independent history. In the next hall we will change what a cell can hold and who counts as its neighbour. The rug and growing network remain encounters in the wider museum; we do not need to rebuild them to understand this step.

@@ -1,98 +1,23 @@
-# Random_Noise_Types - Critical Reflection
+# Admission can stop; a boundary can keep working
 
-## The Paradox of Structured Chaos
+The single point has three coordinate components. Its script repeatedly writes zero into one of them. The flatness a visitor encounters is maintained by an operation that discards part of a proposed movement. We can name the operation, locate it, and alter it. This is a specific opening for artistic research: the representation lets us intervene in the condition that makes this body appear possible.
 
-White noise is "more random" by every mathematical measure:
-- Maximum entropy
-- No correlations
-- No constraints
+At the bench, a candidate's admissibility depends on earlier accepted centres. A late arrival may be refused while those earlier positions remain untouched. The procedure generates an arrangement with a measurable minimum distance; it does not establish that the arrangement is fair, socially desirable, maximally packed, or universally more or less random. Those claims would require another question and another measure.
 
-Yet blue noise **looks more random** to human perception.
+The visitor can bring admitted points into a relation the generator would have refused. The observer reports that relation without correcting it. The queer possibility here lies in a precise separation: a rule that helped something come into existence need not exhaust what that thing can do afterward. This is an invitation to test the rule's reach, not a claim that every constraint is oppressive or that every overlap is emancipatory.
 
-Why? Because humans expect randomness to be evenly distributed. We notice clumping. We detect patterns. When random samples cluster (which they inevitably do in white noise), we perceive structure—even though the structure is accidental.
+LOAD makes a second limit available. An unfilled slot records the end of one hundred failed attempts. It does not prove the absence of an admissible position elsewhere. Earlier choices may have obstructed later ones; a different sequence may build another arrangement. Search time and spatial possibility have become entangled. This is a useful thread toward later landscapes and optimization, provided we carry the distinction between algorithmic failure and impossibility with us.
 
-Blue noise, by constraining samples to maintain distance, removes the accidental patterns. The result looks "cleaner" even though it's mathematically less random.
+The first 220 refused candidates are shown. The rest have a count but no visible body. The record itself has a material budget. Making that budget explicit lets the reader question what the image preserves and what it cannot show, rather than treating the image as an exhaustive account.
 
-## What Counts as Random?
+None of these mechanisms assigns a politics to a point cloud by itself. Their value is methodological: a visitor can perform a change, observe what remains invariant, read the responsible code, then ask how another implementation might host another relation. The two point artifacts together expose a difference that either alone could leave unnamed. The galleries extend the inquiry in other directions.
 
-This reveals that "randomness" is not one thing but a family of related concepts:
+## Letting the other works change the question
 
-- **Mathematical randomness**: Independence, entropy, unpredictability
-- **Perceptual randomness**: Absence of visible patterns
-- **Functional randomness**: Appropriate distribution for the use case
+The two galleries add relationships that the admission/enforcement contrast does not exhaust. In WhiteNoiseGallery, every grid address is provided in advance; height and colour dress the same sampled value. The image and the sound nevertheless come from separate streams. Their proximity can suggest a correspondence that neither generator performs. That suggestion can be a productive artistic arrangement when the book lets the visitor discover and question it.
 
-These don't always align. White noise is mathematically ideal but perceptually patterned. Blue noise is mathematically constrained but perceptually pure.
+NoiseColors3D brings illustrated spectral shapes into company with approximate sound filters. Naming them together creates a family, while source inspection reveals differences inside that family. Its display ceiling makes distinct large powers appear alike. The audible BROWN state retains a bounded accumulation; VIOLET retains a previous draw so that it can produce a difference. Those are additional ways to investigate memory, continuity and change. They need not be squeezed into a single claim about whether rules continue to act.
 
-## The Politics of Noise
+Sound also gives the visitor something to stay with. Attraction, irritation, pleasure and an ear's changing attention belong to the encounter; they are not failures to extract its lesson efficiently. Calling noise waste or interference would already assume another signal that deserves to arrive undisturbed. Here a visitor can choose the noise itself as material. The experiment leaves that choice available without assigning a preferred feeling to a filter.
 
-Noise is never neutral. It has uses:
-
-- **Dithering**: Blue noise hides quantization artifacts
-- **Sampling**: Blue noise avoids over-sampling
-- **Encryption**: White noise obscures information
-- **Jamming**: Noise disrupts signals
-
-Who gets to make noise? Who gets to filter it? The history of noise is a history of power—from radio jamming to surveillance countermeasures to the "noise" of protests in public space.
-
-In computing, noise is sanitized, controlled, generated on demand. The `randf()` function produces docile noise—noise that behaves. Real noise—thermal, quantum, social—is messier, more resistant.
-
-## White Noise: The Sound of Nothing
-
-White noise sounds like static because every frequency is equally present. Our ears, tuned for pattern, hear nothing recognizable—just hiss.
-
-This is entropy as experience: **the absence of information despite the presence of signal**. The noise carries no message. It's pure medium, channel without content.
-
-Meditators use white noise to mask meaning. Sleep apps use it to erase the world. There's something eschatological about white noise—the sound of the universe before or after significance.
-
-## Blue Noise: Disorder with Manners
-
-Blue noise is randomness that follows rules. It's chaos socialized.
-
-The constraint—maintain minimum distance—is simple. The effect is profound: points spread themselves as if repelled, filling space evenly without clustering.
-
-This is **emergent order from local rules**, similar to 10 PRINT but in a different register. The blue noise algorithm doesn't plan the distribution; it just enforces a local constraint, and the global pattern emerges.
-
-## The Edge of Chaos in the Noise Spectrum
-
-The noise types map to the QFEP:
-
-| Noise | λ value | Character |
-|-------|---------|-----------|
-| White | Very high | Maximum chaos, no structure |
-| Pink | High | Natural complexity, 1/f distribution |
-| Blue | Medium | Constrained chaos, emergent order |
-| Brown | Low | Drift, slow variation, memory |
-| Constant | Zero | Pure order, no randomness |
-
-Pink noise (1/f noise) is especially interesting—it appears everywhere in nature (heartbeats, river flows, music, brain activity). It sits at the edge of chaos, between pure randomness and pure order.
-
-## What Noise Cannot Hold
-
-Noise, by definition, cannot carry:
-- **Meaning**: It's the baseline against which meaning is measured
-- **Pattern**: Any visible pattern is not noise but signal
-- **Memory**: Noise is memoryless (or shouldn't be)
-- **Intention**: Noise is what happens without purpose
-
-Yet we generate noise purposefully. We design noise distributions. We choose noise types for specific effects. The purposeless becomes purposeful; the meaningless becomes meaningful in its meaninglessness.
-
-## Questions That Remain
-
-1. **Is there "natural" noise?** Or is all noise shaped by the systems that generate and observe it? Quantum vacuum fluctuations might be the only truly uncaused noise—and even that's debated.
-
-2. **Can noise be queer?** In the sense of disrupting normative patterns, yes: noise scrambles signals, confuses classifiers, evades detection. Blue noise queers white noise by adding constraints that produce unexpected effects.
-
-3. **What is the noise of computation?** Every algorithm produces some noise—rounding errors, timing variations, bit flips. This "noise floor" is usually suppressed, but it's never zero. What if we amplified it instead?
-
-4. **Where does signal become noise?** One person's noise is another's signal. Music is noise to those who don't understand it. Data is noise until it's interpreted. The boundary is social, not physical.
-
-## The QFEP Connection
-
-This map demonstrates that **entropy is not monolithic**. The E(S) term in the QFEP can take different forms:
-- White noise: Maximum, unstructured entropy
-- Blue noise: Constrained entropy with emergent properties
-- Pink noise: Entropy with memory and correlation
-
-The QFEP's power lies in its ability to **modulate** entropy—not just more or less, but different kinds. A system that oscillates between white and blue noise, or between pink and brown, navigates different textures of chaos.
-
-This is the sophistication the randomness sequence builds toward: not just "random vs. ordered" but a whole **palette of randomness** to draw from.
+The curatorial method must stay open to the same revision it invites from visitors. A question can organize attention while remaining answerable to the existing work. Removing a substantial encounter because it exceeds our first formulation would let the teaching scaffold determine the research's result in advance.

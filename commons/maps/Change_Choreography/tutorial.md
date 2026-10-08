@@ -1,19 +1,83 @@
-# Timing machines: period, phase and throughput
+# The same return, a different cause
 
-This hall follows Vectors_Act4b_Oscillation in Forces. It returns to the rate and accumulation ideas from Change. Its primary order is phase_rod_array then conveyor_backlog; the later gravity hall retains its position.
+**Learning elements**
 
-## Twenty rotors
+- Period
+- Phase
+- Relative rate
+- Accumulated angle
+- Prescribed motion
 
-A four-by-five indexed array uses `angle = TAU * frequency * elapsed + phase`. Base frequency is 1/6 Hz. ONE + changes index 9 by PI/4 modulo TAU. WAVE sets phase `(index % 5) * TAU/5`. DRIFT sets indices 10..19 to 1.04 times the base frequency. Relative frequency is 1/150 Hz, so the two groups align every 150 seconds. Controls switch configurations immediately; elapsed time remains continuous. RESET restores equal phases and frequencies, not elapsed zero. RULE toggles the displayed equation. Rotation is prescribed, not simulated by torque. The light rods are visual moving parts above collidable bases.
+Watch the rods turn together, then notice one that is out of step. Look back toward the spring. Both repeat. What keeps each one moving?
 
-## The receiver
+## Make the small study
 
-The existing conveyor_belt scene supplies the visual deck. A new StaticBody3D provides a moving surface, with world-oriented `constant_linear_velocity` of 0.9 m/s. Spawned RigidBody3D parcels have mass 0.5, side 0.44 m, friction 0.75 and bounce 0.05. Continuous collision detection is enabled. Parcel sleeping is disabled so a queue released on a moving static surface resumes contact-driven motion. The belt surface is 1.2 m above the floor; the narrow receiving tray has its floor at 0.45 m. Belt, side rails and receiving tray have colliders. Finite contacts and the physics timestep govern the resulting arrangement.
+Use two sphere points as the tips of two arms. Give each an angle and a turning rate. OFFSET changes one angle once; DRIFT changes how quickly that angle advances.
 
-Feed attempts occur every 1.2 seconds. Each collection pulse removes at most the oldest live parcel whose local x is at least 2.9 m and whose centre has dropped below 1.12 m into the tray. The receiver intervals are MATCHED 1.2 s, BACKLOG 3.0 s, RECOVERING 0.6 s. A pulse with no arrived parcel does nothing. Entering a receiver mode restarts its interval timer; it does not reset the feed timer or existing parcels. RESET clears parcel bodies and local counts, restores matched operation and preserves elapsed time.
+**The hall adds:** The hall adds a whole rod array and eyes that follow you. The conveyor nearby shows what repeated arrivals can do to a physical queue.
 
-`admitted - collected == boxes.size()` is the accounting invariant. Admission pauses if the inlet is occupied or the 48-body cap is reached. Capacity is shown on the console. The experiment is bounded; it is not an unlimited source of physics bodies. Parcels are rigid bodies, not XR pickables, and the pile is not a certified climbing route.
+Save `07_phase.gd` beside your shared files and use it on `PointStudy`. [Setup and complete shared code](../../../doc/book/course/forces-shared-code.md).
 
-## Review
+## Complete code — 07_phase.gd
 
-Compare one phase offset before a phase wave, then frequency drift. Compare actual transport under matched intervals, backlog and recovery. Desktop scripted-pointer and physics tests accompany the first implementation. Headset reach, hand interaction, label comfort and live performance remain to be walked.
+<!-- student-code:07_phase.gd -->
+
+```gdscript
+extends "study.gd"
+var points: Array[RigidBody3D] = []
+var arms: Array[MeshInstance3D] = []
+var angles := [0.0, 0.0]
+var rates := [TAU / 6.0, TAU / 6.0]
+var reading: Label3D
+
+func _ready() -> void:
+    for i in range(2):
+        var point = Point.new()
+        add_child(point)
+        point.freeze = true
+        point.enabled = false
+        point.collision_layer = 0
+        point.collision_mask = 0
+        points.append(point)
+        arms.append(rod())
+    reading = caption("")
+    button("OFFSET", Vector3(-0.5, 1, -0.8), offset)
+    button("DRIFT", Vector3(0.5, 1, -0.8), drift)
+
+func offset() -> void:
+    angles[1] += PI / 4.0
+
+func drift() -> void:
+    rates[1] = TAU / 6.0 * 1.04
+
+func _process(delta: float) -> void:
+    for i in range(2):
+        angles[i] = fposmod(angles[i] + rates[i] * delta, TAU)
+        var pivot := Vector3(i * 1.6 - 0.8, 1.3, 0)
+        points[i].position = pivot + Vector3(sin(angles[i]), cos(angles[i]), 0) * 0.6
+        join(arms[i], pivot, points[i].position)
+    reading.text = "gap %.1f degrees · prescribed position" % rad_to_deg(
+        fposmod(angles[1] - angles[0], TAU))
+```
+
+## Read the change
+
+`angles` stores where each arm is in its turn. `rates` stores how much angle it gains per second. `TAU` is one full turn, so `TAU / 6` completes it in six seconds.
+
+Each frame adds rate times `delta`. The `sin` and `cos` you met in periodic motion turn the angle into a position on a circle. The point is frozen and has no collision; the script places it.
+
+OFFSET adds 45° to one angle. With equal rates, the gap stays fixed. DRIFT raises one rate by 4%, so the gap keeps growing. `fposmod` wraps angles after each complete turn.
+
+## Change one thing
+
+Press OFFSET with equal rates and watch the 45° gap persist. Restart, press DRIFT and wait thirty seconds: predict an added gap of 72°. Change the rate difference to 2% and predict 36°.
+
+## Model notes
+
+The study accumulates angle so a rate change preserves the current position. The museum’s full rod array calculates angle from elapsed time, frequency and phase; changing frequency there can cause a jump. Neither calculation applies a spring force or torque.
+
+## Into the next room
+
+A circular path can be prescribed. Next, let two points attract each other and see what path results.
+
+[Reflective text](final.md).

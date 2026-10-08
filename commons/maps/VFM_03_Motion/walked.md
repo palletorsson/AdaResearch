@@ -1,5 +1,7 @@
 # VFM_03_Motion — walked
 
+> Historical exploratory draft, retained as written. The current [chapter](final.md) follows the motion chamber and friction ramp. Its distinction between a continuing velocity and an applied force supersedes the closing claim here about what forces have “most recently decided.”
+
 > ghost-drafted from the working map (turn slot, forces thread); Palle rules the voice.
 
 ## The cast

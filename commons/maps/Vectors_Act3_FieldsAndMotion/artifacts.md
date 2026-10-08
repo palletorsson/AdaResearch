@@ -1,5 +1,11 @@
+# Book primary
+
+`VectorFieldFlow` — the field_receivers variant compares setting velocity with accumulating acceleration in the same field.
+
+All 13 artifact identities remain. VectorMotion is now supporting, following its primary encounter in VFM_03_Motion. The retained catalogue below is not a declaration of book primacy.
+
 # Vectors Act3 FieldsAndMotion — Artifacts
-*Vectors & Forces: From Direction to Dynamics · oscillation · 5 artifacts*
+*Vectors & Forces: From Direction to Dynamics · oscillation · 13 artifacts*
 
 > Two rooms, two ways a vector stops holding still. First the field: a flow console, then a storm chamber you walk into where an arrow waits at every point and the wind decides where you drift. Then motion: a projectile's arc rising and falling, a bubble gun whose launch velocity you can watch, and a velocity pulled apart into the part that carries you forward and the part that fights gravity. A field is force that has decided to be everywhere at once; motion is a vector the world keeps editing. Both refuse to sit still on a page.
 

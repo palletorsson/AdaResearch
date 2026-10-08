@@ -31,3 +31,14 @@ The actual layers are 13 × 18. Museum wall height is 3 and the clear rectangles
 The independent continuation exports six complete removal histories, compares equal-sized masks, checks cancellation during the highlight and rapid presses, and retains the existing button, mask, replay, ownership, route and streaming checks. Its run receipt, captures, diagnostics and results are in `doc/space/remove-review-2026-09-12/`; the illustrated review is `/research/possible-bodies/random-remove.html`.
 
 Desktop pointer operation is distinct from tracked-hand reach. Headset reading, approach and Quest performance remain for a later visit. Preserve the raw run diagnostics alongside assertion results.
+
+
+## Paired sampling cases — 24 September 2026
+
+`sampling_hoppers` adds a matched set comparison beside the retained board. Both contain identities 1–8. Each uses its own RandomNumberGenerator, reset to seed 79. A pull crossing 28 degrees draws one candidate uniformly by list index; returning below 8 degrees rearms the lever. Busy motion and an empty pool reject extra draws. Pointer dragging and XR grabbing reuse lever_zero; selection is algorithmic, not physical mixing.
+
+The left pool retains the selected member, animates its return, and refuses another draw until that return completes. A miniature copy joins a twelve-entry record; the total continues beyond the retained window. The right removes the member from its pool at selection and moves its actual visual block into the record. Its eight unique members can be exhausted. Empty slots retain identity labels. Both animations are authored presentation, without RigidBody sorting or a claim of physical entropy.
+
+REPLAY BOTH kills active tweens, resets both independent generators, restores the sets and blocks, clears records and rearms controls. Thus first choices match because seed and eight-candidate bounds match. Later matching is not promised once pool sizes diverge. In-flight callbacks cannot append stale draws after replay. Each station uses a real grabbable lever with a pointer event path, at 1.05 m; reach remains subject to headset acceptance.
+
+Placement: cell (3,6), yaw 180 degrees. The existing board and removal arena remain at their original positions; all floor and utility cells are preserved.

@@ -1,164 +1,56 @@
-# Four interconnected chambers with no center — the rhizome as procedurally generated cave system
+# Another way through — implementation and encounter
 
-The bias map exposed classification as a structure that produces the categories it claims to discover. The wall divided the room. The embedding space divided the data. Every tree-structured system — every hierarchy, every taxonomy, every decision tree — operates through division: root to branch to leaf, each split an exclusion, each category a boundary.
+The primary encounters are `rhizome_cave_demo` and `rhizome_grower`, in that order. The cave is placed at (15,18) in a 31 by 37 cell hall with `passage_study:true`. The grower stands at (4,2) as a companion model. They use different constructions; the grower is not a live map of this cave.
 
-The rhizome is the alternative. Deleuze and Guattari proposed a structure with no root, no trunk, no privileged path. Any point connects to any other. The cave system in this map generates such a structure: four chambers in the corners of a 10x10 grid, linked by narrow passages through height-5 walls. No chamber is the center. No path is canonical. The topology is rhizomatic.
+## Inhabitable passages
 
-## The Four-Chamber Layout
+The cave controller selects [RhizomePassages.gd](../../../algorithms/spacetopology/marchingcubes/rhizome/RhizomePassages.gd) only for the new opt-in placement. Other cave placements retain the stochastic generator. This study composes fifteen floor-height positions and twenty links: several lower circuits and a longer upper return. Its highest floor is 3.7 metres above the hall floor. Two open ends connect to the museum floor.
 
-The structure layer encodes a complex topology through height values:
+For each connection, the code samples a rounded corridor around its centre line and clips its interior above an interpolated floor. The union is `air[index] = minf(air[index], passage)`. The existing marching-cubes extractor converts this signed field to surfaces. Inner and outer surfaces are extracted separately at a 0.45 metre sample spacing and a 0.24 metre wall offset, so walls thinner than one cell are not lost. Trilinear field sampling supplies smoother normals. The same mesh supplies a collision surface with both sides enabled.
 
-```
-Height 0: voids — the central cross and corner gaps (impassable, no floor)
-Height 1: passable floor — chambers and corridors
-Height 5: walls — the barriers that define chamber boundaries
-```
+The topology is deliberately authored, not claimed as emergent growth. Volumes can intersect even where graph edges do not. In the first construction, a descending upper floor met a lower tunnel's air and opened an unintended hole. Keeping the overcrossing high until it clears the lower route preserves a continuous upper floor. This is why a graph alone does not establish a walkable route.
 
-The four chambers occupy the grid's corners:
-- **Northwest chamber**: rows 0-2, columns 0-2 (height 1)
-- **Northeast chamber**: rows 0-2, columns 7-9 (height 1)
-- **Southwest chamber**: rows 7-9, columns 0-2 (height 1)
-- **Southeast chamber**: rows 7-9, columns 7-9 (height 1)
+Three coloured lights mark junctions without prescribing directions. The passage study adds no buttons. Its geometry is cached in a resource carrying hashes of the builder and extractor; only the explicit capture path saves the cache. Runtime loads a matching cache or generates the geometry. It never overwrites an asset. Standalone cave camera and environment nodes are omitted from the museum variant.
 
-Between the chambers: height-5 walls and height-0 voids. The central positions (rows 4-5, columns 4-5) are void — no floor, no passage. The center of the map is empty. This is the anti-tree: in a tree, the root occupies the center and all paths radiate outward. Here, the center is void and all paths route around it.
+See the [21 September construction](../../../doc/book/iterations/2026-09-21-rhizome-immersion/SUMMARY.md) for actual museum views and walking evidence. Changing widths, cutting the inhabited walls and live cave growth are not visitor controls.
 
-The passages connecting chambers run along rows 2 and 7 (east-west corridors at height 1) and columns 2 and 7 (north-south corridors at height 1). Each corridor is one tile wide — narrow, requiring single-file passage. The narrowness is deliberate: passages in a rhizomatic network are not highways. They are mycorrhizal connections — thin threads linking nutrient-rich nodes.
+## Companion grower
 
-```
-Schematic (1=floor, 5=wall, 0=void):
+Its [scene](../../../commons/artifacts/rhizome_grower/rhizome_grower.tscn) and [implementation](../../../commons/artifacts/rhizome_grower/rhizome_grower.gd) retain the earlier controls below.
 
-NW-chamber  5  5  0  0  5  5  NE-chamber
-     1      1  5  5  5  5  1       1
-     5      1  1  1  1  1  1       5
-     5      5  1  1  5  5  5       5
-     0      5  1  5  0  0  5       0
-     0      5  1  5  0  0  5       0
-     5      5  1  1  5  5  5       5
-     1      1  1  1  1  1  1       1
-     1      0  1  5  5  5  5  1    1
-     1      1  1  5  0  0  5  5    1
-```
+## The same positions, another connection rule
 
-Multiple paths connect any two chambers. From NW to SE, the learner can traverse: NW east through row-2 corridor to NE, then south through column-7 corridor to SE. Or: NW south through column-2 corridor to SW, then east through row-7 corridor to SE. Or diagonal routes through intermediate passages. The path count is the topological argument: in a tree, one path connects any two nodes. In a rhizome, many paths connect, and no path is privileged.
+The hall configures a full-size interactive placement, `spread=0.85`, `grow_period=0.8` and `sample_seed=47`. The default capacity is forty nodes and the initial rule chooses up to three earlier neighbours. Two initial points have no edge between them. Later points are sampled at radii `spread * 0.4 .. spread`, with height offsets of ±0.06 m. This is a fixed annulus with shallow vertical variation, not an expanding frontier. The display's circular frame is a boundary marker, not an edge in the graph.
 
-## The Rhizome Cave Demo
-
-The `rhizome_cave_demo` artifact sits at grid position (2,5) — in the western corridor, accessible from both NW and SW chambers:
+The random generator prepares a finite sequence of positions. REPLAY retains that sequence and the current link setting, clears the graph to the two initial points and holds. STEP adds one point and holds; GROW toggles timed arrivals. Interactive growth holds at capacity. Other placements retain the passive default: smaller field, whole-graph sway and a fresh random sequence at capacity.
 
 ```gdscript
-# rhizome_cave_demo — procedural cave generation via density field + marching cubes
-@export var grid_resolution: int = 32
-@export var density_threshold: float = 0.5
-@export var growth_iterations: int = 8
-@export var branch_probability: float = 0.4
-@export var merge_radius: float = 3.0
+var targets: Array = _nearest_indices(pos, links_per_node)
+var new_idx: int = _add_node(pos)
+if new_idx < 0:
+    return
+var t: int = 0
+while t < targets.size():
+    _add_edge(new_idx, int(targets[t]))
+    t += 1
 ```
 
-The artifact generates a miniature rhizome as a demonstration of the map's spatial principle. The process has three stages:
+The neighbour search runs before the new node is inserted, so the shoot cannot select itself. It can only select nodes already present. Up to three nearest neighbours receive a link. The rule creates a graph without declaring a family tree; it also gives earlier and nearby nodes opportunities that later or distant nodes do not have.
 
-### Stage 1: Growth Nodes
+LINKS holds growth and reconstructs edges using either one or three nearest earlier points. Positions and insertion order remain fixed. Each node after the first two contributes one edge in the one-link case: the result is two trees. With three links, the third node joins both seeds; subsequent nodes join the existing connected graph. Neither construction asserts equal degree or social influence.
 
-```gdscript
-func _generate_growth_nodes() -> Array[Dictionary]:
-    var nodes := []
-    var seed_count := 4  # One per chamber
-    for i in range(seed_count):
-        var seed_pos := _chamber_positions[i]
-        nodes.append({"position": seed_pos, "radius": 1.5, "children": []})
+## Removal and measurement
 
-    for _iteration in range(growth_iterations):
-        var new_nodes := []
-        for node in nodes:
-            if randf() < branch_probability:
-                var direction := Vector3(
-                    randf_range(-1, 1),
-                    randf_range(-0.3, 0.3),
-                    randf_range(-1, 1)
-                ).normalized()
-                var child_pos := node["position"] + direction * step_size
-                var child := {"position": child_pos, "radius": node["radius"] * 0.8}
-                new_nodes.append(child)
-                node["children"].append(child)
-        nodes.append_array(new_nodes)
-    return nodes
-```
+NODE selects the next birth index, holds growth and highlights its active incident edges. Colour grades from early white to later teal. DEGREE counts undirected active neighbours. COMPONENTS traverses active adjacency and includes isolated active nodes.
 
-Four seeds — one per chamber. Each seed branches probabilistically (40% chance per iteration), producing child nodes at reduced radius. The growth is hierarchical at this stage: parent spawns children, children inherit reduced radius, the tree structure of biological branching.
+CUT toggles the selected node's active state. Its stored coordinates and edges remain available for restoration; a small grey ghost marks the missing point. Edges with an inactive endpoint are omitted from drawing and measurement. Remaining nodes do not reconnect around it. Timed growth and STEP stay held while any node is cut, keeping the comparison stable. LINKS can change the underlying edge rule during that hold; returning CUT restores the node under whichever rule is selected.
 
-### Stage 2: Density Field
+Rendered edge cylinders use an oriented basis followed by scaling along their local Y axis. The runtime probe checks that both ends meet their node coordinates, including diagonal connections. Reconfiguring the artifact replaces only its own generated children and preserves children attached by the museum.
 
-```gdscript
-func _nodes_to_density_field(nodes: Array) -> Array[float]:
-    var field := []
-    field.resize(grid_resolution ** 3)
-    for voxel_index in range(field.size()):
-        var voxel_pos := _index_to_position(voxel_index)
-        var density := 0.0
-        for node in nodes:
-            var dist := voxel_pos.distance_to(node["position"])
-            if dist < node["radius"] * 3.0:
-                density += _falloff(dist, node["radius"])
-        # Merge: nearby nodes blend their density contributions
-        field[voxel_index] = density
-    return field
-```
+## Evidence and limits
 
-Every node contributes a density falloff centered at its position. Where nodes are close — within `merge_radius` — their contributions overlap, producing a continuous density field that connects them. The density threshold determines where solid matter exists: above threshold = solid, below = void.
+The [dated review](../../../doc/book/iterations/2026-09-20-rhizome-review/SUMMARY.md) contains runtime measurements, button-signal checks, selected walking segments and rendered states. For the captured 24-point arrangement, one-link node 3 has degree 3: removing it changes two components into four. Under three links, the same node has degree 8; removing it leaves one component. This is a measured comparison, not a promise that any collection of cuts remains connected.
 
-The key operation is the merge. When two branches from different seeds grow close enough, their density fields overlap. The marching cubes algorithm, extracting the isosurface at the threshold, produces a continuous tunnel connecting the branches. The connection is not prescribed — no edge was added to a graph. The connection emerged from spatial proximity in the density field. This is the rhizomatic principle: connection through adjacency, not through hierarchy.
+The work has no distant-link control, automatic repair, communication traffic or evolving growth boundary. Such extensions would pose different questions. Selected desktop collision and reach checks do not establish headset comfort, readability or learner understanding, nor do they establish that the cave is traversable.
 
-### Stage 3: Marching Cubes
-
-```gdscript
-func _extract_surface(field: Array[float]) -> Mesh:
-    var st := SurfaceTool.new()
-    st.begin(Mesh.PRIMITIVE_TRIANGLES)
-
-    for x in range(grid_resolution - 1):
-        for y in range(grid_resolution - 1):
-            for z in range(grid_resolution - 1):
-                var cube_densities := _get_cube_corners(field, x, y, z)
-                var config := _classify_cube(cube_densities, density_threshold)
-                var triangles := MARCHING_CUBES_TABLE[config]
-                for tri in triangles:
-                    var vertex := _interpolate_edge(cube_densities, tri, density_threshold)
-                    st.add_vertex(vertex)
-
-    st.generate_normals()
-    return st.commit()
-```
-
-The marching cubes algorithm walks through the density field one voxel cube at a time. Each cube has eight corners. Each corner is either above or below the density threshold, producing 2^8 = 256 possible configurations. A lookup table maps each configuration to a set of triangles that approximate the isosurface within that cube. The triangles, stitched together across the grid, form a continuous surface.
-
-The surface does not know which growth node spawned which branch. The topology is discovered from the density field, not prescribed by the growth network. While the generation was hierarchical (nodes spawning children), the result is topologically continuous. The marching cubes algorithm treats the density field as a scalar field — no metadata about parentage, no record of which seed contributed. The surface is anonymous. Any point on it connects to any adjacent point through the mesh's face-edge topology.
-
-This is the closest computation gets to rhizomatic structure: hierarchical generation producing non-hierarchical topology. The cave does not have a root. It has density concentrations. The tunnels do not have directions. They have curvature derived from the gradient of the density field.
-
-## The Central Void
-
-The map's center — rows 4-5, columns 4-5 — is void. Height 0. No floor. The learner cannot walk through the center. They must route around it, through the peripheral corridors.
-
-In graph-theoretic terms, the map's navigability graph is a ring with cross-connections — high connectivity, no bottleneck. Removing the center removes the possibility of a hub-and-spoke topology. Every path is peripheral. Every route winds around the void.
-
-The void is not absence. It is the map's structural assertion that the center need not be occupied. Traditional spatial design places the most important element at the center — the fountain in the piazza, the altar in the church, the root of the tree. The rhizome has no center because it has no root. The void at the map's center is the negative space that enables rhizomatic routing: because there is no hub, every path is equally valid. Because there is no center, every chamber is equally peripheral — which is to say, equally central.
-
-## Deleuze and Guattari's Six Principles
-
-The six principles of the rhizome, articulated in A Thousand Plateaus, map onto the cave system:
-
-1. **Connection**: Any chamber connects to any other through multiple paths.
-2. **Heterogeneity**: The corridors pass through different structural conditions — height-5 walls, height-0 voids, height-1 floors — encountering diverse terrain.
-3. **Multiplicity**: The network cannot be reduced to a single description. Four chambers, multiple corridors, varying passage widths — no summary captures the topology without loss.
-4.
-
-**Asignifying rupture**: Break a corridor and the network reroutes. The redundant connectivity means no single passage is critical.
-5. **Cartography**: The map is always being made. The density field produces the surface; the surface produces the walkable space; the learner produces the path through walking.
-6. **Decalcomania**: The rhizome is not a tracing of a pre-existing structure. It is a production — the density field generates the cave, the cave generates the connections, the connections generate the navigation.
-
-The rhizome_cave_demo makes these principles procedural. The growth algorithm produces a density field. The density field produces a surface. The surface produces a topology. The topology is rhizomatic not because it was programmed to be but because the generation process — independent seeds growing toward each other, merging through density overlap — naturally produces multiply-connected structures.
-
-## From Bias to Rhizome
-
-The transition from the bias map to the rhizome map is the sequence's constructive turn. The bias map showed how tree-structured classification creates inequality: root to branch to leaf, each split producing a majority side and a minority side, the wall as hyperplane. The rhizome offers an alternative topology: no root, no split, no inside and outside. Connection without hierarchy. Navigation without permission.
-
-The teleporter at (1,8) leads to the next map with the label "Next." The rhizome is not the solution to algorithmic bias — it is an alternative spatial logic, a demonstration that structures need not be arboreal, that knowledge need not be hierarchical, that connection can occur without classification. Whether this alternative scales from a 10x10 grid to an institutional architecture is the question the sequence leaves open.
+[Earlier design proposal](../../../doc/space/postcrisis-pass-2026-09-15/before/commons/maps/SpeculativeComputation_Rhizome_Network/technical.md) preserves the previous proposed systems.

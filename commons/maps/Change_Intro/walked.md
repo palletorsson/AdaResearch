@@ -1,3 +1,5 @@
+> **Earlier design draft, retained for its questions.** The current two-hall sequence and encounter are described in [final.md](final.md) and [tutorial.md](tutorial.md). This older walk is not a verified account of the current placement or visitor movement. In particular, a slope against position is not automatically a speed, and the small field painter does not carry the visitor. Added 24 September 2026.
+
 # Change_Intro — walked
 
 > ghost-drafted from the working map (threshold slot, change thread); Palle rules the voice.

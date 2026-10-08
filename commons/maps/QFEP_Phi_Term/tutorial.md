@@ -1,5 +1,14 @@
 # Phi Term
 
+**Learning elements — proposed focus**
+
+*The labels below set the revision focus; the existing lesson still needs alignment.*
+
+- Finite differences
+- Rates of change
+- Signed weights
+- Receivers
+
 φ is the attitude toward change. Negative φ resists; positive φ welcomes. Build a room where your φ choice reshapes what the world lets you do.
 
 Declare the phi dial.

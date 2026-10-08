@@ -1,94 +1,41 @@
-# PostCrisis Synthesis
+# Which consequence will you keep in view after the next line arrives?
 
-One plinth, one sentence, no ornament. Close the arc by compressing it.
+**Learning elements — proposed focus**
 
-Declare the plinth.
+*The labels below set the revision focus; the existing lesson still needs alignment.*
 
-```gdscript
-class_name SynthesisPlinth
-extends Node3D
+- Versioned records
+- Recoverable arrangements
+- Counts and memory
+- Future revisions
 
-@export var sentence: String = ""
-@export var font_size: int = 48
-```
+Every hall made a choice inspectable. Here we turn that practice towards the museum itself.
 
-A single export: the sentence. The plinth is a vehicle for one line. Anything else would be a new teaching.
+<!-- @accountability_ledger -->
 
-Compose the sentence from the arc.
+Read one choice/exclusion pair and keep it in mind after it scrolls away. Choose a room you have walked and name one obstacle, one possible change and one observation that would tell you whether it helped.
 
-```gdscript
-const ARC_SENTENCE := "Knowing the limits of formalization, we build systems that hold their outside."
-```
+The entry count increases while old entries leave the six-line buffer. The examples are prewritten and arrive every six seconds. The display records no visitor decisions and does not save the discussion.
 
-The sentence names what the sequence discovered. Not a conclusion; a practice. The learner carries it forward.
-
-Render the sentence on the plinth.
+The source makes the operation inspectable:
 
 ```gdscript
-func render_sentence(label: Label3D) -> void:
-    label.text = ARC_SENTENCE
-    label.font_size = font_size
-    label.modulate = Color(1.0, 1.0, 0.95)
-    label.outline_size = 4
+_entries.push_front(line)
+while _entries.size() > visible_lines:
+    _entries.pop_back()
+_count += 1
 ```
 
-Cream text, thin outline, generous kerning. The plinth is a publication, not a monument.
+A line enters at the front; another leaves when the buffer is full. The counter survives that loss. We met a running count near the point at the beginning of the museum. Here counting and remembering separate in four lines of code. The machine can announce progress while the evidence of an earlier problem has already disappeared.
 
-Place the plinth off-centre.
+[Implementation](../../../commons/artifacts/accountability_ledger/accountability_ledger.gd). This is an excerpt from the artifact, not a standalone program.
 
-```gdscript
-func place_plinth(pos: Vector3) -> void:
-    plinth_node.position = pos
-    plinth_node.rotation.y = deg_to_rad(-12.0)
-```
+Naming an exclusion does not repair it. Nor should every design limitation be treated as the same kind of harm. Keep the specific body, activity and consequence in view. The next iteration needs a durable record of a change and its outcome, including an outcome we did not expect. Generalisation begins when another hall presents the same relation; it remains a proposal until someone can test that second encounter.
 
-The angle breaks the gallery axis. The sentence refuses to be the centre of the room. The learner has to walk toward it at a slight turn.
+<!-- @ -->
 
-Place four empty plinths around it.
+Return to one earlier hall. Remember both an obstacle and a form you wanted to enter. Desire can locate a next experiment as clearly as a fault. The spine has supplied tools for another pass, not a final inventory of possible bodies.
 
-```gdscript
-func place_memory_plinths(positions: Array) -> void:
-    for p in positions:
-        var m := preload("res://commons/maps/elements/memory_plinth.tscn").instantiate()
-        m.position = p
-        add_child(m)
-```
+## Next experiment — not yet a visitor control
 
-Empty plinths ring the sentence. Each represents a map of the arc. The emptiness invites the learner to remember what stood on each.
-
-Write the door threshold.
-
-```gdscript
-func write_threshold(label: Label3D) -> void:
-    label.text = "continue →"
-    label.modulate = Color(0.9, 0.9, 0.9)
-    label.font_size = 32
-```
-
-The exit does not say goodbye. It says continue. The arc is open-ended by design.
-
-Fade the lighting toward the door.
-
-```gdscript
-func gradient_light(env: WorldEnvironment) -> void:
-    var e := env.environment
-    e.ambient_light_color = Color(0.7, 0.7, 0.75)
-    e.ambient_light_energy = 0.4
-    e.ssao_enabled = false
-```
-
-Cool, even light. No spotlight on the sentence. The gallery is a reading room, not a shrine.
-
-Reading rooms assume the reader. The light treats the learner as already arrived. Nothing asks them to earn it.
-
-Connect the teleporter.
-
-```gdscript
-func on_teleport_ready(t: Node3D) -> void:
-    t.set_meta("destination", "next_arc_start")
-    t.enable()
-```
-
-The teleporter holds a destination meta, not a hardcoded path. The next arc is a reference. The learner steps forward carrying what they have learned.
-
-You have closed the post-foundations arc with one sentence on one plinth. Carry the question into whatever you build next.
+Make the ledger accept a real museum observation with hall, affected activity, proposed change and later result. Preserve unresolved entries across visits. Begin with the contributor-counter ambiguity or a control whose reach has actually been tested.

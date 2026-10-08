@@ -1,3 +1,5 @@
+> Historical snapshot. The current 13 September coordinate study and source-grounded chapter supersede the claims below; see final.md and doc/space/inside-review-2026-09-13/README.md. Retained as a record of earlier work.
+
 # Eye shot — Noise_Inside_Noise
 
 > one pass: ride (gaze), move (place --only-improve), gate (pathfinder), voice (qfep). Field note, not a ruling.

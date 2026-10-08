@@ -1,99 +1,26 @@
-# CA Beyond Binary
+# Follow a cell, then follow a body
 
-Totalistic rules. Hex grids. Multi-state cells.
+**Learning elements — proposed focus**
 
-Totalistic rule (counts only).
+_The labels below set the revision focus; the existing lesson still needs alignment._
 
-```gdscript
-func totalistic_rule(self_state: int, neighbour_sum: int, rule_table: Array) -> int:
-    var index: int = self_state * (MAX_NEIGHBOURS + 1) + neighbour_sum
-    return rule_table[index] if index < rule_table.size() else 0
-```
+- Birth and survival
+- Fixed addresses
+- Output connections
 
-The rule depends on the sum of neighbour states, not their arrangement. Table size: (states) × (max_sum + 1).
+Begin at the dish with GLIDER held at generation zero. Let students predict what four presses of STEP will change before explaining Life. REPLAY gives the same beginning to a student exploring alone.
 
-Generate a random totalistic rule.
+1. Compare the arrangement after four steps with its starting shape and address. Keep shape, location and generation as separate observations.
+2. Replay and follow gold A=(10,10). Notice the occupied cell and lamp together. Then follow the whole pattern while A stays in place.
+3. Walk the enlarged floor image and stay beside a fixed gold address while its state changes. Your presence does not enter this update rule. Recall the previous history bridge: this room maps occupancy to colour, with continuous support beneath both values.
+4. Choose BLINKER. Predict its next phase. Its centre stays occupied, so A stays lit although the line changes orientation.
+5. Read the actual B3/S23 branch in final.md. Work through an empty cell with three neighbours and an occupied cell with one. Explain the second buffer after these observations.
+6. Return to GLIDER and disconnect LINK during a lit moment. STEP again. Identify which output was removed and which process continues. Read the receiver call.
+7. Choose MEET. Predict visits to the witnesses, then compare this prepared beginning with GLIDER. Presets replace the beginning; they do not insert into the current board.
 
-```gdscript
-func random_totalistic_rule(states: int, neighbours: int) -> Array:
-    var table_size: int = states * (states * neighbours + 1)
-    var rule: Array = []
-    for _i in table_size:
-        rule.append(randi() % states)
-    return rule
-```
+Ask students to explain a lamp using a single address, without saying “it senses the glider.” Then ask what the glider description helps them predict that the single-address record does not. Neither account exhausts the event.
 
-Random entries from 0 to states-1. Most random rules produce boring chaos; a few produce interesting structure.
+For an independent reader, the readout names generation, population, changed cells, preset, link state and the finite observation limit. REPLAY is local to this experiment. The next hall will make proximity an input; it must earn that claim through its own source and support tests.
 
-Hex grid cell neighbours.
 
-```gdscript
-func hex_neighbours(x: int, y: int) -> Array:
-    var odd: bool = y % 2 == 1
-    var offsets: Array = [
-        Vector2i(-1, 0), Vector2i(1, 0),
-        Vector2i(0, -1), Vector2i(0, 1),
-    ]
-    if odd:
-        offsets.append(Vector2i(1, -1)); offsets.append(Vector2i(1, 1))
-    else:
-        offsets.append(Vector2i(-1, -1)); offsets.append(Vector2i(-1, 1))
-    var result: Array = []
-    for off in offsets:
-        result.append(Vector2i((x + off.x + size.x) % size.x, (y + off.y + size.y) % size.y))
-    return result
-```
-
-Six neighbours on a hex grid. Offset parity depends on whether the row is even or odd (offset-coordinate layout).
-
-Count hex neighbours.
-
-```gdscript
-func count_hex_neighbours(x: int, y: int) -> int:
-    var count: int = 0
-    for nb in hex_neighbours(x, y):
-        count += grid[nb.y][nb.x]
-    return count
-```
-
-Same pattern as square grids; different coordinate lookup.
-
-VR hex grid display.
-
-```gdscript
-func world_position_for_hex(x: int, y: int, spacing: float = 1.0) -> Vector3:
-    var odd_offset: float = 0.5 if y % 2 == 1 else 0.0
-    return Vector3((x + odd_offset) * spacing, 0, y * spacing * sqrt(3) / 2)
-```
-
-Hex cells tile with a staggered offset. The world positions produce the characteristic honeycomb pattern.
-
-Multi-state cell.
-
-```gdscript
-func multi_state_rule(self_state: int, neighbours: Array) -> int:
-    var sum_by_state: Dictionary = {}
-    for n in neighbours:
-        sum_by_state[n] = sum_by_state.get(n, 0) + 1
-    var dominant_state: int = 0
-    var dominant_count: int = 0
-    for state in sum_by_state:
-        if sum_by_state[state] > dominant_count:
-            dominant_count = sum_by_state[state]; dominant_state = state
-    return dominant_state if dominant_count > 2 else self_state
-```
-
-Cells take on the dominant neighbour state. Produces smoothing / blob behaviour; resembles Turing patterns.
-
-Render cells by state.
-
-```gdscript
-const STATE_COLORS := [Color.BLACK, Color.BLUE, Color.GREEN, Color.RED, Color.YELLOW]
-
-func paint_cell_by_state(x: int, y: int, state: int) -> void:
-    get_cell(x, y).material_override.albedo_color = STATE_COLORS[state]
-```
-
-Each state maps to a colour. The grid becomes a multi-colour mosaic that evolves over time.
-
-You can now build totalistic rules, hex-neighbour lookup, random rule generation, multi-state cells, and colour-coded rendering. CA_ExpandingSpace extends the neighbourhood reach.
+TRACE offers a second reading of the travelling figure: blue marks newly occupied cells, red marks cells that just stopped. Switching it off restores the ordinary colours immediately, without advancing. In the rear gallery, the hexagonal table changes both neighbourhood and birth condition and allows random flips; it is not just the square rule drawn with another tile shape.

@@ -1,5 +1,15 @@
 # Portal Landscape
 
+**Learning elements — proposed focus**
+
+*The labels below set the revision focus; the existing lesson still needs alignment.*
+
+- Spatial masks
+- Signed field composition
+- Controlled comparisons
+
+The museum desk now exposes the existing ladder directly. TERMS adds overhang, cave, arch and outcrop contributions in order. HOLD keeps a mesh copy in the neighbouring bay, without collision. RESET returns the live hillside and preserves the copy; CLEAR removes it. The domain, sample grid, selected level and display transform remain fixed during the comparison. The names below describe intended tendencies to inspect, not guaranteed arches or traversable passages. RULE reveals the combined expression after observation.
+
 Build a landscape by summing signed terms. Before it, the density must already be allowed to read `y` — a heightfield alone can hold no doorway.
 
 Start from the heightfield.

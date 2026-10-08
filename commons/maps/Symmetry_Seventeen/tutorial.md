@@ -1,5 +1,12 @@
 # One mark, three rules
 
+**Learning elements**
+
+- Reflection
+- Glide reflection
+- Symmetry-breaking marks
+- Translation periods
+
 Start with the implemented comparison in `final.md`: P1, PM, PG, HOLD, source paint and UNDO. This placement uses `#lesson:symmetry_compare`; other tile editors retain their existing controls.
 
 The source is a 4 by 4 palette-index array. `WallpaperGroups.get_symmetric_color` reads this array using a selected rule. P1 wraps source coordinates. PM reverses x in odd source blocks. PG also shifts the source row by two, wrapping at four. `VRTileEditor._update_carpet_texture` samples 32 by 32 pixels. The live wall panel and carpet share that image; HOLD copies its pixels into a separate texture.

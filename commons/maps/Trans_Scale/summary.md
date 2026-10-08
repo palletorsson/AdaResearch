@@ -1,50 +1,16 @@
-# Trans_Scale - Map Summary
+Trans_Scale is one composed scale_me encounter. A small enclosed room holds dream_crystal_suit__crust-spire__panels-leaning behind dream_food_table__spread-blooming__service-tower. Taking the DRINK ME bottle changes the room and its contents to fourfold scale at once, then relocates the visitor onto the tower's crown. The encounter presents a cut, not a continuous growth animation. Thirteen visible porcelain serving plates offer a winding descent. The far-side doorway grows from 45 x 60 cm to 1.8 x 2.4 m.
 
-## Overview
-Trans_Scale concludes the transformation sequence with interactive scaling - the transformation that changes size while preserving shape. The scale_me artifact invites direct manipulation, allowing players to resize objects with hand gestures. Prism blocks provide reference geometry, making scale changes perceptible through comparison.
+This replaces the former grid gauntlet. The source map and manuscripts remain in doc/space/scale-drink-me-2026-09-09/before. The primary inventory is scale_me; the two exact dream variants are instantiated inside its encounter.
 
-## Spatial Layout
-- **Dimensions**: 7×13 grid
-- **Architecture**: Open platform with scattered prism blocks and scaling stations
-- **Height**: Single level with elevated objects
-- **Structure**: Comparative layout for observing scale relationships
+The expanded room occupies 16 by 16 metres inside a 21 by 22 metre museum hall. A fixed 1.8 by 2.4 metre doorway beyond the exit gives a second, unchanged reference for the body.
 
-## Key Elements
+A fixed transverse wall joins the small room entrance to the hall sides. Forward passage goes through the room and its enlarged doorway; the separate museum exit remains beyond the fixed witness frame.
 
-### Interactables
-- **scale_me** (1,1) - Interactive scaling object
-- **prism_block** array (0-6, 3) and scattered - Reference geometry
-- **cube_scene** array (2-4, 3) - Scale reference cubes at 0.6 scale
-- **dark_sphere** (2,6) - Ambient atmosphere
-- **scaleme** (3,13) - Additional scaling station
 
-### Utilities
-- **3D Text** (3,4) - "Scale me"
-- **Teleporters** - Multiple exits (1,7), (5,7), (3,8)
-- **Marker** (5,1) - Reference point
+<!-- study-spine:reference_passage -->
 
-## Atmosphere
-- **Lighting**: Cool ambient with warm directional
-- **Background**: Sky blue
-- **Mood**: Playful, experimental, comparative
+## Installed application: Who fits through?
 
-## Learning Sequence
-1. Player enters scaling playground
-2. Reads "Scale me" invitation
-3. Approaches scale_me artifact
-4. Uses gesture to scale object larger/smaller
-5. Observes changes relative to prism blocks
-6. Explores multiple scaling stations
-7. Experiments with different scales
-8. Exits via one of multiple teleporters
+`reference_passage` occupies a new adjoining bay, after the existing encounters. Cell [10, 30], rotation 180°, museum adapter `res://commons/artifacts/spine_studies/passage.tscn`. Original response to Mirosław Bałka; no claim of exact reconstruction.
 
-## Design Intent
-The map transforms scaling from passive observation to **active manipulation**. The player becomes the scaling agent, directly controlling the transformation. The prism blocks and reference cubes establish a perceptual framework - without reference objects, scale changes would be invisible.
-
-Multiple teleporters offer choice, suggesting that the scale sequence can branch in different directions.
-
-## Connection to Sequence
-- **Position in transformation sequence**: 6/6 (Final)
-- **Follows**: Trans_Rotation_2 (rotation completion)
-- **Establishes**: Interactive transformation, player as transformation agent
-- **Completes**: The translation-rotation-scale triad
+Change opening width while keeping the body and opening height. Reuses coordinates, transform; adds no prerequisite node. The display and main-player controls are supplied.

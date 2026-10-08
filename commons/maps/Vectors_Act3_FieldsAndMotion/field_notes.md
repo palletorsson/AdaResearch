@@ -1,3 +1,9 @@
+# Revision: 11 September 2026
+
+The new primary comparison is documented in final.md and tutorial.md. The earlier notes below are a historical record. In particular, the phrase equating every field with force is superseded: this room now distinguishes a spatial sample, its units and the receiver update. The old compact flow retains velocity through blending and damping; it is not memoryless. Supporting weather claims below were not recertified by the field receiver probe.
+
+---
+
 # Vectors_Act3_FieldsAndMotion — field notes
 
 > Field notes hold what the wall text cannot carry. `final.md` is for the

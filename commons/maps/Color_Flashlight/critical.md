@@ -1,97 +1,26 @@
-# Color_Flashlight - Critical Reflection
+# A colour you cannot carry alone
 
-*This reflection builds on Color_Walls and closes the active color sequence by asking what is normalized when color is reduced to controlled beams in controlled darkness.*
+Turn the red lamp away. The patch changes, although the board's material has not. This small discrepancy gives the room its critical opening. Calling the patch a property of the board was convenient; now that account leaves something out.
 
-## The Core Tension
+The lamp does carry an assigned colour. Its `ColorSetter` gives the spotlight an RGB value when the scene starts. But that value does not specify the complete appearance of every surface it might illuminate. The visitor changes a direction, the cone meets another part of the room, and the renderer evaluates another situation. A colour value can remain stable while what we see changes.
 
-Color_Flashlight looks simple: four lights, one canvas, one dark chamber. But this simplicity is a political choice. The map frames color as a problem that can be solved by decomposition into channels: red, green, blue, plus white as reference.
+This makes relation available to experiment. Separate two pools; overlap them; remove one contribution by aiming it aside. The provisional body of the overlap has no independent handle. Its boundary depends on participants that can leave. As an artistic argument, this offers a way to investigate an identity sustained by a meeting. It does not demonstrate that every identity, outside this encounter, obeys the same rules.
 
-That framing is powerful and useful. It is also selective. It teaches one truth about color (additive composition) while backgrounding other truths (material history, cultural naming, context dependence, inaccessible spectra).
+The apparatus also selects what can count as a meeting. Four lamps share one scene and receive different RGB assignments. Their apparent differences are produced within a common implementation. That commonality makes some recombinations inexpensive. It does not make every desired transformation available: the visitor cannot turn a lamp into a reflective material simply by changing its RGB value. Different consequences require different connections in the code.
 
-The tension is not "right vs wrong." The tension is between **operational clarity** and **ontological reduction**.
+Keeping a near-white board fixed gives us a comparison we can follow. It also postpones questions about other receiving materials. The map's authoring system offers swatches and relief, but those variants are not installed as visitor controls here. Aim onto the existing floor or side cube first. What happens when the beam leaves the surface chosen to make its lesson easy to read?
 
-## What This Map Normalizes
+The room uses RGB lights, not a calculation of wavelength spectra. Calling its beams red, green and blue is useful for following its code. It should not become a claim that three numbers exhaust colour, or that all viewers will make the same distinctions. Nor is this an isolated dark chamber: the museum's other illumination remains in the result. The conditions we did not move are still participating.
 
-The flashlight setup normalizes several assumptions:
+For Ada's question, “what bodies are possible?”, this room supplies a precise working case: a visible patch sustained by light, a receiving material and a rendering arrangement. The queer invitation is to try another relation and attend to the difference it produces, while keeping track of what this particular system permits. QFEP can frame that inquiry into constraints and unfamiliar possibilities; this encounter does not measure a numerical entropy threshold.
 
-- **RGB as a primary grammar**: Color becomes legible as three tunable channels, matching display pipelines and shader conventions.
-- **White as calibration reference**: White flashlight acts as neutral baseline, which quietly recenters a normative frame around white illumination.
-- **Controlled environment as epistemic ideal**: The map implies that best knowledge comes from isolating variables in darkness.
-- **Discrete source model**: Four named beams reinforce channel separation even though lived color perception is continuous and contextual.
+In the annex, the pink outline gathers attention before its recess gives the body a place to approach. The overhead opening also offers an inviting central view. Moving sideways or climbing brings other edges into relation. Keep the level-floor and raised viewpoints equally legitimate: authoring a compelling view should not make its eye height a compulsory body. The geometry can be inspected, but no single position shows all of its boundaries together.
 
-These assumptions are common in computer graphics and engineering. The map is honest about that lineage.
+The next room changes the receiver's significance. When the surface resembles part of the player's body, the difference between illumination and a chosen material becomes a question of appearance one might wear.
 
-## What Gets Erased
 
-When color is reduced to channels, several dimensions disappear:
+<!-- study-spine:sphere_in_pink -->
 
-- **Spectral excess**: Many different spectral distributions can appear as the same perceived color (metamerism). RGB does not capture this fully.
-- **Material contingencies**: Real surfaces have roughness, translucency, fluorescence, and scattering behavior that make "same light" look different.
-- **Cultural lexicons**: Color categories are not universal; naming boundaries differ across language and social context.
-- **Embodied variance**: Not all eyes perceive color the same way. Color vision diversity complicates any universal channel model.
+## Installed application: A sphere in pink
 
-So the map teaches an important computational model, but the model compresses difference. That compression is the point and the risk.
-
-## The Body and the Beam
-
-Unlike abstract charts, this map gives the player a grabbable light source. Your hand does not merely choose a swatch; it aims a beam through space. The epistemic act is embodied:
-
-1. orient controller
-2. project light
-3. compare reflected result
-
-That is significant. The body becomes part of color reasoning. But the map also reveals a contradiction: the gesture is rich, while the resulting explanation is channel-simple. Your movement is continuous, but the model interprets it through discrete color logic.
-
-In other words, embodiment is invited, then compressed.
-
-## Darkness as Method
-
-`dark_sphere` is not just atmosphere. It is methodology. By darkening the environment, the map stages a mini laboratory where "signal" (beam/surface relation) can be separated from "noise" (ambient scene complexity).
-
-This laboratory move has a history: controlled light in optics, standardized viewing booths in design, color calibration charts in production pipelines. It produces reliable comparison. It also produces an authority structure: what can be measured inside the chamber becomes "real," while messy context outside becomes secondary.
-
-Queer critique does not reject the lab. It asks what kinds of life the lab cannot register.
-
-## Historical and Political Lineages
-
-Digital RGB standards were built for compatibility, reproducibility, and mass distribution across screens, devices, and codecs. Those priorities are infrastructural and economic. They make global media possible.
-
-They also center certain observers and devices:
-
-- calibrated displays over ambient environments
-- standard observers over perceptual variance
-- production workflows over local interpretation
-
-The flashlight map sits inside that lineage. It teaches the same logic used in rendering engines, UI systems, and broadcast formats. Again: necessary, pragmatic, but not neutral.
-
-## Queer Alternatives to Channel Purity
-
-What would a less normative flashlight pedagogy look like?
-
-- **Spectral flashlight set**: replace RGB-only sources with narrowband and mixed-spectrum beams that produce metameric conflicts.
-- **Context-shifting walls**: dynamically change surrounding colors so the same illuminated patch appears different (simultaneous contrast).
-- **Accessibility modes**: include filters for different color vision profiles and make perceptual disagreement part of the lesson, not an error.
-- **Shared beam interaction**: require two players to co-produce a target color, foregrounding relation over individual control.
-
-These alternatives do not discard RGB. They situate it as one regime among many.
-
-## QFEP Placement
-
-This map is in **F_order** and behaves like it:
-
-- low lambda: high structure, predictable setup, constrained variables
-- high F: calibration logic, clear decomposition, repeatable outcomes
-- controlled E: entropy is reduced through darkness and fixed scene arrangement
-
-But the map also points toward lambda-edge questions. Once you notice that identical channel values can be perceived differently by context and body, order starts to leak. That leak is where queer potential enters: not outside the algorithm, but inside its assumptions.
-
-## Conclusion
-
-Color_Flashlight is a strong ending because it is explicit about technique. It says: here is how digital color is operationalized in practice. It gives a body-level demonstration of additive light that players can trust and reuse.
-
-The critical task is to hold two truths together:
-
-1. This model is effective and foundational for contemporary media systems.
-2. This model is partial and politically situated, not the whole of color.
-
-When you stand in the dark chamber and aim a colored beam, you are not only doing optics. You are rehearsing a way of knowing: isolate, channelize, calibrate, compare. Useful, necessary, and never innocent.
+Keep the lamps in place and change LIGHT / MATERIAL. The pink now belongs to the sphere; the illumination is white. The floor helps you see what the sphere cannot tell you by itself. This is our five-switch response to LeWitt's light study. Thirty-two possible switch states include darkness. An inventory can be complete while the experience of looking keeps changing.

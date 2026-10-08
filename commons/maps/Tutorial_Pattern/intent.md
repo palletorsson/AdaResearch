@@ -1,7 +1,7 @@
-Concept: Patterns as equations the eye solves — checkerboards from (x+y)%2, waves from sin(x), and the learner places colors on tiles to discover that arrays hold data but patterns are data that rhymes.
-Sequence role: Sixth map in Array Tutorial; transitions from structural navigation (maps 2–5) to computational pattern recognition. The learner now uses the grid not just for addressing but for generating visual structure from mathematical rules. Connects forward to Array_Patterns' symmetry groups and back to the dimensional foundation; follows Tutorial_3D; leads to Tutorial_Disco.
-Technical angle: Checkerboard indexing via modular arithmetic, wave patterns via trigonometric functions swept across indices, the script_runner#array artifact executing array-manipulation code in real time. Pattern_tile_mirror and pattern_tile_puzzle provide hands-on tiling with symmetry constraints.
-Critical angle: Pattern recognition is the cognitive bridge between data and meaning. The checkerboard formula is trivial; recognizing that it produces the pattern is the insight. Arrays are neutral containers until a rule runs across their indices — then structure emerges. The eye detects pattern before the mind derives the formula; this map reverses the process.
-Key artifacts: script_runner#array executes pattern-generating code live; pattern_tile_mirror and pattern_tile_puzzle#cursor provide interactive tiling; pattern_tile_puzzle#p4m#cursor introduces the p4m wallpaper group; dark_sphere anchors.
-
-Gap: No gap identified.
+Concept: Distinguish changing stored source cells from changing the rule that samples them.
+Sequence role: Third room of tiling, after Pattern_Foundry and before Array_Patterns.
+Primary: pattern_maker_station, with lesson:fixed_motif. One 4x4 source, two fixed P1/PM panels, one selectable floor.
+Discovery: Keep the source fixed and switch the floor rule. Then FLIP X and watch the source itself change. Let both observations precede the code; preserve the red bend, blue corner and ochre interruption as recognisable companions. Paint an interruption and follow it through the repetitions.
+Critical question: What kinds of difference can a shared source distribute, and what happens when a local interruption becomes regular everywhere?
+Next: Carry the rule into Array_Patterns and distinguish repetition from the surface and route that carry it.
+Deferred: tracked-hand gestures, headset comfort, arbitrary contours, garment transfer. A desktop control comparison is available now.

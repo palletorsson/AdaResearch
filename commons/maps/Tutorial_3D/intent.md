@@ -1,6 +1,27 @@
-Concept: Three indices address a volume — the grid gains height, and what was a spreadsheet becomes a navigable space. Volumetric thinking as the payoff of dimensional progression.
-Sequence role: Fifth map in Array Tutorial; completes the dimensional ladder (scalar → 1D → 2D → 3D). The 4×4×4 cube is 64 positions addressed by three indices — the full spatial data structure. Stepped platforms and lifts make vertical navigation physical. After this, the learner understands that array dimensionality maps directly to spatial dimensionality; follows Tutorial_2D_Build; leads to Tutorial_Pattern.
-Technical angle: 3D array indexing (x, y, z), volumetric data structures, vertical navigation via platforms and lifts, the 4×4×4 grid as navigable volume. The connection between array[z][y][x] and physical position in a 3D world.
-Critical angle: The third dimension is where arrays become worlds. A 2D grid is a floor plan; a 3D grid is a building. Every voxel game, every volumetric simulation, every 3D data structure addresses space with three indices. The stepped platforms literalize the vertical axis — you climb the Z-index, physically ascending through the data structure.
-Key artifacts: grid_3d_4x4x4 is the complete volumetric structure; dark_sphere anchors the space at the center of the volume.
-Gap: A voxel_painter letting the learner color individual cells in the 3D grid by walking to them would make volumetric addressing interactive rather than observational.
+Concept: Fly into the third index. Sixty-four familiar cubes occupy a glass enclosure with local flight.
+
+Sequence: array_tutorial; current order is declared in commons/maps/sequences/array_tutorial.json.
+
+Encounter: array_flight_lab reuses the existing pickup-cube grid and the Menger flight enclosure. X/Y/Z selects an address. Collection writes zero without shifting other indices. Flight belongs to a locomotion region, not to the array data structure.
+
+Critical question: What can inhabit a place the table calls empty? The gap between indexed cubes is traversable space, and the stored zero does not account for the visitor hovering there.
+
+Status: Reading and native illustration refreshed, 2026-09-23; no artifact or map change. Thirty-one checks in doc/book/iterations/2026-09-23-array-entered-address verify supplied pointer/key inputs, selected-cube contact and a continuous ground-door/flight/return journey through the actual museum controller. Earlier first pass, 2026-09-17. Runtime checks accompany doc/space/regularity-split-2026-09-17. Headset comfort and learner reading remain to be tested. Earlier layouts are archived there.
+
+
+<!-- study-spine:open_structures -->
+
+## Installed application: A rule takes up space
+
+`open_structures` occupies a new adjoining bay, after the existing encounters. Cell [10, 35], rotation 180°, museum adapter `res://commons/artifacts/spine_studies/open.tscn`. Original response to Sol LeWitt; no claim of exact reconstruction.
+
+Replace (column + row) % 5 with column; keep all 25 addresses. Reuses line, coordinates, transform, array; adds no prerequisite node. The display and main-player controls are supplied.
+
+
+<!-- study-spine:reference_suspension -->
+
+## Installed application: A place still held
+
+`reference_suspension` occupies a new adjoining bay, after the existing encounters. Cell [10, 56], rotation 180°, museum adapter `res://commons/artifacts/spine_studies/suspension.tscn`. Original response to Mona Hatoum; no claim of exact reconstruction.
+
+Change fragment roughness without changing any of the 75 positions. Reuses array, coordinates; adds no prerequisite node. The display and main-player controls are supplied.

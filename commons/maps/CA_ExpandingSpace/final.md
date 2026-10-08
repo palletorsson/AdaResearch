@@ -4,11 +4,17 @@
 
 The path looks available. Five tiles across, a longer line ahead. Its colours repeat in panels on a free-standing frieze beside the path. Beneath it lies a shallow basin, already drawn with the addresses of tiles that have not yet disappeared.
 
-Begin at the desk. SOURCE can nominate the pink probe in your place. With PROBE / NEAR showing, press RUN. Follow the gold square W. The number falls. The tile changes colour, then becomes a faint sheet through which the basin is visible. Stop the local experiment. How much of a path is still there?
+Begin at the desk. Press SOURCE once to put the pink probe in your place. The readout shows PROBE / NEAR. Press RUN. Follow the gold square W. The number falls. The tile changes colour, then becomes a faint sheet through which the basin is visible. Stop the local experiment. How much of a path is still there?
 
 Use NEAR/FAR to withdraw the probe and run again. Watch the edge of the depleted region before its centre. Something returns through what remained around it. There is no separate instruction ordering this particular patch to grow back into its old outline.
 
 RESTORE prepares a full bridge. Change SOURCE to VISITOR and start RUN. Your position now takes the probe's place. Approach the marked region, wait, move away. The ordinary museum floor continues alongside the basin; recovery ramps rise at either end of its right-hand edge, on the desk's side. On the bridge, lingering can cost you support. The faint tile can still be seen after it can no longer carry you.
+
+Look up to find W again. A gold frame holds its place on the frieze. Wait above the tile while watching its colour there. The change stays in front of you; the consequence arrives beneath your feet. When the surface gives way, you are still looking at the same address from a little lower down.
+
+![The gold address W remains visible on the wall and the depleted bridge.](images/ca-presence-depleted.png)
+
+*One cell, two surfaces. The basin receives the body when the bridge can no longer carry it.*
 
 The bridge's variable is called health. Here that means a number between zero and one. The name lends it a small biological story, but the operations are available to read. Nearby cells lose a fixed amount on each update:
 
@@ -25,7 +31,7 @@ Outside that radius, a cell can recover through its four immediate axial neighbo
 colliders[coord].set_deferred("disabled", health < 0.2)
 ```
 
-One changing value meets two different thresholds. Being visible, carrying a visitor and helping a neighbour recover are separate permissions. The frieze uses the same health materials, but its coloured panels supply no bridge collision. A room can wear an answer without offering the same way through it.
+One changing value meets two different thresholds. Being visible, carrying a visitor and helping a neighbour recover are separate permissions. The frieze wears the same changing colours. Its solid backing remains even when the tile can no longer carry you. A room can wear an answer without offering the same way through it.
 
 There is another condition hidden in “each update.” Choose CHAIN for a small prepared comparison. The bridge begins mostly depleted; three adjacent values are 0.600, 0.495 and 0.000. SOURCE becomes NONE. We can attend to recovery without moving the input at the same time.
 

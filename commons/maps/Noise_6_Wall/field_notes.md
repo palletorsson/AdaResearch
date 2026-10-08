@@ -34,3 +34,24 @@ So the board stands at (9,2) now, beside the path rather than across it, and the
 **The room is larger than the hall it stands in.** Measured, not fixed. The scene's enclosure measures 18.1 x 13.6 x 27.1 m; this hall is 13 cells across with 3 m walls. In the museum its walls stand outside the hall's walls and its ceiling above the hall's ceiling, so a visitor here does not enter the cloud — they pass a board about it. The captures show it: from a standing eye you see the museum's own hall, and from above the room's whole visible contribution is its half-metre-radius sphere. The scene is placed in twelve maps; resizing it is a decision for those twelve, not something to slip into a panel pass. It is written into final.md instead, because a wall text that promises an interior nobody can enter is the worse error.
 
 **`stand:panel` no longer drags the room behind it.** It used to place the whole scene and hang the board on it, so a 27 m enclosure stood invisibly around the entrance and the museum's repair had a body far larger than anything a visitor can see. The enclosure leaves the tree now (`_strip_enclosure_for_panel`), after `_setup_materials` has taken its references: the staged body is a board. Removed rather than hidden, because an extent is measured from the tree.
+
+## 2026-09-13 — an enclosure the desktop body can enter
+
+Current review: doc/space/wall-review-2026-09-13/README.md. Illustrated page: /research/possible-bodies/noise-six-wall.html. Two primary tokens, three retained placements; the room's original internal sphere is part of shader_noise_space. Book and artifact roles agree. Next: Noise_Inside_Noise.
+
+The earlier field notes above are historical. Their claimed "one seed" was not an exposed seed control; fixed shader hash constants are used. Weight sums alone do not explain the patches' brightness. Setting time_scale to zero did not hold the current moment. The original panel also failed to send basis and freeze state to the enclosure, and the sphere did not draw with the controlled material. The accepted review corrects those claims and mechanisms.
+
+An opt-in room mode stages the retained enclosure inside a five-metre floor with two side doors, keeping original scene geometry available elsewhere. The map's structure and utilities remain unchanged; the artifact floor bridges the central opening and the orb moves onto solid floor at (10,10). A cased, supported panel controls count, basis, held/resumed state and finish across the local room and sphere. Patches share the phase and basis with fixed term counts. DRESS changes no collision shapes. UV charts restart on each quad; the room is not continuously world-mapped.
+
+Final run: 39 checks, no failures, PID 26032, 12:52:11–12:52:37 +02:00. Actual shader readback, four pointer controls, cross-hall exclusion, current-time hold/resume and a desktop body crossing both doors pass. Source fingerprints and the original saved hand remain unchanged. Headset reach, comfort and Quest performance remain pending. The shared normal-map repair can change other consumers' shading.
+
+The chapter follows discovery through apparent depth, abs accumulation, display clipping, material dressing and coordinate seams. The independent orb keeps another clock and another way to receive a scalar. Future world-space mapping, editable weights and actual displacement remain proposals.
+
+
+## 2026-09-25 — Stay inside while the room changes
+
+Moved the existing four-window panel from (9,2), yaw 180, to (6,4), yaw 0, against the enclosure's north wall. The room remains at (6,6), with both side doors and its original sphere. The visitor can compare the finish from within the space it changes. No new artifact, interface, shader or geometry was added. All floor/utility cells and the other two placements are retained.
+
+The chapter now keeps the reader inside when they press FREEZE and DRESS, then turns from the small windows to the adjoining wall. The code excerpts and critical argument remain. Current companion notes now match the existing core role: shader_noise_space primary, dark_sphere supporting. Earlier references to a central pit describe previous map versions; the current structure layer is level. Historical entries above are retained as history.
+
+Native before/after views, controlled desktop pointer and traversal checks, exact text differences and limitations: doc/book/iterations/2026-09-25-noise-wall-inside/index.html. Headset comfort and reach remain open.

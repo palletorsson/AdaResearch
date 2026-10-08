@@ -1,6 +1,29 @@
-Concept: Reveals that color is not property but event — it happens when light meets surface, and in darkness, color vanishes entirely.
-Sequence role: Final map in Color sequence; culminates the perceptual thesis by stripping color back to its dependency on illumination. This is the gate map — completing it unlocks Forces, Array Tutorial, and Wavefunctions sequences; follows Color_Walls.
-Technical angle: Flashlight illumination and surface response (absorption, reflection, fluorescence). MultiMesh per-instance colors and NextCube integration point toward the programmatic color systems used in later sequences. The prism decomposes white light into components, closing the loop opened by dark_side_prism in Color_Nails.
-Critical angle: The sequence truth arrives at its fullest expression: remove light and color disappears. Color is contingent, relational, contextual — a system state (the S term in QFEP), not an intrinsic property. This frames everything that follows: forces act on systems, arrays organize system states, wavefunctions describe how states evolve.
-Key artifacts: flashlight_demo is the definitive demonstration — darkness as the null condition of color; prism bookends the sequence by decomposing light into spectrum; dark_sphere persists as the control object across all seven maps, a constant surface whose color is never constant.
-Gap: Could benefit from a side-by-side showing the same object under different illuminants (warm, cool, colored light) to drive home metamerism — different spectra producing identical color percepts.
+# Color_Flashlight — teaching intent
+
+The visitor should discover that changing a surface's appearance need not change its material. Keep the board fixed and move the lights. Let the meeting and separation of pools precede the explanation of their RGB values.
+
+Begin with `flashlight_demo`, containing the lamp comparisons. Preserve the side cube as an alternate receiver and possible shadow caster; keep it out of the first comparison's sightline. Begin with the white lamp aimed aside, so adding it is a deliberate act.
+
+Sequence handoff: Context's neighbours → Flashlight's illumination → Nails' addressed body surface. The reusable method is to hold one participant fixed, change another, and identify the implementation responsible before generalising to a new receiving body.
+
+The critical opening is the apparent colour's dependence on a relation, followed by the limits of this particular RGB implementation. No extra controls, spectral claims or unmeasured QFEP scores are needed to make that opening.
+
+The author's seven-division faceted sphere returns to the earlier primitive lesson. It shares the board's near-white, nonemissive material. Move a lamp around the fixed sphere before adding a second colour: changing incidence makes neighbouring faces differ without repainting them. Keep the board and side cube; the new receiver is a continuation of the same encounter, not another control panel. Seven counts divisions around the sphere, not its total faces.
+
+
+## A room as receiver
+
+The east annex `colour_light_rooms` extends the fixed-material comparison to the room containing the visitor. First move a constant-colour lamp; then enter a fixed room whose central light changes colour. In the second chamber the body changes height under actual openings. Give the comparison time before explaining it. The critical question is where a visible boundary is being made: by material, illumination, an opening or the viewer's position.
+
+The pink recess keeps two sources fixed while the central room light changes. Approach and sidestep before naming its depth. In the second chamber, a continuous stepped well frames one final sky opening. Separate waiting from changing eye height so the visitor can follow each condition. The transferable lesson reuses light assignment and the frame loop; it does not require the student to construct this entire architecture at once.
+
+Turrell is a reference for attending to light and architectural openings, not a label for a replica. Use the author's own spatial experiment and its renderer limits. Do not replace the established handheld encounter or claim that these RGB lights reproduce a spectrum or a measured perceptual effect.
+
+
+<!-- study-spine:sphere_in_pink -->
+
+## Installed application: A sphere in pink
+
+`sphere_in_pink` occupies a new adjoining bay, after the existing encounters. Cell [21, 29], rotation 180°, museum adapter `res://commons/artifacts/spine_studies/pink.tscn`. Original response to Sol LeWitt; no claim of exact reconstruction.
+
+Change one lamp state; compare pink light with a pink surface. Reuses point, colour; adds no prerequisite node. The display and main-player controls are supplied.

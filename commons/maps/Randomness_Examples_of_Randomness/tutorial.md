@@ -1,112 +1,62 @@
-# Examples of Randomness
+# Four uses of a random draw
 
-A gallery of chance. Build four rooms, each showing randomness in a different register.
+**Learning elements — proposed focus**
 
-Declare the gallery registry.
+_The labels below set the revision focus; the existing lesson still needs alignment._
 
-```gdscript
-class_name GalleryRegistry
-extends Resource
+- Monte Carlo estimates
+- Hit tests
+- Finite-sample error
 
-@export var rooms: Dictionary = {
-    "pollock": "action painting",
-    "pipes": "combinatorial play",
-    "butterfly": "biological flight",
-    "extremes": "tail distributions",
-}
-```
+Read these works by following a sampled value into the operation that consumes it. Their shared use of random numbers does not make their outputs the same kind of process.
 
-Four rooms, four names, four subtitles. The registry is the floor plan.
+## A mark and a path
 
-Place the rooms.
+`algorithms/randomness/proceduralrandomness/movementbased/scenes/pollock2d/paint_dripping_2d.gd` draws into an `Image`. `_add_drip()` samples a position, palette index and radius. `_add_line()` begins at a sampled position and repeatedly turns a direction:
 
 ```gdscript
-func place_rooms() -> void:
-    var angle := 0.0
-    for key in registry.rooms:
-        var room := preload("res://commons/artifacts/randomness/gallery_room.tscn").instantiate()
-        room.name = key
-        room.position = Vector3(cos(angle) * 5.0, 0, sin(angle) * 5.0)
-        add_child(room)
-        angle += TAU / registry.rooms.size()
+direction = direction.rotated(rng.randf_range(-line_curviness, line_curviness)).normalized()
+var next_pos: Vector2 = points[-1] + direction * line_segment_length
 ```
 
-Rooms circle a central rotunda. The learner walks the survey.
+Boundary checks reflect the direction when a step would leave the canvas. The resulting line segments are rasterized into the image; `stroke_path_generated` also sends their path to the 3D host. In `pollock_painting_in_3d.gd`, the host shows the SubViewport texture on a framed floor sprite and moves a cursor along that path. The gallery token chooses `#support:floor`.
 
-Drip Pollock.
+This is a generative homage using marks and paths. There is no falling-paint collision calculation, and the visitor does not steer the cursor.
 
-```gdscript
-func pollock_drip(canvas: Node3D) -> void:
-    for i in 80:
-        var pos := Vector3(randf_range(-1.5, 1.5), 1.0, randf_range(-1.5, 1.5))
-        var dir := Vector3(0, -1, 0) + Vector3(randf() - 0.5, 0, randf() - 0.5) * 0.2
-        var drop := preload("res://commons/artifacts/randomness/paint_drop.tscn").instantiate()
-        drop.position = pos
-        drop.linear_velocity = dir * 5.0
-        canvas.add_child(drop)
-```
+## A sample that contributes to an estimate
 
-Drops fall from above the canvas, slightly randomised. Each drop leaves a splat where it lands. Action painting as spawn loop.
+`algorithms/randomness/monte_carlo_dartboard/monte_carlo_dartboard.gd` draws two uniform coordinates in a unit square. `_throw_dart()` classifies the point against an inscribed circle, adds one to the total and, if inside, one to the inside count.
 
-Generate pipe dreams.
+For a uniform square sampler:
 
-```gdscript
-func generate_pipes(grid_size: Vector2i) -> void:
-    for x in grid_size.x:
-        for y in grid_size.y:
-            var piece_kind: int = randi() % 4
-            spawn_pipe_piece(Vector2i(x, y), piece_kind)
-```
+`area(circle) / area(square) = pi / 4`
 
-Four piece kinds (straight, bent, tee, cross). Random per cell. The assembly becomes a plumbing puzzle with no designer.
+Therefore `4 × inside_count / total_count` estimates pi. An additional point can increase or decrease that estimate; convergence is not a promise of improvement after every throw. Sampling bias changes what the count measures.
 
-Fly a butterfly.
+The museum token selects `#disclosure:works` and `#controls:compact#control_front:1.0`. `museum_exhibit_stage.gd` relocates the existing button panel to a reachable console while preserving its signals. AUTO toggles continuous sampling; RESET clears the counts without toggling AUTO. Pause AUTO before making a sequence of individual THROW observations. The default maximum is 500 darts.
 
-```gdscript
-func fly_butterfly(butterfly: Node3D, dt: float) -> void:
-    var noise := FastNoiseLite.new()
-    var t := Time.get_ticks_msec() / 1000.0
-    butterfly.position += Vector3(
-        noise.get_noise_2d(t, 0) * 1.5,
-        noise.get_noise_2d(t, 100) * 0.5,
-        noise.get_noise_2d(t, 200) * 1.5
-    ) * dt
-```
+## A direction admitted by local rules
 
-Noise drives the butterfly's heading. Each dimension samples noise with a different offset. The path becomes characteristic rather than chaotic.
+`algorithms/randomness/pipedream/PipeDream.gd` grows a path in six cardinal directions. `_choose_next_direction()` first gives straight-ahead motion a chance, then tests a shuffled list that excludes immediate reversal. `_is_outside_bounds()` rejects candidate endpoints beyond the configured box.
 
-Visualise extreme tails.
+The default bounds extend ±6 m in x/z and ±4 m in y. Scaling the artifact to 0.25 gives a centreline volume 3 × 2 × 3 m; the pipe and joint radii add a small margin. Lifting its root 1.15 m keeps that volume above the gallery floor. `#residue:path` retains every segment of the run.
 
-```gdscript
-func extreme_sample() -> float:
-    return randfn(0.0, 1.0) + randfn(0.0, 4.0) * 0.1
-```
+There is no occupancy set. The path can revisit earlier positions, and its 180-segment budget does not guarantee full coverage of the box. Changing that rule to reject visited cells would change the set of available choices at every later step.
 
-A Gaussian mixed with a wider Gaussian produces heavy tails. The values sometimes spike far from zero. The spike drawer shows the far edge.
+## An update rule that changes with the chapter
 
-Plot samples against time.
+`algorithms/randomness/proceduralrandomness/particlerandomness/extrem_randomness.gd` uses `#chapter:all` to cycle its five existing chapters. `start_demo()` restages the same particles at each transition; their update function then changes.
 
-```gdscript
-func plot_sample(value: float) -> void:
-    sample_chart.push(value)
-```
+| Chapter | Procedure |
+| --- | --- |
+| Chaos | Add random forces to retained velocities, damp velocity and reflect particles at a radial boundary. |
+| Noise | Sample a smooth field from the local `noise3()` helper, which is a product of sine and cosine terms rather than an implementation of Perlin noise. |
+| Pattern | Combine spiral motion and oscillation with the opening sampled arrangement. |
+| Emergence | Apply separation, alignment, cohesion and random nudges. |
+| Evolution | Rank distance to a moving target; the leading tenth influence the other particles under the default selection rule. |
 
-The chart scrolls. Most values cluster near zero.
+The particle count stays fixed. There is no reproduction, no heavy-tail sampler and no basis for interpreting all five chapters as independent uniform draws. The stage is a comparison of procedures, each with different dependencies and retained state.
 
-Occasional outliers punctuate. Tail distributions become readable.
+The gallery token also opts into `#gallery_radius:7`. After restaging and each update, this boundary confines the entire particle sphere and reflects outward velocity. At scale 0.2 its diameter is 2.8 m, and the 1.5 m lift leaves a 0.1 m gap above the floor. The unconfigured artifact keeps its original behavior; the restored gallery is a bounded presentation of all five chapters.
 
-You have surveyed randomness across domains. The next map, Random Pheromone, turns random agents into collective order.
-<<</MAP>>>
-
-Add a label to each room.
-
-```gdscript
-func label_room(room: Node3D, key: String) -> void:
-    var label := Label3D.new()
-    label.text = "%s
-%s" % [key, registry.rooms[key]]
-    label.position = Vector3(0, 2.5, 0)
-    room.add_child(label)
-```
-
-Each doorway announces the register within. The learner can skip or linger based on the label.
+Return to the room's question before entering Random Game: which variables may chance alter, and which constraints keep acting after the draw?

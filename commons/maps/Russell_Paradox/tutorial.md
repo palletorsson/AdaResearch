@@ -1,5 +1,14 @@
 # Russell Paradox
 
+**Learning elements — proposed focus**
+
+*The labels below set the revision focus; the existing lesson still needs alignment.*
+
+- Membership predicates
+- Finite domains
+- Self reference
+- Restricted construction
+
 The set of all sets that don't contain themselves. Build two boxes and the third box that breaks both.
 
 Declare a set container.

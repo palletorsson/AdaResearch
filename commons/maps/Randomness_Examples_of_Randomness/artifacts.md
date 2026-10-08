@@ -1,41 +1,14 @@
-# Randomness Examples of Randomness — Artifacts
-*Randomness: Freedom from Pattern · E_entropy · 5 artifacts*
+# Examples of Randomness — Artifacts
 
-> A gallery of creative chaos — Pollock's drip paintings, pipe dreams, butterflies in flight, extreme randomness pushed to visual limits. Art where the algorithm becomes the artist.
+Four original works restored to the randomness museum, before Random Game. Coordinates below are zero-based map columns and rows; the museum places roots at cell centres.
 
-The map, read through what it holds — its artifacts in the order you meet them:
+| Work | Cell | Staging | What to inspect |
+| --- | --- | --- | --- |
+| `pollock_painting_in_3d` | (7, 6) | Full scale, floor support; framed footprint 4.34 × 2.94 m | Sampled drips and turning line paths accumulate in a 2D image; a 3D cursor follows those paths. A Pollock-inspired homage, not a reconstruction. |
+| `monte_carlo_dartboard` | (4, 12) | Faces the entry at 180°; full scale; compact controls 1.0 m in front | THROW, AUTO and RESET retain their original callbacks. The circle/square area relation explains `4 × inside / total`; a larger sample need not improve at every step. |
+| `pipe_dream` | (10, 15) | Scale 0.25, root lifted 1.15 m; complete path retained | Bounds ±(6, 4, 6) become a 3 × 2 × 3 m centreline volume. Pipe thickness extends slightly beyond it. Local turns forbid immediate reversal and leaving the bounds, while revisits remain allowed. |
+| `extreme_randomness` | (5, 20) | Scale 0.2, root lifted 1.5 m, all five chapters | Compare damped random forcing, trigonometric flow, spiral motion, flocking rules and selection. The gallery's explicit radius-seven boundary becomes 1.4 m and confines every chapter above the floor. This is not one IID process or a heavy-tail exhibit. |
 
-## Pollock Painting in 3D
-![Pollock Painting in 3D](/scene-catalog/pollock_painting_in_3d.png)
+The continuous floor supports entry, both sides of the painting, each observation bay and the rear exit. Generated plinths and unrelated dream-body props are disabled. The Monte Carlo console uses the museum's existing exhibit-stage adapter. The other three works keep their own presentation.
 
-Interactive 3D Jackson Pollock-inspired painting using movement-based procedural randomness
-
-`pollock_painting_in_3d`
-
-## Pipe Dream
-![Pipe Dream](/scene-catalog/pipe_dream.png)
-
-A 3D recreation of the classic Windows Pipes screensaver. Grows a colored pipe that randomly changes direction, building an intricate network over 100 segments.
-
-`pipe_dream`
-
-## Dark Sphere
-![Dark Sphere](/scene-catalog/dark_sphere.png)
-
-USE a neutral sphere as a reference for scale, silhouette, and atmospheric change.
-
-`dark_sphere`
-
-## Monte Carlo Dart Board
-![Monte Carlo Dart Board](/scene-catalog/monte_carlo_dartboard.png)
-
-Throw darts at a square with an inscribed circle. The ratio of inside/outside hits converges to pi/4. Live counter shows estimate of pi improving with each dart. Green dots inside circle, red dots outside.
-
-`monte_carlo_dartboard`
-
-## Extreme Randomness
-![Extreme Randomness](/scene-catalog/extreme_randomness.png)
-
-Interactive particle-based extreme randomness generation and visualization
-
-`extreme_randomness`
+The gallery's question is: **what is a random choice permitted to change?** The palette, sampling domain, allowed directions and update rules answer differently in each work.

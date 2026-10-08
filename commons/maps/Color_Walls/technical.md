@@ -1,120 +1,51 @@
-# Color_Gradiant - Technical Tutorial
+# Colour as partition, coordinate and path
 
-## Continuous Color Gradients
+## Office — current layout, 1 October 2026
 
-### Linear Interpolation Along Path
+The active placement is `color_constellation_office:0:0:1#layout:planes#compare:visibility#plinth:0`. It remains at map cell (23,20), seated on the museum floor. `office_planes.gd` supplies twelve independent QuadMesh sheets, 2.75–3.55 m high, with thin matching box colliders. Fine edge strips and foot clamps make the obstacles legible. Three desks, monitors and chairs retain the office association without enclosing eight workstations.
 
-```gdscript
-# Color changes smoothly based on position in hallway
-extends Node3D
+The staggered transverse panes alternate the central route. Three smaller angled screens interrupt the rectangular pattern. A pale floor, interrupted side wings, rear opening and two overhead strips provide a neutral ground for the colour; a central ceiling slot stays open to the museum sky. The display backing is unshaded and does not cast shadows, so the global dark sky cannot erase the comparison. It does not simulate colour transmitted onto the floor by lights.
 
-@export var hallway_length: float = 20.0
-@export var start_color: Color = Color.RED
-@export var end_color: Color = Color.MAGENTA
+Each filter uses one double-sided quad, alpha transparency at 0.52, normal blending, unshaded colour and no cast shadow. One quad avoids applying the tint twice as would happen with two faces of a thin glass box. Fog is disabled on the filter itself; the background retains the museum's rendering. FILTER / OPAQUE disables transparency, sets alpha to 1.0 and enables shadow casting, while preserving RGB values, transforms and the exact collision bodies. Colour filtering here is layered RGB tint, not wavelength-dependent glass absorption. A multiplication trial darkened even a white pane in the current Compatibility renderer, and was rejected on visual inspection. The retained alpha mix is order-dependent; transparent sorting is a rendering limit, especially at intersecting sheets.
 
-func get_color_at_position(z_position: float) -> Color:
-    # Normalize position to 0-1
-    var t = clamp(z_position / hallway_length, 0.0, 1.0)
+`layout=cubicles` retains the earlier forty-pane layout. No layout selects the older eighteen-pane installation and its `mixture=bench/light/retina` variants. These are separate configurations; mixture does not modify the active open office. Reapplying the same placement configuration does not rebuild it.
 
-    # Linear interpolation
-    return start_color.lerp(end_color, t)
+## Colour coordinates
 
-# For full spectrum, interpolate through HSV
-func get_spectrum_color_at_position(z_position: float) -> Color:
-    var t = clamp(z_position / hallway_length, 0.0, 1.0)
+`color_space_navigator:180:1.2:1#mount:comparison#plinth:0` adds an integral support for the two small models. The 0.7-metre RGB cube sits entirely above the support; its 500 seeded samples use colour channels as local coordinates. Another 500 samples populate the HSV cylinder: hue angle, saturation radius, value height. Internal names still say HSL in places, but the code calls `Color.from_hsv` and the displayed label says HSV. This is an inspectable model, not an interactive colour picker or a body-sized room. The black corner is slightly brightened for visibility.
 
-    # t maps to hue (0 = red, 0.33 = green, 0.67 = blue)
-    return Color.from_hsv(t * 0.8, 1.0, 1.0)  # 0.8 to avoid magenta loop
+## Interpolation
+
+`gradient_interpolator:180:0.95:1#mount:comparison#plinth:0` adds its own 0.95-metre support and standing canonical control panel. The comparison configuration enlarges the sixteen cubes to 0.045 metres with 0.009-metre gaps. COLOUR A and COLOUR B advance through eight presets; RGB / HSV toggles the calculation while preserving the endpoints. Other placements retain the original rack and dimensions.
+
+RGB mode calls `ca.lerp(cb, t)` at `t = i / (step_count - 1)`. HSV mode wraps the hue difference onto the shorter arc and linearly interpolates saturation and value. Red to blue therefore compares a darker RGB interior with a saturated magenta HSV interior. Other endpoint pairs need not show the same contrast.
+
+## Verification
+
+Replay the focused production-museum probe:
+
+```powershell
+python tools/run_encounter_probe.py Color_Walls --sequence color --render --probe doc/book/iterations/2026-10-01-office-open-colour/probe.gd
 ```
 
-### Rainbow Hallway Shader
+The probe checks the actual placed artifact, pane/furniture count, filter material, ordinary-controller passage along the staggered route and out through the rear opening in both visibility states, refusal at a pane, real pointer press/release callbacks, unchanged collider identity and idempotent placement configuration. See the saved report and native interior comparisons in the review directory. This is a supplied desktop input journey, not a headset or learner trial. Quest performance, tracked-hand reach and first-time navigation remain to be checked.
 
-### Emissive Gradient Walls
+The 23/28 September reports remain historical evidence for the former cubicles and the two unchanged colour benches. Their forty-pane and eight-entrance claims do not describe this revision. The current probe confirms both benches remain placed; their previous sample/interpolation checks are not presented as rerun here.
 
-```gdscript
-extends MeshInstance3D
 
-func create_gradient_material():
-    var mat = ShaderMaterial.new()
-    mat.shader = preload("res://shaders/rainbow_gradient.gdshader")
-    mat.set_shader_parameter("hallway_length", 20.0)
-    mat.set_shader_parameter("saturation", 1.0)
-    mat.set_shader_parameter("value", 1.0)
-    material_override = mat
-```
+<!-- study-spine:colour_assembly -->
 
-### Multi-Stop Gradient
+## Installed application: Room to gather
 
-### The Gradient Class (Godot Resource)
+`colour_assembly` occupies a new adjoining bay, after the existing encounters. Cell [18, 50], rotation 180°, museum adapter `res://commons/artifacts/spine_studies/assembly.tscn`. Original response to Liam Gillick; no claim of exact reconstruction.
 
-```gdscript
-# Godot provides a Gradient resource for this
-var gradient = Gradient.new()
+Shift the colour index by one without moving a panel. Reuses coordinates, transform, array, colour; adds no prerequisite node. The display and main-player controls are supplied.
 
-func setup_rainbow_gradient():
-    gradient.colors = PackedColorArray([
-        Color.RED,
-        Color.ORANGE,
-        Color.YELLOW,
-        Color.GREEN,
-        Color.CYAN,
-        Color.BLUE,
-        Color.PURPLE
-    ])
 
-    # Automatic even spacing, or custom offsets
-    gradient.offsets = PackedFloat32Array([
-        0.0, 0.167, 0.333, 0.5, 0.667, 0.833, 1.0
-    ])
+<!-- study-spine:colour_wall_studies -->
 
-func sample_gradient(t: float) -> Color:
-    return gradient.sample(t)
-```
+## Installed application: Wall relations
 
-### Dynamic Lighting Gradient
+`colour_wall_studies` occupies a new adjoining bay, after the existing encounters. Cell [18, 70], rotation 180°, museum adapter `res://commons/artifacts/spine_studies/wall.tscn`. Original response to Liam Gillick; no claim of exact reconstruction.
 
-### Perceptual vs. Linear Interpolation
-
-```gdscript
-# Linear RGB interpolation can produce unexpected results
-var red = Color(1, 0, 0)
-var cyan = Color(0, 1, 1)
-var midpoint_rgb = red.lerp(cyan, 0.5)
-# Result: (0.5, 0.5, 0.5) - gray!
-
-# HSV interpolation preserves saturation
-func hsv_lerp(a: Color, b: Color, t: float) -> Color:
-    var h_a = a.h
-    var h_b = b.h
-    var s_a = a.s
-    var s_b = b.s
-    var v_a = a.v
-    var v_b = b.v
-
-    # Handle hue wrap-around
-    if abs(h_b - h_a) > 0.5:
-        if h_a < h_b:
-            h_a += 1.0
-        else:
-            h_b += 1.0
-
-    var h = lerp(h_a, h_b, t)
-    var s = lerp(s_a, s_b, t)
-    var v = lerp(v_a, v_b, t)
-
-    return Color.from_hsv(fmod(h, 1.0), s, v)
-```
-
-## Key Takeaway
-
-The gradient hallway reveals that **color is continuous**. The discrete color names (red, orange, yellow) are arbitrary divisions imposed on smooth transition. By walking through unbroken chromatic change, you experience the spectrum as it actually is: a seamless flow where one hue becomes another without boundary. The categories we use to name colors are linguistic convenience, not perceptual reality.
-
-## Implementation Notes and Complexity
-
-The wall artifacts are flat panels with an albedo set per instance. Rendering a wall is a single draw call per unique material; walls sharing a material are batched automatically by Godot's renderer. A gallery of N walls with N unique colours produces N draw calls, and the cost scales linearly with the wall count until GPU-side batching limits are reached.
-
-The wall's reflective properties are controlled by the material's roughness and metallic parameters. A roughness of 0 produces a mirror; a roughness of 1 produces a matte diffuse surface. Between these extremes, the wall reflects with a Gaussian specular lobe whose width is controlled by the roughness value. Real-time reflection on arbitrary geometry requires either a reflection probe (a cubemap captured from a representative point in the scene) or a screen-space approximation. Godot's default pipeline uses both: a scene-wide probe for coarse reflections and screen-space reflections for fine detail when the ray stays on-screen.
-
-Lighting interacts with colour in ways that are easy to get wrong. A red wall under blue light appears dark because the red pigment absorbs blue wavelengths. The naive multiplication of light colour by material albedo produces this correctly. Lighting shaders that use summed colour components instead of multiplied ones produce unrealistic results where a red wall glows under blue light. Godot's physically-based shader uses the multiplicative convention by default.
-
-Within the sequence, Color_Walls makes colour architectural. The walls are not just tinted backdrops; they are first-class artifacts whose albedo, roughness, and metallic properties interact with the scene's lighting to produce a room with a specific character. The map argues that colour is not a property of objects in isolation but a property of their interaction with the lighting environment, and the learner walks through the argument by moving between differently-lit regions of the room.
+Change the pitch of 24 rails without changing their count. Reuses line, coordinates, array, colour; adds no prerequisite node. The display and main-player controls are supplied.

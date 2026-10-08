@@ -1,5 +1,14 @@
 # Edge Of Chaos
 
+**Learning elements — proposed focus**
+
+*The labels below set the revision focus; the existing lesson still needs alignment.*
+
+- Time steps
+- Equal time comparisons
+- Model parameters
+- Numerical behaviour
+
 λ near 0.4, φ positive, both held. Build the narrow band where Turing patterns, Langton's rules, and life itself live.
 
 Declare the edge controller.

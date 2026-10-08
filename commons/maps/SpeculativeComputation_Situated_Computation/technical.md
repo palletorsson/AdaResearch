@@ -1,171 +1,76 @@
-# Situated Computation — Technical
+# Locate the claim — implementation and encounter
 
-Three viewing platforms render the same dataset from three standpoints. Each platform applies a different set of rendering conventions to the shared underlying data.
+The primary artifact is `situated_readout`. Its [scene](../../../commons/artifacts/situated_readout/situated_readout.tscn) and [implementation](../../../commons/artifacts/situated_readout/situated_readout.gd) supply the behaviour described here.
 
-```gdscript
-class_name StandpointViewer extends Node3D
+This follows the merge encounter's question about preserving sources. Four placements retain their explicit `#verdict:NW`, NE, SW and SE keys and cells. They face inward and use full scale, `#interactive:true` and `#address:footnote`. The primary comparison is still between four authored entries, not four sensor measurements.
 
-@export var dataset_name: String = "urban_survey"
-@export var standpoint: String = "ground_level"  # or "aerial", "community"
+The ADDRESS panel exposes FOOTNOTE, COVER (`erasure`) and WITNESS. Only the address presentation changes: the subject, verdict, supplied confidence and station transform remain fixed. The explicit key takes precedence over the position hash. Moving a configured panel and repopulating it updates the numeric footer without changing its verdict. Walking the player around does not update a classification.
 
-var dataset: Resource  # shared across all platforms
+Interactive panels put their centre at 1.25 m and draw four readable text quads from the existing Label3D values. The erasure strip remains physically in front of the footer. WITNESS retains the existing symbolic eye, station plate and height marks; it measures nothing. Controls sit to the side of the reading. Stage geometry rebuilds independently of the console and children added by the museum. Unconfigured placements retain the passive 0.85 m panel centre and original labels. Parallax and survey remain author-configurable variants; they are not added to this hall's controls.
 
-func render_for_standpoint() -> void:
-    match standpoint:
-        "ground_level": render_first_person()
-        "aerial": render_birds_eye()
-        "community": render_oblique_with_annotations()
-```
 
-## Ground-Level View
-
-A first-person camera at human height. Occlusion by foreground objects is preserved; distance is foreshortened by perspective.
+## Operation to read after the encounter
 
 ```gdscript
-func render_first_person() -> void:
-    camera.projection = Camera3D.PROJECTION_PERSPECTIVE
-    camera.fov = 75
-    camera.position = Vector3(0, 1.7, 0)
-    camera.rotation = Vector3.ZERO  # looking forward
-    enable_shadows(true)
+var pos := global_position
+var key := _resolve_quadrant_key(pos)
+var verdict: Dictionary = QUADRANT_VERDICTS.get(key, QUADRANT_VERDICTS["NW"])
+
+_verdict_label.text = verdict.label
+_verdict_label.modulate = verdict.color
+_confidence_label.text = "confidence %d%%" % int(verdict.confidence * 100.0)
+_footer_label.text = "view from %s (%.1f, %.1f)" % [key, pos.x, pos.z]
 ```
 
-## Aerial View
+The dictionary supplies a verdict and a confidence; the footer supplies a location. There is a revealing extra decision: this hall explicitly assigns NW, NE, SW and SE through its map tokens. That override takes precedence over the position-based fallback. The four-way disagreement has been composed for us. The percentages have not been earned by measuring the subject.
 
-A nadir-pointing camera at high altitude. Occlusion is reduced; spatial extent is clarified.
+## What to compare
 
-```gdscript
-func render_birds_eye() -> void:
-    camera.projection = Camera3D.PROJECTION_PERSPECTIVE
-    camera.fov = 60
-    camera.position = Vector3(0, 80, 0)
-    camera.look_at(Vector3.ZERO, Vector3.FORWARD)
-    enable_shadows(false)  # shadows obscure aerial detail
-```
+Read all four panels. Keep SUBJECT #4729 fixed in your comparison and record each verdict, confidence and footer. Return to the first panel and identify which fields changed between panels.
 
-## Community-Vantage View
+Four authored verdicts share one identifier. Your movement changes which panel you read. It does not make a panel recalculate an assessment of you.
 
-An oblique camera at a position chosen by a local informant. Annotations from community members are overlaid on features that the aerial view missed.
+## Limits and next test
 
-```gdscript
-func render_oblique_with_annotations() -> void:
-    camera.projection = Camera3D.PROJECTION_PERSPECTIVE
-    camera.fov = 70
-    camera.position = community_vantage_position
-    camera.look_at(dataset.focal_point, Vector3.UP)
-    overlay_annotations(dataset.community_annotations)
-```
+Give each panel an inspectable criterion and the evidence used. Compare disagreement caused by different criteria with disagreement caused by different observations. First verify that all four small panels can be read without losing their footers.
 
-## Annotation Store
+Controlled runtime checks cover the four assigned claims, presentation changes, selected reach and walking routes. Headset readability, comfort, Quest performance and learner understanding remain open. The supporting spider is paused only in the private geometry probe; its live behaviour is unchanged. Existing supporting artifacts stay in the map; primary status identifies the book's encounter, not the only permitted content.
 
-Annotations are stored as text tags attached to world positions. Each annotation has an author, a timestamp, and a visibility flag.
+[Earlier design proposal](../../../doc/space/postcrisis-pass-2026-09-15/before/commons/maps/SpeculativeComputation_Situated_Computation/technical.md) preserves the previous text and its proposed systems. It is not a description of the current implementation.
 
-```gdscript
-class_name Annotation
+The grid exit at (4,9) previously had a zero floor cell beneath its teleporter; it now has continuous floor. An arrival marker and local decoration exclusions reserve approach and reading space. The creature remains at its original cell with detection 14.
 
-@export var position: Vector3
-@export var text: String
-@export var author: String
-@export var created_at: String
 
-var visible_from_standpoints: Array = []  # which standpoints show this annotation
-```
+<!-- study-spine:museum_witnesses -->
 
-## Standpoint-Aware Classifier
+## Installed application: The room arrives late
 
-A second station trains a classifier conditional on a chosen standpoint. The standpoint affects which features are included, how they are weighted, and what the training labels emphasise.
+`museum_witnesses` occupies a new adjoining bay, after the existing encounters. Cell [11, 20], rotation 180°, museum adapter `res://commons/artifacts/spine_studies/witness.tscn`. Original response to Melanie Gilligan; no claim of exact reconstruction.
 
-```gdscript
-class_name StandpointClassifier extends Node
+Change the delay from three seconds to one; retain the camera and compare the recorded times. Reuses loop, trace, array, situation; adds no prerequisite node. The display and main-player controls are supplied.
 
-@export var standpoint: String
-@export var feature_priorities: Dictionary  # feature -> weight multiplier
-@export var label_emphasis: Dictionary  # class -> weight in training loss
 
-func train(dataset: Array) -> Dictionary:
-    var model: Dictionary = {"weights": {}}
-    for case in dataset:
-        for feature_name in case.features:
-            var priority: float = feature_priorities.get(feature_name, 1.0)
-            var weight_update: float = priority * loss_gradient(case, model)
-            model.weights[feature_name] = model.weights.get(feature_name, 0.0) + weight_update
-    return model
-```
+<!-- study-reference:museum_witnesses -->
 
-## Accounting Pass
+### Reference and scope
 
-The annotation practice accumulates a structured record of what each standpoint shows and hides. A final pass emits a combined account — partial, located, accountable.
+The ZKM presentation describes five episodes on separate monitors linked by steel tubing. Our five monitors carry museum cameras, not Gilligan’s films. The relation concerns distributed attention, mediation and dependence on a shared system.
 
-```gdscript
-func emit_combined_account() -> Dictionary:
-    return {
-        "ground_level_visible": ground_level_annotations,
-        "aerial_visible": aerial_annotations,
-        "community_visible": community_annotations,
-        "combined_positive": union_of_observations(),
-        "known_gaps": intersection_of_blind_spots(),
-    }
-```
+[ZKM: Melanie Gilligan, The Common Sense](https://zkm.de/en/artwork/the-common-sense).
 
-## Complexity
 
-Each standpoint renders independently with Godot's built-in scene graph — O(triangles in view). Annotation display is O(visible annotations) per frame. The combined account computation is O(standpoints × observations per standpoint).
+<!-- witness-runtime -->
 
-Within the sequence, Situated_Computation makes standpoint an explicit parameter. Collective_Knowledge will next turn plural standpoints into a shared reasoning commons.
+### Actual museum images
 
-## Annotation Workflows
+Three 384 × 216 SubViewports share the resident museum World3D and face its existing SituatedReadout objects. No duplicate hall or private set is rendered. Four requested exposures per second; achieved rate depends on runtime performance. The last two monitors reuse camera A. D retains actual earlier images; E retains the exposure and address selected with HOLD. The buffer is bounded at 30 images (about 9.5 MiB for RGBA8 frames); the viewport textures and displayed copies are additional. Initial delay is 3 seconds, with 1 / 3 / 6 seconds available. Timestamps are seconds since this game process started.
 
-Community annotations are added through a dedicated workflow that records author attribution, timestamp, and intent. Annotations cannot be retroactively edited by other parties — the audit trail is preserved.
+The screens occupy a camera-excluded visual layer, avoiding recursive screen rendering. Capture pauses outside 23 metres or when source readouts are unavailable. Resuming after a gap clears the delay buffer. Changing the viewpoint preserves an explicitly held image and its earlier source address. These are views of the resident hall, not a promise to stream unloaded distant halls. Physical XR and Quest frame budgets have not been tested.
 
-```gdscript
-class_name AnnotationWorkflow
+<!-- witness-portable-cameras -->
 
-func add_annotation(author: String, world_position: Vector3, text: String, intent: String) -> Annotation:
-    var annotation := Annotation.new()
-    annotation.author = author
-    annotation.position = world_position
-    annotation.text = text
-    annotation.intent = intent
-    annotation.created_at = Time.get_datetime_string_from_system()
-    annotation.hash = compute_hash(author + text + intent + annotation.created_at)
-    annotation_store.append(annotation)
-    return annotation
-```
+### Take a view
 
-## Standpoint Selection
+Cameras A and B are the pink grabbable bodies beside the original readouts; C stays fixed. On desktop, right-click to pick up, look to aim, and right-click again to release. The usual XR pickup grip moves and turns the same bodies. They stay in the released pose. RETURN CAMERAS restores the current starting views; release the cameras before using return, VIEWPOINT or RESET. Returning the cameras keeps an explicitly held screen image. RESET also clears the held image.
 
-Selecting a standpoint is a political act and the map treats it as such. The standpoint picker exposes not just options but a brief justification for each, and learners are prompted to articulate their choice.
-
-```gdscript
-class_name StandpointPicker extends Control
-
-@export var standpoints: Dictionary = {
-    "ground_level": "Human-scale perception. Privileges proximity and occlusion.",
-    "aerial": "Survey perspective. Privileges extent and aggregation.",
-    "community": "Local expertise. Privileges historical and relational knowledge.",
-}
-
-func _on_standpoint_selected(name: String) -> void:
-    emit_signal("standpoint_chosen", name, standpoints[name])
-```
-
-## Testing Against Standpoints
-
-A classifier trained under a specific standpoint can be evaluated against held-out data from that standpoint's population. Metrics like calibration error help detect when a standpoint's training data is not representative of the population the classifier is deployed on.
-
-```gdscript
-func evaluate_calibration(predictions: Array, outcomes: Array) -> float:
-    var bins: Array = [0, 0, 0, 0, 0]
-    var outcome_per_bin: Array = [0, 0, 0, 0, 0]
-    for i in range(predictions.size()):
-        var bin_idx: int = clamp(int(predictions[i] * 5), 0, 4)
-        bins[bin_idx] += 1
-        outcome_per_bin[bin_idx] += outcomes[i]
-    var calibration_error: float = 0.0
-    for b in range(5):
-        if bins[b] > 0:
-            var avg_outcome: float = float(outcome_per_bin[b]) / bins[b]
-            var expected_outcome: float = (b + 0.5) / 5.0
-            calibration_error += abs(avg_outcome - expected_outcome)
-    return calibration_error / 5.0
-```
+The camera follows the physical body's transform, with its lens 0.32 metres forward. The delayed and held records retain their exposure pose and source label as well as the image and time. Moving A does not rewrite those earlier frames. This reuses coordinates and transforms; constructing the camera housing and pickup system remains supplied.

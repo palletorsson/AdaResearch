@@ -1,5 +1,13 @@
 # Agent Based Modeling
 
+**Learning elements — proposed focus**
+
+*The labels below set the revision focus; the existing lesson still needs alignment.*
+
+- Agent states
+- State transitions
+- Shared history
+
 Stateful agents with perception radius. Each acts on local information.
 
 Define a stateful agent.

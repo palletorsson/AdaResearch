@@ -1,3 +1,5 @@
+> Historical layout: the active room is now a tunnel-and-carousel exhibition gallery. See `final.md` and `technical.md`.
+
 # Eye shot — Trans_RotationSpectacle
 
 > one pass: ride (gaze), move (place --only-improve), gate (pathfinder), voice (qfep). Field note, not a ruling.

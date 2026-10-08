@@ -1,3 +1,9 @@
+# Current review - 11 September 2026
+
+One integrated spring is now primary. The earlier force/sine equivalence is superseded by the final and tutorial text. All 22 identities remain. The large kinetic sculpture is compacted and its standalone cameras, lights and screen overlays are disabled by an opt-in museum presentation.
+
+## Earlier notes (historical)
+
 # Vectors_Act4b_Oscillation — field notes
 
 > Field notes hold what the wall text cannot carry. `final.md` is for the

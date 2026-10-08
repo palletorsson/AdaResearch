@@ -1,120 +1,43 @@
-# Color_Nails - Technical Tutorial
+# One colour address, display hands and the player
 
-## Color Selection Systems
+Color_Nails follows the illumination comparison in Color_Flashlight. This time the operation changes material albedo.
 
-### The Color Class in Godot
+The map's nail_salon at (7,9) uses the existing ArrayMesh from `commons/body/hands/right_hand.tscn`. The mesh is shown in its rest pose at 4.3 metres and 0.32 metres high. It is not a tracked skeleton. Surface names identify `Hand` and `Nails.001`; each display mesh receives its own material overrides, leaving the shared source resource intact.
 
-```gdscript
-# Color is stored as RGBA (Red, Green, Blue, Alpha)
-var color = Color(0.8, 0.3, 0.5, 1.0)
+The primary controls stand on separate plinths: `nail_color_controller` at (9,4) and `hand_color_controller` at (5,4). Both use `commons/interfaces/nail_color_controller.gd`; target_surface distinguishes nails from skin. Their half-metre ValueMapper3D boxes convert point coordinates into RGB. In the salon mounting, root y=1.2 places each box from y=0.9 to 1.4, above an approximately 0.8 m plinth. Front and top access remain open. The optional `#mount:salon` hides the generic canopy/light and reduces the swatch; other placements retain their existing presentation.
 
-# Access individual channels
-var red = color.r      # 0.0 to 1.0
-var green = color.g
-var blue = color.b
-var alpha = color.a    # Transparency
-
-# Alternative constructors
-var from_html = Color.html("#FF5733")
-var from_hsv = Color.from_hsv(0.5, 0.8, 1.0)  # Hue, Saturation, Value
-```
-
-### RGB: Three Numbers, Millions of Colors
-
-### Nail Color Controller Implementation
+The existing controller writes its selected colour through GameManager. The salon connects once to `nail_color_changed` and `hand_color_changed`, then updates only the appropriate material list:
 
 ```gdscript
-extends Node3D
-
-signal color_selected(color: Color)
-
-@export var current_color: Color = Color.WHITE
-
-var hue_slider: float = 0.0
-var saturation_slider: float = 1.0
-var value_slider: float = 1.0
-
-func _on_hue_changed(value: float):
-    hue_slider = value
-    update_color()
-
-func _on_saturation_changed(value: float):
-    saturation_slider = value
-    update_color()
-
-func update_color():
-    current_color = Color.from_hsv(hue_slider, saturation_slider, value_slider)
-    emit_signal("color_selected", current_color)
-    update_preview()
-
-func update_preview():
-    $PreviewMesh.material_override.albedo_color = current_color
+func _nail_colour(colour: Color) -> void:
+    for material in nail_materials:
+        material.albedo_color = colour
 ```
 
-### HSV vs RGB Color Models
+The matching skin handler uses skin_materials. There is no per-frame salon loop. Geometry scale is independent of the material's RGB values. Gloss, lighting and the size of the viewed patch can still make the two appearances differ.
 
-### Applying Color to Materials
+The table, plinths and stool seats have collision. Brass legs, cushion, tiny bottles and file are set dressing; the bottles are not extra controls. The map leaves a route along either side and reserves this room against automatic sculpture placement. The neighbouring colorballs uses `#case:salon`, constructing a closed glass case before spawning its balls so they cannot bounce into the plinth approach. Other colorballs placements retain their open physics display.
 
-```gdscript
-# The hand model receives color from controller
-extends MeshInstance3D
+Verification uses `commons/testing/probe_nail_salon.gd`: actual museum loading, dimensions, two controllers, named material surfaces, standing reach, supplied pickup motion through each RGB box, colour propagation and side-route capsule sweeps. The probe restores the user's saved colours after its samples. Tracked controller ergonomics and headset comfort remain untested.
 
-func apply_nail_color(color: Color):
-    # Create unique material instance
-    var mat = StandardMaterial3D.new()
-    mat.albedo_color = color
+## The player receiver (21 September source check)
 
-    # Optional: add glossy nail effect
-    mat.metallic = 0.3
-    mat.roughness = 0.2
-    mat.clearcoat = 1.0
-    mat.clearcoat_roughness = 0.1
+The default museum scene inherits `base.tscn`, which mounts both production hand scenes under XRController3D collision hands. Each hand scene has a `PresistNailColor` child using its corresponding `left_hand_nails.gd` / `right_hand_nails.gd`. After one frame, these receivers find the named skin and nail surfaces, apply GameManager's current colours, and subscribe to both change signals. Left and right surface order differs; the receivers use names rather than assuming one shared index.
 
-    material_override = mat
-```
+The station always writes the selected colour through GameManager. Its shallow direct-hand lookup can fail in the museum hierarchy without preventing the hand-owned receivers from working. The current default is a controller-driven, grip/trigger-animated hand mesh; this evidence does not establish a bare-hand skeletal-tracking implementation. DesktopHand is a pointer adapter without equivalent player skin/nail materials. The salon's two display hands remain its visible comparison.
 
-### Color Balls as Grabbable Samples
+Colours survive scene changes in the current process. The colour setters do not immediately save to disk; persistence across launches depends on a separate save event. The chapter invites carrying colour beyond the salon within the visit, not guaranteed persistence after quitting.
 
-### The Grab Stick Scanner
+The raw saved plan still contains the older control coordinates. For authored-map rooms, `endless_museum.gd` derives artifact rows from the current map when building the hall. The positions above describe that current authored configuration, not an inspection of an already-built live scene or a visitor override.
 
-```gdscript
-extends XRToolsPickable
+A new isolated Godot probe passed 35 checks, including selection before hands appear, independent nail/skin updates on both real embedded meshes, replacement hand scenes, and coexistence with direct station discovery. The copied receiver/station scripts and colour-only GameManager methods were unchanged; XR animation was omitted and the mapper used a signal fixture. No production autoload, save state or live museum was loaded. This tests material/state wiring, not physical input, wearer perception or comfort. See [the report and reproducible probe](../../../doc/book/iterations/2026-09-21-colour-return/nails/verification.md).
 
-signal color_sampled(color: Color)
+## Native encounter and book figure — 23 September
 
-func sample_color_from(target: Node3D):
-    if target.has_method("get_color"):
-        var sampled = target.get_color()
-        emit_signal("color_sampled", sampled)
-    elif target is MeshInstance3D:
-        # Sample from material
-        var mat = target.get_active_material(0)
-        if mat is StandardMaterial3D:
-            emit_signal("color_sampled", mat.albedo_color)
-```
+`doc/book/iterations/2026-09-23-nails-the-choosing-hand/probe.gd` runs the actual hall through the isolated museum runner. A supplied XRTools grabber moves each actual RGB point: red `(0.8, 0.08, 0.12)` becomes violet `(0.8, 0.08, 0.8)` by changing only the blue coordinate; a separate skin edit leaves the chosen nail value in place. Returning to the original point recovers its colour. The two salon meshes and their transforms stay unchanged.
 
-### Color Interpolation
+Both production left/right hand scenes are also instantiated as invisible receiver fixtures. Their XR pose-driving root scripts are omitted and animation trees disabled; the original meshes and `PresistNailColor` children receive the same GameManager signals emitted by the real museum controls. This joins the real point gesture to the hand-material receivers without claiming tracked motion or wearer perception. Selected colours are restored after the run; no save is requested.
 
-## Key Takeaway
+59 focused checks pass. The initial cross-surface assertion compared against an ideal decimal after several world/local coordinate conversions; the actual blue value differed by about 0.00002. The corrected independence check compares the actual selected colour immediately before and after the skin edit and records both values. Production source was not changed.
 
-Color selection interfaces translate between **perceptual models** (HSV - how we think about color) and **computational models** (RGB - how screens display color). The nail salon metaphor makes color personal: not just a property to observe, but a choice to wear. Three sliders control millions of possible hues - the dimensionality of color compressed into simple interaction.
-
-## Implementation Notes and Complexity
-
-The color_nails artifact renders an array of small spike meshes, each with a material whose albedo is driven by an index into a palette. Instantiating N nails produces N MeshInstance3D nodes and N material assignments; the cost is O(N) on setup and effectively zero at runtime once the nails are placed. The per-frame cost is one draw call per nail unless the engine batches them automatically, in which case the cost collapses to the number of unique materials.
-
-The palette is the organising data structure. A small JSON file maps palette indices to RGB triples, and the nails reference the palette by index rather than by colour directly. This indirection is deliberate: changing the palette at runtime retones every nail simultaneously without touching the per-nail data. The indirection also enables palette swaps — a common technique in retro graphics where a single asset is reused under different colour schemes.
-
-Colour space matters more than it usually does in procedural graphics. Godot's default colour space is linear sRGB for shaders and gamma sRGB for the output framebuffer. Mixing the two produces the wrong result: a linear-space interpolation between two gamma-space colours lands on a different point than the gamma-space interpolation between the same two colours. The nail palette is defined in gamma space, and the shader converts to linear on read, which is the convention Godot's built-in materials follow.
-
-Within the sequence, Color_Nails is an early exploration of colour-as-data. The palette indirection argues that colour is not a property of the object but an assignment of one of several possible tones, and the assignment can change. Later maps in the sequence will extend this: Color_Flashlight detaches colour from the object entirely, and Color_Grid_Pallet makes the palette itself a grid the learner can edit.
-
-## Within the Sequence
-
-Color_Nails sits early in the Color sequence. Palette-as-data becomes the sequence's continuing concern, and this map is where the concept enters the learner's vocabulary.
-
-The per-frame cost of the map scales with the number of instanced artifacts and the resolution of the procedural effects. On typical consumer hardware the whole map runs at 60 frames per second with the default parameter ranges; pushing the parameters to their extremes can raise GPU load to the point where frame rate drops, and the map does not hide this from the learner. A corner indicator reads out the current frame time so the learner can observe the cost of their parameter choices.
-
-Failure modes worth naming. A learner who pushes the sliders off the calibrated ranges can produce visually incoherent output — flickering surfaces, runaway growth, or flat featureless fields. The map's controls are clamped at safe bounds, but within those bounds the parameters still interact nonlinearly, and the nonlinear interactions are part of what the map rewards. Understanding the interactions requires running the parameters through their ranges rather than setting them once from a preset.
-
-The map is one station in a longer arc. The artifacts it introduces reappear in later maps with extended parameter sets, composed behaviours, or different contextual framings. The learner who walks this map carefully carries a vocabulary the remaining sequence depends on, and the vocabulary is the map's concrete contribution to the curriculum.
+The shared book illustration pairs the native giant and petite display-hand captures with height labels (4.3 m and 0.32 m). Views are composed at different scales so the small nails are readable. These are actual placed museum meshes, not photos of the headset experience. The review also shows red/violet choices from fixed cameras and the real RGB plinth. No walking, tracked reach, comfort or performance test is claimed by this pass.

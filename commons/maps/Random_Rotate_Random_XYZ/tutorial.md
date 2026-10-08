@@ -1,5 +1,13 @@
 # Random Rotate Random XYZ
 
+**Learning elements — proposed focus**
+
+_The labels below set the revision focus; the existing lesson still needs alignment._
+
+- State accumulation
+- Random increments
+- Orientation histories
+
 Three axes, three independent rolls. Build the orientation generator that proves 3D randomness is qualitatively different.
 
 Declare the triple roll.

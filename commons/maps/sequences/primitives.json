@@ -2,12 +2,12 @@
   "sequences": {
 	"primitives": {
 	  "name": "Primitives: Points Build Worlds",
-	  "truth": "A point is position without extension. Everything is built from nothing.",
+	  "truth": "A position, a visible surface and a physical boundary are different constructions. Their relations can be made and changed.",
 	  "qfep_term": "F",
-	  "qfep_connection": "Stable foundations before entropy enters. The deterministic base from which complexity grows. Primitives are pure order\u00e2\u20ac\u201dthe F term before \u00ce\u00bbE(S) introduces chaos.",
-	  "formula": "Point = Vector3(x, y, z)",
-	  "demonstration": "Place a point in void. Connect two points to make a line. Three points define a plane. From nothing, everything.",
-	  "description": "Fundamental geometric primitives and their axioms. The atoms of computation\u00e2\u20ac\u201ddimensionless points become lines, triangles, cubes, worlds.",
+	  "qfep_connection": "Stable foundations before entropy enters. The deterministic base from which complexity grows. Primitives are pure orderâ€”the F term before Î»E(S) introduces chaos.",
+	  "formula": "position = Vector3(x, y, z), relative to a chosen frame",
+	  "demonstration": "Locate a point; connect two distinct positions into a segment; join three non-collinear points and add a triangular face; assemble faces around four non-coplanar points. Compare visible enclosure with collision, then inspect mesh connections, reusable scenes and finite resolution.",
+	  "description": "Follow positions into relations, records, addresses, faces and enclosures. Separate generated primitives from the forms the engine supplies; explore column profiles and borrowed letter outlines before returning to finite refinement, limits and composition.",
 	  "layer": "F_order",
 	  "prerequisites": [],
 	  "unlocks": [
@@ -20,42 +20,48 @@
 	  "difficulty": "beginner",
 	  "estimated_time": "15-20 minutes",
 	  "learning_objectives": [
-		"Understanding Vector3 as position in 3D space",
-		"Point visualization: existence without extension",
-		"Line topology: connection between two positions",
-		"Triangle rasterization: the GPU's atomic unit",
-        "From primitives to meshes: building complexity from simplicity"
+		"Separate position, appearance, collision and illumination",
+		"Read positions in a named reference frame and use a supplied pickup component",
+		"Connect and measure two positions; retain successive positions in order",
+		"Use lattice addresses for repeatable placement without confusing a grid with a surface",
+		"Distinguish a closed boundary, a triangular face, a closed mesh and collision",
+		"Move mesh vertices while inspecting retained face connections",
+		"Distinguish reusable scenes from generated mesh resources and their configuration",
+        "Compare finite refinement, tolerance and a mathematical limit; compose with known forms"
 	  ],
 	  "content": [
-		"Point_One: Position Without Extension",
+		"Point_Zero: Point Zero — You arrive late",
+		"Point_One: Point One — A body in the light",
+		"Point_Coordinates: Point Coordinates — Where is the point?",
 		"Point_Lines: Lines, Networks, Measure",
 		"Point_Trace: Duration and Residue",
 		"Point_Line_Grid: Grid Quantizes Movement",
-		"Point_Triangle: Three Points Close a Boundary",
-		"Point_Triangle_Context: Triangles Applied",
+		"Point_Triangle_Context: Closing a boundary, adding a face",
 		"Primitives_Polythedra: Trihedra and First Solids",
 		"Point_Animatedcube: Cube Assembly from Primitives",
 		"Primitives_Ignorance: Limits of Geometric Knowledge",
+		"Primitives_Godot: Forms the engine gives us",
+		"Primitives_Columns: One profile, a family of columns",
+		"Primitives_Profiles: Borrowed outlines become architecture",
 		"Primitives_Portals: Circular Approximation and Limits",
-		"Primitives_Melencolia: Melancholy of Finitude",
-		"Chamber_Primitives: Catalyst chamber \u2014 first mark. Receive the bracelet, fire at targets, meet the FOE."
-		],
+        "Primitives_Melencolia: Melancholy of Finitude"
+	  ],
 	  "maps": [
-
+		"Point_Zero",
 		"Point_One",
-
+		"Point_Coordinates",
 		"Point_Lines",
 		"Point_Trace",
-		
 		"Point_Line_Grid",
-	
 		"Point_Triangle_Context",
-		"Primitives_Polythedra",	
+		"Primitives_Polythedra",
 		"Point_Animatedcube",
- 
 		"Primitives_Ignorance",
+		"Primitives_Godot",
+		"Primitives_Columns",
+		"Primitives_Profiles",
 		"Primitives_Portals",
-		"Primitives_Melencolia"
+        "Primitives_Melencolia"
 	  ],
 	  "axiom_files": [
 		"res://commons/context/clipboard/tutorial_text/primitives_axioms.md",
@@ -77,20 +83,43 @@
 	  ],
 	  "artifact_groups": [
 		{
+		  "map": "Point_Zero",
+		  "position": "arrival",
+		  "artifacts": [
+			"frame_counter_display",
+			"folding_past",
+			"origin",
+            "you_are_here"
+		  ],
+		  "size_budget": "environment",
+		  "grammar": "florence",
+		  "rationale": "An arrival into an already-running room precedes the construction of a point."
+		},
+		{
 		  "map": "Point_One",
 		  "position": "intro",
 		  "artifacts": [
-			"origin",
-			"static_point",
-			"interactive_point_origin",
-			"script_runner#point",
-			"dark_sphere",
-			"folding_past",
-			"frame_counter_display",
-            "CoordinateSystem3M"
+			"point_absent",
+			"point_visible",
+			"point_solid",
+			"point_sun_switch",
+            "point_pedestal"
 		  ],
 		  "size_budget": "compact_only",
-		  "rationale": "Minimal intro: a single point in void with code display and coordinate reference. Establishes the atom of space.",
+		  "rationale": "Appearance, collision and light are separable attachments to a position.",
+		  "grammar": "florence"
+		},
+		{
+		  "map": "Point_Coordinates",
+		  "position": "intro",
+		  "artifacts": [
+			"point_held",
+			"coordinate_readout",
+			"CoordinateSystem3M",
+            "drag_point_target"
+		  ],
+		  "size_budget": "compact_only",
+		  "rationale": "Start by holding the point; name the world and local references that describe its movement.",
 		  "grammar": "florence"
 		},
 		{
@@ -202,31 +231,62 @@
 		  "map": "Primitives_Ignorance",
 		  "position": "integration",
 		  "artifacts": [
-			"platonic_grabbables",
-			"dark_sphere",
-			"hole_with_cones",
-			"sphere_high",
-			"sphere_mid",
-			"sphere_low",
-			"star_primitive",
-			"righttriangle",
-			"roughrock",
-			"truncatedtetrahedron",
-			"capsule",
-			"snap_octahedron_puzzle",
-			"grab_octahedron",
-			"cube_scene",
 			"sphere",
-			"lshape",
-			"prism_block",
-			"torus_radials_rings",
-			"capsule_radials_rings",
+			"geometry_courtyard",
+			"sphere_high",
+			"sphere_resolution_atlas",
+			"sphere_mid",
+			"capsule_reliquary",
+			"sphere_low",
+			"budget_of_smoothness",
+			"dark_sphere",
+			"cube_scene",
+			"primitive_pillar",
+			"science_screen",
+			"star_primitive",
+			"hole_with_cones",
+			"truncatedtetrahedron",
+			"cylinder_radials_rings",
+			"grab_octahedron",
+			"snap_octahedron_puzzle",
 			"diamonds",
-            "plus"
+			"roughrock",
+            "righttriangle"
 		  ],
 		  "size_budget": "environment",
-		  "rationale": "Large gallery re-encountering primitives as constructs. Resolution studies, variant solids, architectural modules. Dense integration map.",
+		  "rationale": "Ideal solids, finite sphere constructions and chosen resolution; retain older comparisons in the side alcove. Engine vocabulary and exploratory families continue in their own halls.",
 		  "grammar": "zelda"
+		},
+		{
+		  "map": "Primitives_Godot",
+		  "position": "vocabulary",
+		  "artifacts": [
+			"primitive_mesh_library",
+            "seven_words_choir"
+		  ],
+		  "size_budget": "environment",
+		  "rationale": "Forms the engine gives us",
+		  "grammar": "sainsbury"
+		},
+		{
+		  "map": "Primitives_Columns",
+		  "position": "exploration",
+		  "artifacts": [
+            "resolution_colonnade_museum"
+		  ],
+		  "size_budget": "environment",
+		  "rationale": "One profile, a family of columns",
+		  "grammar": "sainsbury"
+		},
+		{
+		  "map": "Primitives_Profiles",
+		  "position": "exploration",
+		  "artifacts": [
+            "glyph_profile_gallery"
+		  ],
+		  "size_budget": "environment",
+		  "rationale": "Borrowed outlines become architecture",
+		  "grammar": "sainsbury"
 		},
 		{
 		  "map": "Primitives_Portals",
@@ -259,6 +319,13 @@
 		  "size_budget": "environment",
 		  "rationale": "Culmination: callbacks to pyramids, cubes, and prisms from earlier maps. Historical context through Durer. Melancholy of geometric limits.",
 		  "grammar": "vatican"
+		}
+	  ],
+	  "museum_interludes": [
+		{
+		  "map": "Biome_Ladder_Primitives",
+		  "after": "Primitives_Portals",
+		  "reason": "Retain the existing museum interlude; not an added tutorial chapter."
 		}
 	  ]
 	}

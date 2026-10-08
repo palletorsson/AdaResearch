@@ -53,6 +53,16 @@ The dark sphere stands in front of the squares. It has no seams because it is on
 
 <!-- @ -->
 
+<!-- study-spine:reference_pattern_garden -->
+
+<!-- @reference_pattern_garden -->
+
+The pattern leaves the flat sample and crosses a flower. Turn its phase: a band moves over the petal while the petal stays still. Further back it crosses the room itself.
+
+Claudia Hart's supplied image makes ornament difficult to dismiss as a finishing layer. In this response, the shared pattern can compete with the outline that would ordinarily tell us where one thing ends. Keep watching one edge through the change. Does the surface make the object more available, or make its boundary harder to trust?
+
+<!-- @ -->
+
 Press RESET if you have lost the defaults. The next hall has no desks at all, and nothing on its walls: the pictures end here, and bodies begin. Take the painted seam with you, the one that agreed only because both sides averaged.
 
 [^tint]: `patterns_tile.gdshader`: `tile_color = shape_color * (0.7 + 0.3 * fract(sin(dot(tile_id, vec2(12.9898, 78.233))) * 43758.5453))`, where `tile_id = floor(uv)` is the whole part the fold discarded. The animation is `1.0 + animate * 0.3 * sin(TIME + tile_id.x * 1.3 + tile_id.y * 0.7)`, and it leaps at the clock's wrap like the first hall's wave.
