@@ -450,3 +450,27 @@ doc/reports/**/*.jpg.import
 
 # Local Claude checkouts are worktrees, not distributable submodules.
 /.claude/worktrees/
+
+# Ada's surface-grip extension overlays XR Tools 4.5.1. Keep the small overlay
+# and upstream license, while continuing to ignore the installed addon bundle.
+!/addons/godot-xr-tools/
+/addons/godot-xr-tools/*
+!/addons/godot-xr-tools/LICENSE
+!/addons/godot-xr-tools/hands/
+/addons/godot-xr-tools/hands/*
+!/addons/godot-xr-tools/hands/hand.gd
+!/addons/godot-xr-tools/hands/surface_grip.gd
+!/addons/godot-xr-tools/hands/surface_grip_pose.gd
+!/addons/godot-xr-tools/objects/
+/addons/godot-xr-tools/objects/*
+!/addons/godot-xr-tools/objects/grab_points/
+/addons/godot-xr-tools/objects/grab_points/*
+!/addons/godot-xr-tools/objects/grab_points/grab.gd
+/ada_run/auto-hand-2026-10-05/
+
+# ada_run is DERIVED (CLAUDE.md): plans, bakes, probes, captures, feedback that
+# spine_run, the Godot bake and the tools regenerate. Palle, 2026-10-08: it does
+# not belong in the repo. The files stay on disk - the museum reads em_plan.json
+# and em_bake.json from here at runtime and the export packs ada_run/*.json -
+# they just never enter git again. The partial ada_run/ rules above are kept.
+/ada_run/
