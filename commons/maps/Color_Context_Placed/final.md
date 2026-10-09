@@ -8,7 +8,7 @@ A block, a sphere, a wedge: the primitives. Their positions, turns and proportio
 
 On the disco floor, you held an arrangement before advancing to the next. Here, the choices stand beside one another. One column can remain in view while you look at its neighbour.
 
-![The columns seen from the entrance aisle inside the museum.](/book-review/doc/book/figures/Color_Context_Placed/colour-hall.png)
+![The columns seen from the entrance aisle inside the museum.](/book-images/figures/Color_Context_Placed/colour-hall.png)
 
 Begin with the four columns near the entrance. Each has the same five pieces in the same positions. One ochre covers the first from foot to crown. Beside it, the blocks are red and the round forms blue. Follow a block from one column to the other. Does it still belong to the whole in the same way?
 
@@ -16,7 +16,7 @@ Follow the red past the blue sphere to the next block. The sphere keeps those tw
 
 The third column assigns colour by height. A block near the floor and a block near the top receive different colours. Sharing a shape no longer gives them the same colour. In the fourth, each colour is calculated from the one below: the hue moves halfway around the hue circle, then halfway again. Ochre, blue, ochre again. The alternation is held in the column, for your eye to climb. A neighbour has become an input.
 
-![Four native museum views of the same five forms under four colour rules.](/book-review/doc/book/iterations/2026-09-23-colour-gathering/four-colour-rules.png)
+![Four native museum views of the same five forms under four colour rules.](/book-images/iterations/2026-09-23-colour-gathering/four-colour-rules.png)
 
 *The four columns near the entrance. Their local geometry is the same; each rule gives their pieces a different colour assignment.*
 
@@ -59,7 +59,7 @@ Recognition adds another kind of company. A palette can arrive with memories of 
 
 The next pair rises above you: angular and round forms in two blues, then a tall striped shaft under a broad dark cap. Walk around the striped column. Stripes disappear at one edge and enter at the other. The object has not turned.
 
-![Two views around the fixed rainbow column, with its broad cap overhead.](/book-review/doc/book/iterations/2026-09-23-colour-gathering/around-the-rainbow.png)
+![Two views around the fixed rainbow column, with its broad cap overhead.](/book-images/iterations/2026-09-23-colour-gathering/around-the-rainbow.png)
 
 *The same column seen from two sides. The stripes keep their places while their arrangement in the view changes.*
 

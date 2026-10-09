@@ -20,7 +20,7 @@ The ecosystem in the previous room combined local behaviour with balancing inter
 
 The fresh ground is finite. Four hundred cells, and the ground forgets only one of them every two seconds. Watched at the shipped start, the population fills its ceiling of a hundred and twenty within three seconds, the last fresh cell is crossed by ten, and from then on every lineage drains at the same rate: the hall is empty at thirty-six.[^novelty] There is a finish line after all. Nobody announced it, and no body can see it coming.
 
-![Bodies alive and fresh cells visited, over the first fifty seconds of the hall](/book-review/doc/book/figures/machinelearning/fresh-ground-runs-out.png)
+![Bodies alive and fresh cells visited, over the first fifty seconds of the hall](/book-images/figures/machinelearning/fresh-ground-runs-out.png)
 
 *The hall's first fifty seconds, measured with the artifact's own loop at sixty frames a second. The population reaches its ceiling of 120 within three seconds, the last fresh cell is crossed by ten, and the last body is gone at 35.8. The ground clears one cell every two seconds; nobody can live on that.*
 

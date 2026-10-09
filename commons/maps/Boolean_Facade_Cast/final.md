@@ -6,7 +6,7 @@ A door, a window, a cornice. The facade gives you enough to imagine a room befor
 
 The wall has depth. Its pale reveal stays beside you for a step, then the room opens. One side keeps a straight wall, with a low skirting edge and a rail near the ceiling. On the other side, the enclosure curves away. The outside did not tell you everything about the space it held.
 
-![The facade and the corresponding positive form.](/book-review/doc/book/iterations/2026-09-24-facade-room-and-cast/pair.png)
+![The facade and the corresponding positive form.](/book-images/iterations/2026-09-24-facade-room-and-cast/pair.png)
 
 *Two results from the same construction. The left admits a body. The right makes the interior present as matter.*
 
@@ -18,7 +18,7 @@ Come back through the door. Beside the building stands a pale body with a famili
 
 This form comes from the same interior. We kept the volume removed from the block and placed its positive beside the room. The cut that made an entrance now supplies a surface. Approach the tall projection: it stops you.
 
-![The positive retains the doorway and stepped window profile.](/book-review/doc/book/iterations/2026-09-24-facade-room-and-cast/positive.png)
+![The positive retains the doorway and stepped window profile.](/book-images/iterations/2026-09-24-facade-room-and-cast/positive.png)
 
 *The positive is bounded by the original block. Extensions of the cutting shapes outside that block are not included.*
 
@@ -34,7 +34,7 @@ Our room was made for this encounter. It has no former household whose history w
 
 The computer can keep both results. Subtract the interior from the block and it makes room; keep their intersection and the removed volume becomes an object. This reversibility belongs to the construction. It does not restore a place that has been lost.
 
-![A view back towards the real doorway and window from inside.](/book-review/doc/book/iterations/2026-09-24-facade-room-and-cast/inside-return.png)
+![A view back towards the real doorway and window from inside.](/book-images/iterations/2026-09-24-facade-room-and-cast/inside-return.png)
 
 *The openings remain available in the room while their positive counterparts stand beside it.*
 

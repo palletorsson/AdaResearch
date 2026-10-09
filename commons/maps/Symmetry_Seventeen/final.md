@@ -14,7 +14,7 @@ Now choose **PG**. The reversal remains, but the colour no longer arrives opposi
 
 Try to describe the difference before pressing **HOLD**. This saves the current image on the left. It gives your next change somewhere to return to.
 
-![Held P1 and live PG in the museum side bay](/book-review/doc/book/figures/tiling/symmetry-p1-pg-museum.png)
+![Held P1 and live PG in the museum side bay](/book-images/figures/tiling/symmetry-p1-pg-museum.png)
 
 *One source, two returns. The left panel keeps P1; on the right, PG reflects alternate blocks and slips the source lookup by two rows.*
 

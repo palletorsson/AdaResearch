@@ -37,7 +37,7 @@ Each number names a vertex. Both triples contain `5` and `7`: their shared edge.
 
 <!-- @cube_diagonal_plate -->
 
-![The same cube face before and after corner 6 moves out of its plane. Triangles 4-5-7 and 5-6-7 share the amber diagonal; only the second triangle tilts.](/book-review/doc/book/figures/Point_Animatedcube/cube-hidden-diagonal.png)
+![The same cube face before and after corner 6 moves out of its plane. Triangles 4-5-7 and 5-6-7 share the amber diagonal; only the second triangle tilts.](/book-images/figures/Point_Animatedcube/cube-hidden-diagonal.png)
 
 *The diagonal was already there. Corners 4, 5 and 7 stay still. Moving corner 6 makes the shared edge into a crease.*
 

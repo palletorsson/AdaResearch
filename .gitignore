@@ -482,3 +482,15 @@ doc/reports/**/*.jpg.import
 # and em_bake.json from here at runtime and the export packs ada_run/*.json -
 # they just never enter git again. The partial ada_run/ rules above are kept.
 /ada_run/
+
+# Images do not live in this repo (Palle, 2026-10-08: "I do not want images in the git repo. I
+# want the images in ada encyclopedia"). The ones the book and the blog link to are copied to
+# ada_encyclopedia/public/book-images/ and linked as /book-images/...; review evidence stays on
+# disk under doc/ and is served locally by /book-review/, never committed. Game assets keep their
+# .import sidecar and live outside doc/.
+doc/**/*.png
+doc/**/*.jpg
+doc/**/*.jpeg
+doc/**/*.gif
+doc/**/*.webp
+doc/**/*.bmp

@@ -80,7 +80,7 @@ In the trace hall, movement left positions behind. Here the handle has already b
 
 Bring the free handle back towards its starting corner, then try a curved route to the translucent panel. The recent lines remain together as you try another way. There is room to take the long way within the frame.
 
-![Two door mechanisms leave different traces for different permitted paths.](/book-review/doc/book/iterations/2026-09-23-translation-paths/translation-paths.png)
+![Two door mechanisms leave different traces for different permitted paths.](/book-images/iterations/2026-09-23-translation-paths/translation-paths.png)
 
 *A guided bend, a direct diagonal, and a curved route to the same relative endpoint. Each panel records a separate gesture at the handle.*
 

@@ -1,6 +1,6 @@
 # A pattern that returns
 
-In Synthesis Lab, five amounts could bring a familiar curve back.
+In Synthesis Lab, five amounts could bring a familiar curve back. Cage had kept a score so that it could be heard again. Here, a number seems to offer another way back.
 
 <!-- @seed_replay_demo -->
 
@@ -18,11 +18,7 @@ The right-hand grid changes while the left keeps its arrangement. The seed has n
 
 Above the grids, two strips turn the first twenty-four draws into bar heights. Switch the extra draw off, then on. The right strip now starts with the second bar on the left. Find the next two matches.
 
-With the extra draw enabled, the right-hand grid makes one request before colouring its first cube:
-
-```gdscript
-_rng.randf()  # Request one value without using it for a colour.
-```
+With the extra draw enabled, the right-hand grid requests one value before colouring its first cube, then leaves that value unused.
 
 Each call requests a number between zero and one. A cube takes three: red, green, blue. One unused draw shifts where that grouping begins:
 

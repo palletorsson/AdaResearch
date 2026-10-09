@@ -40,7 +40,7 @@ Press CELL at the bench. The box visits another address and the screen takes its
 
 A thin yellow square runs around the large volume at the height of that slice. Press CELL again. The square changes level high above you. Later, inside the glass flight box, you can rise until this reading meets your eyes. The blocks stay put. We have moved the place from which we read them. A smaller yellow outline keeps the selected address inside the volume, though solid neighbours can hide it. An empty cell still has a location. The decision has withheld a block, not erased its address.
 
-![Flying above the one-metre voxel cells. The yellow frame locates the selected horizontal slice; the glass enclosure lends flight while occupied blocks remain solid.](/book-review/doc/book/figures/Noise_Voxel/flight-from-above.png)
+![Flying above the one-metre voxel cells. The yellow frame locates the selected horizontal slice; the glass enclosure lends flight while occupied blocks remain solid.](/book-images/figures/Noise_Voxel/flight-from-above.png)
 
 Return to THRESHOLD. The right-hand border shifts through a left-hand field that stays still. You can now see several different values receive the same answer. The binary mask cannot show how far a rejected value missed the line; the other display keeps that difference as a shade, darker the further below, though it prints no scale.
 

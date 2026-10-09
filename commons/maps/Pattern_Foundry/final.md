@@ -52,7 +52,7 @@ Walk towards one of the marks, then turn to find another. An arrangement held in
 
 On the smaller surface console, choose ROOM FLOOR and press HOLD. Change the source cell again. The wall follows; the ground keeps its earlier image. You are standing between two moments of the same pattern. The opening still lets you leave, and the supports have stayed where they were. Yet wall and floor no longer agree about the room's present.
 
-![The curved room before and after a source edit with its floor held.](/book-review/doc/book/iterations/2026-09-28-foundry-a-mark-in-the-room/room-pair.png)
+![The curved room before and after a source edit with its floor held.](/book-images/iterations/2026-09-28-foundry-a-mark-in-the-room/room-pair.png)
 
 *The same view from inside the museum. On the right, the wall accepts another source edit while the floor keeps the earlier image.*
 

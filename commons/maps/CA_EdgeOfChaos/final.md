@@ -8,30 +8,21 @@ Walk between them. Thin gold frames mark the same depth in both volumes. As you 
 
 Before taking the first update, stop at five. The changed address appears in the section. Walk to six and it disappears from that picture. Come back. It is still there. We have moved past the difference, not removed it. An empty section could have been all we saw of this volume.
 
-![Matching gold frames locate the selected section in both volumes; the cases and floor show that section.](images/ca-walking-slice.png)
+![Matching gold frames locate the selected section in both volumes; the cases and floor show that section.](images/one-difference.png)
+
+The black point waits beside the console. Take it and choose a section with your hand. The walking reader yields while you hold it; release returns that choice to your body. The same sphere has carried a mark, planted a seed and inspected a row. Here it changes what we can see without changing what is there. Its trigger lets the next update arrive.
 
 Return to the console. Press STEP. Follow the lit difference for a few updates, then use REPLAY to meet the same beginning again. ONE CELL removes the intervention, or restores it. With the intervention removed, both runs should agree through every update, even when the disturbance is loud. What would it mean if they did not?
 
 The two runs receive the same forcing value at the same address and update. This is a deliberately shared, reproducible schedule. Without that agreement, a second source of difference would enter while we were trying to follow the first. The comparison makes a small experimental world inside a larger one whose clock continues.
 
-Here is the local instruction, before storage:
-
-```gdscript
-var drive:float=disturbance*sample(i,tick)
-var va:float=clampf(a[i]*(1.0-coupling)+sa/neighbours[i].size()*coupling+drive,0.0,9.0)
-```
-
-`sa` is the sum of A's valid neighbours. Interior cells have twenty-six; the corner has seven. Every cell reads the previous volume. PULL changes how far it moves toward that average. DRIVE changes the size of the added disturbance. The controls reset both runs, keeping the comparison legible. One gesture no longer changes both tendencies at once.
+Each cell keeps part of its present value and moves the remainder toward its neighbours' average. Both volumes receive the same added disturbance, then their calculated values are clipped to the allowed range. Interior cells have twenty-six neighbours; the corner has seven. Every cell reads the previous volume. PULL changes how far it moves toward that average. DRIVE changes the size of the added disturbance. The controls reset both runs, keeping the comparison legible. One gesture no longer changes both tendencies at once.
 
 Bring DRIVE to zero. Choose the uniform beginning with SEED, leave PULL at 0.25 and ONE CELL enabled. In INTEGER storage, press STEP. The difference is gone. Replay, switch STORE to FRACTIONAL and take the same step. Now twenty-seven addresses differ, but the largest difference is smaller than before: 0.75 instead of one.
 
 More places carry it. Less of it remains at any one place.
 
-The fork is one short line:
-
-```gdscript
-na[i]=float(int(va)) if integer_storage else va
-```
+The two versions part at the moment of storage.
 
 The integer conversion removes the fractional part of these nonnegative values. The pull that took five toward four produced 4.75. The stored integer is four. Around it, smaller fractional changes also fell away. A rule about neighbours was accompanied by another rule about what a value may keep. In this comparison the neighbour rule stayed the same; storage decided how much of its answer could remain.
 
@@ -47,8 +38,10 @@ The other works remain in the rear gallery: a screen that keeps the successive s
 
 <!-- @ -->
 
+There may be a question to take back through these rooms. On the bridge, a surface changed where you could go; the place you went entered its next calculation. What would you keep of an encounter that changed your intention? A record might help you return to it without requiring the next attempt to have the same purpose.
+
 The next hall, the first of Fractals, changes the instruction. Instead of waiting for local exchanges to assemble a larger resemblance, a procedure explicitly asks for another instance of itself. Carry this distinction with you: a form can resemble its neighbour, inherit an earlier state, or be told to repeat. The resemblance does not yet explain the making.
 
 [^ca-edge]: Christopher Langton, [“Computation at the edge of chaos: phase transitions and emergent computation”](https://doi.org/10.1016/0167-2789(90)90064-V), *Physica D* 42 (1990). His experiments associated information storage, transmission and modification with a transition between ordered and disordered behaviour. His λ counts the fraction of rule-table entries whose output differs from a designated quiescent state. It is not the proportion of living cells in a displayed field. PULL changes the strength of neighbour averaging in another model; this hall has not measured Langton's transition.
 
-[^ca-sir]: W. O. Kermack and A. G. McKendrick, “A contribution to the mathematical theory of epidemics”, *Proceedings of the Royal Society A* 115 (1927). In the rear gallery each cell is infected with a fixed probability per infected neighbour and recovers with another: two draws and a grid.
+[^ca-sir]: W. O. Kermack and A. G. McKendrick, “A contribution to the mathematical theory of epidemics”, *Proceedings of the Royal Society A* 115 (1927). In the rear gallery a susceptible cell with at least one infected neighbour is infected with a fixed probability, and an infected cell recovers with another: two draws and a grid.

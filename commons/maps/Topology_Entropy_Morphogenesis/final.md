@@ -18,7 +18,7 @@ NOISE removes or restores the noise contribution. LEVEL moves the cut: minimal, 
 
 Here is what the cut does, computed from the field without its noise. At the opening setting the surface divides the box almost in half, 52 per cent solid and 48 air, and each half is one connected labyrinth; the widest ball that fits in the air is about three and a half metres across. Thickened moves the cut down: the solid takes 72 per cent and the air is left in two separate pockets. Pinched leaves the solid a third, still one piece, drawn out into necks. Broken cuts it to a fifth, and the solid comes apart into islands. Now move S to one. The pattern’s period shrinks from five and a half metres to under four, the same four cuts apply, and the thickened pocket that admitted a three-metre ball now admits one of a metre and a half.[^gyroid]
 
-![One slice through the field at the opening setting, cut at the four levels the desk offers](/book-review/doc/book/figures/softbodies/gyroid-four-levels.png)
+![One slice through the field at the opening setting, cut at the four levels the desk offers](/book-images/figures/softbodies/gyroid-four-levels.png)
 
 *One slice through the same field, cut at the four levels. Dark is the solid side. Nothing in the field changed between the four panels; only the number the cut was made at.*
 

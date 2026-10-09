@@ -1,21 +1,23 @@
 # What a curve needs from a stair
 
-When does a sampled curve become a route a body can use?
+The first tread meets the floor. From here the spiral seems to offer a way up.
 
 <!-- @sine_cylinder_staircase -->
 
-Begin by following the treads with your eyes from the lower end. Compare one step with the next: the change of height, the turn, and the distance from the centre. Notice the surfaces joining neighbouring edges as well as the steps themselves.
+Follow it with your eyes. The steps turn as they rise; the outline widens, then draws inward. The eye reaches places the foot has not yet tried.
 
-The route combines an angular progression with a steady rise. Its radius also varies with a sine function. A regular rule therefore produces a stair that does more than circle a fixed cylinder. The outline breathes inward and outward as it climbs.
+The cube has returned as a tread. It has width, depth and a neighbour. A circular progression places it around the centre, a steady increment lifts it, and sine changes its distance from the axis. Three simple decisions have begun to look like an invitation.
 
-Choose three consecutive treads that you can see clearly from the surrounding floor. Compare their centres first, then compare the edges a foot would meet. A regular change between centres can still leave different apparent gaps at the inner and outer edges of a turn. Move your viewpoint to check whether a gap is real or hidden by an overlapping surface. You do not need to step onto it to make that distinction. Repeat the comparison where the staircase's radius appears wider. Describe which relation changed: height, turn, width or edge connection. These observations turn a general impression of smoothness into several concrete questions about support.
+Stand near the lower turn. The inner edges crowd together while the outer edges spread apart. The centres follow their rule faithfully. At the edges, where a foot would land, another account becomes necessary.
 
-Those sampled positions are only the beginning of a staircase. Each needs a tread with width and depth, an orientation, and a relationship to the next tread. The default construction adds connecting membranes between facing edges. They make the gaps part of the visible argument: a formula gives positions, while a route needs provision for the body moving between them.
+Surfaces connect neighbouring treads. They sit above the tread tops, so finding a connection does not settle how the crossing will feel. A line through the centres would be easier to draw. It would leave the body with the same question.
 
-Do not judge the whole climb from the smoothness of its outline. An entrance, a comfortable rise, headroom and continuous support have to work at the scale of the visitor. From the surrounding floor you can follow the spiral with your eyes. That journey does not tell you whether your body could complete it.
+In Bernini we could follow a ridge upward without asking it to carry us. Here the familiar shape of a stair makes a stronger promise. We begin to read the next surface as somewhere we might stand. That expectation arrives before we have checked the rise, the clearance, or the support between steps.
 
-Identify one turn or gap that would matter to a different stride. A route that feels continuous to one walker can remain discontinuous to another. The question is not answered by adding more samples alone: their arrangement and support also matter.
+The same interval can be a small step for one visitor and an interruption for another. Adding more samples may refine the outline while leaving that difference untouched. A handrail or a wider tread would change what this form offers. Neither is contained in the sine function.
 
 <!-- @ -->
 
-A handrail, supporting posts or a different connection between treads could each change this encounter; they are choices to test, not qualities the equation supplies automatically. The following room returns to interacting cycles. Keep the distinction between a mathematical relation and the particular object that makes it available to perception.
+Stay at the lower end a moment longer. The whole climb is visible; completing it remains a separate question. The room has made it possible to notice the distance between those two kinds of arrival.
+
+Ahead, two waves meet on a display. Their parts will also obey simple rules. We will watch what becomes available between them.

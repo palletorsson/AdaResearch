@@ -31,7 +31,7 @@ The arrangement returns to the room's earlier floor plan. Its reference belongs 
 
 Imagine one cube placed outside the cross. Its construction would be unchanged; its relation to the court would be different. What you know now gives you several ways to make it. None chooses its place for you. You do not need to build every possibility before leaving this one.
 
-![The museum court from three viewpoints: aligned, oblique and a plan from above.](/book-review/doc/book/figures/Primitives_Melencolia/melencolia-one-arrangement.png)
+![The museum court from three viewpoints: aligned, oblique and a plan from above.](/book-images/figures/Primitives_Melencolia/melencolia-one-arrangement.png)
 
 *The same court, from three viewpoints. At the left, two corner pyramids hide two others. None of the objects has moved.*
 
@@ -63,7 +63,7 @@ Perhaps we had hoped that getting the form right would put something else right 
 
 Walk sideways. The stone hides the smaller figure, then lets it appear again. Our sculpture gives depth to an engraving; Dürer did not leave us the far side of this room. Those hidden surfaces are decisions we have made. The apparent completeness of the model rests on what the picture could not tell us.
 
-![The reconstructed Melencolia tableau inside the museum.](/book-review/doc/book/figures/Primitives_Melencolia/melencolia-tableau.png)
+![The reconstructed Melencolia tableau inside the museum.](/book-images/figures/Primitives_Melencolia/melencolia-tableau.png)
 
 *After Dürer's engraving: an arrangement of sculpted figures, tools and solids. Their placement follows the image; their depth is an interpretation. Walking changes which objects conceal one another.*
 

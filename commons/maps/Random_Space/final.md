@@ -18,7 +18,7 @@ Look down: a violet surface rises a little above the grey floor. You can follow 
 
 Beside the mixer, a small blue cellular field on a low stand offers another way for neighbours to belong together. Here the value comes from a difference between distances: how far away are the nearest scattered point and the next nearest? Along a seam those distances nearly agree. Follow one seam, then look back at the mixer's broad layers. Both can suggest a landscape, but their neighbours have been related by different rules.
 
-![A blue cellular field on its low stand above the violet random ground.](/book-review/doc/book/figures/randomness/cellular-field-violet-ground.png)
+![A blue cellular field on its low stand above the violet random ground.](/book-images/figures/randomness/cellular-field-violet-ground.png)
 
 <!-- @shannon_entropy_meter -->
 

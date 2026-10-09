@@ -9,6 +9,8 @@
 
 Start with the cube moving up and down near the entrance. Follow it from the middle to the top, through the middle to the bottom, then back. Its direction changes while its shape remains familiar.
 
+Three questions travel through this sequence. **Movement:** what changes, and what makes it change? **Record:** what do we keep when the movement has passed? **Composition:** what can those parts make together? We will return to these questions through a swing, a surface, a sound and a sum. Begin with one cube and one returning height.
+
 ## What you bring
 
 Keep the cube from Transformation: one `MeshInstance3D`, a `BoxMesh`, and a position updated from elapsed time. There we made a body travel, turn and change size. Here we open the rule for a movement that keeps returning. We do not need to rebuild its faces or introduce a new body.
@@ -107,3 +109,16 @@ This movement is prescribed by a clock. It does not calculate gravity, collision
 ## What travels onward
 
 Keep the cube, elapsed time and the three parameters. The next hall, Pendulum, lets us compare a responding swing with a prescribed cycle and keep a timestamped record. Trace's earlier list returns with another job: making the history of a movement visible.
+
+## Four distinctions for the journey
+
+Return to these names as the encounters change. A similar outline can come from a different operation.
+
+| Operation | What changes | Where we will meet it |
+| --- | --- | --- |
+| Oscillation | A quantity changes periodically in time. | This returning cube. |
+| Spatial pattern | A periodic rule places geometry across space; it can remain still. | Sine Space and Bernini. |
+| Propagation through coupling | A disturbance affects neighbouring locations through their relations. | The coupled lattice. |
+| Composition | Components combine to produce a result. | Two signed waves in Beats; five weighted harmonics in Synthesis. |
+
+These are distinctions to inspect, not four separate blocks of rooms. A composition can oscillate; a moving pattern can be prescribed without neighbour coupling. Ask what the program reads to produce its next value.

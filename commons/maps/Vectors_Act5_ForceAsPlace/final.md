@@ -57,7 +57,7 @@ The probe has ordinary gravity outside the field and damping that slows its moti
 
 Five metres of air, marked by a cage. The thin edges are visible; they are not walls. A solid plank remains through the gap. Look along it, then into the air beside it. What would have to change for both to carry you?
 
-![The plank and the outlined carrying field seen from inside the museum](/book-review/doc/book/figures/forces/two-crossings-museum.png)
+![The plank and the outlined carrying field seen from inside the museum](/book-images/figures/forces/two-crossings-museum.png)
 
 *The plank keeps a route through the gap. Beside it, the outline marks where another rule can carry you.*
 

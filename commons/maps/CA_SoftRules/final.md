@@ -10,28 +10,11 @@ Press +100 and let the local clock complete its hundred updates. The fields begi
 
 EXCHANGE B turns its neighbourhood exchange on and restores both beginnings. Advance again. The two fields now agree. Switch exchange off, replay, and look for the first place where they differ. We can locate the missing relation before giving the result a name.
 
-In the previous hall a neighbour above half health counted as one contribution to recovery. Here a cell stores two concentrations, U and V. It receives differences in concentration from the four sites beside it. For each field, the sum is its neighbours minus four copies of itself:
+In the previous hall a neighbour had to be healthy enough to count. Here each cell holds two concentrations, U and V; how much a neighbour differs becomes part of what it can offer. Both fields perform the same local reaction.[^ca-gray-scott] Only one can receive through the surrounding cells.
 
-```gdscript
-return a[y*N+(x+N-1)%N]+a[y*N+(x+1)%N]+a[((y+N-1)%N)*N+x]+a[((y+1)%N)*N+x]-4.0*a[y*N+x]
-```
+Return to W. Nothing was planted there. Something has arrived on the left. On the right, the initial square has nearly faded by the end of those hundred updates. Keep the two pictures beside one another for a while.
 
-The repeated subtraction matters. If all five values agree, this part of the update contributes zero. A higher neighbour can send a positive contribution; a lower neighbourhood can draw one away. No neighbour has to cross a health threshold to count. How much it differs is now part of what it can offer. Each cell now holds two fractions, and a neighbour matters by how much its concentration differs.
-
-There is also a reaction at the address itself. The product U × V × V removes some U and adds some V. A feed term replenishes U; another term removes V. The installation uses the same arithmetic as the project's existing Gray–Scott generator,[^ca-gray-scott] now exposed one update at a time:
-
-```gdscript
-var uvv:float=a*b*b
-```
-
-```gdscript
-next_u[i]=clampf(a+coupling*0.16*lap_u-uvv+FEED*(1.0-a),0.0,1.0)
-next_v[i]=clampf(b+coupling*0.08*lap_v+uvv-(KILL+FEED)*b,0.0,1.0)
-```
-
-With exchange off, the right-hand field still reacts. But at an unseeded address V is zero, so U × V × V is also zero. Nothing in that local reaction can make its first V arrive. The left-hand field can receive it. This difference is small enough to calculate and large enough to alter the wall. Even the right-hand square's seeded cells cannot keep their V: at feed .037 and kill .060 the reaction alone has no resting state other than full U and no V, so by the end of the first hundred updates that square has nearly faded.
-
-Keep that distinction in hand. “Soft” is not a promise that the rule is gentle or that every boundary has disappeared. Both fields still occupy a 32-by-32 grid. The arithmetic writes into separate next arrays before swapping them into the present. Values are clamped between zero and one. At an edge, the remainder operator wraps the neighbour index to the opposite side. The wall has a visible border that the calculation does not share.
+“Soft” is not a promise that every boundary has disappeared. At the edge of this grid, neighbours wrap to the opposite side. The wall has a visible border that the calculation does not share. The tutorial opens the arithmetic of that exchange.
 
 Use VIEW U/V. Another distribution appears without a single new update. The initial view doubles V before mapping it into colour; the U view has its own palette. A colour can saturate while the stored value still has room to change. An image is already an interpretation of the field.
 
@@ -41,9 +24,11 @@ Press COAT. The colour surfaces disappear while the table fields continue. Bring
 
 Between the displays, a small floor mark says **STEP IN / LEAVE A SEED**. Cross it. Both fields receive the same small second patch. With the clock running, watch beyond its edge as well as at its centre. Exchange lets some concentration leave the place where you put it. Try this after the first hundred updates: the new patch thins in A while the earlier pattern continues to spread. What lets something travel can also let it disperse.
 
+There is also the small black point beside the desk. Take it to either table and hold it above a place you choose. Its trigger gives both fields a seed at that address. We have brought the same object onward, but changed what its position can do. On the bridge it helped remove support; here it introduces a concentration. Neither consequence belongs to the sphere alone.
+
 Stay on the mark. It does not keep replenishing the seed. Leave and return to place it again. INJECT makes the same intervention from the desk. We are no longer only watching a prepared beginning; we have entered another event into its history. REPLAY can restore that beginning. It cannot make our first encounter with the difference happen again.
 
-![A floor crossing places the same small patch on both curved field displays.](images/ca-seed-crossing.png)
+![A floor crossing places the same small patch on both curved field displays.](images/exchange-seed.png)
 
 *The floor receives your arrival. What happens to the seed continues through the field's own relations.*
 

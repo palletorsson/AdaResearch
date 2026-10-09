@@ -6,13 +6,15 @@ Can two constructions resemble one another without doing the same calculation?
 
 Press 90 on the explorer’s CA RULES panel, then RST to return to the central seed. Press STEP a few times. Follow the triangular gaps that develop between occupied cells. Choose a larger triangle and look for smaller ones arranged within its boundary. Add rows, up to fifteen steps, when you need more to compare; at the sixteenth the pattern's two diagonal edges meet around the ring and every new row from then on is empty.
 
+The small black point is back at the desk. Take it along the rail: the numbers follow an address, while the row stays still. Use its trigger and the next row arrives. In the previous room it placed a seed. Here we have given the same held object another relation to the work: it lets us inspect a place and advance a process.
+
 Each new cell is still calculated from a local neighbourhood. No instruction tells the display to draw a large triangle and then decorate it with smaller triangles. The repeated structure becomes visible through many applications of the rule.
 
 Choose one triangular gap in the rule display. The same rows lie enlarged on the floor between the desk and the pyramid. Follow them away from the desk: each row takes one more step in the calculation. Walk into a dark triangle. The cells are empty; the floor still holds you. Here, absence is something drawn beneath your feet.
 
 Keep a few occupied cells around the gap in mind, so there is more to recognise than the outline. Carry that small arrangement to the pyramid. Move sideways. The cubes hide and uncover one another; the floor image stays flat. Where would your remembered gap fit, and would your body fit there too? If one part refuses the match, stay with that part before choosing a different resemblance. We have found something the shared appearance did not tell us.
 
-![The explorer’s stored history spreads across the floor toward the recursive cube construction.](images/ca-pattern-correspondence.png)
+![The explorer’s stored history spreads across the floor toward the recursive cube construction.](images/two-procedures.png)
 
 <!-- @sierpinski_pyramid -->
 

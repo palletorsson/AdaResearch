@@ -18,7 +18,7 @@ PALETTES[palette][value_at(x,z,floor_node.grid_width,floor_node.grid_depth)]
 
 For the square-cell patterns, `value_at` returns zero or one for the address `x,z`. The first pair of brackets selects a palette; the second selects one of its two colours. A square can keep its value and receive another colour because we have changed the pair it draws from.
 
-![Two palettes on the same held checker, seen from the same place on the museum floor.](/book-review/doc/book/iterations/2026-09-28-disco-colour-in-step/checker-pair.png)
+![Two palettes on the same held checker, seen from the same place on the museum floor.](/book-images/iterations/2026-09-28-disco-colour-in-step/checker-pair.png)
 
 In the earlier palette grid, you could leave one square changed. Here one choice reaches every square carrying the same value. The four pairs are prepared for us, including black and white. We can choose among them, but this console does not let us give a single square a colour of its own. The reach of a choice belongs to the way the tool has been made.
 

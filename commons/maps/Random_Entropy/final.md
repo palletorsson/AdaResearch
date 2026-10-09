@@ -74,7 +74,7 @@ Here the random offset grows with a point's position along z. The plan stays squ
 
 Beyond the glass, four pale columns carry a lintel. A brick wall about half their height runs behind them. The ruin waits intact. Choose a joint, then press RUN / PAUSE on the console in front of it. For a moment the joint still holds. A piece drops out of the construction and comes to rest below. A capital loses its place; a shaft becomes a stump. The fallen stone is still here.
 
-![The four columns and their lintel wait intact, with the brick wall behind them and the controls in front.](/book-review/doc/book/figures/randomness/ruin-waiting-museum.png)
+![The four columns and their lintel wait intact, with the brick wall behind them and the controls in front.](/book-images/figures/randomness/ruin-waiting-museum.png)
 
 Press RUN / PAUSE to hold the scene, or ONE STONE to place the next selected piece among the rubble. The counter keeps two accounts: 116 stones, and how many have moved. The first number stays. Does the building stay with it? Look through the gaps and move around the surviving columns. What was a boundary now lets you see across it.
 

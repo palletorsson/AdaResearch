@@ -27,7 +27,7 @@ Now press **DERIVATIVE**. A gold tangent appears at the red point. Above the cur
 
 The derivative asks what the finite ratios approach as the interval tends to zero, where that limit exists. The gold line comes from an analytic calculation for this smooth function. We can compare our samples with it, although none of the four STEP settings reaches the limit itself. Dividing by zero would not bring us closer.
 
-![A shorter interval and the revealed slope plot at the museum workbench](/book-review/doc/book/figures/change/two-readings-near-museum.png)
+![A shorter interval and the revealed slope plot at the museum workbench](/book-images/figures/change/two-readings-near-museum.png)
 
 *The red sample has stayed at the same address. The green one has come closer; their joining line now rises. Above the curve, the second plot gives its slope another place to appear.*
 
@@ -69,7 +69,7 @@ The function stays above the baseline here, so every contribution adds positive 
 
 Return to MID and increase the count to eight. Keep the held four beside them. A ridge that passed between two samples can now receive a sample of its own. The total changes noticeably. Continue to narrower rectangles. Their differences become harder to see as the tops gather around the line.
 
-![Eight live rectangles beside four held rectangles inside the museum](/book-review/doc/book/figures/change/four-held-eight-live-museum.png)
+![Eight live rectangles beside four held rectangles inside the museum](/book-images/figures/change/four-held-eight-live-museum.png)
 
 *Eight live intervals on the left, four held on the right. The earlier reading remains available.*
 

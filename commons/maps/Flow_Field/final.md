@@ -46,7 +46,7 @@ Watch a particle reach the frame. It leaves one side and returns on the opposite
 
 A long stroke can suddenly cross the canvas. The recorder has joined the last position before the wrap to the first one after it. Its line suggests a journey through the middle that the particle did not make. The same drawing operation that helped us follow a bend has drawn across this jump too.
 
-![Arrows and particle trails on the wall monitor inside the Flow Field hall](/book-review/doc/book/figures/change/flow-field-wall-monitor-museum.png)
+![Arrows and particle trails on the wall monitor inside the Flow Field hall](/book-images/figures/change/flow-field-wall-monitor-museum.png)
 
 *The arrows keep their places. Long strokes across the canvas join positions on opposite sides of its frame.*
 

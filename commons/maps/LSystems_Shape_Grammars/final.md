@@ -10,7 +10,7 @@ Beside the cube, each of those two triangles has drawn inward. The top is still 
 
 The third specimen lifts the two inner triangles. New side faces join their raised edges to the surface below. Walk around it. What looked like a square lid has become two separate projections. The diagonal was more than a line drawn on a surface: it helped decide what the operation could take hold of.
 
-![The cube, the inset faces and the first extrusion, built by the museum's mesh grammar.](/book-review/doc/book/iterations/2026-09-24-form-grammar-spine/first-three.png)
+![The cube, the inset faces and the first extrusion, built by the museum's mesh grammar.](/book-images/iterations/2026-09-24-form-grammar-spine/first-three.png)
 
 *One seed, then two operations. Pink marks the faces that receive the next operation; mint marks the inset borders. These colours help us follow the construction.*
 
@@ -22,7 +22,7 @@ Next to it, a wider pair rises to the same height. Both took three steps of fort
 
 The sixth specimen reaches sideways and down as well as up. Its seed is the same cube. The inset amount and number of rounds return to the fourth specimen's values. This time all twelve starting triangles are selected. Each keeps a line of descendants; the new tips continue while their side walls remain. Walk around to find the projections hidden from the entrance.
 
-![Three rounds with two inset amounts, followed by the same operations starting on all twelve faces.](/book-review/doc/book/iterations/2026-09-24-form-grammar-spine/three-families.png)
+![Three rounds with two inset amounts, followed by the same operations starting on all twelve faces.](/book-images/iterations/2026-09-24-form-grammar-spine/three-families.png)
 
 *The specimens keep the same metre scale. Their lowest points rest above the plinths, so the last cube's centre sits higher to make room for its downward growth.*
 
@@ -38,7 +38,7 @@ Beside it, six curved strips spread from the face's centre. Their tips lift; spa
 
 Its direction changes along its length, and its width narrows towards the tip. The builder samples that path in sixteen sections and joins the edges with triangles. No noise has been added. The curve follows a chosen rule. Up close, its changes of angle remain visible in the light.
 
-![One retained triangle beside the curved strips added to it.](/book-review/doc/book/iterations/2026-09-24-form-grammar-canopy/face-and-petals.png)
+![One retained triangle beside the curved strips added to it.](/book-images/iterations/2026-09-24-form-grammar-canopy/face-and-petals.png)
 
 *The seed face and the small petal study. The large version waits beyond them. All three use the same added support design.*
 
@@ -50,7 +50,7 @@ Walk beneath it.
 
 A moment ago we could look down into the arrangement. Now it occupies the sky above us. The pink triangle spreads over the column, while the curved strips rise beyond its edges. Walk towards a gap. One surface passes out of your view and another enters it. The form stays still; your movement changes what covers you.
 
-![The same generated surface seen from beneath at a camera height of 1.7 metres.](/book-review/doc/book/iterations/2026-09-24-form-grammar-canopy/beneath.png)
+![The same generated surface seen from beneath at a camera height of 1.7 metres.](/book-images/iterations/2026-09-24-form-grammar-canopy/beneath.png)
 
 *The same vertices, enlarged uniformly by four. The camera is now below the surface. Its gaps remain open.*
 

@@ -4,7 +4,7 @@
 
 Two rings stand upright on a bench. There is room to stop and see both before moving closer. One wears its variation as small folds. The other keeps a round outline while colour travels across it. The columns behind us asked where change enters a body. Here the question becomes more intimate: could these two surfaces be receiving the same thing?
 
-![The upright relief and colour rings seen together from the standing approach inside the museum.](/book-review/doc/book/figures/Noise_One/standing-pair.png)
+![The upright relief and colour rings seen together from the standing approach inside the museum.](/book-images/figures/Noise_One/standing-pair.png)
 
 Watch a bright patch arrive. Then press FREEZE. The rings hold that moment; the museum carries on. Two pale markers indicate matching coordinates. SAMPLE moves them together around the rings. Before reading the plate, look for a place where the folded ring turns inward and its coloured neighbour goes dark.
 

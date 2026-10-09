@@ -24,7 +24,7 @@ return (RAINBOW_THICKNESS * 7.0) / float(maxi(1, rainbow_colors.size()))
 
 The code keeps a total band thickness of `7 × 0.8`, shared out again whenever the list changes. The arch is scaled down to fit this hall. More strips each receive less of the fixed total; fewer strips receive more. The familiar arch can survive a change in how we divide its colour.
 
-![Six, seven, forty-eight and two bands on the same museum arch.](/book-review/doc/book/iterations/2026-09-23-rainbow-room-for-another/four-arrangements.png)
+![Six, seven, forty-eight and two bands on the same museum arch.](/book-images/iterations/2026-09-23-rainbow-room-for-another/four-arrangements.png)
 
 *Four arrangements, seen from the same place. The coloured steps change with the arch; their height and the opening beneath it remain.*
 

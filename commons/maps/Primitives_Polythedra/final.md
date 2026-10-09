@@ -56,7 +56,7 @@ The convex collision hull spans the four positions, including the base absent fr
 
 Look at the two versions on the wall. The amber base makes visible a boundary you could not see on the object in your hand.
 
-![The open trihedron beside the convex hull of the same four points; an amber face shows where physics closes the missing base.](/book-review/doc/book/figures/Primitives_Polythedra/polyhedra-boundaries.png)
+![The open trihedron beside the convex hull of the same four points; an amber face shows where physics closes the missing base.](/book-images/figures/Primitives_Polythedra/polyhedra-boundaries.png)
 
 *Four positions, two boundaries. The amber face shows where the convex hull closes the opening.*
 

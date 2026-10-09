@@ -8,7 +8,7 @@ Look up a pillar. Near its base, the colour disappears into black. Higher up, it
 
 The grey column beside the field reaches white at the top. The coloured columns do not. Raising value brightens their colours; reaching white also requires saturation to be zero. Even at the same value, a yellow and a blue need not appear equally bright.[^value]
 
-![Colour spreads across the ceiling above pillars that darken towards the floor.](/book-review/doc/book/iterations/2026-09-28-pillar-colour-ceiling/ceiling-and-column.png)
+![Colour spreads across the ceiling above pillars that darken towards the floor.](/book-images/iterations/2026-09-28-pillar-colour-ceiling/ceiling-and-column.png)
 
 *Hue across, saturation along, value up. At their tops, the pillars meet the same colours in the ceiling.*
 

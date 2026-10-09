@@ -18,7 +18,7 @@ Beside the board stands a coarse, pale sphere. Carry the red beam across it. One
 
 We met these flat faces among the primitives, where they interrupted the promise of a smooth sphere. Here they give the light different directions to meet. Each face has a direction, called its *normal*, which the renderer uses along with the light and material to calculate its appearance. What looked like one pale body begins to answer face by face. Bring a second colour across the first. The construction you could barely see now divides their meeting.
 
-![The same pale sphere under a red lamp held on either side. The camera, mesh and material stay fixed.](/book-review/doc/book/iterations/2026-09-23-flashlight-faceted-sphere/same-sphere-moving-light.png)
+![The same pale sphere under a red lamp held on either side. The camera, mesh and material stay fixed.](/book-images/iterations/2026-09-23-flashlight-faceted-sphere/same-sphere-moving-light.png)
 
 The red lamp has crossed from board to sphere without changing its assigned colour. Inside each lamp, `flashlight_color.gd` finds the light and gives it its colour:
 
@@ -46,13 +46,13 @@ On the far wall, a wide pink rectangle draws you towards it. Its narrow luminous
 
 Walk closer, then move sideways. A return wall comes into view. There is room to step inside, and a back wall that stops you. The rectangle has become a recess without anything being rebuilt. Its pink sources keep their colour while the light in the room moves on. The surrounding colour changes the meeting you are looking at.
 
-![The pink recess, photographed from inside the installed white room.](/book-review/doc/book/iterations/2026-10-02-light-an-opening/figures/pink-threshold.png)
+![The pink recess, photographed from inside the installed white room.](/book-images/iterations/2026-10-02-light-an-opening/figures/pink-threshold.png)
 
 The next doorway opens below a tall light well. Three rectangular lips draw the eye upwards. Between them, the walls close around the opening; beyond the last lip is the museum's sky.
 
 Wait beneath it. Rose leaves the ceiling for violet. The code changes the lights around the opening; it never assigns a new colour to the sky. Does the piece of sky you see still seem to belong to the same distance?
 
-![The same light well and viewpoint at two moments. The roof and its opening stay fixed while the surrounding lights change.](/book-review/doc/book/iterations/2026-10-02-light-an-opening/light-well-pair.png)
+![The same light well and viewpoint at two moments. The roof and its opening stay fixed while the surrounding lights change.](/book-images/iterations/2026-10-02-light-an-opening/light-well-pair.png)
 
 A shallow ramp brings you onto a raised landing. Look back through the well. The nearer edge covers another part of the farther one. The view from below has company now. Neither position can give you every edge at once.
 

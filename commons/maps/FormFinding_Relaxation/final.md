@@ -39,7 +39,7 @@ And here is where it stops being a demonstration. A sphere of glass, fifteen rin
 
 It runs once, when the room loads, and stops. The pose it happens to be in at that moment is the vessel. The glass lets you see an inside that its closed collision surface keeps your moving body outside. Transparency offers a view, not an entrance. The falling has finished; the boundary it left can still meet you.
 
-![The frozen glass vessel with the cloth behind it in the museum](/book-review/doc/book/figures/formfinding/glass-keeps-a-boundary-museum.png)
+![The frozen glass vessel with the cloth behind it in the museum](/book-images/figures/formfinding/glass-keeps-a-boundary-museum.png)
 
 *The cloth keeps changing. The vessel keeps a moment, and the surface of that moment keeps a boundary.*
 

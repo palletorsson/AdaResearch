@@ -34,7 +34,7 @@ The numbers behind the gauge are worth a moment. A move costing five hundredths 
 
 And then the turn toward two wells in a low, open tank. Approach the narrow well from its outside edge and look down into it. Compare them before pressing INTERPRET. What stays still? What keeps changing? The lower result and the more responsive result have been placed beside one another, but have they been given the same conditions?
 
-![Looking into the deep well from its outside edge inside the museum](/book-review/doc/book/figures/formfinding/deep-well-museum.png)
+![Looking into the deep well from its outside edge inside the museum](/book-images/figures/formfinding/deep-well-museum.png)
 
 *The deep well from its outside edge at standing eye height. The cube at the bottom does not move.*
 

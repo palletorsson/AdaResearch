@@ -18,9 +18,9 @@ When the cycle-first scan ends, count the pairs and the points left waiting. The
 
 Press ORDER for SPOKES FIRST. The points stay where they were; every connection remains. The earlier pairings clear. Before running again, predict what will happen to the point you chose. This time five pairs form, one along each spoke. Nobody has gained a new connection. We changed which possibility was considered first.
 
-![Cycle first: the ring’s edges scanned before the spokes; three pairs, four outer points waiting.](/book-review/doc/book/figures/graphtheory/matching-cycle-first.png)
+![Cycle first: the ring’s edges scanned before the spokes; three pairs, four outer points waiting.](/book-images/figures/graphtheory/matching-cycle-first.png)
 
-![Spokes first: the same ten points and ten connections; five pairs, one along each spoke.](/book-review/doc/book/figures/graphtheory/matching-spokes-first.png)
+![Spokes first: the same ten points and ten connections; five pairs, one along each spoke.](/book-images/figures/graphtheory/matching-spokes-first.png)
 
 *Same ten points, same ten connections. Cycle first: three pairs, four waiting. Spokes first: five pairs. Two end states of one graph, from the same museum camera.*
 

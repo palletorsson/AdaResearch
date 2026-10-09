@@ -1,25 +1,25 @@
 # A slow pulse from fast motions
 
-How can two quick repetitions produce one slow pulse?
+The lower row grows quiet. Above it, both waves are still moving.
 
 <!-- @beat_frequency_demo -->
 
-Look at the rows labelled A, B and A+B. Use the two frequency controls to bring A and B close together. Follow one part of the lower row long enough to see its movement grow and shrink, then compare that slower change with the quicker movement above.
+Bring the frequencies of A and B close together. Follow one place on the row beneath them. Its quick movement widens and narrows slowly, as though another rhythm had entered the room.
 
-Make the frequency difference smaller while keeping both sources moving. The envelope changes more slowly. At equal frequencies, this version's initially aligned waves reinforce one another without the same slow pattern of beating.
+Nothing else is driving it. The row adds the two values at each place and moment. Their contributions come into agreement, drift into opposition, then approach agreement again. The slow pulse belongs to that changing relation.
 
-Keep A fixed and move B towards it from one side. Watch a single location on the lower row through a broadening and a narrowing of its motion. Now move B away again and compare how quickly that alternation returns. Avoid counting every small rise as a separate beat; you are following the larger change in how much motion is available. At a moment when the lower row is quiet, inspect A and B above it. Their contributions can remain substantial while opposing one another. A small sum therefore does not establish that both inputs have become small or that either source has stopped oscillating.
+At its narrowest, the sum can conceal substantial movement in both sources. We have met a quietness that does not require either part to rest. Looking only at the result, what might we conclude about what produced it?
 
-The lower row combines the two values at each sampled position and moment. When the sources are near alignment, their contributions reinforce. As their phases drift apart, they increasingly cancel; later they approach alignment again. The slow pulse belongs to this changing relationship. It is not a third independent source secretly supplying a new rhythm.
+Move the frequencies closer. The next broadening takes longer to arrive. The readout gives their absolute difference as the beat rate. Two quick returns have made a small difference slow enough to follow. At equal frequencies, this display's initially aligned waves reinforce each other without the same slow beating.
 
-The beat readout gives the absolute difference between the two frequencies. This makes a small difference conspicuous in another form: two individually quick oscillations reveal their separation through a slow envelope. The lower row is drawn at half the raw sum's height so it fits the display, so compare the pattern rather than measuring the amplitudes with a ruler.
+The lower row is labelled `(A+B)/2`. Half the calculated height has been allowed into the drawing so it fits. A row that appears no larger than either source can represent their doubled value. The label lets us recover a distinction the arrangement might otherwise hide.
 
-Try predicting how the envelope will change before moving one control. Then reverse which source has the higher frequency. The absolute difference can remain the same even though you have exchanged the roles of A and B.
+Air Music let two voices begin at different moments. Here the relation is visible and silent. We can stay with the place where the sum almost disappears, then watch it grow again. Neither source needed to stop and start again for that return to happen.
 
 <!-- @ -->
 
-This display does not generate an audible beat. Elsewhere in the hall, the paired red and blue steps give sine and cosine another body. Their quarter-turn difference sets two rows at different heights; here the question of where a curve lies can become a question of where support will be.
+Elsewhere, red and blue steps give sine and cosine places a body might stand. The glowing figure gives oscillations separate spatial coordinates. These parts have been assembled differently: added on one axis, offered as support, or distributed across three axes.
 
-The glowing figure across the hall combines two oscillations the other way: one across, one up, instead of both on one row. A ratio of one to one draws the circle you followed in the unit-circle room, sine against cosine; three to two, a knot that closes; one to the golden ratio, a curve that never returns to its start however long you wait. The rows made a slow pulse from a pair; the same pair set at right angles makes a shape.
+For fixed phases, a rational relation between frequencies can close the figure. An ideal irrational relation does not exactly repeat. Our finite drawing cannot demonstrate “never”, however long we wait beside it.
 
-At the synthesis lab, you will change the contributions of several harmonics and ask how their sum can acquire a shape that no single component has.
+At the next bench, five smooth returns make a shape that none has alone. We will be able to change how much each contributes, and keep a combination we want to find again.

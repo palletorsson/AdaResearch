@@ -92,7 +92,7 @@ What returned depends on what you were following.
 
 Turn a square a quarter of a turn and it is the same square, corner for corner. Turn it an eighth and it is not. The turns that change nothing are a form's symmetry, and they are the part of rotation this chapter cares about most: not where a thing ends up, but which turns bring it home. A square comes home under four. And this is not only a fact about shapes. When physics asks what a particle is, one of the answers is how many turns it takes to come home, and there are particles that need two. How many turns a thing needs is a number physics gives to every particle, and it calls that number spin. It is sameness of form, taken as far as it goes.
 
-![The same cube at zero and ninety degrees, photographed from the same viewpoint. Its outline returns; the marked face moves.](/book-review/doc/book/iterations/2026-09-23-rotation-return-and-sweep/marked-return.png)
+![The same cube at zero and ninety degrees, photographed from the same viewpoint. Its outline returns; the marked face moves.](/book-images/iterations/2026-09-23-rotation-return-and-sweep/marked-return.png)
 
 *Two paused moments from one place. The mark moves from the left-hand face to the right.*
 
@@ -102,7 +102,7 @@ Pause. Part of the cylinder is empty. It describes the outside of all the positi
 
 Change **SHAPE** to the triangle. Its upright edge lies on the axle. As the face turns, the wide bottom sweeps a circle and the sloping edge describes a cone. Hide the boundary and follow the sweep with your eyes; bring it back. The outline helps you keep a whole turn in view. It has made no new solid wall.
 
-![The rotating cube inside its cylindrical boundary and the triangular face inside its conical boundary.](/book-review/doc/book/iterations/2026-09-23-rotation-return-and-sweep/spaces-of-a-turn.png)
+![The rotating cube inside its cylindrical boundary and the triangular face inside its conical boundary.](/book-images/iterations/2026-09-23-rotation-return-and-sweep/spaces-of-a-turn.png)
 
 *In this earlier colour study, the contours describe full turns. Each solid body is paused in one position. The museum now shows these studies in grayscale.*
 

@@ -12,7 +12,7 @@ Look back from the margin. A pink line keeps the walk you have just made. Move a
 
 The trail holds when you leave the patch; entering again begins another attempt. Changing HEIGHT or using RESET clears it too. We keep a short memory of movement on this ground, rather than asking an old crossing to describe a new surface. The line is made from sampled positions, joined and laid on the mesh. It remembers a passage without keeping a whole body.
 
-![A pink record of a walk beside the gold proposed route](/book-review/doc/book/figures/Noise_Space_10/walked-route.png)
+![A pink record of a walk beside the gold proposed route](/book-images/figures/Noise_Space_10/walked-route.png)
 
 *The gold line proposes a crossing. The pink line keeps the body’s sampled passage, including its sidestep.*
 
@@ -66,7 +66,7 @@ Look closely at a ridge. Becoming small has not added any detail to the noise. T
 
 The little pink frame beneath the RETURN beacon is your way back. Walk through it to regain your previous size on the steady margin. We can return and compare. The small body does not have to become a permanent condition of finding out.
 
-![The same noise terrain seen from the miniature visitor's eye height](/book-review/doc/book/figures/Noise_Space_10/small-surface.png)
+![The same noise terrain seen from the miniature visitor's eye height](/book-images/figures/Noise_Space_10/small-surface.png)
 
 *One field, another body. Enter through SMALLER; the small pink RETURN doorway restores your size.*
 

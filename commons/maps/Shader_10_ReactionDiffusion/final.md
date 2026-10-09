@@ -24,7 +24,7 @@ And it is green edge to edge because it is never given what it drew. The hall's 
 
 Suppose the hall did hand it its own picture. From the white start the two quantities would decay evenly, everywhere at once, and within about a hundred frames the square would be red and stay red.[^uniform] A rule fed its past can still do nothing if the past has no difference in it anywhere. Give it a difference, a few cells of the second quantity in the middle of a field of the first, and feed it back, and it does what the figure shows.
 
-![The hall's rule handed its own last frame: a ten-cell seed on a 256 by 256 field at feed 0.055 and kill 0.062, at the shader's diffusion rates and at the standard ones](/book-review/doc/book/figures/shaders/what-the-rule-would-do.png)
+![The hall's rule handed its own last frame: a ten-cell seed on a 256 by 256 field at feed 0.055 and kill 0.062, at the shader's diffusion rates and at the standard ones](/book-images/figures/shaders/what-the-rule-would-do.png)
 
 *The rule in the shader, ported and fed its own output. Top row: with the diffusion rates written in the shader, 0.16 and 0.08, the seed sits and never spreads, two tenths of a per cent of the field at two hundred frames and still at twelve thousand. Bottom row: at the rates this rule is usually run at, 1.0 and 0.5, the same feed and kill grow a coral that covers three tenths of the field after six thousand frames.*
 

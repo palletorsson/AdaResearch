@@ -12,7 +12,7 @@ The larger field beside the desk changes with it. An orange outline marks the sa
 
 NEXT TILE moves a small outline through the samples. Beside it, the rule works out what happens at that address. At [1, 0], the added turn is one quarter-turn; at [2, 0], it is two. Undo the instruction and those differences disappear together. NEXT RULE offers another small alteration: exchange black and white, reflect a column, shift a row. ONE EXCEPTION lets the change stay at one address. A local edit and a rule repeated everywhere need not have the same reach.
 
-![The four-by-four rule study inside the museum, with unchanged and changed samples beside the instruction.](/book-review/doc/book/iterations/2026-09-28-tiling-rule-study/floor-rule-after.png)
+![The four-by-four rule study inside the museum, with unchanged and changed samples beside the instruction.](/book-images/iterations/2026-09-28-tiling-rule-study/floor-rule-after.png)
 
 *The same tile before and after adding an address-dependent quarter-turn. The marked address can be followed through all sixteen places. The larger floor field uses the same calculation.*
 
@@ -34,7 +34,7 @@ The `%` sign gives the remainder after division. As these non-negative counts in
 
 Now look at ONE EXCEPTION. Initially it repeats the translation field. Press EXCEPTION. One cell turns an extra quarter turn; the other five fields stay as they were. From a distance it might look like a direction, an error, an opening. Come closer. The same square is still here, turned once more than its neighbours.
 
-![Six black and white fields generated from one diagonal tile: translation, alternation, quarter turns, reflection, shifted rows and one exception.](/book-review/doc/book/iterations/2026-09-23-tiling-underfoot/one-motif-six-relations.png)
+![Six black and white fields generated from one diagonal tile: translation, alternation, quarter turns, reflection, shifted rows and one exception.](/book-images/iterations/2026-09-23-tiling-underfoot/one-motif-six-relations.png)
 
 *The six images used by the floor artifact, shown face-on for comparison. The source orientation is the same in all six; EXCEPTION is switched on in the last field. The little square at the top is their source motif.*
 

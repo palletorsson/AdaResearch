@@ -6,7 +6,7 @@ Behind us, a number found a height in a wall. An opening moved, and the view cha
 
 Three marble columns stand in the east half of the room. Their shafts come from the same recipe, at the same resolution. The plates at their feet say nothing yet. The little instrument between the silhouettes offers ways to look; it leaves the names until you ask. Stand where you can see all three at once and watch for a while before you press anything.
 
-![Three columns inside the museum, viewed from the standing approach before their drivers are revealed.](/book-review/doc/book/figures/Noise_Columns/three-columns.png)
+![Three columns inside the museum, viewed from the standing approach before their drivers are revealed.](/book-images/figures/Noise_Columns/three-columns.png)
 
 One silhouette holds. The other two rise and sink. There may be a familiar movement among them, something the wave halls have already taught your body to expect. Choose one to follow. When it comes back, keep watching. Does the return arrive after the same interval?
 

@@ -30,7 +30,7 @@ Your controller is a different receiver. Its requested walking speed is multipli
 
 One visible medium contains two implementations. The fact that both seem slower is a beginning for comparison, not proof that they share a mechanism.
 
-![Standing inside the coloured walking passage in the Kinetic Forces hall](/book-review/doc/book/figures/forces/inside-the-passage-museum.png)
+![Standing inside the coloured walking passage in the Kinetic Forces hall](/book-images/figures/forces/inside-the-passage-museum.png)
 
 *The cubes cross the strips; the walking passage runs through them. A cube receives a force. The stick receives a change to its requested speed.*
 

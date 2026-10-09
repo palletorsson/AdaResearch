@@ -12,7 +12,7 @@ The cabinet stands in the middle of the hall, its controls facing you as you app
 
 Press PAUSE. Watch what keeps moving. The beads already released continue to fall. The plate beside the histogram counts them as “in flight” until they land; only the issuing of new draws has stopped. Wait for that count to reach zero. The histogram is now still enough to describe. Where is its highest bar? Where are its gaps? Which of those observations had the word “Gaussian” encouraged you to expect?
 
-![The sampler’s numerical record stands beside its histogram, above the compact controls.](/book-review/doc/book/figures/randomness/sampler-visible-record.png)
+![The sampler’s numerical record stands beside its histogram, above the compact controls.](/book-images/figures/randomness/sampler-visible-record.png)
 
 CLEAR empties the display and restarts its named seed. While paused, it stays empty. Press BATCH. One hundred values are counted immediately, without the falling animation. Describe this particular arrangement. Press twice more, reading the total each time. A gap may close; another bar may fall further short of the pale bar behind it. More evidence does not promise that every part of the picture will improve at the next press.
 

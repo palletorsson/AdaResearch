@@ -39,7 +39,7 @@ Walk around the desk and continue beside the supported displays. The earlier exa
 
 The helix is especially useful to look at twice. Its radius grows by phi over a full turn. A curve usually called a golden spiral grows by phi over a quarter turn. A familiar colour and a persuasive title would not make those constructions identical. The plate names what this source actually draws.
 
-![Plan view of the hall's helix, a golden spiral from the same start, and the rectangle's chain of quarter circles](/book-review/doc/book/figures/fractals/helix-against-golden-spiral.png)
+![Plan view of the hall's helix, a golden spiral from the same start, and the rectangle's chain of quarter circles](/book-images/figures/fractals/helix-against-golden-spiral.png)
 
 *Left: one full turn from the same start. The hall’s helix grows by phi over the whole turn; a golden spiral grows by phi over each quarter. Right: the rectangle’s arcs, quarter circles of fixed radius, one per square. The hall draws the first and the third; the second exists nowhere in the room.*
 

@@ -66,7 +66,7 @@ VERTEX += direction * UV.x * UV.y * relief_depth;
 
 Each vertex has a direction from the centre. `UV.x` carries the sampled noise value; `UV.y` carries a weight that fades the change near the floor and openings. `relief_depth` allows up to 0.8 metres of displacement. One hollow recedes; another part of the wall comes towards you. The yellow ring follows that changing surface while still naming the same direction.
 
-![Inside the enclosing sphere with vertex relief enabled](/book-review/doc/book/figures/Noise_Inside_Noise/vertex-relief.png)
+![Inside the enclosing sphere with vertex relief enabled](/book-images/figures/Noise_Inside_Noise/vertex-relief.png)
 
 *The small body and the room receive the same field. Its values now give the enclosing surface depth.*
 

@@ -10,7 +10,7 @@ There are twelve sheets, staggered across the floor. Some turn away from the oth
 
 A desk waits to one side. Two more places to work are scattered among the partitions. Sit in imagination, or stand beside a chair and look back through the colours. How much of this office could you call your own without being able to close it?
 
-![Looking through the overlapping colour planes in the museum office.](/book-review/doc/book/iterations/2026-10-01-office-open-colour/layers-glass.png)
+![Looking through the overlapping colour planes in the museum office.](/book-images/iterations/2026-10-01-office-open-colour/layers-glass.png)
 
 *The overlap changes with your position. The panes and the gaps remain still.*
 
@@ -34,7 +34,7 @@ Find a gap between the panes and leave the office. At the smaller models, find t
 
 You have been walking through an arrangement of coloured space. These models arrange colour values in space. In the cube, increasing the red channel moves a sample along one axis. Green and blue have their own directions. A colour has become an address again, but the address now comes from the colour itself.
 
-![The museum’s RGB cube and HSV cylinder, each displaying five hundred colour samples.](/book-review/doc/book/iterations/2026-09-28-walls-a-view-from-inside/colour-coordinates.png)
+![The museum’s RGB cube and HSV cylinder, each displaying five hundred colour samples.](/book-images/iterations/2026-09-28-walls-a-view-from-inside/colour-coordinates.png)
 
 *RGB channels become three straight directions. In HSV, hue goes around, saturation moves outward and value changes height.*
 
@@ -55,7 +55,7 @@ At the next bench, red and blue mark the ends of a row of sixteen small cubes. F
 
 The middle changes. The agreement about where to begin and end did not decide how to travel.
 
-![The same sixteen gradient cubes between red and blue in RGB and HSV modes.](/book-review/doc/book/iterations/2026-09-23-walls-view-and-passage/same-endpoints.png)
+![The same sixteen gradient cubes between red and blue in RGB and HSV modes.](/book-images/iterations/2026-09-23-walls-view-and-passage/same-endpoints.png)
 
 *The endpoints remain red and blue. Changing the interpolation changes the colours encountered between them.*
 

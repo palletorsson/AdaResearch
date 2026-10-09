@@ -16,7 +16,7 @@ return (x+z+phase)%2
 
 Start playback, then change SPEED. The same two arrangements can alternate slowly or quickly. The square you chose keeps its place through both. Cross the floor and let your movement meet the returning pattern.
 
-![The same checker floor before and after one step, seen from a fixed viewpoint.](/book-review/doc/book/figures/Tutorial_Disco/fixed-addresses-changing-values.png)
+![The same checker floor before and after one step, seen from a fixed viewpoint.](/book-images/figures/Tutorial_Disco/fixed-addresses-changing-values.png)
 
 *One step apart. Every tile keeps its place; black and white exchange addresses. Another step brings this checker back.*
 
@@ -26,7 +26,7 @@ After SNAKE comes SUPER TRIANGLE. The diagonal tile from the earlier halls retur
 
 Press HOLD during a turn. The floor keeps that unfinished arrangement. ONE STEP takes it to the next pose. The square joints still mark the old addresses, though your eye can join the triangles into another figure. How large is the thing you are following: one tile, four, the floor? The array supplies places to change; it does not tell us where a figure must end.
 
-![Six black and white triangle combinations on the same museum floor.](/book-review/doc/book/figures/Tutorial_Disco/triangle-combinations.png)
+![Six black and white triangle combinations on the same museum floor.](/book-images/figures/Tutorial_Disco/triangle-combinations.png)
 
 *Six moments in the same movement. The triangles turn and gather into larger figures; the floor beneath the foot stays level.*
 

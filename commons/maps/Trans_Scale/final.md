@@ -42,7 +42,7 @@ Find the little door again. It was forty-five centimetres wide and sixty high. N
 
 Just beyond it stands a second gold frame, also 1.8 metres wide and 2.4 high. Pass through that one too. It stood at this size before you took the bottle.
 
-![The tiny gold doorway and its enlarged version viewed from the same standing height and distance.](/book-review/doc/book/iterations/2026-09-23-scale-door-and-body/door-and-body.png)
+![The tiny gold doorway and its enlarged version viewed from the same standing height and distance.](/book-images/iterations/2026-09-23-scale-door-and-body/door-and-body.png)
 
 *The camera stays 1.65 metres above the floor and 2.5 metres from the opening in both views. On the right, the second gold frame beyond the doorway has stayed at its original size.*
 

@@ -12,7 +12,7 @@ Move the outline away. Your colour stays behind, now one square among the others
 
 The white outline has travelled. Your exception has not followed it.
 
-![A pink edit stays at address (10,10) through selection changes and is replaced when RULE runs.](/book-review/doc/book/iterations/2026-09-28-grid-a-colour-left/an-address-keeps-colour.png)
+![A pink edit stays at address (10,10) through selection changes and is replaced when RULE runs.](/book-images/iterations/2026-09-28-grid-a-colour-left/an-address-keeps-colour.png)
 
 *Write, leave, return, rewrite. The pink square keeps its colour while the white outline moves. RULE replaces that value; the same cube still supports you.*
 

@@ -52,9 +52,9 @@ Near the entrance, PAUSE / RESUME holds the floor where it is. Pause after a cha
 
 An empty slot was something we could point to. Underfoot, absence asks something of our balance. The address remains available to the program even when it no longer offers our feet a place to rest.
 
-![The hall’s floor after cells have been copied and consumed.](/book-review/doc/book/figures/Array/museum-floor-changed.png)
+![The hall’s floor after cells have been copied and consumed.](/book-images/figures/Array/museum-floor-changed.png)
 
-![The same floor after restoration, seen from the same position.](/book-review/doc/book/figures/Array/museum-floor-restored.png)
+![The same floor after restoration, seen from the same position.](/book-images/figures/Array/museum-floor-restored.png)
 
 *The same part of the working museum, seen from standing height before and after RESTORE FLOOR. These views hold a supplied set of copy and consume operations for comparison.*
 
@@ -68,7 +68,7 @@ Turn a little. Translate a little. Change the scale. These are the operations we
 
 Watch one of the small grey points. Its surrounding frames can drift away, but the point stays at the indexed site. The address gives us somewhere to return and something to disagree with. How far can the frames depart before you lose the place you were following?
 
-![One layer of ordered nested cubes, the same sites with translation, rotation and scale, then all four layers seen at an angle.](/book-review/doc/book/iterations/2026-09-23-array-molnar-volume/array-departures.png)
+![One layer of ordered nested cubes, the same sites with translation, rotation and scale, then all four layers seen at an angle.](/book-images/iterations/2026-09-23-array-molnar-volume/array-departures.png)
 
 *The same working Godot artifact supplies these three views. Sixteen visible sites become sixty-four when all four layers are shown; each holds four nested cubes. An Ada Research spatial interpretation after Molnár.*
 

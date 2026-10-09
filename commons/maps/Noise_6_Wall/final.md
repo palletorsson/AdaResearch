@@ -12,7 +12,7 @@ Press DRESS without leaving the room. Grey takes the place of pink around you. Y
 
 We have changed what the surface offers the eye. The wall's vertices and the shapes your body collides with have stayed put. This distinction is useful precisely because the surface can be so persuasive. You might still walk differently towards a dark patch, or hesitate before something that looks deep. What your body can cross and what you imagine crossing need not arrive together.
 
-![The four grey windows and their controls inside the pink noise room.](/book-review/doc/book/figures/Noise_6_Wall/inside-controls.png)
+![The four grey windows and their controls inside the pink noise room.](/book-images/figures/Noise_6_Wall/inside-controls.png)
 
 *The small windows keep their different counts while the room wears the chosen sum. The doorway remains in place when the finish changes.*
 

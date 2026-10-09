@@ -2,20 +2,24 @@
 
 What remains composed when the next event is left to chance?
 
+After the turning columns, an entrance arrives without their promise of a regular return. The clock still matters. What it measures no longer has to repeat.
+
 <!-- @john_cage_tech_noir -->
 
-Let the soundscape load, then listen long enough to separate a continuous layer from intermittent events. Count a few entrances without trying to force them into a regular beat. On a second listening, attend to the intervals rather than to the events themselves.
+Let the soundscape load. A continuous layer stays with you; other sounds enter and leave. Count a few entrances without trying to force them into a regular beat. Then listen to the intervals instead. An interval can become the part you are waiting for.
 
-The background can remain recognisable while particular sounds arrive differently. There is a difference between not knowing which event comes next and hearing something the system has no means to produce. Listen for the vocabulary that persists through the variation: the kinds of sound available, their textures and their recurring relationships to the drone.
+The background remains recognisable while particular sounds arrive differently. There is a difference between not knowing which event comes next and hearing something the system has no means to produce. Listen for the vocabulary that persists: a texture, an attack, a relation to the drone. An unexpected entrance can bring a familiar sound.
 
-For one listening interval, attend only to whether the background continues beneath an event. For the next, attend to how the event begins and fades. A sound can arrive unexpectedly while retaining a recognisable envelope or texture. If a related sound returns, compare what seems shared and what differs without assuming it is exactly the same prepared variation. Then leave an event uncounted and listen to what remains around it. This gives you several ways to hear organisation even when the entrances resist a regular pulse. Your attention supplies a repeatable listening task, although the generator does not promise to repeat the same sequence for you.
+The composition prepares a collection of generated sounds, including several variations of each effect type. It then chooses among them. Before chance makes its first selection, someone has decided what belongs in the collection. The program can surprise that person without acquiring a sound they never gave it the means to make.
 
-The composition prepares a collection of generated sounds, including variations of several effect types, then makes choices about their playback. Randomness operates within that prepared collection. The program has already decided what can be selected and has supplied the rules that govern selection. Chance changes the sequence without escaping its frame.
+Listen once for the background beneath an event, then for the event's beginning and decay. Leave the next entrance uncounted. Your attention supplies a repeatable task, although the live generator does not promise to repeat the sequence for you.
 
-The luminous forms respond to sound activity, but looking at them does not reveal every scheduling choice. The listening experiment also does not depend on treating them as physically located sources whose volume you can mix by walking around. Give the sound itself time to disclose its layers.
+The luminous forms respond to sound activity. They do not reveal every scheduling choice, nor are they separate sources whose balance you can mix by walking between them. The room gives sound a visible company. The relation still needs listening.
 
-Try deciding that an interval is the part you are waiting for. This changes your listening without changing the generator. A version that admitted sounds recorded from visitors or the surrounding room would change the available vocabulary; that remains a proposed extension.
+Beside this live composition, the tutorial keeps six choices and their times. You can see what will come, then hear it again. The second performance may cease to surprise you. The record has not changed; your relation to it has. Bernini left a turn in a column when its movement stopped. Here the event list remains when its sounds have ended.
+
+Chance alone does not open the collection. Admitting a visitor's recording would alter what could enter, as well as raising another question: whose sounds would we keep? That is a possible extension, not something this installation already does.
 
 <!-- @ -->
 
-The room's title offers a reference, not a claim to perform a particular John Cage score. Its concrete question is about authorship inside a chance procedure. In Air Music, a strike will supply a more direct beginning: you will choose when an oscillation starts and hear what continues after your contact ends.
+The room's title offers a reference, not a claim to perform a particular John Cage score. Its question is about authorship inside a chance procedure. In Air Music, a strike will supply a more direct beginning. You will choose when an oscillation starts and hear what continues after your contact ends.

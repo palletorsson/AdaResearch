@@ -14,7 +14,7 @@ Press PM. Look at the floor, then back at the source buttons. Press P1 and retur
 
 Now press FLIP X. Watch the source this time. Its blue corner crosses to the other side. Both wall fields respond, although their rules remain P1 and PM. One reversal left the painted cells alone; the other has rearranged them. The little grid is where you can tell them apart.
 
-![The same pair of museum panels before and after flipping their shared source.](/book-review/doc/book/iterations/2026-09-28-pattern-a-facing-return/source-pair.png)
+![The same pair of museum panels before and after flipping their shared source.](/book-images/iterations/2026-09-28-pattern-a-facing-return/source-pair.png)
 
 *FLIP X changes the little source and both fields. The left field continues to translate; the right continues to reverse alternate columns.*
 

@@ -38,7 +38,7 @@ The third component is zero: these drawings remain planar inside a three-dimensi
 
 Try to match every blue fork to a green one. The correspondence is unusually dependable. With the same angle, exchanging x and y at every step reflects the entire construction across the diagonal x = y, relative to its origin. It preserves lengths, angles between segments and which branches connect. A reflection can overturn our expectation of uprightness while retaining this much structure. It is not simply a ninety-degree rotation; follow an off-axis branch to see the difference.
 
-![The green reading and the blue READ F reading of the same sentence at TREE, drawn from the rule, with the diagonal x = y through their shared origin](/book-review/doc/book/figures/lsystems/believing-turtle-reflection.png)
+![The green reading and the blue READ F reading of the same sentence at TREE, drawn from the rule, with the diagonal x = y through their shared origin](/book-images/figures/lsystems/believing-turtle-reflection.png)
 
 *Both readings drawn from the rule at generation two: 172 symbols, 64 segments each, 25 degrees, a 0.32-metre stride. The blue one is the green one reflected across the dashed diagonal; every fork has its counterpart.*
 

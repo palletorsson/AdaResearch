@@ -43,7 +43,7 @@ Now leave the joints where they are. Find the turquoise collar beside the left h
 
 The line that used to end at the hand now ends at the head. The body still has thirteen joints and twelve connections. Not one point needed to move.
 
-![The starting body, the connection rerouted to the head, and the elbow end brought to the hand](/book-review/doc/book/figures/postfoundationscrisis/rerouted-connection-three-states.png)
+![The starting body, the connection rerouted to the head, and the elbow end brought to the hand](/book-images/figures/postfoundationscrisis/rerouted-connection-three-states.png)
 
 *One connection, rerouted twice, drawn from the assembly file. Amber joints, straw lines; the changed line in the turquoise of the final hall. No joint moves in any of the three.*
 

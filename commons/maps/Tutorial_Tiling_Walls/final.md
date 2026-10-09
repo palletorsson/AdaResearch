@@ -10,7 +10,7 @@ Near the entrance, a tall chart resembles the one used to test eyesight. Its mar
 
 Cycle NEXT RULE beside the chart. All the marks change together, and the desk shows the instruction responsible. APPLY / UNDO returns them to plain repetition. Stay with one rule and move closer, then back. Where can you still follow an individual turn? Where do the squares begin to gather into texture? The instruction remains exact at a distance where its work becomes difficult to read.
 
-![A pattern eye chart inside the wall hall, repeating one four-by-four arrangement at five decreasing sizes.](/book-review/doc/book/iterations/2026-09-28-tiling-rule-study/wall-eye-chart.png)
+![A pattern eye chart inside the wall hall, repeating one four-by-four arrangement at five decreasing sizes.](/book-images/iterations/2026-09-28-tiling-rule-study/wall-eye-chart.png)
 
 *Twenty-five copies of the same sample. A new rule changes them together; moving your body changes how much of each one you can distinguish.*
 
@@ -40,7 +40,7 @@ From here the panel is almost nothing. A thin sheet, a hinge, the plain reverse 
 
 The two turns have done different work. EXCEPTION changed an orientation inside the image. TURN WALL moved the surface and the collision shape that travels with it. The first changed what we could read; the second changed where we could go.
 
-![The patterned wall closed and turned open, seen from the same position.](/book-review/doc/book/figures/Tutorial_Tiling_Walls/two-turns.png)
+![The patterned wall closed and turned open, seen from the same position.](/book-images/figures/Tutorial_Tiling_Walls/two-turns.png)
 
 *The same pattern, on the same sheet. Left: a tile has turned, but the wall is still closed. Right: the sheet has turned through a quarter turn, opening onto the landing.*
 

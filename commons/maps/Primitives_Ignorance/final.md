@@ -63,7 +63,7 @@ A crowded equator can belong to a sparsely divided body. One figure has a broad 
 
 A mathematical sphere consists of points at a fixed distance from a centre. The mesh joins sampled positions with flat triangles. Adding triangles can improve that approximation; no finite collection of flat patches acquires the sphere's continuous curvature. Shading can soften their appearance while the polygonal outline remains.
 
-![The existing high, middle and low sphere artifacts in matched views: triangle edges visible above, hidden below. Each column keeps the same mesh.](/book-review/doc/book/figures/Primitives_Ignorance/sphere-visible-construction.png)
+![The existing high, middle and low sphere artifacts in matched views: triangle edges visible above, hidden below. Each column keeps the same mesh.](/book-images/figures/Primitives_Ignorance/sphere-visible-construction.png)
 
 *The lower row keeps every triangle in the upper row. The lines disappear; the construction remains.*
 
@@ -101,7 +101,7 @@ The thing that refuses the ideal is not outside the set. It is in the standard k
 
 This gives ignorance another direction: a limit in our expectation becomes somewhere to look. The same small set of instructions that confines the form can make more available than we first knew to ask of it.
 
-![The five-segment capsule raised on eight cylinders, with resolutions four through eleven.](/book-review/doc/book/iterations/2026-09-27-ignorance-courtyard/five-on-four-to-eleven.png)
+![The five-segment capsule raised on eight cylinders, with resolutions four through eleven.](/book-images/iterations/2026-09-27-ignorance-courtyard/five-on-four-to-eleven.png)
 
 *The capsule keeps its five divisions. The pedestal changes the attention we give them.*
 

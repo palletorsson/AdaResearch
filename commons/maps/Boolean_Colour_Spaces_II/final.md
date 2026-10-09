@@ -8,7 +8,7 @@ A torus has been taken from the block. The removed ring leaves a corridor around
 
 The amber surface folds light into the bend. Ahead, a shaft opens the ceiling. You can see the brightness before you stand beneath it. The core keeps part of the room from view; walking supplies what the first glance cannot.
 
-![The amber passage turns around the remaining core.](/book-review/doc/book/iterations/2026-09-24-boolean-more-spaces/ring-inside.png)
+![The amber passage turns around the remaining core.](/book-images/iterations/2026-09-24-boolean-more-spaces/ring-inside.png)
 
 *Native Godot view. The core remains solid; both sides carry a passage.*
 
@@ -18,7 +18,7 @@ In the next room, two cylindrical cuts cross at the height of the body. Their me
 
 Pink and blue run across the junction. From here, one opening frames another space; another faces the ground outside. The cut has made room, but it has also made a relation between rooms. Leaving through the side changes which one you approach next.
 
-![Crossing passages beneath a pearl-coloured vault.](/book-review/doc/book/iterations/2026-09-24-boolean-more-spaces/cross-inside.png)
+![Crossing passages beneath a pearl-coloured vault.](/book-images/iterations/2026-09-24-boolean-more-spaces/cross-inside.png)
 
 *The horizontal cuts admit a walk. The higher cuts admit views and light.*
 
@@ -28,7 +28,7 @@ The third passage has flat faces. Three box-shaped cutters lean in alternating d
 
 Dark reflective surfaces make the edges difficult to follow at first. Pink lines continue across some of them. Select CHALK at the entrance and look again: the construction becomes easier to separate from the shimmer, though the cuts have not changed.
 
-![The inclined faces of the third passage.](/book-review/doc/book/iterations/2026-09-24-boolean-more-spaces/fold-inside.png)
+![The inclined faces of the third passage.](/book-images/iterations/2026-09-24-boolean-more-spaces/fold-inside.png)
 
 *Alternating planar cuts make an angular enclosure above the shared level floor.*
 

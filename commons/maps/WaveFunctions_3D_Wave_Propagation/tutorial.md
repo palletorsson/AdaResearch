@@ -4,7 +4,7 @@
 
 - Neighbour coupling through displacement differences.
 - One old state and a separate next state.
-- A disturbance travelling through a finite arrangement.
+- Propagation through coupling, distinguished from phase-delayed animation.
 - Boundary points with fewer neighbours.
 
 In the museum, find the lattice of small spheres. Press SINE to select PULSE. The centre receives one push after half a second. Follow a nearby sphere. Now press COUPLED to select INDEPENDENT: the trial restarts, but that neighbour stays still. Restore COUPLED and watch again. The source repeats the same action; the links change what can receive it.

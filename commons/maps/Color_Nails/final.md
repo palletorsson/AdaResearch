@@ -10,7 +10,7 @@ Find the movable point in the RGB box on its open plinth beside the manicure tab
 
 Look up at the giant nails, then down at the petite hand on the table. Both answer the same choice. A movement small enough for your hand to make crosses two very different scales. Does the colour feel equally delicate on both?
 
-![The giant hand and the petite hand on the manicure table, seen from inside the museum salon.](/book-review/doc/book/figures/Color_Nails/salon-red.png)
+![The giant hand and the petite hand on the manicure table, seen from inside the museum salon.](/book-images/figures/Color_Nails/salon-red.png)
 
 Raise the hand you are choosing with and turn its nails toward you. Compare them with the petite hand, the giant nails and the swatch. The colour has reached the hand you use to choose it. What seemed like dressing an object now includes the body doing the dressing.
 

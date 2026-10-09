@@ -14,11 +14,11 @@ Press **SURROUNDS** to give both targets the same grey background. Seen straight
 
 The two targets and the connector are assigned `Color(0.5, 0.5, 0.5)`. This comparison draws them without lighting-dependent shading. The controls change the backgrounds and whether the connector is shown. Numerical equality is something we can inspect in the program. It does not oblige every viewer, display or viewing situation to produce the same experience.
 
-![Equal target values against dark and light surrounds inside the museum](/book-review/doc/book/figures/tiling/contrast-neighbours-museum.png)
+![Equal target values against dark and light surrounds inside the museum](/book-images/figures/tiling/contrast-neighbours-museum.png)
 
 *One grey value, two different surrounds.*
 
-![The same comparison after making both surrounds grey](/book-review/doc/book/figures/tiling/contrast-equal-museum.png)
+![The same comparison after making both surrounds grey](/book-images/figures/tiling/contrast-equal-museum.png)
 
 *The surrounds now match the targets. Their faces nearly disappear; the raised squares remain.*
 

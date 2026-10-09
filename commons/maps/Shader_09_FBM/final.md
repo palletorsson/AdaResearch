@@ -28,7 +28,7 @@ float height_at(vec2 p, float t) {
 
 Three sines, from the halls of wave functions; one value noise, from the halls you have just left; and a sum. The water keeps no state. There is no wave that was here a moment ago and has moved on. There is this frame's answer at this point, and the next frame's. If the clock stopped, the water would freeze, and when it started again the water would not resume: it would be wherever the clock said.
 
-![The 7 by 3 m surface at t = 0 seen from above, and a section along the pool showing the glass lid, the mean surface and the pool floor](/book-review/doc/book/figures/shaders/basin-section-under-the-glass.png)
+![The 7 by 3 m surface at t = 0 seen from above, and a section along the pool showing the glass lid, the mean surface and the pool floor](/book-images/figures/shaders/basin-section-under-the-glass.png)
 
 *Left: the surface at t = 0 from above, height in centimetres under the glass, computed from a port of the shader. Right: a section along the pool at three moments; the crests stay twenty-four centimetres below the lid. Amplitude 0.05, wavelength 1.6 m, speed 0.8 m/s, noise share 0.35: the map's values.*
 

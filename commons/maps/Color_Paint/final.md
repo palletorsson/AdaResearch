@@ -16,7 +16,7 @@ Release the trigger. Your marks stop arriving while the other painter continues.
 
 Which part of the image can you still call yours?
 
-![Spray cans beside the shared canvas, with light and dense passes, overspray and a narrow paint run.](/book-review/doc/book/iterations/2026-09-28-paint-aerosol-and-runs/shared-aerosol.png)
+![Spray cans beside the shared canvas, with light and dense passes, overspray and a narrow paint run.](/book-images/iterations/2026-09-28-paint-aerosol-and-runs/shared-aerosol.png)
 
 *The moving hand, the waiting hand. Distance spreads the colour; speed changes how much arrives in one place. A close, lingering spray can leave a run.*
 

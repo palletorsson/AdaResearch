@@ -125,7 +125,7 @@ Pick one up. Arrivals wait while either cube is held. Release it and the waiting
 
 Beside the podium, five cutout profiles recede into the room. Their uneven horizons sit around eye height, 1.7 metres. The nearest is dark; those behind grow lighter. Move sideways and watch one contour uncover another. A landscape appears between flat panels.
 
-![The waiting podium and its five receding profiles, photographed from inside the museum.](/book-review/doc/book/figures/randomness/waiting-and-seeing.png)
+![The waiting podium and its five receding profiles, photographed from inside the museum.](/book-images/figures/randomness/waiting-and-seeing.png)
 
 Each panel joins seventeen heights. The two ends are fixed; the interior samples vary, with smaller permitted deviations near the edges. PROFILE changes the contours. The nearest, darkest panel shares the podium's seed, so until you press PROFILE its fifteen interior heights trace the first fifteen drawn cube delays, the ones REPLAY brings back, flattened toward its ends. Read that ridge from the end nearest the podium: a point above the level of the fixed ends stands for a wait longer than 0.8 seconds. The panels behind it are separate draws, and so is every contour after PROFILE. Here you can look back and forth along the sequence. At the podium you had to wait through it. What did seeing the whole shape let you anticipate?
 

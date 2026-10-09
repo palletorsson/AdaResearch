@@ -26,7 +26,7 @@ var new_position = node.position + growth_dir * segment_length
 
 Here `segment_length` is 0.5. The two side requests are at (-2, 3, 0) and (2, 3, 0); the upper request is at (0, 5, 0), measured from the model's root. The first new position is therefore (0, 0.5, 0). The geometry you predicted is the geometry the code builds. The gold construction now shows a decision for the next generation, not a replay of the previous one.
 
-![The root, three pink points, three gold unit directions and the white half-metre step of the opening decision](/book-review/doc/book/figures/proceduralgeneration/first-step-three-requests.png)
+![The root, three pink points, three gold unit directions and the white half-metre step of the opening decision](/book-images/figures/proceduralgeneration/first-step-three-requests.png)
 
 *The opening decision, drawn from the study’s own numbers. Unit directions (−0.55, 0.83), (0.55, 0.83) and (0, 1) sum to (0, 2.66); normalised and scaled by half a metre, the first child sits at (0, 0.5).*
 

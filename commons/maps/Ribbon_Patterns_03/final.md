@@ -8,7 +8,7 @@ The mark has crossed a floor, reflected, slipped along a row and acquired depth.
 
 Choose one of the four paint colours, then touch a square in the small source array. Watch the wall and the skirt together. One address changes; many places answer. **UNDO** brings the earlier source back. We still have the array we learned to read. We have given it somewhere else to arrive.
 
-![The fabric studio and preview dress inside the museum](/book-review/doc/book/figures/tiling/fabric-studio-museum.png)
+![The fabric studio and preview dress inside the museum](/book-images/figures/tiling/fabric-studio-museum.png)
 
 *The small source reaches a flat wall and a skirt. The crown and sleeves keep the look’s own materials.*
 

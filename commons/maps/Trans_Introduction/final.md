@@ -81,9 +81,9 @@ The plank has the same length, the same centre, the same quarter-turn. You have 
 
 At the starting setting, the aligned plank meets the landing edge to edge. Move the bank and a gap opens between their surfaces. The readout measures how far apart they have become.
 
-![The aligned plank meets the landing at BANK +0.00 m.](/book-review/doc/book/figures/Trans_Introduction/bank-edges-meet.png)
+![The aligned plank meets the landing at BANK +0.00 m.](/book-images/figures/Trans_Introduction/bank-edges-meet.png)
 
-![A gap opens beyond the same plank at BANK +1.00 m.](/book-review/doc/book/figures/Trans_Introduction/bank-full-gap.png)
+![A gap opens beyond the same plank at BANK +1.00 m.](/book-images/figures/Trans_Introduction/bank-full-gap.png)
 
 *The same crossing at two bank settings: meeting edges, then a one-metre gap. The plank holds the same quarter-turn in both views. The camera has not moved.*
 

@@ -16,7 +16,7 @@ Remember the fixed columns in Colour, where a saved composition could hold its s
 
 The small glass forge gathers a cloud into something with a head, a torso and two limbs. One hundred and eighty points drift into place while a bar rises and the display announces MAX Q. Stay through another cycle. The body loosens, then returns. What makes its arrival convincing?
 
-![The forge gathers a small body of green points inside the museum](/book-review/doc/book/figures/formfinding/forge-body-museum.png)
+![The forge gathers a small body of green points inside the museum](/book-images/figures/formfinding/forge-body-museum.png)
 
 *The display reaches MAX Q as the points arrive at their authored destinations.*
 

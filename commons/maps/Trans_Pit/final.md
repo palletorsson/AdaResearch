@@ -61,9 +61,9 @@ var current_scale: float = lerpf(min_scale, max_scale, t)
 
 Cosine carries `t` from zero to one and back; `lerpf` places the size between its two limits. All three cubes move from thirty centimetres to three and a half metres on a side, then return together.
 
-![At its smallest, the cube leaves the final door visible down the lane.](/book-review/doc/book/figures/Trans_Pit/growers-small.png)
+![At its smallest, the cube leaves the final door visible down the lane.](/book-images/figures/Trans_Pit/growers-small.png)
 
-![At full size, the same cube fills the view from the same position.](/book-review/doc/book/figures/Trans_Pit/growers-large.png)
+![At full size, the same cube fills the view from the same position.](/book-images/figures/Trans_Pit/growers-large.png)
 
 *The same view at two moments in the cycle. At its smallest, the cube leaves the final door visible beyond it. At its largest, it fills the view. The camera has not moved.*
 
@@ -89,7 +89,7 @@ After the growing cubes, two armoured leaves meet inside a heavy frame. These wa
 
 It moves sideways and up. It turns through a quarter-turn. Then it becomes smaller, drawing its armour into a recess beside the opening. The frame has stayed still. The passage has changed.
 
-![The same door closed, partway through its turn, and fully open with the leaves reduced into their recesses.](/book-review/doc/book/iterations/2026-09-23-moving-boundary/make-room.png)
+![The same door closed, partway through its turn, and fully open with the leaves reduced into their recesses.](/book-images/iterations/2026-09-23-moving-boundary/make-room.png)
 
 *Follow the bright meeting strip through the three views. Each leaf moves, turns and becomes smaller; the frame keeps its place. The opening appears before the whole movement is finished.*
 

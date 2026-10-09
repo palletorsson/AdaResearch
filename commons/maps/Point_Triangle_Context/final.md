@@ -18,7 +18,7 @@ Why triangles, and not squares, or anything else? Because three points always sh
 
 The wall plate holds the distinction still: three points, three connected edges, a face.
 
-![The same three corners shown as points, a connected boundary and a filled triangle.](/book-review/doc/book/figures/Point_Triangle_Context/triangle-construction.png)
+![The same three corners shown as points, a connected boundary and a filled triangle.](/book-images/figures/Point_Triangle_Context/triangle-construction.png)
 
 We built this plate while writing the chapter. The book needed an image; the room gained another object to approach. This illustration is a Godot view of that same construction. A sentence can ask for something to try, and making it can change the sentence.
 

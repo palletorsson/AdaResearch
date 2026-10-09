@@ -38,7 +38,7 @@ The row inside an array has gained another enclosing list. Read `values[y][z][x]
 
 <!-- @ -->
 
-![The selected cube at address 1,2,0 before collection and the same transparent marker after it has gone, with the console changing from value 1 to value 0.](/book-review/doc/book/iterations/2026-09-23-array-entered-address/an-address-you-can-enter.png)
+![The selected cube at address 1,2,0 before collection and the same transparent marker after it has gone, with the console changing from value 1 to value 0.](/book-images/iterations/2026-09-23-array-entered-address/an-address-you-can-enter.png)
 
 *The same address before and after arrival. The cube and its label leave; the selection marker remains. The console inset is a separate view of the readout outside the enclosure; it is read on returning to the doorway.*
 

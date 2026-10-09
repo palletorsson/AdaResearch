@@ -24,7 +24,7 @@ var perimeter: float = 2.0*mesh.rings*sin(PI/mesh.rings)
 
 Each straight side is a chord between two points on the circle. Adding sides brings their total length closer to the circumference, which the panel labels **Circle**. The positive gap belongs to this planar comparison; a measure of the whole torus's accuracy would need its own definition.[^portals-circle]
 
-![Three states of the museum diagram: three, eight and twenty-two straight sides approach the same circle.](/book-review/doc/book/figures/Primitives_Portals/portals-visible-limit.png)
+![Three states of the museum diagram: three, eight and twenty-two straight sides approach the same circle.](/book-images/figures/Primitives_Portals/portals-visible-limit.png)
 
 *The corner becomes harder to see. The gap remains. These are three states of the same diagram beside the rings; the numbers compare boundary lengths.*
 

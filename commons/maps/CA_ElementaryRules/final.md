@@ -2,36 +2,19 @@
 
 How would you recognise a cell that has stopped being active but has not yet disappeared?
 
-The previous hall let three cells answer a question about the next row. Here the neighbourhood reaches behind what we can see. Two of the four choices change at once: a cell can hold three states, and it consults twenty-six neighbours instead of two. A small volume waits above the opening in the floor. Walk along its rim. Two marks that seemed to touch can separate as you move; another cell has been behind them all along.
+The previous hall let three cells answer a question about the next row. Here the neighbourhood reaches behind what we can see. A cell can now hold three states, and it consults twenty-six neighbours instead of two. A small volume waits above the opening in the floor. Walk along its rim. Two marks that seemed to touch can separate as you move; another cell has been behind them all along.
 
 <!-- @structure_growth -->
 
 Beside the volume, twenty-seven positions have been pulled apart. You can walk between them. They show one cell and its neighbours from the small structure, enlarged enough to follow without losing the address. The central position wears a golden frame; the finer outlines keep the empty places visible. Move around a cube that blocks your view. What looked like a crowded surface begins to give up its separate positions.
 
-Begin at the console. The structure is held at its starting generation. Pink means active. Press STEP once and look for green. A green cell is still occupied, still drawn where the surface allows it, but it has stopped contributing to its neighbours' active count. Follow it through another step. What does it leave available?
+Begin at the console. The structure is held at its starting generation. Pink means active. Lift the familiar black point beside the controls. Carry it with you; its trigger gives the structure one step while you keep looking at the cells. Press once and look for green. A green cell is still occupied, still drawn where the surface allows it, but it has stopped contributing to its neighbours' active count. Follow it through another step. What does it leave available?
 
-Each position consults a cube of three by three by three positions. Remove the position itself and twenty-six neighbours remain: through faces, along edges, across corners. The source gathers their activity with this test:
-
-```gdscript
-for offset in neighbor_offsets:
-    if current_state[idx + offset] == 1:
-        neighbors += 1
-```
-
-The comparison is to `1`. A green neighbour holds `2`. Being present and being counted have parted company.
+Each position consults a cube of three by three by three positions. Remove the position itself and twenty-six neighbours remain: through faces, along edges, across corners. Only the active state, numbered one, contributes to the count. A green neighbour holds state two. Being present and being counted have parted company.
 
 The inscription `6-8/6-8/3/M` names this installation's agreement. An active cell survives with six, seven or eight active neighbours. An empty cell becomes active with those same counts. Three states are available: empty, active, fading. `M` denotes the surrounding Moore neighbourhood, which this implementation fixes at twenty-six positions.
 
-REPLAY, then STEP once. The cell inside the golden frame is green. Walk around its enlarged neighbourhood and count the pink cells: seven. This is a reading of position `(26, 22, 24)` in the original volume, following the same updates. Seven would be enough for an empty cell to begin. Will this one become pink at the next step? Birth is tempting, but the code has already sent it down another branch. These are the lines for a state above one:
-
-```gdscript
-if state < rule_states - 1:
-    next_state[idx] = state + 1
-else:
-    next_state[idx] = 0
-```
-
-Here `rule_states` is three, so state two goes to zero. Press STEP again and return to the golden frame. The place remains; the cell has gone. It must first become empty. Only a later generation can consider its birth again. Disappearance takes time, and that interval changes where new activity is possible. We have acquired another means of shaping a body: a position can retain a past that temporarily prevents a beginning.
+REPLAY, then STEP once. The cell inside the golden frame is green. Walk around its enlarged neighbourhood and count the pink cells: seven. This is a reading of position `(26, 22, 24)` in the original volume, following the same updates. Seven would be enough for an empty cell to begin. Will this one become pink at the next step? Birth is tempting, but its present state sends it down another branch. In this three-state rule, fading must become empty, however many active neighbours it has. Press STEP again and return to the golden frame. The place remains; the cell has gone. It must first become empty. Only a later generation can consider its birth again. Disappearance takes time, and that interval changes where new activity is possible. We have acquired another means of shaping a body: a position can retain a past that temporarily prevents a beginning.
 
 ![The enlarged address is green after the first step, with seven active neighbours.](images/lingering-cell.png)
 
@@ -51,4 +34,4 @@ There is an edge to this world too. Its outer cells stay empty. They do not wrap
 
 <!-- @ -->
 
-The dark orb remains beside the route as a further encounter. For now, carry the difference between an active cell, a lingering cell and a cell hidden by the drawing. The familiar wish to give something life has opened into more particular questions. What must remain? What must become available again? In the next hall, generations will themselves become a structure laid out in space. A past we have just replaced will become something we can approach.
+The floor opens into a level gallery beyond the volume. The dark orb remains beside the route as a further encounter. For now, carry the difference between an active cell, a lingering cell and a cell hidden by the drawing. The familiar wish to give something life has opened into more particular questions. What must remain? What must become available again? In the next hall, generations will themselves become a structure laid out in space. A past we have just replaced will become something we can approach.

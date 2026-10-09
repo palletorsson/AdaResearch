@@ -18,7 +18,7 @@ The rods make those relationships visible. They have no collision and are not ph
 
 <!-- @wave_propagation_3d -->
 
-Walk to the broad field of tiles. Rings spread across it. Here each tile receives its height from a rule using distance and time. It does not ask a neighbouring tile what happened there. The visual resemblance survives this difference in construction.
+The floor opens into a basin. Walk down the broad ramp onto the tiles. The rim stays level with your arrival; farther in, rings spread beneath your feet. The far ramp returns you to the museum floor. Here each tile receives its height from a rule using distance and time. It does not ask a neighbouring tile what happened there. The visual resemblance survives this difference in construction.
 
 We might want the image of a wave, or we might want a world in which removing a connection changes what follows. Those desires can produce similar surfaces and different possibilities. Which one did you assume when the first crest arrived?
 

@@ -48,7 +48,7 @@ Turn back. The cut stays when you walk away. A return during the same session ca
 
 Some of you passed above the entire record.
 
-![The low cube lattice before a passage and the open-topped cut left by a body, photographed from the same elevated viewpoint.](/book-review/doc/book/iterations/2026-09-23-body-what-remains/the-cut-remains.png)
+![The low cube lattice before a passage and the open-topped cut left by a body, photographed from the same elevated viewpoint.](/book-images/iterations/2026-09-23-body-what-remains/the-cut-remains.png)
 
 *The body has left the second view. These elevated views show the missing cells; the opening was made by walking through the block.*
 

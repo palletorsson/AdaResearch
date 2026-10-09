@@ -10,7 +10,7 @@ The surface catches pink and blue. A turn of the head changes the colour near an
 
 On the entrance plinth, change PEARL to AMBER, then CHROME. The room keeps its openings. A different finish catches the same curved boundary. CHALK quietens the sheen and makes another reading possible. None of these surfaces is the room before appearance. Each gives the eye something else to work with.
 
-![The path leaves a sequence of overlapping cavities. Native Godot view from the working chamber.](/book-review/doc/book/iterations/2026-09-24-boolean-colour-spaces/path-inside.png)
+![The path leaves a sequence of overlapping cavities. Native Godot view from the working chamber.](/book-images/iterations/2026-09-24-boolean-colour-spaces/path-inside.png)
 
 *The path leaves a sequence of overlapping cavities. Native Godot view from the working chamber.*
 
@@ -20,7 +20,7 @@ The second chamber begins with two overlapping spheres. This time their intersec
 
 The wall turns towards a seam overhead. Two volumes have supplied one boundary, but each still helps determine where it bends. The operation does not negotiate their difference. We have chosen their positions, their sizes, and the part of their meeting we want to inhabit.
 
-![The shared region of two spheres becomes the room; further cuts provide its entrances.](/book-review/doc/book/iterations/2026-09-24-boolean-colour-spaces/lens-inside.png)
+![The shared region of two spheres becomes the room; further cuts provide its entrances.](/book-images/iterations/2026-09-24-boolean-colour-spaces/lens-inside.png)
 
 *The shared region of two spheres becomes the room; further cuts provide its entrances.*
 
@@ -30,7 +30,7 @@ Two rounded outer bodies join in the third construction. Smaller volumes hollow 
 
 Dark metal and fine pink lines can make the enclosure look mechanical. Pearl brings out another resemblance. The construction has not become alive, yet its appearance can trouble the distance between a room and a body. We can stay with that uncertainty long enough to make something from it.
 
-![The hollow union, seen from inside. Smaller openings carry a view while the larger one carries the passage.](/book-review/doc/book/iterations/2026-09-24-boolean-colour-spaces/shell-inside.png)
+![The hollow union, seen from inside. Smaller openings carry a view while the larger one carries the passage.](/book-images/iterations/2026-09-24-boolean-colour-spaces/shell-inside.png)
 
 *The hollow union, seen from inside. Smaller openings carry a view while the larger one carries the passage.*
 
