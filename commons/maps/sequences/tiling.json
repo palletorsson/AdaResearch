@@ -23,6 +23,7 @@
         "Tutorial_Pattern",
         "Array_Patterns",
         "Symmetry_Seventeen",
+        "Pattern_Temple",
         "Ribbon_Patterns_01",
         "Ribbon_Patterns_02",
         "Ribbon_Patterns_03"
@@ -30,19 +31,20 @@
       "return_to": "lab",
       "lab_map": "Lab/map_data_post_color",
       "deferred_maps": [],
-      "deferred_reason": "No maps are currently deferred from this eight-hall sequence. The earlier separation of colour and pattern work is recorded in curation_history.",
-      "notes": "Current route: familiar disco with independent palette control; shared sources and receivers in the foundry; fixed-motif comparisons; an addressed corridor; bounded symmetry comparisons; volume; appearance; and a shader recipe carried onto garments and the runway. The eight maps are cumulative encounters, not a complete derivation of the wallpaper-group classification. The historical sequence key remains tiling; patterngeneration is a separate sequence.",
+      "deferred_reason": "No maps are currently deferred from this nine-hall sequence. The earlier separation of colour and pattern work is recorded in curation_history.",
+      "notes": "Current route: familiar disco with independent palette control; shared sources and receivers in the foundry; fixed-motif comparisons; an addressed corridor; bounded symmetry comparisons; volume; appearance; and a shader recipe carried onto garments and the runway. The nine maps are cumulative encounters, not a complete derivation of the wallpaper-group classification. The historical sequence key remains tiling; patterngeneration is a separate sequence.",
       "content": [
         "Pattern_Disco: Arrangement, palette and independent clocks",
         "Pattern_Foundry: Shared sources, held receivers and patterned architecture",
         "Tutorial_Pattern: Keep the motif; change the relation between copies",
         "Array_Patterns: Follow an address across floor and walls",
         "Symmetry_Seventeen: Compare rules and delimit the classification",
+        "Pattern_Temple: The temple wears the rule - one desk dresses floor, walls, columns and dome",
         "Ribbon_Patterns_01: A source acquires a third addressed direction",
         "Ribbon_Patterns_02: Stored values meet carriers and shading",
         "Ribbon_Patterns_03: A saved shader recipe travels onto bodies"
       ],
-      "museum_recovery_note": "The original colour/pattern separation and perimeter-wall recovery remain part of the layout history. Current membership is the eight-map list above; inspect each live map for its authored configuration.",
+      "museum_recovery_note": "The original colour/pattern separation and perimeter-wall recovery remain part of the layout history. Current membership is the nine-map list above; inspect each live map for its authored configuration.",
       "ribbon_consolidation": "2026-09-09: seven former colour ribbon rooms consolidated into three annexes; authored colour/tiling copies take precedence. Remaining exhibits occur once across the annexes.",
       "prerequisites": [
         "array_tutorial",
@@ -71,6 +73,15 @@
           ],
           "rationale": "A small motif becomes a controllable architectural surface; existing machines and precise receiver studies remain.",
           "size_budget": "environment"
+        },
+        {
+          "map": "Pattern_Temple",
+          "position": "development",
+          "artifacts": [
+            "pattern_temple"
+          ],
+          "size_budget": "environment",
+          "rationale": "A Moorish court of primitives in which every surface is a receiver; the rule stays, the body it dresses changes. Added 2026-10-09 (Palle: a Moorish temple where we can control pattern on different walls)."
         }
       ],
       "curation_history": [

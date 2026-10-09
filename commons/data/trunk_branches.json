@@ -2024,152 +2024,265 @@
    "tokens": 69,
    "pearls": [
     {
-     "pearl": "pattern disco",
+     "pearl": "Pattern Disco",
      "map": "Pattern_Disco",
      "index": 0,
-     "hero": "",
-     "hero_by": "",
-     "tokens": [],
-     "blurb": "The familiar disco returns after Color."
+     "hero": "disco_controls",
+     "hero_by": "hand",
+     "tokens": [
+      "disco_controls",
+      "standalone_disco",
+      "step_sequencer"
+     ],
+     "blurb": "The familiar disco returns after Color.",
+     "says": {
+      "disco_controls": "The floor returns in colour",
+      "standalone_disco": "The floor returns in colour",
+      "step_sequencer": "The floor returns in colour"
+     },
+     "says_by": {
+      "disco_controls": "draft",
+      "standalone_disco": "draft",
+      "step_sequencer": "draft"
+     }
     },
     {
      "pearl": "pattern foundry",
      "map": "Pattern_Foundry",
      "index": 1,
      "hero": "pattern_architecture",
-     "hero_by": "first in spine order",
+     "hero_by": "hand",
      "tokens": [
       "pattern_architecture",
       "pattern_tile_4x4",
       "pattern_tile_mirror",
-      "pattern_machine_a",
+      "pattern_machine_a"
+     ],
+     "blurb": "One small mark returns across a field.",
+     "says": {
+      "pattern_architecture": "Four machines can supply the whole architectural surface; source, target, live output, held image, scale and tint are explicit choices.",
+      "pattern_tile_4x4": "pattern tile 4x4",
+      "pattern_tile_mirror": "pattern tile mirror",
+      "pattern_machine_a": "pattern machine a"
+     },
+     "says_by": {
+      "pattern_architecture": "draft",
+      "pattern_tile_4x4": "astra",
+      "pattern_tile_mirror": "astra",
+      "pattern_machine_a": "draft"
+     },
+     "excluded": [
+      "drag_catwalk",
       "pattern_machine_c",
-      "pattern_studio_plate",
-      "pattern_tile_herringbone",
+      "pattern_machine_d",
       "pattern_maker_station",
       "pattern_mill",
-      "pattern_tile_plate",
-      "drag_catwalk",
-      "tiling_demo",
-      "pattern_machine_d",
+      "pattern_studio_plate",
       "pattern_tile_brick",
+      "pattern_tile_herringbone",
+      "pattern_tile_plate",
       "super_drag_mirror",
+      "tiling_demo",
       "wall_drawing_291"
-     ],
-     "blurb": "One small mark returns across a field."
+     ]
     },
     {
      "pearl": "tutorial pattern",
      "map": "Tutorial_Pattern",
      "index": 2,
-     "hero": "grid_model",
-     "hero_by": "first in spine order",
+     "hero": "pattern_maker_station",
+     "hero_by": "hand",
      "tokens": [
-      "grid_model",
-      "pattern_tile_puzzle",
-      "panel_bridge_loom",
-      "script_runner",
-      "pulsar_compact"
+      "pattern_maker_station"
      ],
-     "blurb": "The mark stays; its neighbour turns to face it."
+     "blurb": "The mark stays; its neighbour turns to face it.",
+     "join": true,
+     "says": {
+      "pattern_maker_station": "pattern maker station"
+     },
+     "says_by": {
+      "pattern_maker_station": "astra"
+     },
+     "excluded": [
+      "grid_model",
+      "panel_bridge_loom",
+      "pattern_tile_puzzle",
+      "pulsar_compact",
+      "script_runner"
+     ]
     },
     {
      "pearl": "array patterns",
      "map": "Array_Patterns",
      "index": 3,
      "hero": "pattern_tunnel_machine",
-     "hero_by": "first in spine order",
+     "hero_by": "hand",
      "tokens": [
       "pattern_tunnel_machine",
-      "vr_tile_editor_mirror",
-      "facade_grammar_demo"
+      "pattern_tile_brick"
      ],
-     "blurb": "Four steps return to the same stored cell."
+     "blurb": "Four steps return to the same stored cell.",
+     "join": true,
+     "says": {
+      "pattern_tunnel_machine": "pattern tunnel machine",
+      "pattern_tile_brick": "pattern tile brick"
+     },
+     "says_by": {
+      "pattern_tunnel_machine": "astra",
+      "pattern_tile_brick": "astra"
+     },
+     "excluded": [
+      "facade_grammar_demo",
+      "vr_tile_editor_mirror"
+     ]
     },
     {
      "pearl": "symmetry seventeen",
      "map": "Symmetry_Seventeen",
      "index": 4,
      "hero": "vr_tile_editor",
-     "hero_by": "first in spine order",
+     "hero_by": "hand",
      "tokens": [
       "vr_tile_editor",
-      "wallpaper_cage",
+      "wallpaper_cage"
+     ],
+     "blurb": "Keep one mark.",
+     "join": true,
+     "says": {
+      "vr_tile_editor": "vr tile editor",
+      "wallpaper_cage": "wallpaper cage"
+     },
+     "says_by": {
+      "vr_tile_editor": "astra",
+      "wallpaper_cage": "astra"
+     },
+     "excluded": [
+      "kaleidoscope",
       "loom_alhambra_p6m",
-      "wall_pattern_gallery",
-      "pattern_loom",
       "loom_escher_mirror",
       "mill_alhambra_p6m",
-      "mill_persian_p4",
       "mill_escher_p4g",
-      "kaleidoscope",
-      "pattern_atlas_gallery",
+      "mill_persian_p4",
       "pattern_artifact",
-      "tile_meander_floor"
+      "pattern_atlas_gallery",
+      "pattern_loom",
+      "tile_meander_floor",
+      "wall_pattern_gallery"
+     ]
+    },
+    {
+     "pearl": "pattern temple",
+     "map": "Pattern_Temple",
+     "index": 5,
+     "hero": "pattern_temple",
+     "hero_by": "hand",
+     "tokens": [
+      "pattern_temple"
      ],
-     "blurb": "Keep one mark."
+     "blurb": "A Moorish court built from the primitives you already know, every surface a receiver.",
+     "join": true,
+     "says": {
+      "pattern_temple": "pattern temple"
+     },
+     "says_by": {
+      "pattern_temple": "claude"
+     }
     },
     {
      "pearl": "ribbon patterns 01",
      "map": "Ribbon_Patterns_01",
-     "index": 5,
-     "hero": "grid_3d_4x4x4",
-     "hero_by": "first in spine order",
+     "index": 6,
+     "hero": "grid_2d_4x4",
+     "hero_by": "hand",
      "tokens": [
       "grid_3d_4x4x4",
-      "grid3d",
+      "grid_2d_4x4"
+     ],
+     "blurb": "The mark acquires an inside.",
+     "join": true,
+     "says": {
+      "grid_2d_4x4": "grid 2d 4x4",
+      "grid_3d_4x4x4": "grid 3d 4x4x4"
+     },
+     "says_by": {
+      "grid_2d_4x4": "astra",
+      "grid_3d_4x4x4": "astra"
+     },
+     "excluded": [
       "bar_array",
       "bar_array_bubble_sort",
-      "sorting_algorithm_race",
+      "grid3d",
       "shelf",
-      "shelf_with_stickers"
-     ],
-     "blurb": "The mark acquires an inside."
+      "shelf_with_stickers",
+      "sorting_algorithm_race"
+     ]
     },
     {
      "pearl": "ribbon patterns 02",
      "map": "Ribbon_Patterns_02",
-     "index": 6,
+     "index": 7,
      "hero": "SimultaneousContrast",
-     "hero_by": "first in spine order",
+     "hero_by": "hand",
      "tokens": [
       "SimultaneousContrast",
-      "MetamerismLab",
-      "spherecolors",
-      "hue_carousel",
-      "grabcolorcollection",
-      "color_mixing",
-      "dark_side_prism",
-      "prism",
-      "grab_stick_scanner",
-      "color_scanner",
-      "grab_stick",
-      "two_roads"
+      "MetamerismLab"
      ],
-     "blurb": "The value stays while its neighbours change."
+     "blurb": "The value stays while its neighbours change.",
+     "join": true,
+     "says": {
+      "SimultaneousContrast": "SimultaneousContrast",
+      "MetamerismLab": "MetamerismLab"
+     },
+     "says_by": {
+      "SimultaneousContrast": "astra",
+      "MetamerismLab": "astra"
+     },
+     "excluded": [
+      "color_mixing",
+      "color_scanner",
+      "dark_side_prism",
+      "grab_stick",
+      "grab_stick_scanner",
+      "grabcolorcollection",
+      "hue_carousel",
+      "prism",
+      "spherecolors",
+      "two_roads"
+     ]
     },
     {
      "pearl": "ribbon patterns 03",
      "map": "Ribbon_Patterns_03",
-     "index": 7,
-     "hero": "fabric_shader_studio",
-     "hero_by": "first in spine order",
+     "index": 8,
+     "hero": "minimalglitch",
+     "hero_by": "hand",
      "tokens": [
-      "fabric_shader_studio",
-      "coloredlines",
-      "RotatingLaser",
       "minimalglitch",
-      "textureglitch",
-      "glitchcolor",
-      "advancedglitch",
-      "colortrails",
-      "neon_garden",
-      "strobe_lasers",
-      "disco_lights",
-      "one_bulb_room",
-      "laser_turret"
+      "textureglitch"
      ],
-     "blurb": "What travels when a pattern becomes a garment?"
+     "blurb": "What travels when a pattern becomes a garment?",
+     "join": true,
+     "says": {
+      "minimalglitch": "minimalglitch",
+      "textureglitch": "textureglitch"
+     },
+     "says_by": {
+      "minimalglitch": "astra",
+      "textureglitch": "astra"
+     },
+     "excluded": [
+      "RotatingLaser",
+      "advancedglitch",
+      "coloredlines",
+      "colortrails",
+      "disco_lights",
+      "fabric_shader_studio",
+      "glitchcolor",
+      "laser_turret",
+      "neon_garden",
+      "one_bulb_room",
+      "strobe_lasers"
+     ]
     }
    ]
   },
@@ -8334,7 +8447,7 @@
    "provenance": "derived",
    "space": "wall",
    "space_by": "heuristic",
-   "pearl": "pattern foundry"
+   "pearl": "tutorial pattern"
   },
   {
    "anchor": "tiling",
@@ -8345,7 +8458,7 @@
    "provenance": "derived",
    "space": "wall",
    "space_by": "heuristic",
-   "pearl": "pattern foundry"
+   "pearl": "tutorial pattern"
   },
   {
    "anchor": "tiling",
@@ -8356,7 +8469,7 @@
    "provenance": "derived",
    "space": "wall",
    "space_by": "heuristic",
-   "pearl": "pattern foundry"
+   "pearl": "tutorial pattern"
   },
   {
    "anchor": "tiling",
@@ -8367,7 +8480,7 @@
    "provenance": "derived",
    "space": "wall",
    "space_by": "heuristic",
-   "pearl": "pattern foundry"
+   "pearl": "tutorial pattern"
   },
   {
    "anchor": "tiling",
@@ -8378,7 +8491,7 @@
    "provenance": "derived",
    "space": "wall",
    "space_by": "heuristic",
-   "pearl": "pattern foundry"
+   "pearl": "tutorial pattern"
   },
   {
    "anchor": "tiling",
@@ -8389,7 +8502,7 @@
    "provenance": "derived",
    "space": "wall",
    "space_by": "heuristic",
-   "pearl": "pattern foundry"
+   "pearl": "tutorial pattern"
   },
   {
    "anchor": "tiling",
@@ -8400,7 +8513,7 @@
    "provenance": "derived",
    "space": "wall",
    "space_by": "heuristic",
-   "pearl": "pattern foundry"
+   "pearl": "tutorial pattern"
   },
   {
    "anchor": "tiling",
@@ -8411,7 +8524,7 @@
    "provenance": "derived",
    "space": "wall",
    "space_by": "heuristic",
-   "pearl": "pattern foundry"
+   "pearl": "tutorial pattern"
   },
   {
    "anchor": "tiling",
@@ -8422,7 +8535,7 @@
    "provenance": "derived",
    "space": "wall",
    "space_by": "heuristic",
-   "pearl": "pattern foundry"
+   "pearl": "tutorial pattern"
   },
   {
    "anchor": "tiling",
@@ -8433,7 +8546,7 @@
    "provenance": "derived",
    "space": "wall",
    "space_by": "heuristic",
-   "pearl": "pattern foundry"
+   "pearl": "tutorial pattern"
   },
   {
    "anchor": "tiling",
@@ -8444,7 +8557,7 @@
    "provenance": "derived",
    "space": "wall",
    "space_by": "heuristic",
-   "pearl": "pattern foundry"
+   "pearl": "tutorial pattern"
   },
   {
    "anchor": "tiling",
@@ -8455,7 +8568,7 @@
    "provenance": "derived",
    "space": "wall",
    "space_by": "heuristic",
-   "pearl": "pattern foundry"
+   "pearl": "tutorial pattern"
   },
   {
    "anchor": "tiling",
@@ -8466,7 +8579,7 @@
    "provenance": "derived",
    "space": "wall",
    "space_by": "heuristic",
-   "pearl": "pattern foundry"
+   "pearl": "tutorial pattern"
   },
   {
    "anchor": "tiling",
@@ -8477,7 +8590,7 @@
    "provenance": "derived",
    "space": "wall",
    "space_by": "heuristic",
-   "pearl": "pattern foundry"
+   "pearl": "tutorial pattern"
   },
   {
    "anchor": "tiling",
@@ -8488,7 +8601,7 @@
    "provenance": "derived",
    "space": "wall",
    "space_by": "heuristic",
-   "pearl": "pattern foundry"
+   "pearl": "tutorial pattern"
   },
   {
    "anchor": "tiling",
@@ -8499,7 +8612,7 @@
    "provenance": "derived",
    "space": "wall",
    "space_by": "heuristic",
-   "pearl": "pattern foundry"
+   "pearl": "tutorial pattern"
   },
   {
    "anchor": "tiling",
@@ -8532,7 +8645,7 @@
    "provenance": "derived",
    "space": "wall",
    "space_by": "heuristic",
-   "pearl": "tutorial pattern"
+   "pearl": "ribbon patterns 01"
   },
   {
    "anchor": "tiling",
@@ -8885,6 +8998,303 @@
    "space": "wall",
    "space_by": "heuristic",
    "pearl": "ribbon patterns 03"
+  },
+  {
+   "anchor": "tiling",
+   "token": "algorithm_menu",
+   "kind": "synthesizes",
+   "why": "synthesis of 3 sources, 1 from this node: grid3d",
+   "via": "grid3d",
+   "provenance": "derived",
+   "space": "alcove",
+   "space_by": "heuristic",
+   "pearl": "ribbon patterns 01"
+  },
+  {
+   "anchor": "tiling",
+   "token": "arrangement_yard",
+   "kind": "synthesizes",
+   "why": "synthesis of 4 sources, 1 from this node: grabcolorcollection",
+   "via": "grabcolorcollection",
+   "provenance": "derived",
+   "space": "alcove",
+   "space_by": "heuristic",
+   "pearl": "ribbon patterns 02"
+  },
+  {
+   "anchor": "tiling",
+   "token": "boundary_tile",
+   "kind": "synthesizes",
+   "why": "synthesis of 3 sources, 3 from this node: pattern_maker_station, vr_tile_editor, vr_tile_editor_mirror",
+   "via": "pattern_maker_station",
+   "provenance": "derived",
+   "space": "alcove",
+   "space_by": "heuristic",
+   "pearl": "tutorial pattern"
+  },
+  {
+   "anchor": "tiling",
+   "token": "chapter_arc",
+   "kind": "synthesizes",
+   "why": "synthesis of 6 sources, 1 from this node: facade_grammar_demo",
+   "via": "facade_grammar_demo",
+   "provenance": "derived",
+   "space": "alcove",
+   "space_by": "heuristic",
+   "pearl": "array patterns"
+  },
+  {
+   "anchor": "tiling",
+   "token": "evidence_ladder",
+   "kind": "synthesizes",
+   "why": "synthesis of 12 sources, 1 from this node: dark_side_prism",
+   "via": "dark_side_prism",
+   "provenance": "derived",
+   "space": "alcove",
+   "space_by": "heuristic",
+   "pearl": "ribbon patterns 02"
+  },
+  {
+   "anchor": "tiling",
+   "token": "motif_floor",
+   "kind": "synthesizes",
+   "why": "synthesis of 7 sources, 5 from this node: pattern_tile_puzzle, pattern_tile_4x4, pattern_tile_mirror, pattern_tile_brick",
+   "via": "pattern_tile_puzzle",
+   "provenance": "derived",
+   "space": "alcove",
+   "space_by": "heuristic",
+   "pearl": "tutorial pattern"
+  },
+  {
+   "anchor": "tiling",
+   "token": "sorting_hall",
+   "kind": "synthesizes",
+   "why": "synthesis of 10 sources, 2 from this node: bar_array, bar_array_bubble_sort",
+   "via": "bar_array",
+   "provenance": "derived",
+   "space": "alcove",
+   "space_by": "heuristic",
+   "pearl": "ribbon patterns 01"
+  },
+  {
+   "anchor": "tiling",
+   "token": "taxonomy_hall",
+   "kind": "synthesizes",
+   "why": "synthesis of 7 sources, 1 from this node: facade_grammar_demo",
+   "via": "facade_grammar_demo",
+   "provenance": "derived",
+   "space": "alcove",
+   "space_by": "heuristic",
+   "pearl": "array patterns"
+  },
+  {
+   "anchor": "tiling",
+   "token": "pattern_tile_4x4",
+   "kind": "varies",
+   "why": "motif: blank / checker / cross / twill / houndstooth",
+   "via": "motif",
+   "provenance": "derived",
+   "space": "wall",
+   "space_by": "heuristic",
+   "pearl": "pattern foundry"
+  },
+  {
+   "anchor": "tiling",
+   "token": "pattern_tile_mirror",
+   "kind": "varies",
+   "why": "motif: blank / checker / cross / twill / houndstooth",
+   "via": "motif",
+   "provenance": "derived",
+   "space": "wall",
+   "space_by": "heuristic",
+   "pearl": "pattern foundry"
+  },
+  {
+   "anchor": "tiling",
+   "token": "pattern_machine_c",
+   "kind": "varies",
+   "why": "exhibit: bolt / unit / operation / catalogue",
+   "via": "exhibit",
+   "provenance": "derived",
+   "space": "wall",
+   "space_by": "heuristic",
+   "pearl": "pattern foundry"
+  },
+  {
+   "anchor": "tiling",
+   "token": "pattern_tile_herringbone",
+   "kind": "varies",
+   "why": "motif: blank / checker / cross / twill / houndstooth",
+   "via": "motif",
+   "provenance": "derived",
+   "space": "wall",
+   "space_by": "heuristic",
+   "pearl": "pattern foundry"
+  },
+  {
+   "anchor": "tiling",
+   "token": "pattern_maker_station",
+   "kind": "varies",
+   "why": "boundary: none / edge / cell / lattice",
+   "via": "boundary",
+   "provenance": "derived",
+   "space": "wall",
+   "space_by": "heuristic",
+   "pearl": "tutorial pattern"
+  },
+  {
+   "anchor": "tiling",
+   "token": "pattern_mill",
+   "kind": "varies",
+   "why": "exhibit: bolt / unit / operation / catalogue",
+   "via": "exhibit",
+   "provenance": "derived",
+   "space": "wall",
+   "space_by": "heuristic",
+   "pearl": "pattern foundry"
+  },
+  {
+   "anchor": "tiling",
+   "token": "pattern_tile_brick",
+   "kind": "varies",
+   "why": "motif: blank / checker / cross / twill / houndstooth",
+   "via": "motif",
+   "provenance": "derived",
+   "space": "wall",
+   "space_by": "heuristic",
+   "pearl": "array patterns"
+  },
+  {
+   "anchor": "tiling",
+   "token": "pattern_tile_puzzle",
+   "kind": "varies",
+   "why": "motif: blank / checker / cross / twill / houndstooth",
+   "via": "motif",
+   "provenance": "derived",
+   "space": "wall",
+   "space_by": "heuristic",
+   "pearl": "tutorial pattern"
+  },
+  {
+   "anchor": "tiling",
+   "token": "panel_bridge_loom",
+   "kind": "varies",
+   "why": "threading_draw: straight / point / block / broken",
+   "via": "threading_draw",
+   "provenance": "derived",
+   "space": "wall",
+   "space_by": "heuristic",
+   "pearl": "tutorial pattern"
+  },
+  {
+   "anchor": "tiling",
+   "token": "vr_tile_editor_mirror",
+   "kind": "varies",
+   "why": "boundary: none / edge / cell / lattice",
+   "via": "boundary",
+   "provenance": "derived",
+   "space": "wall",
+   "space_by": "heuristic",
+   "pearl": "array patterns"
+  },
+  {
+   "anchor": "tiling",
+   "token": "facade_grammar_demo",
+   "kind": "varies",
+   "why": "taxonomy: table / ladder / stack / heap",
+   "via": "taxonomy",
+   "provenance": "derived",
+   "space": "wall",
+   "space_by": "heuristic",
+   "pearl": "array patterns"
+  },
+  {
+   "anchor": "tiling",
+   "token": "vr_tile_editor",
+   "kind": "varies",
+   "why": "boundary: none / edge / cell / lattice",
+   "via": "boundary",
+   "provenance": "derived",
+   "space": "wall",
+   "space_by": "heuristic",
+   "pearl": "symmetry seventeen"
+  },
+  {
+   "anchor": "tiling",
+   "token": "wall_pattern_gallery",
+   "kind": "varies",
+   "why": "census: one / pair / triad / chorus",
+   "via": "census",
+   "provenance": "derived",
+   "space": "wall",
+   "space_by": "heuristic",
+   "pearl": "symmetry seventeen"
+  },
+  {
+   "anchor": "tiling",
+   "token": "pattern_loom",
+   "kind": "varies",
+   "why": "colophon: none / repeat / symmetry / catalogue",
+   "via": "colophon",
+   "provenance": "derived",
+   "space": "wall",
+   "space_by": "heuristic",
+   "pearl": "symmetry seventeen"
+  },
+  {
+   "anchor": "tiling",
+   "token": "pattern_atlas_gallery",
+   "kind": "varies",
+   "why": "credit: named / title_only / redacted / anonymous",
+   "via": "credit",
+   "provenance": "derived",
+   "space": "wall",
+   "space_by": "heuristic",
+   "pearl": "symmetry seventeen"
+  },
+  {
+   "anchor": "tiling",
+   "token": "pattern_artifact",
+   "kind": "varies",
+   "why": "group: unset / p1 / p2 / pm / pg / cm",
+   "via": "group",
+   "provenance": "derived",
+   "space": "wall",
+   "space_by": "heuristic",
+   "pearl": "symmetry seventeen"
+  },
+  {
+   "anchor": "tiling",
+   "token": "grid3d",
+   "kind": "varies",
+   "why": "algorithm: BFS / DFS / DIJKSTRA / KRUSKAL_MST / PRIM_MST / FORCE_DIRECTED",
+   "via": "algorithm",
+   "provenance": "derived",
+   "space": "wall",
+   "space_by": "heuristic",
+   "pearl": "ribbon patterns 01"
+  },
+  {
+   "anchor": "tiling",
+   "token": "bar_array",
+   "kind": "varies",
+   "why": "algorithm: BUBBLE_SORT / INSERTION_SORT / SELECTION_SORT / MERGE_SORT / QUICKSORT / HEAP_SORT",
+   "via": "algorithm",
+   "provenance": "derived",
+   "space": "wall",
+   "space_by": "heuristic",
+   "pearl": "ribbon patterns 01"
+  },
+  {
+   "anchor": "tiling",
+   "token": "bar_array_bubble_sort",
+   "kind": "varies",
+   "why": "initial_order: shuffled / reversed / nearly_sorted / sorted",
+   "via": "initial_order",
+   "provenance": "derived",
+   "space": "wall",
+   "space_by": "heuristic",
+   "pearl": "ribbon patterns 01"
   },
   {
    "anchor": "change",
@@ -14621,17 +15031,6 @@
    "pearl": "pg branching growth"
   },
   {
-   "anchor": "tiling",
-   "token": "algorithm_menu",
-   "kind": "synthesizes",
-   "why": "synthesis of 3 sources, 1 from this node: grid3d",
-   "via": "grid3d",
-   "provenance": "derived",
-   "space": "alcove",
-   "space_by": "heuristic",
-   "pearl": "ribbon patterns 01"
-  },
-  {
    "anchor": "lsystems",
    "token": "alphabet_grammar",
    "kind": "synthesizes",
@@ -14674,17 +15073,6 @@
    "space": "alcove",
    "space_by": "heuristic",
    "pearl": "lines"
-  },
-  {
-   "anchor": "tiling",
-   "token": "arrangement_yard",
-   "kind": "synthesizes",
-   "why": "synthesis of 4 sources, 1 from this node: grabcolorcollection",
-   "via": "grabcolorcollection",
-   "provenance": "derived",
-   "space": "alcove",
-   "space_by": "heuristic",
-   "pearl": "ribbon patterns 02"
   },
   {
    "anchor": "forces",
@@ -14840,17 +15228,6 @@
    "pearl": "effect sound"
   },
   {
-   "anchor": "tiling",
-   "token": "boundary_tile",
-   "kind": "synthesizes",
-   "why": "synthesis of 3 sources, 3 from this node: pattern_maker_station, vr_tile_editor, vr_tile_editor_mirror",
-   "via": "pattern_maker_station",
-   "provenance": "derived",
-   "space": "alcove",
-   "space_by": "heuristic",
-   "pearl": "pattern foundry"
-  },
-  {
    "anchor": "wavefunctions",
    "token": "carriage_bench",
    "kind": "synthesizes",
@@ -14860,17 +15237,6 @@
    "space": "alcove",
    "space_by": "heuristic",
    "pearl": "intro"
-  },
-  {
-   "anchor": "tiling",
-   "token": "chapter_arc",
-   "kind": "synthesizes",
-   "why": "synthesis of 6 sources, 1 from this node: facade_grammar_demo",
-   "via": "facade_grammar_demo",
-   "provenance": "derived",
-   "space": "alcove",
-   "space_by": "heuristic",
-   "pearl": "array patterns"
   },
   {
    "anchor": "randomness",
@@ -15057,17 +15423,6 @@
    "space": "alcove",
    "space_by": "heuristic",
    "pearl": "boolean gallery"
-  },
-  {
-   "anchor": "tiling",
-   "token": "evidence_ladder",
-   "kind": "synthesizes",
-   "why": "synthesis of 12 sources, 1 from this node: dark_side_prism",
-   "via": "dark_side_prism",
-   "provenance": "derived",
-   "space": "alcove",
-   "space_by": "heuristic",
-   "pearl": "ribbon patterns 02"
   },
   {
    "anchor": "forces",
@@ -15559,17 +15914,6 @@
    "space": "alcove",
    "space_by": "heuristic",
    "pearl": "intro"
-  },
-  {
-   "anchor": "tiling",
-   "token": "motif_floor",
-   "kind": "synthesizes",
-   "why": "synthesis of 7 sources, 5 from this node: pattern_tile_puzzle, pattern_tile_4x4, pattern_tile_mirror, pattern_tile_brick",
-   "via": "pattern_tile_puzzle",
-   "provenance": "derived",
-   "space": "alcove",
-   "space_by": "heuristic",
-   "pearl": "tutorial pattern"
   },
   {
    "anchor": "qfeplaboratory",
@@ -16242,17 +16586,6 @@
    "pearl": "pendulum"
   },
   {
-   "anchor": "tiling",
-   "token": "sorting_hall",
-   "kind": "synthesizes",
-   "why": "synthesis of 10 sources, 2 from this node: bar_array, bar_array_bubble_sort",
-   "via": "bar_array",
-   "provenance": "derived",
-   "space": "alcove",
-   "space_by": "heuristic",
-   "pearl": "ribbon patterns 01"
-  },
-  {
    "anchor": "cellularautomata",
    "token": "stencil_quarter",
    "kind": "synthesizes",
@@ -16361,17 +16694,6 @@
    "space": "alcove",
    "space_by": "heuristic",
    "pearl": "portals"
-  },
-  {
-   "anchor": "tiling",
-   "token": "taxonomy_hall",
-   "kind": "synthesizes",
-   "why": "synthesis of 7 sources, 1 from this node: facade_grammar_demo",
-   "via": "facade_grammar_demo",
-   "provenance": "derived",
-   "space": "alcove",
-   "space_by": "heuristic",
-   "pearl": "array patterns"
   },
   {
    "anchor": "wavefunctions",
@@ -17289,215 +17611,6 @@
    "space": "wall",
    "space_by": "heuristic",
    "pearl": "walls"
-  },
-  {
-   "anchor": "tiling",
-   "token": "pattern_tile_4x4",
-   "kind": "varies",
-   "why": "motif: blank / checker / cross / twill / houndstooth",
-   "via": "motif",
-   "provenance": "derived",
-   "space": "wall",
-   "space_by": "heuristic",
-   "pearl": "pattern foundry"
-  },
-  {
-   "anchor": "tiling",
-   "token": "pattern_tile_mirror",
-   "kind": "varies",
-   "why": "motif: blank / checker / cross / twill / houndstooth",
-   "via": "motif",
-   "provenance": "derived",
-   "space": "wall",
-   "space_by": "heuristic",
-   "pearl": "pattern foundry"
-  },
-  {
-   "anchor": "tiling",
-   "token": "pattern_machine_c",
-   "kind": "varies",
-   "why": "exhibit: bolt / unit / operation / catalogue",
-   "via": "exhibit",
-   "provenance": "derived",
-   "space": "wall",
-   "space_by": "heuristic",
-   "pearl": "pattern foundry"
-  },
-  {
-   "anchor": "tiling",
-   "token": "pattern_tile_herringbone",
-   "kind": "varies",
-   "why": "motif: blank / checker / cross / twill / houndstooth",
-   "via": "motif",
-   "provenance": "derived",
-   "space": "wall",
-   "space_by": "heuristic",
-   "pearl": "pattern foundry"
-  },
-  {
-   "anchor": "tiling",
-   "token": "pattern_maker_station",
-   "kind": "varies",
-   "why": "boundary: none / edge / cell / lattice",
-   "via": "boundary",
-   "provenance": "derived",
-   "space": "wall",
-   "space_by": "heuristic",
-   "pearl": "pattern foundry"
-  },
-  {
-   "anchor": "tiling",
-   "token": "pattern_mill",
-   "kind": "varies",
-   "why": "exhibit: bolt / unit / operation / catalogue",
-   "via": "exhibit",
-   "provenance": "derived",
-   "space": "wall",
-   "space_by": "heuristic",
-   "pearl": "pattern foundry"
-  },
-  {
-   "anchor": "tiling",
-   "token": "pattern_tile_brick",
-   "kind": "varies",
-   "why": "motif: blank / checker / cross / twill / houndstooth",
-   "via": "motif",
-   "provenance": "derived",
-   "space": "wall",
-   "space_by": "heuristic",
-   "pearl": "pattern foundry"
-  },
-  {
-   "anchor": "tiling",
-   "token": "pattern_tile_puzzle",
-   "kind": "varies",
-   "why": "motif: blank / checker / cross / twill / houndstooth",
-   "via": "motif",
-   "provenance": "derived",
-   "space": "wall",
-   "space_by": "heuristic",
-   "pearl": "tutorial pattern"
-  },
-  {
-   "anchor": "tiling",
-   "token": "panel_bridge_loom",
-   "kind": "varies",
-   "why": "threading_draw: straight / point / block / broken",
-   "via": "threading_draw",
-   "provenance": "derived",
-   "space": "wall",
-   "space_by": "heuristic",
-   "pearl": "tutorial pattern"
-  },
-  {
-   "anchor": "tiling",
-   "token": "vr_tile_editor_mirror",
-   "kind": "varies",
-   "why": "boundary: none / edge / cell / lattice",
-   "via": "boundary",
-   "provenance": "derived",
-   "space": "wall",
-   "space_by": "heuristic",
-   "pearl": "array patterns"
-  },
-  {
-   "anchor": "tiling",
-   "token": "facade_grammar_demo",
-   "kind": "varies",
-   "why": "taxonomy: table / ladder / stack / heap",
-   "via": "taxonomy",
-   "provenance": "derived",
-   "space": "wall",
-   "space_by": "heuristic",
-   "pearl": "array patterns"
-  },
-  {
-   "anchor": "tiling",
-   "token": "vr_tile_editor",
-   "kind": "varies",
-   "why": "boundary: none / edge / cell / lattice",
-   "via": "boundary",
-   "provenance": "derived",
-   "space": "wall",
-   "space_by": "heuristic",
-   "pearl": "symmetry seventeen"
-  },
-  {
-   "anchor": "tiling",
-   "token": "wall_pattern_gallery",
-   "kind": "varies",
-   "why": "census: one / pair / triad / chorus",
-   "via": "census",
-   "provenance": "derived",
-   "space": "wall",
-   "space_by": "heuristic",
-   "pearl": "symmetry seventeen"
-  },
-  {
-   "anchor": "tiling",
-   "token": "pattern_loom",
-   "kind": "varies",
-   "why": "colophon: none / repeat / symmetry / catalogue",
-   "via": "colophon",
-   "provenance": "derived",
-   "space": "wall",
-   "space_by": "heuristic",
-   "pearl": "symmetry seventeen"
-  },
-  {
-   "anchor": "tiling",
-   "token": "pattern_atlas_gallery",
-   "kind": "varies",
-   "why": "credit: named / title_only / redacted / anonymous",
-   "via": "credit",
-   "provenance": "derived",
-   "space": "wall",
-   "space_by": "heuristic",
-   "pearl": "symmetry seventeen"
-  },
-  {
-   "anchor": "tiling",
-   "token": "pattern_artifact",
-   "kind": "varies",
-   "why": "group: unset / p1 / p2 / pm / pg / cm",
-   "via": "group",
-   "provenance": "derived",
-   "space": "wall",
-   "space_by": "heuristic",
-   "pearl": "symmetry seventeen"
-  },
-  {
-   "anchor": "tiling",
-   "token": "grid3d",
-   "kind": "varies",
-   "why": "algorithm: BFS / DFS / DIJKSTRA / KRUSKAL_MST / PRIM_MST / FORCE_DIRECTED",
-   "via": "algorithm",
-   "provenance": "derived",
-   "space": "wall",
-   "space_by": "heuristic",
-   "pearl": "ribbon patterns 01"
-  },
-  {
-   "anchor": "tiling",
-   "token": "bar_array",
-   "kind": "varies",
-   "why": "algorithm: BUBBLE_SORT / INSERTION_SORT / SELECTION_SORT / MERGE_SORT / QUICKSORT / HEAP_SORT",
-   "via": "algorithm",
-   "provenance": "derived",
-   "space": "wall",
-   "space_by": "heuristic",
-   "pearl": "ribbon patterns 01"
-  },
-  {
-   "anchor": "tiling",
-   "token": "bar_array_bubble_sort",
-   "kind": "varies",
-   "why": "initial_order: shuffled / reversed / nearly_sorted / sorted",
-   "via": "initial_order",
-   "provenance": "derived",
-   "space": "wall",
-   "space_by": "heuristic",
-   "pearl": "ribbon patterns 01"
   },
   {
    "anchor": "change",
