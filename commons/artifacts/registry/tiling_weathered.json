@@ -1,0 +1,34 @@
+{
+  "artifacts": {
+    "tiling_weathered": {
+      "lookup_name": "tiling_weathered",
+      "name": "The same pattern, then time",
+      "scene": "res://commons/artifacts/regularity/tiling_weathered.tscn",
+      "category": "shaders",
+      "complexity": "beginner",
+      "map_ready": true,
+      "include_in_map_data": true,
+      "footprint": [
+        12,
+        8,
+        3
+      ],
+      "parameters": {
+        "footprint": [
+          12,
+          8,
+          3
+        ],
+        "size_group": "large"
+      },
+      "description": "The tiling hall's black and white raster returns twice, side by side: once as Tutorial_Tiling_Floor shows it, once through wallpaper_tile.gdshader with the Pattern Studio's aging layers on sliders - dirt, wear, dust, sun fade, cracks, chips. The rule, the motif's turn and the exception are the tiling desk's own; the shader adds only time. Map-token keys: rule, turn, exception, dirt, wear, dust, fade, cracks, chips (0-1); config_mode walls stands both surfaces up.",
+      "qfep_connection": "A rule makes the same surface at every address; weathering is what the surface has answered to since. The joints, the corners and the exposed faces age first: the pattern's own structure decides where time collects.",
+      "interactions": [
+        "RULE cycles the six tiling relations; TURN MOTIF and EXCEPTION are the tiling desk's controls.",
+        "DIRT, WEAR, DUST, SUN FADE, CRACKS, CHIPS slide one aging layer each over the right-hand surface; the left stays clean for comparison.",
+        "CLEAN returns the aged surface to the pattern.",
+        "Grout, wear and dust act on the raster's 8 x 8 joints (cell_count), not only on the surface edge."
+      ]
+    }
+  }
+}

@@ -1,0 +1,34 @@
+{
+  "artifacts": {
+    "pattern_temple": {
+      "lookup_name": "pattern_temple",
+      "name": "Pattern temple",
+      "scene": "res://commons/artifacts/regularity/pattern_temple.tscn",
+      "category": "patterns",
+      "complexity": "intermediate",
+      "map_ready": true,
+      "include_in_map_data": true,
+      "footprint": [
+        15,
+        15,
+        8
+      ],
+      "parameters": {
+        "footprint": [
+          15,
+          15,
+          8
+        ],
+        "size_group": "large"
+      },
+      "description": "A Moorish court built from primitives - quads, boxes, cylinders, a hemisphere and a ring - in which every surface is a pattern receiver: floor, far wall, east and west walls, the entrance wall with its corbelled arch, eight columns, the dome they carry and the frieze. One desk targets a surface and dresses it through wallpaper_tile.gdshader: SOURCE (zellige, stars, lattice, khatam, brick, three rasters from the tiling halls, every package the Pattern Studio has saved under commons/patterns), GROUP (the 17 wallpaper groups), PALETTE (Alhambra, terracotta, azul, midnight), SEED, AGE (dirt, wear, dust, cracks, chips, sun fade together), ALL and CLEAN. Map-token keys: age 0-4, source, group, palette, target.",
+      "qfep_connection": "The same rule dresses a floor, a wall, a column and a dome differently because the receiver is a body with an orientation, a curvature and a distance from the eye; the pattern does not decide what it is on.",
+      "interactions": [
+        "TARGET moves the glowing marker to the next surface: floor, far wall, east, west, entrance, columns, dome, frieze.",
+        "SOURCE, GROUP, PALETTE and SEED change what the targeted surface wears; AGE weathers it in four steps.",
+        "ALL copies the targeted surface's dressing to every surface; CLEAN removes the weathering everywhere.",
+        "The studio's Save to Godot adds a package to the SOURCE cycle on the next visit."
+      ]
+    }
+  }
+}

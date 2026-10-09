@@ -21,6 +21,9 @@ uniform int wallpaper_group : hint_range(0, 16, 1) = 0;
 // Default retains normalized web/studio UVs. Room receivers supply physical extents.
 uniform vec2 surface_metres = vec2(1.0);
 uniform float tile_scale : hint_range(1.0, 32.0, 1.0) = 4.0;
+// Cells across the domain texture when it is a raster of many tiles (the museum's tiling_pattern.gd
+// fields, 8 x 8): grout, wear, dust and chips then act on the raster's joints. 1 = the domain is one tile.
+uniform float cell_count : hint_range(1.0, 64.0, 1.0) = 1.0;
 
 // Grout / gap between tiles
 uniform float grout_width : hint_range(0.0, 0.1) = 0.0;
@@ -628,7 +631,7 @@ void fragment() {
 
 	// Grout lines at tile boundaries
 	float edge_dist = 1.0;
-	vec2 st_grout = uv * tile_scale;
+	vec2 st_grout = uv * tile_scale * max(cell_count, 1.0);
 	vec2 f_grout = fract(st_grout);
 	vec2 d_grout = min(f_grout, 1.0 - f_grout);
 	edge_dist = min(d_grout.x, d_grout.y);
